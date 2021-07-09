@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/defaultWhite"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/tv_main_home_page"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/home_selected"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/text_black"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_main_home_hospital"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/text_black"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_main_mall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/text_black"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_main_my"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/text_black"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

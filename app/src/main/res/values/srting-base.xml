@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="huahansoft_load_state_loading">正在加载</string>
+    <string name="waiting">请稍后&#8230;</string>
+    <string name="huahansoft_net_error">网络未连接，请检查网络！</string>
+    <string name="huahansoft_load_state_no_more_data">暂无更多数据</string>
+    <string name="huahansoft_load_state_failed">加载失败，点击重试</string>
+    <string name="huahansoft_load_state_no_data">暂无数据</string>
+    <!-- dialog提示框开始 -->
+    <string name="tip">提示</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+    <!-- dialog提示框结束 -->
+    <string name="huahansoft_dialog_more_info">更多信息</string>
+</resources>

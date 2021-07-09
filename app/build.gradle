@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.vice.bloodpressure1"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main { jniLibs.srcDir 'libs' }
+    }
+    signingConfigs {
+        release {
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+            storeFile file(KEYSTORE_FILE)
+            storePassword KEYSTORE_PASSWOED
+        }
+    }
+    buildTypes {
+        debug {
+            //混淆开关，默认为 false
+            minifyEnabled true
+            // zipAlign优化，默认为 true。一般我们打包之后先得到xxx-unaligned.apk，开启这个之后才得到最终的xxx-aligned.apk。
+            zipAlignEnabled false
+            //移除无用resources文件(需要保证minifyEnabled开启)
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    viewBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':update-app')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.10'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.qianwen:okhttp-utils:3.8.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    /**
+     * 智能刷新
+     */
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
+
+    //权限请求
+    api 'pub.devrel:easypermissions:2.0.1'
+
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'io.github.youth5201314:banner:2.2.2'
+    implementation 'com.dylanc:viewbinding-ktx:1.0.0'
+
+
+}

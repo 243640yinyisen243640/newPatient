@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BaseAppTheme" parent="@style/HHBaseStyle">
+        <!--Appbar背景色-->
+        <item name="colorPrimary">@color/main_base_color</item>
+        <!--控制各个控件被选中时的颜色-->
+        <item name="colorAccent">@color/main_base_color</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/main_base_color</item>
+        <!--google原生的修改方式：只需要在主题中添加这个属性就可以将状态栏颜色变成黑色，设置为false颜色变白。不过这个属性在API23上才有用-->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- <item name="colorPrimaryDark">#4d4d4d</item>-->
+    </style>
+</resources>

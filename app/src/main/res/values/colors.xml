@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <!--黑色-toast背景色-->
+    <color name="defaultToastBg">#bb12140E</color>
+    <!--全透明-->
+    <color name="defaultTransparent">#00000000</color>
+    <color name="defaultHalfTransparent">#88000000</color>
+    <!--黑色-toast背景色-->
+    <color name="defaultDialogTipBg">#393939</color>
+    <!--黑色颜色值结束-->
+    <!--灰色颜色值开始-->
+    <!--灰色-内容-->
+    <color name="defaultGrayText">#9F9F9F</color>
+    <!--灰色-编辑框提示语-->
+    <color name="defaultGrayLight">#ABABAB</color>
+    <!--灰色颜色值结束-->
+    <color name="main_base_color">#ABABAB</color>
+    <!--纯白色-->
+    <color name="defaultWhite">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <!-- 黑色颜色值开始 -->
+    <!-- 黑色字体 -->
+    <color name="text_black">#323232</color>
+    <!-- 浅黑色 -->
+    <color name="text_black_hint">#646464</color>
+    <!-- 黑色颜色值结束 -->
+
+    <!-- 白色字体 -->
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- 灰色颜色值开始 -->
+    <!-- 灰色 -->
+    <color name="text_gray">#9F9F9F</color>
+    <!-- 浅灰 -->
+    <color name="text_gray_hint">#ABABAB</color>
+    <!-- 灰色颜色值结束 -->
+    <color name="background">#F5F5F5</color>
+    <!--dialog颜色值开始-->
+    <color name="defaultDialogActionTextColorPositive">#03B4FA</color>
+    <color name="defaultDialogActionTextColorNegative">#9F9F9F</color>
+    <color name="defaultDialogActionTextColorNeutral">#9F9F9F</color>
+    <!--dialog颜色值结束-->
+    <!--黑色-标题-->
+    <color name="defaultBlackText">#323232</color>
+    <!--黑色-内容-->
+    <color name="defaultBlackLight">#646464</color>
+</resources>
