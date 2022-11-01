@@ -89,5 +89,7 @@ dependencies {
     implementation 'io.github.youth5201314:banner:2.2.2'
     implementation 'com.dylanc:viewbinding-ktx:1.0.0'
 
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
 
 }
