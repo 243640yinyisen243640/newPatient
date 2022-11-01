@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui;
+package com.vice.bloodpressure.baseui;
 
 import android.content.Context;
 import android.os.Bundle;

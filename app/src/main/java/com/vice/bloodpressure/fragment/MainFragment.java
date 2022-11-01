@@ -1,7 +1,7 @@
 package com.vice.bloodpressure.fragment;
 
 
-import com.vice.bloodpressure.ui.UIBaseFragment;
+import com.vice.bloodpressure.baseui.UIBaseFragment;
 
 public class MainFragment extends UIBaseFragment {
 
