@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/diet_programme_bg_head" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="25dp"
+                android:layout_weight="1"
+                android:max="3"
+                android:progress="3"
+                android:progressDrawable="@drawable/diet_programme_progress_bar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="21dp"
+                android:background="@drawable/bg_black_90_20"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="3/3"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="身体情况"
+                    android:textColor="#9F9F9F"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:textColor="#242424"
+                android:textStyle="bold"
+                android:text="您是否患有慢性肾病?"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="100dp">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:button="@null"
+                    android:text="无"
+                    android:checked="false"
+                    android:textColor="@drawable/selector_color_diet_programme"
+                    android:textSize="14sp"
+                    android:background="@drawable/selector_bg_diet_programme"
+                    android:gravity="center"/>
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:button="@null"
+                    android:text="I期"
+                    android:checked="false"
+                    android:textColor="@drawable/selector_color_diet_programme"
+                    android:textSize="14sp"
+                    android:background="@drawable/selector_bg_diet_programme"
+                    android:gravity="center"/>
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:button="@null"
+                    android:text="II期"
+                    android:checked="true"
+                    android:textColor="@drawable/selector_color_diet_programme"
+                    android:textSize="14sp"
+                    android:background="@drawable/selector_bg_diet_programme"
+                    android:gravity="center"/>
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:button="@null"
+                    android:text="III期"
+                    android:checked="false"
+                    android:textColor="@drawable/selector_color_diet_programme"
+                    android:textSize="14sp"
+                    android:background="@drawable/selector_bg_diet_programme"
+                    android:gravity="center"/>
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:button="@null"
+                    android:text="IV期"
+                    android:checked="false"
+                    android:textColor="@drawable/selector_color_diet_programme"
+                    android:textSize="14sp"
+                    android:background="@drawable/selector_bg_diet_programme"
+                    android:gravity="center"/>
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/bottom_gradient_blue"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:text="确定生成饮食方案"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="12dp"/>
+
+</LinearLayout>
