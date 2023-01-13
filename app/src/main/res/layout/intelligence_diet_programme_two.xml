@@ -31,6 +31,7 @@
                 android:progressDrawable="@drawable/diet_programme_progress_bar" />
 
             <TextView
+                android:id="@+id/tv_diet_programme_two_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -84,6 +85,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_diet_programme_two_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -98,6 +100,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/iv_diet_programme_two_light"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/circle_check" />
@@ -125,6 +128,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_diet_programme_two_middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -139,9 +143,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/iv_diet_programme_two_middle"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/circle_check" />
+                        android:src="@drawable/circle_uncheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -167,6 +172,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_diet_programme_two_heavy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -181,9 +187,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/iv_diet_programme_two_heavy"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/circle_check" />
+                        android:src="@drawable/circle_uncheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,6 +216,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_diet_programme_two_bedridden"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -224,9 +232,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/iv_diet_programme_two_bedridden"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/circle_check" />
+                        android:src="@drawable/circle_uncheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -255,6 +264,7 @@
         android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/tv_diet_programme_two_up_step"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -266,6 +276,7 @@
         android:padding="12dp"/>
 
         <TextView
+            android:id="@+id/tv_diet_programme_two_next_step"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

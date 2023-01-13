@@ -31,6 +31,7 @@
                 android:progressDrawable="@drawable/diet_programme_progress_bar" />
 
             <TextView
+                android:id="@+id/tv_diet_programme_three_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -93,6 +94,7 @@
                 android:text="您是否患有慢性肾病?"/>
 
             <RadioGroup
+                android:id="@+id/rg_diet_paogramme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -100,17 +102,20 @@
                 android:layout_marginBottom="100dp">
 
                 <RadioButton
+                    android:id="@+id/rb_diet_programme_no"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:button="@null"
                     android:text="无"
-                    android:checked="false"
+                    android:checked="true"
                     android:textColor="@drawable/selector_color_diet_programme"
                     android:textSize="14sp"
+                    android:textStyle="bold"
                     android:background="@drawable/selector_bg_diet_programme"
                     android:gravity="center"/>
 
                 <RadioButton
+                    android:id="@+id/rb_diet_paogramme_one"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:button="@null"
@@ -122,17 +127,19 @@
                     android:gravity="center"/>
 
                 <RadioButton
+                    android:id="@+id/rb_diet_paogramme_two"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:button="@null"
                     android:text="II期"
-                    android:checked="true"
+                    android:checked="false"
                     android:textColor="@drawable/selector_color_diet_programme"
                     android:textSize="14sp"
                     android:background="@drawable/selector_bg_diet_programme"
                     android:gravity="center"/>
 
                 <RadioButton
+                    android:id="@+id/rb_diet_paogramme_three"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:button="@null"
@@ -144,6 +151,7 @@
                     android:gravity="center"/>
 
                 <RadioButton
+                    android:id="@+id/rb_diet_paogramme_four"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:button="@null"
@@ -163,6 +171,7 @@
 
 
         <TextView
+            android:id="@+id/tv_diet_programme_three_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

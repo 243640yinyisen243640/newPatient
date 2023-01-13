@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F3F3F3"
     android:orientation="vertical">
 
@@ -32,6 +32,7 @@
                 android:progressDrawable="@drawable/diet_programme_progress_bar" />
 
             <TextView
+                android:id="@+id/tv_diet_programme_one_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -54,8 +55,8 @@
             android:layout_marginTop="55dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/bg_white_10"
-            android:paddingBottom="45dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="45dp">
 
 
             <LinearLayout
@@ -90,13 +91,156 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="17dp"
+                android:text="您的身高是?"
                 android:textColor="#242424"
-                android:textStyle="bold"
-                android:text="您的身高是?"/>
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_rule_height_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="160"
+                    android:textColor="#00C27F"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="5dp"
+                    android:text="cm"
+                    android:textColor="#BBBBBB"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
 
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp">
+
+                <com.lsp.RulerView
+                    android:id="@+id/rulerView_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:firstScale="160"
+                    app:isBgRoundRect="false"
+                    app:largeScaleColor="#C5CDCA"
+                    app:largeScaleStroke="2dp"
+                    app:maxScale="190"
+                    app:midScaleColor="#C5CDCA"
+                    app:midScaleStroke="2dp"
+                    app:minScale="100"
+                    app:rulerHeight="50dp"
+                    app:scaleCount="10"
+                    app:scaleGap="10dp"
+                    app:scaleLimit="10"
+                    app:scaleNumColor="#8A8A8A"
+                    app:scaleNumTextSize="12sp"
+                    app:showScaleResult="false"
+                    app:smallScaleColor="#E1E9E6"
+                    app:smallScaleStroke="2dp" />
 
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/diet_programme_rule" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:text="您的体重是?"
+                android:textColor="#242424"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_rule_weight_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="60"
+                    android:textColor="#00C27F"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="5dp"
+                    android:text="kg"
+                    android:textColor="#BBBBBB"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp">
+
+                <com.lsp.RulerView
+                    android:id="@+id/rulerView_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:firstScale="60"
+                    app:isBgRoundRect="false"
+                    app:largeScaleColor="#C5CDCA"
+                    app:largeScaleStroke="2dp"
+                    app:maxScale="100"
+                    app:midScaleColor="#C5CDCA"
+                    app:midScaleStroke="2dp"
+                    app:minScale="40"
+                    app:rulerHeight="50dp"
+                    app:scaleCount="10"
+                    app:scaleGap="10dp"
+                    app:scaleLimit="10"
+                    app:scaleNumColor="#8A8A8A"
+                    app:scaleNumTextSize="12sp"
+                    app:showScaleResult="false"
+                    app:smallScaleColor="#E1E9E6"
+                    app:smallScaleStroke="2dp" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/diet_programme_rule" />
+
+            </FrameLayout>
         </LinearLayout>
 
     </FrameLayout>
@@ -106,8 +250,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -115,23 +259,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/bg_white_90"
-            android:textSize="15sp"
-            android:textColor="#BBBBBB"
-            android:text="上一题"
             android:gravity="center"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:text="上一题"
+            android:textColor="#BBBBBB"
+            android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_diet_programme_one_next_step"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:background="@drawable/bg_white_90"
-            android:textSize="15sp"
-            android:textColor="#00C27F"
-            android:text="下一题"
             android:gravity="center"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:text="下一题"
+            android:textColor="#00C27F"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
