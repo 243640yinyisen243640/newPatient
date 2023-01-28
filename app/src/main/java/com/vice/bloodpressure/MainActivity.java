@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.vice.bloodpressure.fragment.MainFragment;
-import com.vice.bloodpressure.ui.UIBaseActivity;
+import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.version.VersionUtils;
 
 

@@ -1,3 +1,4 @@
+include ':base-library'
 include ':app'
 include ':update-app'
 rootProject.name = "XyPatient"
