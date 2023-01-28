@@ -33,7 +33,7 @@ android {
             zipAlignEnabled false
             //移除无用resources文件(需要保证minifyEnabled开启)
             shrinkResources false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
@@ -89,5 +89,9 @@ dependencies {
     implementation 'io.github.youth5201314:banner:2.2.2'
     implementation 'com.dylanc:viewbinding-ktx:1.0.0'
 
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
+    implementation 'com.github.superSp:RulerView:v1.5'
+    implementation 'com.google.android.material:material:1.3.0'
 
 }

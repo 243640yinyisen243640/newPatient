@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/bg_white_10"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="查看我的饮食方案"
+            android:textColor="#242424"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/diet_programme_dialog" />
+
+        <TextView
+            android:id="@+id/tv_diet_programme_dialog_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="@drawable/bottom_gradient_blue"
+            android:text="智能推荐"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_diet_programme_dialog_choose"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="@drawable/bg_blue_90_1"
+            android:text="我自己选"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="#00C27F"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="该方案为本日全天饮食推荐，如已进食则不适用"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:drawableLeft="@drawable/diet_programme_dialog_advert"
+            android:drawablePadding="2dp"
+            android:textColor="#BBBBBB"/>
+
+    </LinearLayout>
+</LinearLayout>

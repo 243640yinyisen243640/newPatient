@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:background="#F3F3F3"
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_white_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:drawableLeft="@drawable/shape_blue_4_17"
+                        android:drawablePadding="8dp"
+                        android:text="第一步：请选择分餐比例"
+                        android:textColor="#2A2A2A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="37dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="糖尿病患者应该均衡营养摄入，三大营养素蛋白质、脂肪和碳水化合物所占的比例推荐如下："
+                        android:textColor="#8A8A8A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:text="选择饮食比例 :"
+                        android:textColor="#2A2A2A"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:padding="15dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_diet_programme_choose_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:button="@drawable/selector_circle_right_check"
+                            android:checked="true"
+                            android:padding="5dp"
+                            android:text="早餐1/5；午餐2/5；晚餐2/5；"
+                            android:textColor="#8A8A8A"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_diet_programme_choose_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:button="@drawable/selector_circle_right_check"
+                            android:checked="false"
+                            android:padding="5dp"
+                            android:text="早餐1/3；午餐1/3；晚餐1/3；"
+                            android:textColor="#8A8A8A"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/bg_white_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:drawableLeft="@drawable/shape_blue_4_17"
+                        android:drawablePadding="8dp"
+                        android:text="第二步：请选择想吃的食物"
+                        android:textColor="#2A2A2A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/choode_diet_programme_breakfast"
+                                android:drawablePadding="5dp"
+                                android:text="早餐"
+                                android:textColor="#2A2A2A"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+
+                            <ImageView
+                                android:id="@+id/iv_add"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:padding="6dp"
+                                android:src="@drawable/circle_add" />
+
+
+                        </LinearLayout>
+
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="100dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/choode_diet_programme_lunch"
+                                android:drawablePadding="5dp"
+                                android:text="午餐"
+                                android:textColor="#2A2A2A"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:padding="6dp"
+                                android:src="@drawable/circle_add" />
+
+
+                        </LinearLayout>
+
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/choode_diet_programme_dinner"
+                                android:drawablePadding="5dp"
+                                android:text="晚餐"
+                                android:textColor="#2A2A2A"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:padding="6dp"
+                                android:src="@drawable/circle_add" />
+
+
+                        </LinearLayout>
+
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bottom_gradient_blue"
+        android:gravity="center"
+        android:text="一键生成"
+        android:textColor="#FEFEFE"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</FrameLayout>

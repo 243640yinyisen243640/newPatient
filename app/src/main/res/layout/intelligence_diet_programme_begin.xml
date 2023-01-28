@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/diet_programme_bg_head"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bg_white_5_5_5_0"
+                android:textSize="15sp"
+                android:textColor="#2B5748"
+                android:text="共3题"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/diet_programme_icon"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/diet_programme_bg_middle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="智能饮食健康方案问卷"
+                android:textColor="#242424"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="智能食谱文字介绍，主要介绍内容为:"
+                android:textColor="#242424"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. 通过提交以下服务问卷，经过平台大数据+人功智能技术为您推出“智能饮食健康方案”方案包含早、午、晚及加餐应该怎么吃。"
+                android:textColor="#707070"
+                android:textSize="16sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. 为保证分析结果的准确性，请务必真实、准确、完整的填写问卷内容，我们承诺对您的信息严格保密。"
+                android:textColor="#6F6F6F"
+                android:textSize="15sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_diet_programme_begin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_gradient_blue"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="开启智能体验"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="13dp"
+        android:layout_marginTop="25dp"/>
+
+
+</LinearLayout>

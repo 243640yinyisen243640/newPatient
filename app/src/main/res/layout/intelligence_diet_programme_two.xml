@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/diet_programme_bg_head" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="25dp"
+                android:layout_weight="1"
+                android:max="3"
+                android:progress="2"
+                android:progressDrawable="@drawable/diet_programme_progress_bar" />
+
+            <TextView
+                android:id="@+id/tv_diet_programme_two_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="21dp"
+                android:background="@drawable/bg_black_90_20"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="2/3"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="活动强度"
+                    android:textColor="#9F9F9F"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_diet_programme_two_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_diet_programme_two_light"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/circle_check" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="轻体力劳动"
+                        android:textColor="#242424"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="75%时间坐或者站立、25%时间站立活动例如:教师、售货员、家庭主妇、酒店服务等:以坐着为主的工作，如办公室工作等。"
+                    android:textColor="#8A8A8A"
+                    android:layout_marginTop="14dp"
+                    android:textSize="14sp"
+                    android:layout_marginStart="28dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_diet_programme_two_middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_diet_programme_two_middle"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/circle_uncheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="中体力劳动"
+                        android:textColor="#242424"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25%时间坐或者站立、75%时间特殊活动例如:学生日常活动、机动车驾驶、电工安装、外科医生、体育老师等。"
+                    android:textColor="#8A8A8A"
+                    android:layout_marginTop="14dp"
+                    android:textSize="14sp"
+                    android:layout_marginStart="28dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_diet_programme_two_heavy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_diet_programme_two_heavy"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/circle_uncheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重体力劳动"
+                        android:textColor="#242424"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="例如:建筑工、搬运工、冶炼工、农民(中农活)、运动员、舞蹈者、或者与其相当活动量的职业。"
+                    android:textColor="#8A8A8A"
+                    android:layout_marginTop="14dp"
+                    android:textSize="14sp"
+                    android:layout_marginStart="28dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_diet_programme_two_bedridden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="33dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_diet_programme_two_bedridden"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/circle_uncheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="卧床"
+                        android:textColor="#242424"
+                        android:textSize="18sp"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_diet_programme_two_up_step"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white_90"
+        android:textSize="15sp"
+        android:textColor="#00C27F"
+        android:text="上一题"
+        android:gravity="center"
+        android:padding="12dp"/>
+
+        <TextView
+            android:id="@+id/tv_diet_programme_two_next_step"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_white_90"
+            android:textSize="15sp"
+            android:textColor="#00C27F"
+            android:text="下一题"
+            android:gravity="center"
+            android:padding="12dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

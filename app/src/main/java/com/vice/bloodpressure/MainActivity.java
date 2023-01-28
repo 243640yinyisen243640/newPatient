@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.version.VersionUtils;
 
 
@@ -150,6 +152,13 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_main_home_page:
+
+                DialogUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, false}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M, new DialogUtils.TimePickerCallBack() {
+                    @Override
+                    public void execEvent(String content) {
+
+                    }
+                });
             case R.id.tv_main_home_hospital:
             case R.id.tv_main_mall:
             case R.id.tv_main_my:

@@ -16,3 +16,4 @@
 # Project exclude paths
 /update-app/build/
 /update-app/build/intermediates/javac/debug/classes/
+/.idea/

@@ -102,6 +102,7 @@ public final class DefaultTopViewManager {
         mBackTextView = new TextView(mActivity);
         mBackTextView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mBackTextView.setCompoundDrawablesWithIntrinsicBounds(mTopViewInfo.backLeftDrawable, 0, 0, 0);
+        mBackTextView.setPadding(15,0,15,0);
 
         mBackTextView.setGravity(Gravity.CENTER_VERTICAL);
         mBackTextView.setOnClickListener(new View.OnClickListener() {
