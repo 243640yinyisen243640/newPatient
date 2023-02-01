@@ -11,9 +11,9 @@ import com.vice.bloodpressure.basemanager.DefaultTopViewManager;
 import com.vice.bloodpressure.basemanager.LoadViewManager;
 
 
-public class App extends BaseApp {
-    private static final String TAG = App.class.getSimpleName();
-    private static App application;
+public class XyApplication extends BaseApplication {
+    private static final String TAG = XyApplication.class.getSimpleName();
+    private static XyApplication application;
 
         @Override
         protected void attachBaseContext(Context base) {

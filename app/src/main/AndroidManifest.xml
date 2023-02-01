@@ -84,20 +84,32 @@
             </intent-filter>
         </activity>
 
-        <!-- 饮食方案测试 -->
-        <activity android:name=".ui.diet.DietProgrammeBeginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.diet.DietProgrammeOneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.diet.DietProgrammeTwoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.diet.DietProgrammeThreeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.diet.DietProgrammeChooseActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.diet.DietProgrammeChooseMealActivity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustPan"
-            android:screenOrientation="portrait"/>
+        <!-- 饮食方案 -->
+        <!--饮食方案开始-->
+        <activity
+            android:name=".ui.diet.DietProgrammeBeginActivity"
+            android:screenOrientation="portrait" />
+        <!--饮食方案1-->
+        <activity
+            android:name=".ui.diet.DietProgrammeOneActivity"
+            android:screenOrientation="portrait" />
+        <!--饮食方案2-->
+        <activity
+            android:name=".ui.diet.DietProgrammeTwoActivity"
+            android:screenOrientation="portrait" />
+        <!--饮食方案3-->
+        <activity
+            android:name=".ui.diet.DietProgrammeThreeActivity"
+            android:screenOrientation="portrait" />
+        <!--自定义饮食方案-->
+        <activity
+            android:name=".ui.diet.DietProgrammeChooseActivity"
+            android:screenOrientation="portrait" />
+        <!--自定义早中晚餐-->
+        <activity
+            android:name=".ui.diet.DietProgrammeChooseMealActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
     </application>
 
 </manifest>

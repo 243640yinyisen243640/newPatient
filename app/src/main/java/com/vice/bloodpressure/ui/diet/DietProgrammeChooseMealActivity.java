@@ -1,18 +1,12 @@
 package com.vice.bloodpressure.ui.diet;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,17 +24,23 @@ import com.vice.bloodpressure.ui.adapter.MyFragmentStateAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * 类名：
+ * 传参：meal
+ * 描述: 自定义饮食
+ * 作者: beautiful
+ * 创建日期: 2023/2/1 14:59
+ */
 
 public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     private EditText etSearch;
 
     private List<Fragment> fragmentList;
-    private final String[] titles = {"主食","肉类","蔬菜","饮品类","其他"};
-    private final int[] tabDrawable = {R.drawable.selector_choose_meal_one,R.drawable.selector_choose_meal_two,
-            R.drawable.selector_choose_meal_three,R.drawable.selector_choose_meal_fore,R.drawable.selector_choose_meal_five};
+    private final String[] titles = {"主食", "肉类", "蔬菜", "饮品类", "其他"};
+    private final int[] tabDrawable = {R.drawable.selector_choose_meal_one, R.drawable.selector_choose_meal_two,
+            R.drawable.selector_choose_meal_three, R.drawable.selector_choose_meal_fore, R.drawable.selector_choose_meal_five};
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
-
 
 
     @Override
@@ -55,7 +55,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
         tabLayout = findViewById(R.id.tl_diet_programme_choose);
         viewPager = findViewById(R.id.vp_diet_programme_choose);
         //禁用预加载
-//        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
+        //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         //设置滑动方向
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragmentList));
@@ -74,7 +74,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
                     TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
                     tvTab.setTypeface(Typeface.DEFAULT);
                     tvTab.setTextColor(Color.parseColor("#8A8A8A"));
-                    if (i == position){
+                    if (i == position) {
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
                         tvTab.setTextColor(Color.parseColor("#242424"));
                     }
@@ -115,11 +115,11 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     }
 
     private void search() {
-        etSearch =findViewById(R.id.et_choose_meal_search);
+        etSearch = findViewById(R.id.et_choose_meal_search);
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH){
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String content = etSearch.getText().toString().trim();
-                if (TextUtils.isEmpty(content)){
+                if (TextUtils.isEmpty(content)) {
                     //提示
 
                     return true;

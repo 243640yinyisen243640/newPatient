@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
+/**
+ * 饮食方案开始
+ */
 public class DietProgrammeBeginActivity extends UIBaseActivity {
 
     @Override
@@ -20,7 +23,7 @@ public class DietProgrammeBeginActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("饮食方案");
         TextView tvDietProgrammeBegin = findViewById(R.id.tv_diet_programme_begin);
         //开启智能体验
-        tvDietProgrammeBegin.setOnClickListener(v -> startActivity(new Intent(getPageContext(),DietProgrammeOneActivity.class)));
+        tvDietProgrammeBegin.setOnClickListener(v -> startActivity(new Intent(getPageContext(), DietProgrammeOneActivity.class)));
     }
 
 }

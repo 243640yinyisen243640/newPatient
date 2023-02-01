@@ -7,4 +7,9 @@
     <string name="privacy_protect_disagree">暂不同意</string>
     <string name="privacy_protect_agree">同意</string>
     <string name="privacy_protect_warm_tips">用户协议</string>
+    <string name="tv_main_home_page">首页</string>
+    <string name="tv_main_home_service">服务</string>
+    <string name="tv_main_home_out_hospital">院外管理</string>
+    <string name="tv_main_home_mall">商城</string>
+    <string name="tv_main_home_my">我的</string>
 </resources>

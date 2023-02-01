@@ -13,6 +13,9 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 
 import java.math.BigDecimal;
 
+/**
+ * 饮食方案
+ */
 public class DietProgrammeOneActivity extends UIBaseActivity {
     //身高
     private String height = "160";
@@ -68,13 +71,13 @@ public class DietProgrammeOneActivity extends UIBaseActivity {
         //下一步
         tvNextStep.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), DietProgrammeTwoActivity.class);
-            intent.putExtra("height",height);
-            intent.putExtra("weight",weight);
+            intent.putExtra("height", height);
+            intent.putExtra("weight", weight);
             startActivity(intent);
         });
 
         TextView progress = findViewById(R.id.tv_diet_programme_one_progress);
-        setTextStyle(progress,1.3f,0,1);
+        setTextStyle(progress, 1.3f, 0, 1);
     }
 
 }

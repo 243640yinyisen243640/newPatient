@@ -11,7 +11,7 @@ import androidx.core.graphics.ColorUtils;
 
 /**
  * @类说明 HHSoftStatusBarUtils
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/20 17:20
  */
 public class StatusBarUtils {

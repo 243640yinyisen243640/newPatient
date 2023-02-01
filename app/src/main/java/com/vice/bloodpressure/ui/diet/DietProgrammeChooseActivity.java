@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
+/**
+ * 自定义饮食方案
+ */
 public class DietProgrammeChooseActivity extends UIBaseActivity {
 
     @Override
@@ -21,8 +24,8 @@ public class DietProgrammeChooseActivity extends UIBaseActivity {
 
         ImageView ivAdd = findViewById(R.id.iv_add);
         ivAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(),DietProgrammeChooseMealActivity.class);
-            intent.putExtra("meal","早餐");
+            Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+            intent.putExtra("meal", "早餐");
             startActivity(intent);
         });
     }

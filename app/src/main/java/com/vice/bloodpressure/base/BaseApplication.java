@@ -7,7 +7,7 @@ import com.vice.bloodpressure.baseimp.HHSoftApplicationInterface;
 import com.vice.bloodpressure.basemanager.LoadViewManager;
 
 
-public abstract class BaseApp extends Application {
+public abstract class BaseApplication extends Application {
     private HHSoftApplicationInterface applicationInfo;
     private static Context context;
 

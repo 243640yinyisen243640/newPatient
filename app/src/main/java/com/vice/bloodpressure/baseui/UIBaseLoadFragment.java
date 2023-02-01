@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.base.BaseApp;
+import com.vice.bloodpressure.base.BaseApplication;
 import com.vice.bloodpressure.baseimp.HHSoftApplicationInterface;
 import com.vice.bloodpressure.basemanager.DefaultTopViewManager;
 import com.vice.bloodpressure.basemanager.LoadViewManager;
@@ -57,8 +57,8 @@ public abstract class UIBaseLoadFragment extends BaseFragment {
      * @return
      */
     protected LoadViewManager.LoadMode initLoadMode() {
-        if (getActivity().getApplication() instanceof BaseApp) {
-            BaseApp application = (BaseApp) getActivity().getApplication();
+        if (getActivity().getApplication() instanceof BaseApplication) {
+            BaseApplication application = (BaseApplication) getActivity().getApplication();
             HHSoftApplicationInterface applicationInfo = application.applicationInfo();
             return applicationInfo.appLoadMode() == null ? LoadViewManager.LoadMode.PROGRESS : applicationInfo.appLoadMode();
         }
