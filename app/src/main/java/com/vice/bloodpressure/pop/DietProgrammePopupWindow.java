@@ -16,7 +16,7 @@ import com.vice.bloodpressure.R;
 public class DietProgrammePopupWindow extends PopupWindow {
 
     public DietProgrammePopupWindow(Context context, View.OnClickListener recommendClickListener, View.OnClickListener chooseClickListener) {
-        LinearLayout view = (LinearLayout) View.inflate(context, R.layout.aaa_pop_diet_programme, null);
+        LinearLayout view = (LinearLayout) View.inflate(context, R.layout.pop_diet_programme, null);
         TextView tvRecommend = view.findViewById(R.id.tv_diet_programme_dialog_recommend);
         TextView tvChoose = view.findViewById(R.id.tv_diet_programme_dialog_choose);
 

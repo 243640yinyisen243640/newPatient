@@ -54,7 +54,8 @@ public class XyApplication extends BaseApplication {
         //        PushManager.getInstance().initialize(getApplicationContext(), GetuiPushService.class);
         //        PushManager.getInstance().registerPushIntentService(getApplicationContext(), GetuiIntentService.class);
 
-        //        SDKInitializer.initialize(getApplicationContext());
+        //        SDKInitializer.initiali
+        //        ze(getApplicationContext());
         //        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         //        SDKInitializer.setCoordType(CoordType.BD09LL);
         initX5WebView();

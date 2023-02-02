@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.fragment;
+package com.vice.bloodpressure.ui.fragment;
 
 
 import androidx.core.content.ContextCompat;

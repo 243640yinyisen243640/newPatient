@@ -19,8 +19,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.ui.adapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.ui.fragment.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.aaa_diet_programme_choose_meal, null);
+        View view = View.inflate(getPageContext(), R.layout.diet_programme_choose_meal, null);
         containerView().addView(view);
         initData();
         top();
@@ -84,7 +84,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     }
 
     private void setTab(TabLayout.Tab tab, int position) {
-        LinearLayout customView = (LinearLayout) View.inflate(getPageContext(), R.layout.aaa_tab_choose_meal, null);
+        LinearLayout customView = (LinearLayout) View.inflate(getPageContext(), R.layout.tab_choose_meal, null);
         ImageView ivTab = customView.findViewById(R.id.iv_choose_meal_tab);
         TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
         ImageView ivIndicator = customView.findViewById(R.id.iv_choose_meal_tab_indicator);

@@ -12,4 +12,9 @@
     <string name="tv_main_home_out_hospital">院外管理</string>
     <string name="tv_main_home_mall">商城</string>
     <string name="tv_main_home_my">我的</string>
+
+
+    <!--智能饮食-->
+
+    <string name="diet_custom_programme_top_title">第一步：请选择分餐比例</string>
 </resources>

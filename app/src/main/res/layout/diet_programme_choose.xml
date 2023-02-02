@@ -39,7 +39,7 @@
                         android:drawableLeft="@drawable/shape_blue_4_17"
                         android:drawablePadding="8dp"
                         android:text="第一步：请选择分餐比例"
-                        android:textColor="#2A2A2A"
+                        android:textColor="@color/base_black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
                         android:text="选择饮食比例 :"
-                        android:textColor="#2A2A2A"
+                        android:textColor="@color/base_black"
                         android:textSize="16sp" />
 
                     <RadioGroup
@@ -112,7 +112,7 @@
                         android:drawableLeft="@drawable/shape_blue_4_17"
                         android:drawablePadding="8dp"
                         android:text="第二步：请选择想吃的食物"
-                        android:textColor="#2A2A2A"
+                        android:textColor="@color/base_black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -137,7 +137,7 @@
                                 android:drawableLeft="@drawable/choode_diet_programme_breakfast"
                                 android:drawablePadding="5dp"
                                 android:text="早餐"
-                                android:textColor="#2A2A2A"
+                                android:textColor="@color/base_black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -170,7 +170,7 @@
                                 android:drawableLeft="@drawable/choode_diet_programme_lunch"
                                 android:drawablePadding="5dp"
                                 android:text="午餐"
-                                android:textColor="#2A2A2A"
+                                android:textColor="@color/base_black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                                 android:drawableLeft="@drawable/choode_diet_programme_dinner"
                                 android:drawablePadding="5dp"
                                 android:text="晚餐"
-                                android:textColor="#2A2A2A"
+                                android:textColor="@color/base_black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
