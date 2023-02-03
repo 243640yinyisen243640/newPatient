@@ -117,6 +117,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_diet_custom_plan_breakfast"
                             style="@style/diet_change_diet_meal_title"
                             android:text="@string/diet_change_diet_top_breakfast"
                             android:drawableRight="@drawable/circle_add"/>
@@ -127,6 +128,7 @@
                             android:minHeight="100dp" />
 
                        <TextView
+                           android:id="@+id/tv_diet_custom_plan_lunch"
                            style="@style/diet_change_diet_meal_title"
                            android:text="@string/diet_change_diet_top_lunch"
                            android:drawableRight="@drawable/circle_add"/>
@@ -136,6 +138,7 @@
                             android:layout_height="wrap_content" />
 
                         <TextView
+                            android:id="@+id/tv_diet_custom_plan_dinner"
                             style="@style/diet_change_diet_meal_title"
                             android:text="@string/diet_change_diet_top_dinner"
                             android:drawableRight="@drawable/circle_add"/>

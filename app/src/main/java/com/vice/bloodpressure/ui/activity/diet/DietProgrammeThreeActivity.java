@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.diet;
+package com.vice.bloodpressure.ui.activity.diet;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.pop.DietProgrammePopupWindow;
-
-import org.w3c.dom.Text;
 
 public class DietProgrammeThreeActivity extends UIBaseActivity {
     private RadioGroup radioGroup;

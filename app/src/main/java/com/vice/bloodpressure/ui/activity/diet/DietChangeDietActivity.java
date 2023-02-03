@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.diet;
+package com.vice.bloodpressure.ui.activity.diet;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +12,11 @@ import com.vice.bloodpressure.view.NoScrollListView;
 
 
 /**
- * 作者: beautiful
- * 类名:更换饮食方案
- * 传参:
+ * 类名：更换饮食方案
+ * 传参：
  * 描述:
+ * 作者: beauty
+ * 创建日期: 2023/2/3 16:55
  */
 public class DietChangeDietActivity extends UIBaseActivity {
     /**

@@ -87,32 +87,32 @@
         <!-- 饮食方案 -->
         <!--饮食方案开始-->
         <activity
-            android:name=".ui.diet.DietProgrammeBeginActivity"
+            android:name=".ui.activity.diet.DietProgrammeBeginActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案1-->
         <activity
-            android:name=".ui.diet.DietProgrammeOneActivity"
+            android:name=".ui.activity.diet.DietProgrammeOneActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案2-->
         <activity
-            android:name=".ui.diet.DietProgrammeTwoActivity"
+            android:name=".ui.activity.diet.DietProgrammeTwoActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案3-->
         <activity
-            android:name=".ui.diet.DietProgrammeThreeActivity"
+            android:name=".ui.activity.diet.DietProgrammeThreeActivity"
             android:screenOrientation="portrait" />
         <!--自定义饮食方案-->
         <activity
-            android:name=".ui.diet.DietProgrammeChooseActivity"
+            android:name=".ui.activity.diet.DietProgrammeChooseActivity"
             android:screenOrientation="portrait" />
         <!--自定义早中晚餐-->
         <activity
-            android:name=".ui.diet.DietProgrammeChooseMealActivity"
+            android:name=".ui.activity.diet.DietProgrammeChooseMealActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
         <!--更改饮食方案-->
         <activity
-            android:name=".ui.diet.DietChangeDietActivity"
+            android:name=".ui.activity.diet.DietChangeDietActivity"
             android:screenOrientation="portrait" />
     </application>
 

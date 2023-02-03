@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.diet;
+package com.vice.bloodpressure.ui.activity.diet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,11 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
 /**
- * 饮食方案开始
+ * 类名：饮食方案开始
+ * 传参：
+ * 描述: 
+ * 作者: beauty
+ * 创建日期: 2023/2/3 16:53
  */
 public class DietProgrammeBeginActivity extends UIBaseActivity {
 
