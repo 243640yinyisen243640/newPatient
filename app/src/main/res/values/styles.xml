@@ -126,6 +126,17 @@
         <item name="android:background">@color/text_gray</item>
     </style>
 
+    <style name="Base.ListView" parent="@style/HuaHanSoft.Fill">
+        <item name="android:listSelector">@color/defaultTransparent</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:cacheColorHint">@color/defaultTransparent</item>
+        <item name="android:divider">@color/defaultBackground</item>
+        <item name="android:background">@color/defaultWhite</item>
+    </style>
+
     <style name="diet_change_diet_meal_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -140,10 +151,27 @@
     <style name="diet_change_diet_meal_list">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginBottom">15dp</item>
     </style>
 
+    <style name="style_title_with_green_h">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableLeft">@drawable/shape_green_4_17</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/base_black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="base_dotted_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/diet_dotte_line</item>
+    </style>
+
+    <color name="defaultBackground">#F5F5F5</color>
 </resources>

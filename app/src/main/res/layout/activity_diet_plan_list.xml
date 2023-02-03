@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+
+            <TextView
+                android:id="@+id/tv_diet_plan_breakfast"
+                style="@style/diet_change_diet_meal_title"
+                android:drawableRight="@drawable/diet_change_my_like"
+                android:text="@string/diet_change_diet_top_breakfast" />
+
+            <TextView style="@style/base_dotted_line" />
+
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/nlv_diet_plan_breakfast"
+                style="@style/Base.ListView">
+
+            </com.vice.bloodpressure.view.NoScrollListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+
+            <TextView
+                android:id="@+id/tv_diet_plan_lunch"
+                style="@style/diet_change_diet_meal_title"
+                android:drawableRight="@drawable/diet_change_my_like"
+                android:text="@string/diet_change_diet_top_lunch" />
+
+            <TextView style="@style/base_dotted_line" />
+
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/nlv_diet_plan_lunch"
+                style="@style/Base.ListView">
+
+            </com.vice.bloodpressure.view.NoScrollListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingBottom="15dp">
+
+
+            <TextView
+                android:id="@+id/tv_diet_plan_dinner"
+                style="@style/diet_change_diet_meal_title"
+                android:drawableRight="@drawable/diet_change_my_like"
+                android:text="@string/diet_change_diet_top_dinner" />
+
+            <TextView style="@style/base_dotted_line" />
+
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/nlv_diet_plan_dinner"
+                style="@style/Base.ListView">
+
+            </com.vice.bloodpressure.view.NoScrollListView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_marginBottom="15dp"
+                android:text="@string/add_diet_plan" />
+
+            <TextView
+                style="@style/base_dotted_line"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp" />
+
+            <TextView
+                android:id="@+id/tv_diet_plan_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

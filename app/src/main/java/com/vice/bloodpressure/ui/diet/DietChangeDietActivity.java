@@ -25,7 +25,7 @@ public class DietChangeDietActivity extends UIBaseActivity {
     /**
      * 午餐
      */
-    private TextView noonTv;
+    private TextView lunchTv;
     /**
      * 晚餐
      */
@@ -37,7 +37,7 @@ public class DietChangeDietActivity extends UIBaseActivity {
     /**
      * 午餐列表
      */
-    private NoScrollListView noonNlv;
+    private NoScrollListView lunchNlv;
     /**
      * 晚餐列表
      */
@@ -55,10 +55,10 @@ public class DietChangeDietActivity extends UIBaseActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_change_diet_plan, null);
         containerView().addView(view);
         breakfastTv = view.findViewById(R.id.tv_diet_change_breakfast);
-        noonTv = view.findViewById(R.id.tv_diet_change_noon);
+        lunchTv = view.findViewById(R.id.tv_diet_change_lunch);
         dinnerTv = view.findViewById(R.id.tv_diet_change_dinner);
         breakfastNlv = view.findViewById(R.id.nlv_diet_change_breakfast);
-        noonNlv = view.findViewById(R.id.nlv_diet_change_noon);
+        lunchNlv = view.findViewById(R.id.nlv_diet_change_lunch);
         dinnerNlv = view.findViewById(R.id.nlv_diet_change_dinner);
     }
 
