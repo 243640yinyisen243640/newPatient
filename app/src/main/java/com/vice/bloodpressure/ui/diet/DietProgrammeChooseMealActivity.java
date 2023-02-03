@@ -46,7 +46,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.diet_programme_choose_meal, null);
+        View view = View.inflate(getPageContext(), R.layout.activity_diet_programme_choose_meal, null);
         containerView().addView(view);
         initData();
         top();

@@ -110,6 +110,10 @@
             android:name=".ui.diet.DietProgrammeChooseMealActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
+        <!--更改饮食方案-->
+        <activity
+            android:name=".ui.diet.DietChangeDietActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

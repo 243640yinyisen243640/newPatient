@@ -18,7 +18,7 @@ public class DietProgrammeChooseActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.diet_programme_choose, null);
+        View view = View.inflate(getPageContext(), R.layout.activity_diet_programme_choose, null);
         containerView().addView(view);
         topViewManager().titleTextView().setText("自定义饮食方案");
 

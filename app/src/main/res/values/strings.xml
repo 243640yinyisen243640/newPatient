@@ -17,4 +17,9 @@
     <!--智能饮食-->
 
     <string name="diet_custom_programme_top_title">第一步：请选择分餐比例</string>
+    <string name="diet_change_diet_top_title" >选择我爱吃的食物</string>
+    <string name="diet_activity_change_diet_top_title" >更改饮食方案</string>
+    <string name="diet_change_diet_top_breakfast">早餐</string>
+    <string name="diet_change_diet_top_noon">午餐</string>
+    <string name="diet_change_diet_top_dinner">晚餐</string>
 </resources>
