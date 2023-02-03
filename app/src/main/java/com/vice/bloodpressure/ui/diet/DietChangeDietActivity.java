@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.activity.diet;
+package com.vice.bloodpressure.ui.diet;
 
 import android.os.Bundle;
 import android.view.View;
