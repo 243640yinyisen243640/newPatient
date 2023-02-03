@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:background="@drawable/bg_white_10"
         android:orientation="vertical">
 
@@ -41,16 +42,9 @@
 
                 <TextView
                     android:id="@+id/tv_diet_change_breakfast"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/choode_diet_programme_breakfast"
-                    android:drawableRight="@drawable/diet_arrow_right"
-                    android:drawablePadding="5dp"
-                    android:padding="10dp"
                     android:text="@string/diet_change_diet_top_breakfast"
-                    android:textColor="@color/base_black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:drawableRight="@drawable/arrow_right_gray"
+                    style="@style/diet_change_diet_meal_title" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -59,16 +53,11 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/diet_dotte_line" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_diet_change_breakfast"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                <com.vice.bloodpressure.view.NoScrollListView
+                    android:id="@+id/nlv_diet_change_breakfast"
+                    style="@style/diet_change_diet_meal_list">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </com.vice.bloodpressure.view.NoScrollListView>
 
 
             </LinearLayout>
@@ -95,16 +84,9 @@
 
                 <TextView
                     android:id="@+id/tv_diet_change_noon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/choode_diet_programme_breakfast"
-                    android:drawableRight="@drawable/diet_arrow_right"
-                    android:drawablePadding="5dp"
-                    android:padding="10dp"
-                    android:text="@string/diet_change_diet_top_noon"
-                    android:textColor="@color/base_black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/diet_change_diet_meal_title"
+                    android:drawableRight="@drawable/arrow_right_gray"
+                    android:text="@string/diet_change_diet_top_noon" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -113,16 +95,11 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/diet_dotte_line" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_diet_change_noon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                <com.vice.bloodpressure.view.NoScrollListView
+                    android:id="@+id/nlv_diet_change_noon"
+                    style="@style/diet_change_diet_meal_list">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </com.vice.bloodpressure.view.NoScrollListView>
 
 
             </LinearLayout>
@@ -147,16 +124,9 @@
 
                 <TextView
                     android:id="@+id/tv_diet_change_dinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/choode_diet_programme_breakfast"
-                    android:drawableRight="@drawable/diet_arrow_right"
-                    android:drawablePadding="5dp"
-                    android:padding="10dp"
-                    android:text="@string/diet_change_diet_top_dinner"
-                    android:textColor="@color/base_black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    style="@style/diet_change_diet_meal_title"
+                    android:drawableRight="@drawable/arrow_right_gray"
+                    android:text="@string/diet_change_diet_top_dinner" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -165,16 +135,11 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/diet_dotte_line" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_diet_change_dinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                <com.vice.bloodpressure.view.NoScrollListView
+                    android:id="@+id/nlv_diet_change_dinner"
+                    style="@style/diet_change_diet_meal_list">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </com.vice.bloodpressure.view.NoScrollListView>
 
 
             </LinearLayout>

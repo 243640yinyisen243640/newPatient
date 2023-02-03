@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.view.NoScrollListView;
 
 
 /**
@@ -33,15 +33,15 @@ public class DietChangeDietActivity extends UIBaseActivity {
     /**
      * 早餐列表
      */
-    private RecyclerView breakfastRv;
+    private NoScrollListView breakfastNlv;
     /**
      * 午餐列表
      */
-    private RecyclerView noonRv;
+    private NoScrollListView noonNlv;
     /**
      * 晚餐列表
      */
-    private RecyclerView dinnerRv;
+    private NoScrollListView dinnerNlv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +57,9 @@ public class DietChangeDietActivity extends UIBaseActivity {
         breakfastTv = view.findViewById(R.id.tv_diet_change_breakfast);
         noonTv = view.findViewById(R.id.tv_diet_change_noon);
         dinnerTv = view.findViewById(R.id.tv_diet_change_dinner);
-        breakfastRv = view.findViewById(R.id.rv_diet_change_breakfast);
-        noonRv = view.findViewById(R.id.rv_diet_change_noon);
-        dinnerRv = view.findViewById(R.id.rv_diet_change_dinner);
+        breakfastNlv = view.findViewById(R.id.nlv_diet_change_breakfast);
+        noonNlv = view.findViewById(R.id.nlv_diet_change_noon);
+        dinnerNlv = view.findViewById(R.id.nlv_diet_change_dinner);
     }
 
     private void initValues() {

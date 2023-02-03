@@ -124,96 +124,29 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableLeft="@drawable/choode_diet_programme_breakfast"
-                                android:drawablePadding="5dp"
-                                android:text="早餐"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-
-                            <ImageView
-                                android:id="@+id/iv_add"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:padding="6dp"
-                                android:src="@drawable/circle_add" />
-
-
-                        </LinearLayout>
+                        <TextView
+                            style="@style/diet_change_diet_meal_title"
+                            android:text="@string/diet_change_diet_top_breakfast"
+                            android:drawableRight="@drawable/circle_add"/>
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:minHeight="100dp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableLeft="@drawable/choode_diet_programme_lunch"
-                                android:drawablePadding="5dp"
-                                android:text="午餐"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:padding="6dp"
-                                android:src="@drawable/circle_add" />
-
-
-                        </LinearLayout>
+                       <TextView
+                           style="@style/diet_change_diet_meal_title"
+                           android:text="@string/diet_change_diet_top_noon"
+                           android:drawableRight="@drawable/circle_add"/>
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableLeft="@drawable/choode_diet_programme_dinner"
-                                android:drawablePadding="5dp"
-                                android:text="晚餐"
-                                android:textColor="@color/base_black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:padding="6dp"
-                                android:src="@drawable/circle_add" />
-
-
-                        </LinearLayout>
+                        <TextView
+                            style="@style/diet_change_diet_meal_title"
+                            android:text="@string/diet_change_diet_top_dinner"
+                            android:drawableRight="@drawable/circle_add"/>
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
