@@ -126,16 +126,16 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_out_hospital_unselected, 0, 0);
 
-            mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             mallTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_mall_unselected, 0, 0);
 
-            myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             myTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_me_unselected, 0, 0);
         } else if (checkedId == R.id.tv_main_home_out_hospital) {
-            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             homeTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_unselected, 0, 0);
 
-            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             serviceTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
             outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
@@ -144,16 +144,16 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             mallTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_mall_unselected, 0, 0);
 
-            myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             myTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_me_unselected, 0, 0);
         } else if (checkedId == R.id.tv_main_home_mall){
-            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             homeTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_unselected, 0, 0);
 
-            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             serviceTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
-            outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
             mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
@@ -162,13 +162,13 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             myTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_me_unselected, 0, 0);
         }else {
-            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             homeTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_unselected, 0, 0);
 
-            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            serviceTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             serviceTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
-            outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black));
+            outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
             mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
