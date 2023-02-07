@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.vice.bloodpressure.base.BaseApplication;
-import com.vice.bloodpressure.baseimp.HHSoftApplicationInterface;
+import com.vice.bloodpressure.baseimp.ApplicationInterface;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class BaseFragment extends Fragment implements EasyPermissions.Permission
     protected boolean isNeedFullScreen() {
         if (getActivity().getApplication() instanceof BaseApplication) {
             BaseApplication application = (BaseApplication) getActivity().getApplication();
-            HHSoftApplicationInterface applicationInfo = application.applicationInfo();
+            ApplicationInterface applicationInfo = application.applicationInfo();
             return applicationInfo == null || applicationInfo.isNeedFullScreen();
         }
         return true;

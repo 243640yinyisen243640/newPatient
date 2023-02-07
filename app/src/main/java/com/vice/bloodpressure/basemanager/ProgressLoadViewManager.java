@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.HHSoftLoadStatus;
-import com.vice.bloodpressure.baseimp.HHSoftLoadViewInterface;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseimp.LoadViewInterface;
 import com.vice.bloodpressure.basemodel.LoadViewConfig;
 import com.vice.bloodpressure.basemodel.LoadViewInfo;
 import com.vice.bloodpressure.basemodel.LoadViewStateRecord;
@@ -26,16 +26,16 @@ import java.util.Map;
  * 创建时间：2018/3/2
  */
 
-public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
+public class ProgressLoadViewManager implements LoadViewInterface {
     /*布局及控件*/
     private View mLoadingView;
     private ImageView mLoadingImageView;
     private TextView mLoadingTextView;
     /*状态信息*/
     // mLoaddingView点击事件的散列表
-    private Map<HHSoftLoadStatus, LoadViewStateRecord> mStateListenerMap = new HashMap<>();
+    private Map<LoadStatus, LoadViewStateRecord> mStateListenerMap = new HashMap<>();
     //控制各个状态下显示的图片和文字
-    private Map<HHSoftLoadStatus, LoadViewInfo> mLoadViewInfoMap = new HashMap<>();
+    private Map<LoadStatus, LoadViewInfo> mLoadViewInfoMap = new HashMap<>();
     /*显示动画的drawable*/
     private AnimationDrawable mAnimationDrawable;
     private View mParentView;
@@ -60,7 +60,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     @Override
-    public void changeLoadState(HHSoftLoadStatus state) {
+    public void changeLoadState(LoadStatus state) {
         //还原用户原来设置的点击事件
         bindListener(state);
         switch (state) {
@@ -91,7 +91,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     @Override
-    public void changeLoadStateWithHint(HHSoftLoadStatus state, String stateHint) {
+    public void changeLoadStateWithHint(LoadStatus state, String stateHint) {
         //还原用户原来设置的点击事件
         bindListener(state);
         switch (state) {
@@ -122,7 +122,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     /*绑定监听*/
-    private void bindListener(final HHSoftLoadStatus state) {
+    private void bindListener(final LoadStatus state) {
         switch (state) {
             //当当前的状态是长在加载或者加载成功的时候，取消所有控件的点击事件
             case LOADING:
@@ -155,7 +155,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     /*绑定监听*/
-    private boolean bindChildListener(HHSoftLoadStatus state) {
+    private boolean bindChildListener(LoadStatus state) {
         //判断时候给当前的状态添加了点击事件，如果添加了点击事件，就重新给控件绑定特定的点击事件
         if (mStateListenerMap != null && mStateListenerMap.get(state) != null) {
             //获取特定状态绑定的状态
@@ -174,13 +174,13 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     @Override
-    public void setOnClickListener(HHSoftLoadStatus status, View.OnClickListener listener) {
+    public void setOnClickListener(LoadStatus status, View.OnClickListener listener) {
         loadingViewClickListener(status, listener, false);
     }
 
     /*加载失败控件监听*/
-    public void loadingViewClickListener(HHSoftLoadStatus state, View.OnClickListener listener, boolean justImageView) {
-        if (state == HHSoftLoadStatus.LOADING || state == HHSoftLoadStatus.SUCCESS) {
+    public void loadingViewClickListener(LoadStatus state, View.OnClickListener listener, boolean justImageView) {
+        if (state == LoadStatus.LOADING || state == LoadStatus.SUCCESS) {
             return;
         }
         LoadViewStateRecord record = mStateListenerMap.get(state);
@@ -194,7 +194,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
     }
 
     /*设置提示的视图显示的内容*/
-    private void changeTipViewInfo(HHSoftLoadStatus state, String hint) {
+    private void changeTipViewInfo(LoadStatus state, String hint) {
         //首先需要停止当前动画效果
         stopLoaddingAnim();
         LoadViewInfo hhLoadViewInfo = mLoadViewInfoMap.get(state);
@@ -230,7 +230,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
             msg = hhLoadViewInfo.getMsgInfo();
         }
         //设置控件显示的图片和文本
-        if (HHSoftLoadStatus.LOADING == state) {
+        if (LoadStatus.LOADING == state) {
             mLoadingImageView.setVisibility(View.VISIBLE);
         } else {
             mLoadingImageView.setVisibility(View.GONE);
@@ -280,7 +280,7 @@ public class ProgressLoadViewManager implements HHSoftLoadViewInterface {
 
         @Override
         public void onClick(View v) {
-            changeLoadState(HHSoftLoadStatus.LOADING);
+            changeLoadState(LoadStatus.LOADING);
         }
 
     }

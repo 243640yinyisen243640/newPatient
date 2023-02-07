@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vice.bloodpressure.base.BaseApplication;
-import com.vice.bloodpressure.baseimp.HHSoftApplicationInterface;
+import com.vice.bloodpressure.baseimp.ApplicationInterface;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
     protected boolean isNeedFullScreen() {
         if (getApplication() instanceof BaseApplication) {
             BaseApplication application = (BaseApplication) getApplication();
-            HHSoftApplicationInterface applicationInfo = application.applicationInfo();
+            ApplicationInterface applicationInfo = application.applicationInfo();
             return applicationInfo == null || applicationInfo.isNeedFullScreen();
         }
         return true;

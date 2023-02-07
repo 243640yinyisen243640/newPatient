@@ -1,6 +1,6 @@
 package com.vice.bloodpressure.baseimp;
 
-public enum HHSoftLoadStatus {
+public enum LoadStatus {
     /**
      * 正在加载
      */

@@ -3,19 +3,19 @@ package com.vice.bloodpressure.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.vice.bloodpressure.baseimp.HHSoftApplicationInterface;
+import com.vice.bloodpressure.baseimp.ApplicationInterface;
 import com.vice.bloodpressure.basemanager.LoadViewManager;
 
 
 public abstract class BaseApplication extends Application {
-    private HHSoftApplicationInterface applicationInfo;
+    private ApplicationInterface applicationInfo;
     private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         initAppTopViewInfo();
-        applicationInfo = new HHSoftApplicationInterface() {
+        applicationInfo = new ApplicationInterface() {
             @Override
             public LoadViewManager.LoadMode appLoadMode() {
                 return initAppLoadMode();
@@ -33,7 +33,7 @@ public abstract class BaseApplication extends Application {
         };
     }
 
-    public HHSoftApplicationInterface applicationInfo() {
+    public ApplicationInterface applicationInfo() {
         return applicationInfo;
     }
 

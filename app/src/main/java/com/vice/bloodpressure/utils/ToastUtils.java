@@ -117,7 +117,7 @@ public class ToastUtils {
             view.setBackgroundResource(R.drawable.base_shape_dialog_tip_bg);
             mDialogLoadingImageView = new HHSoftLoadingCircleView(context);
             mDialogLoadingImageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            mDialogLoadingImageView.setBackgroundResource(R.drawable.hhsoft_loading_progress_bar);
+            mDialogLoadingImageView.setBackgroundResource(R.drawable.loading_progress_bar);
             view.addView(mDialogLoadingImageView);
             mDialogContentTextView = new TextView(context);
             mDialogContentTextView.setTextSize(16);

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.HHSoftLoadStatus;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationVideoInfo;
@@ -31,7 +31,7 @@ public class EducationVideoListActivity extends UIBaseListRecycleViewActivity<Ed
         //        mRecyclerView.addItemDecoration(new UserCenterVideoGridDivider(getPageContext(), HHSoftDensityUtils.dip2px(getPageContext(), 3), R.color.white));
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 6), false));
         mRecyclerView.setLayoutManager(layoutManager);
-        loadViewManager().changeLoadState(HHSoftLoadStatus.LOADING);
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     @Override

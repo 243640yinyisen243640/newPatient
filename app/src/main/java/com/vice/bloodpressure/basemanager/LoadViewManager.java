@@ -2,8 +2,8 @@ package com.vice.bloodpressure.basemanager;
 
 import android.view.View;
 
-import com.vice.bloodpressure.baseimp.HHSoftLoadStatus;
-import com.vice.bloodpressure.baseimp.HHSoftLoadViewInterface;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseimp.LoadViewInterface;
 import com.vice.bloodpressure.basemodel.LoadViewConfig;
 
 
@@ -18,7 +18,7 @@ public class LoadViewManager {
         PROGRESS
     }
 
-    private HHSoftLoadViewInterface mAvalibleLoadViewInterface;
+    private LoadViewInterface mAvalibleLoadViewInterface;
 
     /**
      * 加载布局管理器初始化
@@ -38,7 +38,7 @@ public class LoadViewManager {
         mAvalibleLoadViewInterface.init(mLoadViewConfig);
     }
 
-    public HHSoftLoadViewInterface loadViewInterface() {
+    public LoadViewInterface loadViewInterface() {
         return mAvalibleLoadViewInterface;
     }
 
@@ -51,15 +51,15 @@ public class LoadViewManager {
         mAvalibleLoadViewInterface.init(config);
     }
 
-    public void changeLoadState(HHSoftLoadStatus status) {
+    public void changeLoadState(LoadStatus status) {
         mAvalibleLoadViewInterface.changeLoadState(status);
     }
 
-    public void changeLoadStateWithHint(HHSoftLoadStatus status, String hint) {
+    public void changeLoadStateWithHint(LoadStatus status, String hint) {
         mAvalibleLoadViewInterface.changeLoadStateWithHint(status, hint);
     }
 
-    public void setOnClickListener(HHSoftLoadStatus status, View.OnClickListener listener) {
+    public void setOnClickListener(LoadStatus status, View.OnClickListener listener) {
         mAvalibleLoadViewInterface.setOnClickListener(status, listener);
     }
 

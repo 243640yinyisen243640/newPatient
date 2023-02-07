@@ -10,7 +10,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.listener.ScrollBoundaryDecider;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.HHSoftLoadStatus;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
             mPageIndex = 1;
             mRefreshLayout.setVisibility(View.GONE);
             mNestedScrollView.setVisibility(View.GONE);
-            loadViewManager().changeLoadState(HHSoftLoadStatus.LOADING);
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
         });
     }
 
@@ -88,7 +88,7 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
                     mRefreshLayout.setVisibility(View.GONE);
                     mNestedScrollView.setVisibility(View.VISIBLE);
                     mLoadingTextView.setText(R.string.huahansoft_net_error);
-                    loadViewManager().changeLoadState(HHSoftLoadStatus.SUCCESS);
+                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 } else {
                     ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_net_error);
                 }
@@ -102,7 +102,7 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
                     mRefreshLayout.setVisibility(View.GONE);
                     mNestedScrollView.setVisibility(View.VISIBLE);
                     mLoadingTextView.setText(R.string.huahansoft_load_state_no_data);
-                    loadViewManager().changeLoadState(HHSoftLoadStatus.SUCCESS);
+                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 } else {
                     ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
                 }
@@ -126,7 +126,7 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
                     mList.addAll(mTempList);
                     mAdapter.notifyDataSetChanged();
                 }
-                loadViewManager().changeLoadState(HHSoftLoadStatus.SUCCESS);
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
             }
         });
     }
