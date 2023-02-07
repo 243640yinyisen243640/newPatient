@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.activity.service.education;
+package com.vice.bloodpressure.ui.activity.aservice.serviceeducation;
 
 import android.os.Bundle;
 

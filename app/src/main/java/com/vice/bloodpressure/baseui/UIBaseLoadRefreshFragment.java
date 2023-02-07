@@ -7,7 +7,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.vice.bloodpressure.R;
 
 /**
- * @author android_wjh
+ * @author
  * @date 2020/12/2
  */
 public abstract class UIBaseLoadRefreshFragment extends UIBaseLoadFragment {

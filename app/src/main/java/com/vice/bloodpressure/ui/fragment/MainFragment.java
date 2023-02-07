@@ -15,10 +15,12 @@ public class MainFragment extends UIBaseLoadRefreshFragment {
 
     @Override
     protected void onCreate() {
+        super.onCreate();
         topViewManager().topView().removeAllViews();
         StatusBarUtils.statusBarColor(getActivity(), ContextCompat.getColor(getPageContext(), R.color.main_base_color));
         refreshLayout().setOnRefreshListener(refreshLayout -> onPageLoad());
     }
+
 
     @Override
     protected void onPageLoad() {

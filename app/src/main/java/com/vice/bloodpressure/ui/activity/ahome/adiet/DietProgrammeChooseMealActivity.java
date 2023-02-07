@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.ui.activity.diet;
+package com.vice.bloodpressure.ui.activity.ahome.adiet;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
