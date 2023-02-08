@@ -19,3 +19,30 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.vice.bloodpressure.basemodel.**{*;}
+-keep class com.vice.bloodpressure.model.**{*;}
+
+#eventbus
+-keep class org.greenrobot.**{*;}
+# 保护注解
+-keepattributes *Annotation*
+#keepclassmembers只保证配置的方法或属性不被移除和混淆，类名会被混淆
+-keepclassmembers class ** {
+@org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+# Only required if you use AsyncExecutor
+#方法，所有的子类，不包含当前类
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+<init>(java.lang.Throwable);}
+
+##播放器混淆
+-keep public class cn.jzvd.JZMediaSystem {*; }
+-keep public class cn.jzvd.demo.CustomMedia.CustomMedia {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaIjk {*; }
+-keep public class cn.jzvd.demo.CustomMedia.JZMediaSystemAssertFolder {*; }
+
+-keep class tv.danmaku.ijk.media.player.** {*; }
+-dontwarn tv.danmaku.ijk.media.player.*
+-keep interface tv.danmaku.ijk.media.player.** { *; }
