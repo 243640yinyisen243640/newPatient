@@ -24,7 +24,7 @@
                 android:id="@+id/iv_choose_meal_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/choose_meal_selector_three"
+                android:src="@drawable/diet_huacai_with_green"
                 android:padding="1dp"/>
 
         </FrameLayout>

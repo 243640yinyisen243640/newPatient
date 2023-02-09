@@ -21,6 +21,7 @@
     </style>
     <!-- Application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light" />
+
     <style name="HHBaseStyle" parent="AppBaseTheme">
         <item name="colorPrimary">@color/main_base_color</item>
         <item name="colorAccent">@color/main_base_color</item>
@@ -28,6 +29,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="BaseAppTheme" parent="@style/HHBaseStyle">
         <!--Appbar背景色-->
         <item name="colorPrimary">@color/main_base_color</item>
@@ -36,15 +38,19 @@
         <!--状态栏颜色-->
         <item name="colorPrimaryDark">@color/main_base_color</item>
     </style>
+
     <style name="HuaHanSoft.Text.Body.Warp.16" parent="HuaHanSoft.Wrap">
         <item name="android:textColor">@color/defaultGrayText</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="HuaHanSoft"></style>
+
     <style name="HuaHanSoft.Wrap">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="custom_dialog2" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->
@@ -61,6 +67,7 @@
         <!-- 屏幕背景是否变暗 -->
         <item name="android:backgroundDimAmount">0.3</item>
     </style>
+
     <style name="line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
@@ -79,6 +86,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
+
     <style name="HuaHanSoft.Fill.Wr">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -88,6 +96,7 @@
         <item name="android:textColor">@color/defaultBlackText</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="HuaHanSoft.Dialog.Action.Neutral" parent="HuaHanSoft.Text.Body.Weight.12">
         <item name="android:padding">16dp</item>
     </style>
@@ -96,20 +105,25 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="HuaHanSoft.Weight">
         <item name="android:layout_weight">1</item>
     </style>
+
     <style name="HuaHanSoft.Dialog.Action" parent="HuaHanSoft.Text.Body.Warp.12">
         <item name="android:padding">16dp</item>
     </style>
+
     <style name="HuaHanSoft.Text.Body.Weight.12" parent="HuaHanSoft.Weight.Width.Wrap">
         <item name="android:textColor">@color/defaultGrayText</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="HuaHanSoft.Text.Body.Warp.12" parent="HuaHanSoft.Wrap">
         <item name="android:textColor">@color/defaultGrayText</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="shi_an_cai_main_bottom">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -171,6 +185,18 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:background">@drawable/diet_dotte_line</item>
+    </style>
+
+    <style name="diet_make_meal_check_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/selector_color_main_bottom_text</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <color name="defaultBackground">#F5F5F5</color>

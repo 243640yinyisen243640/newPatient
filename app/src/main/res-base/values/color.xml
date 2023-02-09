@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--黑色-半透明-->
+    <color name="defaultBlackTranslucent">#32323232</color>
+    <color name="defaultAlbumBottom">#393A3E</color>
+    <color name="defaultAlbumBottomTranslucent">#ee202020</color>
+</resources>

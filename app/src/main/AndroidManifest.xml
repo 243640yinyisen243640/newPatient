@@ -84,39 +84,50 @@
             </intent-filter>
         </activity>
 
-        <!-- 饮食方案 -->
+        <!-- 首页 -->
         <!--饮食方案开始-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeBeginActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeBeginActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案1-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeOneActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeOneActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案2-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeTwoActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeTwoActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案3-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeThreeActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeThreeActivity"
             android:screenOrientation="portrait" />
         <!--自定义饮食方案-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeChooseActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeChooseActivity"
             android:screenOrientation="portrait" />
         <!--自定义早中晚餐-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietProgrammeChooseMealActivity"
+            android:name=".activity.ahome.adiet.DietProgrammeChooseMealActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
         <!--更改饮食方案-->
         <activity
-            android:name=".ui.activity.ahome.adiet.DietChangeDietActivity"
+            android:name=".activity.ahome.adiet.DietChangeDietActivity"
+            android:screenOrientation="portrait" />
+        <!--一餐详情展示-->
+        <activity
+            android:name=".activity.ahome.adiet.DietMealDetailsActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.aservice.serviceeducation.EducationVideoListActivity"
+        <activity android:name=".activity.ahome.adiet.DietMakeMealDetailsActivity"
             android:screenOrientation="portrait"/>
+
+
+        <!--服务模块-->
+        <!--教育视频列表-->
+        <activity
+            android:name=".activity.aservice.serviceeducation.EducationVideoListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

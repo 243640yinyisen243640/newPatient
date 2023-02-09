@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="75%时间坐或者站立、25%时间站立活动例如:教师、售货员、家庭主妇、酒店服务等:以坐着为主的工作，如办公室工作等。"
-                    android:textColor="#8A8A8A"
+                    android:textColor="@color/base_text_gray"
                     android:layout_marginTop="14dp"
                     android:textSize="14sp"
                     android:layout_marginStart="28dp" />
@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="25%时间坐或者站立、75%时间特殊活动例如:学生日常活动、机动车驾驶、电工安装、外科医生、体育老师等。"
-                    android:textColor="#8A8A8A"
+                    android:textColor="@color/base_text_gray"
                     android:layout_marginTop="14dp"
                     android:textSize="14sp"
                     android:layout_marginStart="28dp" />
@@ -208,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="例如:建筑工、搬运工、冶炼工、农民(中农活)、运动员、舞蹈者、或者与其相当活动量的职业。"
-                    android:textColor="#8A8A8A"
+                    android:textColor="@color/base_text_gray"
                     android:layout_marginTop="14dp"
                     android:textSize="14sp"
                     android:layout_marginStart="28dp" />

@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.vice.bloodpressure.activity.ahome.MainFragment;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.ui.fragment.MainFragment;
 import com.vice.bloodpressure.version.VersionUtils;
 
 

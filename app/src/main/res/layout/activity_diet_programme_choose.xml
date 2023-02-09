@@ -42,7 +42,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:text="糖尿病患者应该均衡营养摄入，三大营养素蛋白质、脂肪和碳水化合物所占的比例推荐如下："
-                        android:textColor="#8A8A8A"
+                        android:textColor="@color/base_text_gray"
                         android:textSize="14sp" />
 
                     <TextView
@@ -69,7 +69,7 @@
                             android:checked="true"
                             android:padding="5dp"
                             android:text="早餐1/5；午餐2/5；晚餐2/5；"
-                            android:textColor="#8A8A8A"
+                            android:textColor="@color/base_text_gray"
                             android:textSize="15sp" />
 
                         <RadioButton
@@ -81,7 +81,7 @@
                             android:checked="false"
                             android:padding="5dp"
                             android:text="早餐1/3；午餐1/3；晚餐1/3；"
-                            android:textColor="#8A8A8A"
+                            android:textColor="@color/base_text_gray"
                             android:textSize="15sp" />
 
                     </RadioGroup>

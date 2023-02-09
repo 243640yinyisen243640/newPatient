@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="picture_rule">不能同时选择图片或视频</string>
+    <string name="picture_message_max_num">你最多可以选择%1$s张图片</string>
+    <string name="picture_min_video_num">视频最低选择不能少于%1$s个</string>
+    <string name="picture_message_video_max_num">你最多可以选择%1$s个视频</string>
+    <string name="hhsoft_permission_read_and_write_tip">是否允许访问您设备上的照片、媒体内容和文件？</string>
+    <string name="hhsoft_permission_record_audio_tip">是否允许拍摄照片、录制视频和使用麦克风?</string>
+    <string name="hhsoft_permission_record_tip">是否允许拍摄照片?</string>
+    <string name="hhsoft_picture_title_name">图片和视频</string>
+    <string name="hhsoft_picture_select_info">确定(%1$d/%2$d)</string>
+    <string name="hhsoft_picture_preview">预览</string>
+    <string name="hhsoft_picture_preview_with_count">预览(%1$d)</string>
+    <string name="hhsoft_picture_title_name_image">所有图片</string>
+    <string name="hhsoft_picture_title_name_video">所有视频</string>
+    <string name="picture_empty_title">无视频或照片\n</string>
+    <string name="picture_empty_audio_title">无音频文件\n</string>
+    <string name="hhsoft_picture_photo_count">%1$d张</string>
+    <string name="hhsoft_picture_photograph">拍照</string>
+    <string name="hhsoft_picture_video">摄像</string>
+    <string name="picture_jurisdiction">读取内存卡权限被拒绝</string>
+    <string name="picture_camera">获取系统相机权限被拒绝</string>
+    <string name="picture_completed">已完成</string>
+    <string name="picture_please_select">请选择</string>
+    <string name="hhsoft_picture_original">原图</string>
+    <string name="picture_selection">选择</string>
+    <string name="picture_min_img_num">图片最低选择不能少于%1$s张</string>
+</resources>

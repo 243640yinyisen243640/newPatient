@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_selected="true" android:drawable="@drawable/choose_meal_selector_two"/>
-    <item android:drawable="@drawable/choose_meal_unselector_two"/>
+    <item android:state_selected="true" android:drawable="@drawable/diet_jitui_with_green"/>
+    <item android:drawable="@drawable/diet_jitui_with_gray"/>
 
 </selector>
