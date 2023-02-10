@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/diet_huacai_with_green"
+                android:drawableLeft="@drawable/diet_huacai_with_green_small"
                 android:drawablePadding="5dp"
                 android:textColor="@color/base_black"
                 android:textSize="17sp"
@@ -33,8 +34,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_10"
             android:layout_marginTop="10dp"
+            android:background="@drawable/bg_white_10"
             android:orientation="vertical"
             android:padding="15dp">
 

@@ -9,7 +9,7 @@ public class TopViewInfo {
     public int titleSize = 20;//单位sp
     public String titleTextColor = "#242424";
     public int titleLeftDrawable = 0;
-    public int backLeftDrawable = R.drawable.base_top_back;
+    public int backLeftDrawable = R.drawable.top_back_black;
     public int moreSize = 14;//单位sp
     public String moreTextColor = "#323232";
     public String topLineColor = "#323232";

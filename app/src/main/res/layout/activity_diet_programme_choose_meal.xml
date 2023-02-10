@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F3F3F3"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -30,6 +33,8 @@
             android:background="@color/transparent"
             android:hint="请输入食物名称，如：宫保鸡丁"
             android:imeOptions="actionSearch"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:maxLines="1"
             android:paddingTop="13dp"
             android:paddingBottom="13dp"
@@ -48,7 +53,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_light_yellow_90"
+        android:background="@drawable/bg_light_yellow_10"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -65,8 +70,8 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:src="@drawable/error_close" />
 
 

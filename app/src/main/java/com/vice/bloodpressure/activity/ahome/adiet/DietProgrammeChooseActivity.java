@@ -30,14 +30,7 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
         initListener();
 
         topViewManager().titleTextView().setText(R.string.diet_activity_custom_diet_top_title);
-        breakfastTv = findViewById(R.id.tv_diet_custom_plan_breakfast);
-        lunchTv = findViewById(R.id.tv_diet_custom_plan_lunch);
-        dinnerTv = findViewById(R.id.tv_diet_custom_plan_dinner);
-        breakfastTv.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
-            intent.putExtra("meal", "早餐");
-            startActivity(intent);
-        });
+
     }
 
     private void initListener() {
@@ -48,6 +41,9 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_programme_choose, null);
+        breakfastTv = view.findViewById(R.id.tv_diet_custom_plan_breakfast);
+        lunchTv = view.findViewById(R.id.tv_diet_custom_plan_lunch);
+        dinnerTv = view.findViewById(R.id.tv_diet_custom_plan_dinner);
         containerView().addView(view);
     }
 
@@ -56,6 +52,9 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
 
         switch (v.getId()) {
             case R.id.tv_diet_custom_plan_breakfast:
+                Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+                intent.putExtra("meal", "早餐");
+                startActivity(intent);
                 break;
             case R.id.tv_diet_custom_plan_lunch:
                 break;

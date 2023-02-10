@@ -33,6 +33,7 @@
 
                     <TextView
                         style="@style/style_title_with_green_h"
+                        android:layout_margin="10dp"
                         android:text="@string/diet_custom_programme_top_title" />
 
                     <TextView
@@ -120,6 +121,7 @@
                             android:id="@+id/tv_diet_custom_plan_breakfast"
                             style="@style/diet_change_diet_meal_title"
                             android:text="@string/diet_change_diet_top_breakfast"
+                            android:drawableLeft="@drawable/diet_bing_with_green"
                             android:drawableRight="@drawable/circle_add"/>
 
                         <com.vice.bloodpressure.view.NoScrollListView
@@ -130,6 +132,7 @@
                        <TextView
                            android:id="@+id/tv_diet_custom_plan_lunch"
                            style="@style/diet_change_diet_meal_title"
+                           android:drawableLeft="@drawable/diet_jitui_with_green"
                            android:text="@string/diet_change_diet_top_lunch"
                            android:drawableRight="@drawable/circle_add"/>
 
@@ -140,6 +143,7 @@
                         <TextView
                             android:id="@+id/tv_diet_custom_plan_dinner"
                             style="@style/diet_change_diet_meal_title"
+                            android:drawableLeft="@drawable/diet_huacai_with_green"
                             android:text="@string/diet_change_diet_top_dinner"
                             android:drawableRight="@drawable/circle_add"/>
 

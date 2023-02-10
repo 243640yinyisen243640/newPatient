@@ -1,6 +1,5 @@
-package com.vice.bloodpressure;
+package com.vice.bloodpressure.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.vice.bloodpressure.activity.ahome.MainFragment;
-import com.vice.bloodpressure.activity.ahome.adiet.DietMakeMealDetailsActivity;
+import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.version.VersionUtils;
 
@@ -81,9 +80,9 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
                 fragment = new MainFragment();
             } else if (checkId == R.id.tv_main_home_out_hospital) {
                 fragment = new MainFragment();
-            } else if (checkId == R.id.tv_main_home_mall){
+            } else if (checkId == R.id.tv_main_home_mall) {
                 fragment = new MainFragment();
-            }else {
+            } else {
                 fragment = new MainFragment();
             }
             transaction.add(R.id.fl_main, fragment, checkId + "");
@@ -148,7 +147,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
 
             myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             myTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_me_unselected, 0, 0);
-        } else if (checkedId == R.id.tv_main_home_mall){
+        } else if (checkedId == R.id.tv_main_home_mall) {
             homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             homeTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_unselected, 0, 0);
 
@@ -163,7 +162,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
 
             myTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             myTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_me_unselected, 0, 0);
-        }else {
+        } else {
             homeTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_gray));
             homeTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_unselected, 0, 0);
 
@@ -192,9 +191,6 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
                 setTextViewColor(view.getId());
                 checkFragment(view.getId());
 
-
-                Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
-                startActivity(intent);
                 break;
             default:
                 break;

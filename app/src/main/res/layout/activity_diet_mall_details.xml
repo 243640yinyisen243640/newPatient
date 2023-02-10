@@ -17,6 +17,8 @@
             android:id="@+id/tv_diet_mall_details_title"
             style="@style/diet_change_diet_meal_title"
             android:drawableRight="@drawable/diet_change_my_like"
+            android:drawableLeft="@drawable/diet_bing_with_green"
+            android:drawablePadding="5dp"
             android:text="@string/diet_change_diet_top_breakfast" />
 
         <TextView style="@style/base_dotted_line" />

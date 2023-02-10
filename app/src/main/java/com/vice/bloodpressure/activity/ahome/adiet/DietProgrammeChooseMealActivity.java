@@ -19,7 +19,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.ahome.MainFragment;
+import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * 类名：
  * 传参：meal
  * 描述: 自定义饮食
- * 作者: beautiful
+ * 作者: beauty
  * 创建日期: 2023/2/1 14:59
  */
 

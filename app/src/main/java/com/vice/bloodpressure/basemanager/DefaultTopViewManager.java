@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public final class DefaultTopViewManager {
     /**
      * 返回键
      */
-    private TextView mBackTextView;
+    private ImageView mBackImageView;
     /**
      * 标题
      */
@@ -99,19 +100,18 @@ public final class DefaultTopViewManager {
         }
         mTopView = new RelativeLayout(mActivity);
         mView.addView(mTopView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtils.dip2px(mActivity, mTopViewInfo.topViewHeight)));
-        mBackTextView = new TextView(mActivity);
-        mBackTextView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mBackTextView.setCompoundDrawablesWithIntrinsicBounds(mTopViewInfo.backLeftDrawable, 0, 0, 0);
-        mBackTextView.setPadding(15,0,15,0);
+        mBackImageView = new ImageView(mActivity);
+        mBackImageView.setLayoutParams(new RelativeLayout.LayoutParams(ScreenUtils.dip2px(mActivity,48), ViewGroup.LayoutParams.WRAP_CONTENT));
+        mBackImageView.setImageResource(mTopViewInfo.backLeftDrawable);
+        mBackImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-        mBackTextView.setGravity(Gravity.CENTER_VERTICAL);
-        mBackTextView.setOnClickListener(new View.OnClickListener() {
+        mBackImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mActivity.finish();
             }
         });
-        mTopView.addView(mBackTextView);
+        mTopView.addView(mBackImageView);
 
         mTitleTextView = new TextView(mActivity);
         RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -163,14 +163,6 @@ public final class DefaultTopViewManager {
         return mTopView;
     }
 
-    /**
-     * 获取返回键
-     *
-     * @return
-     */
-    public TextView backTextView() {
-        return mBackTextView;
-    }
 
     /**
      * 获取标题控件
