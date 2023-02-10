@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.adapter;
+package com.vice.bloodpressure.baseadapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -56,4 +56,12 @@
     <color name="defaultBlackText">#323232</color>
     <!--黑色-内容-->
     <color name="defaultBlackLight">#646464</color>
+
+    <!--diet  食材颜色-->
+    <color name="diet_zhushi">#ED6761</color>
+    <color name="diet_shucai">#3BD3A4</color>
+    <color name="diet_danbai">#F8B172</color>
+    <color name="diet_yinpin">#6FEDF3</color>
+    <color name="diet_yan">#C6A9E7</color>
+    <color name="diet_you">#FFDB84</color>
 </resources>

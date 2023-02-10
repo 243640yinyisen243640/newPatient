@@ -1,5 +1,5 @@
 package com.vice.bloodpressure.basemodel;
 
 public class LoadViewConfig {
-    public String loadViewBgColor = "#323232";
+    public String loadViewBgColor = "#FFFFFF";
 }

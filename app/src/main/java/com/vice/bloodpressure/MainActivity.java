@@ -1,5 +1,6 @@
 package com.vice.bloodpressure;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.vice.bloodpressure.activity.ahome.MainFragment;
+import com.vice.bloodpressure.activity.ahome.adiet.DietMakeMealDetailsActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.version.VersionUtils;
 
@@ -189,6 +191,10 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             case R.id.tv_main_home_my:
                 setTextViewColor(view.getId());
                 checkFragment(view.getId());
+
+
+                Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

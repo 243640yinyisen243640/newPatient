@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="diet_plan_colors">
+        <item>@color/diet_zhushi</item>
+        <item>@color/diet_shucai</item>
+        <item>@color/diet_danbai</item>
+        <item>@color/diet_yinpin</item>
+        <item>@color/diet_yan</item>
+        <item>@color/diet_you</item>
+    </integer-array>
+</resources>

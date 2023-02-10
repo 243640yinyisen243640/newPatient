@@ -172,7 +172,7 @@
     <style name="style_title_with_green_h">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:drawableLeft">@drawable/shape_green_4_17</item>
+        <item name="android:drawableLeft">@drawable/shape_green_4_18_2</item>
         <item name="android:drawablePadding">8dp</item>
         <item name="android:textColor">@color/base_black</item>
         <item name="android:textSize">18sp</item>
@@ -192,7 +192,10 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@color/transparent</item>
+        <item name="android:drawableBottom">@drawable/selector_bg_diet_radiobutton</item>
+        <item name="android:paddingBottom">2dp</item>
         <item name="android:button">@null</item>
+        <item name="android:drawablePadding">8dp</item>
         <item name="android:gravity">center</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/selector_color_main_bottom_text</item>

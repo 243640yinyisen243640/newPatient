@@ -20,44 +20,44 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:drawableRight="@drawable/selector_video_begin_pause"
             android:layout_margin="15dp"
+            android:drawableRight="@drawable/selector_video_begin_pause"
             android:textColor="@color/defaultWhite" />
     </FrameLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_white_10"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_meal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:layout_margin="15dp"
-            android:text="@string/app_name"
+            android:drawableLeft="@drawable/diet_base_meal_img"
+            android:drawablePadding="10dp"
             android:gravity="center|left"
             android:textColor="@color/base_black"
-            android:textStyle="bold"
-            android:drawableLeft="@drawable/diet_base_meal_img"
-            android:drawablePadding="10dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/rg_meal_video"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/defaultWhite"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rb_diet_meal_resource_make"
                 style="@style/diet_make_meal_check_button"
+                android:baselineAligned="false"
                 android:checked="true"
                 android:drawableRight="@drawable/shape_green_2_2_circle"
                 android:text="原料做法" />
@@ -65,8 +65,8 @@
             <RadioButton
                 android:id="@+id/rb_diet_meal_resource_proportion"
                 style="@style/diet_make_meal_check_button"
-                android:text="原料占比"
-                android:drawableRight="@drawable/shape_green_2_2_circle"/>
+                android:drawableRight="@drawable/shape_green_2_2_circle"
+                android:text="原料占比" />
 
             <RadioButton
                 android:id="@+id/rb_diet_meal_heat_proportion"
@@ -75,6 +75,7 @@
         </RadioGroup>
 
     </LinearLayout>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_meal_video"
         android:layout_width="match_parent"

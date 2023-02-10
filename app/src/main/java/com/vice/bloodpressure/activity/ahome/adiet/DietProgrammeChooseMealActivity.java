@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.MainFragment;
-import com.vice.bloodpressure.adapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
 import java.util.ArrayList;

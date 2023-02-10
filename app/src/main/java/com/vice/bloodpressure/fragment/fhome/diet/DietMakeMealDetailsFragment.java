@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
+import com.vice.bloodpressure.baseui.UIBaseFragment;
 
 /**
  * 作者: beauty
@@ -12,7 +12,7 @@ import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
  * 传参:
  * 描述:
  */
-public class DietMakeMealDetailsFragment extends UIBaseLoadFragment {
+public class DietMakeMealDetailsFragment extends UIBaseFragment {
 
     public static DietMakeMealDetailsFragment getInstance(String text) {
 
@@ -25,7 +25,7 @@ public class DietMakeMealDetailsFragment extends UIBaseLoadFragment {
 
     @Override
     protected void onCreate() {
-
+        topViewManager().topView().removeAllViews();
         containerView().addView(initView());
 
     }
@@ -36,8 +36,4 @@ public class DietMakeMealDetailsFragment extends UIBaseLoadFragment {
         return view;
     }
 
-    @Override
-    protected void onPageLoad() {
-
-    }
 }

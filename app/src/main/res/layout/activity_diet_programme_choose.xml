@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
-                        android:drawableLeft="@drawable/shape_green_4_17"
+                        android:drawableLeft="@drawable/shape_green_4_18_2"
                         android:drawablePadding="8dp"
                         android:text="第二步：请选择想吃的食物"
                         android:textColor="@color/base_black"

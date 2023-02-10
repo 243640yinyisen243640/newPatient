@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.MyFragmentStateAdapter;
-import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.basevideo.JZVideoPlayer;
+import com.vice.bloodpressure.fragment.fhome.diet.DietHeatProportionFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietMakeMealDetailsFragment;
+import com.vice.bloodpressure.fragment.fhome.diet.DietResourceProportionFragment;
 import com.vice.bloodpressure.model.VideoInfo;
 import com.vice.bloodpressure.utils.ScreenUtils;
 
@@ -43,9 +44,11 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("制作饮食");
         containerView().addView(initView());
+        initValue();
         initListener();
-        loadViewManager().changeLoadState(LoadStatus.LOADING);
+//        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     private void initListener() {
@@ -61,6 +64,7 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_make_meal_details, null);
+        videoPlayer = view.findViewById(R.id.jz_video_details);
         videoFl = view.findViewById(R.id.fl_video_details);
         controlTv = view.findViewById(R.id.tv_meal_begin_pause);
         mealNameTv = view.findViewById(R.id.tv_meal_name);
@@ -75,17 +79,21 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
     }
 
 
-    private void initValue(String chapterID) {
+    private void initValue() {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
 
         /**
-         * 课程评论
+         * 原料做法
          */
         DietMakeMealDetailsFragment detailsFragment = new DietMakeMealDetailsFragment();
+        DietResourceProportionFragment resourceProportionFragment = new DietResourceProportionFragment();
+        DietHeatProportionFragment heatProportionFragment = new DietHeatProportionFragment();
 
         fragments = new ArrayList<>();
         fragments.add(detailsFragment.getInstance("11"));
+        fragments.add(resourceProportionFragment.getInstance("11"));
+        fragments.add(heatProportionFragment.getInstance("11"));
 
         mealVideoVp.setAdapter(new MyFragmentStateAdapter(this, fragments));
         mealVideoVp.setOffscreenPageLimit(fragments.size());
@@ -134,28 +142,28 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-//        videoPlayer.setUp(videoInfo.getVideoUrl(), "");
-//        XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
+        //        videoPlayer.setUp(videoInfo.getVideoUrl(), "");
+        //        XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
 
-//        if ("1".equals(videoInfo.getIsFirst())) {
-//            videoPlayer.setCanForward(true);
-//            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                    return false;
-//                }
-//            });
-//        } else {
-//            videoPlayer.setCanForward(false);
-//            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                    return true;
-//                }
-//            });
-//
-//        }
+        //        if ("1".equals(videoInfo.getIsFirst())) {
+        //            videoPlayer.setCanForward(true);
+        //            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
+        //                @Override
+        //                public boolean onTouch(View view, MotionEvent motionEvent) {
+        //
+        //                    return false;
+        //                }
+        //            });
+        //        } else {
+        //            videoPlayer.setCanForward(false);
+        //            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
+        //                @Override
+        //                public boolean onTouch(View view, MotionEvent motionEvent) {
+        //
+        //                    return true;
+        //                }
+        //            });
+        //
+        //        }
     }
 }
