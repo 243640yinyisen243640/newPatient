@@ -13,7 +13,6 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeBeginActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseMealActivity;
-import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeOneActivity;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 
@@ -90,8 +89,7 @@ public class MainFragment extends UIBaseLoadFragment implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.text2:
-                intent = new Intent(getPageContext(), DietProgrammeOneActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.text3:
                 intent = new Intent(getPageContext(), DietProgrammeChooseActivity.class);

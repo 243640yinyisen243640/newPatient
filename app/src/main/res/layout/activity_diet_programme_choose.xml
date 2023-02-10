@@ -143,7 +143,7 @@
                         <TextView
                             android:id="@+id/tv_diet_custom_plan_dinner"
                             style="@style/diet_change_diet_meal_title"
-                            android:drawableLeft="@drawable/diet_huacai_with_green"
+                            android:drawableLeft="@drawable/diet_jitui_with_green"
                             android:text="@string/diet_change_diet_top_dinner"
                             android:drawableRight="@drawable/circle_add"/>
 
