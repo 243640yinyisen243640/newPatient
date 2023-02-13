@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.mikephil.charting.charts.PieChart;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.view.CirclePercentView;
 
 /**
@@ -41,6 +43,13 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         topViewManager().titleTextView().setText("饮食方案");
         topViewManager().moreTextView().setText("重新制定");
         initViews();
+        initValues();
+    }
+
+    private void initValues() {
+        Log.i("yys", "seven" + DataUtils.getSevendate());
+        Log.i("yys", "week" + DataUtils.get7week());
+
     }
 
     private void initViews() {
