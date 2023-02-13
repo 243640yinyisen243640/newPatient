@@ -52,7 +52,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
                         android:text="选择饮食比例 :"
-                        android:textColor="@color/base_black"
+                        android:textColor="@color/base_text_black"
                         android:textSize="16sp" />
 
                     <RadioGroup
@@ -105,7 +105,7 @@
                         android:drawableLeft="@drawable/shape_green_4_18_2"
                         android:drawablePadding="8dp"
                         android:text="第二步：请选择想吃的食物"
-                        android:textColor="@color/base_black"
+                        android:textColor="@color/base_text_black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 

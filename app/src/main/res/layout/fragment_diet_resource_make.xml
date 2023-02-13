@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/diet_huacai_with_green_small"
                 android:drawablePadding="5dp"
-                android:textColor="@color/base_black"
+                android:textColor="@color/base_text_black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/diet_guo_with_green"
                 android:drawablePadding="5dp"
-                android:textColor="@color/base_black"
+                android:textColor="@color/base_text_black"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 

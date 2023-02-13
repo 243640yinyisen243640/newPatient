@@ -6,7 +6,7 @@
     <color name="defaultWhite">#FFFFFF</color>
     <!--项目主题色-->
     <color name="main_base_color">#00C27F</color>
-    <color name="background">f3f3f3</color>
+    <color name="background">#f3f3f3</color>
     <color name="little_background">#FBFBFB</color>
     <color name="color_fa">#FAFAFA</color>
 
