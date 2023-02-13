@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_10"
+        android:background="@drawable/shape_bg_white_10"
         android:orientation="vertical"
         android:paddingBottom="10dp">
 
@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_background_10"
+                android:background="@drawable/shape_bg_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 
@@ -66,7 +66,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_background_10"
+                android:background="@drawable/shape_bg_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 
@@ -101,7 +101,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_background_10"
+                android:background="@drawable/shape_bg_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 

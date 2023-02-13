@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
  * data：2017/5/25
  */
 
-public class XyDateUtils {
+public class XyTimeUtils {
     private static SimpleDateFormat msFormat = new SimpleDateFormat("mm:ss");
 
     /**

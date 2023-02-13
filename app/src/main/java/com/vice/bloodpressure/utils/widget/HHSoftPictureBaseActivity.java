@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.utils.ToastUtils;
-import com.vice.bloodpressure.utils.XyDateUtils;
+import com.vice.bloodpressure.utils.XyTimeUtils;
 import com.vice.bloodpressure.utils.compress.CompressionPredicate;
 import com.vice.bloodpressure.utils.compress.Luban;
 import com.vice.bloodpressure.utils.compress.OnCompressListener;
@@ -276,7 +276,7 @@ public class HHSoftPictureBaseActivity extends UIBaseActivity {
                 long date = imageCursor.getLong(eqVideo ?
                         imageCursor.getColumnIndex(MediaStore.Video.Media.DURATION)
                         : imageCursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
-                int duration = XyDateUtils.dateDiffer(date);
+                int duration = XyTimeUtils.dateDiffer(date);
                 imageCursor.close();
                 // DCIM文件下最近时间30s以内的图片，可以判定是最新生成的重复照片
                 return duration <= 30 ? id : -1;

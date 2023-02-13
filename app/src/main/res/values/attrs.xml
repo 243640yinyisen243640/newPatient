@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SubsamplingScaleImageView">
-        <attr name="src" format="reference"/>
-        <attr name="assetName" format="string"/>
-        <attr name="panEnabled" format="boolean"/>
-        <attr name="zoomEnabled" format="boolean"/>
-        <attr name="quickScaleEnabled" format="boolean"/>
-        <attr name="tileBackgroundColor" format="color"/>
+        <attr name="src" format="reference" />
+        <attr name="assetName" format="string" />
+        <attr name="panEnabled" format="boolean" />
+        <attr name="zoomEnabled" format="boolean" />
+        <attr name="quickScaleEnabled" format="boolean" />
+        <attr name="tileBackgroundColor" format="color" />
     </declare-styleable>
 
 
@@ -33,4 +33,20 @@
     <attr name="picture.crop.status.color" format="reference|color" />
     <attr name="picture.crop.title.color" format="reference|color" />
     <attr name="picture.folder_checked_dot" format="reference" />
+
+    <!--圆形图-->
+    <declare-styleable name="CirclePercentView">
+        <!--圆弧背景色-->
+        <attr name="circleBgColor" format="reference" />
+        <!--圆弧进度条颜色-->
+        <attr name="circleProgressColor" format="reference" />
+        <!--圆弧宽度-->
+        <attr name="circleProgressRadius" format="integer" />
+        <!--渐变开始颜色-->
+        <attr name="circleStartColor" format="reference" />
+        <!--渐变结束颜色-->
+        <attr name="circleEndColor" format="reference" />
+        <!--是否渐变-->
+        <attr name="circleIsGradient" format="boolean" />
+    </declare-styleable>
 </resources>

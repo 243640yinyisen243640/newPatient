@@ -1,6 +1,434 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="全天" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_little_background_5"
+                android:orientation="vertical">
+
+                <com.vice.bloodpressure.view.HHAtMostGridView
+                    android:id="@+id/hhgd_meal_plan_details_name"
+                    style="@style/diet_meal_plan_details_gridview" />
+
+                <com.vice.bloodpressure.view.HHAtMostGridView
+                    android:id="@+id/hhgd_meal_plan_details_color"
+                    style="@style/diet_meal_plan_details_gridview" />
+
+                <com.vice.bloodpressure.view.HHAtMostGridView
+                    android:id="@+id/hhgd_meal_plan_details_num"
+                    style="@style/diet_meal_plan_details_gridview" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="三餐分餐比例" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_little_background_5"
+                    android:orientation="horizontal"
+                    android:padding="13dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="早"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="1/3"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_line_1_35_gray" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="中"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="1/3"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_line_1_35_gray" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="早"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="1/3"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8.5dp"
+                    android:layout_marginRight="8.5dp"
+                    android:gravity="center"
+                    android:text="或"
+                    android:textColor="#9E9E9E"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_little_background_5"
+                    android:orientation="horizontal"
+                    android:padding="13dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="早"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="1/5"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_line_1_35_gray" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="中"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="2/5"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_line_1_35_gray" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="早"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6.5dp"
+                            android:includeFontPadding="false"
+                            android:text="2/5"
+                            android:textColor="@color/base_text_black"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:layout_width="164dp"
+                            android:layout_height="164dp"
+                            android:layout_gravity="center|left" />
+
+                        <com.vice.bloodpressure.view.CirclePercentView
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:layout_gravity="center|left"
+                            app:circleBgColor="@color/color_fa"
+                            app:circleIsGradient="false"
+                            app:circleProgressColor="#FF8A77" />
+
+
+                        <com.vice.bloodpressure.view.CirclePercentView
+                            android:layout_width="95dp"
+                            android:layout_height="95dp"
+                            android:layout_gravity="center|left"
+                            app:circleBgColor="@color/color_fa"
+                            app:circleIsGradient="false"
+                            app:circleProgressColor="#65BEFF" />
+
+                        <com.vice.bloodpressure.view.CirclePercentView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:layout_gravity="center|left"
+                            app:circleBgColor="@color/color_fa"
+                            app:circleIsGradient="false"
+                            app:circleProgressColor="#A599FE" />
+
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="12dp"
+                        android:layout_height="5dp"
+                        android:background="@drawable/shape_orange_12_5_3" />
+
+                    <TextView
+                        style="@style/diet_meal_plan_title"
+                        android:text="碳水化合物：50%-60% " />
+
+                    <TextView
+                        android:id="@+id/tv_meal_plan_details_tanshui"
+                        style="@style/diet_meal_plan_content" />
+
+                    <TextView
+                        android:layout_width="12dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shape_blue_12_5_3" />
+
+                    <TextView
+                        style="@style/diet_meal_plan_title"
+                        android:text="蛋白质：10%-15%" />
+
+                    <TextView
+                        android:id="@+id/tv_meal_plan_details_danbai"
+                        style="@style/diet_meal_plan_content" />
+
+                    <TextView
+                        android:layout_width="12dp"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shape_purple_12_5_3" />
+
+                    <TextView
+                        style="@style/diet_meal_plan_title"
+                        android:text="脂肪：<30% " />
+
+                    <TextView
+                        android:id="@+id/tv_meal_plan_details_zhifang"
+                        style="@style/diet_meal_plan_content" />
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|left">
+
+                <TextView
+                    style="@style/style_title_with_green_h"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:text="7天专属饮食方案" />
+
+                <TextView
+                    android:id="@+id/meal_plan_details_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/base_sure_90_little"
+                    android:gravity="center"
+                    android:text="查看更多"
+                    android:textColor="@color/defaultWhite"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

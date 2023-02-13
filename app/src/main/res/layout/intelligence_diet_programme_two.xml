@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="21dp"
-                android:background="@drawable/bg_black_90_20"
+                android:background="@drawable/shape_bg_black_90_20"
                 android:paddingStart="15dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="15dp"
@@ -53,7 +53,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="55dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/bg_white_10"
+            android:background="@drawable/shape_bg_white_10"
             android:orientation="vertical">
 
 
@@ -268,7 +268,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/bg_white_90"
+        android:background="@drawable/shape_bg_white_90"
         android:textSize="15sp"
         android:textColor="#00C27F"
         android:text="上一题"
@@ -281,7 +281,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_white_90"
+            android:background="@drawable/shape_bg_white_90"
             android:textSize="15sp"
             android:textColor="#00C27F"
             android:text="下一题"

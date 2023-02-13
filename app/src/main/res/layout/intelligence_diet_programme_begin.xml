@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:background="@drawable/bg_white_5_5_5_0"
+                android:background="@drawable/shape_bg_white_5_5_5_0"
                 android:textSize="15sp"
                 android:textColor="#2B5748"
                 android:text="共3题"

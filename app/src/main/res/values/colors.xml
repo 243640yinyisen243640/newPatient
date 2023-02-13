@@ -6,7 +6,9 @@
     <color name="defaultWhite">#FFFFFF</color>
     <!--项目主题色-->
     <color name="main_base_color">#00C27F</color>
-    <color name="background">#F2F2F2</color>
+    <color name="background">f3f3f3</color>
+    <color name="little_background">#FBFBFB</color>
+    <color name="color_fa">#FAFAFA</color>
 
 
     <!--黑色-toast背景色-->
@@ -21,10 +23,10 @@
     <!-- 黑色颜色值开始 -->
     <!-- 黑色字体 -->
     <color name="text_black">#323232</color>
-    <color name="base_black">#2A2A2A</color>
+    <color name="base_text_black">#2A2A2A</color>
     <!-- 浅黑色 -->
     <color name="text_black_hint">#646464</color>
-    <color name="base_text_black">#242424</color>
+    <color name="text_black_heavy">#242424</color>
 
     <!--黑色颜色值结束-->
 
@@ -40,6 +42,8 @@
     <color name="text_gray_hint">#ABABAB</color>
 
     <color name="base_text_gray">#8A8A8A</color>
+
+    <color name="line_gray">#E5E5E5</color>
     <!--灰色颜色值结束-->
 
 
@@ -64,4 +68,7 @@
     <color name="diet_yinpin">#6FEDF3</color>
     <color name="diet_yan">#C6A9E7</color>
     <color name="diet_you">#FFDB84</color>
+
+    <!--其他颜色-->
+    <color name="light_yellow">#FFF1D3</color>
 </resources>

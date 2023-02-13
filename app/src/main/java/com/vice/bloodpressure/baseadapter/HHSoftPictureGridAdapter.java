@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
-import com.vice.bloodpressure.utils.XyDateUtils;
+import com.vice.bloodpressure.utils.XyTimeUtils;
 import com.vice.bloodpressure.utils.config.PictureConfig;
 import com.vice.bloodpressure.utils.config.PictureMimeType;
 import com.vice.bloodpressure.utils.config.PictureSelectionConfig;
@@ -97,7 +97,7 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
             int mediaMimeType = PictureMimeType.isPictureType(pictureType);
             //暂不考虑音频
             holder.videoTextView.setVisibility(mediaMimeType == PictureConfig.TYPE_VIDEO ? View.VISIBLE : View.GONE);
-            holder.videoTextView.setText(XyDateUtils.timeParse(media.getDuration()));
+            holder.videoTextView.setText(XyTimeUtils.timeParse(media.getDuration()));
             RequestOptions options = new RequestOptions();
             if (overrideWidth <= 0 && overrideHeight <= 0) {
                 options.sizeMultiplier(sizeMultiplier);

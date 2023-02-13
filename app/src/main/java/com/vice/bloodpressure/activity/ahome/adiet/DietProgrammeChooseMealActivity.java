@@ -77,7 +77,7 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
                     tvTab.setTextColor(ContextCompat.getColor(getPageContext(),R.color.base_text_gray));
                     if (i == position) {
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
-                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(),R.color.base_text_black));
+                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(),R.color.text_black_heavy));
                     }
                 }
             }
