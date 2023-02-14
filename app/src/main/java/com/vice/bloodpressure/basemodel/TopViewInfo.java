@@ -14,4 +14,6 @@ public class TopViewInfo {
     public String moreTextColor = "#323232";
     public String topLineColor = "#323232";
     public int topLineHeight = 0;
+    public String statusBarColor = "#00C27F";
+
 }

@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/diet_base_meal_img" />
+        android:src="@drawable/diet_guogai_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"

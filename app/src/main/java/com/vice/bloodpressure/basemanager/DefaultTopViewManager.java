@@ -91,6 +91,7 @@ public final class DefaultTopViewManager {
         mStatusBarView = new TextView(mActivity);
         mStatusBarView.setBackgroundResource(mTopViewInfo.topBackgroundDrawableRes);
         mStatusBarView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.statusBarHeight(mActivity)));
+        mStatusBarView.setBackgroundColor(Color.parseColor(mTopViewInfo.statusBarColor));
         mView.addView(mStatusBarView);
         if (mIsShowStatusBar) {
             mStatusBarView.setVisibility(View.VISIBLE);

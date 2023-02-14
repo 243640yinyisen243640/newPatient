@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.baseui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;

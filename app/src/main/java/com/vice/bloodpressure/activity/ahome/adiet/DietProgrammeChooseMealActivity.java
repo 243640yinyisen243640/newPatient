@@ -19,12 +19,13 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.fragment.textFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 类名：
  * 传参：meal
@@ -43,10 +44,17 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
 
+    /**
+     * 标题
+     */
+    private String meal;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        meal = getIntent().getStringExtra("meal");
+        topViewManager().titleTextView().setText(meal);
         View view = View.inflate(getPageContext(), R.layout.activity_diet_programme_choose_meal, null);
         containerView().addView(view);
         initData();
@@ -74,10 +82,10 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
                     LinearLayout customView = (LinearLayout) tabAt.getCustomView();
                     TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
                     tvTab.setTypeface(Typeface.DEFAULT);
-                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(),R.color.base_text_gray));
+                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.base_text_gray));
                     if (i == position) {
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
-                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(),R.color.text_black_heavy));
+                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black_heavy));
                     }
                 }
             }
@@ -97,11 +105,11 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
 
     private void initData() {
         fragmentList = new ArrayList();
-        fragmentList.add(MainFragment.getInstance());
-        fragmentList.add(MainFragment.getInstance());
-        fragmentList.add(MainFragment.getInstance());
-        fragmentList.add(MainFragment.getInstance());
-        fragmentList.add(MainFragment.getInstance());
+        fragmentList.add(textFragment.getInstance());
+        fragmentList.add(textFragment.getInstance());
+        fragmentList.add(textFragment.getInstance());
+        fragmentList.add(textFragment.getInstance());
+        fragmentList.add(textFragment.getInstance());
     }
 
     private void top() {

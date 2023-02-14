@@ -99,6 +99,7 @@ public class MainFragment extends UIBaseLoadFragment implements View.OnClickList
                 break;
             case R.id.text4:
                 intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+                intent.putExtra("meal", "早餐");
                 startActivity(intent);
                 break;
             case R.id.text5:
