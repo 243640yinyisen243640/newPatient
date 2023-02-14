@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_education_question_investigate_bg"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/education_question_investigate_item_bg">
+
+        <TextView
+            android:id="@+id/tv_education_question_investigate_text"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginStart="25dp"
+            android:layout_height="match_parent"
+            android:text="是"/>
+
+        <ImageView
+            android:id="@+id/tv_education_question_investigate_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/circle_right_white"
+            android:layout_marginEnd="15dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/education_question_investigate_begin_bg">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:src="@drawable/education_question_investigate_begin_text"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="38dp"/>
+
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="82dp"
+            android:src="@drawable/education_question_investigate_begin_icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00C27F"
+                android:textSize="15sp"
+                android:text="掌握糖尿病知识是控制好血糖的前提。"
+                android:layout_marginTop="34dp"
+                android:layout_marginStart="20dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00C27F"
+                android:textSize="15sp"
+                android:text="我们为您制定了科学的学习课程，点击下方开始答题按钮，开启您的专属课堂。"
+                android:layout_marginTop="18dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_education_question_investigate_begin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bottom_gradient_blue"
+                android:layout_marginStart="38dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginTop="70dp"
+                android:textColor="#FFFFFF"
+                android:text="开始答题"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

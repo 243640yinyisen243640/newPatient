@@ -155,6 +155,11 @@
         <activity
             android:name=".activity.aservice.serviceeducation.EducationVideoListActivity"
             android:screenOrientation="portrait" />
+        <!-- 教育 问卷调查 -->
+        <activity android:name=".activity.ahome.aeducation.EducationQuestionInvestigateActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
