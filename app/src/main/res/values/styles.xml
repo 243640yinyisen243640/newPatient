@@ -170,11 +170,12 @@
 
     <style name="style_title_with_green_h">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:drawableLeft">@drawable/shape_green_4_18_2</item>
         <item name="android:drawablePadding">8dp</item>
         <item name="android:textColor">@color/base_text_black</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center|left</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -231,6 +232,19 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/main_base_color</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="sure_green_13sp_p12">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_bg_main_gra_90</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <color name="defaultBackground">#F5F5F5</color>

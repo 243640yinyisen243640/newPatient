@@ -7,24 +7,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/home_top_background">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/shape_little_background_5">
+        <include layout="@layout/include_home_healthy_tips" />
+
+        <include layout="@layout/include_home_sugar_bmi_blood" />
 
 
-            </LinearLayout>
+        <include layout="@layout/include_home_exercise" />
 
-        </FrameLayout>
+        <include layout="@layout/include_home_education" />
+
 
     </LinearLayout>
 

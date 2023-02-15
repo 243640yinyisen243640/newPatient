@@ -14,6 +14,8 @@ import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
  */
 public class MainHomeFragment extends UIBaseLoadFragment {
 
+
+
     public static MainHomeFragment getInstance() {
 
         MainHomeFragment mainFragment = new MainHomeFragment();

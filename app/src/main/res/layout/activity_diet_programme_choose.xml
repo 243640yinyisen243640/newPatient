@@ -93,9 +93,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:paddingBottom="20dp"
                     android:background="@drawable/shape_bg_white_10"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -117,35 +117,74 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_diet_custom_plan_breakfast"
-                            style="@style/diet_change_diet_meal_title"
-                            android:text="@string/diet_change_diet_top_breakfast"
-                            android:drawableLeft="@drawable/diet_bing_with_green"
-                            android:drawableRight="@drawable/circle_add"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/diet_bing_with_green"
+                                android:gravity="center"
+                                android:layout_marginStart="1dp"
+                                android:includeFontPadding="false" />
+
+                            <TextView
+                                android:id="@+id/tv_diet_custom_plan_breakfast"
+                                style="@style/diet_change_diet_meal_title"
+                                android:layout_marginLeft="4dp"
+                                android:drawableRight="@drawable/circle_add"
+                                android:text="@string/diet_change_diet_top_breakfast" />
+                        </LinearLayout>
+
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:minHeight="100dp" />
 
-                       <TextView
-                           android:id="@+id/tv_diet_custom_plan_lunch"
-                           style="@style/diet_change_diet_meal_title"
-                           android:drawableLeft="@drawable/diet_jitui_with_green"
-                           android:text="@string/diet_change_diet_top_lunch"
-                           android:drawableRight="@drawable/circle_add"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/diet_jitui_with_green" />
+
+                            <TextView
+                                android:id="@+id/tv_diet_custom_plan_lunch"
+                                style="@style/diet_change_diet_meal_title"
+                                android:drawableRight="@drawable/circle_add"
+                                android:text="@string/diet_change_diet_top_lunch" />
+                        </LinearLayout>
+
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:id="@+id/tv_diet_custom_plan_dinner"
-                            style="@style/diet_change_diet_meal_title"
-                            android:drawableLeft="@drawable/diet_huacai_with_green"
-                            android:text="@string/diet_change_diet_top_dinner"
-                            android:drawableRight="@drawable/circle_add"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/diet_huacai_with_green" />
+
+                            <TextView
+                                android:id="@+id/tv_diet_custom_plan_dinner"
+                                style="@style/diet_change_diet_meal_title"
+                                android:drawableRight="@drawable/circle_add"
+                                android:text="@string/diet_change_diet_top_dinner" />
+
+                        </LinearLayout>
+
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:layout_width="match_parent"
