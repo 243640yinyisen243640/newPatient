@@ -116,19 +116,22 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:gravity="right"
                         android:includeFontPadding="false"
-                        android:text="    有氧运动    "
+                        android:text="有氧运动"
                         android:textColor="@color/base_text_black"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
                         android:includeFontPadding="false"
                         android:text="慢跑"
+                        android:layout_marginRight="13dp"
+                        android:gravity="right"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -149,7 +152,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:text="还需要消耗热量"
@@ -157,11 +160,12 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
                         android:includeFontPadding="false"
                         android:text="1100 千卡"
+                        android:gravity="center"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -182,16 +186,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:gravity="left"
                         android:includeFontPadding="false"
-                        android:text="    所需时长  "
-                        android:gravity="center"
+                        android:text="所需时长"
                         android:textColor="@color/base_text_black"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
                         android:includeFontPadding="false"
