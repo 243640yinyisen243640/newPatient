@@ -50,19 +50,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cv_home_healthy_tip"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp" />
+                android:layout_height="100dp" />
 
-            <TextView
+            <ImageView
+                android:id="@+id/tv_home_healthy_tips_spread"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/arrow_down"
-                android:padding="15dp" />
+                android:padding="15dp"
+                android:src="@drawable/arrow_down_green" />
         </LinearLayout>
     </LinearLayout>
 
@@ -88,6 +91,7 @@
 
 
             <TextView
+                android:id="@+id/tv_home_xy_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -99,6 +103,7 @@
                 android:textSize="11sp" />
 
             <ImageView
+                android:id="@+id/iv_home_swm_img"
                 android:layout_width="wrap_content"
                 android:layout_height="17dp"
                 android:layout_gravity="center|top"
@@ -107,6 +112,7 @@
                 android:src="@drawable/home_retina" />
 
             <ImageView
+                android:id="@+id/iv_home_sj_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
@@ -115,6 +121,7 @@
                 android:src="@drawable/home_nerve" />
 
             <TextView
+                android:id="@+id/tv_home_sj_illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -128,6 +135,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_home_swm_illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
@@ -141,6 +149,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_home_xt_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -148,9 +157,11 @@
                 android:layout_marginTop="160dp"
                 android:background="@drawable/shape_bg_white_black_10_1"
                 android:padding="9dp"
-                android:text="血糖值\n4.6 mol/L mmHg\n2022-02-05 15:20" />
+                android:text="血糖值\n4.6 mol/L mmHg\n2022-02-05 15:20"
+                android:textSize="11sp" />
 
             <TextView
+                android:id="@+id/tv_home_xl_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -162,6 +173,7 @@
                 android:textSize="11sp" />
 
             <ImageView
+                android:id="@+id/iv_home_sz_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -171,6 +183,7 @@
                 android:src="@drawable/home_kidney" />
 
             <TextView
+                android:id="@+id/tv_home_sz_illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
@@ -185,6 +198,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_home_tz_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
@@ -194,6 +208,7 @@
                 android:src="@drawable/home_foot" />
 
             <TextView
+                android:id="@+id/tv_home_tz_illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
@@ -206,7 +221,8 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_home_xg_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
@@ -214,7 +230,8 @@
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/xueguan_thin" />
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_home_xg_img_line"
                 android:layout_width="wrap_content"
                 android:layout_height="7dp"
                 android:layout_gravity="center|bottom"
@@ -223,6 +240,7 @@
                 android:background="@drawable/xueguan_line" />
 
             <TextView
+                android:id="@+id/tv_home_xg_illness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -244,6 +262,7 @@
             android:paddingRight="10dp">
 
             <TextView
+                android:id="@+id/tv_home_height_num"
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_weight="1"
@@ -256,6 +275,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_home_weight_num"
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_marginLeft="10dp"
@@ -293,6 +313,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_home_bmi_num"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -303,12 +324,13 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_home_bmi_state"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/shape_bg_white_blue_31_17_2"
+                        android:gravity="center"
                         android:includeFontPadding="false"
                         android:paddingLeft="4dp"
                         android:paddingTop="3dp"

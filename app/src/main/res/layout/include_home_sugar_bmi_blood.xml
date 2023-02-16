@@ -1,56 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/shape_bg_white_10"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_home_three_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_bg_white_10"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+    <RadioGroup
+        android:id="@+id/rg_home_xt_xy_bmi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="15dp">
+        android:orientation="horizontal">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_three_fragment"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp" />
+            android:drawableStart="@drawable/selector_home_page_check_uncheck"
+            android:button="@null"
+            android:checked="true" />
 
-        <RadioGroup
-            android:id="@+id/rg_meal_video"
+
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:drawableStart="@drawable/selector_home_page_check_uncheck"
+            android:button="@null" />
 
-            <RadioButton
-                android:id="@+id/rb_diet_meal_resource_make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:button="@drawable/selector_home_page_check_uncheck"
-                android:checked="true" />
-
-
-            <RadioButton
-                android:id="@+id/rb_diet_meal_resource_proportion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@color/transparent"
-                android:button="@drawable/selector_home_page_check_uncheck" />
-
-            <RadioButton
-                android:id="@+id/rb_diet_meal_heat_proportion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@color/transparent"
-                android:button="@drawable/selector_home_page_check_uncheck" />
-        </RadioGroup>
-    </LinearLayout>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/selector_home_page_check_uncheck"
+            android:button="@null" />
+    </RadioGroup>
 </LinearLayout>

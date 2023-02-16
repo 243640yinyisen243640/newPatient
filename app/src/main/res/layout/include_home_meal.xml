@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tv_meal_make_again"
                 style="@style/sure_green_13sp_p12"
                 android:text="重新制定" />
         </LinearLayout>
@@ -46,6 +48,7 @@
                 android:src="@drawable/diet_programme_icon" />
 
             <TextView
+                android:id="@+id/tv_meal_need_fire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -70,8 +73,9 @@
             android:paddingRight="10dp">
 
             <TextView
+                android:id="@+id/tv_meal_refresh"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableRight="@drawable/diet_change_my_like"
                 android:drawablePadding="12dp"
                 android:gravity="center"
@@ -82,15 +86,17 @@
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/tv_meal_make_yourself"
                 style="@style/sure_green_13sp_p12"
                 android:layout_marginRight="10dp"
                 android:text="自定义饮食" />
 
             <TextView
+                android:id="@+id/tv_meal_plan"
                 style="@style/sure_green_13sp_p12"
                 android:text="饮食方案" />
 
@@ -102,14 +108,27 @@
             android:layout_marginTop="20dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_meal_recycl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_meal_more"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
-                android:background="@drawable/shape_bg_white_90_90_90_0" />
+                android:background="@drawable/shape_bg_white_0_0_90_0"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/arrow_right_green_little"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
         </FrameLayout>
 
     </LinearLayout>

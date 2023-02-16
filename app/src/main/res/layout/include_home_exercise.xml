@@ -14,7 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -27,6 +26,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tv_exercise_make_plan"
                 style="@style/sure_green_13sp_p12"
                 android:text="重新制订运动方案" />
         </LinearLayout>
@@ -40,6 +40,7 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_exercise_step_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,6 +49,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_exercise_fire_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,8 +94,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_exercise_finish"
                     style="@style/sure_green_13sp_p12"
-                    android:drawableRight="@drawable/arrow_right_gray"
+                    android:drawableRight="@drawable/arrow_right_white_little"
+                    android:drawablePadding="8dp"
                     android:text="立即完成" />
 
             </LinearLayout>
@@ -103,9 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="5dp"
                 android:paddingTop="10dp"
-                android:paddingRight="5dp"
                 android:paddingBottom="10dp">
 
                 <LinearLayout
@@ -125,13 +127,14 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_exercise_type"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
-                        android:includeFontPadding="false"
-                        android:text="慢跑"
                         android:layout_marginRight="13dp"
                         android:gravity="right"
+                        android:includeFontPadding="false"
+                        android:text="慢跑"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -140,8 +143,10 @@
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="1dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/shape_line_1_35_gray" />
 
                 <LinearLayout
@@ -160,12 +165,13 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_exercise_need_fire"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
+                        android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="1100 千卡"
-                        android:gravity="center"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -176,6 +182,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/shape_line_1_35_gray" />
 
                 <LinearLayout
@@ -195,6 +203,7 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_exercise_time"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
@@ -236,9 +245,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_exercise_resistance"
                     style="@style/sure_green_13sp_p12"
                     android:layout_marginTop="10dp"
-                    android:drawableRight="@drawable/arrow_right_gray"
+                    android:drawableRight="@drawable/arrow_right_white_little"
+                    android:drawablePadding="8dp"
                     android:text="开始运动" />
 
             </LinearLayout>
@@ -254,15 +265,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="抗阻运动"
+                    android:text="柔韧性运动"
                     android:textColor="@color/text_white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_exercise_flexibility"
                     style="@style/sure_green_13sp_p12"
                     android:layout_marginTop="14dp"
-                    android:drawableRight="@drawable/arrow_right_gray"
+                    android:drawableRight="@drawable/arrow_right_white_little"
+                    android:drawablePadding="8dp"
                     android:text="开始运动" />
 
             </LinearLayout>
