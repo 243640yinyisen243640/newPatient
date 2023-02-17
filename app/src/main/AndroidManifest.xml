@@ -107,6 +107,10 @@
         </activity>
 
         <!-- 首页 -->
+        <!--消息-->
+        <activity
+            android:name=".activity.ahome.HomeMessageListActivity"
+            android:screenOrientation="portrait" />
         <!--饮食方案开始-->
         <activity
             android:name=".activity.ahome.adiet.DietProgrammeBeginActivity"
@@ -156,10 +160,12 @@
             android:name=".activity.aservice.serviceeducation.EducationVideoListActivity"
             android:screenOrientation="portrait" />
         <!-- 教育 问卷调查 -->
-        <activity android:name=".activity.ahome.aeducation.EducationQuestionInvestigateActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationQuestionInvestigateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

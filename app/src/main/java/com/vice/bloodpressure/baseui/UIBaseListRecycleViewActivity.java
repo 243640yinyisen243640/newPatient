@@ -35,7 +35,6 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().topView().removeAllViews();
         initView();
         mIsLoadMore = isLoadMore();
         mRefreshLayout.setEnableLoadMore(mIsLoadMore);

@@ -28,7 +28,7 @@ public class HomeBmiFragment extends UIBaseFragment {
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.fragment_home_xuetang, null);
+        View view = View.inflate(getPageContext(), R.layout.fragment_home_bmi, null);
         containerView().addView(view);
     }
 }

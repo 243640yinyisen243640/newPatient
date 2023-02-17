@@ -10,8 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.MealInfo;
-import com.vice.bloodpressure.utils.XyImageUtils;
+import com.vice.bloodpressure.model.MessageInfo;
 
 import java.util.List;
 
@@ -22,12 +21,12 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
  */
-public class HomeMealListAdapter extends RecyclerView.Adapter<HomeMealListAdapter.ViewHolder> {
+public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageListAdapter.ViewHolder> {
     private Context context;
-    private List<MealInfo> list;
+    private List<MessageInfo> list;
 
 
-    public HomeMealListAdapter(Context context, List<MealInfo> list) {
+    public HomeMessageListAdapter(Context context, List<MessageInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,18 +35,17 @@ public class HomeMealListAdapter extends RecyclerView.Adapter<HomeMealListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_home_meal_list, null);
+        View v = View.inflate(context, R.layout.item_home_message, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealInfo info = list.get(position);
-        int[] radius = new int[]{5, 5, 5, 5};
-        XyImageUtils.loadCustomuRoundImage(context, R.drawable.guogai_img, info.getImg(), holder.coverImageView, radius);
-        holder.nameTextView.setText(info.getTitle());
-
+        MessageInfo info = list.get(position);
+        holder.titleTextView.setText(info.getTitle());
+        holder.timeTextView.setText(info.getTime());
+        holder.contentTextView.setText(info.getContent());
     }
 
     @Override
@@ -56,14 +54,20 @@ public class HomeMealListAdapter extends RecyclerView.Adapter<HomeMealListAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView coverImageView;
-        private TextView nameTextView;
+        private ImageView imgImageView;
+        private TextView titleTextView;
+        private TextView timeTextView;
+        private TextView contentTextView;
+        private View lineView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            coverImageView = itemView.findViewById(R.id.im_meal_bg);
-            nameTextView = itemView.findViewById(R.id.tv_meal_name);
+            imgImageView = itemView.findViewById(R.id.iv_message_img);
+            titleTextView = itemView.findViewById(R.id.tv_message_title);
+            timeTextView = itemView.findViewById(R.id.tv_message_time);
+            contentTextView = itemView.findViewById(R.id.tv_message_content);
+            lineView = itemView.findViewById(R.id.view_message_line);
         }
     }
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_home_fm_xt_add"
+        style="@style/style_title_with_green_h"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:drawableRight="@drawable/circle_add"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:text="血糖" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lc_home_fm_xt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_little_background_5"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="七天测量结果：   "
+                android:textColor="@color/main_base_color"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_home_fm_xt_warning"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/warning_gray"
+                android:gravity="right|center"
+                android:paddingTop="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="12dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_home_fm_xt_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="共测量5次；有2次偏高；3次正常"
+            android:textColor="@color/base_text_black"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

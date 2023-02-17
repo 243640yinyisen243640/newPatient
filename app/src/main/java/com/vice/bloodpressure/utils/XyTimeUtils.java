@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * author：luck
@@ -82,4 +84,31 @@ public class XyTimeUtils {
         long diff = eTime - sTime;
         return diff > 1000 ? diff / 1000 + "秒" : diff + "毫秒";
     }
+
+    /**
+     * 比较两个时间
+     *
+     * @param starTime  开始时间
+     * @param endString 结束时间
+     * @return 结束时间大于开始时间返回true，否则反之֮
+     */
+    public static boolean compareTwoTime(String starTime, String endString) {
+        boolean isMoreThan = false;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        try {
+            Date startData = dateFormat.parse(starTime);
+            Date endData = dateFormat.parse(endString);
+            long diff = endData.getTime() - startData.getTime();
+            if (diff >= 0) {
+                isMoreThan = true;
+            } else {
+                isMoreThan = false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return isMoreThan;
+
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.fragment.fhome;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,10 +11,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
@@ -115,6 +119,7 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
+        topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
         initTopView();
         initView();
         initListener();
@@ -123,8 +128,7 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
     }
 
     private void initValues() {
-        GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        recyclRv.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
         layoutManager.setOrientation(recyclRv.HORIZONTAL);
         recyclRv.setLayoutManager(layoutManager);
         List<MealInfo> list = new ArrayList<>();
@@ -284,6 +288,7 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
         switch (v.getId()) {
             //系统消息
             case R.id.iv_home_message:
+                startActivity(new Intent(getPageContext(), HomeMessageListActivity.class));
                 break;
             //扫一扫
             case R.id.iv_home_data_scan:
