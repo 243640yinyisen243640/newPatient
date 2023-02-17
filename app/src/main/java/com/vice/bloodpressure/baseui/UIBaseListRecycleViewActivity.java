@@ -181,4 +181,13 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
         mLoadingTextView = getViewByID(view, R.id.tv_load_status);
         containerView().addView(view);
     }
+
+    /**
+     * 获取ListView对象
+     *
+     * @return
+     */
+    protected RecyclerView getPageListView() {
+        return mRecyclerView;
+    }
 }

@@ -43,11 +43,11 @@
 
     </LinearLayout>
 
-    <lecho.lib.hellocharts.view.LineChartView
+    <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lc_home_fm_xy"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_height="100dp" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"

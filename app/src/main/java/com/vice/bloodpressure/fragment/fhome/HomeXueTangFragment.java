@@ -5,13 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
-import com.vice.bloodpressure.utils.LineChartUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 作者: beauty
@@ -43,9 +38,9 @@ public class HomeXueTangFragment extends UIBaseFragment {
     }
 
     private void initValues() {
-        LineChartUtils.initChart(xuetangCh, true, true, false);
-        LineChartUtils.setXAxis(xuetangCh, 1, 56, 1);
-        List<Entry> values1 = new ArrayList<>();
+//        LineChartUtils.initChart(xuetangCh, true, true, false);
+//        LineChartUtils.setXAxis(xuetangCh, 1, 56, 1);
+//        List<Entry> values1 = new ArrayList<>();
 //        LineChartUtils.notifyDataSetChanged(xuetangCh,values1, );
     }
 

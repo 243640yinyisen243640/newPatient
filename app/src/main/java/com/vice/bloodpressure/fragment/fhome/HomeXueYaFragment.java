@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
-
-import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * 作者: beauty
@@ -17,7 +16,7 @@ import lecho.lib.hellocharts.view.LineChartView;
  */
 public class HomeXueYaFragment extends UIBaseFragment {
     private TextView addTv;
-    private LineChartView lineChartView;
+    private LineChart lineChartView;
     private TextView numTv;
 
     public static HomeXueYaFragment getInstance(String text) {

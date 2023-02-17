@@ -61,11 +61,12 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
+        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         initListener();
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         //        mRecyclerView.addItemDecoration(new UserCenterVideoGridDivider(getPageContext(), HHSoftDensityUtils.dip2px(getPageContext(), 3), R.color.white));
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
@@ -82,6 +83,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     private View initTopView() {
         View topView = View.inflate(getPageContext(), R.layout.include_warning_message_top, null);
         backIm = topView.findViewById(R.id.iv_home_warning_back);
+        allTv = topView.findViewById(R.id.tv_warning_all_read);
         startTv = topView.findViewById(R.id.tv_warning_start);
         endTv = topView.findViewById(R.id.tv_warning_end);
         sureTv = topView.findViewById(R.id.tv_warning_sure);
@@ -90,11 +92,11 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new MessageInfo("你有一条新的绑定医生通知", "绑定医生通知", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血糖了，请保持良好 的测量习惯。", "血糖未测提醒", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血压了，请保持良好 的测量习惯。", "血压未测提醒", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
 
         //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
         callBack.callBack(listText);
@@ -141,4 +143,5 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 break;
         }
     }
+
 }

@@ -13,6 +13,17 @@ public class MessageInfo implements Serializable {
     private String title;
     private String time;
 
+
+    private String num = "";
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
     public MessageInfo(String content, String title, String time) {
         this.content = content;
         this.title = title;

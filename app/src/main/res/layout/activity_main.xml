@@ -8,7 +8,7 @@
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white_f3"
+        android:background="@color/background"
         android:layout_weight="1" />
 
 

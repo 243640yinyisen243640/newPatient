@@ -46,7 +46,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/white_f3" />
+            android:background="@color/background" />
 
         <TextView
             android:id="@+id/tv_oper_sure"

@@ -17,6 +17,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
+import com.vice.bloodpressure.activity.ahome.HomeWarningListActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietChangeDietActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
@@ -208,7 +213,6 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
     }
 
 
-
     @Override
     protected void onPageLoad() {
 
@@ -216,20 +220,24 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             //系统消息
             case R.id.iv_home_message:
-                startActivity(new Intent(getPageContext(), HomeMessageListActivity.class));
+                intent = new Intent(getPageContext(), HomeMessageListActivity.class);
+                startActivity(intent);
                 break;
             //扫一扫
             case R.id.iv_home_data_scan:
                 break;
             //异常提醒
             case R.id.iv_home_data_abnormal:
+                intent = new Intent(getPageContext(), HomeWarningListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tv_home_healthy_tips_spread:
                 break;
-            //重新制定饮食计划
+            //重新制定运动计划
             case R.id.tv_exercise_make_plan:
                 break;
             //立即完成 运动
@@ -243,15 +251,23 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
                 break;
             //重新制定 饮食
             case R.id.tv_meal_make_again:
+                intent = new Intent(getPageContext(), DietChangeDietActivity.class);
+                startActivity(intent);
                 break;
             //三餐刷新
             case R.id.tv_meal_refresh:
+                intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
+                startActivity(intent);
                 break;
             //自定义饮食
             case R.id.tv_meal_make_yourself:
+                intent = new Intent(getPageContext(), DietProgrammeChooseActivity.class);
+                startActivity(intent);
                 break;
             //饮食方案
             case R.id.tv_meal_plan:
+                intent = new Intent(getPageContext(), DietMealPlanDetailsActivity.class);
+                startActivity(intent);
                 break;
             //三参列表点击进入详情
             case R.id.ll_meal_more:
@@ -266,6 +282,7 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
                 break;
         }
     }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_main_home_first, null);
         healthyTipRv = view.findViewById(R.id.cv_home_healthy_tip);

@@ -35,7 +35,7 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_home_message, null);
+        View v = View.inflate(context, R.layout.item_home_warning, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
     }
@@ -45,7 +45,7 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         MessageInfo info = list.get(position);
         holder.titleTextView.setText(info.getTitle());
         holder.timeTextView.setText(info.getTime());
-        holder.contentTextView.setText(info.getContent());
+        holder.timeTextView.setText(info.getNum());
     }
 
     @Override
@@ -54,20 +54,25 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgImageView;
+
         private TextView titleTextView;
+        private ImageView readImageView;
+        private TextView numTextView;
         private TextView timeTextView;
-        private TextView contentTextView;
-        private View lineView;
+        private TextView deleteTextView;
+        private TextView moreTextView;
+        private TextView tipTextView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgImageView = itemView.findViewById(R.id.iv_message_img);
-            titleTextView = itemView.findViewById(R.id.tv_message_title);
-            timeTextView = itemView.findViewById(R.id.tv_message_time);
-            contentTextView = itemView.findViewById(R.id.tv_message_content);
-            lineView = itemView.findViewById(R.id.view_message_line);
+            titleTextView = itemView.findViewById(R.id.tv_warning_xt_xy);
+            readImageView = itemView.findViewById(R.id.iv_warning_read);
+            numTextView = itemView.findViewById(R.id.tv_warning_num);
+            timeTextView = itemView.findViewById(R.id.tv_warning_time);
+            deleteTextView = itemView.findViewById(R.id.tv_warning_delete);
+            moreTextView = itemView.findViewById(R.id.tv_warning_more);
+            tipTextView = itemView.findViewById(R.id.tv_warning_tip);
         }
     }
 
