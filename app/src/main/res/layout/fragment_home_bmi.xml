@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableRight="@drawable/home_bmi_low"
+            android:drawableLeft="@drawable/home_bmi_high"
             android:includeFontPadding="false"
             android:text="19.4"
             android:textColor="@color/black_2A"
