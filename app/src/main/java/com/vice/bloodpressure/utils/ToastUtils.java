@@ -121,7 +121,7 @@ public class ToastUtils {
             view.addView(mDialogLoadingImageView);
             mDialogContentTextView = new TextView(context);
             mDialogContentTextView.setTextSize(16);
-            mDialogContentTextView.setTextColor(ContextCompat.getColor(context, R.color.defaultGrayText));
+            mDialogContentTextView.setTextColor(ContextCompat.getColor(context, R.color.gray_9F));
             mDialogContentTextView.setText(context.getString(R.string.huahansoft_load_state_loading));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(ExchangeUtils.dip2px(context, 10), 0, 0, 0);

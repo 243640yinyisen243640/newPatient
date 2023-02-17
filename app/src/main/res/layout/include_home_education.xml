@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:text="今日需要学习的课程"
-            android:textColor="@color/base_text_black"
+            android:textColor="@color/black_2A"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:text="这个是标题"
-                    android:textColor="@color/base_text_black"
+                    android:textColor="@color/black_2A"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                     android:layout_marginTop="10dp"
                     android:includeFontPadding="false"
                     android:text="这个是内容"
-                    android:textColor="@color/defaultGrayText"
+                    android:textColor="@color/gray_9F"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="本节共11253字，阅读时间约5分钟"
-            android:textColor="@color/base_text_black"
+            android:textColor="@color/black_2A"
             android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>

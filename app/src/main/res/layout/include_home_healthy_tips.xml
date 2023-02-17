@@ -130,7 +130,7 @@
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="神经病变"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="视网膜病变"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -192,7 +192,7 @@
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="肾脏病变"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -217,7 +217,7 @@
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="糖尿病足"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -248,7 +248,7 @@
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="下肢血管病变"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -270,7 +270,7 @@
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
                 android:text="身高"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -284,7 +284,7 @@
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
                 android:text="体重"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -302,7 +302,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BMI"
-                    android:textColor="@color/base_text_black"
+                    android:textColor="@color/black_2A"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

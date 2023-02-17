@@ -6,9 +6,9 @@
     <color name="defaultWhite">#FFFFFF</color>
     <!--项目主题色-->
     <color name="main_base_color">#00C27F</color>
-    <color name="background">#f3f3f3</color>
-    <color name="little_background">#FBFBFB</color>
-    <color name="color_fa">#FAFAFA</color>
+    <color name="white_f3">#f3f3f3</color>
+    <color name="white_fb">#FBFBFB</color>
+    <color name="white_fa">#FAFAFA</color>
 
 
     <!--黑色-toast背景色-->
@@ -22,30 +22,30 @@
     <color name="transparent">#00000000</color>
     <!-- 黑色颜色值开始 -->
     <!-- 黑色字体 -->
-    <color name="text_black">#323232</color>
-    <color name="base_text_black">#2A2A2A</color>
+    <color name="black_32">#323232</color>
+    <color name="black_2A">#2A2A2A</color>
     <!-- 浅黑色 -->
-    <color name="text_black_hint">#646464</color>
-    <color name="text_black_heavy">#242424</color>
+    <color name="black_64">#646464</color>
+    <color name="black_24">#242424</color>
 
     <!--黑色颜色值结束-->
 
 
     <!--灰色颜色值开始-->
     <!--灰色-内容-->
-    <color name="defaultGrayText">#9F9F9F</color>
+    <color name="gray_9F">#9F9F9F</color>
     <!--灰色-编辑框提示语-->
-    <color name="defaultGrayLight">#ABABAB</color>
+    <color name="gray_AB">#ABABAB</color>
     <!-- 灰色 -->
-    <color name="text_gray">#989898</color>
+    <color name="gray_98">#989898</color>
     <!-- 浅灰 -->
-    <color name="text_gray_hint">#ABABAB</color>
+    <color name="grayAB">#ABABAB</color>
 
-    <color name="base_text_gray">#8A8A8A</color>
+    <color name="gray_8a">#8A8A8A</color>
 
-    <color name="line_gray">#E5E5E5</color>
-    <color name="low_gray">#F4F4F4</color>
-    <color name="little_text_gray">#BBBBBB</color>
+    <color name="gray_E5">#E5E5E5</color>
+    <color name="gray_f4">#F4F4F4</color>
+    <color name="gray_BB">#BBBBBB</color>
 
     <!--灰色颜色值结束-->
 
@@ -73,5 +73,5 @@
     <color name="diet_you">#FFDB84</color>
 
     <!--其他颜色-->
-    <color name="light_yellow">#FFF1D3</color>
+    <color name="yellow_FFF1D3">#FFF1D3</color>
 </resources>

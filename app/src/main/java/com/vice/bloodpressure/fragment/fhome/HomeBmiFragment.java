@@ -2,7 +2,9 @@ package com.vice.bloodpressure.fragment.fhome;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 
@@ -13,6 +15,11 @@ import com.vice.bloodpressure.baseui.UIBaseFragment;
  * 描述:
  */
 public class HomeBmiFragment extends UIBaseFragment {
+    private TextView addTv;
+    private LineChart lineChart;
+    private TextView numAndStateTv;
+    private TextView timeTv;
+
     public static HomeBmiFragment getInstance(String text) {
 
         HomeBmiFragment bmiFragment = new HomeBmiFragment();
@@ -21,6 +28,7 @@ public class HomeBmiFragment extends UIBaseFragment {
         bmiFragment.setArguments(bundle);
         return bmiFragment;
     }
+
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
@@ -29,6 +37,11 @@ public class HomeBmiFragment extends UIBaseFragment {
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_home_bmi, null);
+
+        addTv = view.findViewById(R.id.tv_warning_bmi_add);
+        lineChart = view.findViewById(R.id.lc_warning_bmi);
+        numAndStateTv = view.findViewById(R.id.tv_warning_bmi_num_state);
+        timeTv = view.findViewById(R.id.tv_warning_bmi_time);
         containerView().addView(view);
     }
 }

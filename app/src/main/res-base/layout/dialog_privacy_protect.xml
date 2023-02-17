@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/privacy_protect_warm_tips"
-        android:textColor="@color/text_black"
+        android:textColor="@color/black_32"
         android:textSize="18sp" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:background="@color/text_white"
         android:gravity="center"
         android:text="@string/privacy_protect_agree"
-        android:textColor="@color/text_black"
+        android:textColor="@color/black_32"
         android:textSize="16sp" />
 
     <TextView

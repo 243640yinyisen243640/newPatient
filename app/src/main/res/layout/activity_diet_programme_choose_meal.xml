@@ -40,7 +40,7 @@
             android:paddingBottom="13dp"
             android:singleLine="true"
             android:textColor="#242424"
-            android:textColorHint="@color/base_text_gray"
+            android:textColorHint="@color/gray_8a"
             android:textSize="14sp" />
 
 

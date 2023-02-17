@@ -26,7 +26,7 @@
             android:lines="2"
             android:ellipsize="end"
             android:text="番茄炒鸡蛋"
-            android:textColor="@color/base_text_black"
+            android:textColor="@color/black_2A"
             android:textSize="15sp" />
     </LinearLayout>
 

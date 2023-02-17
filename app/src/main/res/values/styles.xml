@@ -40,7 +40,7 @@
     </style>
 
     <style name="HuaHanSoft.Text.Body.Warp.16" parent="HuaHanSoft.Wrap">
-        <item name="android:textColor">@color/defaultGrayText</item>
+        <item name="android:textColor">@color/gray_9F</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -71,7 +71,7 @@
     <style name="line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/background</item>
+        <item name="android:background">@color/white_f3</item>
     </style>
     <!--字体开始-->
     <style name="text_black_16_w_w_w">
@@ -79,7 +79,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">@color/black_32</item>
     </style>
     <!--基本布局style开始-先宽后高-->
     <style name="HuaHanSoft.Fill">
@@ -115,12 +115,12 @@
     </style>
 
     <style name="HuaHanSoft.Text.Body.Weight.12" parent="HuaHanSoft.Weight.Width.Wrap">
-        <item name="android:textColor">@color/defaultGrayText</item>
+        <item name="android:textColor">@color/gray_9F</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="HuaHanSoft.Text.Body.Warp.12" parent="HuaHanSoft.Wrap">
-        <item name="android:textColor">@color/defaultGrayText</item>
+        <item name="android:textColor">@color/gray_9F</item>
         <item name="android:textSize">12sp</item>
     </style>
 
@@ -137,7 +137,7 @@
     <style name="baseView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/text_gray</item>
+        <item name="android:background">@color/gray_98</item>
     </style>
 
     <style name="Base.ListView" parent="@style/HuaHanSoft.Fill">
@@ -156,7 +156,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:drawablePadding">5dp</item>
         <item name="android:padding">10dp</item>
-        <item name="android:textColor">@color/base_text_black</item>
+        <item name="android:textColor">@color/black_2A</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -173,7 +173,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:drawableLeft">@drawable/shape_green_4_18_2</item>
         <item name="android:drawablePadding">8dp</item>
-        <item name="android:textColor">@color/base_text_black</item>
+        <item name="android:textColor">@color/black_2A</item>
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center|left</item>
         <item name="android:textStyle">bold</item>
@@ -221,7 +221,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">7.5dp</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">@color/base_text_black</item>
+        <item name="android:textColor">@color/black_2A</item>
         <item name="android:textSize">13sp</item>
     </style>
 
@@ -245,6 +245,20 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="style_warning_choose">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_bg_white_black_90_1</item>
+        <item name="android:drawableRight">@drawable/arrow_down_gray_little</item>
+        <item name="android:drawablePadding">5.5dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">7.5dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">7.5dp</item>
+        <item name="android:textColor">@color/gray_8a</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <color name="defaultBackground">#F5F5F5</color>

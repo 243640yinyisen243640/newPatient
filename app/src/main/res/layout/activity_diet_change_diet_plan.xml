@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/white_f3"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -45,7 +45,7 @@
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_breakfast"
                     style="@style/Base.ListView"
-                    android:background="@color/background">
+                    android:background="@color/white_f3">
 
                 </com.vice.bloodpressure.view.NoScrollListView>
 
@@ -81,7 +81,7 @@
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_lunch"
                     style="@style/Base.ListView"
-                    android:background="@color/background">
+                    android:background="@color/white_f3">
 
                 </com.vice.bloodpressure.view.NoScrollListView>
 
@@ -116,7 +116,7 @@
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_dinner"
                     style="@style/Base.ListView"
-                    android:background="@color/background">
+                    android:background="@color/white_f3">
 
                 </com.vice.bloodpressure.view.NoScrollListView>
 

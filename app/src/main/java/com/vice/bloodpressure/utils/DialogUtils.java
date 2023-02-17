@@ -54,8 +54,8 @@ public class DialogUtils {
     public static void showOptionDialog(Context context, String msg, HHSoftDialog.SingleButtonCallback callback) {
         new HHSoftDialog.Builder(context)
                 .content(msg)
-                .negativeColor(R.color.text_gray)
-                .positiveColor(R.color.text_black)
+                .negativeColor(R.color.gray_98)
+                .positiveColor(R.color.black_32)
                 .negativeText(R.string.cancel)
                 .positiveText(R.string.sure)
                 .onAny(callback)
@@ -88,7 +88,7 @@ public class DialogUtils {
      * @param callback
      */
     public static void showPermissionsDeniedDialog(Context context, String msg, HHSoftDialog.SingleButtonCallback callback) {
-        new HHSoftDialog.Builder(context).content(msg).contentColorRes(R.color.text_white).negativeColorRes(R.color.text_gray_hint).negativeText(R.string.cancel).positiveColorRes(R.color.main_base_color).positiveText(R.string.sure).cancelable(false).onPositive((hhSoftDialog, hhSoftDialogActionEnum) -> {
+        new HHSoftDialog.Builder(context).content(msg).contentColorRes(R.color.text_white).negativeColorRes(R.color.grayAB).negativeText(R.string.cancel).positiveColorRes(R.color.main_base_color).positiveText(R.string.sure).cancelable(false).onPositive((hhSoftDialog, hhSoftDialogActionEnum) -> {
             hhSoftDialog.dismiss();
             Intent intent = new Intent();
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);

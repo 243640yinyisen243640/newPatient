@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_activity_detail_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_home_warning_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/base_top_back" />
+
+        <TextView
+            android:id="@+id/tv_user_person_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="异常数据"
+            android:textColor="#242424"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_warning_all_read"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="全部已读"
+            android:textColor="@color/main_base_color"
+            android:textSize="17sp" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_E5" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_warning_start"
+                    style="@style/style_warning_choose"
+                    android:text="选择开始时间" />
+
+                <TextView
+                    android:id="@+id/tv_warning_end"
+                    style="@style/style_warning_choose"
+                    android:layout_marginLeft="10dp"
+                    android:text="选择结束时间" />
+
+                <TextView
+                    android:id="@+id/tv_warning_sure"
+                    style="@style/style_warning_choose"
+                    android:layout_marginLeft="10dp"
+                    android:text="异常类型" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/shape_bg_green_90"
+            android:gravity="center"
+            android:paddingLeft="11.5dp"
+            android:paddingTop="7.5dp"
+            android:paddingRight="11.5dp"
+            android:paddingBottom="7.5dp"
+            android:text="@string/sure"
+            android:textColor="@color/text_white"
+            android:textSize="12sp" />
+
+    </FrameLayout>
+</LinearLayout>

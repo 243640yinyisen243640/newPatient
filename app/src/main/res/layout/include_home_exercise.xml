@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="步行2000步"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="消耗热量 90 千卡"
-                android:textColor="@color/base_text_black"
+                android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
             android:text="今日运动推荐"
-            android:textColor="@color/base_text_black"
+            android:textColor="@color/black_2A"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -123,7 +123,7 @@
                         android:gravity="right"
                         android:includeFontPadding="false"
                         android:text="有氧运动"
-                        android:textColor="@color/base_text_black"
+                        android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
                     <TextView
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:text="还需要消耗热量"
-                        android:textColor="@color/base_text_black"
+                        android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
                     <TextView
@@ -199,7 +199,7 @@
                         android:gravity="left"
                         android:includeFontPadding="false"
                         android:text="所需时长"
-                        android:textColor="@color/base_text_black"
+                        android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
                     <TextView

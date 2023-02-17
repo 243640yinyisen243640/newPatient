@@ -82,10 +82,10 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
                     LinearLayout customView = (LinearLayout) tabAt.getCustomView();
                     TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
                     tvTab.setTypeface(Typeface.DEFAULT);
-                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.base_text_gray));
+                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_8a));
                     if (i == position) {
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
-                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_black_heavy));
+                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
                     }
                 }
             }

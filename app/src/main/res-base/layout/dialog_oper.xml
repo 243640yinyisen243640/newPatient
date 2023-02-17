@@ -14,7 +14,7 @@
         android:paddingTop="20dp"
         android:paddingEnd="20dp"
         android:text="@string/tip"
-        android:textColor="@color/text_black"
+        android:textColor="@color/black_32"
         android:textSize="18sp" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="40dp"
         android:text="@string/app_name"
-        android:textColor="@color/text_black_hint"
+        android:textColor="@color/black_64"
         android:textSize="18sp" />
 
     <View style="@style/line" />
@@ -46,7 +46,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/background" />
+            android:background="@color/white_f3" />
 
         <TextView
             android:id="@+id/tv_oper_sure"

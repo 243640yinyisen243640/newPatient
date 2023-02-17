@@ -172,12 +172,12 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
 
         HomeXueTangFragment detailsFragment = new HomeXueTangFragment();
         HomeXueYaFragment resourceProportionFragment = new HomeXueYaFragment();
-        HomeBmiFragment heatProportionFragment = new HomeBmiFragment();
+        HomeBmiFragment bmiFragment = new HomeBmiFragment();
 
         fragments = new ArrayList<>();
         fragments.add(detailsFragment.getInstance("11"));
         fragments.add(resourceProportionFragment.getInstance("11"));
-        fragments.add(heatProportionFragment.getInstance("11"));
+        fragments.add(bmiFragment.getInstance("11"));
 
         threeVp.setAdapter(new MyFragmentStateAdapter(getActivity(), fragments));
         threeVp.setOffscreenPageLimit(fragments.size());
@@ -207,6 +207,65 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
         });
     }
 
+
+
+    @Override
+    protected void onPageLoad() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            //系统消息
+            case R.id.iv_home_message:
+                startActivity(new Intent(getPageContext(), HomeMessageListActivity.class));
+                break;
+            //扫一扫
+            case R.id.iv_home_data_scan:
+                break;
+            //异常提醒
+            case R.id.iv_home_data_abnormal:
+                break;
+            case R.id.tv_home_healthy_tips_spread:
+                break;
+            //重新制定饮食计划
+            case R.id.tv_exercise_make_plan:
+                break;
+            //立即完成 运动
+            case R.id.tv_exercise_finish:
+                break;
+            //抗阻运动
+            case R.id.tv_exercise_resistance:
+                break;
+            //柔韧性运动
+            case R.id.tv_exercise_flexibility:
+                break;
+            //重新制定 饮食
+            case R.id.tv_meal_make_again:
+                break;
+            //三餐刷新
+            case R.id.tv_meal_refresh:
+                break;
+            //自定义饮食
+            case R.id.tv_meal_make_yourself:
+                break;
+            //饮食方案
+            case R.id.tv_meal_plan:
+                break;
+            //三参列表点击进入详情
+            case R.id.ll_meal_more:
+                break;
+            //教育关于你
+            case R.id.tv_education_about_you:
+                break;
+            //教育重新制定
+            case R.id.tv_education_make_again:
+                break;
+            default:
+                break;
+        }
+    }
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_main_home_first, null);
         healthyTipRv = view.findViewById(R.id.cv_home_healthy_tip);
@@ -276,63 +335,5 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
         scanIm = topView.findViewById(R.id.iv_home_data_scan);
         abnormalIm = topView.findViewById(R.id.iv_home_data_abnormal);
         topViewManager().topView().addView(topView);
-    }
-
-    @Override
-    protected void onPageLoad() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            //系统消息
-            case R.id.iv_home_message:
-                startActivity(new Intent(getPageContext(), HomeMessageListActivity.class));
-                break;
-            //扫一扫
-            case R.id.iv_home_data_scan:
-                break;
-            //异常提醒
-            case R.id.iv_home_data_abnormal:
-                break;
-            case R.id.tv_home_healthy_tips_spread:
-                break;
-            //重新制定饮食计划
-            case R.id.tv_exercise_make_plan:
-                break;
-            //立即完成 运动
-            case R.id.tv_exercise_finish:
-                break;
-            //抗阻运动
-            case R.id.tv_exercise_resistance:
-                break;
-            //柔韧性运动
-            case R.id.tv_exercise_flexibility:
-                break;
-            //重新制定 饮食
-            case R.id.tv_meal_make_again:
-                break;
-            //三餐刷新
-            case R.id.tv_meal_refresh:
-                break;
-            //自定义饮食
-            case R.id.tv_meal_make_yourself:
-                break;
-            //饮食方案
-            case R.id.tv_meal_plan:
-                break;
-            //三参列表点击进入详情
-            case R.id.ll_meal_more:
-                break;
-            //教育关于你
-            case R.id.tv_education_about_you:
-                break;
-            //教育重新制定
-            case R.id.tv_education_make_again:
-                break;
-            default:
-                break;
-        }
     }
 }

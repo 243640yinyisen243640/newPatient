@@ -111,6 +111,8 @@
         <activity
             android:name=".activity.ahome.HomeMessageListActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.ahome.HomeWarningListActivity"
+            android:screenOrientation="portrait"/>
         <!--饮食方案开始-->
         <activity
             android:name=".activity.ahome.adiet.DietProgrammeBeginActivity"
