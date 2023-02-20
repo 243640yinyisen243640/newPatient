@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class MealInfo implements Serializable {
     private String img;
     private String title;
+    private String num;
 
     public MealInfo(String img, String title) {
         this.img = img;
@@ -37,5 +38,11 @@ public class MealInfo implements Serializable {
         this.title = title;
     }
 
+    public String getNum() {
+        return num;
+    }
 
+    public void setNum(String num) {
+        this.num = num;
+    }
 }

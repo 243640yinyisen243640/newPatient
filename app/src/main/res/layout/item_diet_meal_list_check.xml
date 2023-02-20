@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    android:paddingTop="13dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="13dp">
+
+    <CheckBox
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/selector_green_white"
+        android:button="@null" />
+
+    <ImageView
+        android:id="@+id/iv_meal_details_cover_check"
+        android:layout_width="37.5dp"
+        android:layout_height="37.5dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/diet_guogai_gray" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5.5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_meal_details_name_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textColor="@color/black_2A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_meal_details_num_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray_8a"
+            android:textSize="13sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

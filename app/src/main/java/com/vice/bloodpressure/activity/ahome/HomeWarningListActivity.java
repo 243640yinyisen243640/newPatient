@@ -29,7 +29,7 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:异常数据
  */
 public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<MessageInfo> implements View.OnClickListener {
     private List<MessageInfo> listText = new ArrayList<>();
