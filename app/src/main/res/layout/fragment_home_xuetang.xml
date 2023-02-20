@@ -15,10 +15,28 @@
         android:paddingRight="15dp"
         android:text="血糖" />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lc_home_fm_xt"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="202dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lc_xuetang"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="次数"
+            android:layout_gravity="right|bottom"
+            android:textSize="11sp"
+            android:includeFontPadding="false"
+            android:textColor="#9F9F9F"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +44,7 @@
         android:background="@drawable/shape_little_background_5"
         android:orientation="vertical"
         android:paddingLeft="12dp"
+        android:layout_marginTop="10dp"
         android:paddingBottom="12dp">
 
         <LinearLayout

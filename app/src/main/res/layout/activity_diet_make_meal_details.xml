@@ -22,7 +22,8 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:drawableRight="@drawable/selector_video_begin_pause"
-            android:textColor="@color/defaultWhite" />
+            android:textColor="@color/defaultWhite"
+            android:visibility="gone" />
     </FrameLayout>
 
 

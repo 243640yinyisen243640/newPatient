@@ -25,7 +25,7 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
-import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
+import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -39,7 +39,7 @@ import java.util.List;
  * 传参:
  * 描述: 首页
  */
-public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClickListener {
+public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.OnClickListener {
     //头部
     /**
      * 消息，扫一扫，异常提醒
@@ -123,6 +123,7 @@ public class MainHomeFragment extends UIBaseLoadFragment implements View.OnClick
 
     @Override
     protected void onCreate() {
+        super.onCreate();
         topViewManager().topView().removeAllViews();
         topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
         initTopView();

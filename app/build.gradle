@@ -115,6 +115,4 @@ dependencies {
    //这两个都是图表，等有时间改成一个
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-
 }

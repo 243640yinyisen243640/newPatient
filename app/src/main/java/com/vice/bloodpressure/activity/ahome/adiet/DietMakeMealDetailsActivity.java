@@ -19,7 +19,6 @@ import com.vice.bloodpressure.basevideo.JZVideoPlayer;
 import com.vice.bloodpressure.fragment.fhome.diet.DietHeatProportionFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietMakeMealDetailsFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietResourceProportionFragment;
-import com.vice.bloodpressure.model.VideoInfo;
 import com.vice.bloodpressure.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -47,20 +46,10 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         topViewManager().titleTextView().setText("制作饮食");
         containerView().addView(initView());
         initValue();
-        initListener();
-//        loadViewManager().changeLoadState(LoadStatus.LOADING);
+        setVideoInfo();
+        //        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
-    private void initListener() {
-        videoPlayer.setOnStateAutoComplete(() -> {
-            long currentPositionWhenPlaying = videoPlayer.getCurrentPositionWhenPlaying();
-        });
-
-        videoPlayer.setOnClickUiToggle(() -> {
-
-        });
-
-    }
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_make_meal_details, null);
@@ -134,36 +123,15 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
     /**
      * 视频信息
      *
-     * @param videoInfo
+     * @param
      */
-    private void setVideoInfo(VideoInfo videoInfo) {
+    private void setVideoInfo() {
         int width = ScreenUtils.screenWidth(getPageContext());
         int height = width * 9 / 16;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        //        videoPlayer.setUp(videoInfo.getVideoUrl(), "");
-        //        XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
-
-        //        if ("1".equals(videoInfo.getIsFirst())) {
-        //            videoPlayer.setCanForward(true);
-        //            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
-        //                @Override
-        //                public boolean onTouch(View view, MotionEvent motionEvent) {
-        //
-        //                    return false;
-        //                }
-        //            });
-        //        } else {
-        //            videoPlayer.setCanForward(false);
-        //            videoPlayer.progressBar.setOnTouchListener(new View.OnTouchListener() {
-        //                @Override
-        //                public boolean onTouch(View view, MotionEvent motionEvent) {
-        //
-        //                    return true;
-        //                }
-        //            });
-        //
-        //        }
+        videoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/14/1459f2a925c04ba1b41aac513d7ad588.mp4?e=1676922360&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bbu0N3JdhPNn_cMIymTe4qsA59U=", "");
+        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
     }
 }
