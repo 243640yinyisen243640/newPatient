@@ -126,7 +126,8 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
                     @Override
                     public void callBack(Object object) {
-
+                        startTime = object.toString();
+                        startTv.setText(object.toString());
                     }
                 });
                 break;
@@ -136,6 +137,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                     @Override
                     public void callBack(Object object) {
                         XyTimeUtils.compareTwoTime(startTime, object.toString());
+                        endTv.setText(object.toString());
                     }
                 });
                 break;

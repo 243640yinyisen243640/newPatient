@@ -13,7 +13,7 @@
             android:id="@+id/rl_activity_detail_top"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="horizontal">
@@ -59,7 +59,7 @@
             android:layout_height="0.5dp"
             android:background="@color/gray_E5" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -68,6 +68,8 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
                 android:fadeScrollbars="false"
                 android:overScrollMode="never"
                 android:scrollbars="none">
@@ -91,6 +93,7 @@
                     <TextView
                         android:id="@+id/tv_warning_sure"
                         style="@style/style_warning_choose"
+                        android:layout_width="85dp"
                         android:layout_marginLeft="10dp"
                         android:text="异常类型" />
 
@@ -111,7 +114,7 @@
                 android:textColor="@color/text_white"
                 android:textSize="12sp" />
 
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
 

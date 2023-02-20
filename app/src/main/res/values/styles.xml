@@ -248,7 +248,7 @@
     </style>
 
     <style name="style_warning_choose">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">108dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/shape_bg_white_black_90_1</item>
         <item name="android:drawableRight">@drawable/arrow_down_gray_little</item>
