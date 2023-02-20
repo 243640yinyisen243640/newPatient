@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.baseui;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -223,5 +225,16 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
         spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         textView.setText(spannableStringBuilder);
+    }
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        if (res != null && res.getConfiguration().fontScale != 1.0f) {
+            //非默认值
+            Configuration newConfig = res.getConfiguration();
+            newConfig.fontScale = 1.0f;
+            res.updateConfiguration(newConfig, res.getDisplayMetrics());
+        }
+        return res;
     }
 }
