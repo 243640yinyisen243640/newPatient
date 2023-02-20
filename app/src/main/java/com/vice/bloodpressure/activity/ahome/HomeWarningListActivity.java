@@ -20,6 +20,7 @@ import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
             case R.id.iv_home_warning_back:
                 break;
             case R.id.tv_warning_all_read:
+                ToastUtils.getInstance().showToast(getPageContext(), "测试弹出");
                 break;
             case R.id.tv_warning_start:
 

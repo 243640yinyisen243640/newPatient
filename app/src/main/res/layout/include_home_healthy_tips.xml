@@ -62,10 +62,10 @@
 
             <ImageView
                 android:id="@+id/tv_home_healthy_tips_spread"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:src="@drawable/arrow_down_green" />
         </LinearLayout>
     </LinearLayout>
