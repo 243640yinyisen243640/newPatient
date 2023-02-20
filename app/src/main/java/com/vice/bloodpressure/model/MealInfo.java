@@ -13,6 +13,19 @@ public class MealInfo implements Serializable {
     private String title;
     private String num;
 
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public MealInfo() {
+    }
+
     public MealInfo(String img, String title) {
         this.img = img;
         this.title = title;

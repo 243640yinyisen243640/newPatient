@@ -6,13 +6,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietMealPlanNumAdapter;
+import com.vice.bloodpressure.adapter.home.DietMealPlanWeekAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.view.CirclePercentView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -44,11 +51,40 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         topViewManager().moreTextView().setText("重新制定");
         initViews();
         initValues();
+        getData();
     }
 
     private void initValues() {
         Log.i("yys", "seven" + DataUtils.getSevendate());
         Log.i("yys", "week" + DataUtils.get7week());
+
+
+    }
+
+
+    private void getData() {
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
+        layoutManager.setOrientation(nameRc.HORIZONTAL);
+        nameRc.setLayoutManager(layoutManager);
+        List<MealInfo> list = new ArrayList<>();
+        list.add(new MealInfo("主食", "3两"));
+        list.add(new MealInfo("蔬菜", "9两"));
+        list.add(new MealInfo("肉蛋白", "3两"));
+        list.add(new MealInfo("浆乳类", "3两"));
+        list.add(new MealInfo("盐类", "3两"));
+        list.add(new MealInfo("油类", "3两"));
+
+
+        DietMealPlanNumAdapter numAdapter = new DietMealPlanNumAdapter(getPageContext(), list);
+        nameRc.setAdapter(numAdapter);
+
+        sevenPlanRv.setAdapter(new DietMealPlanWeekAdapter(getPageContext(), new ArrayList<>()));
+    }
+
+
+    @Override
+    protected void onPageLoad() {
 
     }
 
@@ -69,11 +105,5 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         lunchTv = view.findViewById(R.id.tv_seven_lunch);
         dinnerTv = view.findViewById(R.id.tv_seven_dinner);
         containerView().addView(view);
-    }
-
-
-    @Override
-    protected void onPageLoad() {
-
     }
 }
