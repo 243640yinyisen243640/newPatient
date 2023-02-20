@@ -54,7 +54,7 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_programme_choose, null);
         breakfastTv = view.findViewById(R.id.tv_diet_custom_plan_breakfast);
-        breakfastTv = view.findViewById(R.id.rv_diet_custom_plan_breakfast);
+        breakfastRv = view.findViewById(R.id.rv_diet_custom_plan_breakfast);
         lunchTv = view.findViewById(R.id.tv_diet_custom_plan_lunch);
         lunchRv = view.findViewById(R.id.rv_diet_custom_plan_lunch);
         dinnerTv = view.findViewById(R.id.tv_diet_custom_plan_dinner);

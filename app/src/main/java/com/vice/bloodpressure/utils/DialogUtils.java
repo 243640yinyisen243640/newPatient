@@ -5,14 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
-import androidx.core.content.ContextCompat;
-
-import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.view.TimePickerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.dialog.HHSoftDialog;
-
-import java.util.Calendar;
 
 
 /**
@@ -171,41 +165,5 @@ public class DialogUtils {
 //        CommentDialogFragment.newInstance().dismiss();
 //    }
 
-
-    public static void showTimeWindow(Context context, boolean[] booleans, String dataManager, TimePickerCallBack callBack) {
-        Calendar currentDate = Calendar.getInstance();
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        int currentYear = currentDate.get(Calendar.YEAR);
-        startDate.set(currentYear - 120, 0, 1, 0, 0);
-
-        TimePickerView timePickerView = new TimePickerBuilder(context, (date, v) -> {
-            String content = DataUtils.convertDateToString(date, dataManager);
-            callBack.execEvent(content);
-        })
-                .setDate(currentDate)
-                .setRangDate(startDate, endDate)
-                .setType(booleans)
-                .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
-                .setCancelColor(ContextCompat.getColor(context, R.color.main_base_color))
-                .build();
-        timePickerView.show();
-    }
-
-    public interface TimePickerCallBack1 {
-        void execEvent(String hour, String minute);
-    }
-
-    public interface TimePickerCallBack {
-        void execEvent(String content);
-    }
-
-
-    /**
-     * 回调位置
-     */
-    public interface PositionCallBack {
-        void execEvent(String content, int position);
-    }
 
 }
