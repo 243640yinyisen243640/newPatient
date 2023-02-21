@@ -22,16 +22,210 @@
 
             <TextView
                 style="@style/style_title_with_green_h"
-                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="全天" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_red_35_5_2"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="主食"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_zhushi_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_green_low_35_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="蔬菜"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_shucai_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_orange_35_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="肉蛋白"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_roudanbai_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_light_blue_35_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="浆乳类"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_jiangrulei_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_purple_35_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="盐类"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_yanlei_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/shape_yellow_35_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="油类"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_youlei_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="三两"
+                        android:textColor="@color/gray_9E"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_all_name_proportion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_little_background_5"
-                android:overScrollMode="never"  />
+                android:overScrollMode="never"
+                android:visibility="gone" />
 
             <TextView
                 style="@style/style_title_with_green_h"

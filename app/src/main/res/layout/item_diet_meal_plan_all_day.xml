@@ -27,7 +27,7 @@
             android:layout_height="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shape_red_90" />
+            android:background="@drawable/shape_red_35_5_2" />
 
         <TextView
             android:id="@+id/tv_diet_plan_meal_num"

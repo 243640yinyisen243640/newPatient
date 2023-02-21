@@ -3,5 +3,6 @@
 
     <solid android:color="@color/diet_danbai" />
 
-    <corners android:radius="90dp" />
+    <corners android:radius="3dp" />
+    <size android:width="35dp" android:height="5dp"/>
 </shape>
