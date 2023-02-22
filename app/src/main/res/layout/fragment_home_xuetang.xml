@@ -81,7 +81,6 @@
             android:id="@+id/tv_home_fm_xt_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="共测量5次；有2次偏高；3次正常"
             android:textColor="@color/black_2A"
             android:textSize="15sp" />
     </LinearLayout>

@@ -107,7 +107,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="本节共13sp主题色字，阅读时间约5分钟"
             android:textColor="@color/black_2A"
             android:textSize="13sp" />
     </LinearLayout>

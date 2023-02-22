@@ -101,7 +101,6 @@
                 android:background="@drawable/shape_bg_white_black_10_1"
                 android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="16sp加粗2a\n15sp#ED4646粗 mmHg\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <ImageView
@@ -160,7 +159,6 @@
                 android:background="@drawable/shape_bg_white_black_10_1"
                 android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="16sp加粗2a\n15sp#2A96F2粗 mol/L\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <TextView
@@ -173,7 +171,6 @@
                 android:background="@drawable/shape_bg_white_black_10_1"
                 android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="16sp加粗2a\n15sp主题粗 mmHg\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <ImageView
@@ -274,10 +271,8 @@
                 android:lineSpacingExtra="13dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
-                android:text="身高 13sp9F\n22sp2A加粗"
-                android:textColor="@color/black_2A"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/gray_9F"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_home_weight_num"
@@ -289,10 +284,8 @@
                 android:lineSpacingExtra="13dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
-                android:text="体重"
-                android:textColor="@color/black_2A"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textColor="@color/gray_9F"
+                android:textSize="13sp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -307,7 +300,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BMI"
                     android:textColor="@color/black_2A"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -324,7 +316,6 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="14.8"
                         android:textColor="#2A96F2"
                         android:textSize="20sp"
                         android:textStyle="bold" />

@@ -34,6 +34,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/diet_programme_icon" />
+
+            <TextView
+                android:id="@+id/tv_home_exercise_need_fire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/shape_bg_white_gray_90_90_90_0"
+                android:paddingLeft="14dp"
+                android:paddingTop="11.5dp"
+                android:paddingRight="14dp"
+                android:paddingBottom="11.5dp"
+                android:textColor="@color/black_2A"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:background="@drawable/shape_little_background_5"
             android:orientation="horizontal"
@@ -44,7 +72,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="步行15sp主题粗步"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
@@ -53,7 +80,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="消耗热量 15#F98515粗 千卡"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 

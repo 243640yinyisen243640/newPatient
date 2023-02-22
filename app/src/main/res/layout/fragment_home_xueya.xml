@@ -4,50 +4,68 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_home_fm_xy_add"
-        style="@style/style_title_with_green_h"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/circle_add"
-        android:gravity="left"
-        android:paddingLeft="10dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:text="血压" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="16.5sp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
+
+            style="@style/style_title_with_green_h"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/home_shousuoya_left"
-            android:drawablePadding="2.5dp"
-            android:text="收缩压"
-            android:textColor="@color/gray_9F"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp"
+            android:text="血压" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="35dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/home_shousuoya_left"
+                android:drawablePadding="2.5dp"
+                android:text="收缩压"
+                android:textColor="@color/gray_9F"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/home_shuzhangya_left"
+                android:drawablePadding="2.5dp"
+                android:text="收缩压"
+                android:textColor="@color/gray_9F"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/home_shuzhangya_left"
-            android:drawablePadding="2.5dp"
-            android:text="收缩压"
-            android:textColor="@color/gray_9F"
-            android:textSize="12sp" />
+            android:id="@+id/tv_home_fm_xy_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/circle_add"
+            android:padding="15dp" />
+
 
     </LinearLayout>
+
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lc_home_fm_xy"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="共测量5次；有2次偏高；3次正常"
             android:textColor="@color/black_2A"
             android:textSize="15sp" />
     </LinearLayout>

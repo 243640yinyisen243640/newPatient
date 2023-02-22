@@ -2,7 +2,13 @@ package com.vice.bloodpressure.fragment.fhome;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -78,7 +84,27 @@ public class HomeXueYaFragment extends UIBaseFragment {
         XueYaMarkView mv = new XueYaMarkView(getPageContext());
         mv.setChartView(lineChart);
         lineChart.setMarker(mv);
+        SpannableStringBuilder stringBuilder = setTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), "共测量", "次数", "次;");
+        SpannableStringBuilder stringBuilder1 = setTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), "有", "次数", "偏高;");
+        SpannableStringBuilder stringBuilder2 = setTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), "", "次数", "正常;");
+
+        numTv.setText(stringBuilder.append(stringBuilder1).append(stringBuilder2));
     }
+
+    private SpannableStringBuilder setTextType(int startColor, int endColor, String text1, String text2, String text3) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        builder.append(text1);
+        int length1 = builder.length();
+        builder.append(text2);
+        int length2 = builder.length();
+        builder.append(text3);
+        builder.setSpan(new ForegroundColorSpan(startColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new StyleSpan(Typeface.BOLD), length1, length2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+    }
+
 
 
     private void initView() {

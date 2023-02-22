@@ -46,22 +46,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="116dp"
                 android:layout_marginTop="33dp"
                 android:orientation="horizontal">
-
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pc_exercise_qk_num"
                     android:layout_width="116dp"
                     android:layout_height="116dp" />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="95dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="12.5sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="116dp"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/shape_little_background_5"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/tv_exercise_work"
@@ -72,7 +70,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="步行      拼接9E  13sp"
+                        android:text="步行&#12288;&#12288;&#12288;拼接9E13sp"
                         android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
@@ -85,7 +83,7 @@
                         android:drawablePadding="10dp"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="跑步      拼接9E  13sp"
+                        android:text="跑步&#12288;&#12288;&#12288;拼接9E13sp"
                         android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
@@ -98,12 +96,28 @@
                         android:drawablePadding="10dp"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="未消耗  拼接9E  13sp"
+                        android:text="未消耗&#12288;&#12288;拼接9E13sp"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/shape_blue_12_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="其他运动&#12288;拼接9E13sp"
                         android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
 
                 </LinearLayout>
+
+
+
             </LinearLayout>
 
             <TextView
@@ -184,9 +198,9 @@
                         android:drawableRight="@drawable/arrow_right_white_little"
                         android:drawablePadding="10dp"
                         android:paddingLeft="12.5dp"
-                        android:paddingTop="11dp"
+                        android:paddingTop="10dp"
                         android:paddingRight="12.5dp"
-                        android:paddingBottom="11dp"
+                        android:paddingBottom="10dp"
                         android:text="开始运动"
                         android:textColor="@color/text_white"
                         android:textSize="13sp" />

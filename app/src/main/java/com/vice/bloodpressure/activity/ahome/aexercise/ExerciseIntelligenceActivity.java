@@ -1,20 +1,23 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.TurnUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +51,10 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
      */
     private TextView noTv;
     /**
+     * 其他
+     */
+    private TextView otherTv;
+    /**
      * 重新制定
      */
     private TextView againTv;
@@ -79,7 +86,37 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("智能运动");
+        topViewManager().moreTextView().setText("运动记录");
+        topViewManager().moreTextView().setOnClickListener(v -> {
+
+        });
         initView();
+        initListener();
+        initValues();
+    }
+
+    private void initValues() {
+        List<String> nameString = new ArrayList<>();
+        nameString.add("小米");
+        nameString.add("鸡蛋");
+        nameString.add("蔬菜");
+        nameString.add("饮品");
+        List<String> rateString = new ArrayList<>();
+        rateString.add("50");
+        rateString.add("20");
+        rateString.add("10");
+        rateString.add("20");
+        showPieChart(numPc, getPieChartData(rateString, nameString));
+    }
+
+
+    private void initListener() {
+        againTv.setOnClickListener(this);
+        exerciseChooseTv.setOnClickListener(this);
+        beginTv.setOnClickListener(this);
+        resistanceBeginTv.setOnClickListener(this);
+        flexibilityBeginTv.setOnClickListener(this);
     }
 
 
@@ -96,7 +133,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
                 break;
             //选择运动
             case R.id.tv_exercise_choose:
-                chooseSexWindow1();
+                chooseSexWindow();
                 break;
             //开始运动
             case R.id.tv_exercise_begin:
@@ -113,6 +150,91 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
 
     }
 
+    /**
+     * 有关饼状图
+     *
+     * @param pieChart
+     * @param pieList
+     */
+    private void showPieChart(PieChart pieChart, List<PieEntry> pieList) {
+        PieDataSet dataSet = new PieDataSet(pieList, "");
+        int[] intArray = getResources().getIntArray(R.array.diet_plan_colors);
+        dataSet.setColors(intArray);
+        PieData pieData = new PieData(dataSet);
+
+
+        pieChart.setUsePercentValues(true);
+        //设置使用百分比
+        //设置描述
+        pieChart.getDescription().setEnabled(false);
+        //设置半透明圆环的半径, 0为透明
+        pieChart.setTransparentCircleRadius(0f);
+
+        pieChart.setHighlightPerTapEnabled(false);//点击是否放大
+
+        pieChart.setCenterText("多少千卡");//设置环中的文字
+        pieChart.setCenterTextSize(15f);//设置环中文字的大小
+        pieChart.setDrawCenterText(true);//设置绘制环中文字
+        //设置初始旋转角度
+        pieChart.setRotationAngle(-15);
+
+        //设置这个数字，越大，这个饼越细，越小，饼越胖
+        pieChart.setHoleRadius(78f);
+        //设置内圆和外圆的一个交叉园的半径，这样会凸显内外部的空间
+        pieChart.setTransparentCircleRadius(31f);
+
+
+        //数据连接线距图形片内部边界的距离，为百分数
+        dataSet.setValueLinePart1OffsetPercentage(80f);
+
+        // 设置饼块之间的间隔
+        dataSet.setSliceSpace(1f);
+        dataSet.setHighlightEnabled(true);
+        // 显示图例
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(false);
+
+        // 和四周相隔一段距离,显示数据
+        pieChart.setExtraOffsets(0, 0, 0, 0);
+
+        // 设置pieChart图表是否可以手动旋转
+        pieChart.setRotationEnabled(false);
+        // 设置piecahrt图表点击Item高亮是否可用
+        pieChart.setHighlightPerTapEnabled(false);
+        // 设置pieChart图表展示动画效果，动画运行1.4秒结束
+        pieChart.animateY(1400, Easing.EaseInOutQuad);
+        //设置pieChart是否只显示饼图上百分比不显示文字
+        pieChart.setDrawEntryLabels(false);
+        // 绘制内容value，设置字体颜色大小
+        pieData.setDrawValues(false);
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.DKGRAY);
+
+        pieChart.setData(pieData);
+        // 更新 piechart 视图
+        pieChart.postInvalidate();
+    }
+
+    /**
+     * 有关饼状图
+     *
+     * @param list1
+     * @param list2
+     * @return
+     */
+    private List<PieEntry> getPieChartData(List<String> list1, List<String> list2) {
+        List<PieEntry> mPie = new ArrayList<>();
+        if (list1 != null && list2 != null) {
+            for (int i = 0; i < list1.size(); i++) {
+                // 参数1为 value，参数2为 data。
+                // 如 PieEntry(0.15F, "90分以上");  表示90分以上的人占比15%。
+                PieEntry pieEntry = new PieEntry(TurnUtils.getFloat(list1.get(i), 0), list2.get(i));
+                mPie.add(pieEntry);
+            }
+        }
+        return mPie;
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_intelligence, null);
         needFireTv = view.findViewById(R.id.tv_exercise_need_fire);
@@ -120,6 +242,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         workTv = view.findViewById(R.id.tv_exercise_work);
         runTv = view.findViewById(R.id.tv_exercise_run);
         noTv = view.findViewById(R.id.tv_exercise_no);
+        otherTv = view.findViewById(R.id.tv_exercise_other);
         againTv = view.findViewById(R.id.tv_exercise_again);
         exerciseChooseTv = view.findViewById(R.id.tv_exercise_choose);
         beginTv = view.findViewById(R.id.tv_exercise_begin);
@@ -150,48 +273,5 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         });
     }
 
-    /**
-     * 选择运动类型
-     */
-    private void chooseSexWindow1() {
-        List<String> exerciseList = new ArrayList<>();
-        exerciseList.add("快跑");
-        exerciseList.add("快走");
-        exerciseList.add("慢跑");
-        exerciseList.add("健步走");
-        exerciseList.add("羽毛球");
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, new CallBack() {
-            @Override
-            public void callBack(Object object) {
-                exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-            }
-        });
-    }
-
-    private void chooseCompanyStyle() {
-        List<MealInfo> list = new ArrayList<>();
-        list.add(new MealInfo("快跑"));
-        list.add(new MealInfo("快走"));
-        list.add(new MealInfo("慢跑"));
-        list.add(new MealInfo("健步走"));
-        list.add(new MealInfo("健步走"));
-        list.add(new MealInfo("羽毛球"));
-        if (list != null && list.size() > 0) {
-            OptionsPickerView optionsPickerView = new OptionsPickerBuilder(getPageContext(), (options1, options2, options3, v) -> {
-                String s = list.get(options1).getColor();
-                exerciseChooseTv.setText(s);
-            }).setLineSpacingMultiplier(2.5f)
-                    .setCancelColor(ContextCompat.getColor(getPageContext(), R.color.gray_E5))
-                    .setSubmitColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color))
-                    .build();
-            List<String> list2 = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
-                String typeName = list.get(i).getColor();
-                list2.add(typeName);
-            }
-            optionsPickerView.setPicker(list2);
-            optionsPickerView.show();
-        }
-    }
 }

@@ -95,10 +95,12 @@ public class PickerViewUtils {
         OptionsPickerView optionsPickerView = new OptionsPickerBuilder(context, (options1, options2, options3, v) -> {
 
             callBack.callBack(options1);
-        }).setLineSpacingMultiplier(2.5f)
-                .setCancelColor(ContextCompat.getColor(context, R.color.gray_E5))
+        }).setLineSpacingMultiplier(1.5f)
+                .setCancelColor(ContextCompat.getColor(context, R.color.gray_85))
                 .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
                 .setTitleText(title)
+                .setTitleBgColor(ContextCompat.getColor(context, R.color.text_white))
+                .setDividerColor(ContextCompat.getColor(context, R.color.gray_EA))
                 .build();
         optionsPickerView.setPicker(list);
         optionsPickerView.show();

@@ -57,7 +57,6 @@
                 android:paddingTop="11.5dp"
                 android:paddingRight="14dp"
                 android:paddingBottom="11.5dp"
-                android:text="今日需要摄入总热量 18sp主题色 千卡"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
