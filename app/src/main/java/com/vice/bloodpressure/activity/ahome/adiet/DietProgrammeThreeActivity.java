@@ -3,6 +3,9 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -72,5 +75,9 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
             }
         });
     }
-
+    private void setTextStyle(TextView textView, float proportion, int start, int end) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
+        spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        textView.setText(spannableStringBuilder);
+    }
 }

@@ -6,11 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.RelativeSizeSpan;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -221,11 +217,8 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
         }
     }
 
-    protected void setTextStyle(TextView textView, float proportion, int start, int end){
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
-        spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        textView.setText(spannableStringBuilder);
-    }
+
+
     @Override
     public Resources getResources() {
         Resources res = super.getResources();

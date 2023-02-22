@@ -2,6 +2,9 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -78,6 +81,11 @@ public class DietProgrammeOneActivity extends UIBaseActivity {
 
         TextView progress = findViewById(R.id.tv_diet_programme_one_progress);
         setTextStyle(progress, 1.3f, 0, 1);
+    }
+    private void setTextStyle(TextView textView, float proportion, int start, int end) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
+        spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        textView.setText(spannableStringBuilder);
     }
 
 }

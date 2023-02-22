@@ -2,6 +2,9 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,7 +49,7 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
         ivBedridden = findViewById(R.id.iv_diet_programme_two_bedridden);
 
         TextView progress = findViewById(R.id.tv_diet_programme_two_progress);
-        setTextStyle(progress,1.3f,0,1);
+        setTextStyle(progress, 1.3f, 0, 1);
     }
 
     @Override
@@ -76,8 +79,8 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
                 //下一步
                 Intent intent = new Intent(getPageContext(), DietProgrammeThreeActivity.class);
                 intent.putExtra("workWeight", workWeight);
-                intent.putExtra("height",getIntent().getStringExtra("height"));
-                intent.putExtra("weight",getIntent().getStringExtra("weight"));
+                intent.putExtra("height", getIntent().getStringExtra("height"));
+                intent.putExtra("weight", getIntent().getStringExtra("weight"));
                 startActivity(intent);
                 break;
             default:
@@ -85,13 +88,13 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
         }
     }
 
-    private void checkWork(String workWeight){
+    private void checkWork(String workWeight) {
         this.workWeight = workWeight;
         ivLight.setImageResource(R.drawable.circle_uncheck);
         ivMiddle.setImageResource(R.drawable.circle_uncheck);
         ivHeavy.setImageResource(R.drawable.circle_uncheck);
         ivBedridden.setImageResource(R.drawable.circle_uncheck);
-        switch (workWeight){
+        switch (workWeight) {
             case "0":
                 ivLight.setImageResource(R.drawable.circle_check);
                 ivMiddle.setImageResource(R.drawable.circle_uncheck);
@@ -119,5 +122,11 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
             default:
                 break;
         }
+    }
+
+    private void setTextStyle(TextView textView, float proportion, int start, int end) {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
+        spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        textView.setText(spannableStringBuilder);
     }
 }
