@@ -5,12 +5,15 @@ import android.widget.FrameLayout;
 
 import androidx.core.content.ContextCompat;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -79,6 +82,26 @@ public class PickerViewUtils {
         //        timePickerView.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         timePickerView.show();
 
+    }
+
+    /**
+     *
+     * @param context
+     * @param title
+     * @param list
+     * @param callBack
+     */
+    public static <T> void showChooseSinglePicker(Context context, String title, List<T> list, CallBack callBack) {
+        OptionsPickerView optionsPickerView = new OptionsPickerBuilder(context, (options1, options2, options3, v) -> {
+
+            callBack.callBack(options1);
+        }).setLineSpacingMultiplier(2.5f)
+                .setCancelColor(ContextCompat.getColor(context, R.color.gray_E5))
+                .setSubmitColor(ContextCompat.getColor(context, R.color.main_base_color))
+                .setTitleText(title)
+                .build();
+        optionsPickerView.setPicker(list);
+        optionsPickerView.show();
     }
 
 

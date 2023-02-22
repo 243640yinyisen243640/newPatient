@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/diet_programme_icon" />
+
+                <TextView
+                    android:id="@+id/tv_exercise_need_fire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/shape_bg_white_gray_90_90_90_0"
+                    android:paddingLeft="23dp"
+                    android:paddingTop="11.5dp"
+                    android:paddingRight="23dp"
+                    android:paddingBottom="11.5dp"
+                    android:text="今日需消耗 18sp主题粗 千卡"
+                    android:textColor="@color/black_2A"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:orientation="horizontal">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pc_exercise_qk_num"
+                    android:layout_width="116dp"
+                    android:layout_height="116dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12.5sp"
+                    android:background="@drawable/shape_little_background_5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_exercise_work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/shape_red_12_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="步行      拼接9E  13sp"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_run"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/shape_red_12_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="跑步      拼接9E  13sp"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/shape_green_12_5_3"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="未消耗  拼接9E  13sp"
+                        android:textColor="@color/black_2A"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_exercise_again"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/shape_bg_main_gra_90"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="重新制定运动方案 "
+                android:textColor="@color/text_white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:text="有氧运动" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/home_bg_run"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="22dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="33dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="有氧运动"
+                    android:textColor="@color/main_base_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_exercise_choose"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_bg_white_90"
+                        android:drawableRight="@drawable/arrow_down_gray_little"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="10dp"
+                        android:text="步行"
+                        android:textColor="@color/black_2A"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_begin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_bg_main_gra_90"
+                        android:drawableRight="@drawable/arrow_right_white_little"
+                        android:drawablePadding="10dp"
+                        android:paddingLeft="12.5dp"
+                        android:paddingTop="11dp"
+                        android:paddingRight="12.5dp"
+                        android:paddingBottom="11dp"
+                        android:text="开始运动"
+                        android:textColor="@color/text_white"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_marginTop="20dp"
+                android:text="抗阻运动" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/resistance_exercise_big"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_exercise_resistance_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="箱式深蹲"
+                    android:textColor="@color/text_white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_exercise_resistance_begin"
+                    style="@style/sure_green_13sp_p12"
+                    android:drawableRight="@drawable/arrow_right_white_little"
+                    android:drawablePadding="8dp"
+                    android:text="开始运动" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="13dp"
+                android:text="柔韧性运动" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/flexibility_exercise_big"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_exercise_flexibility_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="柔韧性运动"
+                    android:textColor="@color/text_white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_exercise_flexibility_begin"
+                    style="@style/sure_green_13sp_p12"
+                    android:drawableRight="@drawable/arrow_right_white_little"
+                    android:drawablePadding="8dp"
+                    android:text="开始运动" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

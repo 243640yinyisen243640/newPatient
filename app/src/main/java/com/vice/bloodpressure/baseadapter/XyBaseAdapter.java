@@ -11,14 +11,14 @@ import java.util.List;
  * 默认实现了出getView方法意外的其他的方法
  *
  * @param <T>
- * @author yuan
+ * @author
  */
-public abstract class HHSoftBaseAdapter<T> extends BaseAdapter {
+public abstract class XyBaseAdapter<T> extends BaseAdapter {
 
     private Context mContext;
     private List<T> mList;
 
-    public HHSoftBaseAdapter(Context context, List<T> list) {
+    public XyBaseAdapter(Context context, List<T> list) {
         this.mContext = context;
         this.mList = list;
     }

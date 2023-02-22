@@ -131,7 +131,20 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/14/1459f2a925c04ba1b41aac513d7ad588.mp4?e=1676922360&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bbu0N3JdhPNn_cMIymTe4qsA59U=", "");
+        videoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/04/0487b7bb4d4647e9a69edcbf8600734f.mp4?e=1676996640&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:Iy3rHz-ra2knEn-OT8HowmgnNJk=", "");
         // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
     }
 }

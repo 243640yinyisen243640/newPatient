@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="步行2000步"
+                android:text="步行15sp主题粗步"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
@@ -53,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="消耗热量 90 千卡"
+                android:text="消耗热量 15#F98515粗 千卡"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp" />
 
@@ -165,7 +165,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_exercise_need_fire"
+                        android:id="@+id/tv_main_exercise_need_fire"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
@@ -232,7 +232,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/resistance_excesis"
+                android:background="@drawable/resistance_exercise"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -247,7 +247,7 @@
                 <TextView
                     android:id="@+id/tv_exercise_resistance"
                     style="@style/sure_green_13sp_p12"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="14dp"
                     android:drawableRight="@drawable/arrow_right_white_little"
                     android:drawablePadding="8dp"
                     android:text="开始运动" />

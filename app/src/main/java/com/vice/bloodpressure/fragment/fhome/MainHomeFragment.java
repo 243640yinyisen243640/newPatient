@@ -331,7 +331,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         fireNumTv = view.findViewById(R.id.tv_exercise_fire_num);
         finishTv = view.findViewById(R.id.tv_exercise_finish);
         typeTv = view.findViewById(R.id.tv_exercise_type);
-        needFireTv = view.findViewById(R.id.tv_exercise_need_fire);
+        needFireTv = view.findViewById(R.id.tv_main_exercise_need_fire);
         timeTv = view.findViewById(R.id.tv_exercise_time);
         resistanceTv = view.findViewById(R.id.tv_exercise_resistance);
         flexibilityTv = view.findViewById(R.id.tv_exercise_flexibility);

@@ -111,8 +111,9 @@
         <activity
             android:name=".activity.ahome.HomeMessageListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ahome.HomeWarningListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.HomeWarningListActivity"
+            android:screenOrientation="portrait" />
         <!--饮食方案开始-->
         <activity
             android:name=".activity.ahome.adiet.DietProgrammeBeginActivity"
@@ -149,12 +150,17 @@
         <!--制作饮食  可有视频可无视频-->
         <activity
             android:name=".activity.ahome.adiet.DietMakeMealDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <!--饮食方案详细-->
         <activity
             android:name=".activity.ahome.adiet.DietMealPlanDetailsActivity"
             android:screenOrientation="portrait" />
 
+        <!--运动模块-->
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseIntelligenceActivity"
+            android:screenOrientation="portrait" />
 
         <!--服务模块-->
         <!--教育视频列表-->

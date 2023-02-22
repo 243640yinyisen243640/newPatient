@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseadapter.HHSoftBaseAdapter;
+import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
 import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class HHSoftBottomMenuWindow extends PopupWindow {
         });
     }
 
-    private class MenuAdapter extends HHSoftBaseAdapter<String> {
+    private class MenuAdapter extends XyBaseAdapter<String> {
 
         public MenuAdapter(Context context, List<String> list) {
             super(context, list);

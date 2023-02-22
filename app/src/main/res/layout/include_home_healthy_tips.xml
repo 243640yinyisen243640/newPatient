@@ -99,8 +99,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_bg_white_black_10_1"
+                android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="血压值\n130/80 mmHg\n2022-02-05 15:20"
+                android:text="16sp加粗2a\n15sp#ED4646粗 mmHg\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <ImageView
@@ -157,8 +158,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="160dp"
                 android:background="@drawable/shape_bg_white_black_10_1"
+                android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="血糖值\n4.6 mol/L mmHg\n2022-02-05 15:20"
+                android:text="16sp加粗2a\n15sp#2A96F2粗 mol/L\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <TextView
@@ -169,8 +171,9 @@
                 android:layout_marginTop="130dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/shape_bg_white_black_10_1"
+                android:lineSpacingExtra="5.5dp"
                 android:padding="9dp"
-                android:text="心率\n60 次/分\n2022-02-05 15:20"
+                android:text="16sp加粗2a\n15sp主题粗 mmHg\n2022-02-05 15:20"
                 android:textSize="11sp" />
 
             <ImageView
@@ -268,9 +271,10 @@
                 android:layout_height="110dp"
                 android:layout_weight="1"
                 android:background="@drawable/people_hight"
+                android:lineSpacingExtra="13dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
-                android:text="身高"
+                android:text="身高 13sp9F\n22sp2A加粗"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -282,6 +286,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/people_weight"
+                android:lineSpacingExtra="13dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="10dp"
                 android:text="体重"

@@ -140,7 +140,7 @@
                     app:isBgRoundRect="false"
                     app:largeScaleColor="#C5CDCA"
                     app:largeScaleStroke="2dp"
-                    app:maxScale="190"
+                    app:maxScale="200"
                     app:midScaleColor="#C5CDCA"
                     app:midScaleStroke="2dp"
                     app:minScale="100"
