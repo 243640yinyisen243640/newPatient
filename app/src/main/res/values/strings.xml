@@ -13,15 +13,23 @@
     <string name="tv_main_home_mall">商城</string>
     <string name="tv_main_home_my">我的</string>
 
-   
+
     <!--智能饮食-->
 
     <string name="diet_custom_programme_top_title">第一步：请选择分餐比例</string>
-    <string name="diet_change_diet_top_title" >选择我爱吃的食物</string>
-    <string name="diet_activity_change_diet_top_title" >更改饮食方案</string>
-    <string name="diet_activity_custom_diet_top_title" >自定义饮食方案</string>
+    <string name="diet_change_diet_top_title">选择我爱吃的食物</string>
+    <string name="diet_activity_change_diet_top_title">更改饮食方案</string>
+    <string name="diet_activity_custom_diet_top_title">自定义饮食方案</string>
     <string name="diet_change_diet_top_breakfast">早餐</string>
     <string name="diet_change_diet_top_lunch">午餐</string>
     <string name="diet_change_diet_top_dinner">晚餐</string>
     <string name="add_diet_plan">加餐方案</string>
+    <string name="intelligence_run_work">步行</string>
+    <string name="intelligence_run_run">跑步</string>
+    <string name="intelligence_run_no">未消耗</string>
+    <string name="intelligence_run_other">其他消耗</string>
+    <string name="intelligence_run_three">&#12288;&#12288;&#12288;%1$s</string>
+    <string name="intelligence_run_two">&#12288;&#12288;%1$s</string>
+    <string name="intelligence_run_one">&#12288;%1$s</string>
+    <string name="intelligence_run_num_unit">千卡</string>
 </resources>

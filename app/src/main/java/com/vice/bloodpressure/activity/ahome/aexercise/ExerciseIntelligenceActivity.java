@@ -2,6 +2,10 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +20,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
 
@@ -108,6 +113,12 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         rateString.add("10");
         rateString.add("20");
         showPieChart(numPc, getPieChartData(rateString, nameString));
+
+        needFireTv.setText(setMealTextType("1", Color.parseColor("#00C27F"), 18, "今日需消耗", " 2400 ", "千卡"));
+        workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work),String.format(getPageContext().getString(R.string.intelligence_run_three), "1234"), getString(R.string.intelligence_run_num_unit)));
+        runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run),String.format(getPageContext().getString(R.string.intelligence_run_three), "234"), getString(R.string.intelligence_run_num_unit)));
+        noTv.setText(setMealTextType("3", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no),String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
+        otherTv.setText(setMealTextType("4", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), "567"), getString(R.string.intelligence_run_num_unit)));
     }
 
 
@@ -117,6 +128,24 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         beginTv.setOnClickListener(this);
         resistanceBeginTv.setOnClickListener(this);
         flexibilityBeginTv.setOnClickListener(this);
+    }
+
+    private SpannableStringBuilder setMealTextType(String type, int endColor, float textSize, String text1, String text2, String text3) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        builder.append(text1);
+        int length1 = builder.length();
+        builder.append(text2);
+        int length2 = builder.length();
+        builder.append(text3);
+        if ("1".equals(type)) {
+            builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            builder.setSpan(new ForegroundColorSpan(endColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return builder;
     }
 
 

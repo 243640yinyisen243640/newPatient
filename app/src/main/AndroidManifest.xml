@@ -165,6 +165,10 @@
         <activity
             android:name=".activity.ahome.aeducation.ExercisePlanOneActivity"
             android:screenOrientation="portrait" />
+        <!--答题第二题-->
+        <activity
+            android:name=".activity.ahome.aeducation.ExercisePlanTwoActivity"
+            android:screenOrientation="portrait" />
 
         <!--服务模块-->
         <!--教育视频列表-->
