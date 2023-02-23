@@ -8,5 +8,11 @@
         <item>@color/diet_yan</item>
         <item>@color/diet_you</item>
     </integer-array>
+    <integer-array name="exercise_plan_colors">
+        <item>@color/diet_danbai</item>
+        <item>@color/diet_zhushi</item>
+        <item>@color/diet_shucai</item>
+        <item>@color/blue_53</item>
+    </integer-array>
 
 </resources>

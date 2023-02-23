@@ -18,7 +18,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
@@ -31,7 +30,7 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:智能运动
  */
 public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements View.OnClickListener {
     /**
@@ -117,8 +116,8 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         needFireTv.setText(setMealTextType("1", Color.parseColor("#00C27F"), 18, "今日需消耗", " 2400 ", "千卡"));
         workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work),String.format(getPageContext().getString(R.string.intelligence_run_three), "1234"), getString(R.string.intelligence_run_num_unit)));
         runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run),String.format(getPageContext().getString(R.string.intelligence_run_three), "234"), getString(R.string.intelligence_run_num_unit)));
-        noTv.setText(setMealTextType("3", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no),String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
-        otherTv.setText(setMealTextType("4", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), "567"), getString(R.string.intelligence_run_num_unit)));
+        noTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no),String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
+        otherTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), "567"), getString(R.string.intelligence_run_num_unit)));
     }
 
 
@@ -187,7 +186,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
      */
     private void showPieChart(PieChart pieChart, List<PieEntry> pieList) {
         PieDataSet dataSet = new PieDataSet(pieList, "");
-        int[] intArray = getResources().getIntArray(R.array.diet_plan_colors);
+        int[] intArray = getResources().getIntArray(R.array.exercise_plan_colors);
         dataSet.setColors(intArray);
         PieData pieData = new PieData(dataSet);
 
@@ -294,12 +293,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         exerciseList.add("健步走");
         exerciseList.add("羽毛球");
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, new CallBack() {
-            @Override
-            public void callBack(Object object) {
-                exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-            }
-        });
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, object -> exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object)))));
     }
 
 

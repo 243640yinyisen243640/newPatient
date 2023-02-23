@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/diet_programme_bg_head" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_weight="1"
+                    android:max="5"
+                    android:progress="3"
+                    android:progressDrawable="@drawable/diet_programme_progress_bar" />
+
+                <TextView
+                    android:id="@+id/tv_diet_programme_one_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="21dp"
+                    android:background="@drawable/shape_bg_black_90_20"
+                    android:paddingStart="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="5dp"
+                    android:text="3/5"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_bg_white_10"
+                android:orientation="vertical"
+                android:paddingBottom="45dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@color/main_base_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="身高体重"
+                        android:textColor="@color/main_base_color"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@color/main_base_color" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="身高 "
+                        android:textColor="#242424"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="cm"
+                        android:textColor="@color/gray_BB"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_height_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="160"
+                        android:textColor="#00C27F"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="5dp"
+                        android:text="cm"
+                        android:textColor="#BBBBBB"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp">
+
+                    <com.lsp.RulerView
+                        android:id="@+id/rv_exercise_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:firstScale="160"
+                        app:isBgRoundRect="false"
+                        app:largeScaleColor="#C5CDCA"
+                        app:largeScaleStroke="2dp"
+                        app:maxScale="200"
+                        app:midScaleColor="#C5CDCA"
+                        app:midScaleStroke="2dp"
+                        app:minScale="100"
+                        app:rulerHeight="50dp"
+                        app:scaleCount="10"
+                        app:scaleGap="10dp"
+                        app:scaleLimit="10"
+                        app:scaleNumColor="@color/gray_8a"
+                        app:scaleNumTextSize="12sp"
+                        app:showScaleResult="false"
+                        app:smallScaleColor="#E1E9E6"
+                        app:smallScaleStroke="2dp" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/diet_programme_rule" />
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="体重 "
+                        android:textColor="#242424"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="kg"
+                        android:textColor="@color/gray_BB"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_exercise_weight_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textColor="#00C27F"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="5dp"
+                        android:text="kg"
+                        android:textColor="#BBBBBB"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp">
+
+                    <com.lsp.RulerView
+                        android:id="@+id/rv_exercise_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:firstScale="60"
+                        app:isBgRoundRect="false"
+                        app:largeScaleColor="#C5CDCA"
+                        app:largeScaleStroke="2dp"
+                        app:maxScale="200"
+                        app:midScaleColor="#C5CDCA"
+                        app:midScaleStroke="2dp"
+                        app:minScale="10"
+                        app:rulerHeight="50dp"
+                        app:scaleCount="10"
+                        app:scaleGap="10dp"
+                        app:scaleLimit="10"
+                        app:scaleNumColor="@color/gray_8a"
+                        app:scaleNumTextSize="12sp"
+                        app:showScaleResult="false"
+                        app:smallScaleColor="#E1E9E6"
+                        app:smallScaleStroke="2dp" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/diet_programme_rule" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_exercise_hw_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_90"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="上一步"
+                android:textColor="@color/main_base_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_exercise_hw_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_90"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="下一步"
+                android:textColor="#00C27F"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

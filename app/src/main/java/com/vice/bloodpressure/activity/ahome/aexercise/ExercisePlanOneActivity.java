@@ -1,5 +1,6 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,7 +14,11 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
 /**
- * 饮食方案
+ * 类名：
+ * 传参：
+ * 描述: 运动答题 运动禁忌症
+ * 作者: beauty
+ * 创建日期: 2023/2/23 11:28
  */
 public class ExercisePlanOneActivity extends UIBaseActivity implements View.OnClickListener {
     private TextView unFitTv;
@@ -22,15 +27,27 @@ public class ExercisePlanOneActivity extends UIBaseActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initView();
+        initListener();
+
+    }
+
+    private void initListener() {
+        unFitTv.setOnClickListener(this);
+        fitTv.setOnClickListener(this);
+    }
+
+    private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_one, null);
         containerView().addView(view);
         topViewManager().titleTextView().setText("制定运动方案");
 
-        unFitTv = findViewById(R.id.tv_exercise_plan_un_fit);
-        fitTv = findViewById(R.id.tv_exercise_plan_fit);
+        unFitTv = view.findViewById(R.id.tv_exercise_plan_un_fit);
+        fitTv = view.findViewById(R.id.tv_exercise_plan_fit);
 
 
-        TextView progress = findViewById(R.id.tv_exercise_plan_one_progress);
+        TextView progress = view.findViewById(R.id.tv_exercise_plan_one_progress);
         setTextStyle(progress, 1.3f, 0, 1);
     }
 
@@ -47,6 +64,7 @@ public class ExercisePlanOneActivity extends UIBaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.tv_exercise_plan_fit:
+                startActivity(new Intent(getPageContext(), ExercisePlanAnswerAgeActivity.class));
                 break;
             default:
                 break;

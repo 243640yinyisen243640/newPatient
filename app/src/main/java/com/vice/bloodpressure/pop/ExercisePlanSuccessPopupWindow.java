@@ -13,24 +13,21 @@ import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
 
-public class DietProgrammePopupWindow extends PopupWindow {
+public class ExercisePlanSuccessPopupWindow extends PopupWindow {
+    private TextView contentTv;
 
-    public DietProgrammePopupWindow(Context context, View.OnClickListener recommendClickListener, View.OnClickListener chooseClickListener) {
-        LinearLayout view = (LinearLayout) View.inflate(context, R.layout.pop_diet_programme, null);
-        TextView tvRecommend = view.findViewById(R.id.tv_diet_programme_dialog_recommend);
-        TextView tvChoose = view.findViewById(R.id.tv_diet_programme_dialog_choose);
 
-        tvRecommend.setOnClickListener(v -> {
+    public ExercisePlanSuccessPopupWindow(Context context, View.OnClickListener recommendClickListener) {
+        LinearLayout view = (LinearLayout) View.inflate(context, R.layout.pop_exercise_plan_success, null);
+        contentTv = view.findViewById(R.id.tv_exercise_success_content);
+        TextView sureTv = view.findViewById(R.id.tv_exercise_success_sure);
+
+        sureTv.setOnClickListener(v -> {
             if (recommendClickListener != null) {
                 recommendClickListener.onClick(v);
             }
         });
 
-        tvChoose.setOnClickListener(v -> {
-            if (chooseClickListener != null) {
-                chooseClickListener.onClick(v);
-            }
-        });
         //解决PopupWindow无法覆盖状态栏
         this.setClippingEnabled(false);
         // 设置SelectPicPopupWindow的View
@@ -50,5 +47,9 @@ public class DietProgrammePopupWindow extends PopupWindow {
         //因为某些机型是虚拟按键的,所以要加上以下设置防止挡住按键.
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         view.setOnClickListener(v -> dismiss());
+    }
+
+    public TextView showContent() {
+        return contentTv;
     }
 }

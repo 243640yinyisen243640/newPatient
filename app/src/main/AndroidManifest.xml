@@ -163,11 +163,20 @@
             android:screenOrientation="portrait" />
         <!--答题第一题-->
         <activity
-            android:name=".activity.ahome.aeducation.ExercisePlanOneActivity"
+            android:name=".activity.ahome.aexercise.ExercisePlanOneActivity"
             android:screenOrientation="portrait" />
         <!--答题第二题-->
         <activity
-            android:name=".activity.ahome.aeducation.ExercisePlanTwoActivity"
+            android:name=".activity.ahome.aexercise.ExercisePlanAnswerAgeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExercisePlanHeightWeightActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExercisePlanIllActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExercisePlanExerciseActivity"
             android:screenOrientation="portrait" />
 
         <!--服务模块-->

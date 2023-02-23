@@ -1,5 +1,6 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -16,9 +17,13 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import java.math.BigDecimal;
 
 /**
- * 饮食方案
+ * 类名：
+ * 传参：
+ * 描述: 运动答题 年龄
+ * 作者: beauty
+ * 创建日期: 2023/2/23 11:27
  */
-public class ExercisePlanTwoActivity extends UIBaseActivity implements View.OnClickListener {
+public class ExercisePlanAnswerAgeActivity extends UIBaseActivity implements View.OnClickListener {
     //年龄
     private String age = "30";
 
@@ -26,7 +31,7 @@ public class ExercisePlanTwoActivity extends UIBaseActivity implements View.OnCl
     private RulerView ageRv;
 
     private TextView resultTv;
-    private TextView upTv;
+    private TextView backTv;
     private TextView nextTv;
 
     @Override
@@ -55,15 +60,15 @@ public class ExercisePlanTwoActivity extends UIBaseActivity implements View.OnCl
     }
 
     private void initListener() {
-        upTv.setOnClickListener(this);
+        backTv.setOnClickListener(this);
         nextTv.setOnClickListener(this);
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_two, null);
+        View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_age, null);
         ageRv = view.findViewById(R.id.rv_exercise_plan_ruler);
         resultTv = view.findViewById(R.id.tv_exercise_plan_result);
-        upTv = view.findViewById(R.id.tv_exercise_plan_up);
+        backTv = view.findViewById(R.id.tv_exercise_plan_back);
         nextTv = view.findViewById(R.id.tv_exercise_plan_next);
         containerView().addView(view);
     }
@@ -78,9 +83,9 @@ public class ExercisePlanTwoActivity extends UIBaseActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_exercise_plan_next:
-
+                startActivity(new Intent(getPageContext(), ExercisePlanHeightWeightActivity.class));
                 break;
-            case R.id.tv_exercise_plan_up:
+            case R.id.tv_exercise_plan_back:
                 finish();
                 break;
             default:

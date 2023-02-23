@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:text="运动禁忌症"
+                    android:text="年龄"
                     android:textColor="@color/main_base_color"
                     android:textSize="13sp" />
 
@@ -175,7 +175,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_exercise_plan_up"
+            android:id="@+id/tv_exercise_plan_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
