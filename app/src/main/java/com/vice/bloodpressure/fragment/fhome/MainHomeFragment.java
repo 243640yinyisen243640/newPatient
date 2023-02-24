@@ -29,6 +29,7 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietChangeDietActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
+import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
@@ -401,11 +402,14 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //重新制定运动计划
             case R.id.tv_exercise_make_plan:
-
-                intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
-                startActivity(intent);
-                //                intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
-                //                startActivity(intent);
+                String type = "2";
+                if ("1".equals(type)) {
+                    intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
+                    startActivity(intent);
+                }
                 break;
             //立即完成 运动
             case R.id.tv_exercise_finish:

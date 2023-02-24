@@ -117,6 +117,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_home_warning_back:
+                finish();
                 break;
             case R.id.tv_warning_all_read:
                 ToastUtils.getInstance().showToast(getPageContext(), "测试弹出");

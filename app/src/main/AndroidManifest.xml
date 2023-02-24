@@ -178,6 +178,12 @@
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanExerciseActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseRecordListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExercisePlanAddRecordActivity"
+            android:screenOrientation="portrait" />
 
         <!--服务模块-->
         <!--教育视频列表-->

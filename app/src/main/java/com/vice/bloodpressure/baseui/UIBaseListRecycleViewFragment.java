@@ -175,6 +175,15 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
         return mPageIndex;
     }
 
+    /**
+     * 获取ListView对象
+     *
+     * @return
+     */
+    protected RecyclerView getPageListView() {
+        return mRecyclerView;
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view, null);
         mRefreshLayout = getViewByID(view, R.id.refresh_layout);
@@ -183,4 +192,5 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
         mLoadingTextView = getViewByID(view, R.id.tv_load_status);
         containerView().addView(view);
     }
+
 }

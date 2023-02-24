@@ -286,5 +286,20 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="community_rb_bottom">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableBottom">@drawable/selector_gb_green_tran</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/selector_black_24_gray_8a</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <color name="defaultBackground">#F5F5F5</color>
 </resources>

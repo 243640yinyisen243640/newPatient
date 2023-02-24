@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -93,7 +94,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         topViewManager().titleTextView().setText("智能运动");
         topViewManager().moreTextView().setText("运动记录");
         topViewManager().moreTextView().setOnClickListener(v -> {
-
+            startActivity(new Intent(getPageContext(), ExerciseRecordListActivity.class));
         });
         initView();
         initListener();
@@ -114,9 +115,9 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         showPieChart(numPc, getPieChartData(rateString, nameString));
 
         needFireTv.setText(setMealTextType("1", Color.parseColor("#00C27F"), 18, "今日需消耗", " 2400 ", "千卡"));
-        workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work),String.format(getPageContext().getString(R.string.intelligence_run_three), "1234"), getString(R.string.intelligence_run_num_unit)));
-        runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run),String.format(getPageContext().getString(R.string.intelligence_run_three), "234"), getString(R.string.intelligence_run_num_unit)));
-        noTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no),String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
+        workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work), String.format(getPageContext().getString(R.string.intelligence_run_three), "1234"), getString(R.string.intelligence_run_num_unit)));
+        runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run), String.format(getPageContext().getString(R.string.intelligence_run_three), "234"), getString(R.string.intelligence_run_num_unit)));
+        noTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no), String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
         otherTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), "567"), getString(R.string.intelligence_run_num_unit)));
     }
 
