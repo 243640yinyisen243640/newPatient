@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.adapter.home;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
 
 import java.util.List;
 

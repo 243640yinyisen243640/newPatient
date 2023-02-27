@@ -14,7 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
 import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.ArrayList;

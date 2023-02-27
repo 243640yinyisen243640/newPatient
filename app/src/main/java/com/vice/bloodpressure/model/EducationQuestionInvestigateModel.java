@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.model;
 
 public class EducationQuestionInvestigateModel {
     public EducationQuestionInvestigateModel(String text, boolean isCheck) {
