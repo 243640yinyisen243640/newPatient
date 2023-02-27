@@ -39,8 +39,7 @@
                     android:paddingRight="23dp"
                     android:paddingBottom="11.5dp"
                     android:textColor="@color/black_2A"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 

@@ -15,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.basevideo.JZVideoPlayer;
 import com.vice.bloodpressure.fragment.fhome.diet.DietHeatProportionFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietMakeMealDetailsFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietResourceProportionFragment;
@@ -24,6 +23,7 @@ import com.vice.bloodpressure.utils.ScreenUtils;
 import java.util.ArrayList;
 
 import cn.jzvd.Jzvd;
+import cn.jzvd.JzvdStd;
 
 /**
  * 作者: beauty
@@ -32,7 +32,7 @@ import cn.jzvd.Jzvd;
  * 描述:制作饮食  可有视频可无视频
  */
 public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
-    private JZVideoPlayer videoPlayer;
+    private JzvdStd videoPlayer;
     private FrameLayout videoFl;
     private TextView controlTv;
     private TextView mealNameTv;
@@ -131,7 +131,7 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/04/0487b7bb4d4647e9a69edcbf8600734f.mp4?e=1676996640&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:Iy3rHz-ra2knEn-OT8HowmgnNJk=", "");
+        videoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/f1/f16486a151434ec79d8ee5caf9b7e8df.mp4?e=1677253860&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:r41rqctGSuCjA2Pd7QILfIFQZws=", "");
         // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
     }
 

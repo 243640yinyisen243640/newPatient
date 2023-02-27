@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.vice.bloodpressure.basevideo.JZVideoPlayer
+        <cn.jzvd.JzvdStd
             android:id="@+id/jz_video_details"
             android:layout_width="match_parent"
             android:layout_height="190dp" />

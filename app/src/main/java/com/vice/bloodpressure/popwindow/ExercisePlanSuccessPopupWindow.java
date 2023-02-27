@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.pop;
+package com.vice.bloodpressure.popwindow;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;

@@ -2,11 +2,14 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -87,6 +90,10 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
      * 柔韧性开始
      */
     private TextView flexibilityBeginTv;
+    /**
+     * 运动类型
+     */
+    private String exerciseType = "跑步";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,7 +147,8 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         builder.append(text3);
         if ("1".equals(type)) {
             builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new StyleSpan(Typeface.BOLD), length1, length2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         } else {
             builder.setSpan(new ForegroundColorSpan(endColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -159,20 +167,30 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         switch (v.getId()) {
             //重新制定
             case R.id.tv_exercise_again:
+                Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                startActivity(intent);
                 break;
             //选择运动
             case R.id.tv_exercise_choose:
-                chooseSexWindow();
+                chooseExerciseTypeWindow();
                 break;
             //开始运动
             case R.id.tv_exercise_begin:
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
+                intent.putExtra("type", "2");
+                intent.putExtra("title", exerciseType);
+                startActivity(intent);
                 break;
             //抗阻开始
             case R.id.tv_exercise_resistance_begin:
-                break;
-            //柔韧性开始
+                //柔韧性开始
             case R.id.tv_exercise_flexibility_begin:
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
+                intent.putExtra("type", "1");
+                intent.putExtra("title", "举重");
+                startActivity(intent);
                 break;
+
             default:
                 break;
         }
@@ -286,7 +304,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
     /**
      * 选择运动类型
      */
-    private void chooseSexWindow() {
+    private void chooseExerciseTypeWindow() {
         List<String> exerciseList = new ArrayList<>();
         exerciseList.add("快跑");
         exerciseList.add("快走");
@@ -294,7 +312,11 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         exerciseList.add("健步走");
         exerciseList.add("羽毛球");
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, object -> exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object)))));
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, object -> {
+                    exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
+                    exerciseType = exerciseList.get(Integer.parseInt(String.valueOf(object)));
+                }
+        );
     }
 
 

@@ -301,5 +301,13 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="Dialog.NoTitle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/HuaHanSoft.Window.Fade.Anim</item>
+    </style>
+
     <color name="defaultBackground">#F5F5F5</color>
 </resources>

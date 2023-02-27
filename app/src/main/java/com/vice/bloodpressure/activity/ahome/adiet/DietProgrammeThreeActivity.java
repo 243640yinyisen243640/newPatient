@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.pop.DietProgrammePopupWindow;
+import com.vice.bloodpressure.popwindow.DietProgrammePopupWindow;
 
 public class DietProgrammeThreeActivity extends UIBaseActivity {
     private RadioGroup radioGroup;

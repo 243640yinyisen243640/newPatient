@@ -184,6 +184,11 @@
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanAddRecordActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseRecordAddHandActivity"
+            android:screenOrientation="portrait"
+
+            android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden"/>
 
         <!--服务模块-->
         <!--教育视频列表-->

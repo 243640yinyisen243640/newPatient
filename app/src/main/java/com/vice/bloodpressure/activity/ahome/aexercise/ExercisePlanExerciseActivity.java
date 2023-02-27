@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.pop.ExercisePlanSuccessPopupWindow;
+import com.vice.bloodpressure.popwindow.ExercisePlanSuccessPopupWindow;
 import com.vice.bloodpressure.utils.ToastUtils;
 
 /**
