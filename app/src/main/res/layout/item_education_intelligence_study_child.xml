@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_education_study_child_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_education_study_child_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:drawableLeft="@drawable/education_study_star_child"
+        android:drawablePadding="5dp"
+        android:textColor="#494949"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_education_study_child_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center"
+        android:background="@drawable/shape_white_blue_90_00aeff"
+        android:includeFontPadding="false"
+        android:paddingLeft="7.5dp"
+        android:paddingTop="4dp"
+        android:paddingRight="7.5dp"
+        android:paddingBottom="4dp"
+        android:text="学习中"
+        android:textColor="#00AEFF"
+        android:textSize="12sp" />
+
+</LinearLayout>

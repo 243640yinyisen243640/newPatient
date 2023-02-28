@@ -22,7 +22,8 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:消息提醒 */
+ * 描述:消息提醒
+ */
 public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
     private List<MessageInfo> listText = new ArrayList<>();
 

@@ -1,146 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_activity_detail_top"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="25dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_education_study_back"
-            android:layout_width="wrap_content"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_education"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:src="@drawable/base_top_back" />
+            android:layout_marginBottom="5dp"
+            android:background="@color/background"
+            android:overScrollMode="never"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp" />
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlClassicsSpinnerStyle="Translate" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_present_nodate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/text_white"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/tv_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="智能学习"
-            android:textColor="#242424"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/education_no_data_bg"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/huahansoft_load_state_no_data"
+            android:textColor="@color/gray_8a"
+            android:textSize="16sp" />
+    </androidx.core.widget.NestedScrollView>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_present_reword"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/tv_education_study_classify"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:drawableLeft="@drawable/education_study_classify"
-            android:drawablePadding="5dp"
+            style="@style/HuaHanSoft.Wrap"
+            android:layout_gravity="center"
+            android:drawablePadding="23dp"
             android:gravity="center"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="分类"
-            android:textColor="@color/main_base_color"
-            android:textSize="17sp" />
-
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/education_study_bg"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已学习时间"
-                android:textColor="@color/text_white"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_education_study_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="220"
-                    android:textColor="@color/text_white"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分钟"
-                    android:textColor="@color/text_white"
-                    android:textSize="13sp" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="50dp"
-            android:background="@color/text_white" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已学习课程"
-                android:textColor="@color/text_white"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_education_study_subject"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textColor="@color/text_white"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="课程"
-                    android:textColor="@color/text_white"
-                    android:textSize="13sp" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+            android:includeFontPadding="false"
+            android:text="抱歉，没有找到相关课程"
+            android:textColor="@color/gray_8a"
+            android:textSize="13sp" />
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

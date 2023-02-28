@@ -55,7 +55,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableRight="@drawable/circle_add"
-            android:padding="15dp" />
+            android:padding="10dp" />
 
 
     </LinearLayout>
@@ -72,7 +72,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_little_background_5"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"

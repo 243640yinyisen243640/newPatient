@@ -15,6 +15,14 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
+/**
+ * 类名：
+ * 传参：
+ * 描述: 饮食方案
+ * 作者: beauty
+ * 创建日期: 2023/2/28 13:11
+ */
+
 public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnClickListener {
     private ImageView ivLight;
     private ImageView ivMiddle;

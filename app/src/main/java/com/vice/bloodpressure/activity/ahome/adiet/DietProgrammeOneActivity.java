@@ -17,9 +17,12 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import java.math.BigDecimal;
 
 /**
- * 饮食方案
- */
-public class DietProgrammeOneActivity extends UIBaseActivity {
+ * 类名：
+ * 传参：
+ * 描述: 饮食方案
+ * 作者: beauty
+ * 创建日期: 2023/2/28 13:07
+ */public class DietProgrammeOneActivity extends UIBaseActivity {
     //身高
     private String height = "160";
     //体重
