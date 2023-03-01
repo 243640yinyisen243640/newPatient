@@ -10,6 +10,13 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 
+/**
+ * 类名：
+ * 传参：
+ * 描述: 问卷调查
+ * 作者: beauty
+ * 创建日期: 2023/3/1 11:11
+ */
 public class EducationQuestionInvestigateBeginActivity extends UIBaseActivity {
 
     @Override

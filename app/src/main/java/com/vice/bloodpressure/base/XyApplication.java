@@ -43,8 +43,8 @@ public class XyApplication extends BaseApplication {
     protected void initAppTopViewInfo() {
         DefaultTopViewManager.mTopViewInfo.titleSize = 20;
         DefaultTopViewManager.mTopViewInfo.titleTextColor = "#323232";
-        DefaultTopViewManager.mTopViewInfo.topLineColor = "#F7F7F7";
-        DefaultTopViewManager.mTopViewInfo.topLineHeight = 0;
+        DefaultTopViewManager.mTopViewInfo.topLineColor = "#F3F3F3";
+        DefaultTopViewManager.mTopViewInfo.topLineHeight = 1;
         DefaultTopViewManager.mTopViewInfo.backLeftDrawable = R.drawable.top_back_black;
         DefaultTopViewManager.mTopViewInfo.topBackgroundDrawableRes = 0;
         DefaultTopViewManager.mTopViewInfo.topBackgroundColor = "#FFFFFF";

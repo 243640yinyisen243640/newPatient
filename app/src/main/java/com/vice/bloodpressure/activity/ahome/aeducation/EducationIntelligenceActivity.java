@@ -32,7 +32,7 @@ import java.util.List;
  * 描述:智能学习 这里还有一个页面EducationIntelligenceListActivity 等真正用的时候要换成这个页面，背景图不是公共的
  */
 public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity<EducationInfo> {
-    private List<EducationInfo> listText;
+    private List<EducationInfo> educationInfos;
     private EducationIntelligenceAdapter adapter;
 
     @Override
@@ -60,18 +60,18 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText = new ArrayList<>();
-        listText.add(new EducationInfo("", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
-        listText.add(new EducationInfo("", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
-        listText.add(new EducationInfo("", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
+        educationInfos = new ArrayList<>();
+        educationInfos.add(new EducationInfo("", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
+        educationInfos.add(new EducationInfo("", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
+        educationInfos.add(new EducationInfo("", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
 
         List<EducationInfo> childList = new ArrayList<>();
         childList.add(new EducationInfo("第一节:知晓血压，了解血压!", "学习中"));
         childList.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
-        for (int i = 0; i < listText.size(); i++) {
-            listText.get(i).setChildList(childList);
+        for (int i = 0; i < educationInfos.size(); i++) {
+            educationInfos.get(i).setChildList(childList);
         }
-        callBack.callBack(listText);
+        callBack.callBack(educationInfos);
     }
 
     @Override

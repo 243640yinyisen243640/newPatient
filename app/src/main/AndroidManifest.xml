@@ -199,18 +199,24 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationQuestionInvestigateActivity"
             android:screenOrientation="portrait" />
+        <!-- 教育 问卷调查 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity"
             android:screenOrientation="portrait" />
+        <!--弃用页面，等接口出来以后看是不是需要删除-->
         <activity
             android:name=".activity.ahome.aeducation.EducationIntelligenceActivity"
             android:screenOrientation="portrait" />
+        <!-- 教育 智能学习 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationIntelligenceListActivity"
             android:screenOrientation="portrait" />
+        <!-- 教育 分类 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationClassifyActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.ahome.aeducation.EducationIntelligenceSearchActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

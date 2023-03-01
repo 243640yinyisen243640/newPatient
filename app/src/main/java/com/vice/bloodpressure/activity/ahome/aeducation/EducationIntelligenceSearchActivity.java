@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,11 +31,11 @@ import java.util.List;
 /**
  * 类名：
  * 传参：
- * 描述: 智能学习
+ * 描述: 智能学习 分类 搜索
  * 作者: beauty
  * 创建日期: 2023/2/28 14:46
  */
-public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
+public class EducationIntelligenceSearchActivity extends UIBaseLoadActivity {
 
     private final static int REQUEST_CODE_FOE_REFRESH = 10;
     private EducationIntelligenceAdapter mAdapter;
@@ -58,6 +59,7 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
+        topViewManager().lineViewVisibility(View.VISIBLE);
         initTopView();
         initView();
         initValue();
@@ -283,11 +285,14 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
     }
 
     private void initTopView() {
-        View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_study, null);
-        ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
-        TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
+        View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_search, null);
+        ImageView backImageView = topView.findViewById(R.id.iv_education_study_search_back);
+        EditText contentEditText = topView.findViewById(R.id.et_education_class_search);
+        TextView searchTextView = topView.findViewById(R.id.tv_education_class_search_sure);
         backImageView.setOnClickListener(v -> finish());
-        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(),EducationClassifyActivity.class)));
+        String content = contentEditText.getText().toString().trim();
+        searchTextView.setOnClickListener(v -> {
+        });
         topViewManager().topView().addView(topView);
     }
 }

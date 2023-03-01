@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,9 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_education_classify, null);
         leftListView = getViewByID(view, R.id.lv_education_class_first);
         searchTextView = getViewByID(view, R.id.tv_education_class_search);
+        searchTextView.setOnClickListener(v -> {
+            startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
+        });
         containerView().addView(view);
     }
 
@@ -64,7 +68,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         leftListView.setAdapter(leftAdapter);
         educationInfos.get(0).setIsCheck("1");
         leftListView.setOnItemClickListener((parent, view, position, id) -> {
-            Log.i("yys", "setOnItemClickListenerposition==="+position);
+            Log.i("yys", "setOnItemClickListenerposition===" + position);
             //初始化
             for (int i = 0; i < educationInfos.size(); i++) {
                 if (position == i) {

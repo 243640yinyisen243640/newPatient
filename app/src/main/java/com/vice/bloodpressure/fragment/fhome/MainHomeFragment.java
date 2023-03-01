@@ -29,7 +29,7 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietChangeDietActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceListActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
@@ -449,7 +449,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //教育重新制定
             case R.id.tv_education_make_again:
-                intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+                intent = new Intent(getPageContext(), EducationIntelligenceListActivity.class);
                 startActivity(intent);
                 break;
             default:
