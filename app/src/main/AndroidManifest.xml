@@ -107,7 +107,13 @@
         </activity>
 
         <!-- 首页 -->
+        <!--扫一扫-->
+        <activity
+            android:name=".modules.zxing.activity.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <!--消息-->
+
         <activity
             android:name=".activity.ahome.HomeMessageListActivity"
             android:screenOrientation="portrait" />

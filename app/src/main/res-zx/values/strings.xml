@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="zxing_scan_bar_code">扫描二维码</string>
-    <string name="zxing_permission_apply_camera_tip">在设置-应用-钓钓乐-权限中开启相机权限，以正常使用扫描功能</string>
+    <string name="zxing_permission_apply_camera_tip">请权限中开启相机权限，以正常使用扫描功能</string>
     <string name="zxing_scan_camera_open_failed">相机打开出错，请稍后重试</string>
     <string name="zxing_camera_permission_open">请在应用管理中打开“相机”访问权限！</string>
     <string name="zxing_scan_tips">将二维码放入框内，即可自动扫描</string>

@@ -84,8 +84,7 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
     private RelativeLayout scanCropView;
     private ImageView scanLine;
     private ToggleButton toggleButton;
-    private ImageView flashlightView;
-    private ImageView albumView;
+
     /*功能实现*/
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
@@ -138,8 +137,6 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
 
     private void initListeners() {
         toggleButton.setOnClickListener(this);
-        flashlightView.setOnClickListener(this);
-        albumView.setOnClickListener(this);
     }
 
     @Override

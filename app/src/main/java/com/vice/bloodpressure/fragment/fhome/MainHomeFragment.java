@@ -39,6 +39,7 @@ import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.ArrayList;
@@ -394,6 +395,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //扫一扫
             case R.id.iv_home_data_scan:
+                intent = new Intent(getPageContext(), CaptureActivity.class);
+                startActivity(intent);
                 break;
             //异常提醒
             case R.id.iv_home_data_abnormal:

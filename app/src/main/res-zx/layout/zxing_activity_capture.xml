@@ -46,6 +46,7 @@
                 android:textOn="轻点关闭"
                 android:textOff="轻点照亮"
                 android:textSize="11sp"
+                android:visibility="gone"
                 android:textColor="@color/text_white"
                 android:layout_marginBottom="10dp"/>
         </RelativeLayout>
