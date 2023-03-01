@@ -215,8 +215,14 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationClassifyActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ahome.aeducation.EducationIntelligenceSearchActivity"
-            android:screenOrientation="portrait"/>
+        <!--智能学习 分类 搜索-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationIntelligenceSearchActivity"
+            android:screenOrientation="portrait" />
+        <!--教育目录-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationInteCatalogueListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

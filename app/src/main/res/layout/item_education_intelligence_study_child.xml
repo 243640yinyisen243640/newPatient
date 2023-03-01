@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:drawableLeft="@drawable/education_study_star_child"
+        android:drawableLeft="@drawable/audio_pause"
         android:drawablePadding="5dp"
         android:textColor="#494949"
         android:textSize="15sp" />

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_education_catalogue_click"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_education_catalogue_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:drawableLeft="@drawable/selector_sudio_check_uncheck"
+        android:drawablePadding="5dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:textColor="#494949"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

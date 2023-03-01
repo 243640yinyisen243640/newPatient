@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.fragment.fhome.education;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.scwang.smart.refresh.layout.listener.ScrollBoundaryDecider;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationClassifyActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationInteCatalogueListActivity;
 import com.vice.bloodpressure.adapter.home.EducationClassifyRightAdapter;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -55,9 +57,9 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
-//        if (!EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().register(this);
-//        }
+        //        if (!EventBus.getDefault().isRegistered(this)) {
+        //            EventBus.getDefault().register(this);
+        //        }
         mark = getArguments().getString("mark");
         topicID = getArguments().getString("topicID");
         topViewManager().topView().removeAllViews();
@@ -77,9 +79,9 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        if (EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().unregister(this);
-//        }
+        //        if (EventBus.getDefault().isRegistered(this)) {
+        //            EventBus.getDefault().unregister(this);
+        //        }
     }
 
 
@@ -97,6 +99,7 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
             @Override
             public void adapterClickListener(int position, View view) {
                 //跳转页面
+                startActivity(new Intent(getPageContext(), EducationInteCatalogueListActivity.class));
             }
 
             @Override
@@ -192,7 +195,7 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
      */
     public void refresh(String firstClassID) {
         this.firstClassID = firstClassID;
-//        listView.setEnabled(false);
+        //        listView.setEnabled(false);
 
         mPageIndex = 1;
         loadViewManager().changeLoadState(LoadStatus.LOADING);
