@@ -25,4 +25,5 @@
     <string name="hhsoft_picture_original">原图</string>
     <string name="picture_selection">选择</string>
     <string name="picture_min_img_num">图片最低选择不能少于%1$s张</string>
+    <color name="bar_grey">#393a3e</color>
 </resources>

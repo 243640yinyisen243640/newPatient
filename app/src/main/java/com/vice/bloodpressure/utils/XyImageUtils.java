@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -21,12 +22,16 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
+import com.vice.bloodpressure.utils.config.PictureConfig;
 import com.vice.bloodpressure.utils.glide.CustomRoundedCorners;
 import com.vice.bloodpressure.utils.luban.CompressionPredicate;
 import com.vice.bloodpressure.utils.luban.Luban;
 import com.vice.bloodpressure.utils.luban.OnCompressListener;
 import com.vice.bloodpressure.utils.luban.OnRenameListener;
 import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.widget.PictureSelector;
 
 import java.io.File;
 import java.io.IOException;
@@ -457,4 +462,43 @@ public class XyImageUtils {
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .into(imageView);
     }
+    /**
+     * @param context
+     * @param mimeType   回调code
+     * @param maxCount
+     * @param isCompress
+     */
+    public static void getImagePictureSelector(Context context, int mimeType, int maxCount, boolean isCompress) {
+        HHSoftFileUtils.createDirectory(ConstantParamNew.IMAGE_SAVE_CACHE);
+        // 进入相册 以下是例子：不需要的api可以不写
+        PictureSelector.create((Activity) context).openGallery(mimeType)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .theme(R.style.app_picture_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
+                .maxSelectNum(maxCount)// 最大图片选择数量
+                .minSelectNum(1)// 最小选择数量
+                .imageSpanCount(4)// 每行显示个数
+                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
+                .previewImage(false)// 是否可预览图片
+                .previewVideo(false)// 是否可预览视频
+                .enablePreviewAudio(true) // 是否可播放音频
+                .isCamera(true)// 是否显示拍照按钮
+                .isZoomAnim(false)// 图片列表点击 缩放效果 默认true
+                //                .imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
+                .setOutputCameraPath(ConstantParamNew.IMAGE_SAVE_CACHE)// 自定义拍照保存路径
+                .enableCrop(false)// 是否裁剪
+                .compress(isCompress)// 是否压缩
+                .original(false)//是否原图
+                .synOrAsy(false)//同步true或异步false 压缩 默认同步
+                .compressSavePath(ConstantParamNew.IMAGE_SAVE_CACHE)//压缩图片保存地址
+                .minimumCompressSize(200)// 小于200kb的图片不压缩
+                //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
+                .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+                .withAspectRatio(1, 1)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                .hideBottomControls(true)// 是否显示uCrop工具栏，默认不显示
+                .isGif(true)// 是否显示gif图片
+                .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+                .circleDimmedLayer(false)// 是否圆形裁剪
+                .openClickSound(false)// 是否开启点击声音
+                .videoMaxSecond(15).videoMinSecond(1).forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+    }
+
 }

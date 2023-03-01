@@ -20,6 +20,7 @@ android {
             res.srcDirs =
                     ['src/main/res',
                      'src/main/res-base',
+                     'src/main/res-zx'
                     ]
 
 
@@ -69,6 +70,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':update-app')
+
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.12'
@@ -104,6 +106,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
     //eventbus
     implementation files('libs/eventbus-3.1.1')
+    //zx 扫一扫
+    implementation files('libs/core-3.3.3.jar')
 
     //播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.6.0'

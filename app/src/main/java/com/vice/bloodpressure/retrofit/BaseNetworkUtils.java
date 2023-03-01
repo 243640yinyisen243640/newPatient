@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
 
 import org.json.JSONObject;
 
