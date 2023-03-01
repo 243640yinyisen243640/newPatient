@@ -223,6 +223,10 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationInteCatalogueListActivity"
             android:screenOrientation="portrait" />
+        <!--教育详情-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationDetailsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.adapter.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -49,7 +48,6 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Log.i("yys", "size==" + list.size());
         EducationInfo info = list.get(position);
 
         holder.titleTextView.setText(info.getTitle());

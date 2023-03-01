@@ -172,6 +172,9 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
             public void adapterClickListener(int position, int index, View view) {
                 switch (view.getId()) {
                     case R.id.ll_education_study_child_click:
+                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                        intent.putExtra("type", "1");
+                        startActivity(intent);
                         break;
                     default:
                         break;
@@ -255,39 +258,13 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
         }
     }
 
-    private class OnItemClickListener implements IAdapterViewClickListener {
-        @Override
-        public void adapterClickListener(int position, View view) {
-            switch (view.getId()) {
-                case R.id.ll_education_study_click:
-                    if (mList.get(position).getIsExpand() == 1) {
-                        mList.get(position).setIsExpand(0);
-                    } else if (mList.get(position).getIsExpand() == 0) {
-                        mList.get(position).setIsExpand(1);
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    break;
-
-
-                default:
-                    break;
-
-
-            }
-        }
-
-        @Override
-        public void adapterClickListener(int position, int index, View view) {
-
-        }
-    }
 
     private void initTopView() {
         View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_study, null);
         ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
         TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
         backImageView.setOnClickListener(v -> finish());
-        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(),EducationClassifyActivity.class)));
+        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(), EducationClassifyActivity.class)));
         topViewManager().topView().addView(topView);
     }
 }

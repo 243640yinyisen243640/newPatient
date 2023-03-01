@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -74,7 +75,9 @@ public class EducationInteCatalogueListActivity extends UIBaseLoadActivity {
                 switch (view.getId()) {
                     case R.id.ll_education_catalogue_click:
                         //跳到详情
-
+                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                        intent.putExtra("type", "2");
+                        startActivity(intent);
                         break;
                     default:
                         break;

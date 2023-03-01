@@ -30,6 +30,7 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceListActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
@@ -446,6 +447,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //教育关于你
             case R.id.tv_education_about_you:
+                intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
+                startActivity(intent);
                 break;
             //教育重新制定
             case R.id.tv_education_make_again:
