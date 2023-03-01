@@ -208,6 +208,9 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationIntelligenceListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ahome.aeducation.EducationClassifyActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

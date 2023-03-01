@@ -15,11 +15,11 @@ public class XyApplication extends BaseApplication {
     private static final String TAG = XyApplication.class.getSimpleName();
     private static XyApplication application;
 
-        @Override
-        protected void attachBaseContext(Context base) {
-            super.attachBaseContext(base);
-            MultiDex.install(this); //添加这一行
-        }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this); //添加这一行
+    }
 
     @Override
     public void onCreate() {
@@ -41,14 +41,14 @@ public class XyApplication extends BaseApplication {
 
     @Override
     protected void initAppTopViewInfo() {
-                DefaultTopViewManager.mTopViewInfo.titleSize = 20;
-                DefaultTopViewManager.mTopViewInfo.titleTextColor = "#323232";
-                DefaultTopViewManager.mTopViewInfo.topLineColor = "#F7F7F7";
-                DefaultTopViewManager.mTopViewInfo.topLineHeight = 0;
-                DefaultTopViewManager.mTopViewInfo.backLeftDrawable = R.drawable.top_back_black;
-                DefaultTopViewManager.mTopViewInfo.topBackgroundDrawableRes = 0;
-                DefaultTopViewManager.mTopViewInfo.topBackgroundColor = "#FFFFFF";
-                LoadViewManager.mLoadViewConfig.loadViewBgColor = "#FFFFFF";
+        DefaultTopViewManager.mTopViewInfo.titleSize = 20;
+        DefaultTopViewManager.mTopViewInfo.titleTextColor = "#323232";
+        DefaultTopViewManager.mTopViewInfo.topLineColor = "#F7F7F7";
+        DefaultTopViewManager.mTopViewInfo.topLineHeight = 0;
+        DefaultTopViewManager.mTopViewInfo.backLeftDrawable = R.drawable.top_back_black;
+        DefaultTopViewManager.mTopViewInfo.topBackgroundDrawableRes = 0;
+        DefaultTopViewManager.mTopViewInfo.topBackgroundColor = "#FFFFFF";
+        LoadViewManager.mLoadViewConfig.loadViewBgColor = "#FFFFFF";
 
         // 为第三方自定义推送服务
         //        PushManager.getInstance().initialize(getApplicationContext(), GetuiPushService.class);
@@ -63,7 +63,7 @@ public class XyApplication extends BaseApplication {
 
     @Override
     protected LoadViewManager.LoadMode initAppLoadMode() {
-        return LoadViewManager.LoadMode.DRAWABLE;
+        return LoadViewManager.LoadMode.PROGRESS;
     }
 
     @Override

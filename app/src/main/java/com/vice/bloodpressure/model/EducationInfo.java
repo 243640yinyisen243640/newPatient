@@ -18,6 +18,8 @@ public class EducationInfo implements Serializable {
     private List<EducationInfo> childList;
     private List<EducationInfo> list;
 
+    private String classifyId;
+
     public EducationInfo(String title, String state) {
         this.title = title;
         this.state = state;
@@ -31,10 +33,34 @@ public class EducationInfo implements Serializable {
         this.subject = subject;
     }
 
+    public EducationInfo(String title, String content, String classifyId) {
+        this.title = title;
+        this.content = content;
+        this.classifyId = classifyId;
+    }
+
     /**
      * 那个按钮的展示状态 0展开 1收起状态，展开更多
      */
-    private int isExpand=1;
+    private int isExpand = 1;
+
+    private String isCheck;
+
+    public String getIsCheck() {
+        return isCheck;
+    }
+
+    public void setIsCheck(String isCheck) {
+        this.isCheck = isCheck;
+    }
+
+    public String getClassifyId() {
+        return classifyId;
+    }
+
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
+    }
 
     public List<EducationInfo> getList() {
         return list;

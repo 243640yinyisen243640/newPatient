@@ -6,22 +6,19 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout_education"
+        android:id="@+id/refreshLayout_classify"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_education"
+            android:id="@+id/rv_classify"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
             android:background="@color/background"
             android:overScrollMode="never"
             android:paddingStart="3dp"
@@ -34,25 +31,24 @@
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsv_present_nodate_education"
+        android:id="@+id/nsv_present_nodate_classify"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/text_white"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
-            android:id="@+id/tv_no_data_education"
+            android:id="@+id/tv_no_data_classify"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:drawableTop="@drawable/education_no_data_bg"
-            android:drawablePadding="15dp"
+            android:drawablePadding="10dp"
             android:gravity="center"
             android:padding="10dp"
-            android:text="抱歉，没有找到相关课程"
+            android:text="暂时没有内容，先看看其他的吧"
             android:textColor="@color/gray_8a"
             android:textSize="16sp" />
     </androidx.core.widget.NestedScrollView>
-
 
 </LinearLayout>

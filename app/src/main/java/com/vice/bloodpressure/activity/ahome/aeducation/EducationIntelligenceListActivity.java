@@ -86,10 +86,10 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_education_intelligence_study, null);
-        mRefreshLayout = getViewByID(view, R.id.refreshLayout);
+        mRefreshLayout = getViewByID(view, R.id.refreshLayout_education);
         mRecyclerView = getViewByID(view, R.id.rv_education);
-        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate);
-        stateTextView = getViewByID(view, R.id.tv_no_data);
+        presentNestedSrcollView = getViewByID(view, R.id.nsv_present_nodate_education);
+        stateTextView = getViewByID(view, R.id.tv_no_data_education);
         containerView().addView(view);
     }
 
@@ -137,56 +137,56 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
             return;
         }
         mIsLoading = true;
-//        Call<String> requestCall = GoodsDataManager.discountGoodsMarketList(mPageIndex + "", mPageSize + "", "",
-//                (call, response) -> {
-//                    mIsLoading = false;
-//                    if (1 != mPageIndex) {
-//                        mRefreshLayout.finishLoadMore();
-//                    } else {
-//                        mRefreshLayout.finishRefresh();
-//                    }
-//                    if (100 == response.code) {
-//                        allInfo = (EducationInfo) response.object;
-//                        mTempList = allInfo.getList();
-//                        mPageCount = mTempList == null ? 0 : mTempList.size();
-//                        if (1 == mPageIndex) {
-//                            if (mList == null) {
-//                                mList = new ArrayList<>();
-//                            } else {
-//                                mList.clear();
-//                            }
-//                            mList.addAll(mTempList);
-//                            if (mAdapter == null) {
-//                                mAdapter = new EducationIntelligenceAdapter(getPageContext(), mList, new OnItemClickListener());
-//                                mRecyclerView.setAdapter(mAdapter);
-//                            } else {
-//                                mAdapter.notifyDataSetChanged();
-//                            }
-//                        } else {
-//                            mList.addAll(mTempList);
-//                            mAdapter.notifyDataSetChanged();
-//                        }
-//                        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-//                    } else if (101 == response.code) {
-//                        mPageCount = 0;
-//                        if (1 == mPageIndex) {
-//                            loadViewManager().changeLoadState(LoadStatus.NODATA);
-//                        } else {
-//                            ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
-//                        }
-//                    } else {
-//                        mPageCount = 0;
-//                        if (1 == mPageIndex) {
-//                            loadViewManager().changeLoadState(LoadStatus.FAILED);
-//                        } else {
-//                            ToastUtils.getInstance().showToast(getPageContext(), R.string.net_error);
-//                        }
-//                    }
-//                    changeLoadUI(response.code);
-//                }, (call, t) -> {
-//                    handleRequestFailure();
-//                });
-//        addRequestCallToMap("discountGoodsMarketList", requestCall);
+        //        Call<String> requestCall = GoodsDataManager.discountGoodsMarketList(mPageIndex + "", mPageSize + "", "",
+        //                (call, response) -> {
+        //                    mIsLoading = false;
+        //                    if (1 != mPageIndex) {
+        //                        mRefreshLayout.finishLoadMore();
+        //                    } else {
+        //                        mRefreshLayout.finishRefresh();
+        //                    }
+        //                    if (100 == response.code) {
+        //                        allInfo = (EducationInfo) response.object;
+        //                        mTempList = allInfo.getList();
+        //                        mPageCount = mTempList == null ? 0 : mTempList.size();
+        //                        if (1 == mPageIndex) {
+        //                            if (mList == null) {
+        //                                mList = new ArrayList<>();
+        //                            } else {
+        //                                mList.clear();
+        //                            }
+        //                            mList.addAll(mTempList);
+        //                            if (mAdapter == null) {
+        //                                mAdapter = new EducationIntelligenceAdapter(getPageContext(), mList, new OnItemClickListener());
+        //                                mRecyclerView.setAdapter(mAdapter);
+        //                            } else {
+        //                                mAdapter.notifyDataSetChanged();
+        //                            }
+        //                        } else {
+        //                            mList.addAll(mTempList);
+        //                            mAdapter.notifyDataSetChanged();
+        //                        }
+        //                        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+        //                    } else if (101 == response.code) {
+        //                        mPageCount = 0;
+        //                        if (1 == mPageIndex) {
+        //                            loadViewManager().changeLoadState(LoadStatus.NODATA);
+        //                        } else {
+        //                            ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
+        //                        }
+        //                    } else {
+        //                        mPageCount = 0;
+        //                        if (1 == mPageIndex) {
+        //                            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        //                        } else {
+        //                            ToastUtils.getInstance().showToast(getPageContext(), R.string.net_error);
+        //                        }
+        //                    }
+        //                    changeLoadUI(response.code);
+        //                }, (call, t) -> {
+        //                    handleRequestFailure();
+        //                });
+        //        addRequestCallToMap("discountGoodsMarketList", requestCall);
     }
 
 

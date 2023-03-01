@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/text_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_education_class_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_bg_gray_90"
+        android:drawableLeft="@drawable/education_search"
+        android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:text="请输入糖尿病类型或相关病因"
+        android:textColor="@color/gray_8a"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/lv_education_class_first"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/defaultBackground"
+            android:cacheColorHint="@color/transparent"
+            android:contentDescription=""
+            android:dividerHeight="-1dp"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:listSelector="@color/transparent"
+            android:scrollbars="none" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_education_class_second"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>

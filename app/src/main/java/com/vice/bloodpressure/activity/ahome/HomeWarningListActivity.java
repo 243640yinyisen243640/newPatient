@@ -66,7 +66,6 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         initListener();
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        //        mRecyclerView.addItemDecoration(new UserCenterVideoGridDivider(getPageContext(), HHSoftDensityUtils.dip2px(getPageContext(), 3), R.color.white));
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);

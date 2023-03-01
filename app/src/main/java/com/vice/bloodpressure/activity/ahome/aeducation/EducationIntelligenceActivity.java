@@ -1,8 +1,11 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -40,7 +43,6 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        //        mRecyclerView.addItemDecoration(new UserCenterVideoGridDivider(getPageContext(), HHSoftDensityUtils.dip2px(getPageContext(), 3), R.color.white));
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -49,6 +51,10 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
     private void initTopView() {
         View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_study, null);
+        ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
+        TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
+        backImageView.setOnClickListener(v -> finish());
+        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(),EducationClassifyActivity.class)));
         topViewManager().topView().addView(topView);
     }
 
