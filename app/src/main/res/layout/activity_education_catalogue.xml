@@ -10,13 +10,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_catalogue"
         android:layout_width="match_parent"
-        android:paddingBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:background="@drawable/shape_bg_white_10"
         android:overScrollMode="never"
-        android:paddingStart="3dp"
-        android:paddingEnd="3dp" />
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="3dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp" />
 
 
 </LinearLayout>
