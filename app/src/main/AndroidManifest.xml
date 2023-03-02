@@ -94,6 +94,9 @@
         <!--            </intent-filter>-->
         <!--        </activity>-->
 
+        <activity
+            android:name=".baseui.WebViewHelperActivity"
+            android:screenOrientation="portrait" />
         <!--登录-->
         <activity
             android:name=".activity.login.LoginActivity"
@@ -101,6 +104,9 @@
         <!--注册-->
         <activity
             android:name=".activity.login.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.PerfectUserInfoActivity"
             android:screenOrientation="portrait" />
         <!-- 忘记密码-->
         <activity

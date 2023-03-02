@@ -78,6 +78,7 @@
     <color name="diet_yinpin">#6FEDF3</color>
     <color name="diet_yan">#C6A9E7</color>
     <color name="diet_you">#FFDB84</color>
+    <color name="defaultBackground">#F5F5F5</color>
 
     <!--其他颜色-->
     <color name="yellow_FFF1D3">#FFF1D3</color>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="姓名" />
+
+                <EditText
+                    android:id="@+id/et_perfect_name"
+                    style="@style/user_add_right"
+                    android:hint="请输入姓名" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="身份证号" />
+
+                <EditText
+                    android:id="@+id/et_perfect_id"
+                    style="@style/user_add_right"
+                    android:hint="请输入身份证号"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:lines="1" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="出生年月" />
+
+                <TextView
+                    android:id="@+id/tv_perfect_born"
+                    style="@style/user_add_right_choose"
+                    android:text="_ _" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="性别" />
+
+
+                <CheckBox
+                    android:id="@+id/cb_perfect_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_green_gray"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/select_male"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="7.5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="7.5dp"
+                    android:text="男"
+                    android:textColor="@color/selector_white_ff_gray_8a"
+                    android:textSize="13sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_perfect_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/selector_red_gray"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/select_female"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="7.5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="7.5dp"
+                    android:text="女"
+                    android:textColor="@color/selector_white_ff_gray_8a"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <TextView
+                style="@style/user_add_left"
+                android:text="糖尿病" />
+
+            <com.vice.bloodpressure.view.HHAtMostGridView
+                android:id="@+id/gv_perfect_tang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:fadingEdge="none"
+                android:fadingEdgeLength="0dp"
+                android:horizontalSpacing="5dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="3"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="20dp"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" />
+
+            <View style="@style/line" />
+
+            <TextView
+                style="@style/user_add_left"
+                android:layout_marginTop="5dp"
+                android:text="高血压" />
+
+            <com.vice.bloodpressure.view.HHAtMostGridView
+                android:id="@+id/gv_perfect_ya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:fadingEdge="none"
+                android:fadingEdgeLength="0dp"
+                android:horizontalSpacing="5dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="2"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="20dp"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" />
+
+            <TextView
+                android:id="@+id/tv_perfect_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_bg_main_gra_90"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="开始答题"
+                android:textColor="#FEFEFE"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

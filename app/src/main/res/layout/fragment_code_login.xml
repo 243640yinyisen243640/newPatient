@@ -94,7 +94,7 @@
         android:id="@+id/tv_login_code_sure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_tran_green_90"
+        android:background="@drawable/shape_bg_main_gra_90"
         android:gravity="center"
         android:padding="15dp"
         android:text="登录"

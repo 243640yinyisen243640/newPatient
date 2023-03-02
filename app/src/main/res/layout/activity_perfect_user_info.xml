@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_user_add_location_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:drawablePadding="10dp"
+            android:gravity="center|left"
+            android:padding="10dp"
+            android:textSize="13sp"
+            android:visibility="gone">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="姓名" />
+
+                <EditText
+                    android:id="@+id/et_community_user_add_name"
+                    style="@style/user_add_right"
+                    android:hint="请输入姓名" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="身份证号" />
+
+                <EditText
+                    android:id="@+id/et_community_user_add_phone"
+                    style="@style/user_add_right"
+                    android:hint="请输入身份证号"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:lines="1" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="出生年月" />
+
+                <TextView
+                    android:id="@+id/tv_community_user_add_born"
+                    style="@style/user_add_right_choose"
+                    android:text="_ _" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_add_left"
+                    android:text="性别" />
+
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_green_gray"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/select_male"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="7.5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="7.5dp"
+                    android:text="男"
+                    android:textColor="@color/selector_white_ff_gray_8a"
+                    android:textSize="13sp" />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/selector_red_gray"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/select_male"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="7.5dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="7.5dp"
+                    android:text="女"
+                    android:textColor="@color/selector_white_ff_gray_8a"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:text="&#12288;&#12288;无&#12288;&#12288;" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text=" 1型糖尿病" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="2型糖尿病" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="妊娠糖尿病" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="&#12288;其他&#12288;&#12288;" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="&#12288;未知&#12288;&#12288;" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    android:id="@+id/cb_community_disease_heart"
+                    style="@style/user_add_type"
+                    android:text="&#12288;&#12288;无&#12288;&#12288;" />
+
+                <CheckBox
+                    android:id="@+id/cb_community_disease_mental_illness"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text=" 1级高血压" />
+
+                <CheckBox
+                    android:id="@+id/cb_community_disease_pregnant"
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="2级高血压" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="3级高血压" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="&#12288;未知&#12288;&#12288;" />
+
+                <CheckBox
+                    style="@style/user_add_type"
+                    android:layout_marginLeft="3dp"
+                    android:text="&#12288;未知&#12288;&#12288;"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
