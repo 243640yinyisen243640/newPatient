@@ -55,6 +55,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("完善个人信息");
         initView();
         initValue();
         initListener();
@@ -99,15 +100,15 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
 
         List<UserInfo> diseaseList2 = new ArrayList<>();
         UserInfo typeInfo11 = new UserInfo("无", "1");
-        diseaseList.add(typeInfo11);
+        diseaseList2.add(typeInfo11);
         UserInfo typeInfo12 = new UserInfo("1级高血压", "2");
-        diseaseList.add(typeInfo12);
+        diseaseList2.add(typeInfo12);
         UserInfo typeInfo13 = new UserInfo("2级高血压", "3");
-        diseaseList.add(typeInfo13);
+        diseaseList2.add(typeInfo13);
         UserInfo typeInfo14 = new UserInfo("3级高血压", "4");
-        diseaseList.add(typeInfo14);
+        diseaseList2.add(typeInfo14);
         UserInfo typeInfo15 = new UserInfo("未知", "5");
-        diseaseList.add(typeInfo15);
+        diseaseList2.add(typeInfo15);
 
         PerfectDiseaseAdapter adapter2 = new PerfectDiseaseAdapter(getPageContext(), diseaseList2);
         yaHHAtMostGridView.setAdapter(adapter2);
