@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_10_0_10_0"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingBottom="40dp">
+
+            <RadioButton
+                style="@style/style_login_pwd_code"
+                android:checked="true"
+                android:text="账号密码登录" />
+
+            <RadioButton
+                style="@style/style_login_pwd_code"
+                android:layout_marginLeft="35dp"
+                android:text="验证码登录" />
+
+        </RadioGroup>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bg_white_0_10_0_10" />
+    </LinearLayout>
+
+</LinearLayout>

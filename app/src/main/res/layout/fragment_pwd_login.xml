@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_bg_white_10"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/et_login_pwd_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_white"
+        android:digits="0123456789 X"
+        android:drawableLeft="@drawable/login_phone"
+        android:drawablePadding="8dp"
+        android:hint="请输入手机号/身份证号"
+        android:inputType="numberSigned"
+        android:maxLength="18"
+        android:maxLines="1"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textColorHint="#999999"
+        android:textColor="@color/black_24"
+        android:textSize="15sp"
+        tools:ignore="TextFields" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="25dp"
+        android:background="@color/gray_EA" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_login_pwd_pwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/text_white"
+            android:drawableLeft="@drawable/login_pwd"
+            android:drawablePadding="8dp"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textColorHint="#999999"
+            android:textColor="@color/black_24"
+            android:textSize="15sp"
+            tools:ignore="TextFields" />
+
+        <CheckBox
+            android:id="@+id/cb_login_pwd_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:checked="true"
+            android:drawableEnd="@drawable/select_login_eye_close_open"
+            android:paddingLeft="25dp" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="25dp"
+        android:background="@color/gray_EA" />
+
+    <TextView
+        android:id="@+id/tv_login_pwd_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:button="@null"
+        android:checked="true"
+        android:drawableLeft="@drawable/selector_green_white"
+        android:drawablePadding="8.5dp"
+        android:gravity="center|left"
+        android:text="@string/login_agreement"
+        android:textColor="@color/gray_B4"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_login_pwd_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_tran_green_90"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="登录"
+        android:textColor="#FEFEFE"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_login_pwd_forget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="忘记密码?"
+        android:textColor="@color/main_base_color"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

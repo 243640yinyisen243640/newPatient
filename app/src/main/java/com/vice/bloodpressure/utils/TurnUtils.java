@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.utils;
 
+import android.text.TextUtils;
+
 import java.text.DecimalFormat;
 
 public class TurnUtils {
@@ -133,5 +135,20 @@ public class TurnUtils {
         DecimalFormat myformat = new DecimalFormat();
         myformat.applyPattern(",##0");
         return myformat.format(Double.parseDouble(str));
+    }
+
+    /**
+     * 判断手机格式
+     *
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles) {
+        String telRegex = "^((1[3,5,6,7,8,9][0-9]))\\d{8}$";
+        if (TextUtils.isEmpty(mobiles)) {
+            return false;
+        } else {
+            return mobiles.matches(telRegex);
+        }
     }
 }

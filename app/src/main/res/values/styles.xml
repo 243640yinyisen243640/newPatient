@@ -309,5 +309,23 @@
         <item name="android:windowAnimationStyle">@style/HuaHanSoft.Window.Fade.Anim</item>
     </style>
 
+    <style name="register_input">
+        <item name="android:background">@color/text_white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">@color/gray_A9</item>
+    </style>
+
+    <style name="style_login_pwd_code">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableBottom">@drawable/selector_gb_green_tran_30_4</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:textColor">@color/selector_black_24_gray_b3</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <color name="defaultBackground">#F5F5F5</color>
 </resources>

@@ -33,6 +33,7 @@ import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceLis
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
+import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
@@ -524,6 +525,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         containTv = view.findViewById(R.id.tv_education_article_contain);
         contentTv = view.findViewById(R.id.tv_education_article_content);
         educationNumTv = view.findViewById(R.id.tv_education_article_text_num);
+        educationNumTv.setOnClickListener(v -> {
+            startActivity(new Intent(getPageContext(), LoginActivity.class));
+        });
 
         containerView().addView(view);
     }

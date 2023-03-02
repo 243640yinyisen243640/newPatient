@@ -36,7 +36,6 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
     private List<EducationInfo> educationInfos;
 
 
-    private String classfiId;
     private List<Fragment> fragments;
 
     @Override
@@ -53,7 +52,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         searchTextView.setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
         });
-                viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
     }
 
 
@@ -99,10 +98,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
                 }
             }
             leftAdapter.notifyDataSetChanged();
-            //获取当前选中的item
-            //            if (classifySecondFragment != null) {
-            //                classifySecondFragment.refresh(educationInfos.get(position).getClassifyId());
-            //            }
+
         });
 
 

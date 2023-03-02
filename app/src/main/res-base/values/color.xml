@@ -4,4 +4,5 @@
     <color name="defaultBlackTranslucent">#32323232</color>
     <color name="defaultAlbumBottom">#393A3E</color>
     <color name="defaultAlbumBottomTranslucent">#ee202020</color>
+    <color name="bar_grey">#393a3e</color>
 </resources>

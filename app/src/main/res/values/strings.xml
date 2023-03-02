@@ -12,7 +12,11 @@
     <string name="tv_main_home_out_hospital">院外管理</string>
     <string name="tv_main_home_mall">商城</string>
     <string name="tv_main_home_my">我的</string>
-
+    <string name="login_agreement">请阅读并同意慧健康《用户协议》及《隐私政策》</string>
+    <string name="login_agreement_left">请阅读并同意慧健康</string>
+    <string name="login_agreement_user_agreement">《用户协议》</string>
+    <string name="login_agreement_user_and">及</string>
+    <string name="login_agreement_privacy">《隐私政策》</string>
 
     <!--智能饮食-->
 
