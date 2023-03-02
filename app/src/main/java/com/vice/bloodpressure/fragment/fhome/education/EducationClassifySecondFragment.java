@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.fragment.fhome.education;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,6 +55,14 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
 
     private String firstClassID;
 
+    public static EducationClassifySecondFragment newInstance(String firstClassID) {
+        Bundle bundle = new Bundle();
+        bundle.putString("firstClassID", firstClassID);
+        EducationClassifySecondFragment fragment = new EducationClassifySecondFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
@@ -72,9 +81,9 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
 
     }
 
-    public EducationClassifySecondFragment(ListView listView) {
-        this.listView = listView;
-    }
+    //    public EducationClassifySecondFragment(ListView listView) {
+    //        this.listView = listView;
+    //    }
 
     @Override
     public void onDestroy() {

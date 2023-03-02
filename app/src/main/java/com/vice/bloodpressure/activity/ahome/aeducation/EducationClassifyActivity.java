@@ -2,16 +2,17 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationClassifyLeftAdapter;
+import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.fragment.fhome.education.EducationClassifySecondFragment;
@@ -30,12 +31,13 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
     private ListView leftListView;
     private TextView searchTextView;
+    private ViewPager2 viewPager;
 
     private List<EducationInfo> educationInfos;
 
-    private EducationClassifySecondFragment classifySecondFragment;
 
     private String classfiId;
+    private List<Fragment> fragments;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +45,15 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         topViewManager().titleTextView().setText("分类");
         topViewManager().lineViewVisibility(View.VISIBLE);
         initView();
+        initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    private void initListener() {
+        searchTextView.setOnClickListener(v -> {
+            startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
+        });
+                viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
     }
 
 
@@ -51,9 +61,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_education_classify, null);
         leftListView = getViewByID(view, R.id.lv_education_class_first);
         searchTextView = getViewByID(view, R.id.tv_education_class_search);
-        searchTextView.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
-        });
+        viewPager = getViewByID(view, R.id.vp_education_class_second);
         containerView().addView(view);
     }
 
@@ -61,14 +69,27 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
     @Override
     protected void onPageLoad() {
         loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+
         educationInfos = new ArrayList<>();
         educationInfos.add(new EducationInfo("1型", "", "1"));
         educationInfos.add(new EducationInfo("2型", "", "2"));
+        fragments = new ArrayList<>();
+        for (int i = 0; i < educationInfos.size(); i++) {
+            fragments.add(EducationClassifySecondFragment.newInstance(i + ""));
+        }
+        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments) {
+        });
+        educationInfos.get(0).setIsCheck("1");
+        viewPager.setCurrentItem(0);//默认选中项
+        viewPager.setOffscreenPageLimit(fragments.size());
+
+
         EducationClassifyLeftAdapter leftAdapter = new EducationClassifyLeftAdapter(getPageContext(), educationInfos);
         leftListView.setAdapter(leftAdapter);
-        educationInfos.get(0).setIsCheck("1");
+
         leftListView.setOnItemClickListener((parent, view, position, id) -> {
-            Log.i("yys", "setOnItemClickListenerposition===" + position);
+            viewPager.setCurrentItem(position);
+
             //初始化
             for (int i = 0; i < educationInfos.size(); i++) {
                 if (position == i) {
@@ -79,22 +100,24 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
             }
             leftAdapter.notifyDataSetChanged();
             //获取当前选中的item
-            if (classifySecondFragment != null) {
-                classifySecondFragment.refresh(educationInfos.get(position).getClassifyId());
-            }
+            //            if (classifySecondFragment != null) {
+            //                classifySecondFragment.refresh(educationInfos.get(position).getClassifyId());
+            //            }
         });
-        if (classifySecondFragment == null) {
-            classifySecondFragment = new EducationClassifySecondFragment(leftListView);
-            Bundle bundle = new Bundle();
-            bundle.putString("firstClassID", classfiId);
-            //数据传递到fragment中
-            classifySecondFragment.setArguments(bundle);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.fl_education_class_second, classifySecondFragment, "fl_classify_second");
-            transaction.show(classifySecondFragment).commit();
-            getSupportFragmentManager().executePendingTransactions();
 
-        }
+
+        //        if (classifySecondFragment == null) {
+        //            classifySecondFragment = new EducationClassifySecondFragment(leftListView);
+        //            Bundle bundle = new Bundle();
+        //            bundle.putString("firstClassID", classfiId);
+        //            //数据传递到fragment中
+        //            classifySecondFragment.setArguments(bundle);
+        //            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //            transaction.add(R.id.fl_education_class_second, classifySecondFragment, "fl_classify_second");
+        //            transaction.show(classifySecondFragment).commit();
+        //            getSupportFragmentManager().executePendingTransactions();
+        //
+        //        }
 
 
     }
