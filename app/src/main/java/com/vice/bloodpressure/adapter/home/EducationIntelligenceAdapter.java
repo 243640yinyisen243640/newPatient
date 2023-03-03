@@ -65,7 +65,7 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
             holder.recyclerView.setAdapter(adapter);
         }
 
-        XyImageUtils.loadCircleImage(context, R.drawable.education_study_bg, info.getBg(), holder.bgImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.education_study_bg, info.getBg(), holder.bgImageView);
         holder.titleTextView.setText(info.getTitle());
         holder.contentTextView.setText(info.getContent());
         holder.stateTextView.setText(info.getState());

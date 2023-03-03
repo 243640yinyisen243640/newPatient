@@ -139,9 +139,9 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
     protected void onPageLoad() {
         loadViewManager().changeLoadState(LoadStatus.SUCCESS);
         educationInfos = new ArrayList<>();
-        educationInfos.add(new EducationInfo("", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
-        educationInfos.add(new EducationInfo("", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
-        educationInfos.add(new EducationInfo("", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
+        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
+        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
+        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
 
         List<EducationInfo> childList = new ArrayList<>();
         childList.add(new EducationInfo("第一节:知晓血压，了解血压!", "学习中"));

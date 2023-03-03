@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -23,6 +24,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.view.X5WebView;
 
+import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 
 /**
@@ -58,7 +60,23 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         type = getIntent().getStringExtra("type");
         initView();
         initAudioProgress();
+        setVideoInfo();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    /**
+     * 视频信息
+     *
+     * @param
+     */
+    private void setVideoInfo() {
+        //        int width = ScreenUtils.screenWidth(getPageContext());
+        //        int height = width * 9 / 16;
+        //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
+        //        videoJz.setLayoutParams(ll);
+        Jzvd.SAVE_PROGRESS = true;
+        videoJz.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
+        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
     }
 
     private void initView() {
@@ -87,17 +105,24 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
 
 
     private void setAudioClick() {
+        Log.i("yys", "setAudioClick");
         audioSeekBar.setEnabled(true);
         clickCount = clickCount + 1;
         AnimationDrawable am = (AnimationDrawable) startImageView.getBackground();
-        if (isOddNumber(clickCount)) {
+        Boolean oddNumber = isOddNumber(clickCount);
+        Log.i("yys", "oddNumber=="+oddNumber);
+        if (oddNumber) {
+            Log.i("yys", "oddNumber=====");
             am.start();
-            int id = getIntent().getExtras().getInt("id", 0);
-            String audioUrl = getIntent().getExtras().getString("link");
+            //            int id = getIntent().getExtras().getInt("id", 1);
+            int id = 2;
+            //            String audioUrl = getIntent().getExtras().getString("url");
+            String audioUrl = "http://video.xiyuns.cn/1633773952000.mp3";
             //开始播放
             SongInfo info = new SongInfo();
             info.setSongId(id + "");
             info.setSongUrl(audioUrl);
+            Log.i("yys", "info==" + info == null ? "1" : "0");
             StarrySky.with().playMusicByInfo(info);
             //开始更新进度
             taskManager.startToUpdateProgress(1000);
@@ -164,10 +189,13 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
                 //设置进度条
                 //总时长
                 long duration = StarrySky.with().getDuration();
+                Log.i("yys", "duration=="+duration);
                 //播放位置
                 long position = StarrySky.with().getPlayingPosition();
+                Log.i("yys", "position=="+position);
                 //缓冲位置
                 long buffered = StarrySky.with().getBufferedPosition();
+                Log.i("yys", "buffered=="+buffered);
                 if (audioSeekBar.getMax() != duration) {
                     audioSeekBar.setMax((int) duration);
                 }
@@ -238,7 +266,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        StarrySky.with().stopMusic();
+        StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
     }
 }

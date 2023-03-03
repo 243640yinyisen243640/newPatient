@@ -6,6 +6,7 @@ import android.content.res.Resources;
 
 import androidx.multidex.MultiDex;
 
+import com.lzx.starrysky.StarrySky;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.basemanager.DefaultTopViewManager;
 import com.vice.bloodpressure.basemanager.LoadViewManager;
@@ -25,7 +26,7 @@ public class XyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         application = this;
-
+        StarrySky.init(this).apply();
         /**
          * 第三方初始化
          */

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 按下状态 -->
-    <item android:state_pressed="true"
-        android:drawable="@drawable/shape_green_2_2_circle" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    &lt;!&ndash; 按下状态 &ndash;&gt;-->
+<!--    <item android:state_pressed="true"-->
+<!--        android:drawable="@drawable/shape_green_2_2_circle" />-->
 
-    <!-- 焦点状态 -->
-    <item android:state_focused="true"
-        android:drawable="@drawable/shape_tran_2_2_circle" />
+<!--    &lt;!&ndash; 焦点状态 &ndash;&gt;-->
+<!--    <item android:state_focused="true"-->
+<!--        android:drawable="@drawable/shape_tran_2_2_circle" />-->
 
-    <!-- 默认状态 -->
-    <item android:drawable="@drawable/shape_tran_2_2_circle" />
+<!--    &lt;!&ndash; 默认状态 &ndash;&gt;-->
+<!--    <item android:drawable="@drawable/shape_tran_2_2_circle" />-->
 
-</selector>
+    <solid android:color="@color/main_base_color"/>
+    <size android:width="5dp"
+        android:height="5dp"/>
+
+    <corners android:radius="90dp"/>
+
+
+</shape>

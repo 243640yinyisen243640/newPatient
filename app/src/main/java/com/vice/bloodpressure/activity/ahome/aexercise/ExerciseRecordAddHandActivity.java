@@ -118,7 +118,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                     Log.i("yys", "click===");
                     startOrPause = "2";
                     pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                    jzVideoPlayer.setUp("https://fd.aigei.com/src/vdo/mp4/9b/9b538220b0df4aa2b1f19b6ff69164d4.mp4?e=1677496740&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:jh_bbcUpY-PmSmPHrlNl9AtggIU=", "");
+                    jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
                     jzVideoPlayer.startVideo();
                 } else {
                     Log.i("yys", "onStatePause==");

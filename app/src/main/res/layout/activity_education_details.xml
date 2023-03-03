@@ -37,11 +37,12 @@
                 <SeekBar
                     android:id="@+id/sb_education_details_audio"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="12dp"
                     android:layout_marginTop="25dp"
-                    android:max="10"
-                    android:progress="1"
-                    android:progressDrawable="@drawable/diet_programme_progress_bar"
+                    android:max="100"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:progressDrawable="@drawable/education_audio_progress_bar"
                     android:thumb="@drawable/education_thum_bar" />
 
 

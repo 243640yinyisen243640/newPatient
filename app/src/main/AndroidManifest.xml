@@ -251,6 +251,7 @@
         <!--教育详情-->
         <activity
             android:name=".activity.ahome.aeducation.EducationDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
     </application>
 
