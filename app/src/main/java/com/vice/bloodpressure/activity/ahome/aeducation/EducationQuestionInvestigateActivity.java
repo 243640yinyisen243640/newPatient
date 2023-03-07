@@ -278,7 +278,13 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
                     startActivity(intent);
                 } else if (isLastQuestion) {
                     //是最后一题
-                    Log.i("xie", "答案==" + "\n" + answer[0] + "\n" + answer[1] + "\n" + answer[2] + "\n" + answer[3] + "\n" + answer[4] + "\n" + answer[5]);
+                    Log.i("yys", "答案=="
+                            + "\n" + answer[0]
+                            + "\n" + answer[1]
+                            + "\n" + answer[2]
+                            + "\n" + answer[3]
+                            + "\n" + answer[4]
+                            + "\n" + answer[5]);
                 } else {
                     intent.putExtra("questionNowNum", questionNowNum + 1);
                     intent.putExtra("questionAllNum", getIntent().getIntExtra("questionAllNum", 6));

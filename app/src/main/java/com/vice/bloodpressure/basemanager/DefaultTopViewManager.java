@@ -224,4 +224,13 @@ public final class DefaultTopViewManager {
     public boolean getMIsShowStatusBar() {
         return mIsShowStatusBar;
     }
+
+    /**
+     * 获取更多控件
+     *
+     * @return
+     */
+    public ImageView backImageView() {
+        return mBackImageView;
+    }
 }

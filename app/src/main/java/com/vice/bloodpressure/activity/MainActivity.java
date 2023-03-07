@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,11 +16,12 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.fragment.fhome.MainHomeFragment;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.version.VersionUtils;
 
 
 public class MainActivity extends UIBaseActivity implements View.OnClickListener {
-
+    private long exitTime;
     private FragmentManager mFragManager;
     private Fragment mCurrentFragment;
 
@@ -195,6 +197,24 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
                 break;
             default:
                 break;
+        }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+            dialog();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void dialog() {
+        long nowTime = System.currentTimeMillis();
+        if (nowTime - exitTime > 3000) {
+            ToastUtils.getInstance().showToast(getPageContext(), "再按一次退出应用");
+            exitTime = nowTime;
+        } else {
+            finish();
         }
     }
 }

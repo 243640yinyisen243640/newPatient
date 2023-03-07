@@ -87,6 +87,7 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
                 //下一步
                 Intent intent = new Intent(getPageContext(), DietProgrammeThreeActivity.class);
                 intent.putExtra("workWeight", workWeight);
+                intent.putExtra("type", "2");
                 intent.putExtra("height", getIntent().getStringExtra("height"));
                 intent.putExtra("weight", getIntent().getStringExtra("weight"));
                 startActivity(intent);

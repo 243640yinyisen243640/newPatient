@@ -165,7 +165,7 @@
                 android:fadingEdgeLength="0dp"
                 android:horizontalSpacing="5dp"
                 android:listSelector="@color/transparent"
-                android:numColumns="2"
+                android:numColumns="3"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="20dp"

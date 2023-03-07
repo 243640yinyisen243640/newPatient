@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.ForgetPwdActivity;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.utils.ToastUtils;
@@ -42,7 +43,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
      */
     private EditText passwordEditText;
     /**
-     *隐私政策
+     * 隐私政策
      */
     private TextView agreeTextView;
     /**
@@ -130,6 +131,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
     private void initListener() {
         sureTextView.setOnClickListener(this);
         forgetPwdTextView.setOnClickListener(this);
+        agreeTextView.setOnClickListener(this);
 
         closeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -149,9 +151,12 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-
             case R.id.tv_login_pwd_sure:
-                login();
+                startActivity(new Intent(getPageContext(), MainActivity.class));
+                //                login();
+                break;
+            case R.id.tv_login_pwd_agreement:
+                agreeTextView.setSelected(!agreeTextView.isSelected());
                 break;
             case R.id.tv_login_pwd_forget:
                 //忘记密码

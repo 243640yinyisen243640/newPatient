@@ -98,23 +98,39 @@
             android:name=".baseui.WebViewHelperActivity"
             android:screenOrientation="portrait" />
         <!--登录-->
-        <activity
-            android:name=".activity.login.LoginActivity"
-            android:screenOrientation="portrait" />
-        <!--注册-->
+        <!--        <activity-->
+        <!--            android:name=".activity.login.LoginActivity"-->
+        <!--            android:screenOrientation="portrait" />-->
+        <!--        &lt;!&ndash;注册&ndash;&gt;-->
         <activity
             android:name=".activity.login.RegisterActivity"
             android:screenOrientation="portrait" />
+        <!--完善信息-->
         <activity
             android:name=".activity.login.PerfectUserInfoActivity"
             android:screenOrientation="portrait" />
+        <!--登录答题开始页面-->
+        <activity
+            android:name=".activity.login.AnswerBeginActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题内容页面-->
+        <activity
+            android:name=".activity.login.AnswerBeginContentActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  劳动强度-->
+        <activity
+            android:name=".activity.login.AnswerExerciseStrengthActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题 身高体重-->
+        <activity android:name=".activity.login.AnswerHeightWeightActivity"
+            android:screenOrientation="portrait"/>
         <!-- 忘记密码-->
         <activity
             android:name=".activity.login.ForgetPwdActivity"
             android:screenOrientation="portrait" />
         <!-- 首页 -->
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.login.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -126,6 +142,9 @@
         </activity>
 
         <!-- 首页 -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
         <!--扫一扫-->
         <activity
             android:name=".modules.zxing.activity.CaptureActivity"

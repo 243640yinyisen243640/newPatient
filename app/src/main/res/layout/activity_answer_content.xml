@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/anwser_begin_bg"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/pb_answer_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="21dp"
+            android:max="6"
+            android:progress="1"
+            android:progressDrawable="@drawable/diet_programme_progress_bar" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_bg_white_90"
+                android:gravity="center"
+                android:text="为制定符合自己的控制方案，请认真完成以下问题"
+                android:textColor="#9A9A9A"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_answer_content_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_white_90"
+                    android:text="是否了解糖尿病基础知识？"
+                    android:textColor="#242424"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_answer_content_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_white_90"
+                    android:text="(可多选)"
+                    android:textColor="#B7B7B7"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_answer_content_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_bg_white_90"
+                android:gravity="center"
+                android:text="如患病情况、易患人群、危险因素、饮食运动方式等..."
+                android:textColor="#8A8A8A"
+                android:textSize="13sp" />
+
+            <ListView
+                android:id="@+id/lv_answer_content_investigate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerHeight="10dp"
+                android:divider="@color/transparent"
+                android:listSelector="@color/transparent"
+                android:layout_margin="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="47dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_answer_content_up"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_green_90_1"
+                android:gravity="center"
+                android:text="上一题"
+                android:textColor="#00C27F"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_answer_content_next"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_main_gra_90"
+                android:gravity="center"
+                android:text="下一题"
+                android:textColor="@color/text_white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

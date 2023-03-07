@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * 类名：
  * 传参：
- * 描述:
+ * 描述:完善信息
  * 作者: beauty
  * 创建日期: 2023/3/2 16:25
  */
@@ -55,6 +56,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().backImageView().setVisibility(View.INVISIBLE);
         topViewManager().titleTextView().setText("完善个人信息");
         initView();
         initValue();
@@ -140,6 +142,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
                 });
                 break;
             case R.id.tv_perfect_start:
+                startActivity(new Intent(getPageContext(), AnswerBeginActivity.class));
                 break;
             default:
                 break;

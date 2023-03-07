@@ -147,7 +147,6 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
         getVerTextView = view.findViewById(R.id.tv_login_code_get);
         sureTextView = view.findViewById(R.id.tv_login_code_sure);
         agreeTextView = view.findViewById(R.id.tv_login_code_agreement);
-        agreeTextView.setSelected(true);
 
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
         stringBuilder.append(getString(R.string.login_agreement_left));

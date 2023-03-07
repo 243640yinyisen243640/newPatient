@@ -50,7 +50,7 @@ public class PerfectDiseaseAdapter extends XyBaseAdapter<UserInfo> {
             holder.contentTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_main_gra_90));
         } else {
             holder.contentTextView.setTextColor(getContext().getResources().getColor(R.color.black_24));
-            holder.contentTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_gray_black_90_1));
+            holder.contentTextView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shape_bg_white_black_90_1));
         }
 
         return convertView;

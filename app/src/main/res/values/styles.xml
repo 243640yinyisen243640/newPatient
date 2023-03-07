@@ -347,10 +347,10 @@
         <item name="android:button">@null</item>
         <item name="android:background">@drawable/selector_community_user_add_choose1</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">9dp</item>
+        <item name="android:paddingBottom">9dp</item>
         <item name="android:textColor">@color/selector_black_24_white_ff</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="community_filter_title">

@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.login;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,9 +14,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.basemodel.Event;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.login.LoginCodeFragment;
 import com.vice.bloodpressure.fragment.login.LoginPwdFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -33,13 +38,32 @@ public class LoginActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         topViewManager().titleTextView().setText("登录");
+        topViewManager().backImageView().setVisibility(View.INVISIBLE);
         topViewManager().moreTextView().setText("注册");
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), RegisterActivity.class));
         });
         initView();
         initValue();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+    @Subscribe()
+    public void onDeleteAddressEvent(Event.DeleteAddressEvent event) {
+
+        if (event != null && event.getAddressID().equals("1")) {
+            Log.i("yys","onDeleteAddressEvent");
+        }
     }
 
     private void initValue() {

@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -57,6 +58,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         initListener();
     }
 
+
     private void sureToRegister() {
         String phone = phoneEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
@@ -103,7 +105,8 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_register_sure:
-                sureToRegister();
+                startActivity(new Intent(getPageContext(), PerfectUserInfoActivity.class));
+                //                sureToRegister();
                 break;
             case R.id.tv_register_get:
                 getVerifiCode();
@@ -149,7 +152,6 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         getVerTextView = view.findViewById(R.id.tv_register_get);
         sureTextView = view.findViewById(R.id.tv_register_sure);
         agreeTextView = view.findViewById(R.id.tv_register_agreement);
-        agreeTextView.setSelected(true);
 
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
         stringBuilder.append(getString(R.string.login_agreement_left));

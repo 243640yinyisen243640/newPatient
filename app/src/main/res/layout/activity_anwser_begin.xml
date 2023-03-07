@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anwser_begin_bg"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/anwser_begin_tip"
+        android:gravity="center|left"
+        android:paddingLeft="110dp"
+        android:paddingTop="10dp"
+        android:paddingRight="25dp"
+        android:text="下面的问题，将帮助我们为您提供更为精准的饮食、运动、学习方案，建议您依据个人的真是情况进行选择。"
+        android:textColor="@color/black_24"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_answer_begin_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_bg_main_gra_90"
+        android:gravity="center"
+        android:padding="11dp"
+        android:text="开始答题"
+        android:textColor="@color/text_white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

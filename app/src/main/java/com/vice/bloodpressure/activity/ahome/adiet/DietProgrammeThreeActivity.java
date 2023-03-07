@@ -32,12 +32,14 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
     //慢性病
     private String chronicDisease = "0";
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = View.inflate(getPageContext(), R.layout.intelligence_diet_programme_three, null);
         containerView().addView(view);
         topViewManager().titleTextView().setText("饮食方案");
+
 
         radioGroup = findViewById(R.id.rg_diet_paogramme);
         TextView tvSubmit = findViewById(R.id.tv_diet_programme_three_submit);
@@ -49,19 +51,19 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
             String weight = getIntent().getStringExtra("weight");
             String workWeight = getIntent().getStringExtra("workWeight");
             //确定生成饮食方案
-            Log.i("xie", "height==" + height);
-            Log.i("xie", "weight==" + weight);
-            Log.i("xie", "workWeight==" + workWeight);
-            Log.i("xie", "chronicDisease==" + chronicDisease);
+            Log.i("yys", "height==" + height);
+            Log.i("yys", "weight==" + weight);
+            Log.i("yys", "workWeight==" + workWeight);
+            Log.i("yys", "chronicDisease==" + chronicDisease);
             if (programmePopupWindow == null) {
                 programmePopupWindow = new DietProgrammePopupWindow(getPageContext(),
                         recommendView -> {
                             //智能推荐
-                            Log.i("xie", "智能推荐");
+                            Log.i("yys", "智能推荐");
                         },
                         chooseView -> {
                             //我自己选
-                            Log.i("xie", "我自己选");
+                            Log.i("yys", "我自己选");
                             Intent intent = new Intent(getPageContext(),DietProgrammeChooseActivity.class);
                             startActivity(intent);
                         });
