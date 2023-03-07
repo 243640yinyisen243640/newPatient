@@ -2,6 +2,8 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,11 +13,9 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
-import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.model.IDCardInfoExtractor;
 import com.vice.bloodpressure.model.UserInfo;
-import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
@@ -66,6 +66,27 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     private void initListener() {
         bornTextView.setOnClickListener(this);
         sureTextView.setOnClickListener(this);
+        idCardEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //从身份证号码中提取出生日期
+                String birthDay;
+                //拿到身份证号码文本
+                IDCardInfoExtractor idCardInfo = new IDCardInfoExtractor(s.toString().trim());
+                birthDay = idCardInfo.getYear() + "-" + idCardInfo.getMonth() + "-" + idCardInfo.getDay();
+                bornTextView.setText(birthDay);
+            }
+        });
         maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 femaleCheckBox.setChecked(false);
@@ -133,13 +154,13 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_perfect_born:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        String born = object.toString();
-                        bornTextView.setText(object.toString());
-                    }
-                });
+                //                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                //                    @Override
+                //                    public void callBack(Object object) {
+                //                        String born = object.toString();
+                //                        bornTextView.setText(object.toString());
+                //                    }
+                //                });
                 break;
             case R.id.tv_perfect_start:
                 startActivity(new Intent(getPageContext(), AnswerBeginActivity.class));

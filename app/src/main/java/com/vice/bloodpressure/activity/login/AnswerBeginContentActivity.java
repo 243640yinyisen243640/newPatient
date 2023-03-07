@@ -78,7 +78,7 @@ public class AnswerBeginContentActivity extends UIBaseActivity implements View.O
         //进度
         questionNowNum = getIntent().getIntExtra("questionNowNum", 1);
         questionAllNum = getIntent().getIntExtra("questionAllNum", 5);
-        progressBar.setMax(questionAllNum);
+        progressBar.setMax(questionAllNum + 7);
         progressBar.setProgress(questionNowNum);
 
         initData();
@@ -389,18 +389,16 @@ public class AnswerBeginContentActivity extends UIBaseActivity implements View.O
                         intent.putExtra("questionNowNum", questionNowNum + 1);
                         intent.putExtra("questionAllNum", 23);
                         startActivity(intent);
-                    }else {
+                    } else {
                         Intent intent1 = new Intent(getPageContext(), AnswerHeightWeightActivity.class);
-                        intent.putExtra("progressNum", 1);
                         intent.putExtra("answer", answer);
                         startActivity(intent1);
                         Log.i("yys", "答案==" + "\n" + answer[0] + "\n" + answer[1] + "\n" + answer[2] + "\n" + answer[3] + "\n" + answer[4]);
                     }
 
-                } else if ( !isFirstQuestion&&isLastQuestion) {
+                } else if (!isFirstQuestion && isLastQuestion) {
                     //是最后一题
                     Intent intent1 = new Intent(getPageContext(), AnswerHeightWeightActivity.class);
-                    intent.putExtra("progressNum", 1);
                     intent.putExtra("answer", answer);
                     startActivity(intent1);
                     Log.i("yys", "答案===" + "\n" + answer[0] + "\n" + answer[1] + "\n" + answer[2] + "\n" + answer[3] + "\n" + answer[4]);

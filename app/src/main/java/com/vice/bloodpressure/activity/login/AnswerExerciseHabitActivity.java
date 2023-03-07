@@ -22,13 +22,11 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:height 身高  weight体重  answer 前面的答案列表
- * 描述:登录答题 运动强度
+ * 描述:登录答题 运动习惯
  */
-public class AnswerExerciseStrengthActivity extends UIBaseActivity {
+public class AnswerExerciseHabitActivity extends UIBaseActivity {
 
     private String[] answer;
-    private String height;
-    private String weight;
 
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list;
@@ -39,8 +37,6 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
         answer = getIntent().getStringArrayExtra("answer");
-        height = getIntent().getStringExtra("height");
-        weight = getIntent().getStringExtra("weight");
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
@@ -52,24 +48,27 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
         ListView listView = view.findViewById(R.id.lv_answer_content_strength);
         TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
         TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
+        TextView titleTextView = view.findViewById(R.id.tv_answer_content_strength_title);
+        titleTextView.setText("是否有运动习惯？");
         ProgressBar progressBar = view.findViewById(R.id.pb_answer_strength);
-        progressBar.setProgress(answer.length +7);
+        progressBar.setProgress(answer.length + 7);
         progressBar.setMax(answer.length +7);
         containerView().addView(view);
         backTextView.setOnClickListener(v -> finish());
         nextTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), AnswerNephromaActivity.class);
+            Intent intent = new Intent(getPageContext(), AnswerExerciseTimeRateActivity.class);
             intent.putExtra("answer", answer);
-            intent.putExtra("height", height);
-            intent.putExtra("weight", weight);
-            intent.putExtra("strength", list.get(adapter.getClickPosition()).getId());
+            intent.putExtra("height", getIntent().getStringExtra("height"));
+            intent.putExtra("weight", getIntent().getStringExtra("weight"));
+            intent.putExtra("strength", getIntent().getStringExtra("strength"));
+            intent.putExtra("chronicDisease", getIntent().getStringExtra("chronicDisease"));
+            intent.putExtra("illType", getIntent().getStringExtra("illType"));
+            intent.putExtra("isExercise", list.get(adapter.getClickPosition()).getId());
             startActivity(intent);
         });
         list = new ArrayList<>();
-        list.add(new EducationQuestionInvestigateModel("轻体力劳动", "1", false));
-        list.add(new EducationQuestionInvestigateModel("中体力劳动", "2", false));
-        list.add(new EducationQuestionInvestigateModel("重体力劳动", "3", false));
-        list.add(new EducationQuestionInvestigateModel("卧床","4", false));
+        list.add(new EducationQuestionInvestigateModel("是", "1", false));
+        list.add(new EducationQuestionInvestigateModel("否", "0", false));
         adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view1, position, id) -> {

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anwser_begin_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
+
+        <ProgressBar
+            android:id="@+id/pb_answer_motion"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="20dp"
+            android:max="5"
+            android:progress="1"
+            android:progressDrawable="@drawable/diet_programme_progress_bar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/exercise_plan_one_bg"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:paddingBottom="45dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="1dp"
+                    android:background="#9A9A9A" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="为制定符合自己的控制方案，请认真完成以下问题"
+                    android:textColor="#9A9A9A"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="1dp"
+                    android:background="#9A9A9A" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="是否符合制备运动评估的条件?"
+                android:textColor="@color/black_24"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="(需符合所有选项方可制定运动方案)?"
+                android:textColor="@color/black_24"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="当前血糖情况:空腹血糖&lt;16.7mmol/L和任意血糖&gt;4.0mmol/L" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="当前血压情况:收缩压&lt;180mmHg和舒张压&lt;100mmHg" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="最近无频发的低血糖" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="未合并各种急性感染" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="未合并新近发生的血栓尿酮体阴性" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="足部病变:健康，无并发症" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="无严重心血管疾病(不稳定心绞痛、心力衰竭、严重心律失常、一过性脑缺血发作)" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="无严重视网膜并发症" />
+
+            <TextView
+                style="@style/exercise_plan_one_text"
+                android:text="无严重肾脏疾病" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_answer_motion_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_white_90"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="不符合"
+                android:textColor="@color/main_base_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_answer_motion_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_main_gra_90"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="符合"
+                android:textColor="@color/text_white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

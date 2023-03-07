@@ -122,8 +122,29 @@
             android:name=".activity.login.AnswerExerciseStrengthActivity"
             android:screenOrientation="portrait" />
         <!--登录答题 身高体重-->
-        <activity android:name=".activity.login.AnswerHeightWeightActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.login.AnswerHeightWeightActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  肾病-->
+        <activity
+            android:name=".activity.login.AnswerNephromaActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  运动禁忌-->
+        <activity
+            android:name=".activity.login.AnswerMotionConditionsActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  疾病-->
+        <activity
+            android:name=".activity.login.AnswerIllnessActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  运动习惯-->
+        <activity
+            android:name=".activity.login.AnswerExerciseHabitActivity"
+            android:screenOrientation="portrait" />
+        <!--登录答题  运动时间频率-->
+        <activity
+            android:name=".activity.login.AnswerExerciseTimeRateActivity"
+            android:screenOrientation="portrait" />
         <!-- 忘记密码-->
         <activity
             android:name=".activity.login.ForgetPwdActivity"

@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 
 /**
  * 类名：
- * 传参：
+ * 传参：answer  上个页面的答案列表
  * 描述: 登录答题 身高体重
  * 作者: beauty
  */
@@ -35,24 +36,32 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
     private TextView heightResultTv;
     private TextView weightResultTv;
 
-    private int progressNum;
+    private String[] answer;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_height_weight, null);
-        containerView().addView(view);
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
+        answer = getIntent().getStringArrayExtra("answer");
+        Log.i("yys", "onCreateanswer" + answer);
+        initView();
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_height_weight, null);
+        containerView().addView(view);
         progressBar = findViewById(R.id.pb_answer_content_progress);
         heightRv = findViewById(R.id.rv_answer_content_height);
         weightRv = findViewById(R.id.rv_answer_content_weight);
         heightResultTv = findViewById(R.id.tv_answer_content_height_result);
         weightResultTv = findViewById(R.id.tv_answer_content_weight_result);
+        progressBar.setProgress(answer.length + 7);
+        progressBar.setMax(answer.length + 7);
         heightRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
@@ -86,12 +95,12 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             Intent intent = new Intent(getPageContext(), AnswerExerciseStrengthActivity.class);
             intent.putExtra("height", height);
             intent.putExtra("weight", weight);
+            intent.putExtra("answer", answer);
             startActivity(intent);
         });
 
         TextView backTv = findViewById(R.id.tv_answer_content_hw_back);
         backTv.setOnClickListener(v -> finish());
-
     }
 
 }

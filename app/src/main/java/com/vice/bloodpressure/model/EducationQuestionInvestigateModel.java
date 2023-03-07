@@ -7,7 +7,15 @@ public class EducationQuestionInvestigateModel {
     }
 
     private String text;
+    private String id;
     private boolean isCheck;
+
+
+    public EducationQuestionInvestigateModel(String text, String id, boolean isCheck) {
+        this.text = text;
+        this.id = id;
+        this.isCheck = isCheck;
+    }
 
     public String getText() {
         return text;
@@ -23,5 +31,13 @@ public class EducationQuestionInvestigateModel {
 
     public void setCheck(boolean check) {
         isCheck = check;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
