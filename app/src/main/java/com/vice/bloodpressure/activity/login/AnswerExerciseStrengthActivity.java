@@ -27,46 +27,61 @@ import java.util.List;
  */
 public class AnswerExerciseStrengthActivity extends UIBaseActivity {
 
-    private String height;
-    private String weight;
-
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list;
+    private ProgressBar progressBar;
+    private ListView listView;
+
     private int position;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
-        height = getIntent().getStringExtra("height");
-        weight = getIntent().getStringExtra("weight");
+
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
         initView();
+        initValue();
     }
 
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_strength, null);
-        ListView listView = view.findViewById(R.id.lv_answer_content_strength);
-        TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
-        TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_strength);
+    private void initValue() {
         if (position == 0) {
             progressBar.setProgress(7);
             progressBar.setMax(12);
         } else if (position == 1) {
             progressBar.setProgress(5);
             progressBar.setMax(10);
-        } else if (position==5){
+        } else if (position == 5) {
             progressBar.setProgress(3);
             progressBar.setMax(8);
-        }else {
+        } else {
             progressBar.setProgress(4);
             progressBar.setMax(9);
         }
+        list = new ArrayList<>();
+        list.add(new EducationQuestionInvestigateModel("轻体力劳动", "1", false));
+        list.add(new EducationQuestionInvestigateModel("中体力劳动", "2", false));
+        list.add(new EducationQuestionInvestigateModel("重体力劳动", "3", false));
+        list.add(new EducationQuestionInvestigateModel("卧床", "4", false));
+        adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            adapter.setClickPosition(position);
+        });
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_strength, null);
+        listView = view.findViewById(R.id.lv_answer_content_strength);
+        TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
+        TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
+        progressBar = view.findViewById(R.id.pb_answer_strength);
+
         containerView().addView(view);
         backTextView.setOnClickListener(v -> finish());
         nextTextView.setOnClickListener(v -> {
@@ -77,15 +92,6 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
             intent.putExtra("strength", list.get(adapter.getClickPosition()).getId());
             startActivity(intent);
         });
-        list = new ArrayList<>();
-        list.add(new EducationQuestionInvestigateModel("轻体力劳动", "1", false));
-        list.add(new EducationQuestionInvestigateModel("中体力劳动", "2", false));
-        list.add(new EducationQuestionInvestigateModel("重体力劳动", "3", false));
-        list.add(new EducationQuestionInvestigateModel("卧床","4", false));
-        adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
-            adapter.setClickPosition(position);
-        });
+
     }
 }

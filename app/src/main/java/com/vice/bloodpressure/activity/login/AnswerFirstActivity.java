@@ -28,6 +28,10 @@ public class AnswerFirstActivity extends UIBaseActivity {
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
     private ListView listView;
+
+    private ProgressBar progressBar;
+    private TextView tvTitle;
+    private TextView tvMoro;
     //是否多选
     private boolean isChooseMore;
 
@@ -73,24 +77,24 @@ public class AnswerFirstActivity extends UIBaseActivity {
             } else {
                 adapter.setClickPosition(position);
             }
-//            adapter.notifyDataSetChanged();
+            //            adapter.notifyDataSetChanged();
         });
-    }
-
-    private void init() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        containerView().addView(view);
-
-        ProgressBar progressBar = findViewById(R.id.pb_answer_content);
-        TextView tvTitle = findViewById(R.id.tv_answer_content_title);
-        TextView tvMoro = findViewById(R.id.tv_answer_content_more);
-        listView = findViewById(R.id.lv_answer_content_investigate);
-        TextView tvUp = findViewById(R.id.tv_answer_content_up);
-        TextView tvNext = findViewById(R.id.tv_answer_content_next);
         progressBar.setMax(7);
         progressBar.setProgress(1);
         tvTitle.setText("您是否患有下列疾病？");
         tvMoro.setVisibility(View.GONE);
+    }
+
+    private void init() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
+        progressBar = findViewById(R.id.pb_answer_content);
+        tvTitle = findViewById(R.id.tv_answer_content_title);
+        tvMoro = findViewById(R.id.tv_answer_content_more);
+        listView = findViewById(R.id.lv_answer_content_investigate);
+        TextView tvUp = findViewById(R.id.tv_answer_content_up);
+        TextView tvNext = findViewById(R.id.tv_answer_content_next);
+        containerView().addView(view);
+
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {

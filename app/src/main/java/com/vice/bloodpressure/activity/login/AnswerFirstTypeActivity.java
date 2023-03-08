@@ -28,6 +28,10 @@ public class AnswerFirstTypeActivity extends UIBaseActivity {
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
     private ListView listView;
+
+    private ProgressBar progressBar;
+    private TextView tvTitle;
+    private TextView tvMoro;
     //是否多选
     private boolean isChooseMore;
 
@@ -78,9 +82,9 @@ public class AnswerFirstTypeActivity extends UIBaseActivity {
     private void init() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
 
-        ProgressBar progressBar = findViewById(R.id.pb_answer_content);
-        TextView tvTitle = view.findViewById(R.id.tv_answer_content_title);
-        TextView tvMoro = view.findViewById(R.id.tv_answer_content_more);
+         progressBar = findViewById(R.id.pb_answer_content);
+         tvTitle = view.findViewById(R.id.tv_answer_content_title);
+         tvMoro = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
         TextView tvNext = view.findViewById(R.id.tv_answer_content_next);

@@ -32,6 +32,7 @@ public class AnswerExerciseTimeRateActivity extends UIBaseActivity {
     private ListView listView;
     private EditText rateEt;
     private TextView nextTv;
+    private ProgressBar progressBar;
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list;
     private int position;
@@ -56,17 +57,6 @@ public class AnswerExerciseTimeRateActivity extends UIBaseActivity {
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             adapter.setClickPosition(position);
         });
-    }
-
-
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_time, null);
-        listView = view.findViewById(R.id.lv_answer_exercise_time);
-        timeEt = view.findViewById(R.id.et_answer_exercise_time);
-        rateEt = view.findViewById(R.id.et_answer_exercise_rate);
-        nextTv = view.findViewById(R.id.tv_exercise_time_next);
-        TextView backTv = view.findViewById(R.id.tv_exercise_time_back);
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_exercise_time);
         if (position == 0) {
             progressBar.setProgress(11);
             progressBar.setMax(12);
@@ -80,6 +70,18 @@ public class AnswerExerciseTimeRateActivity extends UIBaseActivity {
             progressBar.setProgress(8);
             progressBar.setMax(9);
         }
+    }
+
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_time, null);
+        listView = view.findViewById(R.id.lv_answer_exercise_time);
+        timeEt = view.findViewById(R.id.et_answer_exercise_time);
+        rateEt = view.findViewById(R.id.et_answer_exercise_rate);
+        nextTv = view.findViewById(R.id.tv_exercise_time_next);
+        TextView backTv = view.findViewById(R.id.tv_exercise_time_back);
+         progressBar = view.findViewById(R.id.pb_answer_exercise_time);
+
         backTv.setOnClickListener(v -> finish());
         nextTv.setOnClickListener(v -> {
             setAnswerSubmit();

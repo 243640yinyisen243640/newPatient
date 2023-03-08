@@ -26,7 +26,9 @@ import java.util.List;
  * 描述:登录答题 运动习惯
  */
 public class AnswerExerciseHabitActivity extends UIBaseActivity {
-
+    private TextView titleTextView;
+    private ProgressBar progressBar;
+    private ListView listView;
     private int position;
 
     private AnswerExerciseStrengthAdapter adapter;
@@ -41,18 +43,13 @@ public class AnswerExerciseHabitActivity extends UIBaseActivity {
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         initView();
+        initValues();
     }
 
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_strength, null);
-        ListView listView = view.findViewById(R.id.lv_answer_content_strength);
-        TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
-        TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
-        TextView titleTextView = view.findViewById(R.id.tv_answer_content_strength_title);
+    private void initValues() {
         titleTextView.setText("是否有运动习惯？");
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_strength);
         if (position == 0) {
             progressBar.setProgress(11);
             progressBar.setMax(12);
@@ -66,7 +63,25 @@ public class AnswerExerciseHabitActivity extends UIBaseActivity {
             progressBar.setProgress(8);
             progressBar.setMax(9);
         }
+        list = new ArrayList<>();
+        list.add(new EducationQuestionInvestigateModel("是", "1", false));
+        list.add(new EducationQuestionInvestigateModel("否", "0", false));
+        adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            adapter.setClickPosition(position);
+        });
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_exercise_strength, null);
+        listView = view.findViewById(R.id.lv_answer_content_strength);
+        TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
+        TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
+        titleTextView = view.findViewById(R.id.tv_answer_content_strength_title);
+        progressBar = view.findViewById(R.id.pb_answer_strength);
         containerView().addView(view);
+
         backTextView.setOnClickListener(v -> finish());
         nextTextView.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerExerciseTimeRateActivity.class);
@@ -79,13 +94,6 @@ public class AnswerExerciseHabitActivity extends UIBaseActivity {
             intent.putExtra("isExercise", list.get(adapter.getClickPosition()).getId());
             startActivity(intent);
         });
-        list = new ArrayList<>();
-        list.add(new EducationQuestionInvestigateModel("是", "1", false));
-        list.add(new EducationQuestionInvestigateModel("否", "0", false));
-        adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
-            adapter.setClickPosition(position);
-        });
+
     }
 }

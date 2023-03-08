@@ -29,6 +29,9 @@ public class AnswerfourthActivity extends UIBaseActivity {
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
     private ListView listView;
+    private ProgressBar progressBar;
+    private TextView tvTitle;
+    private TextView tvMoro;
     //是否多选
     private boolean isChooseMore;
 
@@ -43,7 +46,7 @@ public class AnswerfourthActivity extends UIBaseActivity {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         init();
         initValues();
     }
@@ -75,20 +78,8 @@ public class AnswerfourthActivity extends UIBaseActivity {
             } else {
                 adapter.setClickPosition(position);
             }
-//            adapter.notifyDataSetChanged();
+            //            adapter.notifyDataSetChanged();
         });
-    }
-
-    private void init() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        containerView().addView(view);
-
-        ProgressBar progressBar = findViewById(R.id.pb_answer_content);
-        TextView tvTitle = findViewById(R.id.tv_answer_content_title);
-        TextView tvMoro = findViewById(R.id.tv_answer_content_more);
-        listView = findViewById(R.id.lv_answer_content_investigate);
-        TextView tvUp = findViewById(R.id.tv_answer_content_up);
-        TextView tvNext = findViewById(R.id.tv_answer_content_next);
         tvTitle.setText("您患病有多长时间了？");
         tvMoro.setVisibility(View.GONE);
         if (position == 0) {
@@ -101,6 +92,20 @@ public class AnswerfourthActivity extends UIBaseActivity {
             progressBar.setProgress(2);
             progressBar.setMax(9);
         }
+    }
+
+    private void init() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
+
+        progressBar = view.findViewById(R.id.pb_answer_content);
+        tvTitle = view.findViewById(R.id.tv_answer_content_title);
+        tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        listView = view.findViewById(R.id.lv_answer_content_investigate);
+        TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
+        TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
+        containerView().addView(view);
+
+
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerHeightWeightActivity.class);

@@ -34,6 +34,7 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
 
     private TextView heightResultTv;
     private TextView weightResultTv;
+    private ProgressBar progressBar;
     private int position;
 
     @Override
@@ -45,31 +46,37 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         initView();
+        initValue();
     }
 
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_height_weight, null);
-        containerView().addView(view);
-        ProgressBar progressBar = findViewById(R.id.pb_answer_content_progress);
-        heightRv = findViewById(R.id.rv_answer_content_height);
-        weightRv = findViewById(R.id.rv_answer_content_weight);
-        heightResultTv = findViewById(R.id.tv_answer_content_height_result);
-        weightResultTv = findViewById(R.id.tv_answer_content_weight_result);
+    private void initValue() {
         if (position == 0) {
             progressBar.setProgress(6);
             progressBar.setMax(12);
         } else if (position == 1) {
             progressBar.setProgress(4);
             progressBar.setMax(10);
-        } else if (position==5){
+        } else if (position == 5) {
             progressBar.setProgress(2);
             progressBar.setMax(8);
-        }else {
+        } else {
             progressBar.setProgress(3);
             progressBar.setMax(9);
         }
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_height_weight, null);
+        progressBar = view.findViewById(R.id.pb_answer_content_progress);
+        heightRv = view.findViewById(R.id.rv_answer_content_height);
+        weightRv = view.findViewById(R.id.rv_answer_content_weight);
+        heightResultTv = view.findViewById(R.id.tv_answer_content_height_result);
+        weightResultTv = view.findViewById(R.id.tv_answer_content_weight_result);
+        TextView nextStepTv = view.findViewById(R.id.tv_answer_content_hw_next);
+        containerView().addView(view);
+
         heightRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
@@ -97,7 +104,7 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
         });
 
 
-        TextView nextStepTv = findViewById(R.id.tv_answer_content_hw_next);
+
         //下一步
         nextStepTv.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerExerciseStrengthActivity.class);

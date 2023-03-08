@@ -26,26 +26,42 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
 
     private TextView tvUp;
     private TextView tvNext;
+    private ProgressBar progressBar;
     private int position;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        intView();
+        initValues();
 
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
+
+
+
+        tvUp.setOnClickListener(this);
+        tvNext.setOnClickListener(this);
+
+    }
+
+    private void intView() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_ill, null);
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_ill);
+         progressBar = view.findViewById(R.id.pb_answer_ill);
         listView = view.findViewById(R.id.lv_answer_ill_investigate);
         tvUp = view.findViewById(R.id.tv_answer_ill_back);
         tvNext = view.findViewById(R.id.tv_answer_ill_next);
+        containerView().addView(view);
+
+    }
+
+    private void initValues() {
         if (position == 0) {
             progressBar.setProgress(9);
             progressBar.setMax(12);
@@ -59,14 +75,6 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
             progressBar.setProgress(6);
             progressBar.setMax(9);
         }
-        containerView().addView(view);
-        init();
-        tvUp.setOnClickListener(this);
-        tvNext.setOnClickListener(this);
-
-    }
-
-    private void init() {
         list.add(new EducationQuestionInvestigateModel("冠心病", "1", false));
         list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
         list.add(new EducationQuestionInvestigateModel("合并神经病变", "3", false));

@@ -23,7 +23,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 public class AnswerMotionConditionsActivity extends UIBaseActivity implements View.OnClickListener {
     private TextView unFitTv;
     private TextView fitTv;
-
+    private ProgressBar progressBar;
 
     private int position;
 
@@ -34,26 +34,14 @@ public class AnswerMotionConditionsActivity extends UIBaseActivity implements Vi
         topViewManager().moreTextView().setText("跳过答题");
         topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), MainActivity.class)));
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         initView();
+        initValues();
         initListener();
 
     }
 
-    private void initListener() {
-        unFitTv.setOnClickListener(this);
-        fitTv.setOnClickListener(this);
-    }
-
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_motion_conditions, null);
-
-
-        unFitTv = view.findViewById(R.id.tv_answer_motion_back);
-        fitTv = view.findViewById(R.id.tv_answer_motion_next);
-
-
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_motion);
+    private void initValues() {
         if (position == 0) {
             progressBar.setProgress(10);
             progressBar.setMax(12);
@@ -67,6 +55,19 @@ public class AnswerMotionConditionsActivity extends UIBaseActivity implements Vi
             progressBar.setProgress(7);
             progressBar.setMax(9);
         }
+    }
+
+    private void initListener() {
+        unFitTv.setOnClickListener(this);
+        fitTv.setOnClickListener(this);
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_motion_conditions, null);
+        unFitTv = view.findViewById(R.id.tv_answer_motion_back);
+        fitTv = view.findViewById(R.id.tv_answer_motion_next);
+        progressBar = view.findViewById(R.id.pb_answer_motion);
+
         containerView().addView(view);
     }
 

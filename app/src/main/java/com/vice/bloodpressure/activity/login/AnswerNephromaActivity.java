@@ -32,6 +32,7 @@ public class AnswerNephromaActivity extends UIBaseActivity {
     //慢性病
     private String chronicDisease = "0";
     private int position;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,15 +43,10 @@ public class AnswerNephromaActivity extends UIBaseActivity {
         position = getIntent().getIntExtra("position", 0);
         Log.i("yys", "position===" + position);
         initView();
+        initValues();
     }
 
-    private void initView() {
-
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_nephroma, null);
-        radioGroup = view.findViewById(R.id.rg_answer_programme);
-        TextView tvBack = view.findViewById(R.id.tv_answer_nephroma_back);
-        TextView tvSubmit = view.findViewById(R.id.tv_answer_nephroma_next);
-        ProgressBar progressBar = view.findViewById(R.id.pb_answer_nephroma);
+    private void initValues() {
         if (position == 0) {
             progressBar.setProgress(8);
             progressBar.setMax(12);
@@ -64,6 +60,15 @@ public class AnswerNephromaActivity extends UIBaseActivity {
             progressBar.setProgress(5);
             progressBar.setMax(9);
         }
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_nephroma, null);
+        radioGroup = view.findViewById(R.id.rg_answer_programme);
+        TextView tvBack = view.findViewById(R.id.tv_answer_nephroma_back);
+        TextView tvSubmit = view.findViewById(R.id.tv_answer_nephroma_next);
+        progressBar = view.findViewById(R.id.pb_answer_nephroma);
+
         containerView().addView(view);
 
         tvBack.setOnClickListener(v -> finish());

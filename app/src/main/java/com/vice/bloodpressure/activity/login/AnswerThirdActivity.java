@@ -29,6 +29,9 @@ public class AnswerThirdActivity extends UIBaseActivity {
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
     private ListView listView;
+    private ProgressBar progressBar;
+    private TextView tvTitle;
+    private TextView tvMoro;
     //是否多选
     private boolean isChooseMore;
     private int position;
@@ -75,19 +78,7 @@ public class AnswerThirdActivity extends UIBaseActivity {
             }
             //            adapter.notifyDataSetChanged();
         });
-    }
 
-    private void init() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        containerView().addView(view);
-
-
-        ProgressBar progressBar = findViewById(R.id.pb_answer_content);
-        TextView tvTitle = findViewById(R.id.tv_answer_content_title);
-        TextView tvMoro = findViewById(R.id.tv_answer_content_more);
-        listView = findViewById(R.id.lv_answer_content_investigate);
-        TextView tvUp = findViewById(R.id.tv_answer_content_up);
-        TextView tvNext = findViewById(R.id.tv_answer_content_next);
         tvTitle.setText("是否了解糖尿病基础知识？");
         tvMoro.setVisibility(View.GONE);
         if (position == 0) {
@@ -97,6 +88,20 @@ public class AnswerThirdActivity extends UIBaseActivity {
             progressBar.setMax(11);
             progressBar.setProgress(3);
         }
+    }
+
+    private void init() {
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
+
+
+         progressBar = view.findViewById(R.id.pb_answer_content);
+         tvTitle = view.findViewById(R.id.tv_answer_content_title);
+         tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        listView = view.findViewById(R.id.lv_answer_content_investigate);
+        TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
+        TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
+        containerView().addView(view);
+
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerfourthActivity.class);
