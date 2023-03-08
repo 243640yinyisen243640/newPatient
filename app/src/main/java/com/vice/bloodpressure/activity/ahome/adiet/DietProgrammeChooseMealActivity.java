@@ -64,8 +64,8 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
 
         initList();
 
-        tabLayout = findViewById(R.id.tl_diet_programme_choose);
-        viewPager = findViewById(R.id.vp_diet_programme_choose);
+        tabLayout =view. findViewById(R.id.tl_diet_programme_choose);
+        viewPager = view.findViewById(R.id.vp_diet_programme_choose);
         //禁用预加载
         //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         //设置滑动方向
