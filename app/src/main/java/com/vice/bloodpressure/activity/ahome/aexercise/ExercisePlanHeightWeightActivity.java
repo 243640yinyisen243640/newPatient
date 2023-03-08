@@ -83,10 +83,10 @@ public class ExercisePlanHeightWeightActivity extends UIBaseActivity {
             startActivity(intent);
         });
 
-        TextView backTv = findViewById(R.id.tv_exercise_hw_back);
+        TextView backTv = view.findViewById(R.id.tv_exercise_hw_back);
         backTv.setOnClickListener(v -> finish());
 
-        TextView progress = findViewById(R.id.tv_diet_programme_one_progress);
+        TextView progress = view.findViewById(R.id.tv_diet_programme_one_progress);
         setTextStyle(progress, 1.3f, 0, 1);
     }
 
