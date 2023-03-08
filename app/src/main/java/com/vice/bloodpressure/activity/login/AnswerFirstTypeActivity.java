@@ -77,14 +77,15 @@ public class AnswerFirstTypeActivity extends UIBaseActivity {
 
     private void init() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        containerView().addView(view);
 
         ProgressBar progressBar = findViewById(R.id.pb_answer_content);
-        TextView tvTitle = findViewById(R.id.tv_answer_content_title);
-        TextView tvMoro = findViewById(R.id.tv_answer_content_more);
-        listView = findViewById(R.id.lv_answer_content_investigate);
-        TextView tvUp = findViewById(R.id.tv_answer_content_up);
-        TextView tvNext = findViewById(R.id.tv_answer_content_next);
+        TextView tvTitle = view.findViewById(R.id.tv_answer_content_title);
+        TextView tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        listView = view.findViewById(R.id.lv_answer_content_investigate);
+        TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
+        TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
+        containerView().addView(view);
+
         progressBar.setMax(12);
         progressBar.setProgress(2);
         tvTitle.setText("您的糖尿病类型是什么？");
