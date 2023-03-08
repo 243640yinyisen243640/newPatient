@@ -87,14 +87,13 @@ public class AnswerFirstActivity extends UIBaseActivity {
 
     private void init() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        progressBar = findViewById(R.id.pb_answer_content);
-        tvTitle = findViewById(R.id.tv_answer_content_title);
-        tvMoro = findViewById(R.id.tv_answer_content_more);
-        listView = findViewById(R.id.lv_answer_content_investigate);
-        TextView tvUp = findViewById(R.id.tv_answer_content_up);
-        TextView tvNext = findViewById(R.id.tv_answer_content_next);
+        progressBar = view.findViewById(R.id.pb_answer_content);
+        tvTitle = view.findViewById(R.id.tv_answer_content_title);
+        tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        listView = view.findViewById(R.id.lv_answer_content_investigate);
+        TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
+        TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
         containerView().addView(view);
-
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
