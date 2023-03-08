@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -26,21 +27,21 @@ import java.util.List;
  */
 public class AnswerExerciseStrengthActivity extends UIBaseActivity {
 
-    private String[] answer;
     private String height;
     private String weight;
 
     private AnswerExerciseStrengthAdapter adapter;
     private List<EducationQuestionInvestigateModel> list;
-
+    private int position;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
-        answer = getIntent().getStringArrayExtra("answer");
         height = getIntent().getStringExtra("height");
         weight = getIntent().getStringExtra("weight");
+        position = getIntent().getIntExtra("position", 0);
+        Log.i("yys","position==="+position);
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
@@ -53,15 +54,26 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
         TextView backTextView = view.findViewById(R.id.tv_answer_content_strength_back);
         TextView nextTextView = view.findViewById(R.id.tv_answer_content_strength_next);
         ProgressBar progressBar = view.findViewById(R.id.pb_answer_strength);
-        progressBar.setProgress(answer.length +7);
-        progressBar.setMax(answer.length +7);
+        if (position == 0) {
+            progressBar.setProgress(7);
+            progressBar.setMax(12);
+        } else if (position == 1) {
+            progressBar.setProgress(5);
+            progressBar.setMax(10);
+        } else if (position==5){
+            progressBar.setProgress(3);
+            progressBar.setMax(8);
+        }else {
+            progressBar.setProgress(4);
+            progressBar.setMax(9);
+        }
         containerView().addView(view);
         backTextView.setOnClickListener(v -> finish());
         nextTextView.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerNephromaActivity.class);
-            intent.putExtra("answer", answer);
-            intent.putExtra("height", height);
-            intent.putExtra("weight", weight);
+            intent.putExtra("position", position);
+            intent.putExtra("height", getIntent().getStringExtra("height"));
+            intent.putExtra("weight", getIntent().getStringExtra("weight"));
             intent.putExtra("strength", list.get(adapter.getClickPosition()).getId());
             startActivity(intent);
         });

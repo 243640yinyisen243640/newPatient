@@ -38,15 +38,15 @@ public class ExercisePlanHeightWeightActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_height_weight, null);
-        containerView().addView(view);
         topViewManager().titleTextView().setText("制定运动方案");
 
-        heightRv = findViewById(R.id.rv_exercise_height);
-        weightRv = findViewById(R.id.rv_exercise_weight);
-        heightResultTv = findViewById(R.id.tv_exercise_height_result);
-        weightResultTv = findViewById(R.id.tv_exercise_weight_result);
-
+        View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_height_weight, null);
+        heightRv = view.findViewById(R.id.rv_exercise_height);
+        weightRv = view.findViewById(R.id.rv_exercise_weight);
+        heightResultTv = view.findViewById(R.id.tv_exercise_height_result);
+        weightResultTv = view.findViewById(R.id.tv_exercise_weight_result);
+        TextView nextStepTv = view.findViewById(R.id.tv_exercise_hw_next);
+        containerView().addView(view);
         heightRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
@@ -74,7 +74,7 @@ public class ExercisePlanHeightWeightActivity extends UIBaseActivity {
         });
 
 
-        TextView nextStepTv = findViewById(R.id.tv_exercise_hw_next);
+
         //下一步
         nextStepTv.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), ExercisePlanIllActivity.class);

@@ -63,7 +63,6 @@ public class AnswerBeginContentActivity extends UIBaseActivity implements View.O
         progressBar = findViewById(R.id.pb_answer_content);
         tvTitle = findViewById(R.id.tv_answer_content_title);
         tvMoro = findViewById(R.id.tv_answer_content_more);
-        tvTip = findViewById(R.id.tv_answer_content_tip);
         listView = findViewById(R.id.lv_answer_content_investigate);
         tvUp = findViewById(R.id.tv_answer_content_up);
         tvNext = findViewById(R.id.tv_answer_content_next);
@@ -401,6 +400,7 @@ public class AnswerBeginContentActivity extends UIBaseActivity implements View.O
                     Intent intent1 = new Intent(getPageContext(), AnswerHeightWeightActivity.class);
                     intent.putExtra("answer", answer);
                     startActivity(intent1);
+                    Log.i("yys","answer=="+answer.toString());
                     Log.i("yys", "答案===" + "\n" + answer[0] + "\n" + answer[1] + "\n" + answer[2] + "\n" + answer[3] + "\n" + answer[4]);
                 } else {
                     intent.putExtra("questionNowNum", questionNowNum + 1);

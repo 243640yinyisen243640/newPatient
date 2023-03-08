@@ -34,7 +34,7 @@ public class AnswerBeginActivity extends UIBaseActivity {
         TextView sureTv = view.findViewById(R.id.tv_answer_begin_sure);
         sureTv.setOnClickListener(v ->
         {
-            startActivity(new Intent(getPageContext(), AnswerBeginContentActivity.class));
+            startActivity(new Intent(getPageContext(), AnswerFirstActivity.class));
         });
         containerView().addView(view);
     }

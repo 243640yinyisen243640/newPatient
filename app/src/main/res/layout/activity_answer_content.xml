@@ -57,9 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"
-                    android:text="是否了解糖尿病基础知识？"
                     android:textColor="#242424"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_answer_content_more"
@@ -68,21 +68,12 @@
                     android:background="@drawable/shape_bg_white_90"
                     android:text="(可多选)"
                     android:textColor="#B7B7B7"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_answer_content_tip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/shape_bg_white_90"
-                android:gravity="center"
-                android:text="如患病情况、易患人群、危险因素、饮食运动方式等..."
-                android:textColor="#8A8A8A"
-                android:textSize="13sp" />
+
 
             <ListView
                 android:id="@+id/lv_answer_content_investigate"

@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -19,33 +20,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClickListener {
-    private ProgressBar progressBar;
     private ListView listView;
     private EducationQuestionInvestigateAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
 
     private TextView tvUp;
     private TextView tvNext;
-    private String[] answer;
+    private int position;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_ill, null);
-        containerView().addView(view);
+
+
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
-        answer = getIntent().getStringArrayExtra("answer");
+        position = getIntent().getIntExtra("position", 0);
+        Log.i("yys","position==="+position);
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
-
-        progressBar = findViewById(R.id.pb_answer_ill);
-        listView = findViewById(R.id.lv_answer_ill_investigate);
-        tvUp = findViewById(R.id.tv_answer_ill_back);
-        tvNext = findViewById(R.id.tv_answer_ill_next);
-
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_ill, null);
+        ProgressBar progressBar = view.findViewById(R.id.pb_answer_ill);
+        listView = view.findViewById(R.id.lv_answer_ill_investigate);
+        tvUp = view.findViewById(R.id.tv_answer_ill_back);
+        tvNext = view.findViewById(R.id.tv_answer_ill_next);
+        if (position == 0) {
+            progressBar.setProgress(9);
+            progressBar.setMax(12);
+        } else if (position == 1) {
+            progressBar.setProgress(7);
+            progressBar.setMax(10);
+        } else if (position == 5) {
+            progressBar.setProgress(5);
+            progressBar.setMax(8);
+        } else {
+            progressBar.setProgress(6);
+            progressBar.setMax(9);
+        }
+        containerView().addView(view);
         init();
         tvUp.setOnClickListener(this);
         tvNext.setOnClickListener(this);
@@ -53,9 +67,6 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
     }
 
     private void init() {
-        //进度
-        progressBar.setProgress(answer.length + 7);
-        progressBar.setMax(answer.length +7);
         list.add(new EducationQuestionInvestigateModel("冠心病", "1", false));
         list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
         list.add(new EducationQuestionInvestigateModel("合并神经病变", "3", false));
@@ -101,7 +112,7 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
                 }
                 builder.deleteCharAt(builder.length() - 1);
                 Intent intent = new Intent(getPageContext(), AnswerMotionConditionsActivity.class);
-                intent.putExtra("answer", answer);
+                intent.putExtra("position", position);
                 intent.putExtra("height", getIntent().getStringExtra("height"));
                 intent.putExtra("weight", getIntent().getStringExtra("weight"));
                 intent.putExtra("strength", getIntent().getStringExtra("strength"));

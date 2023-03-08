@@ -56,16 +56,16 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = View.inflate(getPageContext(), R.layout.education_question_investigate, null);
-        containerView().addView(view);
         topViewManager().titleTextView().setText("问卷调查");
 
-        progressBar = findViewById(R.id.pb_education_question_investigate);
-        tvTitle = findViewById(R.id.tv_education_question_investigate_title);
-        tvMoro = findViewById(R.id.tv_education_question_investigate_more);
-        tvTip = findViewById(R.id.tv_education_question_investigate_tip);
-        listView = findViewById(R.id.lv_education_question_investigate);
-        tvUp = findViewById(R.id.tv_education_question_investigate_up);
-        tvNext = findViewById(R.id.tv_education_question_investigate_next);
+        progressBar = view.findViewById(R.id.pb_education_question_investigate);
+        tvTitle = view.findViewById(R.id.tv_education_question_investigate_title);
+        tvMoro = view.findViewById(R.id.tv_education_question_investigate_more);
+        tvTip = view.findViewById(R.id.tv_education_question_investigate_tip);
+        listView = view.findViewById(R.id.lv_education_question_investigate);
+        tvUp = view.findViewById(R.id.tv_education_question_investigate_up);
+        tvNext = view.findViewById(R.id.tv_education_question_investigate_next);
+        containerView().addView(view);
 
         init();
         tvUp.setOnClickListener(this);
@@ -85,12 +85,12 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
         LinearLayout.LayoutParams lps = (LinearLayout.LayoutParams) tvNext.getLayoutParams();
         if (isFirstQuestion | isLastQuestion) {
             tvUp.setVisibility(View.GONE);
-            lps.setMargins(DensityUtils.dip2px(getPageContext(),27),0,DensityUtils.dip2px(getPageContext(),27),0);
+            lps.setMargins(DensityUtils.dip2px(getPageContext(), 27), 0, DensityUtils.dip2px(getPageContext(), 27), 0);
             if (isLastQuestion) {
                 tvNext.setText("完成");
             }
         } else {
-            lps.setMargins(0,0,0,0);
+            lps.setMargins(0, 0, 0, 0);
             tvUp.setVisibility(View.VISIBLE);
         }
 
@@ -104,14 +104,14 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             if (isChooseMore) {
-                if (list.get(position).getText().equals("无")){
+                if (list.get(position).getText().equals("无")) {
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).setCheck(false);
                     }
                     list.get(position).setCheck(true);
                 } else {
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getText().equals("无")){
+                        if (list.get(i).getText().equals("无")) {
                             list.get(i).setCheck(false);
                         }
                     }

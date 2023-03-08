@@ -62,7 +62,6 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tv_answer_content_more"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"

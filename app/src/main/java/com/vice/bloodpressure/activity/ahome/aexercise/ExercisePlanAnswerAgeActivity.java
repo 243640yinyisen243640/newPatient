@@ -55,8 +55,6 @@ public class ExercisePlanAnswerAgeActivity extends UIBaseActivity implements Vie
         });
 
 
-        TextView progress = findViewById(R.id.tv_exercise_plan_two_progress);
-        setTextStyle(progress, 1.3f, 0, 1);
     }
 
     private void initListener() {
@@ -70,6 +68,8 @@ public class ExercisePlanAnswerAgeActivity extends UIBaseActivity implements Vie
         resultTv = view.findViewById(R.id.tv_exercise_plan_result);
         backTv = view.findViewById(R.id.tv_exercise_plan_back);
         nextTv = view.findViewById(R.id.tv_exercise_plan_next);
+        TextView progress = view.findViewById(R.id.tv_exercise_plan_two_progress);
+        setTextStyle(progress, 1.3f, 0, 1);
         containerView().addView(view);
     }
 

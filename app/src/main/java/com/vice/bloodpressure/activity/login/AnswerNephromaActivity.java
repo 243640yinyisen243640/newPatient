@@ -28,47 +28,49 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
  */
 public class AnswerNephromaActivity extends UIBaseActivity {
     private RadioGroup radioGroup;
-    private ProgressBar progressBar;
 
     //慢性病
     private String chronicDisease = "0";
-    private String[] answer;
-    private String height;
-    private String weight;
-    private String strength;
+    private int position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), MainActivity.class)));
-
-
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
-        answer = getIntent().getStringArrayExtra("answer");
+        position = getIntent().getIntExtra("position", 0);
+        Log.i("yys", "position===" + position);
         initView();
-
-
     }
 
     private void initView() {
+
         View view = View.inflate(getPageContext(), R.layout.activity_answer_nephroma, null);
+        radioGroup = view.findViewById(R.id.rg_answer_programme);
+        TextView tvBack = view.findViewById(R.id.tv_answer_nephroma_back);
+        TextView tvSubmit = view.findViewById(R.id.tv_answer_nephroma_next);
+        ProgressBar progressBar = view.findViewById(R.id.pb_answer_nephroma);
+        if (position == 0) {
+            progressBar.setProgress(8);
+            progressBar.setMax(12);
+        } else if (position == 1) {
+            progressBar.setProgress(6);
+            progressBar.setMax(10);
+        } else if (position == 5) {
+            progressBar.setProgress(4);
+            progressBar.setMax(8);
+        } else {
+            progressBar.setProgress(5);
+            progressBar.setMax(9);
+        }
         containerView().addView(view);
-        radioGroup = findViewById(R.id.rg_diet_paogramme);
-        TextView tvBack = findViewById(R.id.tv_answer_nephroma_back);
-        TextView tvSubmit = findViewById(R.id.tv_answer_nephroma_next);
-        progressBar = findViewById(R.id.pb_answer_nephroma);
-        progressBar.setProgress(answer.length + 7);
-        progressBar.setMax(answer.length +7);
+
         tvBack.setOnClickListener(v -> finish());
         tvSubmit.setOnClickListener(v -> {
-
-            //确定生成饮食方案
-            Log.i("yys", "height==" + height);
-            Log.i("yys", "weight==" + weight);
             Log.i("yys", "chronicDisease==" + chronicDisease);
             Intent intent = new Intent(getPageContext(), AnswerIllnessActivity.class);
-            intent.putExtra("answer", answer);
+            intent.putExtra("position", position);
             intent.putExtra("height", getIntent().getStringExtra("height"));
             intent.putExtra("weight", getIntent().getStringExtra("weight"));
             intent.putExtra("strength", getIntent().getStringExtra("strength"));

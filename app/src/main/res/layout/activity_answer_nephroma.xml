@@ -14,8 +14,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
-        android:max="3"
-        android:progress="3"
         android:progressDrawable="@drawable/diet_programme_progress_bar" />
 
 
@@ -65,7 +63,7 @@
             android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/rg_diet_paogramme"
+            android:id="@+id/rg_answer_programme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"

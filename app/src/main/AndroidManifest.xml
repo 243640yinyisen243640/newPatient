@@ -117,6 +117,21 @@
         <activity
             android:name=".activity.login.AnswerBeginContentActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.AnswerFirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.AnswerFirstTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.AnswerSecondActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.AnswerThirdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.AnswerfourthActivity"
+            android:screenOrientation="portrait" />
         <!--登录答题  劳动强度-->
         <activity
             android:name=".activity.login.AnswerExerciseStrengthActivity"

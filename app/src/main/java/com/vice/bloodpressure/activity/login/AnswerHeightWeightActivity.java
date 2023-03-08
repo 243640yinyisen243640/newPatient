@@ -28,16 +28,13 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
     //体重
     private String weight = "60";
 
-    private ProgressBar progressBar;
 
     private RulerView heightRv;
     private RulerView weightRv;
 
     private TextView heightResultTv;
     private TextView weightResultTv;
-
-    private String[] answer;
-
+    private int position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,21 +44,32 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
-        answer = getIntent().getStringArrayExtra("answer");
-        Log.i("yys", "onCreateanswer" + answer);
+        position = getIntent().getIntExtra("position", 0);
+        Log.i("yys","position==="+position);
         initView();
     }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_height_weight, null);
         containerView().addView(view);
-        progressBar = findViewById(R.id.pb_answer_content_progress);
+        ProgressBar progressBar = findViewById(R.id.pb_answer_content_progress);
         heightRv = findViewById(R.id.rv_answer_content_height);
         weightRv = findViewById(R.id.rv_answer_content_weight);
         heightResultTv = findViewById(R.id.tv_answer_content_height_result);
         weightResultTv = findViewById(R.id.tv_answer_content_weight_result);
-        progressBar.setProgress(answer.length + 7);
-        progressBar.setMax(answer.length + 7);
+        if (position == 0) {
+            progressBar.setProgress(6);
+            progressBar.setMax(12);
+        } else if (position == 1) {
+            progressBar.setProgress(4);
+            progressBar.setMax(10);
+        } else if (position==5){
+            progressBar.setProgress(2);
+            progressBar.setMax(8);
+        }else {
+            progressBar.setProgress(3);
+            progressBar.setMax(9);
+        }
         heightRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
@@ -95,8 +103,9 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             Intent intent = new Intent(getPageContext(), AnswerExerciseStrengthActivity.class);
             intent.putExtra("height", height);
             intent.putExtra("weight", weight);
-            intent.putExtra("answer", answer);
+            intent.putExtra("position", position);
             startActivity(intent);
+
         });
 
         TextView backTv = findViewById(R.id.tv_answer_content_hw_back);
