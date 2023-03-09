@@ -20,8 +20,6 @@
             android:layout_marginTop="21dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="21dp"
-            android:max="6"
-            android:progress="1"
             android:progressDrawable="@drawable/diet_programme_progress_bar" />
 
 

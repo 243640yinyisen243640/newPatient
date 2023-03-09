@@ -70,6 +70,8 @@ public class AnswerExerciseTimeRateActivity extends UIBaseActivity {
             progressBar.setProgress(8);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
     }
 
 

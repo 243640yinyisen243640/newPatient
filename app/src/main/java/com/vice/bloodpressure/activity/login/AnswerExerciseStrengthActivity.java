@@ -64,6 +64,8 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
             progressBar.setProgress(4);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
         list = new ArrayList<>();
         list.add(new EducationQuestionInvestigateModel("轻体力劳动", "1", false));
         list.add(new EducationQuestionInvestigateModel("中体力劳动", "2", false));

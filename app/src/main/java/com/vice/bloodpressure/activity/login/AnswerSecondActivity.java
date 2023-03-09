@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -102,12 +103,14 @@ public class AnswerSecondActivity extends UIBaseActivity {
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             StringBuilder builder = new StringBuilder();
-            for (EducationQuestionInvestigateModel model : list) {
-                //                    builder.append("{");
-                builder.append(model.getId());
-                //                    builder.append("}");
-                builder.append(",");
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).isCheck()) {
+                    builder.append(list.get(i).getId());
+                    //                    builder.append("}");
+                    builder.append(",");
+                }
             }
+            Log.i("yys", "build.length==" + builder.length());
             if (builder.length() == 0) {
                 ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
                 return;

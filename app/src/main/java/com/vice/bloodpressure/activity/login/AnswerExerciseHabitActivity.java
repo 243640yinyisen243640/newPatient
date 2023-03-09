@@ -63,6 +63,8 @@ public class AnswerExerciseHabitActivity extends UIBaseActivity {
             progressBar.setProgress(8);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
         list = new ArrayList<>();
         list.add(new EducationQuestionInvestigateModel("是", "1", false));
         list.add(new EducationQuestionInvestigateModel("否", "0", false));

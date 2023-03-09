@@ -55,6 +55,8 @@ public class AnswerMotionConditionsActivity extends UIBaseActivity implements Vi
             progressBar.setProgress(7);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
     }
 
     private void initListener() {

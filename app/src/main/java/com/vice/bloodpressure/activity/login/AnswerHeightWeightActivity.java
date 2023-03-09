@@ -65,6 +65,8 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             progressBar.setProgress(3);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
     }
 
     private void initView() {
@@ -104,7 +106,6 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
         });
 
 
-
         //下一步
         nextStepTv.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), AnswerExerciseStrengthActivity.class);
@@ -112,7 +113,6 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             intent.putExtra("weight", weight);
             intent.putExtra("position", position);
             startActivity(intent);
-
         });
 
         TextView backTv = findViewById(R.id.tv_answer_content_hw_back);

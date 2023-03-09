@@ -74,6 +74,8 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
             progressBar.setProgress(6);
             progressBar.setMax(9);
         }
+        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
+        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
         list.add(new EducationQuestionInvestigateModel("冠心病", "1", false));
         list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
         list.add(new EducationQuestionInvestigateModel("合并神经病变", "3", false));
@@ -111,11 +113,17 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
             //下一题
             case R.id.tv_answer_ill_next:
                 StringBuilder builder = new StringBuilder();
-                for (EducationQuestionInvestigateModel model : list) {
-                    //                    builder.append("{");
-                    builder.append(model.getId());
-                    //                    builder.append("}");
-                    builder.append(",");
+//                for (EducationQuestionInvestigateModel model : list) {
+//                    //                    builder.append("{");
+//                    builder.append(model.getId());
+//                    //                    builder.append("}");
+//                    builder.append(",");
+//                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isCheck()){
+                        builder.append(list.get(i).getId());
+                        builder.append(",");
+                    }
                 }
                 builder.deleteCharAt(builder.length() - 1);
                 if (builder.length() == 0) {
