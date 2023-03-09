@@ -74,8 +74,7 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
             progressBar.setProgress(6);
             progressBar.setMax(9);
         }
-        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
-        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
+
         list.add(new EducationQuestionInvestigateModel("冠心病", "1", false));
         list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
         list.add(new EducationQuestionInvestigateModel("合并神经病变", "3", false));

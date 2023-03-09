@@ -65,8 +65,6 @@ public class AnswerHeightWeightActivity extends UIBaseActivity {
             progressBar.setProgress(3);
             progressBar.setMax(9);
         }
-        Log.i("yys", " progressBar.setProgress==" + progressBar.getProgress());
-        Log.i("yys", " progressBar.setMax==" + progressBar.getMax());
     }
 
     private void initView() {
