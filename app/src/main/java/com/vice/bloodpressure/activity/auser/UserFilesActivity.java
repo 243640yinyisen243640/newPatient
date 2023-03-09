@@ -1,6 +1,5 @@
-package com.vice.bloodpressure.activity.login;
+package com.vice.bloodpressure.activity.auser;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +13,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.fragment.login.LoginCodeFragment;
-import com.vice.bloodpressure.fragment.login.LoginPwdFragment;
+import com.vice.bloodpressure.fragment.fuser.UserFilesBaseInfoFragment;
+import com.vice.bloodpressure.fragment.fuser.UserFilesFamilyFragment;
+import com.vice.bloodpressure.fragment.fuser.UserFilesIllFragment;
+import com.vice.bloodpressure.fragment.fuser.UserFilesLiveStyleFragment;
 
 import java.util.ArrayList;
 
@@ -23,34 +24,32 @@ import java.util.ArrayList;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:登录
+ * 描述:我的档案
  */
-public class LoginActivity extends UIBaseActivity {
+public class UserFilesActivity extends UIBaseActivity {
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        topViewManager().titleTextView().setText("登录");
-        topViewManager().backImageView().setVisibility(View.INVISIBLE);
-        topViewManager().moreTextView().setText("注册");
-        topViewManager().moreTextView().setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), RegisterActivity.class));
-        });
-        initView();
+        View view = View.inflate(getPageContext(), R.layout.activity_user_center_files, null);
+        radioGroup = view.findViewById(R.id.rg_user_files);
+        viewPager = view.findViewById(R.id.vp_user_files_info);
+        containerView().addView(view);
         initValue();
     }
 
     private void initValue() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        LoginPwdFragment pwdFragment = new LoginPwdFragment();
-        LoginCodeFragment codeFragment = new LoginCodeFragment();
-        fragments.add(pwdFragment);
-
-        fragments.add(codeFragment);
+        UserFilesBaseInfoFragment infoFragment = new UserFilesBaseInfoFragment();
+        UserFilesLiveStyleFragment liveStyleFragment = new UserFilesLiveStyleFragment();
+        UserFilesIllFragment illFragment = new UserFilesIllFragment();
+        UserFilesFamilyFragment familyFragment = new UserFilesFamilyFragment();
+        fragments.add(infoFragment);
+        fragments.add(liveStyleFragment);
+        fragments.add(illFragment);
+        fragments.add(familyFragment);
 
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         viewPager.setOffscreenPageLimit(fragments.size());
@@ -85,12 +84,5 @@ public class LoginActivity extends UIBaseActivity {
 
             }
         });
-    }
-
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_login, null);
-        radioGroup = view.findViewById(R.id.rg_login);
-        viewPager = view.findViewById(R.id.vp_login);
-        containerView().addView(view);
     }
 }

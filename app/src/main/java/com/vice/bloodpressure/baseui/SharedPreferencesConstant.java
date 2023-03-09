@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.baseui;
 
 public class SharedPreferencesConstant {
+
     /**
      * 用户ID
      */
@@ -10,4 +11,7 @@ public class SharedPreferencesConstant {
      * 推送的token
      */
     public static String CLIENT_ID = "client_id";
+
+    public static final String HEAD_IMG = "head_img";
+    public static final String NICK_NAME = "nick_name";
 }

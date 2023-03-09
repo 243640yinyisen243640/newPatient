@@ -40,4 +40,8 @@
     <string name="exercise_success_weight">，需要%1$s%2$s斤。已经为您制定了%3$s计划。</string>
     <string name="intelligence_run_num_unit">千卡</string>
     <string name="education_intelligence_subject_num">还有%1$s节课未学完</string>
+
+
+
+    <string name="user_center_age">年龄：%1$s岁</string>
 </resources>

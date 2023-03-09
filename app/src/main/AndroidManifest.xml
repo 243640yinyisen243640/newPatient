@@ -97,6 +97,8 @@
         <activity
             android:name=".baseui.WebViewHelperActivity"
             android:screenOrientation="portrait" />
+
+        <!--登录模块开始-->
         <!--登录-->
         <!--        <activity-->
         <!--            android:name=".activity.login.LoginActivity"-->
@@ -113,7 +115,7 @@
         <activity
             android:name=".activity.login.AnswerBeginActivity"
             android:screenOrientation="portrait" />
-        <!--登录答题内容页面-->
+        <!--登录答题内容页面开始-->
         <activity
             android:name=".activity.login.AnswerBeginContentActivity"
             android:screenOrientation="portrait" />
@@ -160,11 +162,19 @@
         <activity
             android:name=".activity.login.AnswerExerciseTimeRateActivity"
             android:screenOrientation="portrait" />
+
+        <!--登录答题内容页面结束-->
+
+
         <!-- 忘记密码-->
         <activity
             android:name=".activity.login.ForgetPwdActivity"
             android:screenOrientation="portrait" />
-        <!-- 首页 -->
+
+        <!--登录模块结束-->
+
+
+        <!-- 首页模块开始 -->
         <activity
             android:name=".activity.login.LoginActivity"
             android:label="@string/app_name"
@@ -241,6 +251,7 @@
         <activity
             android:name=".activity.ahome.aexercise.ExerciseIntelligenceActivity"
             android:screenOrientation="portrait" />
+        <!--运动模块答题开始-->
         <!--答题第一题-->
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanOneActivity"
@@ -258,16 +269,20 @@
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanExerciseActivity"
             android:screenOrientation="portrait" />
+
+        <!--运动模块答题结束-->
+        <!--运动记录-->
         <activity
             android:name=".activity.ahome.aexercise.ExerciseRecordListActivity"
             android:screenOrientation="portrait" />
+        <!--添加运动记录-->
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanAddRecordActivity"
             android:screenOrientation="portrait" />
+        <!--手动添加运动记录-->
         <activity
             android:name=".activity.ahome.aexercise.ExerciseRecordAddHandActivity"
             android:screenOrientation="portrait"
-
             android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden" />
 
         <!--服务模块-->
@@ -308,6 +323,39 @@
             android:name=".activity.ahome.aeducation.EducationDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+        <!-- 首页模块结束 -->
+
+
+        <!--个人中心模块开始-->
+        <activity
+            android:name=".activity.auser.UserQRCodeActivity"
+            android:screenOrientation="portrait" />
+        <!--我的收藏-->
+        <activity
+            android:name=".activity.auser.UserCollectActivity"
+            android:screenOrientation="portrait" />
+        <!--我的档案-->
+        <activity
+            android:name=".activity.auser.UserFilesActivity"
+            android:screenOrientation="portrait" />
+        <!--我的订单-->
+        <activity
+            android:name=".activity.auser.UserOrderListActivity"
+            android:screenOrientation="portrait" />
+        <!--我的设备-->
+        <activity
+            android:name=".activity.auser.UserEquipmetActivity"
+            android:screenOrientation="portrait" />
+        <!--设置-->
+        <activity
+            android:name=".activity.auser.UserSetActivity"
+            android:screenOrientation="portrait" />
+        <!--消息通知-->
+        <activity
+            android:name=".activity.auser.UserMsgListActivity"
+            android:screenOrientation="portrait" />
+
+        <!--个人中心模块结束-->
     </application>
 
 </manifest>

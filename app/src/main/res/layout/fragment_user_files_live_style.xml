@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/shape_green_4_18_2"
+            android:drawablePadding="7dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="生活方式"
+            android:textColor="@color/black_24"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="是否吸烟" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_smoke"
+                style="@style/user_file_right"
+                android:text="一条鱼" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="是否饮酒" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_drink"
+                style="@style/user_file_right"
+                android:text="一条鱼" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="是否妊娠" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_pregnant"
+                style="@style/user_file_right"
+                android:text="一条鱼" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="妊娠时间" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_pregnant_time"
+                style="@style/user_file_right"
+                android:text="一条鱼" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="婚姻状况" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_marriage"
+                style="@style/user_file_right"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="是否独居" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_alone"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="是否长期卧床" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_bed"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="文化程度" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_culture"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="职业情况" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_work"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="医疗支付方式" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_pay"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请选择" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/user_file_left"
+                android:text="就诊卡号" />
+
+            <TextView
+                android:id="@+id/tv_user_live_style_hos_card"
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:text="请输入就诊卡号" />
+        </LinearLayout>
+
+        <View style="@style/base_line" />
+    </LinearLayout>
+
+</ScrollView>

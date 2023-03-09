@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="@drawable/user_center_top_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_user_center_avatar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/user_center_default_head_img" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_user_center_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/user_center_female"
+                        android:drawablePadding="7dp"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textColor="@color/text_white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_center_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/user_center_age"
+                        android:textColor="@color/text_white"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_user_center_ill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="主要诊断："
+                        android:textColor="@color/text_white"
+                        android:textSize="13sp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_user_center_qrcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_bg_white_90"
+                    android:drawableLeft="@drawable/user_center_qr_code"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="10dp"
+                    android:text="二维码"
+                    android:textColor="@color/main_base_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="140dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_bg_white_10"
+                android:orientation="horizontal"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp">
+
+                <TextView
+                    android:id="@+id/tv_user_center_files"
+                    style="@style/user_center_about_user"
+                    android:drawableTop="@drawable/user_center_files"
+                    android:text="我的档案" />
+
+                <TextView
+                    android:id="@+id/tv_user_center_collect"
+                    style="@style/user_center_about_user"
+                    android:drawableTop="@drawable/user_center_my_like"
+                    android:text="我的收藏" />
+
+                <TextView
+                    android:id="@+id/tv_user_center_equipmet"
+                    style="@style/user_center_about_user"
+                    android:drawableTop="@drawable/user_center_my_equipmet"
+                    android:text="我的设备" />
+
+                <TextView
+                    android:id="@+id/tv_user_center_doctor"
+                    style="@style/user_center_about_user"
+                    android:drawableTop="@drawable/user_center_my_doctor"
+                    android:text="我的医生" />
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <LinearLayout
+                android:id="@+id/ll_user_center_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="我的订单"
+                    android:textColor="@color/black_24"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/diet_arrow_right"
+                    android:drawablePadding="10dp"
+                    android:text="查看全部"
+                    android:textColor="#878787"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/fl_user_center_wait_pay"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/user_center_about_order"
+                        android:drawableTop="@drawable/user_center_order_wait_pay"
+                        android:text="待付款" />
+                    <TextView
+                        android:id="@+id/tv_user_center_wait_pay_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|top"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/user_center_order_wait_pay"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="@color/text_white"
+                        android:textSize="11sp"
+                        android:visibility="gone" />
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/fl_user_center_push"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/user_center_about_order"
+                        android:layout_width="28dp"
+                        android:drawableTop="@drawable/user_center_order_wait"
+                        android:text="待发货" />
+
+                    <TextView
+                        android:id="@+id/tv_user_center_push_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|top"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/shape_red_6_6_circle"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="@color/text_white"
+                        android:textSize="11sp"
+                        android:visibility="gone" />
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/fl_user_center_to_be_received"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        style="@style/user_center_about_order"
+                        android:drawableTop="@drawable/user_center_order_wait_receive"
+                        android:text="待收货" />
+                    <TextView
+                        android:id="@+id/tv_user_center_received_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/user_center_order_wait_pay"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="@color/text_white"
+                        android:textSize="11sp"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/fl_user_center_order_finish"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        style="@style/user_center_about_order"
+                        android:drawableTop="@drawable/user_center_order_finish"
+                        android:text="已完成" />
+                    <TextView
+                        android:id="@+id/tv_user_center_order_finish_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/user_center_order_wait_pay"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="@color/text_white"
+                        android:textSize="11sp"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_user_center_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:drawableLeft="@drawable/user_center_message"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:drawablePadding="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="20dp"
+            android:text="消息列表"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_user_center_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_bg_white_10"
+            android:drawableLeft="@drawable/user_center_message"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:drawablePadding="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="20dp"
+            android:text="设置"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
