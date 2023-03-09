@@ -14,6 +14,7 @@ import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class AnswerSecondActivity extends UIBaseActivity {
 
     private void init() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-        progressBar = findViewById(R.id.pb_answer_content);
+        progressBar = view.findViewById(R.id.pb_answer_content);
         tvTitle = view.findViewById(R.id.tv_answer_content_title);
         tvMoro = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
@@ -100,6 +101,17 @@ public class AnswerSecondActivity extends UIBaseActivity {
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
+            StringBuilder builder = new StringBuilder();
+            for (EducationQuestionInvestigateModel model : list) {
+                //                    builder.append("{");
+                builder.append(model.getId());
+                //                    builder.append("}");
+                builder.append(",");
+            }
+            if (builder.length() == 0) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
+                return;
+            }
             int position = getIntent().getIntExtra("position", 0);
             Intent intent = new Intent(getPageContext(), AnswerThirdActivity.class);
             intent.putExtra("position", position);

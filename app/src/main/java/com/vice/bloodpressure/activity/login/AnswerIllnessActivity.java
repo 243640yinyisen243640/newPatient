@@ -15,6 +15,7 @@ import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,6 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
 
-
-
         tvUp.setOnClickListener(this);
         tvNext.setOnClickListener(this);
 
@@ -53,7 +52,7 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
 
     private void intView() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_ill, null);
-         progressBar = view.findViewById(R.id.pb_answer_ill);
+        progressBar = view.findViewById(R.id.pb_answer_ill);
         listView = view.findViewById(R.id.lv_answer_ill_investigate);
         tvUp = view.findViewById(R.id.tv_answer_ill_back);
         tvNext = view.findViewById(R.id.tv_answer_ill_next);
@@ -119,6 +118,10 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
                     builder.append(",");
                 }
                 builder.deleteCharAt(builder.length() - 1);
+                if (builder.length() == 0) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
+                    return;
+                }
                 Intent intent = new Intent(getPageContext(), AnswerMotionConditionsActivity.class);
                 intent.putExtra("position", position);
                 intent.putExtra("height", getIntent().getStringExtra("height"));

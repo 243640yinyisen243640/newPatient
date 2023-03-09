@@ -15,6 +15,7 @@ import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.login.AnswerExerciseStrengthAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,10 @@ public class AnswerExerciseStrengthActivity extends UIBaseActivity {
         containerView().addView(view);
         backTextView.setOnClickListener(v -> finish());
         nextTextView.setOnClickListener(v -> {
+            if (adapter.getClickPosition() == -1) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
+                return;
+            }
             Intent intent = new Intent(getPageContext(), AnswerNephromaActivity.class);
             intent.putExtra("position", position);
             intent.putExtra("height", getIntent().getStringExtra("height"));

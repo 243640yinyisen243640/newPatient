@@ -73,6 +73,7 @@ public class AnswerNephromaActivity extends UIBaseActivity {
 
         tvBack.setOnClickListener(v -> finish());
         tvSubmit.setOnClickListener(v -> {
+
             Log.i("yys", "chronicDisease==" + chronicDisease);
             Intent intent = new Intent(getPageContext(), AnswerIllnessActivity.class);
             intent.putExtra("position", position);

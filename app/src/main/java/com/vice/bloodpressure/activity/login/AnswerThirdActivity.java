@@ -15,6 +15,7 @@ import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.login.AnswerExerciseStrengthAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class AnswerThirdActivity extends UIBaseActivity {
             startActivity(new Intent(getPageContext(), MainActivity.class));
         });
         position = getIntent().getIntExtra("position", 0);
-        Log.i("yys","position==="+position);
+        Log.i("yys", "position===" + position);
         init();
         initValues();
     }
@@ -84,7 +85,7 @@ public class AnswerThirdActivity extends UIBaseActivity {
         if (position == 0) {
             progressBar.setMax(12);
             progressBar.setProgress(4);
-        }else {
+        } else {
             progressBar.setMax(11);
             progressBar.setProgress(3);
         }
@@ -92,11 +93,9 @@ public class AnswerThirdActivity extends UIBaseActivity {
 
     private void init() {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
-
-
-         progressBar = view.findViewById(R.id.pb_answer_content);
-         tvTitle = view.findViewById(R.id.tv_answer_content_title);
-         tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        progressBar = view.findViewById(R.id.pb_answer_content);
+        tvTitle = view.findViewById(R.id.tv_answer_content_title);
+        tvMoro = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
         TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
@@ -104,6 +103,10 @@ public class AnswerThirdActivity extends UIBaseActivity {
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
+            if (adapter.getClickPosition() == -1) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
+                return;
+            }
             Intent intent = new Intent(getPageContext(), AnswerfourthActivity.class);
             intent.putExtra("position", position);
             startActivity(intent);

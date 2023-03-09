@@ -34,15 +34,32 @@
             android:background="@drawable/shape_bg_white_10"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_bg_white_90"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:text="为制定符合自己的控制方案，请认真完成以下问题"
-                android:textColor="#9A9A9A"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="为制定符合自己的控制方案，请认真完成以下问题"
+                    android:textColor="#9F9F9F"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="1dp"
+                    android:background="#E9E9E9" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,8 +75,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"
                     android:textColor="#242424"
-                    android:textSize="20sp"
-                    android:visibility="gone"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/tv_answer_content_more"

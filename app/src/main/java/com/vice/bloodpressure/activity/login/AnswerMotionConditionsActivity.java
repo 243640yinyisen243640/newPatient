@@ -67,7 +67,6 @@ public class AnswerMotionConditionsActivity extends UIBaseActivity implements Vi
         unFitTv = view.findViewById(R.id.tv_answer_motion_back);
         fitTv = view.findViewById(R.id.tv_answer_motion_next);
         progressBar = view.findViewById(R.id.pb_answer_motion);
-
         containerView().addView(view);
     }
 
