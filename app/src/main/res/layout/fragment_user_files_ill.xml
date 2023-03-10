@@ -50,7 +50,7 @@
                     android:text="疾病类型" />
 
                 <TextView
-                    android:id="@+id/tv_user_base_info_name"
+                    android:id="@+id/tv_user_files_ill_name"
                     style="@style/user_file_right"
                     android:text="糖尿病  1型糖尿病" />
             </LinearLayout>

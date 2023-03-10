@@ -354,6 +354,10 @@
         <activity
             android:name=".activity.auser.UserMsgListActivity"
             android:screenOrientation="portrait" />
+        <!--抽烟喝酒-->
+        <activity
+            android:name=".activity.auser.UserSmokeDrinkActivity"
+            android:screenOrientation="portrait" />
 
         <!--个人中心模块结束-->
     </application>
