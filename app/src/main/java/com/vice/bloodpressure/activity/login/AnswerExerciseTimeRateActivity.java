@@ -58,16 +58,16 @@ public class AnswerExerciseTimeRateActivity extends UIBaseActivity {
             adapter.setClickPosition(position);
         });
         if (position == 0) {
-            progressBar.setProgress(11);
+            progressBar.setProgress(12);
             progressBar.setMax(12);
         } else if (position == 1) {
-            progressBar.setProgress(8);
+            progressBar.setProgress(10);
             progressBar.setMax(10);
         } else if (position == 5) {
-            progressBar.setProgress(7);
+            progressBar.setProgress(8);
             progressBar.setMax(8);
         } else {
-            progressBar.setProgress(8);
+            progressBar.setProgress(9);
             progressBar.setMax(9);
         }
 

@@ -104,6 +104,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
             }
             Intent intent;
             switch (adapter.getClickPosition()) {
+
                 case 0:
                     intent = new Intent(getPageContext(), AnswerFirstTypeActivity.class);
                     intent.putExtra("position", adapter.getClickPosition());
@@ -112,11 +113,12 @@ public class AnswerFirstActivity extends UIBaseActivity {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     intent = new Intent(getPageContext(), AnswerfourthActivity.class);
                     intent.putExtra("position", adapter.getClickPosition());
                     startActivity(intent);
                     break;
-                case 4:
+                case 5:
                     intent = new Intent(getPageContext(), AnswerHeightWeightActivity.class);
                     intent.putExtra("position", adapter.getClickPosition());
                     startActivity(intent);

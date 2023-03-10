@@ -54,7 +54,7 @@ public class AnswerExerciseHabitActivity extends UIBaseActivity {
             progressBar.setProgress(11);
             progressBar.setMax(12);
         } else if (position == 1) {
-            progressBar.setProgress(8);
+            progressBar.setProgress(9);
             progressBar.setMax(10);
         } else if (position == 5) {
             progressBar.setProgress(7);
