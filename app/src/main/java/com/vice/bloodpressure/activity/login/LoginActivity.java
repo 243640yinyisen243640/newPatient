@@ -35,7 +35,7 @@ public class LoginActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
 
         topViewManager().titleTextView().setText("登录");
-        topViewManager().backImageView().setVisibility(View.INVISIBLE);
+        topViewManager().backTextView().setVisibility(View.INVISIBLE);
         topViewManager().moreTextView().setText("注册");
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), RegisterActivity.class));

@@ -117,6 +117,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
     @Override
     protected void onCreate() {
         topViewManager().titleTextView().setText("个人中心");
+        topViewManager().backTextView().setVisibility(View.GONE);
         initView();
         initValue();
         initListener();

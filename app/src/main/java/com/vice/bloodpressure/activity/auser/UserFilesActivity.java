@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +16,7 @@ import com.vice.bloodpressure.fragment.fuser.UserFilesBaseInfoFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesFamilyFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesIllFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesLiveStyleFragment;
+import com.vice.bloodpressure.view.NestRadioGroup;
 
 import java.util.ArrayList;
 
@@ -27,18 +27,25 @@ import java.util.ArrayList;
  * 描述:我的档案
  */
 public class UserFilesActivity extends UIBaseActivity {
-    private RadioGroup radioGroup;
+    private NestRadioGroup radioGroup;
     private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().topView().setBackgroundColor(getResources().getColor(R.color.main_base_color));
+        topViewManager().statusBarView().setBackgroundColor(getResources().getColor(R.color.main_base_color));
+        topViewManager().titleTextView().setTextColor(getResources().getColor(R.color.text_white));
+        topViewManager().backTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_top_back_white, 0, 0, 0);
+        topViewManager().titleTextView().setText("我的档案");
+        topViewManager().lineViewVisibility(View.GONE);
         View view = View.inflate(getPageContext(), R.layout.activity_user_center_files, null);
         radioGroup = view.findViewById(R.id.rg_user_files);
         viewPager = view.findViewById(R.id.vp_user_files_info);
         containerView().addView(view);
         initValue();
     }
+
 
     private void initValue() {
         ArrayList<Fragment> fragments = new ArrayList<>();

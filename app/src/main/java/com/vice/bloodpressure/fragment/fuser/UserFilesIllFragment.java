@@ -12,9 +12,13 @@ import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
  * 描述:
  */
 public class UserFilesIllFragment extends UIBaseLoadFragment {
+
+
     @Override
     protected void onCreate() {
+        topViewManager().topView().removeAllViews();
         View view = View.inflate(getPageContext(), R.layout.fragment_user_files_ill,null);
+
         containerView().addView(view);
     }
 

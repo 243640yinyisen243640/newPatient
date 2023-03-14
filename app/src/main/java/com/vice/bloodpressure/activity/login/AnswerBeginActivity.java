@@ -24,7 +24,7 @@ public class AnswerBeginActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("个性化健康方案定制");
         topViewManager().moreTextView().setText("跳过答题");
-        topViewManager().backImageView().setOnClickListener(v -> startActivity(new Intent(getPageContext(),MainActivity.class)));
+        topViewManager().backTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(),MainActivity.class)));
         topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), MainActivity.class)));
         initView();
     }

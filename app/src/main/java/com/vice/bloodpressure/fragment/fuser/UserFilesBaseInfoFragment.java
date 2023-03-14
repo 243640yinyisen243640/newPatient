@@ -36,6 +36,8 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
 
     @Override
     protected void onCreate() {
+        topViewManager().topView().removeAllViews();
+
         initView();
         initListener();
     }
@@ -73,6 +75,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                 chooseSexWindow();
                 break;
             case R.id.tv_user_base_info_city:
+
                 break;
             case R.id.tv_user_base_info_sos_name:
                 showEditDialog("紧急联系人", "请输入紧急联系人名称");
@@ -98,7 +101,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         TextView sureTextView = getViewByID(view, R.id.tv_dialog_sure);
 
         titleTextView.setText(title);
-        msgEditText.setText(msg);
+        msgEditText.setHint(msg);
         //  msgEditText.setSelection(msg.length());
         //设置14个字长
         msgEditText.setMaxWidth(11);

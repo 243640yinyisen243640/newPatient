@@ -8,12 +8,17 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.auser.UserSmokeDrinkActivity;
+import com.vice.bloodpressure.activity.auser.UserDrinkActivity;
+import com.vice.bloodpressure.activity.auser.UserPayStyleActivity;
+import com.vice.bloodpressure.activity.auser.UserSmokeActivity;
+import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
@@ -56,6 +61,14 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
      */
     private TextView pregnantTimeTv;
     /**
+     * 怀孕时间
+     */
+    private LinearLayout pregnantTimeLinearLayout;
+    /**
+     * 怀孕时间
+     */
+    private View pregnantTimeView;
+    /**
      * 是否结婚
      */
     private TextView marriageTv;
@@ -83,11 +96,34 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
      * 就诊卡号
      */
     private TextView hosCardTv;
+    /**
+     * 是否妊娠
+     */
+    private String isPregnant;
+    /**
+     * 是否怀孕
+     */
+    private String isMarriage;
+    /**
+     * 是否独居
+     */
+    private String isAlone;
+    /**
+     * 是否卧床
+     */
+    private String isInBed;
+    /**
+     * 文化程度
+     */
+    private String culture;
+    /**
+     * 工作类型
+     */
+    private String workType;
 
     @Override
     protected void onCreate() {
-        View view = View.inflate(getPageContext(), R.layout.fragment_user_files_live_style, null);
-        containerView().addView(view);
+        topViewManager().topView().removeAllViews();
 
         initView();
         initListener();
@@ -118,6 +154,8 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         smokeTv = view.findViewById(R.id.tv_user_live_style_smoke);
         drinkTv = view.findViewById(R.id.tv_user_live_style_drink);
         pregnantTv = view.findViewById(R.id.tv_user_live_style_pregnant);
+        pregnantTimeLinearLayout = view.findViewById(R.id.ll_user_live_style_pregnant_time);
+        pregnantTimeView = view.findViewById(R.id.view_user_live_style_pregnant_time_line);
         pregnantTimeTv = view.findViewById(R.id.tv_user_live_style_pregnant_time);
         marriageTv = view.findViewById(R.id.tv_user_live_style_marriage);
         aloneTv = view.findViewById(R.id.tv_user_live_style_alone);
@@ -134,58 +172,137 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_user_live_style_smoke:
-                intent = new Intent(getPageContext(), UserSmokeDrinkActivity.class);
-                intent.putExtra("type", "1");
+                intent = new Intent(getPageContext(), UserSmokeActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_FOR_SMOKE_STYLE);
                 break;
             case R.id.tv_user_live_style_drink:
-                intent = new Intent(getPageContext(), UserSmokeDrinkActivity.class);
-                intent.putExtra("type", "2");
+                intent = new Intent(getPageContext(), UserDrinkActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_FOR_DRINK_STYLE);
                 break;
             case R.id.tv_user_live_style_pregnant:
-                showEditDialog("紧急联系人", "请输入紧急联系人名称");
+                List<String> pregnantList = new ArrayList<>();
+                pregnantList.add("是");
+                pregnantList.add("否");
+
+                chooseWindow("1", "妊娠", pregnantList);
+
                 break;
             case R.id.tv_user_live_style_pregnant_time:
-                showEditDialog("联系方式", "请输入联系方式");
-                break;
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                    @Override
+                    public void callBack(Object object) {
+                        String born = object.toString();
+                        pregnantTimeTv.setText(object.toString());
+                    }
+                });
             case R.id.tv_user_live_style_marriage:
-                showEditDialog("联系方式", "请输入联系方式");
+                List<String> marriageList = new ArrayList<>();
+                marriageList.add("已婚");
+                marriageList.add("未婚");
+                marriageList.add("其他");
+                chooseWindow("2", "婚姻", marriageList);
                 break;
             case R.id.tv_user_live_style_alone:
-                showEditDialog("联系方式", "请输入联系方式");
+                List<String> aloneList = new ArrayList<>();
+                aloneList.add("是");
+                aloneList.add("否");
+                aloneList.add("未知");
+
+                chooseWindow("3", "独居", aloneList);
                 break;
             case R.id.tv_user_live_style_bed:
-                showEditDialog("联系方式", "请输入联系方式");
+                //                DialogUtils.showOperDialog(getPageContext(), "", "是否解除该设备？", "我再想想", "确定", (dialog, which) -> {
+                //                    dialog.dismiss();
+                //                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                //                        dialog.dismiss();
+                //                    }
+                //                });
+                List<String> isInBedList = new ArrayList<>();
+                isInBedList.add("是");
+                isInBedList.add("否");
+                isInBedList.add("未知");
+                chooseWindow("4", "卧床", isInBedList);
                 break;
             case R.id.tv_user_live_style_culture:
-                showEditDialog("联系方式", "请输入联系方式");
+                List<String> cultureList = new ArrayList<>();
+                cultureList.add("研究生");
+                cultureList.add("大学本科");
+                cultureList.add("大学专科和专科学院");
+                cultureList.add("中等专业学校");
+                cultureList.add("技工学校");
+                cultureList.add("高中");
+                cultureList.add("初中");
+                cultureList.add("小学");
+                cultureList.add("文盲或半文盲");
+                cultureList.add("未知");
+                chooseWindow("5", "文化程度", cultureList);
+
                 break;
             case R.id.tv_user_live_style_work:
-                showEditDialog("联系方式", "请输入联系方式");
+                List<String> workList = new ArrayList<>();
+                workList.add("轻体力");
+                workList.add("中体力");
+                workList.add("重体力");
+                chooseWindow("6", "职业情况", workList);
                 break;
             case R.id.tv_user_live_style_pay:
-                showEditDialog("联系方式", "请输入联系方式");
+                intent = new Intent(getPageContext(), UserPayStyleActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tv_user_live_style_hos_card:
-                showEditDialog("联系方式", "请输入联系方式");
+                showEditDialog("就诊卡号", "请输入就诊卡号");
                 break;
-
             default:
                 break;
         }
     }
 
     /**
-     *
+     * @param type  1:是否妊娠 2是否结婚 3：是否独居 4：是否卧床 5：文化程度  6：职业情况
+     * @param title
+     * @param list
      */
-    private void chooseSexWindow() {
-        List<String> exerciseList = new ArrayList<>();
-        exerciseList.add("是");
-        exerciseList.add("否");
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, object -> {
-                    //sexTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-                    String sex = exerciseList.get(Integer.parseInt(String.valueOf(object)));
+    private void chooseWindow(String type, String title, List<String> list) {
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), title, list, object -> {
+                    int position = Integer.parseInt(String.valueOf(object));
+                    String text = list.get(Integer.parseInt(String.valueOf(object)));
+                    switch (type) {
+                        case "1":
+                            isPregnant = position + "";
+                            pregnantTv.setText(text);
+                            if ("1".equals(isPregnant)) {
+                                pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+                                pregnantTimeView.setVisibility(View.VISIBLE);
+                            } else {
+                                pregnantTimeLinearLayout.setVisibility(View.GONE);
+                                pregnantTimeView.setVisibility(View.GONE);
+                            }
+
+                            break;
+                        case "2":
+                            isMarriage = position + "";
+                            marriageTv.setText(text);
+                            break;
+                        case "3":
+                            isAlone = position + "";
+                            aloneTv.setText(text);
+                            break;
+                        case "4":
+                            isInBed = position + "";
+                            bedTv.setText(text);
+                            break;
+                        case "5":
+                            culture = position + "";
+                            cultureTv.setText(text);
+                            break;
+                        case "6":
+                            workType = position + "";
+                            workTv.setText(text);
+                            break;
+                        default:
+                            break;
+
+                    }
                 }
         );
     }
@@ -245,7 +362,6 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
             }
         }
     }
-
 
 
     private void showInputMethod() {

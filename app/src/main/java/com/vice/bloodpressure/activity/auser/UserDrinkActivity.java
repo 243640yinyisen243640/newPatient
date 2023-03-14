@@ -21,32 +21,28 @@ import java.util.List;
 /**
  * 作者: beauty
  * 类名:
- * 传参:type  1：抽烟  2：喝酒
- * 描述:抽烟喝酒的编辑数量
+ * 传参:
+ * 描述:喝酒的编辑数量
  */
-public class UserSmokeDrinkActivity extends UIBaseActivity {
+public class UserDrinkActivity extends UIBaseActivity {
 
     private TextView titleTextView;
     private CheckBox yesCb;
     private CheckBox noCb;
     private LinearLayout smokeLinerLayout;
-    private EditText smokeNumEt;
     private ImageView arrowImageView;
     private TextView typeTv;
     private EditText drinkNumEt;
     private LinearLayout drinkLinerLayout;
     private TextView sureTv;
-    /**
-     * 1：抽烟  2：喝酒
-     */
-    private String type;
+
 
     private String drinkType = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        type = getIntent().getStringExtra("type");
+        topViewManager().titleTextView().setText("饮酒");
         initView();
         initListener();
     }
@@ -56,15 +52,21 @@ public class UserSmokeDrinkActivity extends UIBaseActivity {
             if (isChecked) {
                 noCb.setChecked(false);
                 arrowImageView.setVisibility(View.VISIBLE);
-                arrowImageView.setVisibility(View.VISIBLE);
+                drinkLinerLayout.setVisibility(View.VISIBLE);
             } else {
                 noCb.setChecked(true);
+                arrowImageView.setVisibility(View.GONE);
+                drinkLinerLayout.setVisibility(View.GONE);
             }
         });
         noCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                arrowImageView.setVisibility(View.GONE);
+                drinkLinerLayout.setVisibility(View.GONE);
                 yesCb.setChecked(false);
             } else {
+                arrowImageView.setVisibility(View.VISIBLE);
+                drinkLinerLayout.setVisibility(View.VISIBLE);
                 yesCb.setChecked(true);
             }
         });
@@ -74,14 +76,9 @@ public class UserSmokeDrinkActivity extends UIBaseActivity {
         });
         sureTv.setOnClickListener(v -> {
             Intent intent = new Intent();
-            if ("1".equals(type)) {
-                intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-                intent.putExtra("smokeNum", smokeNumEt.getText().toString().trim());
-            } else {
-                intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-                intent.putExtra("drinkNum", drinkNumEt.getText().toString().trim());
-                intent.putExtra("drinkType", drinkType);
-            }
+            intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
+            intent.putExtra("drinkNum", drinkNumEt.getText().toString().trim());
+            intent.putExtra("drinkType", drinkType);
             setResult(RESULT_OK, intent);
             finish();
         });
@@ -112,22 +109,15 @@ public class UserSmokeDrinkActivity extends UIBaseActivity {
         titleTextView = view.findViewById(R.id.tv_files_smoke_drink_title);
         yesCb = view.findViewById(R.id.cb_files_smoke_drink_yes);
         noCb = view.findViewById(R.id.cb_files_smoke_drink_no);
-        smokeNumEt = view.findViewById(R.id.iv_files_smoke);
-        arrowImageView = view.findViewById(R.id.et_files_smoke_drink_smoke_num);
+        arrowImageView = view.findViewById(R.id.iv_files_smoke);
         smokeLinerLayout = view.findViewById(R.id.ll_files_smoke);
         typeTv = view.findViewById(R.id.tv_files_smoke_drink_type);
         drinkNumEt = view.findViewById(R.id.et_files_smoke_drink_num);
         drinkLinerLayout = view.findViewById(R.id.ll_files_drink);
         sureTv = view.findViewById(R.id.tv_files_smoke_drink_sure);
-        if ("1".equals(type)) {
-            titleTextView.setText("是否吸烟");
-            smokeLinerLayout.setVisibility(View.VISIBLE);
-            drinkLinerLayout.setVisibility(View.GONE);
-        } else {
-            titleTextView.setText("是否饮酒");
-            smokeLinerLayout.setVisibility(View.GONE);
-            drinkLinerLayout.setVisibility(View.VISIBLE);
-        }
+        titleTextView.setText("是否饮酒");
+        smokeLinerLayout.setVisibility(View.GONE);
+        drinkLinerLayout.setVisibility(View.VISIBLE);
     }
 
 }

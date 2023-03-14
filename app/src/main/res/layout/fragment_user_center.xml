@@ -188,6 +188,7 @@
                         style="@style/user_center_about_order"
                         android:drawableTop="@drawable/user_center_order_wait_pay"
                         android:text="待付款" />
+
                     <TextView
                         android:id="@+id/tv_user_center_wait_pay_num"
                         android:layout_width="wrap_content"
@@ -214,7 +215,7 @@
 
                     <TextView
                         style="@style/user_center_about_order"
-                        android:layout_width="28dp"
+                        android:layout_width="wrap_content"
                         android:drawableTop="@drawable/user_center_order_wait"
                         android:text="待发货" />
 
@@ -247,6 +248,7 @@
                         style="@style/user_center_about_order"
                         android:drawableTop="@drawable/user_center_order_wait_receive"
                         android:text="待收货" />
+
                     <TextView
                         android:id="@+id/tv_user_center_received_num"
                         android:layout_width="wrap_content"
@@ -274,6 +276,7 @@
                         style="@style/user_center_about_order"
                         android:drawableTop="@drawable/user_center_order_finish"
                         android:text="已完成" />
+
                     <TextView
                         android:id="@+id/tv_user_center_order_finish_num"
                         android:layout_width="wrap_content"
@@ -294,43 +297,51 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_user_center_message"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:background="@drawable/shape_bg_white_10"
-            android:drawableLeft="@drawable/user_center_message"
-            android:drawableRight="@drawable/arrow_right_gray"
-            android:drawablePadding="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="20dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="20dp"
-            android:text="消息列表"
-            android:textColor="@color/black_24"
-            android:textSize="15sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_user_center_set"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/shape_bg_white_10"
-            android:drawableLeft="@drawable/user_center_message"
-            android:drawableRight="@drawable/arrow_right_gray"
-            android:drawablePadding="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="20dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="20dp"
-            android:text="设置"
-            android:textColor="@color/black_24"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_user_center_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableLeft="@drawable/user_center_message"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp"
+                android:text="消息列表"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+            <View style="@style/base_line"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_user_center_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:drawableLeft="@drawable/user_center_set"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp"
+                android:text="设置"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -1,7 +1,5 @@
 package com.vice.bloodpressure.basemodel;
 
-import com.vice.bloodpressure.R;
-
 public class TopViewInfo {
     public String topBackgroundColor = "#FFFFFF";
     public int topBackgroundDrawableRes = 0;
@@ -9,7 +7,7 @@ public class TopViewInfo {
     public int titleSize = 20;//单位sp
     public String titleTextColor = "#242424";
     public int titleLeftDrawable = 0;
-    public int backLeftDrawable = R.drawable.top_back_black;
+    public int backLeftDrawable = 0;
     public int moreSize = 17;//单位sp
     public String moreTextColor = "#00C27F";
     public String topLineColor = "#F3F3F3";

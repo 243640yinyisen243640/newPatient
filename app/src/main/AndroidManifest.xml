@@ -358,6 +358,15 @@
         <activity
             android:name=".activity.auser.UserSmokeDrinkActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.auser.UserSmokeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.auser.UserDrinkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.auser.UserPayStyleActivity"
+            android:screenOrientation="portrait" />
 
         <!--个人中心模块结束-->
     </application>

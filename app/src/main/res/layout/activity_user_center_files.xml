@@ -63,21 +63,21 @@
                 style="@style/user_center_files_check"
                 android:layout_marginLeft="10dp"
                 android:baselineAligned="false"
-                android:drawableTop="@drawable/user_files_base_ino"
+                android:drawableTop="@drawable/user_files_life_style"
                 android:text="生活方式" />
 
             <RadioButton
                 style="@style/user_center_files_check"
                 android:layout_marginLeft="10dp"
                 android:baselineAligned="false"
-                android:drawableTop="@drawable/user_files_base_ino"
+                android:drawableTop="@drawable/user_files_ill_type"
                 android:text="疾病诊断" />
 
             <RadioButton
                 style="@style/user_center_files_check"
                 android:layout_marginLeft="10dp"
                 android:baselineAligned="false"
-                android:drawableTop="@drawable/user_files_base_ino"
+                android:drawableTop="@drawable/user_files_family"
                 android:text="家族史" />
         </com.vice.bloodpressure.view.NestRadioGroup>
 
@@ -93,6 +93,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="-90dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/shape_bg_white_10"/>
 
 

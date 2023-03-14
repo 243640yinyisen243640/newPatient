@@ -56,7 +56,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().backImageView().setVisibility(View.INVISIBLE);
+        topViewManager().backTextView().setVisibility(View.INVISIBLE);
         topViewManager().titleTextView().setText("完善个人信息");
         initView();
         initValue();
