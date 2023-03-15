@@ -195,6 +195,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         pregnantTimeTv.setText(object.toString());
                     }
                 });
+                break;
             case R.id.tv_user_live_style_marriage:
                 List<String> marriageList = new ArrayList<>();
                 marriageList.add("已婚");
@@ -353,9 +354,30 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_FOR_SMOKE_STYLE:
+                    if (data!=null){
+                        String isSmoke = data.getStringExtra("isCheck");
+                        String smokeNum = data.getStringExtra("smokeNum");
+                        if ("1".equals(isSmoke)){
+                            smokeTv.setText("是 "+smokeNum+"日/支");
+                        }else {
+                            smokeTv.setText("否");
+                        }
+                    }
+
 
                     break;
                 case REQUEST_CODE_FOR_DRINK_STYLE:
+                    if (data!=null){
+                        String isDrink = data.getStringExtra("isCheck");
+                        String drinkNum = data.getStringExtra("drinkNum");
+                        String drinkType = data.getStringExtra("drinkType");
+                        String drinkName = data.getStringExtra("drinkName");
+                        if ("1".equals(isDrink)){
+                            drinkTv.setText("是 "+drinkName+" "+drinkNum+"ml/日");
+                        }else {
+                            drinkTv.setText("否");
+                        }
+                    }
                     break;
                 default:
                     break;

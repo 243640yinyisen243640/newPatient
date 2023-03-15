@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.activity.auser;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,7 +8,6 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
@@ -31,11 +29,7 @@ public class UserPayStyleActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         intView();
         initValues();
-        topViewManager().titleTextView().setText("个性化健康方案定制");
-        topViewManager().moreTextView().setText("跳过答题");
-        topViewManager().moreTextView().setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), MainActivity.class));
-        });
+        topViewManager().titleTextView().setText("医疗支付方式");
     }
 
     private void intView() {

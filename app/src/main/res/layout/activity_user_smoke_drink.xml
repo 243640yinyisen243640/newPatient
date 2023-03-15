@@ -100,6 +100,7 @@
                 <EditText
                     android:id="@+id/et_files_smoke_drink_smoke_num"
                     android:layout_width="0dp"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
@@ -184,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
+                    android:inputType="number"
                     android:background="@drawable/shape_bg_white_black_90_1"
                     android:gravity="center"
                     android:hint="请输入数值"

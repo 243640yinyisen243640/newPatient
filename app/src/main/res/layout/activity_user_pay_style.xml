@@ -66,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginTop="50dp"
             android:background="@drawable/shape_bg_white_10_10_0_0"
             android:padding="10dp">
 
@@ -75,7 +76,7 @@
                 android:background="@drawable/shape_bg_main_gra_90"
                 android:gravity="center"
                 android:padding="13dp"
-                android:text="@string/sure"
+                android:text="保存"
                 android:textColor="@color/text_white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -25,40 +25,12 @@
             android:textSize="17sp"
             android:textStyle="bold" />
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View style="@style/base_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="主要诊断"
-                android:textColor="@color/black_24"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/user_file_left"
-                    android:text="疾病类型" />
-
-                <TextView
-                    android:id="@+id/tv_user_files_ill_name"
-                    style="@style/user_file_right"
-                    android:text="糖尿病  1型糖尿病" />
-            </LinearLayout>
-
-            <View style="@style/base_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,12 +41,75 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:text="主要诊断"
                     android:textColor="@color/black_24"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_user_files_ill_important_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_white_green_90_1"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="6dp"
+                    android:text="添加"
+                    android:textColor="@color/main_base_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <View style="@style/base_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_user_files_ill_important"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/user_file_left"
+                        android:text="疾病类型" />
+
+                    <TextView
+                        android:id="@+id/tv_user_files_ill_name"
+                        style="@style/user_file_right"
+                        android:text="糖尿病  1型糖尿病" />
+
+
+                </LinearLayout>
+
+                <View style="@style/base_line" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="其他诊断"
+                    android:textColor="@color/black_24"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_user_files_ill_other_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_green_90_1"
@@ -89,20 +124,28 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_user_files_ill_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/user_file_left"
-                    android:text="疾病类型" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/user_file_right"
-                    android:text="高血压  2级高血压  中危" />
+                    <TextView
+                        style="@style/user_file_left"
+                        android:text="疾病类型" />
+
+                    <TextView
+                        style="@style/user_file_right"
+                        android:text="高血压  2级高血压  中危" />
+                </LinearLayout>
+
+                <View style="@style/base_line" />
             </LinearLayout>
 
-            <View style="@style/base_line" />
 
         </LinearLayout>
 

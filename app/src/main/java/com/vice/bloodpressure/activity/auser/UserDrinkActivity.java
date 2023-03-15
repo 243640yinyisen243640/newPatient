@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.auser;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class UserDrinkActivity extends UIBaseActivity {
 
 
     private String drinkType = "0";
+    private String drinkName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,8 +79,9 @@ public class UserDrinkActivity extends UIBaseActivity {
         sureTv.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-            intent.putExtra("drinkNum", drinkNumEt.getText().toString().trim());
+            intent.putExtra("drinkNum", TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim());
             intent.putExtra("drinkType", drinkType);
+            intent.putExtra("drinkName", drinkName);
             setResult(RESULT_OK, intent);
             finish();
         });
@@ -90,15 +93,17 @@ public class UserDrinkActivity extends UIBaseActivity {
      * 酒的种类
      */
     private void chooseDrinkTypeWindow() {
-        List<String> exerciseList = new ArrayList<>();
-        exerciseList.add("白酒");
-        exerciseList.add("啤酒");
-        exerciseList.add("红酒");
-        exerciseList.add("黄酒");
+        List<String> drinkList = new ArrayList<>();
+        drinkList.add("白酒");
+        drinkList.add("啤酒");
+        drinkList.add("红酒");
+        drinkList.add("黄酒");
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", exerciseList, object -> {
-                    typeTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-                    drinkType = exerciseList.get(Integer.parseInt(String.valueOf(object)));
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", drinkList, object -> {
+                    drinkName = drinkList.get(Integer.parseInt(String.valueOf(object)));
+                    typeTv.setText(drinkName);
+                    drinkType = drinkList.get(Integer.parseInt(String.valueOf(object)));
+
                 }
         );
     }

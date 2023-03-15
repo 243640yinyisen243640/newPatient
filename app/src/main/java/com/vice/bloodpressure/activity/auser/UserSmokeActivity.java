@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.auser;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -69,7 +70,7 @@ public class UserSmokeActivity extends UIBaseActivity {
         sureTv.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-            intent.putExtra("smokeNum", smokeNumEt.getText().toString().trim());
+            intent.putExtra("smokeNum", TextUtils.isEmpty(smokeNumEt.getText().toString().trim())?"":smokeNumEt.getText().toString().trim());
             setResult(RESULT_OK, intent);
             finish();
         });
