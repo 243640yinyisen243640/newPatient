@@ -439,8 +439,8 @@
     <style name="user_file_left">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingTop">17dp</item>
-        <item name="android:paddingBottom">17dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
         <item name="android:textColor">#555555</item>
         <item name="android:textSize">15sp</item>
     </style>

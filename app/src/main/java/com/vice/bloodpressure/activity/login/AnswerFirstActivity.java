@@ -33,6 +33,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
     private ProgressBar progressBar;
     private TextView tvTitle;
     private TextView tvMoro;
+    private TextView tvLater;
     //是否多选
     private boolean isChooseMore;
 
@@ -55,6 +56,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
         list.add(new EducationQuestionInvestigateModel("冠心病", "3", false));
         list.add(new EducationQuestionInvestigateModel("慢性阻塞性肺疾病", "4", false));
         list.add(new EducationQuestionInvestigateModel("脑卒中", "5", false));
+        list.add(new EducationQuestionInvestigateModel("糖尿病前期", "6", false));
         list.add(new EducationQuestionInvestigateModel("都没有", "0", false));
 
         adapter = new AnswerExerciseStrengthAdapter(list, getPageContext());
@@ -84,6 +86,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
         progressBar.setProgress(1);
         tvTitle.setText("您是否患有下列疾病？");
         tvMoro.setVisibility(View.GONE);
+        tvLater.setVisibility(View.VISIBLE);
     }
 
     private void init() {
@@ -91,6 +94,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
         progressBar = view.findViewById(R.id.pb_answer_content);
         tvTitle = view.findViewById(R.id.tv_answer_content_title);
         tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        tvLater = view.findViewById(R.id.tv_answer_content_more_later);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
         TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
@@ -119,6 +123,7 @@ public class AnswerFirstActivity extends UIBaseActivity {
                     startActivity(intent);
                     break;
                 case 5:
+                case 6:
                     intent = new Intent(getPageContext(), AnswerHeightWeightActivity.class);
                     intent.putExtra("position", adapter.getClickPosition());
                     startActivity(intent);

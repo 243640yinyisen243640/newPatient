@@ -367,6 +367,10 @@
         <activity
             android:name=".activity.auser.UserPayStyleActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.auser.UserIllImportantActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.auser.UserIllPlusActivity"
+            android:screenOrientation="portrait"/>
 
         <!--个人中心模块结束-->
     </application>

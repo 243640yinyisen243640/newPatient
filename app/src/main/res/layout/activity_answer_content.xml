@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="6dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="21dp"
+            android:layout_marginBottom="15dp"
             android:max="6"
             android:progress="1"
             android:progressDrawable="@drawable/diet_programme_progress_bar" />
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"
                     android:textColor="#242424"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_answer_content_more"
@@ -85,20 +85,30 @@
                     android:text="(可多选)"
                     android:textColor="#B7B7B7"
                     android:textSize="15sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_answer_content_more_later"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="5dp"
+                android:text="(可在我的档案中丰富更多疾病信息)"
+                android:textColor="#9F9F9F"
+                android:textSize="12sp"
+                android:visibility="gone"/>
 
 
             <ListView
                 android:id="@+id/lv_answer_content_investigate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:dividerHeight="10dp"
+                android:layout_margin="20dp"
                 android:divider="@color/transparent"
-                android:listSelector="@color/transparent"
-                android:layout_margin="20dp" />
+                android:dividerHeight="10dp"
+                android:listSelector="@color/transparent" />
 
         </LinearLayout>
 
