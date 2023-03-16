@@ -30,9 +30,9 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:isAdd 1：添加  2：编辑
- * 描述:合并症
+ * 描述:其他诊断
  */
-public class UserIllPlusActivity extends UIBaseLoadActivity {
+public class UserIllOtherActivity extends UIBaseLoadActivity {
     /**
      * 1：添加  2：编辑
      */
@@ -41,14 +41,15 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
     private ImageView arrowImageView;
     private LinearLayout bgLinearLayout;
     private FlexboxLayout typeFl;
-    private HHAtMostGridView gridView;
+    private HHAtMostGridView typeGridView;
+    private HHAtMostGridView levelGridView;
     private TextView timeTv;
     private TextView saveTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("合并症");
+        topViewManager().titleTextView().setText("其他诊断");
         isAdd = getIntent().getStringExtra("isAdd");
         if ("1".equals(isAdd)) {
             loadViewManager().changeLoadState(LoadStatus.SUCCESS);
@@ -62,10 +63,11 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
     private void initValues() {
         List<EducationQuestionInvestigateModel> list = new ArrayList();
-        list.add(new EducationQuestionInvestigateModel("糖尿病肾病", "1", false));
-        list.add(new EducationQuestionInvestigateModel("糖尿病神经病变", "2", false));
-        list.add(new EducationQuestionInvestigateModel("糖尿病下肢血管病变", "3", false));
-        list.add(new EducationQuestionInvestigateModel("糖尿病视网膜病变", "4", false));
+        list.add(new EducationQuestionInvestigateModel("糖尿病", "1", false));
+        list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
+        list.add(new EducationQuestionInvestigateModel("冠心病", "3", false));
+        list.add(new EducationQuestionInvestigateModel("脑卒中", "4", false));
+        list.add(new EducationQuestionInvestigateModel("慢阻肺", "5", false));
 
         list.get(0).setCheck(true);
         for (int i = 0; i < list.size(); i++) {
@@ -89,7 +91,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             textView.setTag(list.get(i).getId());
             typeFl.addView(textView, lp);
             textView.setOnClickListener(v -> {
-                if ("1".equals(v.getTag())) {
+                if ("2".equals(v.getTag())) {
                     arrowImageView.setVisibility(View.VISIBLE);
                     bgLinearLayout.setVisibility(View.VISIBLE);
                 } else {
@@ -115,20 +117,28 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
 
         List<UserInfo> diseaseList = new ArrayList<>();
-        UserInfo typeInfo1 = new UserInfo("1期", "1");
+        UserInfo typeInfo1 = new UserInfo("1级高血压", "1");
         diseaseList.add(typeInfo1);
-        UserInfo typeInfo2 = new UserInfo("2期", "2");
+        UserInfo typeInfo2 = new UserInfo("2级高血压", "2");
         diseaseList.add(typeInfo2);
-        UserInfo typeInfo3 = new UserInfo("3a期", "3");
+        UserInfo typeInfo3 = new UserInfo("3级高血压", "3");
         diseaseList.add(typeInfo3);
-        UserInfo typeInfo4 = new UserInfo("3b期", "4");
-        diseaseList.add(typeInfo4);
-        UserInfo typeInfo5 = new UserInfo("4期", "5");
-        diseaseList.add(typeInfo5);
-        UserInfo typeInfo6 = new UserInfo("5期", "6");
-        diseaseList.add(typeInfo6);
+
         PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
-        gridView.setAdapter(adapter);
+        typeGridView.setAdapter(adapter);
+
+        List<UserInfo> levelList = new ArrayList<>();
+        UserInfo levelInfo1 = new UserInfo("低危", "1");
+        levelList.add(levelInfo1);
+        UserInfo levelInfo2 = new UserInfo("中危", "2");
+        levelList.add(levelInfo2);
+        UserInfo levelInfo3 = new UserInfo("高危", "3");
+        levelList.add(levelInfo3);
+        UserInfo levelInfo4 = new UserInfo("很高危", "4");
+        levelList.add(levelInfo4);
+
+        PerfectDiseaseAdapter levelAdapter = new PerfectDiseaseAdapter(getPageContext(), levelList);
+        levelGridView.setAdapter(levelAdapter);
     }
 
     private void initListener() {
@@ -144,13 +154,14 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_user_ill_plus, null);
-        arrowImageView = view.findViewById(R.id.iv_user_ill_plus);
-        bgLinearLayout = view.findViewById(R.id.ll_user_ill_plus);
-        typeFl = view.findViewById(R.id.fl_user_ill_plus);
-        gridView = view.findViewById(R.id.gv_user_ill_plus);
-        timeTv = view.findViewById(R.id.tv_user_ill_plus);
-        saveTv = view.findViewById(R.id.tv_user_ill_plus_save);
+        View view = View.inflate(getPageContext(), R.layout.activity_user_ill_other, null);
+        arrowImageView = view.findViewById(R.id.iv_user_ill_other);
+        bgLinearLayout = view.findViewById(R.id.ll_user_ill_other);
+        typeFl = view.findViewById(R.id.fl_user_ill_other);
+        typeGridView = view.findViewById(R.id.gv_user_ill_other_type);
+        levelGridView = view.findViewById(R.id.gv_user_ill_other_level);
+        timeTv = view.findViewById(R.id.tv_user_ill_other);
+        saveTv = view.findViewById(R.id.tv_user_ill_other_save);
         containerView().addView(view);
     }
 

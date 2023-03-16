@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.auser.UserIllImportantActivity;
+import com.vice.bloodpressure.activity.auser.UserIllOtherActivity;
 import com.vice.bloodpressure.activity.auser.UserIllPlusActivity;
 import com.vice.bloodpressure.adapter.user.UserFilesPiusAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
@@ -102,6 +103,9 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
 
                 break;
             case R.id.tv_user_files_ill_other_add:
+                intent = new Intent(getPageContext(), UserIllOtherActivity.class);
+                intent.putExtra("isAdd", "1");
+                startActivity(intent);
                 break;
             case R.id.tv_user_files_ill_plus_add:
                 intent = new Intent(getPageContext(), UserIllPlusActivity.class);
