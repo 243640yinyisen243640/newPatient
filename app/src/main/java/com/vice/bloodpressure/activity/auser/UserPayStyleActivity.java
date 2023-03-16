@@ -15,8 +15,13 @@ import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class UserPayStyleActivity extends UIBaseActivity {
+/**
+ * 类名：
+ * 传参：
+ * 描述:  支付方式
+ * 作者: beauty
+ * 创建日期: 2023/3/16 11:30
+ */public class UserPayStyleActivity extends UIBaseActivity {
     private ListView listView;
     private EducationQuestionInvestigateAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();

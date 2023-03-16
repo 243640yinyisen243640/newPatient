@@ -67,11 +67,11 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
         list.add(new EducationQuestionInvestigateModel("高血压", "2", false));
         list.add(new EducationQuestionInvestigateModel("冠心病", "3", false));
         list.add(new EducationQuestionInvestigateModel("脑卒中", "4", false));
-        list.add(new EducationQuestionInvestigateModel("慢阻肺", "5", false));
+        list.add(new EducationQuestionInvestigateModel("慢性阻塞性肺疾病", "5", false));
 
         list.get(0).setCheck(true);
         for (int i = 0; i < list.size(); i++) {
-            FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, DensityUtils.dip2px(getPageContext(), 28f));
+            FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
             TextView textView = new TextView(getPageContext());
             textView.setTextSize(15f);
@@ -86,7 +86,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
             textView.setGravity(Gravity.CENTER);
             textView.setText(list.get(i).getText());
             textView.setMaxLines(1);
-            textView.setPadding(DensityUtils.dip2px(getPageContext(), 15f), 0, DensityUtils.dip2px(getPageContext(), 15f), 0);
+            textView.setPadding(DensityUtils.dip2px(getPageContext(), 15f),DensityUtils.dip2px(getPageContext(), 8f), DensityUtils.dip2px(getPageContext(), 15f),DensityUtils.dip2px(getPageContext(), 8f));
 
             textView.setTag(list.get(i).getId());
             typeFl.addView(textView, lp);

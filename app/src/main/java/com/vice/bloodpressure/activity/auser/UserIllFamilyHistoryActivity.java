@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.auser;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -29,7 +30,8 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
     private String isAdd;
 
     private HHAtMostGridView relationshipGridView;
-    private HHAtMostGridView heredityGridView;
+    private CheckBox haveCheckBox;
+    private CheckBox noCheckBox;
     private TextView saveTv;
 
     @Override
@@ -62,19 +64,25 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
         PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
         relationshipGridView.setAdapter(adapter);
 
-        List<UserInfo> levelList = new ArrayList<>();
-        UserInfo levelInfo1 = new UserInfo("是", "0");
-        levelList.add(levelInfo1);
-        UserInfo levelInfo2 = new UserInfo("否", "1");
-        levelList.add(levelInfo2);
-
-
-        PerfectDiseaseAdapter levelAdapter = new PerfectDiseaseAdapter(getPageContext(), levelList);
-        heredityGridView.setAdapter(levelAdapter);
     }
 
     private void initListener() {
+        haveCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                noCheckBox.setChecked(false);
 
+            } else {
+                noCheckBox.setChecked(true);
+
+            }
+        });
+        noCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                haveCheckBox.setChecked(false);
+            } else {
+                haveCheckBox.setChecked(true);
+            }
+        });
         saveTv.setOnClickListener(v -> {
 
         });
@@ -83,7 +91,8 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_ill_family_history, null);
         relationshipGridView = view.findViewById(R.id.gv_user_ill_family_history_relationship);
-        heredityGridView = view.findViewById(R.id.gv_user_ill_family_history);
+        haveCheckBox = view.findViewById(R.id.cb_files_family_have);
+        noCheckBox = view.findViewById(R.id.cb_files_family_no);
         saveTv = view.findViewById(R.id.tv_user_ill_family_history_save);
         containerView().addView(view);
     }

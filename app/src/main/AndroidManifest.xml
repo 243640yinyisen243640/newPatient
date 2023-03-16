@@ -358,21 +358,34 @@
         <activity
             android:name=".activity.auser.UserSmokeDrinkActivity"
             android:screenOrientation="portrait" />
+        <!--抽烟-->
         <activity
             android:name=".activity.auser.UserSmokeActivity"
             android:screenOrientation="portrait" />
+        <!--饮酒-->
         <activity
             android:name=".activity.auser.UserDrinkActivity"
             android:screenOrientation="portrait" />
+        <!--支付方式-->
         <activity
             android:name=".activity.auser.UserPayStyleActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.auser.UserIllImportantActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.auser.UserIllPlusActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.auser.UserIllOtherActivity"
-            android:screenOrientation="portrait"/>
+        <!--主要诊断-->
+        <activity
+            android:name=".activity.auser.UserIllImportantActivity"
+            android:screenOrientation="portrait" />
+        <!--合并症-->
+        <activity
+            android:name=".activity.auser.UserIllPlusActivity"
+            android:screenOrientation="portrait" />
+        <!--其他疾病-->
+        <activity
+            android:name=".activity.auser.UserIllOtherActivity"
+            android:screenOrientation="portrait" />
+        <!--家族史-->
+        <activity
+            android:name=".activity.auser.UserIllFamilyHistoryActivity"
+            android:screenOrientation="portrait" />
 
         <!--个人中心模块结束-->
     </application>

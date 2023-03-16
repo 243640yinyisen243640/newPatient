@@ -1,23 +1,22 @@
 package com.vice.bloodpressure.activity.auser;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.android.flexbox.FlexboxLayout;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
-import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +35,16 @@ public class UserIllImportantActivity extends UIBaseLoadActivity {
 
     private CheckBox tangCb;
     private CheckBox gaoCb;
-    private FlexboxLayout typeFl;
+    private ImageView arrowImageView;
+    private LinearLayout bgLinearLayout;
+    private HHAtMostGridView mostGridView;
     private TextView timeTv;
     private TextView saveTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("主要诊断");
         isAdd = getIntent().getStringExtra("isAdd");
         if ("1".equals(isAdd)) {
             loadViewManager().changeLoadState(LoadStatus.SUCCESS);
@@ -55,64 +57,32 @@ public class UserIllImportantActivity extends UIBaseLoadActivity {
     }
 
     private void initValues() {
-        List<EducationQuestionInvestigateModel> list = new ArrayList();
-        list.add(new EducationQuestionInvestigateModel("1型糖尿病","1", false));
-        list.add(new EducationQuestionInvestigateModel("2型糖尿病","2", false));
-        list.add(new EducationQuestionInvestigateModel("妊娠糖尿病","3", false));
+        List<UserInfo> list = new ArrayList();
+        list.add(new UserInfo("1型糖尿病", "1"));
+        list.add(new UserInfo("2型糖尿病", "2"));
+        list.add(new UserInfo("妊娠糖尿病", "3"));
 
-        list.get(0).setCheck(true);
-        for (int i = 0; i < list.size(); i++) {
-            FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, DensityUtils.dip2px(getPageContext(), 28f));
-            lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
-            TextView textView = new TextView(getPageContext());
-            textView.setTextSize(15f);
-            if (list.get(i).isCheck()) {
-                textView.setBackgroundResource(R.drawable.shape_bg_main_gra_90);
-                textView.setTextColor(Color.parseColor("#FFFFFF"));
-            } else {
-                textView.setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
-                textView.setTextColor(Color.parseColor("#242424"));
-            }
-
-            textView.setGravity(Gravity.CENTER);
-            textView.setText(list.get(i).getText());
-            textView.setMaxLines(1);
-            textView.setMaxEms(6);
-            textView.setPadding(DensityUtils.dip2px(getPageContext(), 15f), 0, DensityUtils.dip2px(getPageContext(), 15f), 0);
-
-            textView.setTag(list.get(i).getId());
-            typeFl.addView(textView, lp);
-            textView.setOnClickListener(v -> {
-                for (int j = 0; j < list.size(); j++) {
-                    if (v.getTag().equals(list.get(j).getId())) {
-                        //设置选中
-                        list.get(j).setCheck(true);
-                        typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_main_gra_90);
-                        ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#FFFFFF"));
-                    } else {
-                        //设置不选中
-                        list.get(j).setCheck(false);
-                        typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
-                        ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#242424"));
-                    }
-                }
-            });
-        }
+        PerfectDiseaseAdapter levelAdapter = new PerfectDiseaseAdapter(getPageContext(), list);
+        mostGridView.setAdapter(levelAdapter);
     }
 
     private void initListener() {
         tangCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (gaoCb.isChecked()) {
-                tangCb.setChecked(false);
+            if (isChecked) {
+                gaoCb.setChecked(false);
+                setVisibility(View.GONE);
             } else {
-                tangCb.setChecked(true);
+                gaoCb.setChecked(true);
+                setVisibility(View.VISIBLE);
             }
         });
         gaoCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (tangCb.isChecked()) {
-                gaoCb.setChecked(false);
+            if (isChecked) {
+                tangCb.setChecked(false);
+                setVisibility(View.GONE);
             } else {
-                gaoCb.setChecked(true);
+                tangCb.setChecked(true);
+                setVisibility(View.VISIBLE);
             }
         });
         timeTv.setOnClickListener(v -> {
@@ -125,11 +95,18 @@ public class UserIllImportantActivity extends UIBaseLoadActivity {
         });
     }
 
+    private void setVisibility(int visibility) {
+        arrowImageView.setVisibility(visibility);
+        bgLinearLayout.setVisibility(visibility);
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_ill_important, null);
         tangCb = view.findViewById(R.id.cb_user_ill_tang);
         gaoCb = view.findViewById(R.id.cb_user_ill_gao);
-        typeFl = view.findViewById(R.id.fl_user_ill_important_type);
+        arrowImageView = view.findViewById(R.id.iv_user_ill_important);
+        bgLinearLayout = view.findViewById(R.id.ll_user_ill_important);
+        mostGridView = view.findViewById(R.id.gv_user_ill_important);
         timeTv = view.findViewById(R.id.tv_user_ill_important_time);
         saveTv = view.findViewById(R.id.tv_user_ill_important_save);
         containerView().addView(view);
