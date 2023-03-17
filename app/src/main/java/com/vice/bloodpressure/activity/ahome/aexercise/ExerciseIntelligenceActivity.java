@@ -10,6 +10,7 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.popwindow.AnswerForPopupWindow;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
@@ -37,6 +39,7 @@ import java.util.List;
  * 描述:智能运动
  */
 public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements View.OnClickListener {
+    private AnswerForPopupWindow answerForPopupWindow;
     /**
      * 需要消耗千卡
      */
@@ -162,13 +165,28 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
 
     }
 
+    private void showType() {
+        if (answerForPopupWindow == null) {
+            answerForPopupWindow = new AnswerForPopupWindow(getPageContext(), "2",
+                    other -> {
+                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                        startActivity(intent);
+                    },
+                    self -> {
+                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                        startActivity(intent);
+                    });
+        }
+        answerForPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+    }
+
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             //重新制定
             case R.id.tv_exercise_again:
-                Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
-                startActivity(intent);
+              showType();
                 break;
             //选择运动
             case R.id.tv_exercise_choose:

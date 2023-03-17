@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.popwindow.AnswerForPopupWindow;
 
 /**
  * 作者: beauty
@@ -18,7 +20,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
  * 描述:首页答题页面
  */
 public class AnswerBeginActivity extends UIBaseActivity {
-
+    private AnswerForPopupWindow forPopupWindow;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,18 @@ public class AnswerBeginActivity extends UIBaseActivity {
         TextView sureTv = view.findViewById(R.id.tv_answer_begin_sure);
         sureTv.setOnClickListener(v ->
         {
-            startActivity(new Intent(getPageContext(), AnswerFirstActivity.class));
+            if (forPopupWindow == null) {
+                forPopupWindow = new AnswerForPopupWindow(getPageContext(),"1",
+                        other -> {
+                            startActivity(new Intent(getPageContext(), AnswerFirstActivity.class));
+                        },
+                        self -> {
+                            startActivity(new Intent(getPageContext(), AnswerFirstActivity.class));
+                        });
+            }
+            forPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+
+
         });
         containerView().addView(view);
     }
