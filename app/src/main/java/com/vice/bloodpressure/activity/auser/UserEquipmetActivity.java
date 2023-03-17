@@ -37,6 +37,7 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("我的设备");
         topViewManager().moreTextView().setText("新增");
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), CaptureActivity.class);
