@@ -46,6 +46,7 @@ import androidx.core.content.PermissionChecker;
 
 import com.google.zxing.Result;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.auser.UserAddEquipmentActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.constant.PermissionsConstant;
 import com.vice.bloodpressure.modules.zxing.camera.CameraManager;
@@ -106,6 +107,14 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("扫一扫");
+        int isEquipmet = getIntent().getIntExtra("isEquipmet", 0);
+        if (isEquipmet == 1) {
+            topViewManager().moreTextView().setText("手动添加");
+            topViewManager().moreTextView().setOnClickListener(v -> {
+                Intent intent = new Intent(getPageContext(), UserAddEquipmentActivity.class);
+                startActivity(intent);
+            });
+        }
         initView();
         initValues();
         initListeners();

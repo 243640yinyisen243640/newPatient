@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:background="@drawable/shape_bg_white_10"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/et_register_phone"
@@ -22,27 +21,32 @@
             android:digits="0123456789"
             android:drawableLeft="@drawable/login_phone"
             android:drawablePadding="8dp"
-            android:textColorHint="#999999"
             android:hint="请输入手机号码"
             android:inputType="number"
             android:maxLength="11"
             android:maxLines="1"
+            android:paddingStart="15dp"
             android:paddingTop="20dp"
+            android:paddingEnd="15dp"
             android:paddingBottom="20dp"
             android:textColor="@color/black_24"
+            android:textColorHint="#999999"
             android:textSize="15sp"
             tools:ignore="TextFields" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:background="@color/gray_EA" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <EditText
                 android:id="@+id/et_register_code"
@@ -53,12 +57,11 @@
                 android:drawableLeft="@drawable/login_code"
                 android:drawablePadding="8dp"
                 android:hint="请输入验证码"
-                android:textColorHint="#999999"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:textColor="@color/black_24"
+                android:textColorHint="#999999"
                 android:textSize="15sp"
                 tools:ignore="TextFields" />
 
@@ -79,28 +82,34 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:background="@color/gray_EA" />
 
         <TextView
             android:id="@+id/tv_register_agreement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:button="@null"
             android:checked="true"
             android:drawableLeft="@drawable/selector_green_white"
             android:drawablePadding="8.5dp"
             android:gravity="center|left"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/login_agreement"
             android:textColor="@color/gray_B4"
             android:textSize="12sp" />
+
         <TextView
             android:id="@+id/tv_register_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/shape_bg_main_gra_90"
             android:gravity="center"
             android:padding="15dp"

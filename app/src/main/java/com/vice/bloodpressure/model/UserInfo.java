@@ -11,15 +11,50 @@ import java.io.Serializable;
 public class UserInfo implements Serializable {
     private String userID;
     private String diseaseName;
-    private boolean checkID ;
+    private boolean checkID;
     private boolean isSelected;
 
+    private String time;
+    private String type;
+    private String img;
+
     public UserInfo() {
+    }
+
+    public UserInfo(String diseaseName, String time, String type, String img) {
+        this.diseaseName = diseaseName;
+        this.time = time;
+        this.type = type;
+        this.img = img;
     }
 
     public UserInfo(String userID, String diseaseName) {
         this.userID = userID;
         this.diseaseName = diseaseName;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public boolean isSelected() {

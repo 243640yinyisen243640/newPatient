@@ -22,7 +22,6 @@ import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.ForgetPwdActivity;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.utils.ToastUtils;
-import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
 /**
@@ -178,10 +177,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号/身份证号");
             return;
         }
-        if (!TurnUtils.isMobileNO(phone)) {
-            ToastUtils.getInstance().showToast(getPageContext(), "请输入正确的手机号格式");
-            return;
-        }
+
         String pwd = passwordEditText.getText().toString().trim();
         if (TextUtils.isEmpty(pwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");

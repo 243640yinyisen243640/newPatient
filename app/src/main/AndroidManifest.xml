@@ -351,9 +351,6 @@
             android:name=".activity.auser.UserSetActivity"
             android:screenOrientation="portrait" />
         <!--消息通知-->
-        <activity
-            android:name=".activity.auser.UserMsgListActivity"
-            android:screenOrientation="portrait" />
         <!--抽烟喝酒-->
         <activity
             android:name=".activity.auser.UserSmokeDrinkActivity"
@@ -386,7 +383,23 @@
         <activity
             android:name=".activity.auser.UserIllFamilyHistoryActivity"
             android:screenOrientation="portrait" />
-
+        <!--我的医生-->
+        <activity
+            android:name=".activity.auser.UserDoctorActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.auser.UserAboutAsActivity" />
+        <!--账户与安全-->
+        <activity
+            android:name=".activity.auser.UserAccountSafeActivity"
+            android:screenOrientation="portrait" />
+        <!--修改登录密码-->
+        <activity
+            android:name=".activity.auser.UserEditPwdActivity"
+            android:screenOrientation="portrait" />
+        <!--手动添加-->
+        <activity
+            android:name=".activity.auser.UserAddEquipmentActivity"
+            android:screenOrientation="portrait" />
         <!--个人中心模块结束-->
     </application>
 

@@ -64,7 +64,7 @@ public class QRCodeUtils {
 
     }
 
-    /* 华信应用内个人、群组二维码、认证*/
+
     private static void handleQrcodeJump(Context context, String content) {
         // 格式：http://116.255.236.229:8495/register.html?mark=2&content=31
         //返回的是Url的话 要分割取出对应的字段和值

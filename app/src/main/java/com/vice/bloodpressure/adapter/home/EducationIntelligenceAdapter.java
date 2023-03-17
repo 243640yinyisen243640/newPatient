@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * 类名：
- * 传参：
+ * 传参：type 1:智能学习 搜索  显示还有多少节课未学完 学习状态显示  2：我的收藏 显示收藏目录  学习状态不显示
  * 描述:
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
@@ -30,15 +30,17 @@ import java.util.List;
 public class EducationIntelligenceAdapter extends RecyclerView.Adapter<EducationIntelligenceAdapter.ViewHolder> {
     private Context context;
     private List<EducationInfo> list;
+    private String type;
 
     private IAdapterViewClickListener clickListener;
 
     private EducationIntelligenceChildAdapter adapter;
 
-    public EducationIntelligenceAdapter(Context context, List<EducationInfo> list, IAdapterViewClickListener clickListener) {
+    public EducationIntelligenceAdapter(Context context, List<EducationInfo> list, String type, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
+        this.type = type;
     }
 
     @NonNull
@@ -57,7 +59,7 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
 
         holder.expandImageView.setVisibility(View.VISIBLE);
 
-        if (adapter==null) {
+        if (adapter == null) {
             GridLayoutManager layoutManager = new GridLayoutManager(context, 1);
             holder.recyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(context, 10), false));
             holder.recyclerView.setLayoutManager(layoutManager);
@@ -68,8 +70,19 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
         XyImageUtils.loadRoundImage(context, R.drawable.education_study_bg, info.getBg(), holder.bgImageView);
         holder.titleTextView.setText(info.getTitle());
         holder.contentTextView.setText(info.getContent());
-        holder.stateTextView.setText(info.getState());
-        holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getSubject()));
+        if ("1".equals(type)) {
+            holder.stateTextView.setVisibility(View.VISIBLE);
+            holder.stateTextView.setText(info.getState());
+            holder.line.setVisibility(View.GONE);
+            holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
+            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getSubject()));
+        } else {
+            holder.stateTextView.setVisibility(View.GONE);
+            holder.subjectTextView.setText("收藏目录");
+            holder.line.setVisibility(View.VISIBLE);
+            holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.gray_8a));
+        }
+
         //那个按钮的展示状态 0展开 1收起状态
         int expandState = info.getIsExpand();
         if (expandState == 0) {
@@ -101,6 +114,7 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
         private LinearLayout expandLinearLayout;
         private TextView subjectTextView;
         private RecyclerView recyclerView;
+        private View line;
 
 
         public ViewHolder(View itemView) {
@@ -114,6 +128,7 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
             subjectTextView = itemView.findViewById(R.id.tv_education_study_subject_num);
             recyclerView = itemView.findViewById(R.id.rv_education_study_child);
             expandLinearLayout = itemView.findViewById(R.id.ll_education_study_child);
+            line = itemView.findViewById(R.id.view_user_collect);
         }
     }
 

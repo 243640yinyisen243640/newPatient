@@ -212,12 +212,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 chooseWindow("3", "独居", aloneList);
                 break;
             case R.id.tv_user_live_style_bed:
-                //                DialogUtils.showOperDialog(getPageContext(), "", "是否解除该设备？", "我再想想", "确定", (dialog, which) -> {
-                //                    dialog.dismiss();
-                //                    if (HHSoftDialogActionEnum.POSITIVE == which) {
-                //                        dialog.dismiss();
-                //                    }
-                //                });
+
                 List<String> isInBedList = new ArrayList<>();
                 isInBedList.add("是");
                 isInBedList.add("否");

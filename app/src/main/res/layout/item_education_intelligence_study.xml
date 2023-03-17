@@ -2,116 +2,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_bg_white_10"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-
-        <ImageView
-            android:id="@+id/iv_education_study_bg"
-            android:layout_width="110dp"
-            android:layout_height="110dp" />
-
+        android:background="@drawable/shape_bg_white_10"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/tv_education_study_title"
+
+            <ImageView
+                android:id="@+id/iv_education_study_bg"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_education_study_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/black_24"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_education_study_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shape_white_blue_90_00aeff"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="7.5dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="7.5dp"
+                    android:paddingBottom="4dp"
+                    android:text="学习中"
+                    android:textColor="#00AEFF"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_education_study_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/gray_8a"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_education_study_click"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_education_study_subject_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF5C4B"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_education_study_spand"
+                        android:layout_width="10dp"
+                        android:layout_height="7.5dp"
+                        android:layout_marginLeft="7.5dp"
+                        android:src="@drawable/arrow_down_gray_solid" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_education_study_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="课程目录"
                 android:textColor="@color/black_24"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_education_study_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/shape_white_blue_90_00aeff"
-                android:includeFontPadding="false"
-                android:paddingLeft="7.5dp"
-                android:paddingTop="4dp"
-                android:paddingRight="7.5dp"
-                android:paddingBottom="4dp"
-                android:text="学习中"
-                android:textColor="#00AEFF"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_education_study_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_education_study_child"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/gray_8a"
-                android:textSize="13sp" />
+                android:layout_marginTop="15dp"
+                android:dividerHeight="0dp" />
 
-            <LinearLayout
-                android:id="@+id/ll_education_study_click"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center|left"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_education_study_subject_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FF5C4B"
-                    android:textSize="13sp" />
-
-                <ImageView
-                    android:id="@+id/iv_education_study_spand"
-                    android:layout_width="10dp"
-                    android:layout_height="7.5dp"
-                    android:layout_marginLeft="7.5dp"
-                    android:src="@drawable/arrow_down_gray_solid" />
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_education_study_child"
+
+
+    <View
+        android:id="@+id/view_user_collect"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="课程目录"
-            android:textColor="@color/black_24"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_education_study_child"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:dividerHeight="0dp" />
-
-
-    </LinearLayout>
+        android:layout_height="10dp"
+        android:backgroundTint="@color/background"
+        android:visibility="gone" />
 
 
 </LinearLayout>

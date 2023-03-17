@@ -149,7 +149,7 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
         for (int i = 0; i < educationInfos.size(); i++) {
             educationInfos.get(i).setChildList(childList);
         }
-        mAdapter = new EducationIntelligenceAdapter(getPageContext(), educationInfos, new IAdapterViewClickListener() {
+        mAdapter = new EducationIntelligenceAdapter(getPageContext(), educationInfos,"1", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 Log.i("yys", "click===");

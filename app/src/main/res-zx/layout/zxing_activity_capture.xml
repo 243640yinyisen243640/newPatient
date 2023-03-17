@@ -85,7 +85,7 @@
             android:layout_below="@id/capture_crop_view"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
-            android:text="@string/zxing_scan_tips"
+            android:text="支持二维码/条形码扫描"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
     </RelativeLayout>

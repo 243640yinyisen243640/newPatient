@@ -58,7 +58,6 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         private TextView titleTextView;
         private TextView timeTextView;
         private TextView contentTextView;
-        private View lineView;
 
 
         public ViewHolder(View itemView) {
@@ -67,7 +66,6 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
             titleTextView = itemView.findViewById(R.id.tv_message_title);
             timeTextView = itemView.findViewById(R.id.tv_message_time);
             contentTextView = itemView.findViewById(R.id.tv_message_content);
-            lineView = itemView.findViewById(R.id.view_message_line);
         }
     }
 

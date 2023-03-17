@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationVideoInfo;
@@ -45,6 +46,6 @@ public class EducationVideoListActivity extends UIBaseListRecycleViewActivity<Ed
 
     @Override
     protected int getPageSize() {
-        return 0;
+        return BaseDataManager.PAGE_SIZE;
     }
 }

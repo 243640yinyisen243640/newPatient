@@ -18,18 +18,15 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/et_forget_pwd_phone"
+            android:id="@+id/et_user_edit_pwd_before"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="0123456789"
-            android:background="@drawable/shape_bg_white_10_0_10_0"
-            android:drawableLeft="@drawable/login_phone"
+            android:background="@color/text_white"
+            android:drawableLeft="@drawable/login_pwd"
             android:drawablePadding="8dp"
-            android:hint="请输入手机号码"
-            android:inputType="number"
-            android:maxLength="11"
+            android:hint="请输入原有密码"
             android:maxLines="1"
-            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:paddingEnd="15dp"
             android:paddingBottom="20dp"
@@ -45,67 +42,23 @@
             android:layout_marginEnd="15dp"
             android:background="@color/gray_EA" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp">
-
-            <EditText
-                android:id="@+id/et_forget_pwd_code"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/text_white"
-                android:drawableLeft="@drawable/login_code"
-                android:drawablePadding="8dp"
-                android:hint="请输入验证码"
-                android:maxLines="1"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:textColor="@color/black_24"
-                android:textColorHint="#999999"
-                android:textSize="15sp"
-                tools:ignore="TextFields" />
-
-            <TextView
-                android:id="@+id/tv_forget_pwd_get"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:gravity="center"
-                android:paddingLeft="25dp"
-                android:text="获取验证码"
-                android:textColor="@color/main_base_color"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:background="@color/gray_EA" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
             android:paddingEnd="15dp">
 
             <EditText
-                android:id="@+id/et_forget_pwd_pwd"
+                android:id="@+id/et_edit_pwd_new"
                 android:layout_width="328dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/text_white"
                 android:drawableLeft="@drawable/login_pwd"
                 android:drawablePadding="8dp"
-                android:hint="请输入密码"
+                android:hint="请输入新密码"
                 android:maxLines="1"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
@@ -115,7 +68,7 @@
                 tools:ignore="TextFields" />
 
             <CheckBox
-                android:id="@+id/cb_forget_pwd_close"
+                android:id="@+id/cb_user_edit_close"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
@@ -142,7 +95,7 @@
             android:paddingEnd="15dp">
 
             <EditText
-                android:id="@+id/et_forget_pwd_pwd_again"
+                android:id="@+id/et_edit_pwd_new_again"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -159,7 +112,7 @@
                 tools:ignore="TextFields" />
 
             <CheckBox
-                android:id="@+id/cb_forget_pwd_close_again"
+                android:id="@+id/cb_user_edit_close_again"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
@@ -182,8 +135,6 @@
             android:id="@+id/tv_forget_pwd_agreement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="30dp"
             android:button="@null"
@@ -191,21 +142,23 @@
             android:drawableLeft="@drawable/warning_gray_little"
             android:drawablePadding="8.5dp"
             android:gravity="center|left"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="密码为6-12位，可使用字母和数字组合"
             android:textColor="#BBBBBB"
             android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/tv_forget_pwd_sure"
+            android:id="@+id/tv_user_edit_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/shape_bg_main_gra_90"
             android:gravity="center"
             android:padding="15dp"
             android:text="确定"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="#FEFEFE"
             android:textSize="17sp"
             android:textStyle="bold" />

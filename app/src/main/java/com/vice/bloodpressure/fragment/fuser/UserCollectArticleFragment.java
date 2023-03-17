@@ -1,13 +1,10 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +14,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -25,41 +22,38 @@ import com.vice.bloodpressure.utils.DensityUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
+ * 类名：
+ * 传参：
+ * 描述: 我的收藏文章
  * 作者: beauty
- * 类名:
- * 传参:
- * 描述:智能学习 这里还有一个页面EducationIntelligenceListActivity 等真正用的时候要换成这个页面，背景图不是公共的
+ * 创建日期: 2023/2/28 14:46
  */
-public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity<EducationInfo> {
-    private List<EducationInfo> educationInfos;
+public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<EducationInfo> {
+
+    private final static int REQUEST_CODE_FOE_REFRESH = 10;
     private EducationIntelligenceAdapter adapter;
+    private List<EducationInfo> educationInfos;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate() {
+        super.onCreate();
         topViewManager().topView().removeAllViews();
-        initTopView();
-        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), true));
         mRecyclerView.setLayoutManager(layoutManager);
+        getPageListView().setBackgroundColor(ContextCompat.getColor(getPageContext(), R.color.background));
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+        loadViewManager().setOnClickListener(LoadStatus.NODATA, view -> loadViewManager().changeLoadState(LoadStatus.LOADING));
 
-    }
-
-    private void initTopView() {
-        View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_study, null);
-        ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
-        TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
-        backImageView.setOnClickListener(v -> finish());
-        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(),EducationClassifyActivity.class)));
-        topViewManager().topView().addView(topView);
     }
 
     @Override
     protected void getListData(CallBack callBack) {
+
         educationInfos = new ArrayList<>();
         educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
         educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
@@ -76,17 +70,16 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
-        return adapter = new EducationIntelligenceAdapter(getPageContext(), list,"1", new IAdapterViewClickListener() {
+        return adapter = new EducationIntelligenceAdapter(getPageContext(), educationInfos, "2", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
-                Log.i("yys", "click===");
                 //那个按钮的展示状态 0展开 1收起状态 2没有数据隐藏
                 switch (view.getId()) {
                     case R.id.ll_education_study_click:
-                        if (list.get(position).getIsExpand() == 1) {
-                            list.get(position).setIsExpand(0);
-                        }else if (list.get(position).getIsExpand() == 0){
-                            list.get(position).setIsExpand(1);
+                        if (educationInfos.get(position).getIsExpand() == 1) {
+                            educationInfos.get(position).setIsExpand(0);
+                        } else if (educationInfos.get(position).getIsExpand() == 0) {
+                            educationInfos.get(position).setIsExpand(1);
                         }
                         adapter.notifyDataSetChanged();
                         break;
@@ -97,13 +90,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
             @Override
             public void adapterClickListener(int position, int index, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_education_study_child_click:
-                        break;
-                    default:
-                        break;
 
-                }
             }
         });
     }
@@ -112,4 +99,21 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOE_REFRESH:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+
 }

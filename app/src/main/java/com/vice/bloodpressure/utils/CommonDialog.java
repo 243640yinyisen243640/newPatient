@@ -55,10 +55,7 @@ public class CommonDialog extends Dialog {
         //如果用户自定了title和message
         if (!TextUtils.isEmpty(tip)) {
             tvTip.setText(R.string.tip);
-//            tvTip.setVisibility(View.VISIBLE);
-        }/* else {
-            tvTip.setVisibility(View.GONE);
-        }*/
+        }
         if (!TextUtils.isEmpty(msg)) {
             tvMsg.setText(msg);
         }

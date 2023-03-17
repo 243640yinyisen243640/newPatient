@@ -49,7 +49,7 @@ public class DialogUtils {
         new HHSoftDialog.Builder(context)
                 .content(msg)
                 .negativeColor(R.color.gray_98)
-                .positiveColor(R.color.black_32)
+                .positiveColor(R.color.main_base_color)
                 .negativeText(R.string.cancel)
                 .positiveText(R.string.sure)
                 .onAny(callback)

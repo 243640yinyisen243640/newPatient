@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.utils.ToastUtils;
-import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
 /**
@@ -65,10 +64,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
             return;
         }
-        if (!TurnUtils.isMobileNO(phone)) {
-            ToastUtils.getInstance().showToast(getPageContext(), "请输入合法的手机号");
-            return;
-        }
+
 
         String verification = verificationEditText.getText().toString().trim();
         if (TextUtils.isEmpty(verification)) {
@@ -128,10 +124,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
             return;
         }
-        if (!TurnUtils.isMobileNO(phone)) {
-            ToastUtils.getInstance().showToast(getPageContext(), "请输入合法的手机号");
-            return;
-        }
+
         //        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
         //        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, "1", (call, response) -> {
         //            ToastUtils.getInstance().dismissProgressDialog();

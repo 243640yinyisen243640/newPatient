@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_user_set_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user_set_about_us"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:drawablePadding="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="20dp"
+            android:text="关于我们"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
+
+        <TextView
+            android:id="@+id/tv_user_set_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user_set_account"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:drawablePadding="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="20dp"
+            android:text="账户与安全"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_user_set_out_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/shape_bg_white_90"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="切换账户"
+        android:textColor="@color/black_24"
+        android:textSize="17sp" />
+</LinearLayout>

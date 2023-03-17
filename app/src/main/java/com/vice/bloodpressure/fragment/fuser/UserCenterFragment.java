@@ -7,11 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
 import com.vice.bloodpressure.activity.auser.UserCollectActivity;
 import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
 import com.vice.bloodpressure.activity.auser.UserEquipmetActivity;
 import com.vice.bloodpressure.activity.auser.UserFilesActivity;
-import com.vice.bloodpressure.activity.auser.UserMsgListActivity;
 import com.vice.bloodpressure.activity.auser.UserOrderListActivity;
 import com.vice.bloodpressure.activity.auser.UserQRCodeActivity;
 import com.vice.bloodpressure.activity.auser.UserSetActivity;
@@ -331,7 +331,8 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
 
             //消息通知
             case R.id.tv_user_center_message:
-                startActivity(new Intent(getPageContext(), UserMsgListActivity.class));
+                intent = new Intent(getPageContext(), HomeMessageListActivity.class);
+                startActivity(intent);
                 break;
             //设置
             case R.id.tv_user_center_set:
