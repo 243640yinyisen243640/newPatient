@@ -326,6 +326,18 @@
         <!-- 首页模块结束 -->
 
 
+        <!--院外管理开始-->
+        <!--医院列表-->
+        <activity
+            android:name=".activity.aout.OutHospitalListActivity"
+            android:screenOrientation="portrait" />
+        <!--科室列表-->
+        <activity
+            android:name=".activity.aout.OutOfficeActivity"
+            android:screenOrientation="portrait" />
+        <!--院外管理结束-->
+
+
         <!--个人中心模块开始-->
         <activity
             android:name=".activity.auser.UserQRCodeActivity"

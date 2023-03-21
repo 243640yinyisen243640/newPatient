@@ -16,6 +16,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.fragment.fhome.MainHomeFragment;
+import com.vice.bloodpressure.fragment.fout.OutMainFragment;
 import com.vice.bloodpressure.fragment.fuser.UserCenterFragment;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.version.VersionUtils;
@@ -83,7 +84,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             } else if (checkId == R.id.tv_main_home_service) {
                 fragment = new MainFragment();
             } else if (checkId == R.id.tv_main_home_out_hospital) {
-                fragment = new MainFragment();
+                fragment = new OutMainFragment();
             } else if (checkId == R.id.tv_main_home_mall) {
                 fragment = new MainFragment();
             } else {
