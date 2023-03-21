@@ -68,6 +68,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
         list.add(new EducationQuestionInvestigateModel("冠心病", "3", false));
         list.add(new EducationQuestionInvestigateModel("脑卒中", "4", false));
         list.add(new EducationQuestionInvestigateModel("慢性阻塞性肺疾病", "5", false));
+        list.add(new EducationQuestionInvestigateModel("糖尿病前期", "6", false));
 
         list.get(0).setCheck(true);
         for (int i = 0; i < list.size(); i++) {
@@ -86,7 +87,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
             textView.setGravity(Gravity.CENTER);
             textView.setText(list.get(i).getText());
             textView.setMaxLines(1);
-            textView.setPadding(DensityUtils.dip2px(getPageContext(), 15f),DensityUtils.dip2px(getPageContext(), 8f), DensityUtils.dip2px(getPageContext(), 15f),DensityUtils.dip2px(getPageContext(), 8f));
+            textView.setPadding(DensityUtils.dip2px(getPageContext(), 15f), DensityUtils.dip2px(getPageContext(), 8f), DensityUtils.dip2px(getPageContext(), 15f), DensityUtils.dip2px(getPageContext(), 8f));
 
             textView.setTag(list.get(i).getId());
             typeFl.addView(textView, lp);
