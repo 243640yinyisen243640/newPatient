@@ -90,8 +90,6 @@
 
         </LinearLayout>
 
-
-
         <cn.jzvd.JzvdStd
             android:id="@+id/jz_education_details_video"
             android:layout_width="match_parent"

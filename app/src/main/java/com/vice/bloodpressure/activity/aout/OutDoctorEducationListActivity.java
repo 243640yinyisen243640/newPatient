@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.ahome.aeducation.OutDoctorEducationInfoActivity;
 import com.vice.bloodpressure.adapter.home.OutDoctorEducationListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;

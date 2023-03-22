@@ -347,7 +347,7 @@
             android:name=".activity.aout.OutDoctorEducationListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ahome.aeducation.OutDoctorEducationInfoActivity"
+            android:name=".activity.aout.OutDoctorEducationInfoActivity"
             android:screenOrientation="portrait" />
         <!--院外管理结束-->
 

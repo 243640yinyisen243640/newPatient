@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.activity.ahome.aeducation;
+package com.vice.bloodpressure.activity.aout;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
@@ -31,7 +31,7 @@ import cn.jzvd.JzvdStd;
  * 作者: beauty
  * 类名:
  * 传参:type 1:视频  2：音频 3：文本
- * 描述:教育详情
+ * 描述:宣教详情
  */
 public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
@@ -56,7 +56,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("详情");
+        topViewManager().titleTextView().setText("宣教详情");
         type = getIntent().getStringExtra("type");
         initView();
         initAudioProgress();
