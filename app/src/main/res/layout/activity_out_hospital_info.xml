@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_out_hos_info_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:background="@drawable/user_my_doctor_bg"
+                        android:scaleType="centerCrop" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="140dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/shape_bg_white_10"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="3"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/tv_out_hos_info_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="河南省人民医院"
+                                android:textColor="@color/black_24"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_out_hos_info_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shape_bg_white_green_90_1"
+                                android:paddingLeft="7dp"
+                                android:paddingTop="5dp"
+                                android:paddingRight="7dp"
+                                android:paddingBottom="5dp"
+                                android:text="三甲医院"
+                                android:textColor="@color/main_base_color"
+                                android:textSize="11sp" />
+
+                            <TextView
+                                android:id="@+id/tv_out_hos_info_location"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:drawableLeft="@drawable/location_gray"
+                                android:drawablePadding="5dp"
+                                android:includeFontPadding="false"
+                                android:text="郑州市金水区东十里铺社区"
+                                android:textColor="@color/gray_8a"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="30dp"
+                            android:background="#E7E7E7" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_out_hos_info_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center|right"
+                                android:src="@drawable/phone_logo" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/shape_bg_white_10"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/user_my_doctor_hos"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="医院简介"
+                        android:textColor="@color/black_24"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_out_hos_info_introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教育、科研、预防、保健、康复为一体的综合性国家"
+                        android:textColor="@color/gray_8a"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

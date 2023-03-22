@@ -23,11 +23,12 @@ public class HospitalInfo implements Serializable {
     private String doctorPost;
     private String doctorIntroduce;
 
-    public HospitalInfo(String doctorImg, String doctorName, String doctorPost, String doctorIntroduce) {
+    public HospitalInfo(String doctorImg, String doctorName, String doctorPost, String doctorIntroduce, String office, String isCheck) {
         this.doctorImg = doctorImg;
         this.doctorName = doctorName;
         this.doctorPost = doctorPost;
         this.doctorIntroduce = doctorIntroduce;
+        this.office = office;
     }
 
     public HospitalInfo(String office, String isCheck) {

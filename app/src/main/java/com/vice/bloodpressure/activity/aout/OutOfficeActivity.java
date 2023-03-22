@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceSearchActivity;
 import com.vice.bloodpressure.adapter.out.OutOfficeDoctorLeftAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -33,6 +33,7 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
 
     private ListView leftListView;
     private TextView searchTextView;
+    private LinearLayout hosClickLinearLayout;
     private ImageView headImageView;
     private TextView nameTextView;
     private TextView introduceTextView;
@@ -57,15 +58,21 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
 
     private void initListener() {
         searchTextView.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
+            startActivity(new Intent(getPageContext(), OutDoctorSearchListActivity.class));
+        });
+        hosClickLinearLayout.setOnClickListener(v -> {
+            startActivity(new Intent(getPageContext(), OutHospitalInfoActivity.class));
         });
         viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        ////true:滑动，false：禁止滑动
+        viewPager.setUserInputEnabled(false);
     }
 
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_out_office, null);
         searchTextView = getViewByID(view, R.id.tv_out_office_search);
+        hosClickLinearLayout = getViewByID(view, R.id.ll_out_office_hos_click);
         headImageView = getViewByID(view, R.id.iv_out_office_hos_img);
         nameTextView = getViewByID(view, R.id.tv_out_office_hos_name);
         introduceTextView = getViewByID(view, R.id.tv_out_office_hos_introduce);

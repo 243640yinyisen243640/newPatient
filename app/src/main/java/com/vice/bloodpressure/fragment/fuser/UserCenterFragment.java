@@ -296,7 +296,9 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 break;
             //我的医生
             case R.id.tv_user_center_doctor:
-                startActivity(new Intent(getPageContext(), UserDoctorActivity.class));
+                intent = new Intent(getPageContext(), UserDoctorActivity.class);
+                intent.putExtra("type","1");
+                startActivity(intent);
                 break;
             //订单
             case R.id.ll_user_center_order:

@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.aout.OutDoctorEducationListActivity;
 import com.vice.bloodpressure.activity.aout.OutHospitalListActivity;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 
@@ -44,6 +45,16 @@ public class OutMainFragment extends UIBaseLoadFragment {
             startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
         });
         educationTextView.setOnClickListener(v -> {
+            //            DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", true, (dialog, which) -> {
+            //                dialog.dismiss();
+            //                if (HHSoftDialogActionEnum.NEGATIVE == which) {
+            //                    dialog.dismiss();
+            //                } else {
+            //                    startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
+            //                }
+            //            });
+
+            startActivity(new Intent(getPageContext(), OutDoctorEducationListActivity.class));
         });
 
     }

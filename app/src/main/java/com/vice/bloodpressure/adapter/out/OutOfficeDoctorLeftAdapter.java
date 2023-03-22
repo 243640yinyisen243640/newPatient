@@ -34,8 +34,8 @@ public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<HospitalInfo> {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(getContext(), R.layout.item_education_classify_left, null);
-            holder.typeTextView = convertView.findViewById(R.id.tv_classify_first_name);
+            convertView = View.inflate(getContext(), R.layout.item_out_office_left, null);
+            holder.typeTextView = convertView.findViewById(R.id.tv_out_office_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

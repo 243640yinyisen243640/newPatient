@@ -21,12 +21,12 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
  */
-public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageListAdapter.ViewHolder> {
+public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDoctorEducationListAdapter.ViewHolder> {
     private Context context;
     private List<MessageInfo> list;
 
 
-    public HomeMessageListAdapter(Context context, List<MessageInfo> list) {
+    public OutDoctorEducationListAdapter(Context context, List<MessageInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -35,7 +35,7 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_home_message, null);
+        View v = View.inflate(context, R.layout.item_doctor_education, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
     }
@@ -46,6 +46,7 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         holder.titleTextView.setText(info.getTitle());
         holder.timeTextView.setText(info.getTime());
         holder.contentTextView.setText(info.getContent());
+       holder.imgImageView.setImageResource(R.drawable.out_doctor_education_audio);
     }
 
     @Override
@@ -63,11 +64,11 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgImageView = itemView.findViewById(R.id.iv_message_img);
-            titleTextView = itemView.findViewById(R.id.tv_message_title);
-            timeTextView = itemView.findViewById(R.id.tv_message_time);
-            contentTextView = itemView.findViewById(R.id.tv_message_content);
-            readImageView = itemView.findViewById(R.id.iv_message_read);
+            imgImageView = itemView.findViewById(R.id.iv_doctor_education_img);
+            titleTextView = itemView.findViewById(R.id.tv_doctor_education_title);
+            timeTextView = itemView.findViewById(R.id.tv_doctor_education_time);
+            contentTextView = itemView.findViewById(R.id.tv_doctor_education_content);
+            readImageView = itemView.findViewById(R.id.iv_doctor_education_read);
         }
     }
 

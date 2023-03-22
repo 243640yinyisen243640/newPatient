@@ -19,11 +19,13 @@ public class CommonDialog extends Dialog {
     private TextView tvMsg;
     private TextView tvNegative;
     private TextView tvPositive;
+    private TextView tvBg;
 
     private String tip;
     private String msg;
     private String negative;
     private String positive;
+    private boolean isShowBg = false;
     private SingleButtonCallback callback;
     private Context context;
 
@@ -36,7 +38,7 @@ public class CommonDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = View.inflate(context, R.layout.dialog_oper, null);
-        setContentView(view, new ViewGroup.LayoutParams(ScreenUtils.screenWidth(context) - DensityUtils.dip2px(context, 90), ViewGroup.LayoutParams.WRAP_CONTENT));
+        setContentView(view, new ViewGroup.LayoutParams(ScreenUtils.screenWidth(context) - DensityUtils.dip2px(context, 80), ViewGroup.LayoutParams.WRAP_CONTENT));
         setCanceledOnTouchOutside(false);
         initView();
         refreshView();
@@ -70,6 +72,12 @@ public class CommonDialog extends Dialog {
         } else {
             tvNegative.setText(R.string.cancel);
         }
+
+        if (isShowBg) {
+            tvBg.setVisibility(View.VISIBLE);
+        } else {
+            tvBg.setVisibility(View.GONE);
+        }
     }
 
     private void initView() {
@@ -77,6 +85,7 @@ public class CommonDialog extends Dialog {
         tvMsg = findViewById(R.id.tv_oper_content);
         tvNegative = findViewById(R.id.tv_oper_cancel);
         tvPositive = findViewById(R.id.tv_oper_sure);
+        tvBg = findViewById(R.id.tv_oper_bg);
         tvNegative.setOnClickListener(v -> {
             if (callback != null) {
                 callback.onClick(this, HHSoftDialogActionEnum.NEGATIVE);
@@ -113,6 +122,11 @@ public class CommonDialog extends Dialog {
 
     public CommonDialog setPositive(String positive) {
         this.positive = positive;
+        return this;
+    }
+
+    public CommonDialog setShowBg(boolean isShowBg) {
+        this.isShowBg = isShowBg;
         return this;
     }
 

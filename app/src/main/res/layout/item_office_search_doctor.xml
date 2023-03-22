@@ -5,14 +5,15 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_office_doctor_click"
+        android:id="@+id/ll_office_doctor_click_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal"
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/iv_office_doctor_head"
+            android:id="@+id/iv_office_doctor_head_search"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/out_doctor_default_head_img" />
@@ -30,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_office_doctor_name"
+                    android:id="@+id/tv_office_doctor_name_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black_24"
@@ -38,19 +39,31 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tv_office_doctor_post"
+                    android:id="@+id/tv_office_doctor_post_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/gray_8a"
                     android:textSize="13sp" />
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="#DCDCDC" />
 
+                <TextView
+                    android:id="@+id/tv_office_doctor_office_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_8a"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_office_doctor_introduce"
+                android:id="@+id/tv_office_doctor_introduce_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
@@ -60,10 +73,6 @@
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
-
-    <View
-        style="@style/base_line"
-        android:layout_marginStart="10dp" />
 
 
 </LinearLayout>

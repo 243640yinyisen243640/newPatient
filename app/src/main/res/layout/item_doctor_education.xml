@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_bg_white_10"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="7.5dp"
+        android:paddingTop="11dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="11dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_doctor_education_img"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/out_doctor_education_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="9dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_doctor_education_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="糖尿病的遗传概率有多大？"
+                    android:textColor="#292929"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_doctor_education_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:text="宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用..."
+                    android:textColor="@color/gray_9F"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_doctor_education_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="false"
+                    android:text="2022-07-12 12:20:23"
+                    android:textColor="@color/gray_BB"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_doctor_education_read"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_gravity="top|right"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/shape_red_6_6_circle" />
+    </FrameLayout>
+
+
+</LinearLayout>

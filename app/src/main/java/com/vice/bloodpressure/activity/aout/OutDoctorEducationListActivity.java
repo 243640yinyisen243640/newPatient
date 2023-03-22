@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.activity.ahome;
+package com.vice.bloodpressure.activity.aout;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vice.bloodpressure.adapter.home.HomeMessageListAdapter;
+import com.vice.bloodpressure.adapter.home.OutDoctorEducationListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
@@ -24,20 +24,18 @@ import java.util.List;
  * 传参:
  * 描述:消息提醒
  */
-public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
+public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
     private List<MessageInfo> listText = new ArrayList<>();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("消息提醒");
+        topViewManager().titleTextView().setText("医生宣教");
         topViewManager().moreTextView().setText("全部已读");
-        topViewManager().moreTextView().setOnClickListener(v -> {
-        });
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
@@ -45,11 +43,8 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new MessageInfo("你有一条新的绑定医生通知", "绑定医生通知", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血糖了，请保持良好 的测量习惯。", "血糖未测提醒", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血压了，请保持良好 的测量习惯。", "血压未测提醒", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "标题", "2022-07-12 12:20:23"));
+        listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "糖尿病遗传的概率有多大？", "2022-07-12 12:20:23"));
 
         //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
         callBack.callBack(listText);
@@ -57,7 +52,7 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
-        return new HomeMessageListAdapter(getPageContext(), list);
+        return new OutDoctorEducationListAdapter(getPageContext(), list);
     }
 
     @Override

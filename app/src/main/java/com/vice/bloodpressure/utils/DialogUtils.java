@@ -39,6 +39,27 @@ public class DialogUtils {
     }
 
     /**
+     * 本项目使用
+     *
+     * @param context
+     * @param tip      不传，不现实title
+     * @param msg
+     * @param negative 左边文字
+     * @param positive 右边文字
+     * @param callback
+     */
+    public static void showOperDialog(Context context, String tip, String msg, String negative, String positive, boolean isShowBg, CommonDialog.SingleButtonCallback callback) {
+        CommonDialog commonDialog = new CommonDialog(context);
+        commonDialog.setTitle(R.string.tip);
+        commonDialog.setMessage(msg);
+        commonDialog.setNegative(negative);
+        commonDialog.setPositive(positive);
+        commonDialog.setShowBg(isShowBg);
+        commonDialog.onAny(callback);
+        commonDialog.show();
+    }
+
+    /**
      * 选项dialog,取消和确定
      *
      * @param context
@@ -94,76 +115,76 @@ public class DialogUtils {
             context.startActivity(intent);
         }).onNegative(callback).show();
     }
-//    public static void showOperDialog(Context context, int resID, final HHDialogOperListener listener) {
-//        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
-//        // 0:资源resID; 1:string[]; 2:List<String>
-//        builder.setSourcesType(0);
-//        builder.setResID(resID);
-//        //builder.setResArray(resID);
-//        //builder.setResList(resID);
-//        builder.setDpMargin(30);
-//        builder.setDpPadding(12);
-//        builder.setTextSize(16);
-//        builder.setDividerColor(R.color.color_f0);
-//        builder.setTextColor(R.color.main_base_color);
-//        builder.setItemClickListener(listener);
-//        builder.createOperDialog().show();
-//    }
-//
-//    public static void showOperDialog(Context context, List<String> list, final HHDialogOperListener listener) {
-//        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
-//        // 0:资源resID; 1:string[]; 2:List<String>
-//        builder.setSourcesType(2);
-//        // builder.setResID(resID);
-////        builder.setResArray(resID);
-//        builder.setResList(list);
-//        builder.setDpMargin(30);
-//        builder.setDpPadding(12);
-//        builder.setTextSize(16);
-//        builder.setDividerColor(R.color.color_f0);
-//        builder.setTextColor(R.color.main_base_color);
-//        builder.setItemClickListener(listener);
-//        builder.createOperDialog().show();
-//    }
-//
-//    public static void showOperDialogType3(Context context, List<? extends HHBaseTextImp> list, final HHDialogOperListener listener) {
-//        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
-//        // 0:资源resID; 1:string[]; 2:List<String>
-//        builder.setSourcesType(3);
-//        // builder.setResID(resID);
-//        //builder.setResArray(resID);
-//        // builder.setResList();
-//        builder.setResListBaseTextImp(list);
-//        builder.setDpMargin(30);
-//        builder.setDpPadding(12);
-//        builder.setTextSize(16);
-//        builder.setDividerColor(R.color.color_f0);
-//        builder.setTextColor(R.color.main_base_color);
-//        builder.setItemClickListener(listener);
-//        builder.createOperDialog().show();
-//    }
+    //    public static void showOperDialog(Context context, int resID, final HHDialogOperListener listener) {
+    //        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
+    //        // 0:资源resID; 1:string[]; 2:List<String>
+    //        builder.setSourcesType(0);
+    //        builder.setResID(resID);
+    //        //builder.setResArray(resID);
+    //        //builder.setResList(resID);
+    //        builder.setDpMargin(30);
+    //        builder.setDpPadding(12);
+    //        builder.setTextSize(16);
+    //        builder.setDividerColor(R.color.color_f0);
+    //        builder.setTextColor(R.color.main_base_color);
+    //        builder.setItemClickListener(listener);
+    //        builder.createOperDialog().show();
+    //    }
+    //
+    //    public static void showOperDialog(Context context, List<String> list, final HHDialogOperListener listener) {
+    //        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
+    //        // 0:资源resID; 1:string[]; 2:List<String>
+    //        builder.setSourcesType(2);
+    //        // builder.setResID(resID);
+    ////        builder.setResArray(resID);
+    //        builder.setResList(list);
+    //        builder.setDpMargin(30);
+    //        builder.setDpPadding(12);
+    //        builder.setTextSize(16);
+    //        builder.setDividerColor(R.color.color_f0);
+    //        builder.setTextColor(R.color.main_base_color);
+    //        builder.setItemClickListener(listener);
+    //        builder.createOperDialog().show();
+    //    }
+    //
+    //    public static void showOperDialogType3(Context context, List<? extends HHBaseTextImp> list, final HHDialogOperListener listener) {
+    //        HHDialogUtils.BuilderOper builder = new HHDialogUtils.BuilderOper(context);
+    //        // 0:资源resID; 1:string[]; 2:List<String>
+    //        builder.setSourcesType(3);
+    //        // builder.setResID(resID);
+    //        //builder.setResArray(resID);
+    //        // builder.setResList();
+    //        builder.setResListBaseTextImp(list);
+    //        builder.setDpMargin(30);
+    //        builder.setDpPadding(12);
+    //        builder.setTextSize(16);
+    //        builder.setDividerColor(R.color.color_f0);
+    //        builder.setTextColor(R.color.main_base_color);
+    //        builder.setItemClickListener(listener);
+    //        builder.createOperDialog().show();
+    //    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //                                         朋友圈评论弹出框开始
     //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    public static void showMomentsCommentDialogFragment(FragmentManager fragmentManager, CommentDialogFragment.ICommentDialogListener listener) {
-//        showMomentsCommentDialogFragment(fragmentManager, "", listener);
-//    }
-//
-//    public static void showMomentsCommentDialogFragment(FragmentManager fragmentManager, String hint, CommentDialogFragment.ICommentDialogListener listener) {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("hint", hint);
-//        CommentDialogFragment commentDialogFragment = CommentDialogFragment.newInstance()
-//                .setArgument(bundle)
-//                .setOnCommentDialogListener(listener);
-//        commentDialogFragment.show(fragmentManager, "moments");
-//    }
-//
-//    public static void closeMomentsCommentDialogFragment() {
-//        CommentDialogFragment.newInstance().dismiss();
-//    }
+    //    public static void showMomentsCommentDialogFragment(FragmentManager fragmentManager, CommentDialogFragment.ICommentDialogListener listener) {
+    //        showMomentsCommentDialogFragment(fragmentManager, "", listener);
+    //    }
+    //
+    //    public static void showMomentsCommentDialogFragment(FragmentManager fragmentManager, String hint, CommentDialogFragment.ICommentDialogListener listener) {
+    //        Bundle bundle = new Bundle();
+    //        bundle.putString("hint", hint);
+    //        CommentDialogFragment commentDialogFragment = CommentDialogFragment.newInstance()
+    //                .setArgument(bundle)
+    //                .setOnCommentDialogListener(listener);
+    //        commentDialogFragment.show(fragmentManager, "moments");
+    //    }
+    //
+    //    public static void closeMomentsCommentDialogFragment() {
+    //        CommentDialogFragment.newInstance().dismiss();
+    //    }
 
 
 }

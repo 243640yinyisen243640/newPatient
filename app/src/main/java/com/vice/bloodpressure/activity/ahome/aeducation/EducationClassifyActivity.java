@@ -53,6 +53,8 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
             startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
         });
         viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        ////true:滑动，false：禁止滑动
+        viewPager.setUserInputEnabled(false);
     }
 
 

@@ -335,6 +335,17 @@
         <activity
             android:name=".activity.aout.OutOfficeActivity"
             android:screenOrientation="portrait" />
+        <!--医院详情-->
+        <activity
+            android:name=".activity.aout.OutHospitalInfoActivity"
+            android:screenOrientation="portrait" />
+        <!--医生搜索-->
+        <activity
+            android:name=".activity.aout.OutDoctorSearchListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.aout.OutDoctorEducationListActivity"
+            android:screenOrientation="portrait" />
         <!--院外管理结束-->
 
 

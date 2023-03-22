@@ -30,7 +30,7 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:异常数据
+ * 描述:医院列表
  */
 public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<HospitalInfo> implements View.OnClickListener {
     private List<HospitalInfo> listText = new ArrayList<>();

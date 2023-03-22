@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.utils.DialogUtils;
 
 /**
  * 作者: beauty
@@ -24,16 +26,30 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
     private TextView introduceTextView;
     private TextView breakTextView;
 
+    /**
+     * 1:我的医生  2：其他医生
+     */
+    private String type;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("我的医生");
+        type = getIntent().getStringExtra("type");
         initView();
         initlistener();
     }
 
     private void initlistener() {
         breakTextView.setOnClickListener(v -> {
+            DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
+                dialog.dismiss();
+                if (HHSoftDialogActionEnum.NEGATIVE == which) {
+                    dialog.dismiss();
+                } else {
+
+                }
+            });
         });
     }
 
@@ -45,6 +61,11 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         hospitalTextView = view.findViewById(R.id.tv_user_my_doctor_hos);
         introduceTextView = view.findViewById(R.id.tv_user_my_doctor_introduce);
         breakTextView = view.findViewById(R.id.tv_user_my_doctor_break);
+        if ("1".equals(type)) {
+            breakTextView.setText("解绑医生");
+        } else {
+            breakTextView.setText("绑定医生");
+        }
         containerView().addView(view);
     }
 

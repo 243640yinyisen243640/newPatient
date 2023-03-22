@@ -28,14 +28,14 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
  */
-public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeDoctorRightAdapter.ViewHolder> {
+public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOfficeDoctorSearchAdapter.ViewHolder> {
     private Context context;
     private List<HospitalInfo> list;
 
     private IAdapterViewClickListener clickListener;
 
 
-    public OutOfficeDoctorRightAdapter(Context context, List<HospitalInfo> list,  IAdapterViewClickListener clickListener) {
+    public OutOfficeDoctorSearchAdapter(Context context, List<HospitalInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -45,7 +45,7 @@ public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeD
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //实例化得到Item布局文件的View对象
-        View v = View.inflate(context, R.layout.item_office_doctor, null);
+        View v = View.inflate(context, R.layout.item_office_search_doctor, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
     }
@@ -56,7 +56,7 @@ public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeD
         XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getDoctorImg(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
         holder.postTextView.setText(info.getDoctorPost());
-
+        holder.officeTextView.setText(info.getOffice());
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("简介：");
@@ -79,16 +79,18 @@ public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeD
         private TextView nameTextView;
         private TextView postTextView;
         private TextView introduceTextView;
+        private TextView officeTextView;
         private LinearLayout clickLinearLayout;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            headImageView = itemView.findViewById(R.id.iv_office_doctor_head);
-            nameTextView = itemView.findViewById(R.id.tv_office_doctor_name);
-            postTextView = itemView.findViewById(R.id.tv_office_doctor_post);
-            introduceTextView = itemView.findViewById(R.id.tv_office_doctor_introduce);
-            clickLinearLayout = itemView.findViewById(R.id.ll_office_doctor_click);
+            headImageView = itemView.findViewById(R.id.iv_office_doctor_head_search);
+            nameTextView = itemView.findViewById(R.id.tv_office_doctor_name_search);
+            postTextView = itemView.findViewById(R.id.tv_office_doctor_post_search);
+            introduceTextView = itemView.findViewById(R.id.tv_office_doctor_introduce_search);
+            officeTextView = itemView.findViewById(R.id.tv_office_doctor_office_search);
+            clickLinearLayout = itemView.findViewById(R.id.ll_office_doctor_click_search);
         }
     }
 

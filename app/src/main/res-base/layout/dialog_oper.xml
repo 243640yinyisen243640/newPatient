@@ -14,21 +14,38 @@
         android:paddingTop="20dp"
         android:paddingEnd="20dp"
         android:text="@string/tip"
-        android:visibility="gone"
         android:textColor="@color/black_32"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/tv_oper_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingStart="20dp"
-        android:paddingTop="30dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="40dp"
-        android:textColor="@color/black_24"
-        android:textSize="18sp" />
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp">
+
+        <TextView
+            android:id="@+id/tv_oper_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/band_doctor_bg"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_oper_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black_24"
+            android:textSize="18sp" />
+    </LinearLayout>
+
 
     <View style="@style/line" />
 
