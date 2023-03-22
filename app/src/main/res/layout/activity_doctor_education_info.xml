@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll_education_details_audio"
+            android:id="@+id/ll_education_details_audio_doctor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_education_details_audio_title"
+                    android:id="@+id/tv_education_details_audio_title_doctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="系列一：高血压的基础知识"
@@ -35,7 +35,7 @@
                     android:textStyle="bold" />
 
                 <SeekBar
-                    android:id="@+id/sb_education_details_audio"
+                    android:id="@+id/sb_education_details_audio_doctor"
                     android:layout_width="match_parent"
                     android:layout_height="12dp"
                     android:layout_marginTop="25dp"
@@ -55,7 +55,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_education_details_audio_start_time"
+                        android:id="@+id/tv_education_details_audio_start_time_doctor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
@@ -65,7 +65,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/tv_education_details_audio_all_time"
+                        android:id="@+id/tv_education_details_audio_all_time_doctor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
@@ -78,7 +78,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_education_details_audio_start"
+                android:id="@+id/iv_education_details_audio_start_doctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -90,10 +90,8 @@
 
         </LinearLayout>
 
-
-
         <cn.jzvd.JzvdStd
-            android:id="@+id/jz_education_details_video"
+            android:id="@+id/jz_education_details_video_doctor"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="10dp" />
@@ -109,7 +107,7 @@
             android:padding="10dp">
 
             <com.vice.bloodpressure.view.X5WebView
-                android:id="@+id/web_education_details_web"
+                android:id="@+id/web_education_details_web_doctor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fadingEdge="none"
@@ -117,7 +115,7 @@
                 android:scrollbars="none" />
 
             <ProgressBar
-                android:id="@+id/pb_education_details_web"
+                android:id="@+id/pb_education_details_web_doctor"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="8px"
@@ -130,30 +128,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/education_details_start_unbg"
-            android:gravity="center"
-            android:paddingBottom="9dp"
-            android:text="我已学习(110s)"
-            android:textColor="@color/text_white"
-            android:textSize="14sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/education_audio_star_check" />
-
-
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

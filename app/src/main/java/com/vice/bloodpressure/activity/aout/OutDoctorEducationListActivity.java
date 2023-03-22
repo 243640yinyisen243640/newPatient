@@ -1,13 +1,18 @@
 package com.vice.bloodpressure.activity.aout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.ahome.aeducation.OutDoctorEducationInfoActivity;
 import com.vice.bloodpressure.adapter.home.OutDoctorEducationListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
@@ -46,13 +51,30 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
         listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "标题", "2022-07-12 12:20:23"));
         listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "糖尿病遗传的概率有多大？", "2022-07-12 12:20:23"));
 
-        //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
         callBack.callBack(listText);
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
-        return new OutDoctorEducationListAdapter(getPageContext(), list);
+        return new OutDoctorEducationListAdapter(getPageContext(), list, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.ll_doctor_education_click:
+                        Intent intent = new Intent(getPageContext(), OutDoctorEducationInfoActivity.class);
+                        intent.putExtra("type", "1");
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
     }
 
     @Override

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.model.MessageInfo;
 
 import java.util.List;
@@ -24,11 +26,13 @@ import java.util.List;
 public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDoctorEducationListAdapter.ViewHolder> {
     private Context context;
     private List<MessageInfo> list;
+    private IAdapterViewClickListener clickListener;
 
 
-    public OutDoctorEducationListAdapter(Context context, List<MessageInfo> list) {
+    public OutDoctorEducationListAdapter(Context context, List<MessageInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -46,7 +50,9 @@ public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDocto
         holder.titleTextView.setText(info.getTitle());
         holder.timeTextView.setText(info.getTime());
         holder.contentTextView.setText(info.getContent());
-       holder.imgImageView.setImageResource(R.drawable.out_doctor_education_audio);
+        holder.imgImageView.setImageResource(R.drawable.out_doctor_education_audio);
+        DoctorInfoOnClick click = new DoctorInfoOnClick(position);
+        holder.clickLinearLayout.setOnClickListener(click);
     }
 
     @Override
@@ -60,6 +66,7 @@ public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDocto
         private TextView timeTextView;
         private TextView contentTextView;
         private ImageView readImageView;
+        private LinearLayout clickLinearLayout;
 
 
         public ViewHolder(View itemView) {
@@ -69,6 +76,23 @@ public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDocto
             timeTextView = itemView.findViewById(R.id.tv_doctor_education_time);
             contentTextView = itemView.findViewById(R.id.tv_doctor_education_content);
             readImageView = itemView.findViewById(R.id.iv_doctor_education_read);
+            clickLinearLayout = itemView.findViewById(R.id.ll_doctor_education_click);
+        }
+    }
+
+    private class DoctorInfoOnClick implements View.OnClickListener {
+        private int position;
+
+        public DoctorInfoOnClick(int position) {
+            this.position = position;
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.adapterClickListener(position, v);
+            }
         }
     }
 

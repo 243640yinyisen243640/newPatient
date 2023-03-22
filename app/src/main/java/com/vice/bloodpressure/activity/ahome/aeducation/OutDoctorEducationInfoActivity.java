@@ -33,7 +33,7 @@ import cn.jzvd.JzvdStd;
  * 传参:type 1:视频  2：音频 3：文本
  * 描述:教育详情
  */
-public class EducationDetailsActivity extends UIBaseLoadActivity {
+public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
     private LinearLayout audioLinearLayout;
     private TextView titleTextView;
@@ -80,22 +80,25 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_education_details, null);
-        audioLinearLayout = view.findViewById(R.id.ll_education_details_audio);
-        titleTextView = view.findViewById(R.id.tv_education_details_audio_title);
-        audioSeekBar = view.findViewById(R.id.sb_education_details_audio);
-        startTimeTextView = view.findViewById(R.id.tv_education_details_audio_start_time);
-        allTimeTextView = view.findViewById(R.id.tv_education_details_audio_all_time);
-        startImageView = view.findViewById(R.id.iv_education_details_audio_start);
-        videoJz = view.findViewById(R.id.jz_education_details_video);
-        webView = view.findViewById(R.id.web_education_details_web);
-        progressBar = view.findViewById(R.id.pb_education_details_web);
+        View view = View.inflate(getPageContext(), R.layout.activity_doctor_education_info, null);
+        audioLinearLayout = view.findViewById(R.id.ll_education_details_audio_doctor);
+        titleTextView = view.findViewById(R.id.tv_education_details_audio_title_doctor);
+        audioSeekBar = view.findViewById(R.id.sb_education_details_audio_doctor);
+        startTimeTextView = view.findViewById(R.id.tv_education_details_audio_start_time_doctor);
+        allTimeTextView = view.findViewById(R.id.tv_education_details_audio_all_time_doctor);
+        startImageView = view.findViewById(R.id.iv_education_details_audio_start_doctor);
+        videoJz = view.findViewById(R.id.jz_education_details_video_doctor);
+        webView = view.findViewById(R.id.web_education_details_web_doctor);
+        progressBar = view.findViewById(R.id.pb_education_details_web_doctor);
         containerView().addView(view);
         if ("1".equals(type)) {
             audioLinearLayout.setVisibility(View.GONE);
             videoJz.setVisibility(View.VISIBLE);
-        } else {
+        } else if ("2".equals(type)){
             audioLinearLayout.setVisibility(View.VISIBLE);
+            videoJz.setVisibility(View.GONE);
+        }else {
+            audioLinearLayout.setVisibility(View.GONE);
             videoJz.setVisibility(View.GONE);
         }
         startImageView.setOnClickListener(v -> {
@@ -110,7 +113,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         clickCount = clickCount + 1;
         AnimationDrawable am = (AnimationDrawable) startImageView.getBackground();
         Boolean oddNumber = isOddNumber(clickCount);
-        Log.i("yys", "oddNumber=="+oddNumber);
+        Log.i("yys", "oddNumber==" + oddNumber);
         if (oddNumber) {
             Log.i("yys", "oddNumber=====");
             am.start();
@@ -189,13 +192,13 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
                 //设置进度条
                 //总时长
                 long duration = StarrySky.with().getDuration();
-                Log.i("yys", "duration=="+duration);
+                Log.i("yys", "duration==" + duration);
                 //播放位置
                 long position = StarrySky.with().getPlayingPosition();
-                Log.i("yys", "position=="+position);
+                Log.i("yys", "position==" + position);
                 //缓冲位置
                 long buffered = StarrySky.with().getBufferedPosition();
-                Log.i("yys", "buffered=="+buffered);
+                Log.i("yys", "buffered==" + buffered);
                 if (audioSeekBar.getMax() != duration) {
                     audioSeekBar.setMax((int) duration);
                 }
