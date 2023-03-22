@@ -348,6 +348,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.aout.OutDoctorEducationInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <!--院外管理结束-->
 
