@@ -17,6 +17,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.fragment.fhome.MainHomeFragment;
 import com.vice.bloodpressure.fragment.fout.OutMainFragment;
+import com.vice.bloodpressure.fragment.fservice.ServiceMainFragment;
 import com.vice.bloodpressure.fragment.fuser.UserCenterFragment;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.version.VersionUtils;
@@ -82,7 +83,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
                 //首页
                 fragment = new MainHomeFragment();
             } else if (checkId == R.id.tv_main_home_service) {
-                fragment = new MainFragment();
+                fragment = new ServiceMainFragment();
             } else if (checkId == R.id.tv_main_home_out_hospital) {
                 fragment = new OutMainFragment();
             } else if (checkId == R.id.tv_main_home_mall) {
@@ -201,6 +202,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
                 break;
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {

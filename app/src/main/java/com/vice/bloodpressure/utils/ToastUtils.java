@@ -124,7 +124,7 @@ public class ToastUtils {
             mDialogContentTextView.setTextColor(ContextCompat.getColor(context, R.color.gray_9F));
             mDialogContentTextView.setText(context.getString(R.string.huahansoft_load_state_loading));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(ExchangeUtils.dip2px(context, 10), 0, 0, 0);
+            params.setMargins(DensityUtils.dip2px(context, 10), 0, 0, 0);
             view.addView(mDialogContentTextView, params);
             mProgressDialog.setContentView(view);
 

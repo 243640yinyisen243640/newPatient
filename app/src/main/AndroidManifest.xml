@@ -326,6 +326,14 @@
         <!-- 首页模块结束 -->
 
 
+        <!--服务模块开始-->
+        <!--健康数据-->
+        <activity
+            android:name=".activity.aservice.ServiceHealthyDataActivity"
+            android:screenOrientation="portrait" />
+        <!--服务模块结束-->
+
+
         <!--院外管理开始-->
         <!--医院列表-->
         <activity

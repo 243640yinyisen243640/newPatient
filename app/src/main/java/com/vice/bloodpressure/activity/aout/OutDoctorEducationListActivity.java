@@ -37,6 +37,7 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("医生宣教");
         topViewManager().moreTextView().setText("全部已读");
+        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
