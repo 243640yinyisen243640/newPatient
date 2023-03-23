@@ -8,7 +8,7 @@
         android:id="@+id/rg_user_collect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/text_white"
+        android:backgroundTint="@color/defaultWhite"
         android:gravity="center"
         android:orientation="horizontal">
 

@@ -186,7 +186,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!--首页开始-->
         <!-- 首页 -->
         <activity
             android:name=".activity.MainActivity"
@@ -285,11 +285,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden" />
 
-        <!--服务模块-->
-        <!--教育视频列表-->
-        <activity
-            android:name=".activity.aservice.serviceeducation.EducationVideoListActivity"
-            android:screenOrientation="portrait" />
+
         <!-- 教育 问卷调查 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationQuestionInvestigateActivity"
@@ -330,6 +326,22 @@
         <!--健康数据-->
         <activity
             android:name=".activity.aservice.ServiceHealthyDataActivity"
+            android:screenOrientation="portrait" />
+        <!--教育视频-->
+        <activity
+            android:name=".activity.aservice.ServiceEducationVideoActivity"
+            android:screenOrientation="portrait" />
+        <!--智能教育视频搜索-->
+        <activity
+            android:name=".activity.aservice.ServiceEducationVideoSearchActivity"
+            android:screenOrientation="portrait" />
+        <!--服务饮食视频-->
+        <activity
+            android:name=".activity.aservice.ServiceMealVideoActivity"
+            android:screenOrientation="portrait" />
+        <!--饮食搜索-->
+        <activity
+            android:name=".activity.aservice.ServiceMealVideoSearchActivity"
             android:screenOrientation="portrait" />
         <!--服务模块结束-->
 

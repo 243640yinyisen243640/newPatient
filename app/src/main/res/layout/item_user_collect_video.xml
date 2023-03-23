@@ -4,21 +4,33 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/i_user_collect_bg"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/i_user_collect_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/video_begin" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_user_collect_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:text="韭菜鸡蛋包子"
-        android:maxLines="1"
-        android:maxLength="10"
         android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:text="韭菜鸡蛋包子"
         android:textColor="@color/black_24"
         android:textSize="15sp" />
 

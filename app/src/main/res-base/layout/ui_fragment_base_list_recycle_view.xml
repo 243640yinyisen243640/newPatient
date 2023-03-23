@@ -19,7 +19,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:overScrollMode="never"
             android:paddingStart="3dp"
@@ -47,8 +47,9 @@
             android:drawablePadding="15dp"
             android:gravity="center"
             android:padding="10dp"
+            android:textColor="#8A8A8A"
             android:text="@string/huahansoft_load_state_no_data"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

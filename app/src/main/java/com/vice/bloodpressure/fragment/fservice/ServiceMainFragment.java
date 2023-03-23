@@ -5,7 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceListActivity;
+import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceEducationVideoActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceHealthyDataActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceMealVideoActivity;
 import com.vice.bloodpressure.adapter.service.SerciveDataShowAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.customView.banner.view.BannerView;
@@ -54,18 +59,23 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
         advertInfos.add(new AdvertInfo(R.drawable.service_exercise_data, "智能运动"));
         advertInfos.add(new AdvertInfo(R.drawable.service_health_text, "健康评测"));
         SerciveDataShowAdapter adapter = new SerciveDataShowAdapter(getPageContext(), advertInfos, "1", object -> {
+            Intent intent;
             switch (Integer.parseInt(String.valueOf(object))) {
                 case 0:
-                    startActivity(new Intent(getPageContext(), ServiceHealthyDataActivity.class));
+                    intent = new Intent(getPageContext(), ServiceHealthyDataActivity.class);
+                    startActivity(intent);
                     break;
                 case 1:
-
+                    intent = new Intent(getPageContext(), DietMealPlanDetailsActivity.class);
+                    startActivity(intent);
                     break;
                 case 2:
-
+                    intent = new Intent(getPageContext(), EducationIntelligenceListActivity.class);
+                    startActivity(intent);
                     break;
                 case 3:
-
+                    intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
+                    startActivity(intent);
                     break;
                 case 4:
 
@@ -83,6 +93,8 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
         gridView = view.findViewById(R.id.gv_service_type);
         mallAreaTextView = view.findViewById(R.id.tv_service_mall_area);
         videoAreaTextView = view.findViewById(R.id.tv_service_video_area);
+        videoAreaTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(), ServiceEducationVideoActivity.class)));
+        mallAreaTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(), ServiceMealVideoActivity.class)));
         containerView().addView(view);
     }
 

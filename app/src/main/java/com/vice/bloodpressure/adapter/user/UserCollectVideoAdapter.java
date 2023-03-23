@@ -3,8 +3,8 @@ package com.vice.bloodpressure.adapter.user;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +48,7 @@ public class UserCollectVideoAdapter extends RecyclerView.Adapter<UserCollectVid
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         VideoInfo info = list.get(position);
         int width = (ScreenUtils.screenWidth(context) - DensityUtils.dip2px(context, 55)) / 2;
-        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(width,  width / 2);
+        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width,  width / 2);
         holder.coverImageView.setLayoutParams(ll);
         XyImageUtils.loadRoundImage(context, R.drawable.diet_guogai_gray, info.getImg(), holder.coverImageView);
         holder.nameTextView.setText(info.getTitle());

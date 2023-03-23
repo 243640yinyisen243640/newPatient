@@ -40,6 +40,8 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
     //当前获取的是第几页的数据，当前可见的数据的数量，当前页获取的数据的条数
     private int mPageIndex = 1, mPageSize = 15, mVisibleCount = 0, mPageCount = 0;
 
+    private String noDataText = "暂无数据";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +109,7 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
                     }
                     mRefreshLayout.setVisibility(View.GONE);
                     mNestedScrollView.setVisibility(View.VISIBLE);
-                    mLoadingTextView.setText(R.string.huahansoft_load_state_no_data);
+                    mLoadingTextView.setText(noDataText);
                     loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 } else {
                     ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_load_state_no_more_data);
@@ -181,14 +183,10 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
         return mPageIndex;
     }
 
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view, null);
-        mRefreshLayout = getViewByID(view, R.id.refresh_layout);
-        mRecyclerView = getViewByID(view, R.id.recycler_view);
-        mNestedScrollView = getViewByID(view, R.id.nsv_present_load);
-        mLoadingTextView = getViewByID(view, R.id.tv_load_status);
-        containerView().addView(view);
+    protected void noDataText(String noDataText) {
+        this.noDataText = noDataText;
     }
+
 
     /**
      * 获取ListView对象
@@ -198,4 +196,14 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
     protected RecyclerView getPageListView() {
         return mRecyclerView;
     }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view, null);
+        mRefreshLayout = getViewByID(view, R.id.refresh_layout);
+        mRecyclerView = getViewByID(view, R.id.recycler_view);
+        mNestedScrollView = getViewByID(view, R.id.nsv_present_load);
+        mLoadingTextView = getViewByID(view, R.id.tv_load_status);
+        containerView().addView(view);
+    }
+
 }
