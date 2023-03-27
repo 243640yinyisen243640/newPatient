@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_bg_white_10"
-            android:padding="15dp">
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp">
 
             <com.vice.bloodpressure.view.SaccharifySeekBar
                 android:id="@+id/service_pf_seek"
