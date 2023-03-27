@@ -161,10 +161,10 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        if (orderUnreadCount > 0) {
         //            payCountTextView.setVisibility(View.VISIBLE);
         //            if (orderUnreadCount > 99) {
-        //                payCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                payCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                payCountTextView.setText("99+");
         //            } else {
-        //                payCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                payCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                payCountTextView.setText(orderUnreadCount + "");
         //            }
         //        } else {
@@ -176,10 +176,10 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        if (orderUnSendCount > 0) {
         //            pushCountTextView.setVisibility(View.VISIBLE);
         //            if (orderUnSendCount > 99) {
-        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                pushCountTextView.setText("99+");
         //            } else {
-        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                pushCountTextView.setText(orderUnSendCount + "");
         //            }
         //        } else {
@@ -191,10 +191,10 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        if (orderUnReceiptCount > 0) {
         //            receivedCountTextView.setVisibility(View.VISIBLE);
         //            if (orderUnReceiptCount > 99) {
-        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                receivedCountTextView.setText("99+");
         //            } else {
-        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                receivedCountTextView.setText(orderUnReceiptCount + "");
         //            }
         //        } else {
@@ -204,10 +204,10 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        if (orderUnReceiptCount > 0) {
         //            finishCountTextView.setVisibility(View.VISIBLE);
         //            if (orderUnReceiptCount > 99) {
-        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                finishCountTextView.setText("99+");
         //            } else {
-        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_6_6_circle));
+        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
         //                finishCountTextView.setText(orderUnReceiptCount + "");
         //            }
         //        } else {

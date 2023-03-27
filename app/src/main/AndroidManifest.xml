@@ -343,6 +343,26 @@
         <activity
             android:name=".activity.aservice.ServiceMealVideoSearchActivity"
             android:screenOrientation="portrait" />
+        <!--血糖添加-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodAddActivity"
+            android:screenOrientation="portrait" />
+        <!--血压添加-->
+        <activity
+            android:name=".activity.aservice.ServicePressureAddActivity"
+            android:screenOrientation="portrait" />
+        <!--bmi添加-->
+        <activity
+            android:name=".activity.aservice.ServiceBmiAddActivity"
+            android:screenOrientation="portrait" />
+        <!--血氧添加-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodOxygenAddActivity"
+            android:screenOrientation="portrait" />
+        <!--添加糖化血红蛋白-->
+        <activity
+            android:name=".activity.aservice.ServiceSaccharifyAddActivity"
+            android:screenOrientation="portrait" />
         <!--服务模块结束-->
 
 

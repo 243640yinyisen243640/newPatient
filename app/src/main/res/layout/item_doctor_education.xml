@@ -76,7 +76,7 @@
             android:layout_height="6dp"
             android:layout_gravity="top|right"
             android:layout_marginTop="10dp"
-            android:src="@drawable/shape_red_6_6_circle" />
+            android:src="@drawable/shape_red_3_3_circle" />
     </FrameLayout>
 
 

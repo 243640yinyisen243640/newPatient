@@ -32,7 +32,7 @@
                 android:id="@+id/iv_warning_read"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:src="@drawable/shape_red_6_6_circle" />
+                android:src="@drawable/shape_red_3_3_circle" />
         </LinearLayout>
 
         <View

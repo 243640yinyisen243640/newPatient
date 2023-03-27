@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_white_10"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/service_blood_control"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:text="您的控制目标："
+                        android:textColor="@color/black_24"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_service_blood_add_control"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.9-7.8"
+                        android:textColor="@color/main_base_color"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_bg_white_10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="15dp"
+                            android:gravity="center"
+                            android:text="血糖测量时间段"
+                            android:textColor="@color/black_24"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_service_blood_add_time_slot"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableRight="@drawable/arrow_right_gray"
+                            android:drawablePadding="10dp"
+                            android:gravity="right"
+                            android:paddingTop="20dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="20dp"
+                            android:text="午餐前"
+                            android:textColor="@color/gray_8a"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        style="@style/base_line"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="15dp"
+                            android:gravity="center"
+                            android:text="检测时间"
+                            android:textColor="@color/black_24"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_service_blood_add_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableRight="@drawable/arrow_right_gray"
+                            android:drawablePadding="10dp"
+                            android:gravity="right"
+                            android:paddingTop="20dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="20dp"
+                            android:text="2021-02-03 15:20"
+                            android:textColor="@color/gray_8a"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_bg_white_10"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            style="@style/style_title_with_green_h"
+                            android:layout_width="wrap_content"
+                            android:text="血糖值" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="mmol/L"
+                            android:textColor="@color/gray_BB"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_service_blood_add_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="8.4"
+                        android:textColor="#00C27F"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <com.lsp.RulerView
+                            android:id="@+id/rv_service_blood_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="25dp"
+                            app:firstScale="8.4"
+                            app:isBgRoundRect="true"
+                            app:largeScaleColor="#C5CDCA"
+                            app:largeScaleStroke="2dp"
+                            app:maxScale="34"
+                            app:midScaleColor="#C5CDCA"
+                            app:midScaleStroke="2dp"
+                            app:minScale="0"
+                            app:rulerHeight="50dp"
+                            app:scaleCount="10"
+                            app:scaleGap="10dp"
+                            app:scaleLimit="1"
+                            app:scaleNumColor="@color/gray_8a"
+                            app:scaleNumTextSize="12sp"
+                            app:showScaleResult="false"
+                            app:smallScaleColor="#E1E9E6"
+                            app:smallScaleStroke="2dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/diet_programme_rule" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_service_blood_add_low"
+                                android:layout_width="7dp"
+                                android:layout_height="7dp"
+                                android:layout_gravity="top|center"
+                                android:background="@drawable/shape_purple_7_7_circle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:background="@drawable/shape_bg_purple_0_0" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginTop="45dp"
+                                android:gravity="center"
+                                android:text="偏低"
+                                android:textColor="@color/gray_8a"
+                                android:textSize="13sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_service_blood_add_normal"
+                                android:layout_width="7dp"
+                                android:layout_height="7dp"
+                                android:layout_gravity="top|center"
+                                android:background="@drawable/shape_green_7_7_circle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:background="@drawable/shape_shape_green_0_0" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginTop="45dp"
+                                android:gravity="center"
+                                android:text="正常"
+                                android:textColor="@color/gray_8a"
+                                android:textSize="13sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_service_blood_add_high"
+                                android:layout_width="7dp"
+                                android:layout_height="7dp"
+                                android:layout_gravity="top|center"
+                                android:background="@drawable/shape_red_7_7_circle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:background="@drawable/shape_bg_red_0_90_0_90" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginTop="45dp"
+                                android:gravity="center"
+                                android:text="偏高"
+                                android:textColor="@color/gray_8a"
+                                android:textSize="13sp" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_service_blood_add_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/shape_bg_white_10_10_0_0"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_main_gra_90"
+                android:gravity="center"
+                android:padding="13dp"
+                android:text="保存"
+                android:textColor="@color/text_white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

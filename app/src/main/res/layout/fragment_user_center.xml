@@ -226,7 +226,7 @@
                         android:layout_gravity="right|top"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="30dp"
-                        android:background="@drawable/shape_red_6_6_circle"
+                        android:background="@drawable/shape_red_3_3_circle"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
