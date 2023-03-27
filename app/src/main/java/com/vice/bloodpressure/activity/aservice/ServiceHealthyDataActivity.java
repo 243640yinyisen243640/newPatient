@@ -80,7 +80,7 @@ public class ServiceHealthyDataActivity extends UIBaseActivity {
         SerciveDataShowAdapter otherAdapter = new SerciveDataShowAdapter(getPageContext(), otherInfoList, "2", object -> {
             switch (Integer.parseInt(String.valueOf(object))) {
                 case 0:
-                    startActivity(new Intent(getPageContext(), ServiceHealthyDataActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceExerciseAddActivity.class));
                     break;
                 case 1:
 

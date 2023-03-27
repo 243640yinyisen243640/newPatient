@@ -371,6 +371,10 @@
         <activity
             android:name=".activity.aservice.ServiceCheckAddActivity"
             android:screenOrientation="portrait" />
+        <!--运动添加-->
+        <activity
+            android:name=".activity.aservice.ServiceExerciseAddActivity"
+            android:screenOrientation="portrait" />
         <!-- 查看大图页面-->
         <activity
             android:name=".baseui.PictureBrowserActivity"
@@ -383,8 +387,9 @@
             android:name=".utils.widget.HHSoftPictureVideoPlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="sensor" />
-        <activity android:name=".utils.widget.HHSoftPicturePreviewActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".utils.widget.HHSoftPicturePreviewActivity"
+            android:screenOrientation="portrait" />
         <!--服务模块结束-->
 
 
