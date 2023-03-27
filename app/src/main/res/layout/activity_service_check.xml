@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center"
+                android:text="项目名称"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_service_check_add_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_white_0_90_0_0"
+                android:gravity="right"
+                android:hint="请输入项目名称"
+                android:inputType="number"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black_24"
+                android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center"
+                android:text="检测时间"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_service_check_add_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:gravity="right"
+                android:paddingTop="20dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="20dp"
+                android:text="2021-02-03 15:20"
+                android:textColor="@color/gray_8a"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:gravity="center"
+                android:text="添加照片"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:paddingRight="15dp"
+                android:text="(请选择1-9张照片)"
+                android:textColor="@color/gray_8a"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <com.vice.bloodpressure.view.image.GalleryUploadImageView
+            android:id="@+id/guiv_check_add"
+            style="@style/HuaHanSoft.Fill.Wr"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/ll_service_check_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_bg_white_10_0_10_0"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_main_gra_90"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="保存"
+            android:textColor="@color/text_white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

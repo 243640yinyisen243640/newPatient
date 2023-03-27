@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                style="@style/style_title_with_green_h"
+                android:layout_width="wrap_content"
+                android:text="体温" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="℃"
+                android:textColor="@color/gray_BB"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_service_temperature_add_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="37"
+            android:textColor="#00C27F"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.lsp.RulerView
+                android:id="@+id/rv_service_temperature_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                app:firstScale="37"
+                app:isBgRoundRect="true"
+                app:largeScaleColor="#C5CDCA"
+                app:largeScaleStroke="2dp"
+                app:maxScale="42"
+                app:midScaleColor="#C5CDCA"
+                app:midScaleStroke="2dp"
+                app:minScale="35"
+                app:rulerHeight="50dp"
+                app:scaleCount="10"
+                app:scaleGap="10dp"
+                app:scaleLimit="1"
+                app:scaleNumColor="@color/gray_8a"
+                app:scaleNumTextSize="12sp"
+                app:showScaleResult="false"
+                app:smallScaleColor="#E1E9E6"
+                app:smallScaleStroke="2dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/diet_programme_rule" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            android:text="检测时间"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_service_temperature_add_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:drawablePadding="10dp"
+            android:gravity="right"
+            android:paddingTop="20dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="20dp"
+            android:text="2021-02-03 15:20"
+            android:textColor="@color/gray_8a"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/ll_service_temperature_add_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_bg_white_10_10_0_0"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_main_gra_90"
+            android:gravity="center"
+            android:padding="13dp"
+            android:text="保存"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>

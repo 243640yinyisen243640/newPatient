@@ -68,4 +68,12 @@
     <style name="MyCustomTabTextAppearance">
         <item name="android:textSize">17sp</item>
     </style>
+
+    <style name="hh_progress_bar_circle">
+        <item name="android:indeterminateDrawable">@drawable/hh_progress_bar</item>
+        <item name="android:minWidth">56dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:maxHeight">56dp</item>
+        <item name="android:maxWidth">56dp</item>
+    </style>
 </resources>

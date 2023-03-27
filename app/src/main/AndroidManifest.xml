@@ -363,6 +363,28 @@
         <activity
             android:name=".activity.aservice.ServiceSaccharifyAddActivity"
             android:screenOrientation="portrait" />
+        <!--体温添加-->
+        <activity
+            android:name=".activity.aservice.ServiceTemperatureAddActivity"
+            android:screenOrientation="portrait" />
+        <!--添加检验检查数据-->
+        <activity
+            android:name=".activity.aservice.ServiceCheckAddActivity"
+            android:screenOrientation="portrait" />
+        <!-- 查看大图页面-->
+        <activity
+            android:name=".baseui.PictureBrowserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.widget.HHSoftPictureSelectorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".utils.widget.HHSoftPictureVideoPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor" />
+        <activity android:name=".utils.widget.HHSoftPicturePreviewActivity"
+            android:screenOrientation="portrait"/>
         <!--服务模块结束-->
 
 

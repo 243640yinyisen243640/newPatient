@@ -19,7 +19,7 @@ public class ConstantParamNew {
     private static final String CACHR_DIR_NAME = APK_NAME;
     public static final String APK_DOWNLOAD_PATH = BASE_CACHR_DIR + APK_NAME + ".apk";
     public static final String IMAGE_SAVE_CACHE = BASE_CACHR_DIR + "saveImage/";
-
+    public static final String FILE_PROVIDER = ".FileProvider";
 
     /**
      * 包名

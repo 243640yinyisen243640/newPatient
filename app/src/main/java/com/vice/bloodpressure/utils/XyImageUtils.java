@@ -2,6 +2,7 @@ package com.vice.bloodpressure.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,7 +24,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.IImageBrower;
 import com.vice.bloodpressure.basemanager.ConstantParamNew;
+import com.vice.bloodpressure.baseui.PictureBrowserActivity;
 import com.vice.bloodpressure.utils.config.PictureConfig;
 import com.vice.bloodpressure.utils.glide.CustomRoundedCorners;
 import com.vice.bloodpressure.utils.luban.CompressionPredicate;
@@ -501,4 +504,17 @@ public class XyImageUtils {
                 .videoMaxSecond(15).videoMinSecond(1).forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
+    /**
+     * 查看大图
+     *
+     * @param context
+     * @param position
+     * @param list
+     */
+    public static void lookBigImage(Context context, int position, ArrayList<? extends IImageBrower> list) {
+        Intent intent = new Intent(context, PictureBrowserActivity.class);
+        intent.putExtra(PictureBrowserActivity.FLAG_IMAGE_POSITION, position);
+        intent.putExtra(PictureBrowserActivity.FLAG_IMAGE_LIST, list);
+        context.startActivity(intent);
+    }
 }
