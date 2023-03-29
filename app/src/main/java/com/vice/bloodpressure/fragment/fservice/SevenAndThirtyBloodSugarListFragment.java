@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.fragment.fservice;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
     private TextView averTextView;
     private TextView highTextView;
     private RecyclerView recyclerView;
+    private LinearLayout sureLinearLayout;
 
     @Override
     protected void onCreate() {
@@ -91,6 +93,7 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
         averTextView = view.findViewById(R.id.tv_service_blood_seven_aver);
         highTextView = view.findViewById(R.id.tv_service_blood_seven_high);
         recyclerView = view.findViewById(R.id.rv_service_blood_seven);
+        sureLinearLayout = view.findViewById(R.id.ll_service_blood_seven_sure);
         containerView().addView(view);
     }
 
