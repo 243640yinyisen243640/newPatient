@@ -7,4 +7,5 @@ package com.vice.bloodpressure.datamanager;
  * 描述:
  */
 public class UserDataManager {
+
 }

@@ -45,7 +45,7 @@ public class ServiceHealthyDataActivity extends UIBaseActivity {
         SerciveDataShowAdapter adapter = new SerciveDataShowAdapter(getPageContext(), normalInfoList, "2", object -> {
             switch (Integer.parseInt(String.valueOf(object))) {
                 case 0:
-                    startActivity(new Intent(getPageContext(), ServiceBloodAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceBloodDataActivity.class));
                     break;
                 case 1:
                     startActivity(new Intent(getPageContext(), ServiceSaccharifyAddActivity.class));

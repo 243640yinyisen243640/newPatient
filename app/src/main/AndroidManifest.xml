@@ -347,6 +347,10 @@
         <activity
             android:name=".activity.aservice.ServiceBloodAddActivity"
             android:screenOrientation="portrait" />
+        <!--血糖数据-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodDataActivity"
+            android:screenOrientation="portrait" />
         <!--血压添加-->
         <activity
             android:name=".activity.aservice.ServicePressureAddActivity"
@@ -375,6 +379,7 @@
         <activity
             android:name=".activity.aservice.ServiceExerciseAddActivity"
             android:screenOrientation="portrait" />
+
         <!-- 查看大图页面-->
         <activity
             android:name=".baseui.PictureBrowserActivity"

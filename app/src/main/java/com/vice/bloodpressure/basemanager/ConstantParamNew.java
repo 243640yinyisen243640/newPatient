@@ -6,6 +6,7 @@ import android.os.Environment;
 import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
 
 public class ConstantParamNew {
+    public static final String SERVER_VERSION = "210601";
     /**
      * ip地址
      */
