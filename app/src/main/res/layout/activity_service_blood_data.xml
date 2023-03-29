@@ -8,43 +8,6 @@
 
     <include layout="@layout/include_service_top_with_time" />
 
-    <RadioGroup
-        android:id="@+id/rg_service_blood_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/text_white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_green_90_0_gray_white_90_0"
-            android:baselineAligned="false"
-            android:button="@null"
-            android:checked="true"
-            android:paddingStart="25dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="25dp"
-            android:paddingBottom="8dp"
-            android:text="7天"
-            android:textColor="@color/selector_black_24_white_ff" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_green_0_90_gray_white_0_90"
-            android:button="@null"
-            android:paddingStart="25dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="25dp"
-            android:paddingBottom="8dp"
-            android:text="30天"
-            android:textColor="@color/selector_black_24_white_ff" />
-
-    </RadioGroup>
 
 
     <androidx.viewpager2.widget.ViewPager2

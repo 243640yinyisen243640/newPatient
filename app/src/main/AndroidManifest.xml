@@ -349,7 +349,7 @@
             android:screenOrientation="portrait" />
         <!--血糖数据-->
         <activity
-            android:name=".activity.aservice.ServiceBloodDataActivity"
+            android:name=".activity.aservice.ServiceBloodListActivity"
             android:screenOrientation="portrait" />
         <!--血压添加-->
         <activity
@@ -378,6 +378,34 @@
         <!--运动添加-->
         <activity
             android:name=".activity.aservice.ServiceExerciseAddActivity"
+            android:screenOrientation="portrait" />
+        <!--血红蛋白列表-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodScleroproteinListActivity"
+            android:screenOrientation="portrait" />
+        <!--血压列表-->
+        <activity
+            android:name=".activity.aservice.ServicePressureListActivity"
+            android:screenOrientation="portrait" />
+        <!--bmi列表-->
+        <activity
+            android:name=".activity.aservice.ServiceBmiListActivity"
+            android:screenOrientation="portrait" />
+        <!--检验检查列表-->
+        <activity
+            android:name=".activity.aservice.ServiceCheckListActivity"
+            android:screenOrientation="portrait" />
+        <!--运动列表-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodExerciseListActivity"
+            android:screenOrientation="portrait" />
+        <!--血氧列表-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodOxygenListActivity"
+            android:screenOrientation="portrait" />
+        <!--体温列表-->
+        <activity
+            android:name=".activity.aservice.ServiceTemperatureListActivity"
             android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->

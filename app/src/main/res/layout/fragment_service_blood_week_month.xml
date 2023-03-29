@@ -46,13 +46,8 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:includeFontPadding="false"
-                            android:text="mmol/L"
-                            android:textColor="@color/gray_8a"
-                            android:textSize="12sp" />
+                            style="@style/service_pressure_unit"
+                            android:text="mmol/L" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -88,13 +83,8 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:includeFontPadding="false"
-                            android:text="mmol/L"
-                            android:textColor="@color/gray_8a"
-                            android:textSize="12sp" />
+                            style="@style/service_pressure_unit"
+                            android:text="mmol/L" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -130,13 +120,8 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:includeFontPadding="false"
-                            android:text="mmol/L"
-                            android:textColor="@color/gray_8a"
-                            android:textSize="12sp" />
+                            style="@style/service_pressure_unit"
+                            android:text="mmol/L" />
 
                         <TextView
                             android:layout_width="wrap_content"

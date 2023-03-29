@@ -45,25 +45,32 @@ public class ServiceHealthyDataActivity extends UIBaseActivity {
         SerciveDataShowAdapter adapter = new SerciveDataShowAdapter(getPageContext(), normalInfoList, "2", object -> {
             switch (Integer.parseInt(String.valueOf(object))) {
                 case 0:
-                    startActivity(new Intent(getPageContext(), ServiceBloodDataActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceBloodAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceBloodListActivity.class));
                     break;
                 case 1:
-                    startActivity(new Intent(getPageContext(), ServiceSaccharifyAddActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceSaccharifyAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceBloodScleroproteinListActivity.class));
                     break;
                 case 2:
-                    startActivity(new Intent(getPageContext(), ServicePressureAddActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServicePressureAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServicePressureListActivity.class));
                     break;
                 case 3:
-                    startActivity(new Intent(getPageContext(), ServiceBmiAddActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceBmiAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceBmiListActivity.class));
                     break;
                 case 4:
-                    startActivity(new Intent(getPageContext(), ServiceCheckAddActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceCheckAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceCheckListActivity.class));
                     break;
                 case 5:
-                    startActivity(new Intent(getPageContext(), ServiceTemperatureAddActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceTemperatureAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceTemperatureListActivity.class));
                     break;
                 case 6:
-                    startActivity(new Intent(getPageContext(), ServiceBloodOxygenAddActivity.class));
+                    startActivity(new Intent(getPageContext(), ServiceBloodOxygenListActivity.class));
+                    //                    startActivity(new Intent(getPageContext(), ServiceBloodOxygenAddActivity.class));
                     break;
                 default:
                     break;

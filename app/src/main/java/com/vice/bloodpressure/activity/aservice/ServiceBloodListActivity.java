@@ -11,8 +11,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.fservice.SevenAndThirtyBloodSugarListFragment;
+import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.ArrayList;
 
@@ -24,13 +28,15 @@ import java.util.ArrayList;
  * 作者: beauty
  * 创建日期: 2023/3/28 13:59
  */
-public class ServiceBloodDataActivity extends UIBaseActivity {
+public class ServiceBloodListActivity extends UIBaseActivity implements View.OnClickListener {
     private ImageView backImageView;
     private TextView moreTextView;
     private TextView startTimeTextView;
     private TextView endTimeTextView;
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
+
+    private String startTime;
 
 
     @Override
@@ -51,6 +57,7 @@ public class ServiceBloodDataActivity extends UIBaseActivity {
         endTimeTextView = view.findViewById(R.id.tv_service_blood_data_end_time);
         radioGroup = view.findViewById(R.id.rg_service_blood_data);
         viewPager = view.findViewById(R.id.vp_service_blood_data);
+        radioGroup.setVisibility(View.VISIBLE);
         moreTextView.setVisibility(View.VISIBLE);
         titleTextView.setText("血糖数据");
         containerView().addView(view);
@@ -101,4 +108,35 @@ public class ServiceBloodDataActivity extends UIBaseActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_service_blood_data_back:
+                finish();
+                break;
+            case R.id.tv_service_blood_data_more:
+                break;
+            case R.id.tv_service_blood_data_start_time:
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                    @Override
+                    public void callBack(Object object) {
+                        startTime = String.valueOf(object);
+                        startTimeTextView.setText(object.toString());
+                    }
+                });
+                break;
+            case R.id.tv_service_blood_data_end_time:
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                    @Override
+                    public void callBack(Object object) {
+                        XyTimeUtils.compareTwoTime(startTime, object.toString());
+                        endTimeTextView.setText(object.toString());
+                    }
+                });
+                break;
+
+            default:
+                break;
+        }
+    }
 }

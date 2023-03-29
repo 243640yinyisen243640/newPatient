@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.fragment.fservice;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.aservice.ServiceBloodAddActivity;
 import com.vice.bloodpressure.adapter.service.SevenBottomAdapter;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
@@ -36,6 +38,12 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
         topViewManager().topView().removeAllViews();
         initView();
         initValue();
+        initListener();
+    }
+
+    private void initListener() {
+        sureLinearLayout.setOnClickListener(v -> startActivity(new Intent(getPageContext(), ServiceBloodAddActivity.class)));
+        ;
     }
 
     private void initValue() {
