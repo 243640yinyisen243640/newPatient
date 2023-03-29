@@ -45,11 +45,14 @@ public class ServiceBloodDataActivity extends UIBaseActivity {
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_service_blood_data, null);
         backImageView = view.findViewById(R.id.iv_service_blood_data_back);
+        TextView titleTextView = view.findViewById(R.id.tv_service_blood_data_title);
         moreTextView = view.findViewById(R.id.tv_service_blood_data_more);
         startTimeTextView = view.findViewById(R.id.tv_service_blood_data_start_time);
         endTimeTextView = view.findViewById(R.id.tv_service_blood_data_end_time);
         radioGroup = view.findViewById(R.id.rg_service_blood_data);
         viewPager = view.findViewById(R.id.vp_service_blood_data);
+        moreTextView.setVisibility(View.VISIBLE);
+        titleTextView.setText("血糖数据");
         containerView().addView(view);
     }
 
