@@ -21,7 +21,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBg1Activity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.ServiceInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -37,7 +37,7 @@ import java.util.List;
  * 传参:
  * 描述:bmi列表
  */
-public class ServiceBmiListActivity extends UIBaseListRecycleViewForBgActivity<ServiceInfo> implements View.OnClickListener {
+public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<ServiceInfo> implements View.OnClickListener {
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;

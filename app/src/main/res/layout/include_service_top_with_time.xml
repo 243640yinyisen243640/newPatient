@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@color/text_white"
         android:orientation="vertical">
 
@@ -160,8 +159,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal"
         android:paddingTop="20dp"
@@ -239,8 +238,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal"
         android:paddingTop="20dp"
@@ -396,6 +395,7 @@
         android:id="@+id/ll_service_bmi_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:visibility="gone">
 

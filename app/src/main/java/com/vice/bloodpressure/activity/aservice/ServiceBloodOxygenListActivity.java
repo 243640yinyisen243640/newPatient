@@ -69,19 +69,17 @@ public class ServiceBloodOxygenListActivity extends UIBaseListRecycleViewForBgAc
         LinearLayout allLinearLayout = topView.findViewById(R.id.ll_service_blood_oxygen_all);
         lowTextView = topView.findViewById(R.id.tv_service_blood_oxygen_low);
         highTextView = topView.findViewById(R.id.tv_service_blood_oxygen_high);
-        titleTextView.setText("糖化血红蛋白");
+        titleTextView.setText("血氧数据");
         allLinearLayout.setVisibility(View.VISIBLE);
         return topView;
     }
 
     private void setPublicBottom() {
-
         View view = View.inflate(getPageContext(), R.layout.include_save_bottom, null);
         addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
         FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        textTextView.setText("添加糖化血红蛋白数据");
-
+        textTextView.setText("添加血氧数据");
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
 
