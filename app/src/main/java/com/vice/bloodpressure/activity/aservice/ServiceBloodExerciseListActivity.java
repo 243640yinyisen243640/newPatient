@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -130,6 +131,7 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
                 finish();
                 break;
             case R.id.ll_service_exercise_add_sure:
+                startActivity(new Intent(getPageContext(), ServiceExerciseAddActivity.class));
                 break;
             default:
                 break;
