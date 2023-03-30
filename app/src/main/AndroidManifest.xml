@@ -407,6 +407,13 @@
         <activity
             android:name=".activity.aservice.ServiceTemperatureListActivity"
             android:screenOrientation="portrait" />
+        <!--用药列表-->
+        <activity
+            android:name=".activity.aservice.ServiceMedicineListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.aservice.ServiceMedicineRecordAddActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->
         <activity

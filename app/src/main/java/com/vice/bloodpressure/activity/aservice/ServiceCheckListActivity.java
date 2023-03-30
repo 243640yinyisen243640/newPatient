@@ -79,8 +79,6 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         textTextView.setText("添加检验检查数据");
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
-
-
     }
 
     private void initListener() {

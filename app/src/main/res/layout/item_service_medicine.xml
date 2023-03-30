@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_service_medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxEms="12"
+                android:maxLines="1"
+                android:paddingTop="15dp"
+                android:text="药品名称最长展示12个字"
+                android:textColor="@color/black_24"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_item_service_medicine_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="2022-02-12 12:20"
+                android:textColor="@color/gray_BB"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_service_medicine_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="12"
+                    android:maxLines="1"
+                    android:text="2"
+                    android:textColor="#E54C4C"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="次/日"
+                    android:textColor="@color/gray_BB"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_service_medicine_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="12"
+                    android:maxLines="1"
+                    android:text="2"
+                    android:textColor="#E54C4C"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="g/次"
+                    android:textColor="@color/gray_BB"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/tv_item_service_medicine_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_green_90_1"
+            android:gravity="center|right"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="编辑"
+            android:textColor="@color/main_base_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_service_medicine_look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/shape_bg_white_green_90_1"
+            android:gravity="center|right"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="查看"
+            android:textColor="@color/main_base_color"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/base_line"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
+</LinearLayout>

@@ -89,7 +89,7 @@ public class ServiceHealthyDataActivity extends UIBaseActivity {
 
                     break;
                 case 2:
-
+                    startActivity(new Intent(getPageContext(), ServiceMedicineListActivity.class));
                     break;
 
                 default:
