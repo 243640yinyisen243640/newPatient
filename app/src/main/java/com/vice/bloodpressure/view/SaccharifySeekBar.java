@@ -41,7 +41,7 @@ public class SaccharifySeekBar extends androidx.appcompat.widget.AppCompatSeekBa
         mPaint.setTextSize(DensityUtils.sp2px(context, 20));
 
         //设置SeekBar顶部数值文字预留空间，左右为数值背景图片的一半，顶部为数值背景图片高度加五的间隔
-        setPadding((int) Math.ceil(mBgWidth) / 2, (int) Math.ceil(mBgHeight) + 15, (int) Math.ceil(mBgWidth) , 0);
+        setPadding((int) Math.ceil(mBgWidth) / 2, (int) Math.ceil(mBgHeight) + 15, (int) Math.ceil(mBgWidth), 0);
     }
 
     @Override
@@ -63,21 +63,27 @@ public class SaccharifySeekBar extends androidx.appcompat.widget.AppCompatSeekBa
     private void getTextLocation() {
         // Paint.FontMetrics fm = mPaint.getFontMetrics();
         //        mText = txfloat(getProgress());
-        mText = String.valueOf(getProgress());
+        mText = getText(getProgress());
         //测量文字宽度
         mTextWidth = mPaint.measureText(mText);
         //计算文字基线Y坐标
         mTextBaseLineY = mBgHeight;/// 2 - fm.descent + (fm.descent - fm.ascent) / 2
     }
 
+    public String getText(int progress){
+        double progressDouble = Double.valueOf(progress);
+        double textDouble = progressDouble/10;
+        return String.valueOf(textDouble);
+    }
+
     private String txfloat(int a) {
-        //        if (a == 0) {
-        //            return "0";
-        //        }
-        //        if (100 == a) {
-        //            return "10";
-        //        }
+        if (a == 0) {
+            return "0";
+        }
+        if (100 == a) {
+            return "100";
+        }
         DecimalFormat df = new DecimalFormat("0.0");//设置保留位数
-        return df.format((float) a / 10);
+        return df.format((float) a / 10.0);
     }
 }

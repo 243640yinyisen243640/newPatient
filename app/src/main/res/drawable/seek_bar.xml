@@ -17,14 +17,9 @@
             </shape>
         </clip>
     </item>
-        <!--已经滑过的颜色-->
     <item android:id="@android:id/progress">
-    <clip>
-        <shape>
-            <corners android:radius="90dp" />
-            <solid android:color="@color/main_base_color" />
-            <size android:height="10dp" />
-        </shape>
-    </clip>
-</item>
+        <scale
+            android:drawable="@drawable/shape_bg_main_gra_90"
+            android:scaleWidth="100%" />
+    </item>
 </layer-list>

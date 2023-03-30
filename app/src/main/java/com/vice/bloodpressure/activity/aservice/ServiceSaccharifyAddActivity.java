@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.activity.aservice;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -13,6 +15,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.utils.EditTextUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.view.SaccharifySeekBar;
 
@@ -27,32 +30,19 @@ public class ServiceSaccharifyAddActivity extends UIBaseActivity implements View
     private TextView timeTextView;
     private EditText rateEditText;
     private LinearLayout sureLinearLayout;
-
+    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
+    private TextWatcher textWatcher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("添加糖化血红蛋白");
-        initView();
-        initListener();
-//        initValues();
-    }
-
-    private void initValues() {
-//        seekBar.setTextSize(25);// 设置字体大小
-    }
-
-    private void initListener() {
-        timeTextView.setOnClickListener(this);
-        sureLinearLayout.setOnClickListener(this);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                //                if (seekBar.getProgress() == 100) {
-                //                    noDiscountTextView.setVisibility(View.VISIBLE);
-                //                } else {
-                //                    noDiscountTextView.setVisibility(View.INVISIBLE);
-                //                }
+            public void onProgressChanged(SeekBar sb, int i, boolean b) {
+                rateEditText.removeTextChangedListener(textWatcher);
+                rateEditText.setText(seekBar.getText(i));
+                rateEditText.addTextChangedListener(textWatcher);
             }
 
             @Override
@@ -64,7 +54,41 @@ public class ServiceSaccharifyAddActivity extends UIBaseActivity implements View
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
-        });
+        };
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                seekBar.setOnSeekBarChangeListener(null);
+                int progress = Integer.valueOf((int) (Double.valueOf(s.toString()) * 10));
+                seekBar.setProgress(progress);
+                seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+
+                //                BigDecimal discountBigDecimal = new BigDecimal(s.toString()).multiply(new BigDecimal("10.0"));
+                //                seekBar.setProgress(discountBigDecimal.toBigInteger().intValue());
+            }
+
+        };
+        initView();
+        initListener();
+    }
+
+
+    private void initListener() {
+        timeTextView.setOnClickListener(this);
+        sureLinearLayout.setOnClickListener(this);
+        seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        EditTextUtils.decimalNumber(rateEditText, 1);
+        rateEditText.addTextChangedListener(textWatcher);
     }
 
     private void initView() {
@@ -75,6 +99,7 @@ public class ServiceSaccharifyAddActivity extends UIBaseActivity implements View
         sureLinearLayout = view.findViewById(R.id.ll_service_saccharify_add_sure);
         containerView().addView(view);
     }
+
 
     @Override
     public void onClick(View v) {
