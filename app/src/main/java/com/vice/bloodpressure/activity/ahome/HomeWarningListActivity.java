@@ -62,7 +62,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
-        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
+//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         initListener();
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);

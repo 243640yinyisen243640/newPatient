@@ -14,12 +14,12 @@
             android:id="@+id/tv_item_service_pressure_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="10dp"
+            android:layout_weight="1.2"
+            android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="2022-05-06 09:54"
             android:textColor="@color/black_24"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,7 +36,6 @@
 
             <TextView
                 style="@style/service_item_content"
-                android:layout_marginStart="3dp"
                 android:text="mmHg"
                 android:textColor="@color/black_24" />
 
@@ -57,7 +56,6 @@
 
             <TextView
                 style="@style/service_item_content"
-                android:layout_marginStart="3dp"
                 android:text="次/分"
                 android:textColor="@color/gray_8a" />
 
@@ -69,6 +67,7 @@
             android:layout_width="wrap_content"
             android:gravity="right|center"
             android:paddingRight="10dp"
+            android:textSize="13sp"
             android:text="手动"
             android:textColor="@color/gray_8a" />
 

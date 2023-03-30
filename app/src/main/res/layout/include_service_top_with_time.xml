@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:background="@color/text_white"
         android:orientation="vertical">
 
@@ -69,7 +70,7 @@
             android:background="@color/text_white"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -159,8 +160,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal"
         android:paddingTop="20dp"
@@ -238,8 +239,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal"
         android:paddingTop="20dp"
@@ -259,7 +260,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="@color/main_base_color"
+                android:textColor="#4B89F7"
                 android:textSize="24sp" />
 
             <TextView
@@ -271,7 +272,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:includeFontPadding="false"
-                android:text="7日血糖最低值"
+                android:text="收缩压最低值"
                 android:textColor="@color/black_24"
                 android:textSize="13sp" />
 
@@ -296,7 +297,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="@color/main_base_color"
+                android:textColor="#FF5750"
                 android:textSize="24sp" />
 
             <TextView
@@ -308,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:includeFontPadding="false"
-                android:text="7日血糖最低值"
+                android:text="收缩压最高值"
                 android:textColor="@color/black_24"
                 android:textSize="13sp" />
 
@@ -333,7 +334,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="@color/main_base_color"
+                android:textColor="#4B89F7"
                 android:textSize="24sp" />
 
             <TextView
@@ -345,7 +346,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:includeFontPadding="false"
-                android:text="7日血糖平均值"
+                android:text="舒张压最低值"
                 android:textColor="@color/black_24"
                 android:textSize="13sp" />
 
@@ -370,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="@color/main_base_color"
+                android:textColor="#FF5750"
                 android:textSize="24sp" />
 
             <TextView
@@ -382,7 +383,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:includeFontPadding="false"
-                android:text="7日血糖最高值"
+                android:text="舒张压最高值"
                 android:textColor="@color/black_24"
                 android:textSize="13sp" />
 
@@ -402,7 +403,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/shape_bg_white_10"
             android:orientation="horizontal"
@@ -517,8 +517,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingStart="30dp"
                     android:text="日期"
                     android:textColor="@color/gray_8a"
                     android:textSize="14sp" />
@@ -526,6 +527,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="身高"

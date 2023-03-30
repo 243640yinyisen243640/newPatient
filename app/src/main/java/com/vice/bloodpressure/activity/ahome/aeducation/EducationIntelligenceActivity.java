@@ -40,7 +40,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         initTopView();
-        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
+//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));

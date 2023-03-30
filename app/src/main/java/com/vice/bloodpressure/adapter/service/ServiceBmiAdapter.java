@@ -43,8 +43,8 @@ public class ServiceBmiAdapter extends RecyclerView.Adapter<ServiceBmiAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceInfo info = list.get(position);
         holder.timeTextView.setText(info.getTime());
-        holder.heightTextView.setText(info.getRate());
-        holder.weightTextView.setText(info.getType());
+        holder.heightTextView.setText(info.getRate()+"cm");
+        holder.weightTextView.setText(info.getType()+"kg");
         holder.valueTextView.setText(info.getData());
     }
 

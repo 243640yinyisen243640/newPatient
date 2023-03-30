@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
+        Log.i("yys", "status==" + topViewManager().statusBarView().getLayoutParams().height);
         topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 2);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));

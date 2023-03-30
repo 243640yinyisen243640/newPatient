@@ -3,7 +3,6 @@ package com.vice.bloodpressure.fragment.fhome.exercise;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.ExerciseResistanceListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -28,7 +27,7 @@ public class ExerciseFlexibilityFragment extends UIBaseListRecycleViewFragment<E
     @Override
     public void onCreate() {
         super.onCreate();
-        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
+//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));

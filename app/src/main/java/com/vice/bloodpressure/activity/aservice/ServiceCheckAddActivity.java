@@ -53,7 +53,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
     private void initValues() {
         GalleryUploadImageView.Builder builder = new GalleryUploadImageView.Builder(getPageContext())
                 .maxCount(9)
-                .rowMaxCount(4)
+                .rowMaxCount(3)
                 .defaultImage(R.drawable.choose_pic_default)
                 .paddingWidth(DensityUtils.dip2px(getPageContext(), 10))
                 .totalWidth(ScreenUtils.screenWidth(getPageContext()) - DensityUtils.dip2px(getPageContext(), 40))

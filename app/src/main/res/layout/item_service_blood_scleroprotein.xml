@@ -16,7 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingTop="10dp"
+            android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="2022-05-06"
             android:textColor="@color/black_24"

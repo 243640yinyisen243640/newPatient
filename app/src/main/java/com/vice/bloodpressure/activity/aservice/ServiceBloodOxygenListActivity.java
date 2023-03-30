@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -53,7 +54,7 @@ public class ServiceBloodOxygenListActivity extends UIBaseListRecycleViewForBgAc
         setPublicBottom();
         initListener();
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
@@ -79,8 +80,6 @@ public class ServiceBloodOxygenListActivity extends UIBaseListRecycleViewForBgAc
         addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
         FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        f2.topMargin = DensityUtils.dip2px(getPageContext(), 70);
-        //        f2.rightMargin = DensityUtils.dip2px(getPageContext(), 10);
         textTextView.setText("添加糖化血红蛋白数据");
 
         f2.gravity = Gravity.BOTTOM;
@@ -141,6 +140,7 @@ public class ServiceBloodOxygenListActivity extends UIBaseListRecycleViewForBgAc
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
+                startActivity(new Intent(getPageContext(), ServiceBloodOxygenAddActivity.class));
                 break;
             default:
                 break;

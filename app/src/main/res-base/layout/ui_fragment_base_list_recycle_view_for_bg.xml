@@ -11,7 +11,7 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="65dp"
         android:visibility="visible">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
@@ -22,8 +22,8 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/shape_bg_white_10"
             android:overScrollMode="never"
             android:paddingStart="3dp"

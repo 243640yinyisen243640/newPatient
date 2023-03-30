@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -51,8 +52,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));        mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
         setPublicBottom();
@@ -76,10 +76,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
         FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        f2.topMargin = DensityUtils.dip2px(getPageContext(), 70);
-        //        f2.rightMargin = DensityUtils.dip2px(getPageContext(), 10);
-        textTextView.setText("添加糖化血红蛋白数据");
-
+        textTextView.setText("添加检验检查数据");
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
 
@@ -141,6 +138,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
+                startActivity(new Intent(getPageContext(), ServiceCheckAddActivity.class));
                 break;
             default:
                 break;
