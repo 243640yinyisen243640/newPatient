@@ -42,8 +42,6 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
-    private TextView lowTextView;
-    private TextView highTextView;
 
     private String startTime;
 
@@ -66,11 +64,7 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
         endTextView = topView.findViewById(R.id.tv_service_blood_data_end_time);
         TextView titleTextView = topView.findViewById(R.id.tv_service_blood_data_title);
         backImageView = topView.findViewById(R.id.iv_service_blood_data_back);
-        LinearLayout allLinearLayout = topView.findViewById(R.id.ll_service_blood_oxygen_all);
-        lowTextView = topView.findViewById(R.id.tv_service_blood_oxygen_low);
-        highTextView = topView.findViewById(R.id.tv_service_blood_oxygen_high);
-        titleTextView.setText("糖化血红蛋白");
-        allLinearLayout.setVisibility(View.VISIBLE);
+        titleTextView.setText("运动数据");
         return topView;
     }
 
@@ -135,7 +129,7 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
             case R.id.iv_service_blood_data_back:
                 finish();
                 break;
-            case R.id.ll_service_exercise_add_sure:
+            case R.id.ll_service_base_bottom_sure:
                 startActivity(new Intent(getPageContext(), ServiceExerciseAddActivity.class));
                 break;
             default:

@@ -411,8 +411,13 @@
         <activity
             android:name=".activity.aservice.ServiceMedicineListActivity"
             android:screenOrientation="portrait" />
+        <!--添加用药-->
         <activity
             android:name=".activity.aservice.ServiceMedicineRecordAddActivity"
+            android:screenOrientation="portrait" />
+        <!--添加用药提醒-->
+        <activity
+            android:name=".activity.aservice.ServiceMedicineRemindAddActivity"
             android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->
