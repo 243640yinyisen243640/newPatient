@@ -25,6 +25,7 @@ import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.ServiceInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
+        mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
         setPublicBottom();
@@ -122,8 +124,11 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
                     @Override
                     public void callBack(Object object) {
-                        XyTimeUtils.compareTwoTime(startTime, object.toString());
-                        endTextView.setText(object.toString());
+                        if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTextView.setText(object.toString());
+                        } else {
+                            ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
+                        }
                     }
                 });
                 break;

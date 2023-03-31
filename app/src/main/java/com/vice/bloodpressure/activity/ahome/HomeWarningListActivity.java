@@ -136,8 +136,11 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
                     @Override
                     public void callBack(Object object) {
-                        XyTimeUtils.compareTwoTime(startTime, object.toString());
-                        endTv.setText(object.toString());
+                        if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTv.setText(object.toString());
+                        } else {
+                            ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
+                        }
                     }
                 });
                 break;

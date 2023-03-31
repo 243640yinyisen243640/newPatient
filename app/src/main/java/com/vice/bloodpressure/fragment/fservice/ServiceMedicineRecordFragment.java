@@ -80,10 +80,12 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
-        return new ServiceMedicineAdapter(getPageContext(), list, new IAdapterViewClickListener() {
+        return new ServiceMedicineAdapter(getPageContext(), list, "1", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
+                    case R.id.tv_item_service_medicine_delete:
+                        break;
                     case R.id.tv_item_service_medicine_edit:
                         break;
                     case R.id.tv_item_service_medicine_look:

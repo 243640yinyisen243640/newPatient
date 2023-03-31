@@ -28,23 +28,22 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/et_service_medicine_record_add_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:layout_weight="1"
                 android:hint="请输入药品名称"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:paddingTop="20dp"
                 android:paddingBottom="25dp"
-                android:textColor="@color/gray_8a"
+                android:textColor="@color/black_24"
                 android:textColorHint="@color/gray_8a"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+        <View style="@style/base_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,23 +59,42 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/et_service_medicine_record_add_specs"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="25dp"
+                android:layout_weight="1"
+                android:gravity="left"
                 android:hint="请输入规格数量"
-                android:maxLines="1"
+                android:inputType="number"
+                android:maxLines="2"
                 android:paddingTop="20dp"
                 android:paddingBottom="25dp"
-                android:textColor="@color/gray_8a"
+                android:textColor="@color/black_24"
                 android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_service_medicine_record_add_specs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/shape_bg_white_black_90_1"
+                android:drawableRight="@drawable/arrow_down_gray_little"
+                android:drawablePadding="13dp"
+                android:paddingStart="12dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="7dp"
+                android:text="/盒"
+                android:textColor="@color/black_24"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+        <View style="@style/base_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,23 +110,31 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/et_service_medicine_record_add_times"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:layout_weight="1"
                 android:hint="请输入服药次数"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingTop="20dp"
                 android:paddingBottom="25dp"
-                android:textColor="@color/gray_8a"
+                android:textColor="@color/black_24"
                 android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="次"
+                android:textColor="@color/black_24"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+        <View style="@style/base_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -124,23 +150,40 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/et_service_medicine_record_add_dosage"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:layout_weight="1"
                 android:hint="请输入服药剂量"
+                android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:paddingTop="20dp"
-                android:paddingBottom="25dp"
-                android:textColor="@color/gray_8a"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black_24"
                 android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_service_medicine_record_add_dosage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/shape_bg_white_black_90_1"
+                android:drawableRight="@drawable/arrow_down_gray_little"
+                android:drawablePadding="13dp"
+                android:paddingStart="12dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="7dp"
+                android:text="mg"
+                android:textColor="@color/black_24"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+        <View style="@style/base_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,29 +194,82 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="用药周期"
+                android:text="用药开始时间"
                 android:textColor="@color/black_24"
                 android:textSize="15sp" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:hint="请输入药品名称"
-                android:maxLines="1"
+                android:id="@+id/tv_service_medicine_record_add_start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:gravity="center|right"
+                android:hint="请选择用药开始时间"
                 android:paddingTop="20dp"
-                android:paddingBottom="25dp"
-                android:textColor="@color/gray_8a"
-                android:textColorHint="@color/gray_8a"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black_24"
                 android:textSize="15sp" />
+
 
         </LinearLayout>
 
-        <View
-            style="@style/base_line"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+        <View style="@style/base_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="用药开始时间"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_service_medicine_record_add_end"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"
+                android:gravity="center|right"
+                android:hint="请选择用药结束时间"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
+    <LinearLayout
+        android:id="@+id/ll_service_medicine_record_add_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_bg_white_10_10_0_0"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_main_gra_90"
+            android:gravity="center"
+            android:padding="13dp"
+            android:text="保存"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

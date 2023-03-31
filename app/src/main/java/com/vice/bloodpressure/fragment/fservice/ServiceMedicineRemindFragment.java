@@ -70,7 +70,7 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
         LinearLayout addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
         FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        textTextView.setText("添加新记录");
+        textTextView.setText("添加新提醒");
         addLinearLayout.setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class));
         });
@@ -80,10 +80,12 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
-        return new ServiceMedicineAdapter(getPageContext(), list, new IAdapterViewClickListener() {
+        return new ServiceMedicineAdapter(getPageContext(), list, "2", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
+                    case R.id.tv_item_service_medicine_delete:
+                        break;
                     case R.id.tv_item_service_medicine_edit:
                         break;
                     case R.id.tv_item_service_medicine_look:

@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 类名：
- * 传参：
+ * 传参：type  1:用药记录
  * 描述:
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
@@ -25,12 +25,14 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
     private Context context;
     private List<ServiceInfo> list;
     private IAdapterViewClickListener clickListener;
+    private String type;
 
 
-    public ServiceMedicineAdapter(Context context, List<ServiceInfo> list, IAdapterViewClickListener clickListener) {
+    public ServiceMedicineAdapter(Context context, List<ServiceInfo> list, String type, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
+        this.type = type;
     }
 
     @NonNull
@@ -49,7 +51,13 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
         holder.nameTextView.setText(info.getType());
         holder.rateTextView.setText(info.getRate());
         holder.valueTextView.setText(info.getData());
+        if ("1".equals(type)){
+            holder.editTextView.setText("复制");
+        }else {
+            holder.editTextView.setText("编辑");
+        }
         clickOnClick clickOnClick = new clickOnClick(position);
+        holder.deleteTextView.setOnClickListener(clickOnClick);
         holder.editTextView.setOnClickListener(clickOnClick);
         holder.lookTextView.setOnClickListener(clickOnClick);
     }
@@ -64,6 +72,7 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
         private TextView nameTextView;
         private TextView rateTextView;
         private TextView valueTextView;
+        private TextView deleteTextView;
         private TextView editTextView;
         private TextView lookTextView;
 
@@ -73,6 +82,7 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
             timeTextView = itemView.findViewById(R.id.tv_item_service_medicine_time);
             rateTextView = itemView.findViewById(R.id.tv_item_service_medicine_rate);
             valueTextView = itemView.findViewById(R.id.tv_item_service_medicine_value);
+            deleteTextView = itemView.findViewById(R.id.tv_item_service_medicine_delete);
             editTextView = itemView.findViewById(R.id.tv_item_service_medicine_edit);
             lookTextView = itemView.findViewById(R.id.tv_item_service_medicine_look);
         }
