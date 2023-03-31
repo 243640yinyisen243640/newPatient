@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.aservice.ServiceMedicineRecordAddActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceMedicineRemindAddActivity;
 import com.vice.bloodpressure.adapter.service.ServiceMedicineAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
@@ -21,8 +21,10 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgFragment;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.ServiceInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.DialogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,9 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
         FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textTextView.setText("添加新提醒");
         addLinearLayout.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class));
+            Intent intent = new Intent(getPageContext(), ServiceMedicineRemindAddActivity.class);
+            intent.putExtra("type", "3");
+            startActivity(intent);
         });
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
@@ -83,12 +87,25 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
         return new ServiceMedicineAdapter(getPageContext(), list, "2", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
+                Intent intent;
                 switch (view.getId()) {
                     case R.id.tv_item_service_medicine_delete:
+                        DialogUtils.showOperDialog(getPageContext(), "", "确定要删除吗？", "取消", "确定", (dialog, which) -> {
+                            dialog.dismiss();
+                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+
+                            }
+                        });
                         break;
                     case R.id.tv_item_service_medicine_edit:
+                        intent = new Intent(getPageContext(), ServiceMedicineRemindAddActivity.class);
+                        intent.putExtra("type", "1");
+                        startActivity(intent);
                         break;
                     case R.id.tv_item_service_medicine_look:
+                        intent = new Intent(getPageContext(), ServiceMedicineRemindAddActivity.class);
+                        intent.putExtra("type", "2");
+                        startActivity(intent);
                         break;
                     default:
                         break;

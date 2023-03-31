@@ -14,7 +14,7 @@
             android:id="@+id/tv_item_service_exercise_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:gravity="left"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="170"
-                android:textColor="@color/black_24"
+                android:textColor="#E54C4C"
                 android:textSize="14sp" />
 
             <TextView
@@ -53,7 +53,7 @@
             android:id="@+id/tv_item_service_exercise_type"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center|right"
             android:paddingRight="10dp"
             android:text="步行工作/上学"

@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 作者: beauty
  * 类名:
- * 传参:
+ * 传参:type 1：编辑 2：查看 3添加
  * 描述:添加用药提醒
  */
 public class ServiceMedicineRemindAddActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -29,6 +29,7 @@ public class ServiceMedicineRemindAddActivity extends UIBaseLoadActivity impleme
     private EditText specsEditText;
     private TextView specsTextView;
     private TextView useTextView;
+    private TextView numEditText;
     private EditText timesEditText;
     private EditText dosageEditText;
     private TextView dosageTextView;
@@ -36,14 +37,47 @@ public class ServiceMedicineRemindAddActivity extends UIBaseLoadActivity impleme
     private LinearLayout sureLinearLayout;
 
     private String startTime;
+    /**
+     * 1：编辑 2：查看 3添加
+     */
+    private String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("添加用药提醒");
+        type = getIntent().getStringExtra("type");
         initView();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+        if ("1".equals(type)) {
+            topViewManager().titleTextView().setText("编辑用药提醒");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            nameEditText.setEnabled(false);
+            sureLinearLayout.setVisibility(View.VISIBLE);
+            isCanClick(true);
+        } else if ("2".equals(type)) {
+            topViewManager().titleTextView().setText("用药提醒详情");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            sureLinearLayout.setVisibility(View.GONE);
+            nameEditText.setEnabled(false);
+            isCanClick(false);
+        } else {
+            topViewManager().titleTextView().setText("添加用药提醒");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            nameEditText.setEnabled(true);
+            isCanClick(true);
+            sureLinearLayout.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    private void isCanClick(boolean isCanClick) {
+        specsEditText.setEnabled(isCanClick);
+        timesEditText.setEnabled(isCanClick);
+        dosageEditText.setEnabled(isCanClick);
+        timeTextView.setEnabled(isCanClick);
+        useTextView.setEnabled(isCanClick);
+        numEditText.setEnabled(isCanClick);
     }
 
     @Override
@@ -65,6 +99,7 @@ public class ServiceMedicineRemindAddActivity extends UIBaseLoadActivity impleme
         specsEditText = view.findViewById(R.id.et_service_medicine_remind_add_specs);
         specsTextView = view.findViewById(R.id.tv_service_medicine_remind_add_specs);
         useTextView = view.findViewById(R.id.tv_service_medicine_record_add_use);
+        numEditText = view.findViewById(R.id.et_service_medicine_remind_add_num);
         timesEditText = view.findViewById(R.id.et_service_medicine_remind_add_times);
         dosageEditText = view.findViewById(R.id.et_service_medicine_remind_add_dosage);
         dosageTextView = view.findViewById(R.id.tv_service_medicine_remind_add_dosage);

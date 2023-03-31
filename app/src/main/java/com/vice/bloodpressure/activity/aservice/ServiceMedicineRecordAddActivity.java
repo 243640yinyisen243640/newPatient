@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 作者: beauty
  * 类名:
- * 传参:
+ * 传参:type 1：编辑 2：查看
  * 描述:添加用药
  */
 public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -38,15 +38,49 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
     private LinearLayout sureLinearLayout;
 
     private String startTime;
+    /**
+     * 1：编辑 2：查看 3添加
+     */
+    private String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("添加用药记录");
+        type = getIntent().getStringExtra("type");
         initView();
         initListener();
-        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+
+        if ("1".equals(type)) {
+            topViewManager().titleTextView().setText("复制用药记录");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            nameEditText.setEnabled(false);
+            isCanClick(true);
+            sureLinearLayout.setVisibility(View.VISIBLE);
+        } else if ("2".equals(type)) {
+            topViewManager().titleTextView().setText("用药记录详情");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            nameEditText.setEnabled(false);
+            isCanClick(false);
+            sureLinearLayout.setVisibility(View.GONE);
+        } else {
+            topViewManager().titleTextView().setText("添加用药记录");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            nameEditText.setClickable(true);
+            isCanClick(true);
+            sureLinearLayout.setVisibility(View.VISIBLE);
+        }
+
+
     }
+
+    private void isCanClick(boolean isCanClick) {
+        dosageEditText.setEnabled(isCanClick);
+        timesEditText.setEnabled(isCanClick);
+        specsEditText.setEnabled(isCanClick);
+        startTextView.setEnabled(isCanClick);
+        endTextView.setEnabled(isCanClick);
+    }
+
 
     @Override
     protected void onPageLoad() {

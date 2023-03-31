@@ -30,17 +30,16 @@
                 android:paddingTop="15dp"
                 android:text="药品名称最长展示12个字"
                 android:textColor="@color/black_24"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv_item_service_medicine_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="15dp"
                 android:text="2022-02-12 12:20"
                 android:textColor="@color/gray_BB"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -65,14 +64,14 @@
                     android:maxLines="1"
                     android:text="2"
                     android:textColor="#E54C4C"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="次/日"
-                    android:textColor="@color/gray_BB"
-                    android:textSize="12sp" />
+                    android:textColor="@color/black_24"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -91,14 +90,14 @@
                     android:maxLines="1"
                     android:text="2"
                     android:textColor="#E54C4C"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="g/次"
-                    android:textColor="@color/gray_BB"
-                    android:textSize="12sp" />
+                    android:textColor="@color/black_24"
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -109,7 +108,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:gravity="right"
         android:orientation="horizontal"
