@@ -34,7 +34,7 @@
                 android:id="@+id/tv_exercise_oxygen_need"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/exercise_oxygen"
+                android:drawableLeft="@drawable/fire_with_black"
                 android:drawablePadding="10dp"
                 android:textColor="@color/black_24"
                 android:textSize="15sp" />

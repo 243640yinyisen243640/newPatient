@@ -419,6 +419,14 @@
         <activity
             android:name=".activity.aservice.ServiceMedicineRemindAddActivity"
             android:screenOrientation="portrait" />
+        <!--饮食数据列表-->
+        <activity
+            android:name=".activity.aservice.ServiceMealListActivity"
+            android:screenOrientation="portrait" />
+        <!--饮食数据添加-->
+        <activity
+            android:name=".activity.aservice.ServiceMealAddActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->
         <activity

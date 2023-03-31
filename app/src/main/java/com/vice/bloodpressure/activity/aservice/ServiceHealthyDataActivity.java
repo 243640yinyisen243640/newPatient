@@ -86,7 +86,7 @@ public class ServiceHealthyDataActivity extends UIBaseActivity {
                     startActivity(new Intent(getPageContext(), ServiceBloodExerciseListActivity.class));
                     break;
                 case 1:
-
+                    startActivity(new Intent(getPageContext(), ServiceMealListActivity.class));
                     break;
                 case 2:
                     startActivity(new Intent(getPageContext(), ServiceMedicineListActivity.class));

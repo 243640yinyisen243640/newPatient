@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.model;
 
+import java.util.List;
+
 /**
  * 作者: beauty
  * 类名:
@@ -11,6 +13,7 @@ public class ServiceInfo {
     private String data;
     private String rate;
     private String type;
+    private List<ServiceInfo> list;
 
     public ServiceInfo(String time, String data, String type) {
         this.time = time;
@@ -28,6 +31,14 @@ public class ServiceInfo {
     public ServiceInfo(String time, String data) {
         this.time = time;
         this.data = data;
+    }
+
+    public List<ServiceInfo> getList() {
+        return list;
+    }
+
+    public void setList(List<ServiceInfo> list) {
+        this.list = list;
     }
 
     public String getRate() {
