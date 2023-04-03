@@ -9,7 +9,7 @@
         style="@style/style_title_with_green_h"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:drawableRight="@drawable/circle_add"
+        android:drawableRight="@drawable/circle_add_white"
         android:paddingLeft="10dp"
         android:paddingTop="15dp"
         android:paddingRight="15dp"

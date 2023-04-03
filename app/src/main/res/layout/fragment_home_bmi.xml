@@ -8,7 +8,7 @@
         android:id="@+id/tv_warning_bmi_add"
         style="@style/style_title_with_green_h"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/circle_add"
+        android:drawableRight="@drawable/circle_add_white"
         android:gravity="left"
         android:paddingLeft="10dp"
         android:paddingTop="15dp"

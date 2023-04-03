@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:drawableRight="@drawable/circle_add"
+            android:drawableRight="@drawable/circle_add_white"
             android:padding="10dp" />
 
 

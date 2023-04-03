@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_service_meal_choose_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="请输入食物名称"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingTop="13dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="13dp"
+        android:singleLine="true"
+        android:textColor="#242424"
+        android:textColorHint="@color/gray_8a"
+        android:textSize="14sp" />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_service_meal_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_bg_white_10"
+        app:tabBackground="@null"
+        app:tabIndicator="@color/transparent"
+        app:tabRippleColor="@null" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_service_meal_choose"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
+
+</LinearLayout>

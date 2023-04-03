@@ -427,6 +427,10 @@
         <activity
             android:name=".activity.aservice.ServiceMealAddActivity"
             android:screenOrientation="portrait" />
+        <!--饮食数据选择-->
+        <activity
+            android:name=".activity.aservice.ServiceMealChooseActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->
         <activity

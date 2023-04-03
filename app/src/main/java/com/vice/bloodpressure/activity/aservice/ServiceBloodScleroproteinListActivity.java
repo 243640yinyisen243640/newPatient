@@ -82,7 +82,6 @@ public class ServiceBloodScleroproteinListActivity extends UIBaseListRecycleView
     }
 
     private void setPublicBottom() {
-
         View view = View.inflate(getPageContext(), R.layout.include_save_bottom, null);
         addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
@@ -90,8 +89,6 @@ public class ServiceBloodScleroproteinListActivity extends UIBaseListRecycleView
         textTextView.setText("添加血氧数据");
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
-
-
     }
 
     @Override
