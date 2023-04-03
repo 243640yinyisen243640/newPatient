@@ -100,7 +100,7 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_service_meal_choose, null);
-        etSearch = findViewById(R.id.et_service_meal_choose_search);
+        etSearch = view.findViewById(R.id.et_service_meal_choose_search);
         tabLayout = view.findViewById(R.id.tl_service_meal_choose);
         viewPager = view.findViewById(R.id.vp_service_meal_choose);
         containerView().addView(view);
