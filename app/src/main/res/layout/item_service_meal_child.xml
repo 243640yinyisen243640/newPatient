@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#E54C4C"
+            android:textColor="@color/black_24"
             android:textSize="15sp" />
 
         <TextView

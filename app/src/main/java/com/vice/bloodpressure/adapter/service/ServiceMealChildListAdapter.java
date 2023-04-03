@@ -48,7 +48,7 @@ public class ServiceMealChildListAdapter extends RecyclerView.Adapter<ServiceMea
         ServiceInfo info = list.get(position);
         setTextStyle(holder.fireTextView, Color.parseColor("#E54C4C"), info.getData(), "千卡");
         holder.titleTextView.setText(info.getTime());
-        holder.numTextView.setText(info.getType());
+        holder.numTextView.setText(info.getType()+"g");
     }
 
     @Override
