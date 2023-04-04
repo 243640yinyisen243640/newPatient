@@ -1,23 +1,17 @@
 package com.vice.bloodpressure.fragment.fservice;
 
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.service.ServiceChooseMealListAdapter;
-import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
-import com.vice.bloodpressure.basemanager.BaseDataManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgFragment;
-import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
+import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.model.ServiceInfo;
-import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,56 +22,60 @@ import java.util.List;
  * 传参:
  * 描述:血压列表
  */
-public class ServiceMealChooseListFragment extends UIBaseListRecycleViewForBgFragment<ServiceInfo> {
+public class ServiceMealChooseListFragment extends UIBaseLoadFragment {
 
     private TextView numTextView;
-
+    private RecyclerView recyclerView;
+    private TextView sureTextView;
+    private ServiceChooseMealListAdapter adapter;
     @Override
     protected void onCreate() {
-        super.onCreate();
-        GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
-        mRecyclerView.setLayoutManager(layoutManager);
+        topViewManager().topView().removeAllViews();
+        initView();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
+        recyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
-        setPublicBottom();
     }
 
-    private void setPublicBottom() {
-        View view = View.inflate(getPageContext(), R.layout.include_service_bottom, null);
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.fragment_service_meal_type, null);
+        recyclerView = view.findViewById(R.id.rv_service_meal_type);
         numTextView = view.findViewById(R.id.tv_service_meal_add_have_choose);
-        TextView sureTextView = view.findViewById(R.id.tv_service_meal_add_have_sure);
-        FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        f2.gravity = Gravity.BOTTOM;
-        sureTextView.setOnClickListener(v -> {
-
-        });
-        containerView().addView(view, f2);
+        sureTextView = view.findViewById(R.id.tv_service_meal_add_have_sure);
+        containerView().addView(view);
     }
 
-
     @Override
-    protected void getListData(CallBack callBack) {
+    protected void onPageLoad() {
+        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
         List<ServiceInfo> oxygenList = new ArrayList<>();
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        oxygenList.add(new ServiceInfo("胡萝卜", "22","100"));
-        callBack.callBack(oxygenList);
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));
+        adapter = new ServiceChooseMealListAdapter(getPageContext(), oxygenList, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.ll_service_meal_choose_click:
+                        oxygenList.get(position).setCheck(!oxygenList.get(position).isCheck());
+                        adapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-    }
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
 
-    @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
-        return new ServiceChooseMealListAdapter(getPageContext(), list);
-    }
-
-    @Override
-    protected int getPageSize() {
-        return BaseDataManager.PAGE_SIZE;
+            }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
 }

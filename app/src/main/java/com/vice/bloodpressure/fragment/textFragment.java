@@ -25,7 +25,7 @@ public class textFragment extends UIBaseLoadFragment {
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
-        View view = View.inflate(getPageContext(), R.layout.text, null);
+        View view = View.inflate(getPageContext(), R.layout.fragment_main_home, null);
         containerView().addView(view);
     }
 

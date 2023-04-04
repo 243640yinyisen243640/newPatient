@@ -50,35 +50,7 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("食物类型");
         initView();
-        initData();
         initListener();
-        //禁用预加载
-        //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
-        //设置滑动方向
-        viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragmentList));
-        new TabLayoutMediator(tabLayout, viewPager, true, false, (tab, position) -> setTab(tab, position)).attach();
-        ////true:滑动，false：禁止滑动
-        viewPager.setUserInputEnabled(true);
-
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-
-                for (int i = 0; i < tabLayout.getTabCount(); i++) {
-                    TabLayout.Tab tabAt = tabLayout.getTabAt(i);
-                    LinearLayout customView = (LinearLayout) tabAt.getCustomView();
-                    TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
-                    tvTab.setTypeface(Typeface.DEFAULT);
-                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_8a));
-                    if (i == position) {
-                        tvTab.setTypeface(Typeface.DEFAULT_BOLD);
-                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-                    }
-                }
-            }
-        });
     }
 
     private void initListener() {
@@ -96,7 +68,49 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
             }
             return false;
         });
+        fragmentList = new ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment();
+            fragmentList.add(fragment);
+        }
+        //        ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment();
+        //        fragmentList.add(fragment);
+        //        ServiceMealChooseListFragment fragment1 = new ServiceMealChooseListFragment();
+        //        fragmentList.add(fragment1);
+        //        ServiceMealChooseListFragment fragment2 = new ServiceMealChooseListFragment();
+        //        fragmentList.add(fragment2);
+        //        ServiceMealChooseListFragment fragment3 = new ServiceMealChooseListFragment();
+        //        fragmentList.add(fragment3);
+        //        ServiceMealChooseListFragment fragment4= new ServiceMealChooseListFragment();
+        //        fragmentList.add(fragment4);
+
+        //禁用预加载
+        //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
+        //设置滑动方向
+        viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragmentList));
+        new TabLayoutMediator(tabLayout, viewPager, true, false, (tab, position) -> setTab(tab, position)).attach();
+        ////true:滑动，false：禁止滑动
+        viewPager.setUserInputEnabled(true);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                    TabLayout.Tab tabAt = tabLayout.getTabAt(i);
+                    LinearLayout customView = (LinearLayout) tabAt.getCustomView();
+                    TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
+                    tvTab.setTypeface(Typeface.DEFAULT);
+                    tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_8a));
+                    if (i == position) {
+                        tvTab.setTypeface(Typeface.DEFAULT_BOLD);
+                        tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+                    }
+                }
+            }
+        });
     }
+
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_service_meal_choose, null);
@@ -118,11 +132,5 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
         tab.setCustomView(customView);
     }
 
-    private void initData() {
-        fragmentList = new ArrayList<>();
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment();
-            fragmentList.add(fragment);
-        }
-    }
+
 }

@@ -10,6 +10,7 @@ import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceLis
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceEducationVideoActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceHealthyDataActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceHealthyTestListActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceMealVideoActivity;
 import com.vice.bloodpressure.adapter.service.SerciveDataShowAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
@@ -78,7 +79,8 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
                     startActivity(intent);
                     break;
                 case 4:
-
+                    intent = new Intent(getPageContext(), ServiceHealthyTestListActivity.class);
+                    startActivity(intent);
                     break;
                 default:
                     break;

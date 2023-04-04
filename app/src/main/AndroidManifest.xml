@@ -431,6 +431,18 @@
         <activity
             android:name=".activity.aservice.ServiceMealChooseActivity"
             android:screenOrientation="portrait" />
+        <!--血糖分析图-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodTypeActivity"
+            android:screenOrientation="portrait" />
+        <!--健康评测-->
+        <activity
+            android:name=".activity.aservice.ServiceHealthyTestListActivity"
+            android:screenOrientation="portrait" />
+        <!--历史评测-->
+        <activity
+            android:name=".activity.aservice.ServiceHealthyHistoryListActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 查看大图页面-->
         <activity

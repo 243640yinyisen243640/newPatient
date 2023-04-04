@@ -502,4 +502,17 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <style name="service_history_check">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableBottom">@drawable/selector_gb_green_tran</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:textColor">@color/selector_black_24_gray_8a</item>
+    </style>
 </resources>

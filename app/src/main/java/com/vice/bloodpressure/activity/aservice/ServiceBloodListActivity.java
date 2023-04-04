@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,7 +45,6 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
-        setTitle("血糖记录");
         initView();
         initValue();
         initlisteber();
@@ -68,6 +68,7 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
         viewPager = view.findViewById(R.id.vp_service_blood_data);
         radioGroup.setVisibility(View.VISIBLE);
         moreTextView.setVisibility(View.VISIBLE);
+
         titleTextView.setText("血糖数据");
         containerView().addView(view);
     }
@@ -124,7 +125,7 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.tv_service_blood_data_more:
-
+                startActivity(new Intent(getPageContext(), ServiceBloodTypeActivity.class));
                 break;
             case R.id.tv_service_blood_data_start_time:
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {

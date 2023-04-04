@@ -13,6 +13,8 @@ public class ServiceInfo {
     private String data;
     private String rate;
     private String type;
+
+    private boolean isCheck;
     private List<ServiceInfo> list;
 
     public ServiceInfo(String time, String data, String type) {
@@ -31,6 +33,14 @@ public class ServiceInfo {
     public ServiceInfo(String time, String data) {
         this.time = time;
         this.data = data;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 
     public List<ServiceInfo> getList() {

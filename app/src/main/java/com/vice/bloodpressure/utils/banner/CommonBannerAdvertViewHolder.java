@@ -41,7 +41,6 @@ public class CommonBannerAdvertViewHolder implements BannerViewHolder<IImageBrow
     @Override
     public void onBind(Context context, int position, IImageBrower data) {
         int defaultResID = R.drawable.text1;
-        Log.i("yys", "data==" + data.sourceImage());
         XyImageUtils.loadRoundImage(context, defaultResID, data.sourceImage(), mImageView);
 
     }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/text_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_activity_detail_top"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="25dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_service_history_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/base_top_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="历史评测"
+                android:textColor="#242424"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_E5" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:id="@+id/tv_service_history_all"
+                    style="@style/service_history_check"
+                    android:text="全部" />
+
+                <TextView
+                    android:id="@+id/tv_service_history_tang"
+                    style="@style/service_history_check"
+                    android:text="糖尿病风险评测" />
+
+
+                <TextView
+                    android:id="@+id/tv_service_history_meal"
+                    style="@style/service_history_check"
+                    android:text="饮食评测" />
+
+                <TextView
+                    android:id="@+id/tv_service_history_exercise"
+                    style="@style/service_history_check"
+                    android:text="运动评测" />
+
+
+                <TextView
+                    android:id="@+id/tv_service_history_weight"
+                    style="@style/service_history_check"
+                    android:text="体重测评" />
+
+
+                <TextView
+                    android:id="@+id/tv_service_history_emo"
+                    style="@style/service_history_check"
+                    android:text="抑郁测评" />
+
+
+                <TextView
+                    android:id="@+id/tv_service_history_bad"
+                    style="@style/service_history_check"
+                    android:text="焦虑测评" />
+
+                <TextView
+                    android:id="@+id/tv_service_history_heart"
+                    style="@style/service_history_check"
+                    android:text="国人缺血性心血管病(ICVD) 10年发病风险评测" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
