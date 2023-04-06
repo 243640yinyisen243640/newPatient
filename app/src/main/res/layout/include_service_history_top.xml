@@ -62,6 +62,7 @@
                 <TextView
                     android:id="@+id/tv_service_history_all"
                     style="@style/service_history_check"
+                    android:textStyle="bold"
                     android:text="全部" />
 
                 <TextView
