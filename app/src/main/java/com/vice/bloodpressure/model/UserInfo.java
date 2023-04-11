@@ -18,6 +18,18 @@ public class UserInfo implements Serializable {
     private String type;
     private String img;
 
+    private boolean isCheck;
+
+    /**
+     *
+     * 档案ID
+     */
+    private String archivesId;
+    /**
+     * userId
+     */
+    private String userId;
+
     public UserInfo() {
     }
 
@@ -87,5 +99,29 @@ public class UserInfo implements Serializable {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getArchivesId() {
+        return archivesId;
+    }
+
+    public void setArchivesId(String archivesId) {
+        this.archivesId = archivesId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean getIsCheck() {
+        return isCheck;
+    }
+
+    public void setIsCheck(boolean isCheck) {
+        this.isCheck = isCheck;
     }
 }

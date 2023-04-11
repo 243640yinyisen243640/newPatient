@@ -225,6 +225,7 @@ public class NetReqUtils {
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
+                        Log.i(TAG,"response=="+response.toString());
                         LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.ASYNC:onResponse：" + ip + methodName + "==" + response.code());
                         if (response.isSuccessful()) {
                             String respResult = response.body();

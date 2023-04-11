@@ -20,7 +20,6 @@ import com.vice.bloodpressure.fragment.fout.OutMainFragment;
 import com.vice.bloodpressure.fragment.fservice.ServiceMainFragment;
 import com.vice.bloodpressure.fragment.fuser.UserCenterFragment;
 import com.vice.bloodpressure.utils.ToastUtils;
-import com.vice.bloodpressure.version.VersionUtils;
 
 
 public class MainActivity extends UIBaseActivity implements View.OnClickListener {
@@ -42,7 +41,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
         initValue();
         initListener();
 
-        VersionUtils.getInstance().updateNewVersion(getPageContext(), this, false);
+//        VersionUtils.getInstance().updateNewVersion(getPageContext(), this, false);
     }
 
     private View initView() {

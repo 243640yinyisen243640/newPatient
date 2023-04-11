@@ -32,7 +32,7 @@
 
                     <EditText
                         android:id="@+id/et_perfect_name"
-                        style="@style/user_add_right_right"
+                        style="@style/user_add_right"
                         android:hint="请输入姓名" />
 
                 </LinearLayout>
@@ -46,13 +46,11 @@
 
                     <TextView
                         style="@style/user_add_left"
-                        android:layout_marginStart="10dp"
-                        android:drawableLeft="@null"
                         android:text="身份证号" />
 
                     <EditText
                         android:id="@+id/et_perfect_id"
-                        style="@style/user_add_right_right"
+                        style="@style/user_add_right"
                         android:hint="请输入身份证号"
                         android:imeOptions="actionSearch"
                         android:inputType="phone"
@@ -75,8 +73,7 @@
                     <TextView
                         android:id="@+id/tv_perfect_born"
                         style="@style/user_add_right_choose"
-                        android:gravity="right|center"
-                        android:text="请选择" />
+                        android:text="_ _" />
 
                 </LinearLayout>
 
@@ -133,90 +130,48 @@
 
                 <TextView
                     style="@style/user_add_left"
-                    android:text="疾病类型" />
+                    android:text="糖尿病" />
 
-
-                <LinearLayout
+                <com.vice.bloodpressure.view.HHAtMostGridView
+                    android:id="@+id/gv_perfect_tang"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/user_add_left"
-                        android:layout_marginStart="10dp"
-                        android:drawableLeft="@null"
-                        android:text="糖尿病" />
-
-                    <TextView
-                        android:id="@+id/tv_perfect_tang"
-                        style="@style/user_add_right_choose"
-                        android:gravity="right|center"
-                        android:text="请选择" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fadingEdge="none"
+                    android:fadingEdgeLength="0dp"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="@color/transparent"
+                    android:numColumns="3"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="20dp"
+                    android:scrollbars="none"
+                    android:verticalSpacing="15dp" />
 
                 <View style="@style/line" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/user_add_left"
+                    android:layout_marginTop="5dp"
+                    android:text="高血压" />
 
-                    <TextView
-                        style="@style/user_add_left"
-                        android:layout_marginStart="10dp"
-                        android:drawableLeft="@null"
-                        android:text="高血压" />
-
-                    <TextView
-                        android:id="@+id/tv_perfect_gao"
-                        style="@style/user_add_right_choose"
-                        android:gravity="right|center"
-                        android:text="请选择" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <com.vice.bloodpressure.view.HHAtMostGridView
+                    android:id="@+id/gv_perfect_ya"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="30dp"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:fadingEdge="none"
+                    android:fadingEdgeLength="0dp"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="@color/transparent"
+                    android:numColumns="3"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="20dp"
+                    android:scrollbars="none"
+                    android:verticalSpacing="15dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
 
-                        <CheckBox
-                            style="@style/user_add_type"
-                            android:text="&#12288;&#12288;冠心病&#12288;&#12288;&#12288;" />
-
-                        <CheckBox
-                            style="@style/user_add_type"
-                            android:layout_marginLeft="10dp"
-                            android:text="&#12288;&#12288;脑卒中&#12288;&#12288;&#12288;" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            style="@style/user_add_type"
-                            android:text="慢性阻塞性肺疾病" />
-
-                        <CheckBox
-                            style="@style/user_add_type"
-                            android:layout_marginLeft="10dp"
-                            android:text="&#12288;糖尿病前期&#12288;" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>
@@ -229,7 +184,6 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="30dp"
             android:background="@drawable/shape_bg_main_gra_90"
             android:gravity="center"
             android:padding="12dp"

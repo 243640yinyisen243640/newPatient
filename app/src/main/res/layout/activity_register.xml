@@ -86,19 +86,62 @@
             android:layout_marginEnd="15dp"
             android:background="@color/gray_EA" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
+
+            <EditText
+                android:id="@+id/et_register_pwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/text_white"
+                android:drawableLeft="@drawable/login_pwd"
+                android:drawablePadding="8dp"
+                android:hint="请输入密码"
+                android:maxLines="1"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black_24"
+                android:textColorHint="#999999"
+                android:textSize="15sp"
+                tools:ignore="TextFields" />
+
+            <CheckBox
+                android:id="@+id/cb_register_close"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:button="@null"
+                android:checked="true"
+                android:drawableEnd="@drawable/select_login_eye_close_open"
+                android:paddingLeft="25dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/gray_EA" />
+
         <TextView
             android:id="@+id/tv_register_agreement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:button="@null"
             android:checked="true"
             android:drawableLeft="@drawable/selector_green_white"
             android:drawablePadding="8.5dp"
             android:gravity="center|left"
             android:paddingStart="15dp"
+            android:paddingTop="15dp"
             android:paddingEnd="15dp"
+            android:paddingBottom="15dp"
             android:text="@string/login_agreement"
             android:textColor="@color/gray_B4"
             android:textSize="12sp" />

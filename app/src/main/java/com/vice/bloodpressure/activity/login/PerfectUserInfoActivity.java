@@ -2,8 +2,7 @@ package com.vice.bloodpressure.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,19 +11,29 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
+import com.vice.bloodpressure.adapter.login.PerfectDiseasePlusAdapter;
+import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.model.IDCardInfoExtractor;
+import com.vice.bloodpressure.datamanager.LoginDataManager;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+
 /**
  * 类名：
  * 传参：
- * 描述:完善信息
+ * 描述:
+ * 完善信息
  * 作者: beauty
  * 创建日期: 2023/3/2 16:25
  */
@@ -41,6 +50,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
      * 出生年月
      */
     private TextView bornTextView;
+
     /**
      * 男
      */
@@ -49,9 +59,24 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
      * 女
      */
     private CheckBox femaleCheckBox;
-    private HHAtMostGridView tangHHAtMostGridView;
-    private HHAtMostGridView yaHHAtMostGridView;
+    /**
+     * 糖尿病
+     */
+    private TextView tangTextView;
+    /**
+     * 高血压
+     */
+    private TextView gaoTextView;
+    private HHAtMostGridView otherHHAtMostGridView;
     private TextView sureTextView;
+
+    private String born;
+    private String tangType;
+    private String gaoType;
+
+    private PerfectDiseasePlusAdapter adapter;
+
+    private List<BaseLocalDataInfo> diseaseList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,27 +91,27 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     private void initListener() {
         bornTextView.setOnClickListener(this);
         sureTextView.setOnClickListener(this);
-        idCardEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //从身份证号码中提取出生日期
-                String birthDay;
-                //拿到身份证号码文本
-                IDCardInfoExtractor idCardInfo = new IDCardInfoExtractor(s.toString().trim());
-                birthDay = idCardInfo.getYear() + "-" + idCardInfo.getMonth() + "-" + idCardInfo.getDay();
-                bornTextView.setText(birthDay);
-            }
-        });
+        //        idCardEditText.addTextChangedListener(new TextWatcher() {
+        //            @Override
+        //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        //
+        //            }
+        //
+        //            @Override
+        //            public void onTextChanged(CharSequence s, int start, int before, int count) {
+        //
+        //            }
+        //
+        //            @Override
+        //            public void afterTextChanged(Editable s) {
+        //                //从身份证号码中提取出生日期
+        //                String birthDay;
+        //                //拿到身份证号码文本
+        //                IDCardInfoExtractor idCardInfo = new IDCardInfoExtractor(s.toString().trim());
+        //                birthDay = idCardInfo.getYear() + "-" + idCardInfo.getMonth() + "-" + idCardInfo.getDay();
+        //                bornTextView.setText(birthDay);
+        //            }
+        //        });
         maleCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 femaleCheckBox.setChecked(false);
@@ -104,37 +129,35 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     }
 
     private void initValue() {
-        List<UserInfo> diseaseList = new ArrayList<>();
-        UserInfo typeInfo1 = new UserInfo("无", "1");
-        diseaseList.add(typeInfo1);
-        UserInfo typeInfo2 = new UserInfo("1型糖尿病", "2");
-        diseaseList.add(typeInfo2);
-        UserInfo typeInfo3 = new UserInfo("2型糖尿病", "3");
-        diseaseList.add(typeInfo3);
-        UserInfo typeInfo4 = new UserInfo("妊娠糖尿病", "4");
-        diseaseList.add(typeInfo4);
-        UserInfo typeInfo5 = new UserInfo("其他", "5");
-        diseaseList.add(typeInfo5);
-        UserInfo typeInfo6 = new UserInfo("未知", "6");
-        diseaseList.add(typeInfo6);
-        PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
-        tangHHAtMostGridView.setAdapter(adapter);
+        diseaseList = new ArrayList<>();
+        BaseLocalDataInfo typeInfo11 = new BaseLocalDataInfo("冠心病", "chd");
+        diseaseList.add(typeInfo11);
+        BaseLocalDataInfo typeInfo12 = new BaseLocalDataInfo("脑卒中", "cva");
+        diseaseList.add(typeInfo12);
+        BaseLocalDataInfo typeInfo13 = new BaseLocalDataInfo("慢性阻塞性肺疾病", "copd");
+        diseaseList.add(typeInfo13);
+        BaseLocalDataInfo typeInfo14 = new BaseLocalDataInfo("糖尿病前期", "igr");
+        diseaseList.add(typeInfo14);
 
+        adapter = new PerfectDiseasePlusAdapter(getPageContext(), diseaseList, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.tv_perfect:
+                        diseaseList.get(position).setIsCheck(!diseaseList.get(position).getIsCheck());
+                        adapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-        List<UserInfo> diseaseList2 = new ArrayList<>();
-        UserInfo typeInfo11 = new UserInfo("无", "1");
-        diseaseList2.add(typeInfo11);
-        UserInfo typeInfo12 = new UserInfo("1级高血压", "2");
-        diseaseList2.add(typeInfo12);
-        UserInfo typeInfo13 = new UserInfo("2级高血压", "3");
-        diseaseList2.add(typeInfo13);
-        UserInfo typeInfo14 = new UserInfo("3级高血压", "4");
-        diseaseList2.add(typeInfo14);
-        UserInfo typeInfo15 = new UserInfo("未知", "5");
-        diseaseList2.add(typeInfo15);
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
 
-        PerfectDiseaseAdapter adapter2 = new PerfectDiseaseAdapter(getPageContext(), diseaseList2);
-        yaHHAtMostGridView.setAdapter(adapter2);
+            }
+        });
+        otherHHAtMostGridView.setAdapter(adapter);
     }
 
     private void initView() {
@@ -144,8 +167,9 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         bornTextView = view.findViewById(R.id.tv_perfect_born);
         maleCheckBox = view.findViewById(R.id.cb_perfect_male);
         femaleCheckBox = view.findViewById(R.id.cb_perfect_female);
-        tangHHAtMostGridView = view.findViewById(R.id.gv_perfect_tang);
-        yaHHAtMostGridView = view.findViewById(R.id.gv_perfect_ya);
+        tangTextView = view.findViewById(R.id.tv_perfect_tang);
+        gaoTextView = view.findViewById(R.id.tv_perfect_gao);
+        otherHHAtMostGridView = view.findViewById(R.id.gv_perfect_other);
         sureTextView = view.findViewById(R.id.tv_perfect_start);
         containerView().addView(view);
     }
@@ -154,19 +178,103 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_perfect_born:
-                //                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                //                    @Override
-                //                    public void callBack(Object object) {
-                //                        String born = object.toString();
-                //                        bornTextView.setText(object.toString());
-                //                    }
-                //                });
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                    @Override
+                    public void callBack(Object object) {
+                        born = object.toString();
+                        bornTextView.setText(object.toString());
+                    }
+                });
+                break;
+            case R.id.tv_perfect_tang:
+                List<String> tangIllNessTypeList = new ArrayList<>();
+                tangIllNessTypeList.add("无");
+                tangIllNessTypeList.add("1型糖尿病");
+                tangIllNessTypeList.add("2型糖尿病");
+                tangIllNessTypeList.add("妊娠糖尿病");
+                tangIllNessTypeList.add("其他");
+                tangIllNessTypeList.add("未知");
+
+                PickerViewUtils.showChooseSinglePicker(getPageContext(), "糖尿病", tangIllNessTypeList, object -> {
+                            tangTextView.setText(tangIllNessTypeList.get(Integer.parseInt(String.valueOf(object))));
+                            tangType = tangIllNessTypeList.get(Integer.parseInt(String.valueOf(object)));
+                        }
+                );
+            case R.id.tv_perfect_gao:
+                List<String> gaoIllNessTypeList = new ArrayList<>();
+                gaoIllNessTypeList.add("无");
+                gaoIllNessTypeList.add("1级高血压");
+                gaoIllNessTypeList.add("2级高血压");
+                gaoIllNessTypeList.add("3级高血压");
+                gaoIllNessTypeList.add("未知");
+                PickerViewUtils.showChooseSinglePicker(getPageContext(), "高血压", gaoIllNessTypeList, object -> {
+                            gaoTextView.setText(gaoIllNessTypeList.get(Integer.parseInt(String.valueOf(object))));
+                            gaoType = gaoIllNessTypeList.get(Integer.parseInt(String.valueOf(object)));
+                        }
+                );
                 break;
             case R.id.tv_perfect_start:
-                startActivity(new Intent(getPageContext(), AnswerBeginActivity.class));
+                sureToPerfect();
                 break;
             default:
                 break;
         }
+    }
+
+    private void sureToPerfect() {
+        String name = nameEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请输入姓名");
+            return;
+        }
+        if (TextUtils.isEmpty(born)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择出生年月");
+            return;
+        }
+
+        String gender = maleCheckBox.isChecked() ? "1" : "2";
+        StringBuilder builder = new StringBuilder();
+        if (diseaseList != null && diseaseList.size() > 0) {
+            StringBuilder paramStringBuilder = new StringBuilder();
+            paramStringBuilder.append("{");
+            for (int i = 0; i < diseaseList.size(); i++) {
+                if (diseaseList.get(i).getIsCheck()) {
+                    builder.append(diseaseList.get(i).getId());
+                    builder.append(",");
+                }
+            }
+            paramStringBuilder.deleteCharAt(paramStringBuilder.length() - 1);
+            paramStringBuilder.append("}");
+        }
+        Call<String> requestCall = LoginDataManager.userPerfect(phone, pwd, verification, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                UserInfo userInfo = (UserInfo) response.object;
+                //                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                //                intent.putExtra("userInfo", userInfo);
+                startActivity(intent);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("userRegister", requestCall);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //        super.onBackPressed();
+        backTip();
+    }
+
+    /**
+     * 退出提示
+     */
+    private void backTip() {
+        DialogUtils.showTipDialog(getPageContext(), "信息完善成功才可进入", ((dialog, which) -> {
+            dialog.dismiss();
+        }));
     }
 }

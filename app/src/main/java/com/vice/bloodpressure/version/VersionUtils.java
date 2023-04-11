@@ -42,7 +42,7 @@ public class VersionUtils {
         }
         Call<String> requestCall = checkVersion((stringCall, response) -> {
             ToastUtils.getInstance().dismissProgressDialog();
-            if (100 == response.code) {
+            if ("0000".equals(response.code)) {
                 versionModel = (CheckVersionModel) response.object;
                 int oldCodeNum = AppUtils.appVersionCode(context);
                 if (TurnUtils.getInt(versionModel.getVersionNum(), 0) > oldCodeNum) {
