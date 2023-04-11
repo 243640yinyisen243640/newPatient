@@ -42,12 +42,21 @@ public class UserInfoUtils {
 
 
     /**
+     * 获取archives_id，默认是0
+     */
+    public static String getArchivesId(Context context) {
+        String userID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
+        return TextUtils.isEmpty(userID) ? "" : userID;
+    }
+
+    /**
      * 重置信息--用户退出登录，重置某些信息
      */
     public static void resetUserInfo(Context context) {
 
         Map<String, String> map = new HashMap<>();
         map.put(SharedPreferencesConstant.USER_ID, "0");
+        map.put(SharedPreferencesConstant.ARCHIVES_ID, "");
 
         SharedPreferencesUtils.saveInfo(context, map);
 
@@ -143,7 +152,8 @@ public class UserInfoUtils {
     public static void saveLoginInfo(Context context, UserInfo userInfo) {
         Map<String, String> map = new HashMap<>();
         map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserID());
-
+//        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
+        map.put(SharedPreferencesConstant.ARCHIVES_ID,userInfo.getArchivesId());
         SharedPreferencesUtils.saveInfo(context, map);
     }
 

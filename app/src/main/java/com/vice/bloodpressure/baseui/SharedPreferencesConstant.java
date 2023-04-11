@@ -6,6 +6,10 @@ public class SharedPreferencesConstant {
      * 用户ID
      */
     public static String USER_ID = "user_id";
+    /**
+     * 档案号
+     */
+    public static String ARCHIVES_ID = "archives_id";
 
     /**
      * 推送的token

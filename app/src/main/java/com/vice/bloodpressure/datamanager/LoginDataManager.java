@@ -75,7 +75,8 @@ public class LoginDataManager {
         map.put("diseases", diseases);
         map.put("dmType", dmType);
         map.put("htnGrade", htnGrade);
-        map.put("archivesId", archivesId);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/register", map, successCallBack, failureCallBack);
+//        map.put("archivesId", archivesId);
+        map.put("archivesId", "155");
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/home/v2/savePatientInfo", map, successCallBack, failureCallBack);
     }
 }

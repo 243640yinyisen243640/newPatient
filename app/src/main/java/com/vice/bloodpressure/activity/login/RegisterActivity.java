@@ -24,6 +24,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import retrofit2.Call;
 
@@ -124,7 +125,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
 
 
     private void sureToRegister() {
-//        String phone = phoneEditText.getText().toString().trim();
+        //        String phone = phoneEditText.getText().toString().trim();
         String phone = "15295201816";
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
@@ -138,7 +139,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             ToastUtils.getInstance().showToast(getPageContext(), "请输入验证码");
             return;
         }
-//        String pwd = passwordEditText.getText().toString().trim();
+        //        String pwd = passwordEditText.getText().toString().trim();
         String pwd = "123456";
         if (TextUtils.isEmpty(pwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
@@ -153,15 +154,21 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         Call<String> requestCall = LoginDataManager.userRegister(phone, pwd, verification, (call, response) -> {
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
-                //                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
                 Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                //                intent.putExtra("userInfo", userInfo);
                 startActivity(intent);
                 finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                startActivity(intent);
+                finish();
             }
         }, (call, t) -> {
+
+            Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+            startActivity(intent);
+            finish();
             //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("userRegister", requestCall);
