@@ -199,8 +199,8 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        //        super.onBackPressed();
-        backTip();
+        super.onBackPressed();
+        //        backTip();
     }
 
     /**

@@ -23,8 +23,10 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
 import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.countdown.CountDownTask;
 
 import retrofit2.Call;
 
@@ -174,7 +176,6 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         addRequestCallToMap("userRegister", requestCall);
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -203,17 +204,17 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             return;
         }
 
-        //        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-        //        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, "1", (call, response) -> {
-        //            ToastUtils.getInstance().dismissProgressDialog();
-        //            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-        //            if (100 == response.code) {
-        //                CountDownTask.getInstence().showTimer(getVerTextView, 120, getPageContext());
-        //            }
-        //        }, (call, throwable) -> {
-        //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        //        });
-        //        addRequestCallToMap("verifyCodeByTel", requestCall);
+        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
+        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, (call, response) -> {
+            ToastUtils.getInstance().dismissProgressDialog();
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                CountDownTask.getInstence().showTimer(getVerTextView, 120, getPageContext());
+            }
+        }, (call, throwable) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("verifyCodeByTel", requestCall);
     }
 
     private View initView() {
@@ -225,8 +226,6 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         getVerTextView = view.findViewById(R.id.tv_register_get);
         sureTextView = view.findViewById(R.id.tv_register_sure);
         agreeTextView = view.findViewById(R.id.tv_register_agreement);
-
-
         return view;
     }
 
@@ -234,7 +233,6 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
         getVerTextView.setOnClickListener(this);
         sureTextView.setOnClickListener(this);
         agreeTextView.setOnClickListener(this);
-
         closeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 //显示密码不可见

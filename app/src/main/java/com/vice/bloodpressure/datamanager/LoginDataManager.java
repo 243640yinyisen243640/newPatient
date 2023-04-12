@@ -18,6 +18,8 @@ import retrofit2.Call;
  */
 public class LoginDataManager {
     /**
+     * 注册
+     *
      * @param username        手机号
      * @param password        密码
      * @param code            验证码
@@ -34,6 +36,8 @@ public class LoginDataManager {
     }
 
     /**
+     * 完善信息
+     *
      * @param name            姓名
      * @param idNumber        身份证号
      * @param birthDate       生日
@@ -84,5 +88,17 @@ public class LoginDataManager {
         map.put("archivesId", archivesId);
         map.put("userId", userId);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/home/v2/savePatientInfo", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param username
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> verifyCodeByTel(String username, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("username", username);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/register", map, successCallBack, failureCallBack);
     }
 }
