@@ -11,19 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.login.PerfectDiseasePlusAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
-import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,18 +64,22 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
      * 高血压
      */
     private TextView gaoTextView;
-    private HHAtMostGridView otherHHAtMostGridView;
+    /**
+     * 冠心病
+     */
+    private CheckBox guanCheckBox;
+    /**
+     * 脑卒中
+     */
+    private CheckBox naoCheckBox;
+    private CheckBox feiCheckBox;
+    private CheckBox qianCheckBox;
     private TextView sureTextView;
 
     private String born;
     private String tangType;
     private String gaoType;
 
-    private PerfectDiseasePlusAdapter adapter;
-
-    private List<BaseLocalDataInfo> diseaseList;
-
-    private String diseases = "[no]";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +87,6 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         topViewManager().backTextView().setVisibility(View.INVISIBLE);
         topViewManager().titleTextView().setText("完善个人信息");
         initView();
-        initValue();
         initListener();
     }
 
@@ -160,41 +159,39 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
             return;
         }
 
+
         String gender = maleCheckBox.isChecked() ? "1" : "2";
-        StringBuilder builder = new StringBuilder();
-        if (diseaseList != null && diseaseList.size() > 0) {
-            StringBuilder paramStringBuilder = new StringBuilder();
-            paramStringBuilder.append("{");
-            for (int i = 0; i < diseaseList.size(); i++) {
-                if (diseaseList.get(i).getIsCheck()) {
-                    builder.append(diseaseList.get(i).getId());
-                    builder.append(",");
-                }
-            }
+        //chd
+        String guan = guanCheckBox.isChecked() ? "0" : "1";
+        //cva
+        String nao = naoCheckBox.isChecked() ? "0" : "1";
+        //copd
+        String fei = feiCheckBox.isChecked() ? "0" : "1";
+        //igr
+        String qian = qianCheckBox.isChecked() ? "0" : "1";
 
-            if (!tangType.equals("0")) {
-                builder.append("dm");
-            }
-            if (!gaoType.equals("0")) {
-                builder.append("htn");
-            }
-            paramStringBuilder.deleteCharAt(paramStringBuilder.length() - 1);
-            paramStringBuilder.append("}");
-            diseases = paramStringBuilder.toString();
-        }
-
-        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, diseases, tangType, gaoType, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
-                //                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
                 Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
                 //                intent.putExtra("userInfo", userInfo);
                 startActivity(intent);
                 finish();
             } else {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                UserInfo userInfo = (UserInfo) response.object;
+                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                //                intent.putExtra("userInfo", userInfo);
+                startActivity(intent);
+                finish();
             }
+
         }, (call, t) -> {
+            Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+            //                intent.putExtra("userInfo", userInfo);
+            startActivity(intent);
+            finish();
             //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("userRegister", requestCall);
@@ -257,37 +254,6 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         });
     }
 
-    private void initValue() {
-        diseaseList = new ArrayList<>();
-        BaseLocalDataInfo typeInfo11 = new BaseLocalDataInfo("冠心病", "chd");
-        diseaseList.add(typeInfo11);
-        BaseLocalDataInfo typeInfo12 = new BaseLocalDataInfo("脑卒中", "cva");
-        diseaseList.add(typeInfo12);
-        BaseLocalDataInfo typeInfo13 = new BaseLocalDataInfo("慢性阻塞性肺疾病", "copd");
-        diseaseList.add(typeInfo13);
-        BaseLocalDataInfo typeInfo14 = new BaseLocalDataInfo("糖尿病前期", "igr");
-        diseaseList.add(typeInfo14);
-
-        adapter = new PerfectDiseasePlusAdapter(getPageContext(), diseaseList, new IAdapterViewClickListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.tv_perfect:
-                        diseaseList.get(position).setIsCheck(!diseaseList.get(position).getIsCheck());
-                        adapter.notifyDataSetChanged();
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
-
-            }
-        });
-        otherHHAtMostGridView.setAdapter(adapter);
-    }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_perfect_user_info_text, null);
@@ -298,7 +264,10 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         femaleCheckBox = view.findViewById(R.id.cb_perfect_female);
         tangTextView = view.findViewById(R.id.tv_perfect_tang);
         gaoTextView = view.findViewById(R.id.tv_perfect_gao);
-        otherHHAtMostGridView = view.findViewById(R.id.gv_perfect_other);
+        guanCheckBox = view.findViewById(R.id.cb_perfect_guan);
+        naoCheckBox = view.findViewById(R.id.cb_perfect_nao);
+        feiCheckBox = view.findViewById(R.id.cb_perfect_fei);
+        qianCheckBox = view.findViewById(R.id.cb_perfect_qian);
         sureTextView = view.findViewById(R.id.tv_perfect_start);
         containerView().addView(view);
     }

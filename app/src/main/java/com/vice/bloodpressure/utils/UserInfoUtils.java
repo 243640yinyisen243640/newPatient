@@ -45,8 +45,8 @@ public class UserInfoUtils {
      * 获取archives_id，默认是0
      */
     public static String getArchivesId(Context context) {
-        String userID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
-        return TextUtils.isEmpty(userID) ? "" : userID;
+        String archivesId = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
+        return TextUtils.isEmpty(archivesId) ? "" : "155";
     }
 
     /**

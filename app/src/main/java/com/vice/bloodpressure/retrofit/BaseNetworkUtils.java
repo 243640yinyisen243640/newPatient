@@ -61,7 +61,6 @@ public class BaseNetworkUtils {
      */
     public static Call<String> networkRequest(boolean isNeedAccessToken, String accessToken, NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> headerMap = new HashMap<>();
-        headerMap.put("Content-Type","application/json");
         //        if (isNeedAccessToken) {
         //            if (TextUtils.isEmpty(accessToken)) {
         //                headerMap.put("accessToken", SharedPreferencesUtils.getInfo(HHSoftApplication.getContext(), SharedPreferencesConstant.USER_ID));

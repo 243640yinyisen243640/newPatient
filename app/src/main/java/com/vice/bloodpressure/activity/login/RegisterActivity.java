@@ -125,8 +125,8 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
 
 
     private void sureToRegister() {
-        //        String phone = phoneEditText.getText().toString().trim();
-        String phone = "15295201816";
+        String phone = phoneEditText.getText().toString().trim();
+        //        String phone = "15295201816";
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
             return;

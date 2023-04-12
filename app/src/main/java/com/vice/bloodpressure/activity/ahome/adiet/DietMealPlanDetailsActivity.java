@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.view.CirclePercentView;
@@ -44,18 +45,12 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         topViewManager().moreTextView().setText("重新制定");
         initViews();
         initValues();
-        getData();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     private void initValues() {
         Log.i("yys", "seven" + DataUtils.getSevendate());
         Log.i("yys", "week" + DataUtils.get7week());
-
-    }
-
-
-    private void getData() {
-
 
     }
 

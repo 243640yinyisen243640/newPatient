@@ -38,45 +38,51 @@ public class LoginDataManager {
      * @param idNumber        身份证号
      * @param birthDate       生日
      * @param gender          性别 1男 2女
-     * @param diseases        疾病类型
-     *                        no -> 无
-     *                        dm -> 糖尿病
-     *                        htn -> 高血压
-     *                        chd -> 冠心病
-     *                        copd -> 慢性阻塞性肺疾病
-     *                        cva -> 脑卒中
-     *                        igr -> 糖尿病前期
-     * @param dmType          糖尿病
+     * @param archivesId      档案号
+     * @param dm              糖尿病
      *                        0 无
      *                        1 1型
      *                        2 2型
      *                        3 妊娠
      *                        4 其他
-     *                        5 未知
-     * @param htnGrade        高血压
+     * @param htn             高血压
      *                        0 无
      *                        1 1级
      *                        2 2级
      *                        3 3级
-     *                        4 未知
-     * @param archivesId      档案号
+     * @param chd             冠心病
+     *                        0 无
+     *                        1 有
+     * @param copd            慢性阻塞性肺疾病
+     *                        0 无
+     *                        1 有
+     * @param cva             脑卒中
+     *                        0 无
+     *                        1 有
+     * @param igr             糖尿病前期
+     *                        0 无
+     *                        1 有
+     * @param archivesId
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
     public static Call<String> userPerfect(String name, String idNumber, String birthDate,
-                                           String gender, String diseases, String dmType,
-                                           String htnGrade, String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                           String gender, String dm, String htn, String chd,
+                                           String copd, String cva, String igr, String archivesId, String userId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
         map.put("idNumber", idNumber);
         map.put("birthDate", birthDate);
         map.put("gender", gender);
-        map.put("diseases", diseases);
-        map.put("dmType", dmType);
-        map.put("htnGrade", htnGrade);
-//        map.put("archivesId", archivesId);
-        map.put("archivesId", "155");
+        map.put("dm", dm);
+        map.put("htn", htn);
+        map.put("chd", chd);
+        map.put("copd", copd);
+        map.put("cva", cva);
+        map.put("igr", igr);
+        map.put("archivesId", archivesId);
+        map.put("userId", userId);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/home/v2/savePatientInfo", map, successCallBack, failureCallBack);
     }
 }
