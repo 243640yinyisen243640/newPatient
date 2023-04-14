@@ -57,6 +57,7 @@
                 android:drawableLeft="@drawable/login_code"
                 android:drawablePadding="8dp"
                 android:hint="请输入验证码"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"

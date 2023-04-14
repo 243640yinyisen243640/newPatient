@@ -101,4 +101,21 @@ public class LoginDataManager {
         map.put("username", username);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/register", map, successCallBack, failureCallBack);
     }
+
+    /**
+     *
+     * @param username
+     * @param password 密码
+     * @param code 验证码
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> forgetPwd(String username, String password, String code, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("username", username);
+        map.put("password", password);
+        map.put("code", code);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/forgotPassword", map, successCallBack, failureCallBack);
+    }
 }

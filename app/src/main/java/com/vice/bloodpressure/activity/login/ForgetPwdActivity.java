@@ -12,8 +12,11 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.LoginDataManager;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
-import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -35,19 +38,22 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
      */
     private TextView getVerTextView;
 
-
     /**
      * 密码是否可见
      */
     private CheckBox closeCheckBox;
-
+    /**
+     * 密码
+     */
     private EditText passwordEditText;
 
     /**
      * 密码是否可见
      */
     private CheckBox closeAgainCheckBox;
-
+    /**
+     * 再次输入密码
+     */
     private EditText passwordAgainEditText;
     private TextView sureTextView;
 
@@ -68,7 +74,7 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
         passwordAgainEditText.setSelection(passwordAgainEditText.getText().toString().trim().length());
     }
 
-    private void sureToRegister() {
+    private void sureToEdit() {
         String phone = phoneEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
@@ -76,31 +82,39 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
         }
 
 
-        String verification = verificationEditText.getText().toString().trim();
+        //        String verification = verificationEditText.getText().toString().trim();
+        String verification = "0000";
         if (TextUtils.isEmpty(verification)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入验证码");
             return;
         }
 
+        String pwd = passwordEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(pwd)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
+            return;
+        }
+        String pwdAgain = passwordAgainEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(pwdAgain)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
+            return;
+        }
 
-        String deviceToken = UserInfoUtils.getClientID(getPageContext());
-        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting);
-        //        Call<String> requestCall = LoginDataManager.userRegister(phone, deviceToken, verification, pwd, "0", "0", "0", (call, response) -> {
-        //            ToastUtils.getInstance().dismissProgressDialog();
-        //            if (response.code == 100) {
-        //                UserInfo userInfo = (UserInfo) response.object;
-        //                //                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-        //                Intent intent = new Intent(getPageContext(), UserFirstLoginActivity.class);
-        //                intent.putExtra("userInfo", userInfo);
-        //                startActivity(intent);
-        //                finish();
-        //            } else {
-        //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-        //            }
-        //        }, (call, t) -> {
-        //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        //        });
-        //        addRequestCallToMap("userRegister", requestCall);
+        if (!pwd.equals(pwdAgain)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "两次密码输入的不一致");
+            return;
+        }
+
+        Call<String> requestCall = LoginDataManager.forgetPwd(phone, pwd, verification, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("userRegister", requestCall);
     }
 
 
@@ -108,7 +122,7 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_forget_pwd_sure:
-                sureToRegister();
+                sureToEdit();
                 break;
             case R.id.tv_forget_pwd_get:
                 getVerifiCode();
