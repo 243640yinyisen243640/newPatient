@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -14,6 +15,12 @@ public class MealInfo implements Serializable {
     private String num;
 
     private String color;
+
+    private String id;
+
+    private MealChildInfo dietNutritionVo;
+    private MealChildInfo threeMealVo;
+    private List<MealChildInfo> exclusiveDietPlanVos;
 
     public String getColor() {
         return color;
@@ -57,5 +64,37 @@ public class MealInfo implements Serializable {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public MealChildInfo getDietNutritionVo() {
+        return dietNutritionVo;
+    }
+
+    public void setDietNutritionVo(MealChildInfo dietNutritionVo) {
+        this.dietNutritionVo = dietNutritionVo;
+    }
+
+    public MealChildInfo getThreeMealVo() {
+        return threeMealVo;
+    }
+
+    public void setThreeMealVo(MealChildInfo threeMealVo) {
+        this.threeMealVo = threeMealVo;
+    }
+
+    public List<MealChildInfo> getExclusiveDietPlanVos() {
+        return exclusiveDietPlanVos;
+    }
+
+    public void setExclusiveDietPlanVos(List<MealChildInfo> exclusiveDietPlanVos) {
+        this.exclusiveDietPlanVos = exclusiveDietPlanVos;
     }
 }

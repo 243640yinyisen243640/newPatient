@@ -3,13 +3,15 @@ package com.vice.bloodpressure.adapter.home;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.model.MealChildInfo;
 
 import java.util.List;
 
@@ -22,12 +24,14 @@ import java.util.List;
  */
 public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWeekAdapter.ViewHolder> {
     private Context context;
-    private List<MealInfo> list;
+    private List<MealChildInfo> list;
+    private IAdapterViewClickListener clickListener;
 
 
-    public DietMealPlanWeekAdapter(Context context, List<MealInfo> list) {
+    public DietMealPlanWeekAdapter(Context context, List<MealChildInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -41,9 +45,11 @@ public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealInfo info = list.get(position);
-        holder.weekTextView.setText(info.getTitle());
-        holder.monthTextView.setText(info.getTitle());
+        MealChildInfo info = list.get(position);
+        holder.weekTextView.setText(info.getPlanDate());
+        holder.monthTextView.setText(info.getPlanDate());
+        clickOnClick clickOnClick = new clickOnClick(position);
+        holder.clickLinearLayout.setOnClickListener(clickOnClick);
     }
 
     @Override
@@ -54,15 +60,31 @@ public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWe
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView weekTextView;
         private TextView monthTextView;
+        private LinearLayout clickLinearLayout;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             weekTextView = itemView.findViewById(R.id.tv_diet_week);
             monthTextView = itemView.findViewById(R.id.tv_diet_month);
+            clickLinearLayout = itemView.findViewById(R.id.ll_diet_week_click);
         }
     }
 
+    private class clickOnClick implements View.OnClickListener {
+        private int position;
 
+        public clickOnClick(int position) {
+            this.position = position;
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.adapterClickListener(position, v);
+            }
+        }
+    }
 }
 
