@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.model;
 
+import java.util.List;
+
 /**
  * 作者: beauty
  * 类名:
@@ -78,15 +80,15 @@ public class MealChildInfo {
     /**
      * 早餐
      */
-    private MealExclusiveInfo breakfast;
+    private List<MealExclusiveInfo> breakfast;
     /**
      * 午餐
      */
-    private MealExclusiveInfo lunch;
+    private  List<MealExclusiveInfo>  lunch;
     /**
      * 晚餐
      */
-    private MealExclusiveInfo dinner;
+    private  List<MealExclusiveInfo>  dinner;
     /**
      * *配料信息
      */
@@ -232,27 +234,27 @@ public class MealChildInfo {
         this.fatCalorie = fatCalorie;
     }
 
-    public MealExclusiveInfo getBreakfast() {
+    public List<MealExclusiveInfo> getBreakfast() {
         return breakfast;
     }
 
-    public void setBreakfast(MealExclusiveInfo breakfast) {
+    public void setBreakfast(List<MealExclusiveInfo> breakfast) {
         this.breakfast = breakfast;
     }
 
-    public MealExclusiveInfo getLunch() {
+    public List<MealExclusiveInfo> getLunch() {
         return lunch;
     }
 
-    public void setLunch(MealExclusiveInfo lunch) {
+    public void setLunch(List<MealExclusiveInfo> lunch) {
         this.lunch = lunch;
     }
 
-    public MealExclusiveInfo getDinner() {
+    public List<MealExclusiveInfo> getDinner() {
         return dinner;
     }
 
-    public void setDinner(MealExclusiveInfo dinner) {
+    public void setDinner(List<MealExclusiveInfo> dinner) {
         this.dinner = dinner;
     }
 
