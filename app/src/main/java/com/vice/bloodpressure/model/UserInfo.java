@@ -21,7 +21,6 @@ public class UserInfo implements Serializable {
     private boolean isCheck;
 
     /**
-     *
      * 档案ID
      */
     private String archivesId;
@@ -29,6 +28,18 @@ public class UserInfo implements Serializable {
      * userId
      */
     private String userId;
+    /**
+     * 授权码
+     */
+    private String access_token;
+    /**
+     * 过期时间
+     */
+    private String expires_in;
+    /**
+     * 用户类型(00系统,01用户 02医生 03护士 04主任 05 科室 06医院）
+     */
+    private String user_type;
 
     public UserInfo() {
     }
@@ -123,5 +134,37 @@ public class UserInfo implements Serializable {
 
     public void setIsCheck(boolean isCheck) {
         this.isCheck = isCheck;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getExpires_in() {
+        return expires_in;
+    }
+
+    public void setExpires_in(String expires_in) {
+        this.expires_in = expires_in;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 }

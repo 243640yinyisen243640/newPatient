@@ -176,6 +176,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
                         Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
                         startActivity(intent);
                     });
+            answerForPopupWindow.dismiss();
         }
         answerForPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
     }
@@ -186,7 +187,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         switch (v.getId()) {
             //重新制定
             case R.id.tv_exercise_again:
-              showType();
+                showType();
                 break;
             //选择运动
             case R.id.tv_exercise_choose:

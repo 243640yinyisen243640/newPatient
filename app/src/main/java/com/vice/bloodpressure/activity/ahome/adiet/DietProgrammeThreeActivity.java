@@ -16,8 +16,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.popwindow.DietProgrammePopupWindow;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
+
 /**
  * 类名：
  * 传参：
@@ -47,35 +55,14 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
         setTextStyle(progress, 1.3f, 0, 1);
 
         tvSubmit.setOnClickListener(v -> {
-            String height = getIntent().getStringExtra("height");
-            String weight = getIntent().getStringExtra("weight");
-            String workWeight = getIntent().getStringExtra("workWeight");
-            //确定生成饮食方案
-            Log.i("yys", "height==" + height);
-            Log.i("yys", "weight==" + weight);
-            Log.i("yys", "workWeight==" + workWeight);
-            Log.i("yys", "chronicDisease==" + chronicDisease);
-            if (programmePopupWindow == null) {
-                programmePopupWindow = new DietProgrammePopupWindow(getPageContext(),
-                        recommendView -> {
-                            //智能推荐
-                            Log.i("yys", "智能推荐");
-                        },
-                        chooseView -> {
-                            //我自己选
-                            Log.i("yys", "我自己选");
-                            Intent intent = new Intent(getPageContext(),DietProgrammeChooseActivity.class);
-                            startActivity(intent);
-                        });
-            }
-            programmePopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+            submitData();
         });
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             for (int i = 0; i < radioGroup.getChildCount(); i++) {
                 RadioButton allView = (RadioButton) radioGroup.getChildAt(i);
                 if (allView.isChecked()) {
-                    chronicDisease = i+"";
+                    chronicDisease = i + "";
                     allView.getPaint().setTypeface(Typeface.DEFAULT_BOLD);
                 } else {
                     allView.getPaint().setTypeface(Typeface.DEFAULT);
@@ -83,9 +70,53 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
             }
         });
     }
+
+    private void submitData() {
+        String height = getIntent().getStringExtra("height");
+        String weight = getIntent().getStringExtra("weight");
+        String workWeight = getIntent().getStringExtra("workWeight");
+        //确定生成饮食方案
+        Log.i("yys", "height==" + height);
+        Log.i("yys", "weight==" + weight);
+        Log.i("yys", "workWeight==" + workWeight);
+        Log.i("yys", "chronicDisease==" + chronicDisease);
+        if (programmePopupWindow == null) {
+            programmePopupWindow = new DietProgrammePopupWindow(getPageContext(),
+                    recommendView -> {
+                        //智能推荐
+                        Call<String> requestCall = HomeDataManager.recommendDietPlan(height, weight, chronicDisease, workWeight, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+                            if ("0000".equals(response.code)) {
+                                //成功的话回到首页
+                                Intent intent = new Intent(getPageContext(), MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                            }
+
+                        }, (call, t) -> {
+                            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                        });
+                        addRequestCallToMap("recommendDietPlan", requestCall);
+
+                    },
+                    chooseView -> {
+                        //我自己选
+                        Log.i("yys", "我自己选");
+                        Intent intent = new Intent(getPageContext(), DietProgrammeChooseActivity.class);
+                        startActivity(intent);
+                    });
+        }
+        programmePopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+
+    }
+
     private void setTextStyle(TextView textView, float proportion, int start, int end) {
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(textView.getText().toString());
         spannableStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         textView.setText(spannableStringBuilder);
     }
+
+
 }

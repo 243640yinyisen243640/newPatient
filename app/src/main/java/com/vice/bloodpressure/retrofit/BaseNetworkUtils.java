@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.retrofit;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -7,7 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.vice.bloodpressure.base.XyApplication;
 import com.vice.bloodpressure.basemanager.ConstantParamNew;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 
 import org.json.JSONObject;
 
@@ -61,14 +65,13 @@ public class BaseNetworkUtils {
      */
     public static Call<String> networkRequest(boolean isNeedAccessToken, String accessToken, NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> headerMap = new HashMap<>();
-        //        if (isNeedAccessToken) {
-        //            if (TextUtils.isEmpty(accessToken)) {
-        //                headerMap.put("accessToken", SharedPreferencesUtils.getInfo(HHSoftApplication.getContext(), SharedPreferencesConstant.USER_ID));
-        //            } else {
-        //                headerMap.put("accessToken", accessToken);
-        //            }
-        //
-        //        }
+        if (isNeedAccessToken) {
+            if (TextUtils.isEmpty(accessToken)) {
+                headerMap.put("access_token", SharedPreferencesUtils.getInfo(XyApplication.getContext(), SharedPreferencesConstant.USER_ID));
+            } else {
+                headerMap.put("access_token", accessToken);
+            }
+        }
         return new NetReqUtils.Builder()
                 //IP
                 .baseUrl(ConstantParamNew.IP)
@@ -161,7 +164,7 @@ public class BaseNetworkUtils {
         }
         successCallBack.accept(call, response);
     }
-
+//你看get请求，都有两个方法，一个是传token，一个是不传的
     public static Call<String> getRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.GET, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
@@ -170,6 +173,9 @@ public class BaseNetworkUtils {
         return networkRequest(isNeedAccessToken, accessToken, NetReqUtils.RequestType.GET, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
+    //这个上面的两个
+
+    //你看post  就只有一个方法就是传token为空嘛
     public static Call<String> postRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.POST, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }

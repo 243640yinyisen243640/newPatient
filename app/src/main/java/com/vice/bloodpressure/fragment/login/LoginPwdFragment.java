@@ -21,8 +21,13 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.ForgetPwdActivity;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.datamanager.LoginDataManager;
+import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -151,8 +156,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_login_pwd_sure:
-                startActivity(new Intent(getPageContext(), MainActivity.class));
-                //                login();
+                login();
                 break;
             case R.id.tv_login_pwd_agreement:
                 agreeTextView.setSelected(!agreeTextView.isSelected());
@@ -171,7 +175,6 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
      * 登录
      */
     private void login() {
-        String deviceToken = UserInfoUtils.getClientID(getPageContext());
         String phone = phoneEditText.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号/身份证号");
@@ -183,10 +186,21 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
             return;
         }
-
-        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-
+        Call<String> requestCall = LoginDataManager.userLoginForPwd(phone, pwd, (call, response) -> {
+            ToastUtils.getInstance().dismissProgressDialog();
+            if ("0000".equals(response.code)) {
+                UserInfo userInfo = (UserInfo) response.object;
+                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                Intent intent = new Intent(getPageContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("userLoginForPwd", requestCall);
     }
-
-
 }

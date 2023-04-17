@@ -74,12 +74,12 @@ public class ExercisePlanHeightWeightActivity extends UIBaseActivity {
         });
 
 
-
         //下一步
         nextStepTv.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), ExercisePlanIllActivity.class);
             intent.putExtra("height", height);
             intent.putExtra("weight", weight);
+            intent.putExtra("age", getIntent().getStringExtra("age"));
             startActivity(intent);
         });
 

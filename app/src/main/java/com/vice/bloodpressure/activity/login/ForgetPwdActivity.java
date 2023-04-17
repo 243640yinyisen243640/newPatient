@@ -114,7 +114,7 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("userRegister", requestCall);
+        addRequestCallToMap("forgetPwd", requestCall);
     }
 
 

@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -15,9 +16,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.login.PerfectUserInfoActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.popwindow.ExercisePlanSuccessPopupWindow;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -61,6 +68,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
                 ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
                 return;
             }
+
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
                     //点击确定的操作
@@ -73,7 +81,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             int length1 = stringBuilder.length();
             stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), "肥胖"));
             int length2 = stringBuilder.length();
-            stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_weight),"增重", "10","减重"));
+            stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_weight), "增重", "10", "减重"));
             stringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             textView.setText(stringBuilder);
@@ -112,6 +120,34 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
 
 
         String ha = habitYesCb.isChecked() ? "1" : "0";
+    }
+
+    private void sureSubmit() {
+        String height = getIntent().getStringExtra("height");
+        String weight = getIntent().getStringExtra("weight");
+        String age = getIntent().getStringExtra("age");
+        String illType = getIntent().getStringExtra("diseases");
+        Call<String> requestCall = HomeDataManager.recommendSportPlan(height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                UserInfo userInfo = (UserInfo) response.object;
+                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                //                intent.putExtra("userInfo", userInfo);
+                startActivity(intent);
+                finish();
+            } else {
+                //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                UserInfo userInfo = (UserInfo) response.object;
+                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                //                intent.putExtra("userInfo", userInfo);
+                startActivity(intent);
+                finish();
+            }
+
+        }, (call, t) -> {
+            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("userPerfect", requestCall);
     }
 
 

@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,6 +65,9 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("饮食方案");
         topViewManager().moreTextView().setText("重新制定");
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            startActivity(new Intent(getPageContext(), DietProgrammeBeginActivity.class));
+        });
         initViews();
         initValues();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -92,7 +96,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
 
             //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("getDietPlanByArchivesId", requestCall);
+        addRequestCallToMap("getDietPlan", requestCall);
     }
 
     private void bindData() {
@@ -116,7 +120,9 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
                 + mealInfo.getThreeMealVo().getLowProCalorie() + "g" + "—" + mealInfo.getThreeMealVo().getHighProCalorie() + "g");
 
         fatTv.setText(mealInfo.getThreeMealVo().getFat() + "千卡+“   " + mealInfo.getThreeMealVo().getFatCalorie() + "g");
-
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        sevenPlanRv.setLayoutManager(linearLayoutManager);
         DietMealPlanWeekAdapter adapter = new DietMealPlanWeekAdapter(getPageContext(), mealInfo.getExclusiveDietPlanVos(), new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
@@ -128,9 +134,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
 
             }
         });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        sevenPlanRv.setLayoutManager(linearLayoutManager);
+
         sevenPlanRv.setAdapter(adapter);
 
     }

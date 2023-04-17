@@ -83,7 +83,9 @@ public class ExercisePlanAnswerAgeActivity extends UIBaseActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_exercise_plan_next:
-                startActivity(new Intent(getPageContext(), ExercisePlanHeightWeightActivity.class));
+                Intent intent = new Intent(getPageContext(), ExercisePlanHeightWeightActivity.class);
+                intent.putExtra("age", age);
+                startActivity(intent);
                 break;
             case R.id.tv_exercise_plan_back:
                 finish();

@@ -18,4 +18,12 @@ public class SharedPreferencesConstant {
 
     public static final String HEAD_IMG = "head_img";
     public static final String NICK_NAME = "nick_name";
+    /**
+     * token
+     */
+    public static final String ACCESS_TOKEN = "access_token";
+    /**
+     * 用户类型(00系统,01用户 02医生 03护士 04主任 05 科室 06医院）
+     */
+    public static final String USER_TYPE = "user_type";
 }

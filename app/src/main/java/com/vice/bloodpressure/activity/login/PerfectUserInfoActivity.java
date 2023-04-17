@@ -194,7 +194,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
             finish();
             //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("userRegister", requestCall);
+        addRequestCallToMap("userPerfect", requestCall);
     }
 
     @Override

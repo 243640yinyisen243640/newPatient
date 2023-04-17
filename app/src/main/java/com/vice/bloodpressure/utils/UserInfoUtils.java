@@ -152,10 +152,8 @@ public class UserInfoUtils {
     public static void saveLoginInfo(Context context, UserInfo userInfo) {
         Map<String, String> map = new HashMap<>();
         map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserID());
-//        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
-        map.put(SharedPreferencesConstant.ARCHIVES_ID,userInfo.getArchivesId());
+        map.put(SharedPreferencesConstant.ACCESS_TOKEN, userInfo.getAccess_token());
+        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
         SharedPreferencesUtils.saveInfo(context, map);
     }
-
-
 }

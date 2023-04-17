@@ -3,14 +3,20 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.ExercisePlanIllAdapter;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -19,50 +25,95 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
  * 描述:运动答题  关于疾病
  */
 public class ExercisePlanIllActivity extends UIBaseActivity {
-    private RadioGroup radioGroup;
-    private RadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadioButton, fiveRadioButton, sixRadioButton;
-
+    private RecyclerView recyclerView;
     private TextView backTv;
     private TextView nextTv;
     private String illType;
+    private List<BaseLocalDataInfo> normalInfoList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定运动方案");
         initView();
+        initValues();
         initListener();
     }
 
-    private void initListener() {
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (oneRadioButton.getId() == checkedId) {
-                illType = "1";
-            } else if (twoRadioButton.getId() == checkedId) {
-                illType = "2";
-            } else if (threeRadioButton.getId() == checkedId) {
-                illType = "3";
-            } else if (fourRadioButton.getId() == checkedId) {
-                illType = "4";
-            } else if (fiveRadioButton.getId() == checkedId) {
-                illType = "5";
-            } else {
-                illType = "6";
+    private void initValues() {
+        //chd -> 冠心病
+        //dn -> 肾病
+        //dr -> 视网膜病变
+        //dpn -> 神经病变
+        //htn -> 高血压
+        //no -> 无
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        normalInfoList = new ArrayList<>();
+        normalInfoList.add(new BaseLocalDataInfo("冠心病", "chd"));
+        normalInfoList.add(new BaseLocalDataInfo("高血压", "htn"));
+        normalInfoList.add(new BaseLocalDataInfo("合并神经病变", "dpn"));
+        normalInfoList.add(new BaseLocalDataInfo("合并视网膜病变", "dr"));
+        normalInfoList.add(new BaseLocalDataInfo("合并肾病", "dn"));
+        normalInfoList.add(new BaseLocalDataInfo("无", "no"));
+        ExercisePlanIllAdapter adapter = new ExercisePlanIllAdapter(getPageContext(), normalInfoList, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.tv_item_exercise_ill_type:
+                        if (normalInfoList.get(position).getName().equals("无")) {
+                            for (int i = 0; i < normalInfoList.size(); i++) {
+                                normalInfoList.get(i).setIsCheck(false);
+                            }
+                            normalInfoList.get(position).setIsCheck(true);
+                        } else {
+                            for (int i = 0; i < normalInfoList.size(); i++) {
+                                if (normalInfoList.get(i).getName().equals("无")) {
+                                    normalInfoList.get(i).setIsCheck(false);
+                                }
+                            }
+                            normalInfoList.get(position).setIsCheck(!normalInfoList.get(position).getIsCheck());
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
             }
         });
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void initListener() {
+        StringBuilder illTypeBuilder = new StringBuilder();
+        for (int i = 0; i < normalInfoList.size(); i++) {
+            if (normalInfoList.get(i).getIsCheck()) {
+                illTypeBuilder.append(normalInfoList.get(i).getId());
+                illTypeBuilder.append(",");
+            }
+        }
+        illTypeBuilder.deleteCharAt(illTypeBuilder.length() - 1);
+
         backTv.setOnClickListener(v -> finish());
-        nextTv.setOnClickListener(v -> startActivity(new Intent(getPageContext(),ExercisePlanExerciseActivity.class)));
+        nextTv.setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), ExercisePlanExerciseActivity.class);
+            intent.putExtra("height", getIntent().getStringExtra("height"));
+            intent.putExtra("weight", getIntent().getStringExtra("weight"));
+            intent.putExtra("age", getIntent().getStringExtra("age"));
+            intent.putExtra("diseases", illTypeBuilder.toString());
+            startActivity(intent);
+        });
     }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_ill, null);
-        radioGroup = view.findViewById(R.id.rg_exercise_ill_type);
-        oneRadioButton = view.findViewById(R.id.rb_exercise_ill_type1);
-        twoRadioButton = view.findViewById(R.id.rb_exercise_ill_type2);
-        threeRadioButton = view.findViewById(R.id.rb_exercise_ill_type3);
-        fourRadioButton = view.findViewById(R.id.rb_exercise_ill_type4);
-        fiveRadioButton = view.findViewById(R.id.rb_exercise_ill_type5);
-        sixRadioButton = view.findViewById(R.id.rb_exercise_ill_type6);
         backTv = view.findViewById(R.id.tv_exercise_ill_back);
         nextTv = view.findViewById(R.id.tv_exercise_ill_next);
         containerView().addView(view);

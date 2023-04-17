@@ -91,42 +91,39 @@
                         android:background="@color/main_base_color" />
                 </LinearLayout>
 
-                <RadioGroup
-                    android:id="@+id/rg_exercise_ill_type"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type1"
-                        style="@style/exercise_ill_type_choose"
-                        android:text="冠心病" />
+                    <TextView
+                        android:id="@+id/tv_answer_content_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_bg_white_90"
+                        android:text="是否患有下列疾病？"
+                        android:textColor="@color/black_24"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type2"
-                        style="@style/exercise_ill_type_choose"
-                        android:text="高血压" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_bg_white_90"
+                        android:text="(可多选)"
+                        android:textColor="@color/gray_BB"
+                        android:textSize="15sp" />
 
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type3"
-                        style="@style/exercise_ill_type_choose"
-                        android:text="合并神经病变" />
+                </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type4"
-                        style="@style/exercise_ill_type_choose"
-                        android:text="合并视网膜病变" />
-
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type5"
-                        style="@style/exercise_ill_type_choose"
-                        android:text="合并肾病" />
-
-                    <RadioButton
-                        android:id="@+id/rb_exercise_ill_type6"
-                        style="@style/exercise_ill_type_choose"
-                        android:checked="true"
-                        android:text="无" />
-                </RadioGroup>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_exercise_ill_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:overScrollMode="never" />
 
             </LinearLayout>
 
