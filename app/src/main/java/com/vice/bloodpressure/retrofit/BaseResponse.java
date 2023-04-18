@@ -7,6 +7,7 @@ public class BaseResponse<T> implements Serializable {
     public String msg;
     public String message;
     public String result;
+    public boolean data;
     public T object;
 }
 

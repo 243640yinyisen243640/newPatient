@@ -77,7 +77,7 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             ToastUtils.getInstance().showToast(getPageContext(), "请先同意隐私政策和用户协议");
             return;
         }
-        Call<String> requestCall = LoginDataManager.userLoginForCode(phone, verification, (call, response) -> {
+        Call<String> requestCall = LoginDataManager.userLoginForCode(phone, verification,UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().dismissProgressDialog();
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;

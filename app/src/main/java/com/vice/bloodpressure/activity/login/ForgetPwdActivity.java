@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.login;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -106,8 +107,10 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
         }
 
         Call<String> requestCall = LoginDataManager.forgetPwd(phone, pwd, verification, (call, response) -> {
-            if ("0000".equals(response.code)) {
+            Log.i("yys", "response.data==" + response.result);
+            if ("0000".equals(response.code) && response.data) {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }

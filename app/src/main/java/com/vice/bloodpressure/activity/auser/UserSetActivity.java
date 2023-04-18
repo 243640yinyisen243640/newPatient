@@ -8,9 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 /**
  * 作者: beauty
@@ -57,8 +59,12 @@ public class UserSetActivity extends UIBaseActivity implements View.OnClickListe
             case R.id.tv_user_set_out_login:
                 DialogUtils.showOperDialog(getPageContext(), "", "确定要退出登录吗？", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.NEGATIVE == which) {
-                        dialog.dismiss();
+                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                        UserInfoUtils.outlog(getPageContext(), null, null);
+                        Intent mainIntent = new Intent(getPageContext(), LoginActivity.class);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(mainIntent);
+                        finish();
                     }
                 });
                 break;

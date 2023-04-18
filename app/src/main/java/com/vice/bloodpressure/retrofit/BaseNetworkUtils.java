@@ -67,11 +67,12 @@ public class BaseNetworkUtils {
         Map<String, String> headerMap = new HashMap<>();
         if (isNeedAccessToken) {
             if (TextUtils.isEmpty(accessToken)) {
-                headerMap.put("access_token", SharedPreferencesUtils.getInfo(XyApplication.getContext(), SharedPreferencesConstant.USER_ID));
+                headerMap.put("Authorization", SharedPreferencesUtils.getInfo(XyApplication.getContext(), SharedPreferencesConstant.USER_ID));
             } else {
-                headerMap.put("access_token", accessToken);
+                headerMap.put("Authorization", accessToken);
             }
         }
+        headerMap.put("Client-Tag", "app");
         return new NetReqUtils.Builder()
                 //IP
                 .baseUrl(ConstantParamNew.IP)
@@ -137,34 +138,26 @@ public class BaseNetworkUtils {
     private static void processJsonParse(Call<String> call, String result, @JsonParseMode int parseMode, Class clazz, BiConsumer<Call<String>, BaseResponse> successCallBack) throws Exception {
         BaseResponse response = new BaseResponse();
         JSONObject jsonObject = new JSONObject(result);
-        Log.i("yys", "jsonObject==" + jsonObject);
         response.code = jsonObject.optString("code");
         response.msg = jsonObject.optString("msg");
         response.result = jsonObject.optString("data");
-        //        response.url = jsonObject.optString("url");
-        if ("401".equals(response.code)) {
-            //            //用户尚未登录 清掉当地的accessToken
-            //            UserInfoUtils.outlog(HHSoftApplication.getContext(), null, null);
-            //            ARouter.getInstance().build(PathConstant.REGIST_AND_LOGIN_MAIN_ACTIVITY).navigation();
-        } else {
-            if (JSON_OBJECT == parseMode) {
-                if ("0000".equals(response.code)) {
-                    response.object = new Gson().fromJson(response.result, clazz);
-                }
-            } else if (JSON_ARRAY == parseMode) {
-                if ("0000".equals(response.code)) {
-                    //Gson gson = new Gson();
-                    //Type objectType = type(HHSoftResponseListJson.class, clazz);
-                    //response.object = ((HHSoftResponseListJson) gson.fromJson(result, objectType)).data;
-                    response.object = fromJsonToList(response.result, clazz);
-                } else if ("1009".equals(response.code)) {
-                    response.object = new ArrayList<>();
-                }
+        response.data = jsonObject.optBoolean("data", false);
+        if (JSON_OBJECT == parseMode) {
+            if ("0000".equals(response.code)) {
+                response.object = new Gson().fromJson(response.result, clazz);
             }
+        } else if (JSON_ARRAY == parseMode) {
+            if ("0000".equals(response.code)) {
+                response.object = fromJsonToList(response.result, clazz);
+            } else if ("1009".equals(response.code)) {
+                response.object = new ArrayList<>();
+            }
+        } else {
+
         }
         successCallBack.accept(call, response);
     }
-//你看get请求，都有两个方法，一个是传token，一个是不传的
+
     public static Call<String> getRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.GET, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
@@ -173,11 +166,13 @@ public class BaseNetworkUtils {
         return networkRequest(isNeedAccessToken, accessToken, NetReqUtils.RequestType.GET, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
-    //这个上面的两个
 
-    //你看post  就只有一个方法就是传token为空嘛
     public static Call<String> postRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.POST, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> postRequest(boolean isNeedAccessToken, String accessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        return networkRequest(isNeedAccessToken, accessToken, NetReqUtils.RequestType.POST, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
     public static Call<String> putRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {

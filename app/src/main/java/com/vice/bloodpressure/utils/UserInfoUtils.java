@@ -53,10 +53,10 @@ public class UserInfoUtils {
      * 重置信息--用户退出登录，重置某些信息
      */
     public static void resetUserInfo(Context context) {
-
         Map<String, String> map = new HashMap<>();
         map.put(SharedPreferencesConstant.USER_ID, "0");
         map.put(SharedPreferencesConstant.ARCHIVES_ID, "");
+        map.put(SharedPreferencesConstant.ACCESS_TOKEN, "");
 
         SharedPreferencesUtils.saveInfo(context, map);
 
@@ -77,12 +77,7 @@ public class UserInfoUtils {
             resetUserInfo(context);
             updateDeviceState(context, "0");
             if (handler != null) {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callBack.callBack(null);
-                    }
-                });
+                handler.post(() -> callBack.callBack(null));
             }
         }
     }
@@ -91,12 +86,11 @@ public class UserInfoUtils {
      * 请求验证token
      */
     public static String getAcceToken(Context context) {
-        //        String accessToken = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ACCESS_TOKEN);
-        //        if (TextUtils.isEmpty(accessToken)) {
-        //            accessToken = "";
-        //        }
-        //        return accessToken;
-        return "";
+        String accessToken = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ACCESS_TOKEN, "");
+        if (TextUtils.isEmpty(accessToken)) {
+            accessToken = "";
+        }
+        return accessToken;
     }
 
     /**

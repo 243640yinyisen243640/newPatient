@@ -115,7 +115,7 @@ public class LoginDataManager {
         map.put("username", username);
         map.put("password", password);
         map.put("code", code);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/forgotPassword", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "auth/forgotPassword", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -125,11 +125,11 @@ public class LoginDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> userLoginForCode(String username, String password, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> userLoginForCode(String username, String password, String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("username", username);
         map.put("password", password);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/codeLogin", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/codeLogin", map, successCallBack, failureCallBack);
     }
 
     public static Call<String> userLoginForPwd(String username, String password, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
@@ -137,5 +137,10 @@ public class LoginDataManager {
         map.put("username", username);
         map.put("password", password);
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/login", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> checkToken(String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.NONE, UserInfo.class, "auth/checkToken", map, successCallBack, failureCallBack);
     }
 }

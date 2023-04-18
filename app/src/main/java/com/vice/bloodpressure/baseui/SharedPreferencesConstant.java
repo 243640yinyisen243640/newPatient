@@ -1,6 +1,10 @@
 package com.vice.bloodpressure.baseui;
 
 public class SharedPreferencesConstant {
+    /**
+     * 是否已经同意隐私政策
+     */
+    public static String IS_AGREE = "is_agree";
 
     /**
      * 用户ID

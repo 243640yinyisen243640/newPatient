@@ -82,28 +82,40 @@
             android:name="android.max_aspect"
             android:value="2.1" />
 
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
 
         <!-- 启动页 -->
-        <!--        <activity-->
-        <!--            android:name="com.iweixi.weixi.base.SplashActivity"-->
-        <!--            android:screenOrientation="portrait">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".base.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
+
+        <!-- 基础的webView页面-->
         <activity
             android:name=".baseui.WebViewHelperActivity"
             android:screenOrientation="portrait" />
 
-        <!--登录模块开始-->
         <!--登录-->
-        <!--        <activity-->
-        <!--            android:name=".activity.login.LoginActivity"-->
-        <!--            android:screenOrientation="portrait" />-->
-        <!--        &lt;!&ndash;注册&ndash;&gt;-->
+        <activity
+            android:name=".activity.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <!--注册-->
         <activity
             android:name=".activity.login.RegisterActivity"
             android:screenOrientation="portrait" />
@@ -175,22 +187,8 @@
 
 
         <!-- 首页模块开始 -->
-        <activity
-            android:name=".activity.login.LoginActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!--首页开始-->
-        <!-- 首页 -->
-        <activity
-            android:name=".activity.MainActivity"
-            android:launchMode="singleTask" />
+
         <!--扫一扫-->
         <activity
             android:name=".modules.zxing.activity.CaptureActivity"

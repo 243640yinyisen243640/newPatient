@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/text_white"
+    android:background="@drawable/shape_bg_white_10"
     android:orientation="vertical"
     android:padding="15dp">
 
@@ -13,26 +13,33 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/privacy_protect_warm_tips"
-        android:textColor="@color/black_32"
+        android:textColor="@color/black_24"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tv_dpp_service_agreement"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/privacy_protect_hint"
-        android:textSize="14sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/tv_dpp_service_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/privacy_protect_hint" />
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/tv_dpp_agree"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:background="@color/text_white"
+        android:background="@drawable/shape_bg_main_gra_90"
         android:gravity="center"
         android:text="@string/privacy_protect_agree"
-        android:textColor="@color/black_32"
+        android:textColor="@color/text_white"
         android:textSize="16sp" />
 
     <TextView

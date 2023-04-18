@@ -4,9 +4,10 @@
         \n2、地理位置信息、摄像头、麦克风、相册权限均需要经过授权才会为实现功能或服务时使用。
         \n3、未经您同意，我们不会从第三方处获取、共享或向其提供您的信息。
         \n您还可以查看完整版《慧健康用户服务协议》，请务必审核阅读、充分理解其中各条款。\n如您同意，请点击“同意”开始接受我们的服务</string>
-    <string name="privacy_protect_disagree">暂不同意</string>
+    <string name="privacy_protect_disagree">不同意</string>
     <string name="privacy_protect_agree">同意</string>
     <string name="privacy_protect_warm_tips">用户协议</string>
+    <string name="privacy_protect_warm_tip_privacy">隐私声明</string>
     <string name="tv_main_home_page">首页</string>
     <string name="tv_main_home_service">服务</string>
     <string name="tv_main_home_out_hospital">院外管理</string>
