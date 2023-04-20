@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.retrofit;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -10,8 +9,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.vice.bloodpressure.base.XyApplication;
 import com.vice.bloodpressure.basemanager.ConstantParamNew;
-import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
-import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import org.json.JSONObject;
 
@@ -65,13 +63,7 @@ public class BaseNetworkUtils {
      */
     public static Call<String> networkRequest(boolean isNeedAccessToken, String accessToken, NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> headerMap = new HashMap<>();
-        if (isNeedAccessToken) {
-            if (TextUtils.isEmpty(accessToken)) {
-                headerMap.put("Authorization", SharedPreferencesUtils.getInfo(XyApplication.getContext(), SharedPreferencesConstant.USER_ID));
-            } else {
-                headerMap.put("Authorization", accessToken);
-            }
-        }
+        headerMap.put("Authorization", UserInfoUtils.getAcceToken(XyApplication.getMyApplicationContext()));
         headerMap.put("Client-Tag", "app");
         return new NetReqUtils.Builder()
                 //IP
@@ -141,7 +133,6 @@ public class BaseNetworkUtils {
         response.code = jsonObject.optString("code");
         response.msg = jsonObject.optString("msg");
         response.result = jsonObject.optString("data");
-        response.data = jsonObject.optBoolean("data", false);
         if (JSON_OBJECT == parseMode) {
             if ("0000".equals(response.code)) {
                 response.object = new Gson().fromJson(response.result, clazz);
@@ -153,7 +144,7 @@ public class BaseNetworkUtils {
                 response.object = new ArrayList<>();
             }
         } else {
-
+            response.data = jsonObject.optBoolean("data", false);
         }
         successCallBack.accept(call, response);
     }

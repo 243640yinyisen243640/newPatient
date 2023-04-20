@@ -28,13 +28,14 @@ public class MealExclusiveInfo {
      */
     private String recChildType;
     /**
-     * 食材名称
+     * 调料
      */
-    private String name;
+    private String seasoning;
     /**
-     * 食材克数
+     * 做法
      */
-    private String ingK;
+    private String practice;
+
 
     public String getRecId() {
         return recId;
@@ -76,19 +77,19 @@ public class MealExclusiveInfo {
         this.recChildType = recChildType;
     }
 
-    public String getName() {
-        return name;
+    public String getSeasoning() {
+        return seasoning;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSeasoning(String seasoning) {
+        this.seasoning = seasoning;
     }
 
-    public String getIngK() {
-        return ingK;
+    public String getPractice() {
+        return practice;
     }
 
-    public void setIngK(String ingK) {
-        this.ingK = ingK;
+    public void setPractice(String practice) {
+        this.practice = practice;
     }
 }

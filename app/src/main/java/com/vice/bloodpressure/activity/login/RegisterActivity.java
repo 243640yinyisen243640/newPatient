@@ -158,21 +158,15 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                Intent intent = new Intent(getPageContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                startActivity(intent);
-                finish();
             }
         }, (call, t) -> {
 
-            Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-            startActivity(intent);
-            finish();
-            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("userRegister", requestCall);
     }
@@ -181,7 +175,6 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_register_sure:
-                //                startActivity(new Intent(getPageContext(), PerfectUserInfoActivity.class));
                 sureToRegister();
                 break;
             case R.id.tv_register_get:

@@ -73,7 +73,8 @@ public class LoginDataManager {
      */
     public static Call<String> userPerfect(String name, String idNumber, String birthDate,
                                            String gender, String dm, String htn, String chd,
-                                           String copd, String cva, String igr, String archivesId, String userId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                           String copd, String cva, String igr, String archivesId, String userId,
+                                           String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
         map.put("idNumber", idNumber);
@@ -87,7 +88,8 @@ public class LoginDataManager {
         map.put("igr", igr);
         map.put("archivesId", archivesId);
         map.put("userId", userId);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/home/v2/savePatientInfo", map, successCallBack, failureCallBack);
+        map.put("accessToken", accessToken);
+        return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/v2/savePatientInfo", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -115,7 +117,7 @@ public class LoginDataManager {
         map.put("username", username);
         map.put("password", password);
         map.put("code", code);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.NONE, null, "auth/forgotPassword", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, null, "auth/forgotPassword", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -139,6 +141,14 @@ public class LoginDataManager {
         return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/login", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 检查token是否到期
+     *
+     * @param accessToken
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
     public static Call<String> checkToken(String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.NONE, UserInfo.class, "auth/checkToken", map, successCallBack, failureCallBack);

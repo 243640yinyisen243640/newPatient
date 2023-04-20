@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -476,33 +475,11 @@
                             android:layout_height="164dp"
                             android:layout_gravity="center" />
 
-                        <com.vice.bloodpressure.view.CirclePercentView
-                            android:id="@+id/cpv_carbon_proportion"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
+                        <ImageView
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
                             android:layout_gravity="center"
-                            app:circleBgColor="@color/white_fa"
-                            app:circleIsGradient="false"
-                            app:circleProgressColor="@color/gray_E5" />
-
-
-                        <com.vice.bloodpressure.view.CirclePercentView
-                            android:id="@+id/cpv_protein_proportion"
-                            android:layout_width="95dp"
-                            android:layout_height="95dp"
-                            android:layout_gravity="center"
-                            app:circleBgColor="@color/white_fa"
-                            app:circleIsGradient="false"
-                            app:circleProgressColor="@color/gray_E5" />
-
-                        <com.vice.bloodpressure.view.CirclePercentView
-                            android:id="@+id/cpv_fat_proportion"
-                            android:layout_width="65dp"
-                            android:layout_height="65dp"
-                            android:layout_gravity="center"
-                            app:circleBgColor="@color/white_fa"
-                            app:circleIsGradient="false"
-                            app:circleProgressColor="@color/gray_E5" />
+                            android:src="@drawable/circle_with_yinying" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -512,18 +489,19 @@
 
                             <TextView
                                 android:id="@+id/tv_carbon_proportion_all"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:includeFontPadding="false"
                                 android:text="1700"
                                 android:textColor="@color/black_2A"
-                                android:textSize="15sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
+                                android:gravity="center"
                                 android:includeFontPadding="false"
                                 android:text="千卡"
                                 android:textColor="@color/gray_A9"
@@ -543,7 +521,7 @@
                     <TextView
                         android:layout_width="12dp"
                         android:layout_height="5dp"
-                        android:background="@drawable/shape_orange_12_5_3" />
+                        android:background="@drawable/shape_low_blue_12_5_3" />
 
                     <TextView
                         style="@style/diet_meal_plan_title"
@@ -557,7 +535,7 @@
                         android:layout_width="12dp"
                         android:layout_height="5dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/shape_blue_12_5_3" />
+                        android:background="@drawable/shape_heavy_blue_12_5_3" />
 
                     <TextView
                         style="@style/diet_meal_plan_title"
@@ -571,7 +549,7 @@
                         android:layout_width="12dp"
                         android:layout_height="5dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/shape_purple_12_5_3" />
+                        android:background="@drawable/shape_low_yellow_12_5_3" />
 
                     <TextView
                         style="@style/diet_meal_plan_title"
@@ -635,7 +613,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/shape_little_background_5"
+                android:background="@drawable/shape_background_5"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -688,47 +666,81 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="95dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_seven_breakfast"
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/white_green_1"
-                        android:drawableRight="@drawable/arrow_right_green_little"
-                        android:paddingLeft="6dp"
-                        android:paddingRight="6dp"
-                        android:textColor="@color/main_base_color"
-                        android:textSize="13sp" />
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
-                    <TextView
-                        android:id="@+id/tv_seven_lunch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/white_green_1"
-                        android:drawableRight="@drawable/arrow_right_green_little"
-                        android:paddingLeft="6dp"
-                        android:paddingRight="6dp"
-                        android:textColor="@color/main_base_color"
-                        android:textSize="13sp" />
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:id="@+id/lv_meal_plan_details_breakfast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:divider="@color/transparent" />
 
-                    <TextView
-                        android:id="@+id/tv_seven_dinner"
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:src="@drawable/arrow_right_green_little" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/white_green_1"
-                        android:drawableRight="@drawable/arrow_right_green_little"
-                        android:paddingLeft="6dp"
-                        android:paddingRight="6dp"
-                        android:textColor="@color/main_base_color"
-                        android:textSize="13sp" />
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:id="@+id/lv_meal_plan_details_lunch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:divider="@color/transparent" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="right|center"
+                            android:src="@drawable/arrow_right_green_little" />
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_green_1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <com.vice.bloodpressure.view.NoScrollListView
+                            android:id="@+id/lv_meal_plan_details_dinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:divider="@color/transparent" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:src="@drawable/arrow_right_green_little" />
+
+                    </FrameLayout>
+
 
                 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.datamanager;
 
+import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -26,7 +27,7 @@ public class HomeDataManager {
     public static Call<String> getDietPlan(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
-        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "ai/diet/v2/getDietPlanByArchivesId", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_OBJECT, MealInfo.class, "ai/diet/v2/getDietPlanByArchivesId", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -54,7 +55,7 @@ public class HomeDataManager {
         map.put("dkd", dkd);
         map.put("professionType", professionType);
         map.put("archivesId", archivesId);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "ai/diet/v2/recommendDietPlan", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/diet/v2/recommendDietPlan", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -68,9 +69,9 @@ public class HomeDataManager {
      *                           htn -> 高血压
      *                           no -> 无
      * @param whetherSportHabits 是否有运动习惯 Y N
-     * @param whetherEmptySport 是否空腹运动 Y N
-     * @param exerciseTime 运动时间
-     * @param exerciseFrequency 运动频次
+     * @param whetherEmptySport  是否空腹运动 Y N
+     * @param exerciseTime       运动时间
+     * @param exerciseFrequency  运动频次
      * @param successCallBack
      * @param failureCallBack
      * @return

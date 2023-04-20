@@ -46,7 +46,7 @@ public class UserInfoUtils {
      */
     public static String getArchivesId(Context context) {
         String archivesId = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
-        return TextUtils.isEmpty(archivesId) ? "" : "155";
+        return TextUtils.isEmpty(archivesId) ? "" : archivesId;
     }
 
     /**
@@ -145,7 +145,7 @@ public class UserInfoUtils {
      */
     public static void saveLoginInfo(Context context, UserInfo userInfo) {
         Map<String, String> map = new HashMap<>();
-        map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserID());
+        map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserId());
         map.put(SharedPreferencesConstant.ACCESS_TOKEN, userInfo.getAccess_token());
         map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
         SharedPreferencesUtils.saveInfo(context, map);

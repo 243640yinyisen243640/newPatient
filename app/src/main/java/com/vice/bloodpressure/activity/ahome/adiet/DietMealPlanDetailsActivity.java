@@ -18,16 +18,21 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietMealDetailsThreeMealAdapter;
 import com.vice.bloodpressure.adapter.home.DietMealPlanWeekAdapter;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.utils.DataUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.CirclePercentView;
+import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +58,16 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
     private TextView moreTv;
     private RecyclerView sevenPlanRv;
     private TextView refreshTv;
-    private TextView breakfastTv;
-    private TextView lunchTv;
-    private TextView dinnerTv;
+    private NoScrollListView breakfastLv;
+    private NoScrollListView lunchLv;
+    private NoScrollListView dinnerLv;
 
     private MealInfo mealInfo;
+
+    private DietMealPlanWeekAdapter weekAdapter;
+    private DietMealDetailsThreeMealAdapter breakFastAdapter;
+    private DietMealDetailsThreeMealAdapter lunchAdapter;
+    private DietMealDetailsThreeMealAdapter dinnerAdapter;
 
 
     @Override
@@ -74,27 +84,29 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
     }
 
     private void initValues() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
+        layoutManager.setOrientation(sevenPlanRv.HORIZONTAL);
+        sevenPlanRv.setLayoutManager(layoutManager);
         Log.i("yys", "seven" + DataUtils.getSevendate());
         Log.i("yys", "week" + DataUtils.get7week());
-        //        DietMealPlanWeekAdapter adapter = new DietMealPlanWeekAdapter();
     }
 
 
     @Override
     protected void onPageLoad() {
-
         Call<String> requestCall = HomeDataManager.getDietPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
                 mealInfo = (MealInfo) response.object;
                 bindData();
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
             } else {
-                //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
 
         }, (call, t) -> {
-
-            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("getDietPlan", requestCall);
     }
@@ -107,26 +119,39 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         yanTv.setText(mealInfo.getDietNutritionVo().getSalt());
         youTv.setText(mealInfo.getDietNutritionVo().getOil());
         allkTextView.setText(mealInfo.getThreeMealVo().getSumCalorie());
-
+        List<String> nameString = new ArrayList<>();
+        nameString.add("");
+        nameString.add("");
+        nameString.add("");
         List<String> rateString = new ArrayList<>();
-        rateString.add("50");
-        rateString.add("20");
-        rateString.add("10");
-        rateString.add("20");
-        showPieChart(allProportionRc, getPieChartData(rateString, null));
-        allkTextView.setText(mealInfo.getThreeMealVo().getLowCarbsCalorie() + "千卡" + "—" + mealInfo.getThreeMealVo().getHighCarbsCalorie() + "千卡\n"
+        rateString.add("55");
+        rateString.add("15");
+        rateString.add("30");
+        showPieChart(allProportionRc, getPieChartData(rateString, nameString));
+        carbonTv.setText(mealInfo.getThreeMealVo().getLowCarbsCalorie() + "千卡" + "—" + mealInfo.getThreeMealVo().getHighCarbsCalorie() + "千卡\n"
                 + mealInfo.getThreeMealVo().getLowCarbs() + "g" + "—" + mealInfo.getThreeMealVo().getHighCarbs() + "g");
         proteinTv.setText(mealInfo.getThreeMealVo().getLowPro() + "千卡" + "—" + mealInfo.getThreeMealVo().getHighPro() + "千卡\n"
                 + mealInfo.getThreeMealVo().getLowProCalorie() + "g" + "—" + mealInfo.getThreeMealVo().getHighProCalorie() + "g");
 
-        fatTv.setText(mealInfo.getThreeMealVo().getFat() + "千卡+“   " + mealInfo.getThreeMealVo().getFatCalorie() + "g");
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        sevenPlanRv.setLayoutManager(linearLayoutManager);
-        DietMealPlanWeekAdapter adapter = new DietMealPlanWeekAdapter(getPageContext(), mealInfo.getExclusiveDietPlanVos(), new IAdapterViewClickListener() {
+        fatTv.setText(mealInfo.getThreeMealVo().getFat() + "千卡   " + mealInfo.getThreeMealVo().getFatCalorie() + "g");
+
+        mealInfo.getExclusiveDietPlanVos().get(0).setCheck(true);
+        chanData(0);
+        weekAdapter = new DietMealPlanWeekAdapter(getPageContext(), mealInfo.getExclusiveDietPlanVos(), new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.ll_diet_week_click:
+                        weekAdapter.setClickPosition(position);
+                        chanData(position);
+                        breakFastAdapter.notifyDataSetChanged();
+                        dinnerAdapter.notifyDataSetChanged();
+                        lunchAdapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
 
+                }
             }
 
             @Override
@@ -134,10 +159,26 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
 
             }
         });
+        sevenPlanRv.setAdapter(weekAdapter);
+    }
 
-        sevenPlanRv.setAdapter(adapter);
+    private void chanData(int position) {
+        if (mealInfo.getExclusiveDietPlanVos() != null && mealInfo.getExclusiveDietPlanVos().size() == 7) {
+            List<MealExclusiveInfo> breakfastList = mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast();
+            breakFastAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), breakfastList);
+            breakfastLv.setAdapter(breakFastAdapter);
+
+            List<MealExclusiveInfo> lunchList = mealInfo.getExclusiveDietPlanVos().get(position).getLunch();
+            lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
+            lunchLv.setAdapter(lunchAdapter);
+
+            List<MealExclusiveInfo> dinnerList = mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast();
+            dinnerAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), dinnerList);
+            dinnerLv.setAdapter(dinnerAdapter);
+        }
 
     }
+
 
     /**
      * 有关饼状图
@@ -147,10 +188,9 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
      */
     private void showPieChart(PieChart pieChart, List<PieEntry> pieList) {
         PieDataSet dataSet = new PieDataSet(pieList, "");
-        int[] intArray = getResources().getIntArray(R.array.diet_plan_colors);
+        int[] intArray = getResources().getIntArray(R.array.diet_plan_colors_details);
         dataSet.setColors(intArray);
         PieData pieData = new PieData(dataSet);
-
 
         pieChart.setUsePercentValues(true);
         //设置使用百分比
@@ -161,7 +201,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
 
         pieChart.setHighlightPerTapEnabled(false);//点击是否放大
 
-        pieChart.setCenterText("多少千卡");//设置环中的文字
+        pieChart.setCenterText("");//设置环中的文字
         pieChart.setCenterTextSize(15f);//设置环中文字的大小
         pieChart.setDrawCenterText(false);//设置绘制环中文字
         //设置初始旋转角度
@@ -177,7 +217,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         dataSet.setValueLinePart1OffsetPercentage(80f);
 
         // 设置饼块之间的间隔
-        dataSet.setSliceSpace(1f);
+        dataSet.setSliceSpace(0);
         dataSet.setHighlightEnabled(true);
         // 显示图例
         Legend legend = pieChart.getLegend();
@@ -234,18 +274,15 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         youTv = view.findViewById(R.id.tv_youlei_num);
         allkTextView = view.findViewById(R.id.tv_carbon_proportion_all);
         allProportionRc = view.findViewById(R.id.pc_all_proportion);
-        carbonProportionRc = view.findViewById(R.id.cpv_carbon_proportion);
-        proteinProportionRc = view.findViewById(R.id.cpv_protein_proportion);
-        fatProportionRc = view.findViewById(R.id.cpv_fat_proportion);
         carbonTv = view.findViewById(R.id.tv_carbon_proportion);
         proteinTv = view.findViewById(R.id.tv_protein_proportion);
         fatTv = view.findViewById(R.id.tv_fat_proportion);
         moreTv = view.findViewById(R.id.tv_seven_more);
         sevenPlanRv = view.findViewById(R.id.rv_seven_plan);
         refreshTv = view.findViewById(R.id.tv_seven_refresh);
-        breakfastTv = view.findViewById(R.id.tv_seven_breakfast);
-        lunchTv = view.findViewById(R.id.tv_seven_lunch);
-        dinnerTv = view.findViewById(R.id.tv_seven_dinner);
+        breakfastLv = view.findViewById(R.id.lv_meal_plan_details_breakfast);
+        lunchLv = view.findViewById(R.id.lv_meal_plan_details_lunch);
+        dinnerLv = view.findViewById(R.id.lv_meal_plan_details_dinner);
         containerView().addView(view);
     }
 

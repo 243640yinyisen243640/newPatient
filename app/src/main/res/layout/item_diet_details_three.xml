@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_item_diet_details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dp"
+        android:paddingTop="5dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="5dp"
+        android:text="豇豆"
+        android:maxLines="1"
+        android:maxLength="5"
+        android:ellipsize="end"
+        android:textColor="@color/main_base_color"
+        android:textSize="13sp" />
+
+</LinearLayout>

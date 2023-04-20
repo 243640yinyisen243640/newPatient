@@ -15,4 +15,11 @@
         <item>@color/blue_53</item>
     </integer-array>
 
+
+    <integer-array name="diet_plan_colors_details">
+        <item>@color/blue_19</item>
+        <item>@color/blue_11</item>
+        <item>@color/diet_you</item>
+    </integer-array>
+
 </resources>

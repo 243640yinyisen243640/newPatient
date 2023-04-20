@@ -20,7 +20,7 @@ public class MealInfo implements Serializable {
 
     private MealChildInfo dietNutritionVo;
     private MealChildInfo threeMealVo;
-    private List<MealChildInfo> exclusiveDietPlanVos;
+    private List<MealSecondInfo> exclusiveDietPlanVos;
 
     public String getColor() {
         return color;
@@ -90,11 +90,11 @@ public class MealInfo implements Serializable {
         this.threeMealVo = threeMealVo;
     }
 
-    public List<MealChildInfo> getExclusiveDietPlanVos() {
+    public List<MealSecondInfo> getExclusiveDietPlanVos() {
         return exclusiveDietPlanVos;
     }
 
-    public void setExclusiveDietPlanVos(List<MealChildInfo> exclusiveDietPlanVos) {
+    public void setExclusiveDietPlanVos(List<MealSecondInfo> exclusiveDietPlanVos) {
         this.exclusiveDietPlanVos = exclusiveDietPlanVos;
     }
 }

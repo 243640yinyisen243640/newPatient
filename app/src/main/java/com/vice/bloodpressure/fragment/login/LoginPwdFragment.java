@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.ForgetPwdActivity;
+import com.vice.bloodpressure.activity.login.PerfectUserInfoActivity;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
 import com.vice.bloodpressure.model.UserInfo;
@@ -187,14 +189,21 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             return;
         }
         Call<String> requestCall = LoginDataManager.userLoginForPwd(phone, pwd, (call, response) -> {
-            ToastUtils.getInstance().dismissProgressDialog();
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-                Intent intent = new Intent(getPageContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                getActivity().finish();
+                Log.i("yys","userInfo=="+userInfo.getUserId());
+                if ("1".equals(userInfo.getInfo_status())) {
+                    Intent intent = new Intent(getPageContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }

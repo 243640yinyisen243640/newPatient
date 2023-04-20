@@ -15,9 +15,9 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
-import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
@@ -170,29 +170,17 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         //igr
         String qian = qianCheckBox.isChecked() ? "0" : "1";
 
-        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()), (call, response) -> {
+        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()),UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
-                UserInfo userInfo = (UserInfo) response.object;
-                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                //                intent.putExtra("userInfo", userInfo);
+                Intent intent = new Intent(getPageContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             } else {
-                //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                UserInfo userInfo = (UserInfo) response.object;
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                //                intent.putExtra("userInfo", userInfo);
-                startActivity(intent);
-                finish();
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
 
         }, (call, t) -> {
-            Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-            //                intent.putExtra("userInfo", userInfo);
-            startActivity(intent);
-            finish();
-            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("userPerfect", requestCall);
     }
@@ -200,7 +188,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //        backTip();
+        backTip();
     }
 
     /**

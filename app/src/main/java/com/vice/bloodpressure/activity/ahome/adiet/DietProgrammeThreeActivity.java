@@ -80,6 +80,7 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
         Log.i("yys", "weight==" + weight);
         Log.i("yys", "workWeight==" + workWeight);
         Log.i("yys", "chronicDisease==" + chronicDisease);
+        Log.i("yys", "UserInfoUtils.getArchivesId(getPageContext())" + UserInfoUtils.getArchivesId(getPageContext()));
         if (programmePopupWindow == null) {
             programmePopupWindow = new DietProgrammePopupWindow(getPageContext(),
                     recommendView -> {
@@ -88,7 +89,6 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
                             if ("0000".equals(response.code)) {
                                 //成功的话回到首页
                                 Intent intent = new Intent(getPageContext(), MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             } else {

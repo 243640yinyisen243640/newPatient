@@ -29,7 +29,7 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
     private ImageView ivHeavy;
     private ImageView ivBedridden;
 
-    private String workWeight = "0";
+    private String workWeight = "1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,19 +65,19 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
         switch (v.getId()) {
             case R.id.ll_diet_programme_two_light:
                 //轻体力劳动者
-                checkWork("0");
+                checkWork("1");
                 break;
             case R.id.ll_diet_programme_two_middle:
                 //中体力劳动者
-                checkWork("1");
+                checkWork("2");
                 break;
             case R.id.ll_diet_programme_two_heavy:
                 //重体力劳动者
-                checkWork("2");
+                checkWork("3");
                 break;
             case R.id.ll_diet_programme_two_bedridden:
                 //卧床
-                checkWork("3");
+                checkWork("4");
                 break;
             case R.id.tv_diet_programme_two_up_step:
                 //上一步
@@ -87,7 +87,6 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
                 //下一步
                 Intent intent = new Intent(getPageContext(), DietProgrammeThreeActivity.class);
                 intent.putExtra("workWeight", workWeight);
-                intent.putExtra("type", "2");
                 intent.putExtra("height", getIntent().getStringExtra("height"));
                 intent.putExtra("weight", getIntent().getStringExtra("weight"));
                 startActivity(intent);
@@ -104,25 +103,25 @@ public class DietProgrammeTwoActivity extends UIBaseActivity implements View.OnC
         ivHeavy.setImageResource(R.drawable.circle_uncheck);
         ivBedridden.setImageResource(R.drawable.circle_uncheck);
         switch (workWeight) {
-            case "0":
+            case "1":
                 ivLight.setImageResource(R.drawable.circle_check);
                 ivMiddle.setImageResource(R.drawable.circle_uncheck);
                 ivHeavy.setImageResource(R.drawable.circle_uncheck);
                 ivBedridden.setImageResource(R.drawable.circle_uncheck);
                 break;
-            case "1":
+            case "2":
                 ivLight.setImageResource(R.drawable.circle_uncheck);
                 ivMiddle.setImageResource(R.drawable.circle_check);
                 ivHeavy.setImageResource(R.drawable.circle_uncheck);
                 ivBedridden.setImageResource(R.drawable.circle_uncheck);
                 break;
-            case "2":
+            case "3":
                 ivLight.setImageResource(R.drawable.circle_uncheck);
                 ivMiddle.setImageResource(R.drawable.circle_uncheck);
                 ivHeavy.setImageResource(R.drawable.circle_check);
                 ivBedridden.setImageResource(R.drawable.circle_uncheck);
                 break;
-            case "3":
+            case "4":
                 ivLight.setImageResource(R.drawable.circle_uncheck);
                 ivMiddle.setImageResource(R.drawable.circle_uncheck);
                 ivHeavy.setImageResource(R.drawable.circle_uncheck);

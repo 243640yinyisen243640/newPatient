@@ -9,7 +9,6 @@ import java.io.Serializable;
  * 描述:
  */
 public class UserInfo implements Serializable {
-    private String userID;
     private String diseaseName;
     private boolean checkID;
     private boolean isSelected;
@@ -23,11 +22,11 @@ public class UserInfo implements Serializable {
     /**
      * 档案ID
      */
-    private String archivesId;
+    private String archives_id;
     /**
      * userId
      */
-    private String userId;
+    private String user_id;
     /**
      * 授权码
      */
@@ -40,6 +39,10 @@ public class UserInfo implements Serializable {
      * 用户类型(00系统,01用户 02医生 03护士 04主任 05 科室 06医院）
      */
     private String user_type;
+    /**
+     * 是否完善个人信息  1完善 2未完善
+     */
+    private String info_status;
 
     public UserInfo() {
     }
@@ -52,7 +55,7 @@ public class UserInfo implements Serializable {
     }
 
     public UserInfo(String userID, String diseaseName) {
-        this.userID = userID;
+        this.user_id = userID;
         this.diseaseName = diseaseName;
     }
 
@@ -104,28 +107,21 @@ public class UserInfo implements Serializable {
         this.diseaseName = diseaseName;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     public String getArchivesId() {
-        return archivesId;
+        return archives_id;
     }
 
     public void setArchivesId(String archivesId) {
-        this.archivesId = archivesId;
+        this.archives_id = archivesId;
     }
 
     public String getUserId() {
-        return userId;
+        return user_id;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.user_id = userId;
     }
 
     public boolean getIsCheck() {
@@ -166,5 +162,13 @@ public class UserInfo implements Serializable {
 
     public void setUser_type(String user_type) {
         this.user_type = user_type;
+    }
+
+    public String getInfo_status() {
+        return info_status;
+    }
+
+    public void setInfo_status(String info_status) {
+        this.info_status = info_status;
     }
 }

@@ -42,7 +42,7 @@ public class PerfectDiseaseAdapter extends XyBaseAdapter<UserInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
         UserInfo typeInfo = getList().get(position);
-        holder.contentTextView.setText(typeInfo.getUserID());
+        holder.contentTextView.setText(typeInfo.getUserId());
 
 
         if (clickPosition == position) {

@@ -30,4 +30,8 @@ public class SharedPreferencesConstant {
      * 用户类型(00系统,01用户 02医生 03护士 04主任 05 科室 06医院）
      */
     public static final String USER_TYPE = "user_type";
+    /**
+     * 是否完善过信息1完善过 2：未完善
+     */
+    public static final String INFO_STATUS = "info_status";
 }
