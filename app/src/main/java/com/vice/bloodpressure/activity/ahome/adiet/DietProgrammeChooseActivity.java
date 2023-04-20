@@ -9,10 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.home.DietMealDetailsListAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-
-import java.util.ArrayList;
 
 /**
  * 类名：自定义饮食方案
@@ -42,7 +39,7 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
     }
 
     private void initValues() {
-        DietMealDetailsListAdapter adapter = new DietMealDetailsListAdapter(getPageContext(), new ArrayList<>());
+//        DietMealDetailsListAdapter adapter = new DietMealDetailsListAdapter(getPageContext(), new ArrayList<>());
     }
 
     private void initListener() {

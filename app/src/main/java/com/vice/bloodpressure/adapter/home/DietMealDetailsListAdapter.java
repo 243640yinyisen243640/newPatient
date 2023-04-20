@@ -10,8 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.MealInfo;
-import com.vice.bloodpressure.utils.XyImageUtils;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 
 import java.util.List;
 
@@ -24,10 +23,10 @@ import java.util.List;
  */
 public class DietMealDetailsListAdapter extends RecyclerView.Adapter<DietMealDetailsListAdapter.ViewHolder> {
     private Context context;
-    private List<MealInfo> list;
+    private List<MealExclusiveInfo> list;
 
 
-    public DietMealDetailsListAdapter(Context context, List<MealInfo> list) {
+    public DietMealDetailsListAdapter(Context context, List<MealExclusiveInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,10 +42,17 @@ public class DietMealDetailsListAdapter extends RecyclerView.Adapter<DietMealDet
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealInfo info = list.get(position);
-        XyImageUtils.loadRoundImage(context, R.drawable.diet_guogai_gray, info.getImg(), holder.coverImageView);
-        holder.nameTextView.setText(info.getTitle());
-        holder.numTextView.setText(info.getNum());
+        MealExclusiveInfo info = list.get(position);
+        //        XyImageUtils.loadRoundImage(context, R.drawable.diet_guogai_gray, info.getImg(), holder.coverImageView);
+        holder.nameTextView.setText(info.getRecName());
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < info.getIngMap().size(); i++) {
+            builder.append(info.getIngMap().get(i).getName());
+            builder.append(info.getIngMap().get(i).getIngK() + "g");
+            builder.append(",");
+        }
+        builder.deleteCharAt(builder.length() - 1);
     }
 
     @Override

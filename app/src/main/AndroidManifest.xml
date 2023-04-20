@@ -87,10 +87,10 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-          <!--  <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            <!--  <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
+                  <category android:name="android.intent.category.LAUNCHER" />
+              </intent-filter>-->
         </activity>
 
         <!-- 启动页 -->
@@ -239,6 +239,10 @@
         <activity
             android:name=".activity.ahome.adiet.DietMakeMealDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <!--饮食方案列表-->
+        <activity
+            android:name=".activity.ahome.adiet.DietMealPlanListActivity"
             android:screenOrientation="portrait" />
         <!--饮食方案详细-->
         <activity

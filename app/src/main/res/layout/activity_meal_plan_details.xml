@@ -671,6 +671,7 @@
                     android:orientation="horizontal">
 
                     <FrameLayout
+                        android:id="@+id/fl_meal_plan_details_breakfast"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -694,6 +695,7 @@
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/fl_meal_plan_details_lunch"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -718,6 +720,7 @@
 
 
                     <FrameLayout
+                        android:id="@+id/fl_meal_plan_details_dinner"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"

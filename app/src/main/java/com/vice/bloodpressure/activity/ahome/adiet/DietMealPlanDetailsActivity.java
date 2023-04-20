@@ -3,8 +3,8 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,14 +26,13 @@ import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealInfo;
-import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
-import com.vice.bloodpressure.view.CirclePercentView;
 import com.vice.bloodpressure.view.NoScrollListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,13 +44,10 @@ import retrofit2.Call;
  * 传参:
  * 描述:饮食方案详细
  */
-public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
+public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements View.OnClickListener {
     private TextView zhushiTv, shucaiTv, roudanbaiTv, jiangruTv, youTv, yanTv;
     private TextView allkTextView;
     private PieChart allProportionRc;
-    private CirclePercentView carbonProportionRc;
-    private CirclePercentView proteinProportionRc;
-    private CirclePercentView fatProportionRc;
     private TextView carbonTv;
     private TextView proteinTv;
     private TextView fatTv;
@@ -59,8 +55,11 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
     private RecyclerView sevenPlanRv;
     private TextView refreshTv;
     private NoScrollListView breakfastLv;
+    private FrameLayout breakfastFrameLayout;
     private NoScrollListView lunchLv;
+    private FrameLayout lunchFrameLayout;
     private NoScrollListView dinnerLv;
+    private FrameLayout dinnerFrameLayout;
 
     private MealInfo mealInfo;
 
@@ -80,15 +79,22 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         });
         initViews();
         initValues();
+        initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    private void initListener() {
+        moreTv.setOnClickListener(this);
+        refreshTv.setOnClickListener(this);
+        breakfastFrameLayout.setOnClickListener(this);
+        lunchFrameLayout.setOnClickListener(this);
+        dinnerFrameLayout.setOnClickListener(this);
     }
 
     private void initValues() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
         layoutManager.setOrientation(sevenPlanRv.HORIZONTAL);
         sevenPlanRv.setLayoutManager(layoutManager);
-        Log.i("yys", "seven" + DataUtils.getSevendate());
-        Log.i("yys", "week" + DataUtils.get7week());
     }
 
 
@@ -281,9 +287,44 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity {
         sevenPlanRv = view.findViewById(R.id.rv_seven_plan);
         refreshTv = view.findViewById(R.id.tv_seven_refresh);
         breakfastLv = view.findViewById(R.id.lv_meal_plan_details_breakfast);
+        breakfastFrameLayout = view.findViewById(R.id.fl_meal_plan_details_breakfast);
         lunchLv = view.findViewById(R.id.lv_meal_plan_details_lunch);
+        lunchFrameLayout = view.findViewById(R.id.fl_meal_plan_details_lunch);
         dinnerLv = view.findViewById(R.id.lv_meal_plan_details_dinner);
+        dinnerFrameLayout = view.findViewById(R.id.fl_meal_plan_details_dinner);
         containerView().addView(view);
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.tv_seven_more:
+                intent = new Intent(getPageContext(), DietMealPlanListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_seven_refresh:
+                break;
+            case R.id.fl_meal_plan_details_breakfast:
+                intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
+                intent.putExtra("meal", "早餐");
+                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
+                startActivity(intent);
+                break;
+            case R.id.fl_meal_plan_details_lunch:
+                intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
+                intent.putExtra("meal", "午餐");
+                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
+                startActivity(intent);
+                break;
+            case R.id.fl_meal_plan_details_dinner:
+                intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
+                intent.putExtra("meal", "晚餐");
+                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
 }

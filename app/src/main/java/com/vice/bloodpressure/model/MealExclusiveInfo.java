@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.model;
 
+import java.util.List;
+
 /**
  * 作者: beauty
  * 类名:
@@ -35,6 +37,8 @@ public class MealExclusiveInfo {
      * 做法
      */
     private String practice;
+
+    private List<MealIngMapInfo> ingMap;
 
 
     public String getRecId() {
@@ -91,5 +95,13 @@ public class MealExclusiveInfo {
 
     public void setPractice(String practice) {
         this.practice = practice;
+    }
+
+    public List<MealIngMapInfo> getIngMap() {
+        return ingMap;
+    }
+
+    public void setIngMap(List<MealIngMapInfo> ingMap) {
+        this.ingMap = ingMap;
     }
 }
