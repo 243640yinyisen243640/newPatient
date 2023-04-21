@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
  * 传参:
  * 描述:
  */
-public class MyFrameLayout extends FrameLayout{
+public class MyFrameLayout extends FrameLayout {
     public MyFrameLayout(@NonNull Context context) {
         super(context);
     }
@@ -37,4 +37,9 @@ public class MyFrameLayout extends FrameLayout{
         onTouchEvent(ev);
         return true;
     }
+    //这个也是可以的  为什么要写这个类呢，就是因为我用的listview导致点击事件冲突了，
+    //    @Override
+    //    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    //        return true;
+    //    }
 }
