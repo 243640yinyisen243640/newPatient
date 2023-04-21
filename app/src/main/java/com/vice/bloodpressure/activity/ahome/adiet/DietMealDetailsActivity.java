@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
@@ -58,12 +59,15 @@ public class DietMealDetailsActivity extends UIBaseActivity {
     private void initValues() {
 
         if ("早餐".equals(titleMeal)) {
-            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_bing_with_green, 0, 0, 0);
+            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_bing_with_green, 0, R.drawable.diet_change_my_like, 0);
         } else if ("午餐".equals(titleMeal)) {
-            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_jitui_with_green, 0, 0, 0);
+            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.jitui_with_green_20, 0,  R.drawable.diet_change_my_like, 0);
         } else {
-            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0, 0, 0);
+            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0,  R.drawable.diet_change_my_like, 0);
         }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        mealTitleRv.setLayoutManager(linearLayoutManager);
         DietMealDetailsListAdapter adapter = new DietMealDetailsListAdapter(getPageContext(), mealExclusiveInfoList);
         mealTitleRv.setAdapter(adapter);
 

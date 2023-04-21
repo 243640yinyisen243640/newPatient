@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
     private RecyclerView sevenPlanRv;
     private TextView refreshTv;
     private NoScrollListView breakfastLv;
+    //    private TextView breakFastTextView;
     private FrameLayout breakfastFrameLayout;
     private NoScrollListView lunchLv;
     private FrameLayout lunchFrameLayout;
@@ -174,6 +176,14 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
             breakFastAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), breakfastList);
             breakfastLv.setAdapter(breakFastAdapter);
 
+            //            StringBuilder builder = new StringBuilder();
+            //
+            //            for (int i = 0; i < mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast().size(); i++) {
+            //                builder.append(mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast().get(i).getRecName()).append("\n");
+            //            }
+            //            builder.deleteCharAt(builder.length() - 1);
+            //            breakFastTextView.setText(builder.toString());
+
             List<MealExclusiveInfo> lunchList = mealInfo.getExclusiveDietPlanVos().get(position).getLunch();
             lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
             lunchLv.setAdapter(lunchAdapter);
@@ -286,6 +296,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         moreTv = view.findViewById(R.id.tv_seven_more);
         sevenPlanRv = view.findViewById(R.id.rv_seven_plan);
         refreshTv = view.findViewById(R.id.tv_seven_refresh);
+        //        breakFastTextView = view.findViewById(R.id.tv_meal_plan_three_name);
         breakfastLv = view.findViewById(R.id.lv_meal_plan_details_breakfast);
         breakfastFrameLayout = view.findViewById(R.id.fl_meal_plan_details_breakfast);
         lunchLv = view.findViewById(R.id.lv_meal_plan_details_lunch);
@@ -300,12 +311,14 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_seven_more:
+                Log.i("yys", "点击了");
                 intent = new Intent(getPageContext(), DietMealPlanListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_seven_refresh:
                 break;
             case R.id.fl_meal_plan_details_breakfast:
+                Log.i("yys", "点击了");
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
                 intent.putExtra("meal", "早餐");
                 intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());

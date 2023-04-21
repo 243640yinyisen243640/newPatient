@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * 传参:
  * 描述:
  */
-public class MealExclusiveInfo {
+public class MealExclusiveInfo implements Serializable {
     /**
      * 食谱id
      */

@@ -50,9 +50,10 @@ public class DietMealDetailsListAdapter extends RecyclerView.Adapter<DietMealDet
         for (int i = 0; i < info.getIngMap().size(); i++) {
             builder.append(info.getIngMap().get(i).getName());
             builder.append(info.getIngMap().get(i).getIngK() + "g");
-            builder.append(",");
+            builder.append(";");
         }
         builder.deleteCharAt(builder.length() - 1);
+        holder.numTextView.setText(builder.toString());
     }
 
     @Override
