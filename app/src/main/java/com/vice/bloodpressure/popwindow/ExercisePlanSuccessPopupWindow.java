@@ -19,7 +19,7 @@ public class ExercisePlanSuccessPopupWindow extends PopupWindow {
 
     public ExercisePlanSuccessPopupWindow(Context context, View.OnClickListener recommendClickListener) {
         LinearLayout view = (LinearLayout) View.inflate(context, R.layout.pop_exercise_plan_success, null);
-        contentTv = view.findViewById(R.id.tv_exercise_success_content);
+        contentTv = view.findViewById(R.id.tv_exercise_success_content_head);
         TextView sureTv = view.findViewById(R.id.tv_exercise_success_sure);
 
         sureTv.setOnClickListener(v -> {

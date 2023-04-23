@@ -26,9 +26,15 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tv_exercise_make_plan_again"
+                style="@style/sure_green_13sp_p12"
+                android:text="重新制订" />
+
+            <TextView
                 android:id="@+id/tv_exercise_make_plan"
                 style="@style/sure_green_13sp_p12"
-                android:text="重新制订运动方案" />
+                android:layout_marginStart="10dp"
+                android:text="运动方案" />
         </LinearLayout>
 
         <LinearLayout

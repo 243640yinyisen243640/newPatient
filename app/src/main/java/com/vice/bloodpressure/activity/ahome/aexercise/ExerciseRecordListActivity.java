@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -38,6 +39,7 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     private TextView addRecordTv;
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
+    private String addExerciseType = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,14 +54,11 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
 
-        ExerciseOxygenFragment oxygenFragment = new ExerciseOxygenFragment();
-        ExerciseResistanceFragment resistanceFragment = new ExerciseResistanceFragment();
-        ExerciseFlexibilityFragment flexibilityFragment = new ExerciseFlexibilityFragment();
 
         fragments = new ArrayList<>();
-        fragments.add(oxygenFragment);
-        fragments.add(resistanceFragment);
-        fragments.add(flexibilityFragment);
+        fragments.add(ExerciseOxygenFragment.newInstance("1"));
+        fragments.add(ExerciseResistanceFragment.newInstance("P"));
+        fragments.add(ExerciseFlexibilityFragment.newInstance("R"));
 
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         viewPager.setOffscreenPageLimit(fragments.size());
@@ -80,6 +79,7 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
             @Override
             public void onPageSelected(int i) {
                 radioGroup.check(radioGroup.getChildAt(i).getId());
+                Log.i("yys", "onPageSelected==" + i);
             }
 
             @Override
@@ -101,7 +101,9 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     private void initListener() {
         backIm.setOnClickListener(v -> finish());
         addRecordTv.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), ExercisePlanAddRecordActivity.class));
+            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
+            intent.putExtra("type", "");
+            startActivity(intent);
         });
     }
 

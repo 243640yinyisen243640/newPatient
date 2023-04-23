@@ -212,7 +212,7 @@
                         app:isBgRoundRect="false"
                         app:largeScaleColor="#C5CDCA"
                         app:largeScaleStroke="2dp"
-                        app:maxScale="720"
+                        app:maxScale="300"
                         app:midScaleColor="#C5CDCA"
                         app:midScaleStroke="2dp"
                         app:minScale="0"

@@ -110,9 +110,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     private LinearLayout mealMoreLin;
     //运动
     /**
-     * 制定计划，步数的数据，还需消耗多少热量，消耗了多少热量，立即完成，运动类型，需要消耗热量，运动时间，抗阻运动，柔韧性运动
+     * 制定计划，重新制定运动计划，步数的数据，还需消耗多少热量，消耗了多少热量，立即完成，运动类型，需要消耗热量，运动时间，抗阻运动，柔韧性运动
      */
-    private TextView makePlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, typeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
+    private TextView makePlanTv, makeExerciseAgainPlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, typeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
 
     //教育
 
@@ -332,6 +332,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
         spreadIm.setOnClickListener(this);
 
+        makeExerciseAgainPlanTv.setOnClickListener(this);
         makePlanTv.setOnClickListener(this);
         finishTv.setOnClickListener(this);
         resistanceTv.setOnClickListener(this);
@@ -405,16 +406,15 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             case R.id.tv_home_healthy_tips_spread:
                 break;
-            //重新制定运动计划
+            //重新制定
+            case R.id.tv_exercise_make_plan_again:
+                intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                startActivity(intent);
+                break;
+            //运动计划
             case R.id.tv_exercise_make_plan:
-                String type = "2";
-                if ("1".equals(type)) {
-                    intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
-                    startActivity(intent);
-                } else {
-                    intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
-                    startActivity(intent);
-                }
+                intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
+                startActivity(intent);
                 break;
             //立即完成 运动
             case R.id.tv_exercise_finish:
@@ -505,6 +505,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         mealMoreLin = view.findViewById(R.id.ll_meal_more);
 
 
+        makeExerciseAgainPlanTv = view.findViewById(R.id.tv_exercise_make_plan_again);
         makePlanTv = view.findViewById(R.id.tv_exercise_make_plan);
         exerciseNumTv = view.findViewById(R.id.tv_home_exercise_need_fire);
         stepNumTv = view.findViewById(R.id.tv_exercise_step_num);

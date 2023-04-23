@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,8 +29,8 @@ public class ExercisePlanIllActivity extends UIBaseActivity {
     private RecyclerView recyclerView;
     private TextView backTv;
     private TextView nextTv;
-    private String illType;
     private List<BaseLocalDataInfo> normalInfoList;
+    private ExercisePlanIllAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,11 +59,12 @@ public class ExercisePlanIllActivity extends UIBaseActivity {
         normalInfoList.add(new BaseLocalDataInfo("合并视网膜病变", "dr"));
         normalInfoList.add(new BaseLocalDataInfo("合并肾病", "dn"));
         normalInfoList.add(new BaseLocalDataInfo("无", "no"));
-        ExercisePlanIllAdapter adapter = new ExercisePlanIllAdapter(getPageContext(), normalInfoList, new IAdapterViewClickListener() {
+        adapter = new ExercisePlanIllAdapter(getPageContext(), normalInfoList, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
                     case R.id.tv_item_exercise_ill_type:
+                        Log.i("yys", "adapterClickListener==");
                         if (normalInfoList.get(position).getName().equals("无")) {
                             for (int i = 0; i < normalInfoList.size(); i++) {
                                 normalInfoList.get(i).setIsCheck(false);
@@ -76,6 +78,7 @@ public class ExercisePlanIllActivity extends UIBaseActivity {
                             }
                             normalInfoList.get(position).setIsCheck(!normalInfoList.get(position).getIsCheck());
                         }
+                        adapter.notifyDataSetChanged();
                         break;
                     default:
                         break;
@@ -89,20 +92,21 @@ public class ExercisePlanIllActivity extends UIBaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+        normalInfoList.get(5).setIsCheck(true);
     }
 
     private void initListener() {
-        StringBuilder illTypeBuilder = new StringBuilder();
-        for (int i = 0; i < normalInfoList.size(); i++) {
-            if (normalInfoList.get(i).getIsCheck()) {
-                illTypeBuilder.append(normalInfoList.get(i).getId());
-                illTypeBuilder.append(",");
-            }
-        }
-        illTypeBuilder.deleteCharAt(illTypeBuilder.length() - 1);
-
         backTv.setOnClickListener(v -> finish());
         nextTv.setOnClickListener(v -> {
+
+            StringBuilder illTypeBuilder = new StringBuilder();
+            for (int i = 0; i < normalInfoList.size(); i++) {
+                if (normalInfoList.get(i).getIsCheck()) {
+                    illTypeBuilder.append(normalInfoList.get(i).getId());
+                    illTypeBuilder.append(",");
+                }
+            }
+            illTypeBuilder.deleteCharAt(illTypeBuilder.length() - 1);
             Intent intent = new Intent(getPageContext(), ExercisePlanExerciseActivity.class);
             intent.putExtra("height", getIntent().getStringExtra("height"));
             intent.putExtra("weight", getIntent().getStringExtra("weight"));
@@ -116,6 +120,7 @@ public class ExercisePlanIllActivity extends UIBaseActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_plan_ill, null);
         backTv = view.findViewById(R.id.tv_exercise_ill_back);
         nextTv = view.findViewById(R.id.tv_exercise_ill_next);
+        recyclerView = view.findViewById(R.id.rv_exercise_ill_type);
         containerView().addView(view);
     }
 }

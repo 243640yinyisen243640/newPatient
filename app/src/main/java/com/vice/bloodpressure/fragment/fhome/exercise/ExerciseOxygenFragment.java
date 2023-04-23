@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.fragment.fhome.exercise;
 
+import android.os.Bundle;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,10 +27,17 @@ import java.util.List;
 public class ExerciseOxygenFragment extends UIBaseListRecycleViewFragment<ExerciseInfo> {
     private List<ExerciseInfo> listText;
 
+    public static ExerciseOxygenFragment newInstance(String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type", type);
+        ExerciseOxygenFragment fragment = new ExerciseOxygenFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        //        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));

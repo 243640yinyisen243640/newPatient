@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -16,11 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.login.PerfectUserInfoActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.popwindow.ExercisePlanSuccessPopupWindow;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
@@ -49,12 +48,8 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("制定运动方案");
         initView();
         initListener();
-        initValues();
     }
 
-    private void initValues() {
-
-    }
 
     private void initListener() {
         nextTv.setOnClickListener(v -> {
@@ -68,23 +63,14 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
                 ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
                 return;
             }
-
+            sureSubmit();
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
                     //点击确定的操作
+                    successPopupWindow.dismiss();
                 });
             }
-            TextView textView = successPopupWindow.showContent();
-            SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
 
-            stringBuilder.append(getString(R.string.exercise_success_height));
-            int length1 = stringBuilder.length();
-            stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), "肥胖"));
-            int length2 = stringBuilder.length();
-            stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_weight), "增重", "10", "减重"));
-            stringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            textView.setText(stringBuilder);
 
             successPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
         });
@@ -118,8 +104,6 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             }
         });
 
-
-        String ha = habitYesCb.isChecked() ? "1" : "0";
     }
 
     private void sureSubmit() {
@@ -127,27 +111,36 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         String weight = getIntent().getStringExtra("weight");
         String age = getIntent().getStringExtra("age");
         String illType = getIntent().getStringExtra("diseases");
-        Call<String> requestCall = HomeDataManager.recommendSportPlan(height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
+        Call<String> requestCall = HomeDataManager.recommendSportPlan(UserInfoUtils.getArchivesId(getPageContext()), height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
             if ("0000".equals(response.code)) {
-                UserInfo userInfo = (UserInfo) response.object;
-                UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                //                intent.putExtra("userInfo", userInfo);
-                startActivity(intent);
-                finish();
+                ExerciseInfo info = (ExerciseInfo) response.object;
+                TextView textView = successPopupWindow.showContent();
+                SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+
+                stringBuilder.append(getString(R.string.exercise_success_height));
+                int length1 = stringBuilder.length();
+                stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), info.getBmiStatus()));
+                int length2 = stringBuilder.length();
+                //1偏瘦 2正常 3超重 4肥胖
+                if ("1".equals(info.getBmiTag())) {
+                    stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "增重", info.getWeight(), "增重"));
+                } else if ("2".equals(info.getBmiTag())) {
+                    stringBuilder.append(getString(R.string.exercise_success_height_num_unit));
+                } else if ("3".equals(info.getBmiTag())) {
+                    stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "减重", info.getWeight(), "减重"));
+                } else {
+                    stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "减重", info.getWeight(), "减重"));
+                }
+                stringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                textView.setText(stringBuilder);
             } else {
-                //                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                UserInfo userInfo = (UserInfo) response.object;
-                Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                //                intent.putExtra("userInfo", userInfo);
-                startActivity(intent);
-                finish();
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
 
         }, (call, t) -> {
-            //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("userPerfect", requestCall);
+        addRequestCallToMap("recommendSportPlan", requestCall);
     }
 
 

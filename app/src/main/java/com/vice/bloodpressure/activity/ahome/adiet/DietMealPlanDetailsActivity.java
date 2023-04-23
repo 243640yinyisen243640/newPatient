@@ -3,7 +3,6 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -311,14 +310,12 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_seven_more:
-                Log.i("yys", "点击了");
                 intent = new Intent(getPageContext(), DietMealPlanListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_seven_refresh:
                 break;
             case R.id.fl_meal_plan_details_breakfast:
-                Log.i("yys", "点击了");
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
                 intent.putExtra("meal", "早餐");
                 intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());

@@ -10,7 +10,6 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,14 +22,21 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.popwindow.AnswerForPopupWindow;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -40,6 +46,10 @@ import java.util.List;
  */
 public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements View.OnClickListener {
     private AnswerForPopupWindow answerForPopupWindow;
+    /**
+     * 消耗的千卡总数
+     */
+    private TextView allQiankaTextView;
     /**
      * 需要消耗千卡
      */
@@ -98,6 +108,11 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
      */
     private String exerciseType = "跑步";
 
+    private ExerciseInfo info;
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,27 +123,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         });
         initView();
         initListener();
-        initValues();
-    }
-
-    private void initValues() {
-        List<String> nameString = new ArrayList<>();
-        nameString.add("小米");
-        nameString.add("鸡蛋");
-        nameString.add("蔬菜");
-        nameString.add("饮品");
-        List<String> rateString = new ArrayList<>();
-        rateString.add("50");
-        rateString.add("20");
-        rateString.add("10");
-        rateString.add("20");
-        showPieChart(numPc, getPieChartData(rateString, nameString));
-
-        needFireTv.setText(setMealTextType("1", Color.parseColor("#00C27F"), 18, "今日需消耗", " 2400 ", "千卡"));
-        workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work), String.format(getPageContext().getString(R.string.intelligence_run_three), "1234"), getString(R.string.intelligence_run_num_unit)));
-        runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run), String.format(getPageContext().getString(R.string.intelligence_run_three), "234"), getString(R.string.intelligence_run_num_unit)));
-        noTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no), String.format(getPageContext().getString(R.string.intelligence_run_two), "345"), getString(R.string.intelligence_run_num_unit)));
-        otherTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), "567"), getString(R.string.intelligence_run_num_unit)));
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
 
@@ -162,23 +157,91 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = HomeDataManager.getSportPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                info = (ExerciseInfo) response.object;
+                bindData();
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
 
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getDietPlan", requestCall);
+    }
+
+    private void bindData() {
+        String workString = "";
+        String runString = "";
+        String noString = "";
+        String otherString = "";
+        //这里的逻辑是  ：  比如今日需消耗的是100 已经消耗的是50，是跑步 步行 和其他的和
+        //  100-50=50是未消耗的，
+        if ("0".equals(info.getConsumeCalories())) {
+            workString = "0";
+            runString = "0";
+            noString = "100";
+            otherString = "0";
+        } else {
+            //已消耗热量
+            double haveAll = Double.parseDouble(info.getConsumeCalories());
+            //今日所需热量
+            double need = Double.parseDouble(info.getNeedConsumeCalories());
+
+            //未消耗
+            double haveNo = need - haveAll;
+
+            double work = Double.parseDouble(info.getWalkCalories()) / haveAll;
+            double run = Double.parseDouble(info.getRunCalories()) / haveAll;
+            double other = Double.parseDouble(info.getOtherSportConsumed()) / haveAll;
+
+
+            workString = String.valueOf(work);
+            runString = String.valueOf(run);
+            noString = String.valueOf(haveNo);
+            otherString = String.valueOf(other);
+        }
+
+        List<String> nameString = new ArrayList<>();
+        nameString.add("");
+        nameString.add("");
+        nameString.add("");
+        nameString.add("");
+        List<String> rateString = new ArrayList<>();
+        rateString.add(workString);
+        rateString.add(runString);
+        rateString.add(noString);
+        rateString.add(otherString);
+        showPieChart(numPc, getPieChartData(rateString, nameString));
+        allQiankaTextView.setText(info.getConsumeCalories());
+        needFireTv.setText(setMealTextType("1", Color.parseColor("#00C27F"), 18, "今日需消耗 ", info.getNeedConsumeCalories(), " 千卡"));
+        workTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_work), String.format(getPageContext().getString(R.string.intelligence_run_three), info.getWalkCalories()), getString(R.string.intelligence_run_num_unit)));
+        runTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_run), String.format(getPageContext().getString(R.string.intelligence_run_three), info.getRunCalories()), getString(R.string.intelligence_run_num_unit)));
+        noTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_no), String.format(getPageContext().getString(R.string.intelligence_run_two), info.getNotConsumed()), getString(R.string.intelligence_run_num_unit)));
+        otherTv.setText(setMealTextType("2", Color.parseColor("#2A2A2A"), 14, getString(R.string.intelligence_run_other), String.format(getPageContext().getString(R.string.intelligence_run_one), info.getOtherSportConsumed()), getString(R.string.intelligence_run_num_unit)));
+        exerciseChooseTv.setText(info.getSportAerobics().getSportName());
     }
 
     private void showType() {
-        if (answerForPopupWindow == null) {
-            answerForPopupWindow = new AnswerForPopupWindow(getPageContext(), "2",
-                    other -> {
-                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
-                        startActivity(intent);
-                    },
-                    self -> {
-                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
-                        startActivity(intent);
-                    });
-            answerForPopupWindow.dismiss();
-        }
-        answerForPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+        //        if (answerForPopupWindow == null) {
+        //            answerForPopupWindow = new AnswerForPopupWindow(getPageContext(), "2",
+        //                    other -> {
+        //                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+        //                        startActivity(intent);
+        //                    },
+        //                    self -> {
+        //                        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+        //                        startActivity(intent);
+        //                    });
+        //            answerForPopupWindow.dismiss();
+        //        }
+        //        answerForPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+
+        Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -238,9 +301,9 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
 
         pieChart.setHighlightPerTapEnabled(false);//点击是否放大
 
-        pieChart.setCenterText("多少千卡");//设置环中的文字
+        pieChart.setCenterText("");//设置环中的文字
         pieChart.setCenterTextSize(15f);//设置环中文字的大小
-        pieChart.setDrawCenterText(true);//设置绘制环中文字
+        pieChart.setDrawCenterText(false);//设置绘制环中文字
         //设置初始旋转角度
         pieChart.setRotationAngle(-15);
 
@@ -303,6 +366,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_intelligence, null);
+        allQiankaTextView = view.findViewById(R.id.tv_exercise_qiank_all);
         needFireTv = view.findViewById(R.id.tv_exercise_need_fire);
         numPc = view.findViewById(R.id.pc_exercise_qk_num);
         workTv = view.findViewById(R.id.tv_exercise_work);

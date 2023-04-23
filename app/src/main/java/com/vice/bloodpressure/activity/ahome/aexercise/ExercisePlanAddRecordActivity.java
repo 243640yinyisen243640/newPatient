@@ -2,7 +2,6 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,12 +10,18 @@ import androidx.annotation.Nullable;
 
 import com.lsp.RulerView;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -24,7 +29,7 @@ import java.util.List;
  * 传参:
  * 描述:添加运动  跳绳 太极拳  跑步
  */
-public class ExercisePlanAddRecordActivity extends UIBaseLoadActivity {
+public class ExercisePlanAddRecordActivity extends UIBaseActivity {
     private TextView timeTv;
     private TextView fireTv;
     private TextView typeTv;
@@ -46,12 +51,15 @@ public class ExercisePlanAddRecordActivity extends UIBaseLoadActivity {
     }
 
     private void initValue() {
+        //运动消耗热量的公式=体重(kg)*时间(min)*千卡/1kg/1min  步行 0.06
         timeRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
                 exerciseTime = result;
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+
+                fireTv.setText("");
             }
 
             @Override
@@ -67,8 +75,18 @@ public class ExercisePlanAddRecordActivity extends UIBaseLoadActivity {
             chooseTypeWindow();
         });
         sureTextView.setOnClickListener(v -> {
-
+            sureToAdd();
         });
+    }
+
+    private void sureToAdd() {
+        Call<String> requestCall = HomeDataManager.addAerobicsRecord("", "", "", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("addAerobicsRecord", requestCall);
     }
 
     /**
@@ -82,8 +100,6 @@ public class ExercisePlanAddRecordActivity extends UIBaseLoadActivity {
 
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择运动", exerciseList, object ->
         {
-            Log.i("yys","type==="+exerciseList.get(Integer.parseInt(String.valueOf(object))));
-            Log.i("yys","type2==="+object.toString());
             typeTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
             if (TextUtils.equals(exerciseList.get(Integer.parseInt(String.valueOf(object))), "太极拳")) {
                 taijiLi.setVisibility(View.VISIBLE);
@@ -111,8 +127,5 @@ public class ExercisePlanAddRecordActivity extends UIBaseLoadActivity {
         containerView().addView(view);
     }
 
-    @Override
-    protected void onPageLoad() {
 
-    }
 }

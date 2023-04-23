@@ -49,10 +49,50 @@
                 android:layout_marginTop="33dp"
                 android:orientation="horizontal">
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pc_exercise_qk_num"
-                    android:layout_width="116dp"
-                    android:layout_height="116dp" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pc_exercise_qk_num"
+                        android:layout_width="116dp"
+                        android:layout_height="116dp" />
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/exercise_dashed_circle" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_exercise_qiank_all"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="1700"
+                            android:textColor="@color/main_base_color"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="千卡"
+                            android:textColor="@color/gray_A9"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,7 +148,7 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:textColor="@color/gray_9E"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp" />
 
 
                 </LinearLayout>

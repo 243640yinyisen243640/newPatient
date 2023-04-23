@@ -1,7 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
+import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.MealInfo;
-import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 
@@ -72,11 +72,12 @@ public class HomeDataManager {
      * @param whetherEmptySport  是否空腹运动 Y N
      * @param exerciseTime       运动时间
      * @param exerciseFrequency  运动频次
+     * @param archivesId         档案号
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> recommendSportPlan(String height, String weight, String diseases,
+    public static Call<String> recommendSportPlan(String archivesId, String height, String weight, String diseases,
                                                   String whetherSportHabits, String whetherEmptySport, String exerciseTime, String exerciseFrequency, String age, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("height", height);
@@ -87,6 +88,63 @@ public class HomeDataManager {
         map.put("exerciseTime", exerciseTime);
         map.put("exerciseFrequency", exerciseFrequency);
         map.put("age", age);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "ai/sport/v2/recommendSportPlan", map, successCallBack, failureCallBack);
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_OBJECT, ExerciseInfo.class, "ai/sport/v2/recommendSportPlan", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 根据档案号获取运动方案
+     *
+     * @param archivesId      档案号
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getSportPlan(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, ExerciseInfo.class, "ai/sport/v2/getSportPlan", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 添加有氧运动记录
+     *
+     * @param aerobicsId      有氧运动id
+     * @param workouts        运动时长(分钟)
+     * @param calories        热量
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+
+    public static Call<String> addAerobicsRecord(String aerobicsId, String workouts, String calories, String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("aerobicsId", aerobicsId);
+        map.put("workouts", workouts);
+        map.put("calories", calories);
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/addAerobicsRecord", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 添加抗阻/柔韧性运动记录
+     *
+     * @param sportId
+     * @param sportNumber 运动数量
+     * @param type            P 柔韧性运动
+     *                        R 抗阻运动
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> addPliableResistanceRecord(String sportId, String sportNumber, String type, String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("sportId", sportId);
+        map.put("sportNumber", sportNumber);
+        map.put("type", type);
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/addPliableResistanceRecord", map, successCallBack, failureCallBack);
     }
 }
