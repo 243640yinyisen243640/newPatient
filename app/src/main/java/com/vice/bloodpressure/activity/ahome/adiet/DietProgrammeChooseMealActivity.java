@@ -19,10 +19,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.home.DietChangeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.fragment.textFragment;
+import com.vice.bloodpressure.fragment.fhome.diet.DietProgrammeChooseMealFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +61,8 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
         top();
         search();
 
-        initList();
 
-        tabLayout =view. findViewById(R.id.tl_diet_programme_choose);
+        tabLayout = view.findViewById(R.id.tl_diet_programme_choose);
         viewPager = view.findViewById(R.id.vp_diet_programme_choose);
         //禁用预加载
         //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
@@ -95,9 +93,6 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
         });
     }
 
-    private void initList() {
-        DietChangeMealListAdapter mealListAdapter = new DietChangeMealListAdapter(getPageContext(),new ArrayList<>());
-    }
 
     private void setTab(TabLayout.Tab tab, int position) {
         LinearLayout customView = (LinearLayout) View.inflate(getPageContext(), R.layout.tab_choose_meal, null);
@@ -112,11 +107,11 @@ public class DietProgrammeChooseMealActivity extends UIBaseActivity {
 
     private void initData() {
         fragmentList = new ArrayList();
-        fragmentList.add(textFragment.getInstance());
-        fragmentList.add(textFragment.getInstance());
-        fragmentList.add(textFragment.getInstance());
-        fragmentList.add(textFragment.getInstance());
-        fragmentList.add(textFragment.getInstance());
+        fragmentList.add(DietProgrammeChooseMealFragment.getInstance());
+        fragmentList.add(DietProgrammeChooseMealFragment.getInstance());
+        fragmentList.add(DietProgrammeChooseMealFragment.getInstance());
+        fragmentList.add(DietProgrammeChooseMealFragment.getInstance());
+        fragmentList.add(DietProgrammeChooseMealFragment.getInstance());
     }
 
     private void top() {

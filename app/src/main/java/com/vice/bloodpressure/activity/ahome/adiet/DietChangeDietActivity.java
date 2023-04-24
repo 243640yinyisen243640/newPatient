@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -79,11 +80,26 @@ public class DietChangeDietActivity extends UIBaseActivity {
 
         DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit);
         breakfastNlv.setAdapter(breakAdapter);
+        breakfastNlv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+            intent.putExtra("meal", "早餐");
+            startActivity(intent);
+        });
 
         DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit);
         lunchNlv.setAdapter(lunchAdapter);
+        lunchNlv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+            intent.putExtra("meal", "午餐");
+            startActivity(intent);
+        });
 
         DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit);
         dinnerNlv.setAdapter(dinnerAdapter);
+        dinnerNlv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
+            intent.putExtra("meal", "晚餐");
+            startActivity(intent);
+        });
     }
 }

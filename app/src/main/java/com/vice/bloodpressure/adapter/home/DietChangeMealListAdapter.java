@@ -45,9 +45,7 @@ public class DietChangeMealListAdapter extends RecyclerView.Adapter<DietChangeMe
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealInfo info = list.get(position);
         holder.nameTextView.setText(info.getTitle());
-        holder.nameTextView.setText(info.getTitle());
-        holder.nameTextView.setText(info.getTitle());
-        holder.nameTextView.setText(info.getTitle());
+        holder.numTextView.setText(info.getTitle());
     }
 
     @Override
