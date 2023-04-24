@@ -10,7 +10,6 @@
         android:paddingLeft="6dp"
         android:paddingTop="5dp"
         android:paddingRight="6dp"
-        android:paddingBottom="5dp"
         android:text="豇豆"
         android:maxLines="1"
         android:maxLength="5"

@@ -50,7 +50,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titleMeal = getIntent().getStringExtra("饮食方案列表");
+        topViewManager().titleTextView().setText("饮食方案列表");
         topViewManager().moreTextView().setText("换我想吃");
         topViewManager().moreTextView().setOnClickListener(v -> {
 

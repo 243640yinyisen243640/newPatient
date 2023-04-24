@@ -575,9 +575,9 @@
             android:background="@drawable/shape_bg_white_10"
             android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="15dp">
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -607,16 +607,16 @@
                 android:id="@+id/rv_seven_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:overScrollMode="never" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/shape_background_5"
+                android:background="@drawable/shape_bg_default_background_5"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/tv_seven_refresh"
@@ -625,12 +625,13 @@
                     android:layout_gravity="right"
                     android:drawableRight="@drawable/diet_change_my_like"
                     android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp" />
+                    android:paddingEnd="15dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -670,23 +671,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="95dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
 
                     <com.vice.bloodpressure.view.MyFrameLayout
                         android:id="@+id/fl_meal_plan_details_breakfast"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/white_green_1"
                         android:gravity="center"
-                        android:padding="5dp">
+                        android:paddingLeft="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="15dp">
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/lv_meal_plan_details_breakfast"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:divider="@color/transparent"
-                            />
+                            android:divider="@color/transparent" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -704,7 +709,10 @@
                         android:layout_weight="1"
                         android:background="@drawable/white_green_1"
                         android:gravity="center"
-                        android:padding="5dp">
+                        android:paddingLeft="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="15dp">
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/lv_meal_plan_details_lunch"
@@ -728,7 +736,10 @@
                         android:layout_weight="1"
                         android:background="@drawable/white_green_1"
                         android:gravity="center"
-                        android:padding="5dp">
+                        android:paddingLeft="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="15dp">
 
                         <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/lv_meal_plan_details_dinner"
