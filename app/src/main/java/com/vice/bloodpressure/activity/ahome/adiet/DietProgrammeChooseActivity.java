@@ -6,10 +6,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietProgrammeMealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.view.NoScrollListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 类名：自定义饮食方案
@@ -21,11 +26,11 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 public class DietProgrammeChooseActivity extends UIBaseActivity implements View.OnClickListener {
 
     private TextView breakfastTv;
-    private RecyclerView breakfastRv;
+    private NoScrollListView breakfastRv;
     private TextView lunchTv;
-    private RecyclerView lunchRv;
+    private NoScrollListView lunchRv;
     private TextView dinnerTv;
-    private RecyclerView dinnerRv;
+    private NoScrollListView dinnerRv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +44,28 @@ public class DietProgrammeChooseActivity extends UIBaseActivity implements View.
     }
 
     private void initValues() {
-//        DietMealDetailsListAdapter adapter = new DietMealDetailsListAdapter(getPageContext(), new ArrayList<>());
+
+        List<MealInfo> breakList = new ArrayList<>();
+        breakList.add(new MealInfo("100"));
+        breakList.add(new MealInfo("100"));
+        breakList.add(new MealInfo("100"));
+        DietProgrammeMealAdapter breakListAdapter = new DietProgrammeMealAdapter(getPageContext(), breakList);
+        breakfastRv.setAdapter(breakListAdapter);
+
+        List<MealInfo> LunchkList = new ArrayList<>();
+        LunchkList.add(new MealInfo("100"));
+        LunchkList.add(new MealInfo("100"));
+        LunchkList.add(new MealInfo("100"));
+        DietProgrammeMealAdapter lunchListAdapter = new DietProgrammeMealAdapter(getPageContext(), LunchkList);
+        lunchRv.setAdapter(lunchListAdapter);
+
+
+        List<MealInfo> dinnerList = new ArrayList<>();
+        dinnerList.add(new MealInfo("100"));
+        dinnerList.add(new MealInfo("100"));
+        dinnerList.add(new MealInfo("100"));
+        DietProgrammeMealAdapter dinnerListAdapter = new DietProgrammeMealAdapter(getPageContext(), dinnerList);
+        dinnerRv.setAdapter(dinnerListAdapter);
     }
 
     private void initListener() {

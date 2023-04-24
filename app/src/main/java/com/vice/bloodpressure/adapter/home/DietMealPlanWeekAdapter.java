@@ -39,7 +39,6 @@ public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //实例化得到Item布局文件的View对象item_diet_meal_list_check
         View v = View.inflate(context, R.layout.item_diet_week_list, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);

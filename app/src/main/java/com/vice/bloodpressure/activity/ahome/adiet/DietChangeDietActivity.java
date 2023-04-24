@@ -17,7 +17,7 @@ import java.util.List;
 
 
 /**
- * 类名：更换饮食方案
+ * 类名：更改饮食方案
  * 传参：
  * 描述:
  * 作者: beauty

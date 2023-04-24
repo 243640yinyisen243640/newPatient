@@ -93,17 +93,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/shape_bg_white_10"
                     android:orientation="vertical"
                     android:paddingBottom="20dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
+                        android:background="@drawable/shape_bg_white_10"
                         android:drawableLeft="@drawable/shape_green_4_18_2"
                         android:drawablePadding="8dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="20dp"
                         android:text="第二步：请选择想吃的食物"
                         android:textColor="@color/black_2A"
                         android:textSize="18sp"
@@ -112,10 +114,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical">
+                        android:background="@drawable/shape_bg_white_10"
+                        android:orientation="vertical"
+                        android:paddingStart="15dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -126,25 +127,28 @@
                             <TextView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
+                                android:layout_marginStart="1dp"
                                 android:background="@drawable/diet_bing_with_green"
                                 android:gravity="center"
-                                android:layout_marginStart="1dp"
                                 android:includeFontPadding="false" />
 
                             <TextView
                                 android:id="@+id/tv_diet_custom_plan_breakfast"
-                                style="@style/diet_change_diet_meal_title"
+                                style="@style/diet_change_diet_meal_title1"
                                 android:layout_marginLeft="4dp"
                                 android:drawableRight="@drawable/circle_add_white"
                                 android:text="@string/diet_change_diet_top_breakfast" />
                         </LinearLayout>
 
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/rv_diet_custom_plan_breakfast"
+                            style="@style/Base.ListView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="100dp" />
+                            android:layout_marginStart="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="15dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -158,16 +162,20 @@
 
                             <TextView
                                 android:id="@+id/tv_diet_custom_plan_lunch"
-                                style="@style/diet_change_diet_meal_title"
+                                style="@style/diet_change_diet_meal_title1"
                                 android:drawableRight="@drawable/circle_add_white"
                                 android:text="@string/diet_change_diet_top_lunch" />
                         </LinearLayout>
 
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/rv_diet_custom_plan_lunch"
+                            style="@style/Base.ListView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="15dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -181,17 +189,20 @@
 
                             <TextView
                                 android:id="@+id/tv_diet_custom_plan_dinner"
-                                style="@style/diet_change_diet_meal_title"
+                                style="@style/diet_change_diet_meal_title1"
                                 android:drawableRight="@drawable/circle_add_white"
                                 android:text="@string/diet_change_diet_top_dinner" />
 
                         </LinearLayout>
 
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <com.vice.bloodpressure.view.NoScrollListView
                             android:id="@+id/rv_diet_custom_plan_dinner"
+                            style="@style/Base.ListView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginEnd="10dp" />
 
                     </LinearLayout>
 

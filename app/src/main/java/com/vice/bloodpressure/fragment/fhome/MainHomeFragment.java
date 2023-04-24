@@ -25,9 +25,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
 import com.vice.bloodpressure.activity.ahome.HomeWarningListActivity;
-import com.vice.bloodpressure.activity.ahome.adiet.DietChangeDietActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeBeginActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceListActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
@@ -427,7 +427,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //重新制定 饮食
             case R.id.tv_meal_make_again:
-                intent = new Intent(getPageContext(), DietChangeDietActivity.class);
+                intent = new Intent(getPageContext(), DietProgrammeBeginActivity.class);
                 startActivity(intent);
                 break;
             //三餐刷新

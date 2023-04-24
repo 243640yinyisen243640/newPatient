@@ -36,7 +36,6 @@ public class ExercisePlanIllAdapter extends RecyclerView.Adapter<ExercisePlanIll
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //实例化得到Item布局文件的View对象item_diet_meal_list_check
         View v = View.inflate(context, R.layout.item_exercise_plan_ill, null);
         //返回MyViewHolder的对象
         return new ViewHolder(v);
