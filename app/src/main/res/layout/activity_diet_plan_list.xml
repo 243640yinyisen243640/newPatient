@@ -29,14 +29,15 @@
 
             <TextView style="@style/base_dotted_line" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.vice.bloodpressure.view.NoScrollListView
                 android:id="@+id/rv_diet_plan_breakfast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:scrollbars="none" />
+                android:divider="@color/transparent"
+                android:listSelector="@color/transparent" />
 
 
         </LinearLayout>
@@ -59,14 +60,15 @@
 
             <TextView style="@style/base_dotted_line" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.vice.bloodpressure.view.NoScrollListView
                 android:id="@+id/rv_diet_plan_lunch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:scrollbars="none"/>
+                android:divider="@color/transparent"
+                android:listSelector="@color/transparent" />
 
 
         </LinearLayout>
@@ -89,14 +91,15 @@
 
             <TextView style="@style/base_dotted_line" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.vice.bloodpressure.view.NoScrollListView
                 android:id="@+id/rv_diet_plan_dinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:scrollbars="none" />
+                android:divider="@color/transparent"
+                android:listSelector="@color/transparent" />
 
 
         </LinearLayout>
@@ -127,7 +130,8 @@
                 android:id="@+id/tv_diet_plan_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp"
+                android:text="1. 当空腹血糖控制在7.0mmol/L(126mg/dl)以 下，餐后2小时血糖小于10mmol/L(180ma/dl)糖化" />
         </LinearLayout>
 
 

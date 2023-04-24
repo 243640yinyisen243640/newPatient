@@ -87,7 +87,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_5"
+                    android:background="@drawable/shape_little_background_5"
                     android:orientation="vertical"
                     android:padding="10dp">
 

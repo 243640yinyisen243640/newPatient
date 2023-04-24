@@ -1,17 +1,17 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.home.DietMealDetailsListAdapter;
+import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class DietMealDetailsActivity extends UIBaseActivity {
     /**
      * 早餐列表
      */
-    private RecyclerView mealTitleRv;
+    private NoScrollListView mealTitleRv;
 
     private String titleMeal;
 
@@ -44,6 +44,10 @@ public class DietMealDetailsActivity extends UIBaseActivity {
         titleMeal = getIntent().getStringExtra("meal");
         mealExclusiveInfoList = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("list");
         topViewManager().moreTextView().setText("换我想吃");
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), DietChangeDietActivity.class);
+            startActivity(intent);
+        });
         initView();
         topViewManager().titleTextView().setText(titleMeal);
         initValues();
@@ -61,14 +65,12 @@ public class DietMealDetailsActivity extends UIBaseActivity {
         if ("早餐".equals(titleMeal)) {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_bing_with_green, 0, R.drawable.diet_change_my_like, 0);
         } else if ("午餐".equals(titleMeal)) {
-            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.jitui_with_green_20, 0,  R.drawable.diet_change_my_like, 0);
+            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.jitui_with_green_20, 0, R.drawable.diet_change_my_like, 0);
         } else {
-            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0,  R.drawable.diet_change_my_like, 0);
+            mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0, R.drawable.diet_change_my_like, 0);
         }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        mealTitleRv.setLayoutManager(linearLayoutManager);
-        DietMealDetailsListAdapter adapter = new DietMealDetailsListAdapter(getPageContext(), mealExclusiveInfoList);
+
+        DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealExclusiveInfoList);
         mealTitleRv.setAdapter(adapter);
 
     }

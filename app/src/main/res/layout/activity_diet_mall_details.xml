@@ -23,11 +23,12 @@
 
         <TextView style="@style/base_dotted_line" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.vice.bloodpressure.view.NoScrollListView
             android:id="@+id/rv_diet_mall_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never" />
+            android:divider="@color/transparent"
+            android:listSelector="@color/transparent" />
 
 
     </LinearLayout>

@@ -30,13 +30,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_bg_background_10"
+                android:background="@drawable/shape_little_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 
                 <TextView
                     android:id="@+id/tv_diet_change_breakfast"
                     style="@style/diet_change_diet_meal_title"
+                    android:drawableLeft="@drawable/diet_bing_with_green"
                     android:drawableRight="@drawable/arrow_right_gray"
                     android:text="@string/diet_change_diet_top_breakfast" />
 
@@ -44,10 +45,7 @@
 
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_breakfast"
-                    style="@style/Base.ListView"
-                    android:background="@color/background">
-
-                </com.vice.bloodpressure.view.NoScrollListView>
+                    style="@style/Base.ListView" />
 
 
             </LinearLayout>
@@ -66,13 +64,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_bg_background_10"
+                android:background="@drawable/shape_little_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 
                 <TextView
                     android:id="@+id/tv_diet_change_lunch"
                     style="@style/diet_change_diet_meal_title"
+                    android:drawableLeft="@drawable/diet_jitui_with_green"
                     android:drawableRight="@drawable/arrow_right_gray"
                     android:text="@string/diet_change_diet_top_lunch" />
 
@@ -80,10 +79,7 @@
 
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_lunch"
-                    style="@style/Base.ListView"
-                    android:background="@color/background">
-
-                </com.vice.bloodpressure.view.NoScrollListView>
+                    style="@style/Base.ListView" />
 
 
             </LinearLayout>
@@ -101,13 +97,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_bg_background_10"
+                android:background="@drawable/shape_little_background_10"
                 android:orientation="vertical"
                 android:paddingBottom="15dp">
 
                 <TextView
                     android:id="@+id/tv_diet_change_dinner"
                     style="@style/diet_change_diet_meal_title"
+                    android:drawableLeft="@drawable/diet_huacai_with_green"
                     android:drawableRight="@drawable/arrow_right_gray"
                     android:text="@string/diet_change_diet_top_dinner" />
 
@@ -115,10 +112,7 @@
 
                 <com.vice.bloodpressure.view.NoScrollListView
                     android:id="@+id/nlv_diet_change_dinner"
-                    style="@style/Base.ListView"
-                    android:background="@color/background">
-
-                </com.vice.bloodpressure.view.NoScrollListView>
+                    style="@style/Base.ListView" />
 
 
             </LinearLayout>

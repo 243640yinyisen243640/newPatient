@@ -1,19 +1,25 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.view.NoScrollListView;
+
+import java.io.Serializable;
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -30,21 +36,22 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
      * 早餐
      */
     private TextView breakfastTitleTv;
-    private RecyclerView breakFastRv;
+    private NoScrollListView breakFastRv;
     /**
      * 午餐
      */
     private TextView lunchTitleTv;
-    private RecyclerView lunchFastRv;
+    private NoScrollListView lunchFastRv;
 
     /**
      * 晚餐
      */
     private TextView dinnerTitleTv;
-    private RecyclerView dinnerFastRv;
+    private NoScrollListView dinnerFastRv;
 
-
-    private String titleMeal;
+    private List<MealExclusiveInfo> breakLsit;
+    private List<MealExclusiveInfo> lunchLsit;
+    private List<MealExclusiveInfo> dinnerLsit;
 
 
     @Override
@@ -52,8 +59,15 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("饮食方案列表");
         topViewManager().moreTextView().setText("换我想吃");
+        breakLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("breaklist");
+        lunchLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("lunchlist");
+        dinnerLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("dinnerlist");
         topViewManager().moreTextView().setOnClickListener(v -> {
-
+            Intent intent = new Intent(getPageContext(), DietChangeDietActivity.class);
+            intent.putExtra("breaklist", (Serializable) breakLsit);
+            intent.putExtra("lunchlist", (Serializable) lunchLsit);
+            intent.putExtra("dinnerlist", (Serializable) dinnerLsit);
+            startActivity(intent);
         });
         initView();
         initValues();
@@ -90,6 +104,13 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
 
     private void initValues() {
 
+        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit);
+        breakFastRv.setAdapter(breakAdapter);
 
+        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit);
+        lunchFastRv.setAdapter(lunchAdapter);
+
+        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit);
+        dinnerFastRv.setAdapter(dinnerAdapter);
     }
 }

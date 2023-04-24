@@ -7,8 +7,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.view.NoScrollListView;
+
+import java.util.List;
 
 
 /**
@@ -44,9 +48,17 @@ public class DietChangeDietActivity extends UIBaseActivity {
      */
     private NoScrollListView dinnerNlv;
 
+    private List<MealExclusiveInfo> breakLsit;
+    private List<MealExclusiveInfo> lunchLsit;
+    private List<MealExclusiveInfo> dinnerLsit;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        breakLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("breaklist");
+        lunchLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("lunchlist");
+        dinnerLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("dinnerlist");
         initView();
         topViewManager().titleTextView().setText(R.string.diet_activity_change_diet_top_title);
         initValues();
@@ -65,6 +77,13 @@ public class DietChangeDietActivity extends UIBaseActivity {
 
     private void initValues() {
 
+        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit);
+        breakfastNlv.setAdapter(breakAdapter);
 
+        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit);
+        lunchNlv.setAdapter(lunchAdapter);
+
+        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit);
+        dinnerNlv.setAdapter(dinnerAdapter);
     }
 }

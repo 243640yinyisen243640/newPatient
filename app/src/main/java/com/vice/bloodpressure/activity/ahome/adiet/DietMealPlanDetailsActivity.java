@@ -311,6 +311,10 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         switch (v.getId()) {
             case R.id.tv_seven_more:
                 intent = new Intent(getPageContext(), DietMealPlanListActivity.class);
+                intent.putExtra("meal", "早餐");
+                intent.putExtra("breaklist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
+                intent.putExtra("lunchlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
+                intent.putExtra("dinnerlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
                 startActivity(intent);
                 break;
             case R.id.tv_seven_refresh:
