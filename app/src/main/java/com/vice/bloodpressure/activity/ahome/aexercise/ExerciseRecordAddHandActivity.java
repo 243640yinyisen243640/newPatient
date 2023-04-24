@@ -99,7 +99,6 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         switch (v.getId()) {
             case R.id.iv_exercise_hand_pause:
                 if ("1".equals(startOrPause)) {
-                    Log.i("yys", "click===");
                     startOrPause = "2";
                     pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
                     jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
