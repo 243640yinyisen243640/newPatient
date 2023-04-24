@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#80000000"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_white_10_10_0_0"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="30dp">
+
+        <ImageView
+            android:id="@+id/iv_hand_add_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="15dp"
+            android:src="@drawable/popwindow_close_gray" />
+
+
+        <TextView
+            android:id="@+id/tv_exercise_success_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="20dp"
+            android:text="今天的柔韧性运动您运动了多久？"
+            android:textColor="@color/black_2A"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="时长:"
+                android:textColor="@color/black_2A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_exercise_hand_hour"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/shape_bg_white_black_90_1"
+                android:gravity="center"
+                android:hint="请输入完成个数"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="13dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black_24"
+                android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="时"
+                android:textColor="@color/black_2A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_exercise_hand_min"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/shape_bg_white_black_90_1"
+                android:gravity="center"
+                android:hint="请输入完成个数"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="13dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black_24"
+                android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="分"
+                android:textColor="@color/black_2A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_exercise_hand_second"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/shape_bg_white_black_90_1"
+                android:gravity="center"
+                android:hint="请输入完成个数"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="13dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:textColor="@color/black_24"
+                android:textColorHint="@color/gray_8a"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:text="秒"
+                android:textColor="@color/black_2A"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_exercise_hand_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_bg_main_gra_90"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="保存"
+            android:textColor="@color/text_white"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

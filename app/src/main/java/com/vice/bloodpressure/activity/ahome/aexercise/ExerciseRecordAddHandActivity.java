@@ -3,9 +3,7 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,8 +13,8 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.fragment.InputNumDialogAddFragment;
 import com.vice.bloodpressure.fragment.InputNumDialogFragment;
-import com.vice.bloodpressure.popwindow.ExercisePlanHandAddPopupWindow;
 import com.vice.bloodpressure.window.JZVideoPlayer;
 
 /**
@@ -26,7 +24,6 @@ import com.vice.bloodpressure.window.JZVideoPlayer;
  * 描述:跟着视频运动
  */
 public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements View.OnClickListener {
-    private ExercisePlanHandAddPopupWindow addPopupWindow;
     private JZVideoPlayer jzVideoPlayer;
     private LinearLayout timeAndFireLiner;
     private TextView timeTv;
@@ -96,19 +93,6 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
 
     }
 
-    private void showPop() {
-        if (addPopupWindow == null) {
-            addPopupWindow = new ExercisePlanHandAddPopupWindow(getPageContext(),
-
-                    chooseView -> {
-                        //我自己选
-                        EditText editText = addPopupWindow.showContent();
-                        String editContent = editText.getText().toString().trim();
-                    });
-        }
-
-        addPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
-    }
 
     @Override
     public void onClick(View v) {
@@ -133,7 +117,12 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                 jzVideoPlayer.onStateAutoComplete();
                 break;
             case R.id.tv_exercise_hand_record:
-                showNumDialog();
+                if ("1".equals(type)) {
+                    showNumDialog();
+                } else {
+                    showFlexibilityNumDialog();
+                }
+
                 break;
 
             default:
@@ -144,6 +133,13 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
 
     private void showNumDialog() {
         InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
+            //TODO 提交反馈信息
+        });
+        dialog.showNow(getSupportFragmentManager(), "input");
+    }
+
+    private void showFlexibilityNumDialog() {
+        InputNumDialogAddFragment dialog = new InputNumDialogAddFragment(inputStr -> {
             //TODO 提交反馈信息
         });
         dialog.showNow(getSupportFragmentManager(), "input");
