@@ -2,9 +2,9 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -39,7 +39,6 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     private TextView addRecordTv;
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
-    private String addExerciseType = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,10 +63,16 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
         viewPager.setOffscreenPageLimit(fragments.size());
         radioGroup.check(radioGroup.getChildAt(0).getId());
         viewPager.setCurrentItem(0);
-
+        setCurrentPosiStatus(0);
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             int index = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
             viewPager.setCurrentItem(index);
+            if (index == 0) {
+                addRecordTv.setVisibility(View.VISIBLE);
+            } else {
+                addRecordTv.setVisibility(View.GONE);
+            }
+            setCurrentPosiStatus(radioGroup.indexOfChild(radioGroup.findViewById(checkedId)));
         });
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -78,8 +83,14 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
 
             @Override
             public void onPageSelected(int i) {
+
                 radioGroup.check(radioGroup.getChildAt(i).getId());
-                Log.i("yys", "onPageSelected==" + i);
+                if (i == 0) {
+                    addRecordTv.setVisibility(View.VISIBLE);
+                } else {
+                    addRecordTv.setVisibility(View.GONE);
+                }
+                setCurrentPosiStatus(i);
             }
 
             @Override
@@ -87,6 +98,17 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
 
             }
         });
+    }
+
+    private void setCurrentPosiStatus(int position) {
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton button = (RadioButton) radioGroup.getChildAt(i);
+            if (position == i) {
+                button.setTextSize(18);
+            } else {
+                button.setTextSize(16);
+            }
+        }
     }
 
     private void initView() {

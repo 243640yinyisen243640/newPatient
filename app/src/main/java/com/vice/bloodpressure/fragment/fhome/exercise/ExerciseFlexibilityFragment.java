@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vice.bloodpressure.adapter.home.ExerciseResistanceListAdapter;
+import com.vice.bloodpressure.adapter.home.ExerciseFlexibilityListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
@@ -54,7 +54,7 @@ public class ExerciseFlexibilityFragment extends UIBaseListRecycleViewFragment<E
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<ExerciseChildInfo> list) {
-        return new ExerciseResistanceListAdapter(getPageContext(), list);
+        return new ExerciseFlexibilityListAdapter(getPageContext(), list);
     }
 
     @Override
