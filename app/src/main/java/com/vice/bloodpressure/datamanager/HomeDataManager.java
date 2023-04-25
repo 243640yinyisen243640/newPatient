@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
 import com.vice.bloodpressure.model.MealInfo;
@@ -21,6 +23,8 @@ import retrofit2.Call;
 public class HomeDataManager {
 
     /**
+     * 首页
+     *
      * @param archivesId
      * @param successCallBack
      * @param failureCallBack
@@ -34,6 +38,8 @@ public class HomeDataManager {
 
 
     /**
+     * 智能饮食
+     *
      * @param archivesId      档案号
      * @param successCallBack
      * @param failureCallBack
@@ -46,8 +52,9 @@ public class HomeDataManager {
     }
 
 
-
     /**
+     * 饮食答题
+     *
      * @param height          身高(cm)
      * @param weight          体重(kg)
      * @param dkd             肾病
@@ -76,6 +83,8 @@ public class HomeDataManager {
     }
 
     /**
+     * 运动答题
+     *
      * @param height
      * @param weight
      * @param diseases           疾病 （逗号拼接）
@@ -163,5 +172,45 @@ public class HomeDataManager {
         map.put("type", type);
         map.put("archivesId", archivesId);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/addPliableResistanceRecord", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * APP获取有氧运动列表
+     *
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getSportAerobics( BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, BaseLocalDataInfo.class, "system/sport/v2/getSportAerobics", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * APP获取柔韧性运动
+     *
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getSportPliable(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportPliable", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * APP获取抗阻运动
+     *
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getSportResistance(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportResistance", map, successCallBack, failureCallBack);
     }
 }

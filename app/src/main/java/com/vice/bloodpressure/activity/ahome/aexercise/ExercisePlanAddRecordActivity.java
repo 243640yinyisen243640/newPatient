@@ -12,13 +12,13 @@ import com.lsp.RulerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,6 +40,10 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
     private TextView sureTextView;
 
     private String exerciseTime;
+
+    private List<BaseLocalDataInfo> sportList;
+
+    private String sportId = "-1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
     }
 
     private void sureToAdd() {
-        Call<String> requestCall = HomeDataManager.addAerobicsRecord("", "", "", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+        Call<String> requestCall = HomeDataManager.addAerobicsRecord(sportId, "", "", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
 
         }, (call, t) -> {
@@ -93,18 +97,24 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
      * 选择运动类型
      */
     private void chooseTypeWindow() {
-        List<String> exerciseList = new ArrayList<>();
-        exerciseList.add("跑步");
-        exerciseList.add("跳绳");
-        exerciseList.add("太极拳");
+        Call<String> requestCall = HomeDataManager.getSportAerobics((call, response) -> {
+            if ("100".equals(response.code)) {
+                sportList = (List<BaseLocalDataInfo>) response.object;
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择运动", exerciseList, object ->
+            }
+        }, (Call, t) -> {
+
+        });
+
+
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择运动", sportList, object ->
         {
-            typeTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-            if (TextUtils.equals(exerciseList.get(Integer.parseInt(String.valueOf(object))), "太极拳")) {
+            sportId = sportList.get(Integer.parseInt(String.valueOf(object))).getId();
+            typeTv.setText(sportList.get(Integer.parseInt(String.valueOf(object))).getName());
+            if (TextUtils.equals(sportList.get(Integer.parseInt(String.valueOf(object))).getName(), "太极拳")) {
                 taijiLi.setVisibility(View.VISIBLE);
                 tiaoshengLl.setVisibility(View.GONE);
-            } else if (TextUtils.equals(exerciseList.get(Integer.parseInt(String.valueOf(object))), "跳绳")) {
+            } else if (TextUtils.equals(sportList.get(Integer.parseInt(String.valueOf(object))).getName(), "跳绳")) {
                 taijiLi.setVisibility(View.GONE);
                 tiaoshengLl.setVisibility(View.VISIBLE);
             } else {

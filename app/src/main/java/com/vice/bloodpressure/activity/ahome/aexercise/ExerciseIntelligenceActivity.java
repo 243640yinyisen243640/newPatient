@@ -257,21 +257,18 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
             //开始运动
             case R.id.tv_exercise_begin:
                 intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("type", "O");
                 intent.putExtra("title", exerciseType);
                 startActivity(intent);
                 break;
             //抗阻开始
             case R.id.tv_exercise_resistance_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("type", "R");
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandResistanceActivity.class);
                 intent.putExtra("title", "举重");
                 startActivity(intent);
                 break;
             //柔韧性开始
             case R.id.tv_exercise_flexibility_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("type", "P");
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
                 intent.putExtra("title", "举重");
                 startActivity(intent);
                 break;

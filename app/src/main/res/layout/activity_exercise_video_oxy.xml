@@ -6,12 +6,11 @@
     android:orientation="vertical">
 
     <com.vice.bloodpressure.window.JZVideoPlayer
-        android:id="@+id/jz_exercise_video_details"
+        android:id="@+id/jz_exercise_video_details_oxy"
         android:layout_width="match_parent"
         android:layout_height="190dp" />
 
     <LinearLayout
-        android:id="@+id/ll_exercise_hand_fire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -20,7 +19,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="25dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             style="@style/style_title_with_green_h"
@@ -45,7 +44,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_exercise_hand_time"
+                        android:id="@+id/tv_exercise_hand_time_oxy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30"
@@ -88,7 +87,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_exercise_hand_fire"
+                        android:id="@+id/tv_exercise_hand_fire_oxy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30"
@@ -125,13 +124,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/iv_exercise_hand_pause"
+            android:id="@+id/iv_exercise_hand_pause_oxy"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/exercise_hand_star" />
 
         <ImageView
-            android:id="@+id/iv_exercise_hand_stop"
+            android:id="@+id/iv_exercise_hand_stop_oxy"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="50dp"
@@ -139,32 +138,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <LinearLayout
-        android:id="@+id/ll_exercise_hand_record"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/text_white"
-        android:padding="10dp"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/tv_exercise_hand_record"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_main_gra_90"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="记录运动"
-            android:textColor="@color/text_white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

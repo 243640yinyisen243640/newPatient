@@ -10,6 +10,14 @@ public class BaseLocalDataInfo {
     private String name;
     private String id;
     private boolean isCheck;
+    /**
+     * 运动名称
+     */
+    private String sportName;
+    /**
+     * 运动项目消耗每分的热量
+     */
+    private String calorie;
 
 
     public BaseLocalDataInfo(String name, String id) {
@@ -39,5 +47,29 @@ public class BaseLocalDataInfo {
 
     public void setIsCheck(boolean isCheck) {
         this.isCheck = isCheck;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public String getSportName() {
+        return sportName;
+    }
+
+    public void setSportName(String sportName) {
+        this.sportName = sportName;
+    }
+
+    public String getCalorie() {
+        return calorie;
+    }
+
+    public void setCalorie(String calorie) {
+        this.calorie = calorie;
     }
 }

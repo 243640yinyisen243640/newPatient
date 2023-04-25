@@ -281,9 +281,19 @@
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanAddRecordActivity"
             android:screenOrientation="portrait" />
-        <!--手动添加运动记录-->
+        <!--手动添加运动记录有氧-->
         <activity
             android:name=".activity.ahome.aexercise.ExerciseRecordAddHandActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden" />
+        <!--手动添加运动记录柔韧-->
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseRecordAddHandFlexActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden" />
+        <!--手动添加运动记录抗阻-->
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseRecordAddHandResistanceActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|adjustUnspecified|stateHidden" />
 

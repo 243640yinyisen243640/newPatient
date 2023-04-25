@@ -131,7 +131,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="right"
                     android:padding="15dp"
-                    android:text="跑步"
+                    android:text="请选择"
                     android:textColor="@color/gray_8a"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -182,7 +182,7 @@
                         android:id="@+id/tv_exercise_record_add_time_choose"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30"
+                        android:text="0"
                         android:textColor="#00C27F"
                         android:textSize="36sp"
                         android:textStyle="bold" />
@@ -208,7 +208,7 @@
                         android:id="@+id/rv_exercise_record_add_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:firstScale="30"
+                        app:firstScale="0"
                         app:isBgRoundRect="false"
                         app:largeScaleColor="#C5CDCA"
                         app:largeScaleStroke="2dp"

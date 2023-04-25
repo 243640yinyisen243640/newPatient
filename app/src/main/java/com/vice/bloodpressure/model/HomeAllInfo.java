@@ -17,4 +17,5 @@ public class HomeAllInfo {
 
     private MealInfo dietModule;
     private ExerciseInfo sportModule;
+    
 }

@@ -12,7 +12,14 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.window.JZVideoPlayer;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.fragment.InputNumDialogAddFragment;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import cn.jzvd.JzvdStd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -20,13 +27,11 @@ import com.vice.bloodpressure.window.JZVideoPlayer;
  * 传参:
  * 描述:跟着视频运动
  */
-public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements View.OnClickListener {
-    private JZVideoPlayer jzVideoPlayer;
-    private TextView timeTv;
-    private TextView fireTv;
+public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implements View.OnClickListener {
+    private JzvdStd jzVideoPlayer;
     private ImageView pauseImageView;
     private ImageView stopImageView;
-
+    private TextView recordTextView;
 
     private String startOrPause = "1";
 
@@ -34,7 +39,6 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText(getIntent().getStringExtra("title"));
-        topViewManager().moreTextView().setText("手动添加记录");
         topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), ExercisePlanAddRecordActivity.class)));
         initView();
         initListener();
@@ -43,23 +47,16 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     private void initListener() {
         pauseImageView.setOnClickListener(this);
         stopImageView.setOnClickListener(this);
-        jzVideoPlayer.setOnStateAutoComplete(() -> {
-            //点击直接播放完
+        recordTextView.setOnClickListener(this);
 
-        });
-        jzVideoPlayer.setOnStateStart(() -> {
-
-        });
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_exercise_video_oxy, null);
-        jzVideoPlayer = view.findViewById(R.id.jz_exercise_video_details_oxy);
-        timeTv = view.findViewById(R.id.tv_exercise_hand_time_oxy);
-        fireTv = view.findViewById(R.id.tv_exercise_hand_fire_oxy);
-        pauseImageView = view.findViewById(R.id.iv_exercise_hand_pause_oxy);
-        stopImageView = view.findViewById(R.id.iv_exercise_hand_stop_oxy);
-
+        View view = View.inflate(getPageContext(), R.layout.activity_exercise_video_flex, null);
+        jzVideoPlayer = view.findViewById(R.id.jz_exercise_video_details_flex);
+        pauseImageView = view.findViewById(R.id.iv_exercise_hand_pause_flex);
+        stopImageView = view.findViewById(R.id.iv_exercise_hand_stop_flex);
+        recordTextView = view.findViewById(R.id.tv_exercise_hand_record_flex);
         containerView().addView(view);
     }
 
@@ -72,7 +69,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_exercise_hand_pause_oxy:
+            case R.id.iv_exercise_hand_pause_flex:
                 if ("1".equals(startOrPause)) {
                     startOrPause = "2";
                     pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
@@ -86,9 +83,12 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                 }
 
                 break;
-            case R.id.iv_exercise_hand_stop_oxy:
+            case R.id.iv_exercise_hand_stop_flex:
                 BaseDataManager.EXERCISE_IS_COMPLETE = 2;
                 jzVideoPlayer.onStateAutoComplete();
+                break;
+            case R.id.tv_exercise_hand_record_flex:
+                showFlexibilityNumDialog();
                 break;
 
             default:
@@ -96,6 +96,26 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         }
     }
 
+
+    private void showFlexibilityNumDialog() {
+        InputNumDialogAddFragment dialog = new InputNumDialogAddFragment(inputStr -> {
+            //TODO 提交反馈信息
+            submitOxygen(inputStr);
+        });
+        dialog.showNow(getSupportFragmentManager(), "inputFlex");
+    }
+
+    /**
+     * @param inputStr
+     */
+    private void submitOxygen(String inputStr) {
+        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord("1", inputStr, "P", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("addPliableResistanceRecord", requestCall);
+    }
 
 
 }
