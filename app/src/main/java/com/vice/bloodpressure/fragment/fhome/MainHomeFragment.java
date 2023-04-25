@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -37,16 +36,16 @@ import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceLis
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
-import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
+import com.vice.bloodpressure.adapter.home.HomeHealthyTipsAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
-import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +70,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     /**
      * 健康贴士的列表
      */
-    private RecyclerView healthyTipRv;
+    private NoScrollListView healthyTipRv;
     /**
      * 健康贴士的手气展开
      */
@@ -147,7 +146,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     private LinearLayout educationHaveLinearLayout, educationNoLinearLayout;
 
 
-    private HomeHealthyTipAdapter healthyTipAdapter;
+    private HomeHealthyTipsAdapter healthyTipAdapter;
 
     private List<MealInfo> list1;
 
@@ -236,25 +235,16 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     }
 
 
-
-
-
     /**
      * 给赋值
      */
     private void initHealthy() {
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getPageContext(), 1);
-        healthyTipRv.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), false));
-        healthyTipRv.setLayoutManager(layoutManager1);
+
         list1 = new ArrayList<>();
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        healthyTipAdapter = new HomeHealthyTipAdapter(getPageContext(), list1);
+        healthyTipAdapter = new HomeHealthyTipsAdapter(getPageContext(), list1);
         healthyTipRv.setAdapter(healthyTipAdapter);
 
     }
@@ -398,7 +388,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_main_home_first, null);
-        healthyTipRv = view.findViewById(R.id.cv_home_healthy_tip);
+        healthyTipRv = view.findViewById(R.id.lv_home_healthy_tip);
         spreadIm = view.findViewById(R.id.tv_home_healthy_tips_spread);
         xyLinearLayout = view.findViewById(R.id.ll_home_xy_people_value);
         xyValueTv = view.findViewById(R.id.tv_home_xy_people_value);
@@ -485,7 +475,6 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         abnormalIm = topView.findViewById(R.id.iv_home_data_abnormal);
         topViewManager().topView().addView(topView);
     }
-
 
 
     /**

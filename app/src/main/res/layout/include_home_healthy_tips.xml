@@ -55,8 +55,9 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cv_home_healthy_tip"
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/lv_home_healthy_tip"
+                style="@style/Base.ListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -509,8 +510,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="13dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
