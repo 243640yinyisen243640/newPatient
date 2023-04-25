@@ -461,9 +461,8 @@
                 android:padding="12dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -513,9 +512,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1.5"
                     android:orientation="vertical">
 
                     <TextView
@@ -630,9 +631,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:orientation="horizontal">
+                    android:paddingEnd="10dp">
 
                     <TextView
                         android:layout_width="0dp"

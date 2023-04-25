@@ -43,6 +43,105 @@ public class UserInfo implements Serializable {
      * 是否完善个人信息  1完善 2未完善
      */
     private String info_status;
+    /**
+     * 身高
+     */
+    private String height;
+    /**
+     * 体重
+     */
+    private String weight;
+    /**
+     * bmi数值
+     */
+    private String bmi;
+    /**
+     * bmi状态
+     * 1 偏瘦
+     * 2 正常
+     * 3 超重
+     * 4 肥胖
+     */
+    private String bmiStatus;
+    /**
+     * bmi文字标签
+     */
+    private String bmiTag;
+    /**
+     * bmi正常范围文案
+     */
+    private String bmiNormal;
+    /**
+     * 收缩压
+     */
+    private String sbp;
+    /**
+     * 身高
+     */
+    private String dbp;
+    /**
+     * 舒张压
+     */
+    private String bpDate;
+    /**
+     * 血压测量日期
+     */
+    private String bpStatus;
+    /**
+     * 血压状态
+     * 1 偏低
+     * 2 正常
+     * 3 偏高
+     */
+    private String bgValue;
+    /**
+     * 血糖测量日期
+     */
+    private String bgDate;
+    /**
+     * 血糖状态
+     * 1 偏低
+     * 2 正常
+     * 3 偏高
+     */
+    private String bgStatus;
+    /**
+     * 心率
+     */
+    private String hr;
+    /**
+     * 心率状态
+     * 1 偏低
+     * 2 正常
+     * 3 偏低
+     */
+    private String hrStatus;
+    /**
+     * 心率检测日期
+     */
+    private String hrDate;
+    /**
+     * 肾脏病变
+     * true 是
+     * false 否
+     */
+    private String dn;
+    /**
+     * 视网膜病变
+     */
+    private String dr;
+    /**
+     * 神经病变
+     */
+    private String dpn;
+    /**
+     * 下肢血管病变
+     */
+    private String lead;
+    /**
+     * 糖尿病足
+     */
+    private String df;
 
     public UserInfo() {
     }
@@ -170,5 +269,189 @@ public class UserInfo implements Serializable {
 
     public void setInfo_status(String info_status) {
         this.info_status = info_status;
+    }
+
+    public String getArchives_id() {
+        return archives_id;
+    }
+
+    public void setArchives_id(String archives_id) {
+        this.archives_id = archives_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(String bmi) {
+        this.bmi = bmi;
+    }
+
+    public String getBmiStatus() {
+        return bmiStatus;
+    }
+
+    public void setBmiStatus(String bmiStatus) {
+        this.bmiStatus = bmiStatus;
+    }
+
+    public String getBmiTag() {
+        return bmiTag;
+    }
+
+    public void setBmiTag(String bmiTag) {
+        this.bmiTag = bmiTag;
+    }
+
+    public String getBmiNormal() {
+        return bmiNormal;
+    }
+
+    public void setBmiNormal(String bmiNormal) {
+        this.bmiNormal = bmiNormal;
+    }
+
+    public String getSbp() {
+        return sbp;
+    }
+
+    public void setSbp(String sbp) {
+        this.sbp = sbp;
+    }
+
+    public String getDbp() {
+        return dbp;
+    }
+
+    public void setDbp(String dbp) {
+        this.dbp = dbp;
+    }
+
+    public String getBpDate() {
+        return bpDate;
+    }
+
+    public void setBpDate(String bpDate) {
+        this.bpDate = bpDate;
+    }
+
+    public String getBpStatus() {
+        return bpStatus;
+    }
+
+    public void setBpStatus(String bpStatus) {
+        this.bpStatus = bpStatus;
+    }
+
+    public String getBgValue() {
+        return bgValue;
+    }
+
+    public void setBgValue(String bgValue) {
+        this.bgValue = bgValue;
+    }
+
+    public String getBgDate() {
+        return bgDate;
+    }
+
+    public void setBgDate(String bgDate) {
+        this.bgDate = bgDate;
+    }
+
+    public String getBgStatus() {
+        return bgStatus;
+    }
+
+    public void setBgStatus(String bgStatus) {
+        this.bgStatus = bgStatus;
+    }
+
+    public String getHr() {
+        return hr;
+    }
+
+    public void setHr(String hr) {
+        this.hr = hr;
+    }
+
+    public String getHrStatus() {
+        return hrStatus;
+    }
+
+    public void setHrStatus(String hrStatus) {
+        this.hrStatus = hrStatus;
+    }
+
+    public String getHrDate() {
+        return hrDate;
+    }
+
+    public void setHrDate(String hrDate) {
+        this.hrDate = hrDate;
+    }
+
+    public String getDn() {
+        return dn;
+    }
+
+    public void setDn(String dn) {
+        this.dn = dn;
+    }
+
+    public String getDr() {
+        return dr;
+    }
+
+    public void setDr(String dr) {
+        this.dr = dr;
+    }
+
+    public String getDpn() {
+        return dpn;
+    }
+
+    public void setDpn(String dpn) {
+        this.dpn = dpn;
+    }
+
+    public String getLead() {
+        return lead;
+    }
+
+    public void setLead(String lead) {
+        this.lead = lead;
+    }
+
+    public String getDf() {
+        return df;
+    }
+
+    public void setDf(String df) {
+        this.df = df;
     }
 }

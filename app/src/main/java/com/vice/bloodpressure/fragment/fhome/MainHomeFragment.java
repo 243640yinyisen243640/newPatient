@@ -11,6 +11,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -37,13 +38,17 @@ import com.vice.bloodpressure.adapter.home.HomeHealthyTipAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -133,6 +138,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     private LinearLayout educationHaveLinearLayout, educationNoLinearLayout;
 
 
+    private HomeHealthyTipAdapter healthyTipAdapter;
+
     public static MainHomeFragment getInstance() {
 
         MainHomeFragment mainFragment = new MainHomeFragment();
@@ -156,7 +163,13 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = HomeDataManager.getHomeData(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
 
+
+        }, (call, t) -> {
+
+        });
+        addRequestCallToMap("getHomeData", requestCall);
     }
 
     private void initValues() {
@@ -184,7 +197,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
 
     /**
-     * 给小人赋值
+     * 给赋值
      */
     private void initHealthy() {
         GridLayoutManager layoutManager1 = new GridLayoutManager(getPageContext(), 1);
@@ -194,12 +207,24 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
         list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        HomeHealthyTipAdapter healthyTipAdapter = new HomeHealthyTipAdapter(getPageContext(), list1);
+        healthyTipAdapter = new HomeHealthyTipAdapter(getPageContext(), list1);
         healthyTipRv.setAdapter(healthyTipAdapter);
 
         setTextTypeHeight(heightNumTv, Color.parseColor("#2A2A2A"), Color.parseColor("#2A2A2A"), "身高", "  cm\n", "178");
         setTextTypeHeight(weightNumTv, Color.parseColor("#2A2A2A"), Color.parseColor("#2A2A2A"), "体重", "  Kg\n", "70");
 
+    }
+
+    public void notifyWithLimitItemNumb(List<MealInfo> list, int limitNumb, int dpHeight, RecyclerView rv) {
+        ViewGroup.LayoutParams params = rv.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        if (list.size() < limitNumb) {
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        } else {
+            params.height = DensityUtils.dip2px(getPageContext(), dpHeight) * limitNumb;
+        }
+        rv.setLayoutParams(params);
+        healthyTipAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -551,4 +576,6 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         abnormalIm = topView.findViewById(R.id.iv_home_data_abnormal);
         topViewManager().topView().addView(topView);
     }
+
+
 }

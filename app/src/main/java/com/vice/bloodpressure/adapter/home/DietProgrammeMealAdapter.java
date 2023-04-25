@@ -13,13 +13,11 @@ import com.vice.bloodpressure.model.MealInfo;
 import java.util.List;
 
 public class DietProgrammeMealAdapter extends XyBaseAdapter<MealInfo> {
-    private List<MealInfo> list;
-    private Context context;
+
 
     public DietProgrammeMealAdapter(Context context, List<MealInfo> list) {
         super(context, list);
-        this.context = context;
-        this.list = list;
+
     }
 
 
@@ -29,9 +27,9 @@ public class DietProgrammeMealAdapter extends XyBaseAdapter<MealInfo> {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = View.inflate(getContext(), R.layout.item_diet_meal_list_with_line, null);
-            holder.coverImageView = convertView.findViewById(R.id.iv_meal_details_cover);
-            holder.nameTextView = convertView.findViewById(R.id.tv_meal_details_name);
-            holder.numTextView = convertView.findViewById(R.id.tv_meal_details_num);
+            holder.coverImageView = convertView.findViewById(R.id.iv_meal_details_cover_line);
+            holder.nameTextView = convertView.findViewById(R.id.tv_meal_details_name_with_line);
+            holder.numTextView = convertView.findViewById(R.id.tv_meal_details_num_line);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

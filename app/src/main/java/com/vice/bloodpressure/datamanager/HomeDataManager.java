@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.ExerciseInfo;
+import com.vice.bloodpressure.model.HomeAllInfo;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -18,6 +19,20 @@ import retrofit2.Call;
  * 描述:
  */
 public class HomeDataManager {
+
+    /**
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getHomeData(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HomeAllInfo.class, "app/v2/home", map, successCallBack, failureCallBack);
+    }
+
+
     /**
      * @param archivesId      档案号
      * @param successCallBack
@@ -27,8 +42,10 @@ public class HomeDataManager {
     public static Call<String> getDietPlan(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
-        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_OBJECT, MealInfo.class, "ai/diet/v2/getDietPlanByArchivesId", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealInfo.class, "ai/diet/v2/getDietPlanByArchivesId", map, successCallBack, failureCallBack);
     }
+
+
 
     /**
      * @param height          身高(cm)
@@ -131,7 +148,7 @@ public class HomeDataManager {
      * 添加抗阻/柔韧性运动记录
      *
      * @param sportId
-     * @param sportNumber 运动数量
+     * @param sportNumber     运动数量
      * @param type            P 柔韧性运动
      *                        R 抗阻运动
      * @param archivesId

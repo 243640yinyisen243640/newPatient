@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,7 +32,7 @@ import retrofit2.Call;
  * 作者: beauty
  * 创建日期: 2023/2/3 16:55
  */
-public class DietMealPlanListActivity extends UIBaseLoadActivity {
+public class DietMealPlanListActivity extends UIBaseLoadActivity implements AdapterView.OnItemClickListener {
     /**
      * 早餐
      */
@@ -71,6 +72,13 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
         });
         initView();
         initValues();
+        initListener();
+    }
+
+    private void initListener() {
+        breakFastRv.setOnItemClickListener(this);
+        lunchFastRv.setOnItemClickListener(this);
+        dinnerFastRv.setOnItemClickListener(this);
     }
 
     @Override
@@ -107,10 +115,29 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity {
         DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit);
         breakFastRv.setAdapter(breakAdapter);
 
+
         DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit);
         lunchFastRv.setAdapter(lunchAdapter);
 
+
         DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit);
         dinnerFastRv.setAdapter(dinnerAdapter);
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (view.getId()) {
+            case R.id.rv_diet_plan_breakfast:
+
+            case R.id.rv_diet_plan_lunch:
+
+            case R.id.rv_diet_plan_dinner:
+                Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

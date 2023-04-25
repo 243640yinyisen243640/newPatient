@@ -13,7 +13,7 @@
         android:paddingBottom="10dp">
 
         <ImageView
-            android:id="@+id/iv_meal_details_cover"
+            android:id="@+id/iv_meal_details_cover_line"
             android:layout_width="37dp"
             android:layout_height="37dp"
             android:src="@drawable/diet_guogai_gray" />
@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_meal_details_name"
+                android:id="@+id/tv_meal_details_name_with_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
@@ -35,7 +35,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/tv_meal_details_num"
+                android:id="@+id/tv_meal_details_num_line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

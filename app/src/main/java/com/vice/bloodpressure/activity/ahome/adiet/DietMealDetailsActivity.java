@@ -69,9 +69,13 @@ public class DietMealDetailsActivity extends UIBaseActivity {
         } else {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0, R.drawable.diet_change_my_like, 0);
         }
-
         DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealExclusiveInfoList);
         mealTitleRv.setAdapter(adapter);
+
+        mealTitleRv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+            startActivity(intent);
+        });
 
     }
 }

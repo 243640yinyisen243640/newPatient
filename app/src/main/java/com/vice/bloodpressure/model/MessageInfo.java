@@ -15,6 +15,14 @@ public class MessageInfo implements Serializable {
 
 
     private String num = "";
+    /**
+     *消息类型
+     */
+    private String msgType;
+    /**
+     * 消息数据
+     */
+    private String msgData;
 
     public String getNum() {
         return num;
@@ -57,5 +65,21 @@ public class MessageInfo implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
+
+    public String getMsgData() {
+        return msgData;
+    }
+
+    public void setMsgData(String msgData) {
+        this.msgData = msgData;
     }
 }
