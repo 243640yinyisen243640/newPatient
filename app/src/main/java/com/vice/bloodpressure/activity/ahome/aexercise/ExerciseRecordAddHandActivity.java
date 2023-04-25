@@ -13,14 +13,22 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.fragment.InputNumDialogAddFragment;
 import com.vice.bloodpressure.fragment.InputNumDialogFragment;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.window.JZVideoPlayer;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
  * 类名:
- * 传参:type 1:抗阻和柔韧性   2：有氧
+ * 传参:type  P 柔韧性运动
+ * * R 抗阻运动
+ * * O有氧
  * 描述:跟着视频运动
  */
 public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -33,7 +41,9 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     private TextView recordTextView;
     private LinearLayout recordLinearLayout;
     /**
-     * 1:抗阻和柔韧性   2：有氧
+     * P 柔韧性运动
+     * R 抗阻运动
+     * O有氧
      */
     private String type;
 
@@ -45,7 +55,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         super.onCreate(savedInstanceState);
         type = getIntent().getStringExtra("type");
         topViewManager().titleTextView().setText(getIntent().getStringExtra("title"));
-        if ("2".equals(type)) {
+        if ("O".equals(type)) {
             topViewManager().moreTextView().setText("手动添加记录");
 
         }
@@ -78,12 +88,12 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         recordLinearLayout = view.findViewById(R.id.ll_exercise_hand_record);
         recordTextView = view.findViewById(R.id.tv_exercise_hand_record);
         //1:抗阻和柔韧性   2：有氧
-        if ("1".equals(type)) {
-            timeAndFireLiner.setVisibility(View.VISIBLE);
-            recordLinearLayout.setVisibility(View.VISIBLE);
-        } else {
+        if ("O".equals(type)) {
             timeAndFireLiner.setVisibility(View.GONE);
             recordLinearLayout.setVisibility(View.GONE);
+        } else {
+            timeAndFireLiner.setVisibility(View.VISIBLE);
+            recordLinearLayout.setVisibility(View.VISIBLE);
         }
         containerView().addView(view);
     }
@@ -116,7 +126,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                 jzVideoPlayer.onStateAutoComplete();
                 break;
             case R.id.tv_exercise_hand_record:
-                if ("1".equals(type)) {
+                if ("O".equals(type)) {
                     showNumDialog();
                 } else {
                     showFlexibilityNumDialog();
@@ -133,15 +143,35 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     private void showNumDialog() {
         InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
             //TODO 提交反馈信息
+            submitFlex(inputStr);
         });
-        dialog.showNow(getSupportFragmentManager(), "input");
+        dialog.showNow(getSupportFragmentManager(), "inputOxy");
     }
 
     private void showFlexibilityNumDialog() {
         InputNumDialogAddFragment dialog = new InputNumDialogAddFragment(inputStr -> {
             //TODO 提交反馈信息
+            submitOxygen(inputStr);
         });
-        dialog.showNow(getSupportFragmentManager(), "input");
+        dialog.showNow(getSupportFragmentManager(), "inputFlex");
+    }
+
+    private void submitOxygen(String inputStr) {
+        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord("1", inputStr, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("addPliableResistanceRecord", requestCall);
+    }
+
+    private void submitFlex(String inputStr) {
+        Call<String> requestCall = HomeDataManager.addAerobicsRecord("1", inputStr, "热量", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("addAerobicsRecord", requestCall);
     }
 
 }

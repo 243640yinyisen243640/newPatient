@@ -111,8 +111,6 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
     private ExerciseInfo info;
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,16 +257,21 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
             //开始运动
             case R.id.tv_exercise_begin:
                 intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("type", "2");
+                intent.putExtra("type", "O");
                 intent.putExtra("title", exerciseType);
                 startActivity(intent);
                 break;
             //抗阻开始
             case R.id.tv_exercise_resistance_begin:
-                //柔韧性开始
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
+                intent.putExtra("type", "R");
+                intent.putExtra("title", "举重");
+                startActivity(intent);
+                break;
+            //柔韧性开始
             case R.id.tv_exercise_flexibility_begin:
                 intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("type", "1");
+                intent.putExtra("type", "P");
                 intent.putExtra("title", "举重");
                 startActivity(intent);
                 break;
