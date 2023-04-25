@@ -99,32 +99,39 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     //饮食
     /**
-     * 重新制定计划，热量，刷新饮食，自定义饮食，饮食计划，进入详情
+     * 没有答题时去开启答题，重新制定计划，热量，刷新饮食，自定义饮食，饮食计划，进入详情
      */
-    private TextView mealAgainTv, mealfireTv, refreshTv, yourselfTv, mealPlanTv;
+    private TextView mealOpenTv, mealAgainTv, mealfireTv, refreshTv, yourselfTv, mealPlanTv;
     /**
      * 食物列表，
      */
     private RecyclerView recyclRv;
-
-    private LinearLayout mealMoreLin;
+    /**
+     * 没有答题的布局
+     */
+    private LinearLayout mealNoOpenLin, mealHaveOpenLin, mealMoreLin;
     //运动
     /**
-     * 制定计划，重新制定运动计划，步数的数据，还需消耗多少热量，消耗了多少热量，立即完成，运动类型，需要消耗热量，运动时间，抗阻运动，柔韧性运动
+     * 没有答题时的开启，制定计划，重新制定运动计划，步数的数据，还需消耗多少热量，消耗了多少热量，立即完成，运动类型，需要消耗热量，运动时间，抗阻运动，柔韧性运动
      */
-    private TextView makePlanTv, makeExerciseAgainPlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, typeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
+    private TextView exerciseOpenTv, makePlanTv, makeExerciseAgainPlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, typeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
 
+    private LinearLayout exerciseNoLinearLayout, exerciseHaveLinearLayout;
     //教育
 
     /**
-     * 教育与你相关  重新制定，标题，小内容，内容
+     * 教育没有答题时去开启，教育与你相关  重新制定，标题，小内容，内容
      */
-    private TextView aboutYouTv, makeAgainTv, titleTv, containTv, contentTv, educationNumTv;
+    private TextView educationOpenTv, aboutYouTv, makeAgainTv, titleTv, containTv, contentTv, educationNumTv;
     /**
      * 文章封面，
      */
-
     private ImageView articleBgIm;
+    /**
+     *
+     */
+    private LinearLayout educationHaveLinearLayout, educationNoLinearLayout;
+
 
     public static MainHomeFragment getInstance() {
 
@@ -496,6 +503,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         threeRg = view.findViewById(R.id.rg_home_xt_xy_bmi);
 
 
+        mealNoOpenLin = view.findViewById(R.id.ll_main_no_answer_meal);
+        mealHaveOpenLin = view.findViewById(R.id.ll_main_have_answer_meal);
+        mealOpenTv = view.findViewById(R.id.tv_main_no_answer_meal);
         mealAgainTv = view.findViewById(R.id.tv_meal_make_again);
         mealfireTv = view.findViewById(R.id.tv_meal_need_fire);
         refreshTv = view.findViewById(R.id.tv_meal_refresh);
@@ -505,6 +515,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         mealMoreLin = view.findViewById(R.id.ll_meal_more);
 
 
+        exerciseOpenTv = view.findViewById(R.id.tv_main_no_answer_exercise);
+        exerciseNoLinearLayout = view.findViewById(R.id.ll_main_no_answer_exercise);
+        exerciseHaveLinearLayout = view.findViewById(R.id.ll_main_have_answer_exercise);
         makeExerciseAgainPlanTv = view.findViewById(R.id.tv_exercise_make_plan_again);
         makePlanTv = view.findViewById(R.id.tv_exercise_make_plan);
         exerciseNumTv = view.findViewById(R.id.tv_home_exercise_need_fire);
@@ -518,6 +531,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         flexibilityTv = view.findViewById(R.id.tv_exercise_flexibility);
 
 
+        educationOpenTv = view.findViewById(R.id.tv_main_no_answer_education);
+        educationNoLinearLayout = view.findViewById(R.id.ll_main_no_answer_education);
+        educationHaveLinearLayout = view.findViewById(R.id.ll_main_have_answer_education);
         aboutYouTv = view.findViewById(R.id.tv_education_about_you);
         makeAgainTv = view.findViewById(R.id.tv_education_make_again);
         articleBgIm = view.findViewById(R.id.iv_education_article_bg);
