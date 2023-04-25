@@ -156,6 +156,10 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         dialog.showNow(getSupportFragmentManager(), "inputFlex");
     }
 
+    /**
+     * 
+     * @param inputStr
+     */
     private void submitOxygen(String inputStr) {
         Call<String> requestCall = HomeDataManager.addPliableResistanceRecord("1", inputStr, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
@@ -165,6 +169,10 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         addRequestCallToMap("addPliableResistanceRecord", requestCall);
     }
 
+    /**
+     *
+     * @param inputStr
+     */
     private void submitFlex(String inputStr) {
         Call<String> requestCall = HomeDataManager.addAerobicsRecord("1", inputStr, "热量", UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
