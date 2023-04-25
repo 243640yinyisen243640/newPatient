@@ -17,12 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
 import com.vice.bloodpressure.activity.ahome.HomeWarningListActivity;
@@ -73,12 +76,18 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 健康贴士的手气展开
      */
     private ImageView spreadIm;
-
-
     /**
-     * 人体中 血糖，血压，心率数据
+     * 人体中 血糖，血压，心率数据  没有这些病种的话整体隐藏
+     */
+    private LinearLayout xyLinearLayout, xtLinearLayout, xlLinearLayout;
+    /**
+     * 人体中 血糖，血压，心率数据 展示的值
      */
     private TextView xyValueTv, xtValueTv, xlValueTv;
+    /**
+     * 人体中 血糖，血压，心率数据 展示的时间
+     */
+    private TextView xyTimeTv, xtTimeTv, xlTimeTv;
     /**
      * 血管，视网膜，神经肾脏，糖尿病，症状名称
      */
@@ -140,6 +149,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     private HomeHealthyTipAdapter healthyTipAdapter;
 
+    private List<MealInfo> list1;
+
     public static MainHomeFragment getInstance() {
 
         MainHomeFragment mainFragment = new MainHomeFragment();
@@ -158,226 +169,12 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         initView();
         initListener();
         initValues();
+        initViewPager();
 
     }
 
-    @Override
-    protected void onPageLoad() {
-        Call<String> requestCall = HomeDataManager.getHomeData(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-
-
-        }, (call, t) -> {
-
-        });
-        addRequestCallToMap("getHomeData", requestCall);
-    }
-
-    private void initValues() {
-        initHealthy();
-        initThree();
-        initMeal();
-        initExercise();
-        initEducation();
-    }
-
-
-    /**
-     * 给血糖血压bmi三个轮播赋值
-     */
-    private void initThree() {
-        //血压
-        setTextType(xyValueTv, Color.parseColor("#2A2A2A"), Color.parseColor("#ED4646"), "血压值\n", "130/80 ", "mmHg\n", "2022-02-05 15:20");
-        //血糖
-        setTextType(xtValueTv, Color.parseColor("#2A2A2A"), Color.parseColor("#ED4646"), "血糖值\n", "4.6 ", "mol/L\n", "2022-02-05 15:20");
-        //心率
-        setTextType(xlValueTv, Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), "心率\n", "60 ", "次/分\n", "2022-02-05 15:20");
-
-
-    }
-
-
-    /**
-     * 给赋值
-     */
-    private void initHealthy() {
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getPageContext(), 1);
-        healthyTipRv.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), false));
-        healthyTipRv.setLayoutManager(layoutManager1);
-        List<MealInfo> list1 = new ArrayList<>();
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
-        healthyTipAdapter = new HomeHealthyTipAdapter(getPageContext(), list1);
-        healthyTipRv.setAdapter(healthyTipAdapter);
-
-        setTextTypeHeight(heightNumTv, Color.parseColor("#2A2A2A"), Color.parseColor("#2A2A2A"), "身高", "  cm\n", "178");
-        setTextTypeHeight(weightNumTv, Color.parseColor("#2A2A2A"), Color.parseColor("#2A2A2A"), "体重", "  Kg\n", "70");
-
-    }
-
-    public void notifyWithLimitItemNumb(List<MealInfo> list, int limitNumb, int dpHeight, RecyclerView rv) {
-        ViewGroup.LayoutParams params = rv.getLayoutParams();
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        if (list.size() < limitNumb) {
-            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        } else {
-            params.height = DensityUtils.dip2px(getPageContext(), dpHeight) * limitNumb;
-        }
-        rv.setLayoutParams(params);
-        healthyTipAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * 给饮食赋值
-     */
-    private void initMeal() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
-        layoutManager.setOrientation(recyclRv.HORIZONTAL);
-        recyclRv.setLayoutManager(layoutManager);
-        List<MealInfo> list = new ArrayList<>();
-        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
-        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
-        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
-        HomeMealListAdapter adapter = new HomeMealListAdapter(getPageContext(), list);
-        recyclRv.setAdapter(adapter);
-        mealfireTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要摄入总热量", " 1700 ", "千卡"));
-    }
-
-    /**
-     * 给运动赋值
-     */
-    private void initExercise() {
-        exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " 1700 ", "千卡"));
-        stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " 2000 ", "步"));
-        fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量 ", " 90 ", "千卡"));
-
-    }
-
-    /**
-     * 给教育赋值
-     */
-    private void initEducation() {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append("本节共");
-        int length = builder.length();
-        builder.append("字数");
-        int length1 = builder.length();
-        builder.append("字，阅读时间约");
-        int length2 = builder.length();
-        builder.append("分钟数");
-        int length3 = builder.length();
-        builder.append("分钟");
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length2, length3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        educationNumTv.setText(builder);
-    }
-
-    /**
-     * 设置字体的大小颜色
-     *
-     * @param textView   展示的控件
-     * @param startColor 开始的颜色
-     * @param endColor   结束的颜色
-     * @param text1      第一段字体
-     * @param text2      第二段字体
-     * @param text3      第三段字体
-     * @param text4      第四段字体
-     */
-    private void setTextType(TextView textView, int startColor, int endColor, String text1, String text2, String text3, String text4) {
-
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(text1);
-        int length1 = builder.length();
-        builder.append(text2);
-        int length2 = builder.length();
-        builder.append(text3);
-        int length3 = builder.length();
-        builder.append(text4);
-        builder.setSpan(new ForegroundColorSpan(startColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), 16)), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), 15)), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new StyleSpan(Typeface.BOLD), 0, length1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new StyleSpan(Typeface.BOLD), length1, length2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(builder);
-    }
-
-    /**
-     * 身高体重的样式
-     *
-     * @param textView
-     * @param startColor
-     * @param endColor
-     * @param text1
-     * @param text2
-     * @param text3
-     */
-    private void setTextTypeHeight(TextView textView, int startColor, int endColor, String text1, String text2, String text3) {
-
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(text1);
-        int length1 = builder.length();
-        builder.append(text2);
-        int length2 = builder.length();
-        builder.append(text3);
-        int length3 = builder.length();
-        builder.setSpan(new ForegroundColorSpan(startColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), 15)), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        builder.setSpan(new ForegroundColorSpan(endColor), length2, length3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), 22)), length2, length3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new StyleSpan(Typeface.BOLD), 0, length1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new StyleSpan(Typeface.BOLD), length2, length3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(builder);
-    }
-
-    /**
-     * 设置饮食的颜色
-     *
-     * @param
-     * @param startColor
-     * @param endColor
-     * @param text1
-     * @param text2
-     * @param text3
-     */
-    private SpannableStringBuilder setMealTextType(int startColor, int endColor, float textSize, String text1, String text2, String text3) {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(text1);
-        int length1 = builder.length();
-        builder.append(text2);
-        int length2 = builder.length();
-        builder.append(text3);
-        builder.setSpan(new ForegroundColorSpan(startColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new StyleSpan(Typeface.BOLD), length1, length2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return builder;
-    }
-
-    private void initListener() {
-        messageIm.setOnClickListener(this);
-        scanIm.setOnClickListener(this);
-        abnormalIm.setOnClickListener(this);
-
-        spreadIm.setOnClickListener(this);
-
-        makeExerciseAgainPlanTv.setOnClickListener(this);
-        makePlanTv.setOnClickListener(this);
-        finishTv.setOnClickListener(this);
-        resistanceTv.setOnClickListener(this);
-        flexibilityTv.setOnClickListener(this);
-        mealAgainTv.setOnClickListener(this);
-        refreshTv.setOnClickListener(this);
-        yourselfTv.setOnClickListener(this);
-        mealPlanTv.setOnClickListener(this);
-        mealMoreLin.setOnClickListener(this);
-
-        aboutYouTv.setOnClickListener(this);
-        makeAgainTv.setOnClickListener(this);
-        ArrayList<Fragment> fragments = new ArrayList<>();
+    private void initViewPager() {
+        ArrayList<Fragment> fragments;
 
         HomeXueTangFragment detailsFragment = new HomeXueTangFragment();
         HomeXueYaFragment resourceProportionFragment = new HomeXueYaFragment();
@@ -416,6 +213,109 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         });
     }
 
+    private void initValues() {
+        initHealthy();
+        initMeal();
+        initExercise();
+        initEducation();
+    }
+
+    @Override
+    protected void onPageLoad() {
+        getHomeData();
+    }
+
+    private void getHomeData() {
+        Call<String> requestCall = HomeDataManager.getHomeData(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+
+
+        }, (call, t) -> {
+
+        });
+        addRequestCallToMap("getHomeData", requestCall);
+    }
+
+
+
+
+
+    /**
+     * 给赋值
+     */
+    private void initHealthy() {
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getPageContext(), 1);
+        healthyTipRv.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), false));
+        healthyTipRv.setLayoutManager(layoutManager1);
+        list1 = new ArrayList<>();
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        list1.add(new MealInfo("血糖目标：空腹血糖目标：4.7—7.2 mmol/L； 非空腹血糖目标：4.7—10.0 mmol/L 。"));
+        healthyTipAdapter = new HomeHealthyTipAdapter(getPageContext(), list1);
+        healthyTipRv.setAdapter(healthyTipAdapter);
+
+    }
+
+    public void notifyWithLimitItemNumb() {
+        ViewGroup.LayoutParams params = healthyTipRv.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        if (list1.size() <= 3) {
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        } else {
+            params.height = DensityUtils.dip2px(getPageContext(), 15) * 3;
+        }
+        healthyTipRv.setLayoutParams(params);
+        healthyTipAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 给饮食赋值
+     */
+    private void initMeal() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
+        layoutManager.setOrientation(recyclRv.HORIZONTAL);
+        recyclRv.setLayoutManager(layoutManager);
+        List<MealInfo> list = new ArrayList<>();
+        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
+        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
+        list.add(new MealInfo("https://seopic.699pic.com/photo/50236/0275.jpg_wh1200.jpg", "这个是标题"));
+        HomeMealListAdapter adapter = new HomeMealListAdapter(getPageContext(), list);
+        recyclRv.setAdapter(adapter);
+        mealfireTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要摄入总热量", " 1700 ", "千卡"));
+    }
+
+    /**
+     * 给运动赋值
+     */
+    private void initExercise() {
+        exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " 1700 ", "千卡"));
+        stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " 2000 ", "步"));
+        fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量 ", " 90 ", "千卡"));
+
+    }
+
+    /**
+     * 给教育赋值
+     */
+    private void initEducation() {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        builder.append("本节共");
+        int length = builder.length();
+        builder.append("100");
+        int length1 = builder.length();
+        builder.append("字，阅读时间约");
+        int length2 = builder.length();
+        builder.append("20");
+        int length3 = builder.length();
+        builder.append("分钟");
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length2, length3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        educationNumTv.setText(builder);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -437,6 +337,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 startActivity(intent);
                 break;
             case R.id.tv_home_healthy_tips_spread:
+                notifyWithLimitItemNumb();
                 break;
             //重新制定
             case R.id.tv_exercise_make_plan_again:
@@ -499,9 +400,17 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         View view = View.inflate(getPageContext(), R.layout.fragment_main_home_first, null);
         healthyTipRv = view.findViewById(R.id.cv_home_healthy_tip);
         spreadIm = view.findViewById(R.id.tv_home_healthy_tips_spread);
-        xyValueTv = view.findViewById(R.id.tv_home_xy_value);
-        xtValueTv = view.findViewById(R.id.tv_home_xt_value);
-        xlValueTv = view.findViewById(R.id.tv_home_xl_value);
+        xyLinearLayout = view.findViewById(R.id.ll_home_xy_people_value);
+        xyValueTv = view.findViewById(R.id.tv_home_xy_people_value);
+        xyTimeTv = view.findViewById(R.id.tv_home_xy_people_time);
+
+        xtLinearLayout = view.findViewById(R.id.ll_home_xt_people_value);
+        xtValueTv = view.findViewById(R.id.tv_home_xt_people_value);
+        xtTimeTv = view.findViewById(R.id.tv_home_xt_people_time);
+
+        xlLinearLayout = view.findViewById(R.id.ll_home_xl_people_value);
+        xlValueTv = view.findViewById(R.id.tv_home_xl_people_value);
+        xlTimeTv = view.findViewById(R.id.tv_home_xl_people_time);
 
         xgIllnessTv = view.findViewById(R.id.tv_home_xg_illness);
         xgIllnessIm = view.findViewById(R.id.iv_home_xg_img);
@@ -577,5 +486,61 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         topViewManager().topView().addView(topView);
     }
 
+
+
+    /**
+     * 设置饮食的颜色
+     *
+     * @param
+     * @param startColor
+     * @param endColor
+     * @param text1
+     * @param text2
+     * @param text3
+     */
+    private SpannableStringBuilder setMealTextType(int startColor, int endColor, float textSize, String text1, String text2, String text3) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        builder.append(text1);
+        int length1 = builder.length();
+        builder.append(text2);
+        int length2 = builder.length();
+        builder.append(text3);
+        builder.setSpan(new ForegroundColorSpan(startColor), 0, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new AbsoluteSizeSpan(DensityUtils.sp2px(getPageContext(), textSize)), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setSpan(new ForegroundColorSpan(endColor), length1, length2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(new StyleSpan(Typeface.BOLD), length1, length2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return builder;
+    }
+
+    private void initListener() {
+        messageIm.setOnClickListener(this);
+        scanIm.setOnClickListener(this);
+        abnormalIm.setOnClickListener(this);
+
+        spreadIm.setOnClickListener(this);
+
+        makeExerciseAgainPlanTv.setOnClickListener(this);
+        makePlanTv.setOnClickListener(this);
+        finishTv.setOnClickListener(this);
+        resistanceTv.setOnClickListener(this);
+        flexibilityTv.setOnClickListener(this);
+        mealAgainTv.setOnClickListener(this);
+        refreshTv.setOnClickListener(this);
+        yourselfTv.setOnClickListener(this);
+        mealPlanTv.setOnClickListener(this);
+        mealMoreLin.setOnClickListener(this);
+
+        aboutYouTv.setOnClickListener(this);
+        makeAgainTv.setOnClickListener(this);
+
+        refreshLayout().setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                getHomeData();
+            }
+        });
+
+    }
 
 }
