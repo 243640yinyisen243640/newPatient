@@ -43,7 +43,7 @@ public class InputNumDialogAddFragment extends DialogFragment {
     private TextView submit;
 
     public interface IInputFinishCallback {
-        void sendStr(String inputStr);
+        void sendStr(String hour, String min, String second);
     }
 
     public InputNumDialogAddFragment(IInputFinishCallback callback) {
@@ -68,26 +68,20 @@ public class InputNumDialogAddFragment extends DialogFragment {
     private void initEvent() {
         submit.setOnClickListener(v -> {
             String hour = hourEditText.getText().toString().trim();
-            if (!TextUtils.isEmpty(hour) && hour.length() <= 200) {
-                callback.sendStr(hour);
-                dialog.dismiss();
-            } else {
+            if (!TextUtils.isEmpty(hour)) {
                 ToastUtils.getInstance().showToast(getContext(), "请输入小时");
+                return;
             }
             String min = minEditText.getText().toString().trim();
-            if (!TextUtils.isEmpty(min) && min.length() <= 200) {
-                callback.sendStr(min);
-                dialog.dismiss();
-            } else {
+            if (!TextUtils.isEmpty(min)) {
                 ToastUtils.getInstance().showToast(getContext(), "请输入分钟");
             }
             String second = secondEditText.getText().toString().trim();
-            if (!TextUtils.isEmpty(second) && second.length() <= 200) {
-                callback.sendStr(second);
-                dialog.dismiss();
-            } else {
+            if (!TextUtils.isEmpty(second)) {
                 ToastUtils.getInstance().showToast(getContext(), "请输入秒");
+
             }
+            callback.sendStr(hour, min, second);
         });
         cancel.setOnClickListener(v -> {
 

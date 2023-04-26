@@ -121,24 +121,25 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
     private void showNumDialog() {
         InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
             //TODO 提交反馈信息
-            submitOxygen(inputStr);
+            submitOxygen(inputStr, "", "");
         });
-        dialog.showNow(getSupportFragmentManager(), "inputFlex");
+        dialog.showNow(getSupportFragmentManager(), "inputRe");
     }
 
     private void showFlexibilityNumDialog() {
-        InputNumDialogAddFragment dialog = new InputNumDialogAddFragment(inputStr -> {
-            //TODO 提交反馈信息
-            submitOxygen(inputStr);
+        InputNumDialogAddFragment dialog = new InputNumDialogAddFragment((hour, min, second) -> {
+            submitOxygen(hour, min, second);
         });
         dialog.showNow(getSupportFragmentManager(), "inputFlex");
     }
 
     /**
-     * @param inputStr
+     * @param hour
+     * @param min
+     * @param second
      */
-    private void submitOxygen(String inputStr) {
-        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord(sportId, inputStr, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+    private void submitOxygen(String hour, String min, String second) {
+        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord(sportId, hour, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
