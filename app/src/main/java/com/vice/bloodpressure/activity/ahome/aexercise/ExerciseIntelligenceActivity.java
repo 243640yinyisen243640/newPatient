@@ -25,11 +25,13 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.popwindow.AnswerForPopupWindow;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
@@ -106,10 +108,14 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
     /**
      * 运动类型
      */
-    private String exerciseType = "跑步";
+    private String exerciseType;
 
     private ExerciseInfo info;
+    private List<BaseLocalDataInfo> sportList;
 
+    private String oxygenSportId = "-1";
+    private String resistanceSportId = "-1";
+    private String flexSportId = "-1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -172,6 +178,12 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
     }
 
     private void bindData() {
+        oxygenSportId = info.getSportAerobics().getId();
+        exerciseType = info.getSportAerobics().getSportName();
+        resistanceSportId = info.getSportResistance().getId();
+        flexSportId = info.getSportPliable().getId();
+        resistanceNameTv.setText(info.getSportResistance().getSportName());
+        flexibilityNameTv.setText(info.getSportPliable().getSportName());
         String workString = "";
         String runString = "";
         String noString = "";
@@ -252,24 +264,29 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
                 break;
             //选择运动
             case R.id.tv_exercise_choose:
-                chooseExerciseTypeWindow();
+                getOxygenData();
                 break;
             //开始运动
             case R.id.tv_exercise_begin:
                 intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
                 intent.putExtra("title", exerciseType);
+                intent.putExtra("sportId", oxygenSportId);
                 startActivity(intent);
                 break;
             //抗阻开始
             case R.id.tv_exercise_resistance_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandResistanceActivity.class);
-                intent.putExtra("title", "举重");
+                intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
+                intent.putExtra("title", info.getSportResistance().getSportName());
+                intent.putExtra("sportId", resistanceSportId);
+                intent.putExtra("type", "R");
                 startActivity(intent);
                 break;
             //柔韧性开始
             case R.id.tv_exercise_flexibility_begin:
                 intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
-                intent.putExtra("title", "举重");
+                intent.putExtra("title", info.getSportPliable().getSportName());
+                intent.putExtra("sportId", flexSportId);
+                intent.putExtra("type", "P");
                 startActivity(intent);
                 break;
 
@@ -384,22 +401,36 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         containerView().addView(view);
     }
 
+    private void getOxygenData() {
+        Call<String> requestCall = HomeDataManager.getSportAerobics((call, response) -> {
+            if ("0000".equals(response.code)) {
+                sportList = (List<BaseLocalDataInfo>) response.object;
+                List<String> list = new ArrayList<>();
+                if (sportList != null && sportList.size() > 0) {
+                    for (int i = 0; i < sportList.size(); i++) {
+                        String typeName = sportList.get(i).getSportName();
+                        list.add(typeName);
+                    }
+                }
+                chooseTypeWindow(list);
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getSportAerobics", requestCall);
+    }
+
     /**
      * 选择运动类型
      */
-    private void chooseExerciseTypeWindow() {
-        List<String> exerciseList = new ArrayList<>();
-        exerciseList.add("快跑");
-        exerciseList.add("快走");
-        exerciseList.add("慢跑");
-        exerciseList.add("健步走");
-        exerciseList.add("羽毛球");
-
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "有氧运动", exerciseList, object -> {
-                    exerciseChooseTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-                    exerciseType = exerciseList.get(Integer.parseInt(String.valueOf(object)));
-                }
-        );
+    private void chooseTypeWindow(List<String> stringList) {
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择运动", stringList, object -> {
+            oxygenSportId = sportList.get(Integer.parseInt(String.valueOf(object))).getId();
+            exerciseType = sportList.get(Integer.parseInt(String.valueOf(object))).getSportName();
+            exerciseChooseTv.setText(sportList.get(Integer.parseInt(String.valueOf(object))).getSportName());
+        });
     }
 
 
