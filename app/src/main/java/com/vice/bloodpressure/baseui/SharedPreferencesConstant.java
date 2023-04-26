@@ -34,4 +34,8 @@ public class SharedPreferencesConstant {
      * 是否完善过信息1完善过 2：未完善
      */
     public static final String INFO_STATUS = "info_status";
+    /**
+     * 用户体重
+     */
+    public static final String WEIGHT = "weight";
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.ExerciseInfo;
@@ -114,12 +115,24 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         Call<String> requestCall = HomeDataManager.recommendSportPlan(UserInfoUtils.getArchivesId(getPageContext()), height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
             if ("0000".equals(response.code)) {
                 ExerciseInfo info = (ExerciseInfo) response.object;
+                UserInfoUtils.saveUserInfo(getPageContext(), SharedPreferencesConstant.WEIGHT, weight);
                 TextView textView = successPopupWindow.showContent();
                 SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
 
+                String bimTagText = "";
+                if ("1".equals(info.getBmiTag())) {
+                    bimTagText = "偏瘦";
+                } else if ("2".equals(info.getBmiTag())) {
+                    bimTagText = "正常";
+                } else if ("3".equals(info.getBmiTag())) {
+                    bimTagText = "超重";
+                } else {
+                    bimTagText = "肥胖";
+                }
+
                 stringBuilder.append(getString(R.string.exercise_success_height));
                 int length1 = stringBuilder.length();
-                stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), info.getBmiStatus()));
+                stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), bimTagText));
                 int length2 = stringBuilder.length();
                 //1偏瘦 2正常 3超重 4肥胖
                 if ("1".equals(info.getBmiTag())) {

@@ -47,7 +47,7 @@ public class ExerciseOxygenFragment extends UIBaseListRecycleViewFragment<Exerci
 
     @Override
     protected void getListData(CallBack callBack) {
-//        Call<String> requestCall = HomeDataManager.getSportAerobics();
+        //        Call<String> requestCall = HomeDataManager.getSportAerobics();
         listText = new ArrayList<>();
         listText.add(new ExerciseInfo("3360", "2022-07-12 12:20:23", "1260"));
         listText.add(new ExerciseInfo("3860", "2022-07-12 12:20:23", "1160"));
@@ -70,5 +70,9 @@ public class ExerciseOxygenFragment extends UIBaseListRecycleViewFragment<Exerci
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+    public void refresh() {
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 }

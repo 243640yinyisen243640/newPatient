@@ -40,7 +40,7 @@
                             android:id="@+id/tv_exercise_record_add_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="30"
+                            android:text="0"
                             android:textColor="@color/main_base_color"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -83,7 +83,7 @@
                             android:id="@+id/tv_exercise_record_add_fire"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="30"
+                            android:text="0"
                             android:textColor="#FF8604"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="5dp"
-                        android:text="cm"
+                        android:text="分钟"
                         android:textColor="#BBBBBB"
                         android:textSize="13sp" />
 
@@ -275,7 +275,6 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_exercise_record_add_sure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -376,6 +375,7 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/tv_exercise_record_add_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_bg_main_gra_90"

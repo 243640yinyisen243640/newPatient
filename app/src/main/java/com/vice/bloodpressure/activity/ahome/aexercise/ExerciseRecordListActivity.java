@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 public class ExerciseRecordListActivity extends UIBaseActivity {
 
+    private static final int REQUEST_CODE_FOR_REFRESH = 1;
     /**
      * 返回键
      */
@@ -40,6 +41,8 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
 
+    private ArrayList<Fragment> fragments;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +53,6 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     }
 
     private void initValue() {
-
-        ArrayList<Fragment> fragments = new ArrayList<>();
-
-
         fragments = new ArrayList<>();
         fragments.add(ExerciseOxygenFragment.newInstance("1"));
         fragments.add(ExerciseResistanceFragment.newInstance("P"));
@@ -124,9 +123,22 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
         backIm.setOnClickListener(v -> finish());
         addRecordTv.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
-            intent.putExtra("type", "");
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOR_REFRESH:
+                    ExerciseOxygenFragment fragment = (ExerciseOxygenFragment) fragments.get(0);
+                    fragment.refresh();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

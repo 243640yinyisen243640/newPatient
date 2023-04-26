@@ -132,7 +132,7 @@ public class UserInfoUtils {
     /**
      * 保存个人中心信息
      */
-    public static void saveUserInfo(Context context, UserInfo userInfo) {
+    public static void saveUserInfoForModel(Context context, UserInfo userInfo) {
 
         Map<String, String> map = new HashMap<>();
         //        map.put(SharedPreferencesConstant.LOGIN_NAME, userInfo.getLoginName());
@@ -148,6 +148,19 @@ public class UserInfoUtils {
         map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserId());
         map.put(SharedPreferencesConstant.ACCESS_TOKEN, userInfo.getAccess_token());
         map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
+        SharedPreferencesUtils.saveInfo(context, map);
+    }
+
+    /**
+     * 保存单个字段信息
+     *
+     * @param context
+     * @param filedKey
+     * @param filedValue
+     */
+    public static void saveUserInfo(Context context, String filedKey, String filedValue) {
+        Map<String, String> map = new HashMap<>();
+        map.put(filedKey, filedValue);
         SharedPreferencesUtils.saveInfo(context, map);
     }
 }
