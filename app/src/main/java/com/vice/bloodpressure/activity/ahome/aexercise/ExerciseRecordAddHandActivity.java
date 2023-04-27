@@ -95,18 +95,6 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                     jzVideoPlayer.mediaInterface.start();
                     jzVideoPlayer.onStatePlaying();
                 }
-
-                //                if ("1".equals(startOrPause)) {
-                //                    startOrPause = "2";
-                //                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                //                    jzVideoPlayer.startVideo();
-                //                } else {
-                //                    startOrPause = "1";
-                //                    //                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
-                //                    jzVideoPlayer.onStatePause();
-                //                    //                    jzVideoPlayer.mediaInterface.pause();
-                //                }
-
                 break;
             case R.id.iv_exercise_hand_stop_oxy:
                 BaseDataManager.EXERCISE_IS_COMPLETE = 2;
