@@ -54,8 +54,8 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
-        initListener();
         setPublicBottom();
+        initListener();
     }
 
     private void initListener() {

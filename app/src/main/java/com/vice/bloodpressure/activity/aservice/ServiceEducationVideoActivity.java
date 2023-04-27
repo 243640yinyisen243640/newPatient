@@ -16,7 +16,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgTopActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.VideoInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -30,7 +30,7 @@ import java.util.List;
  * 传参:
  * 描述:服务教育视频
  */
-public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgActivity<VideoInfo> {
+public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTopActivity<VideoInfo> {
     private List<VideoInfo> videoInfos = new ArrayList<>();
 
     @Override

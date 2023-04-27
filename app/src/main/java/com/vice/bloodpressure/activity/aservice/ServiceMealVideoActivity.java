@@ -2,7 +2,6 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgTopActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.VideoInfo;
@@ -32,14 +31,13 @@ import java.util.List;
  * 传参:
  * 描述:服务饮食视频
  */
-public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgActivity<VideoInfo> {
+public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActivity<VideoInfo> {
     private List<MealExclusiveInfo> videoInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
-        Log.i("yys", "status==" + topViewManager().statusBarView().getLayoutParams().height);
         topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 2);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));

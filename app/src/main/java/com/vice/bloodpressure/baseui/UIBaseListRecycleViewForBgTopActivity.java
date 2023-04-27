@@ -21,11 +21,11 @@ import java.util.List;
 /**
  * 类名：
  * 传参：
- * 描述: 这里是列表的基础  这个是只有一个地方用到了
+ * 描述: 这里是列表的基础  因为项目中会列表的背景是白色十度的背景  所以分开使用，这个是有背景的
  * 作者: beauty
  * 创建日期: 2023/3/23 9:42
  */
-public abstract class UIBaseListRecycleViewForBg1Activity<T> extends UIBaseLoadActivity {
+public abstract class UIBaseListRecycleViewForBgTopActivity<T> extends UIBaseLoadActivity {
 
     protected SmartRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
@@ -184,7 +184,7 @@ public abstract class UIBaseListRecycleViewForBg1Activity<T> extends UIBaseLoadA
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view_for_bg1, null);
+        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view_for_bg_top, null);
         mRefreshLayout = getViewByID(view, R.id.refresh_layout);
         mRecyclerView = getViewByID(view, R.id.recycler_view);
         mNestedScrollView = getViewByID(view, R.id.nsv_present_load);
