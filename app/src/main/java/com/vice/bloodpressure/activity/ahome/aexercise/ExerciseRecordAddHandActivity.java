@@ -52,9 +52,9 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
             //点击直接播放完
 
         });
-        jzVideoPlayer.setOnStateStart(() -> {
-
-        });
+//        jzVideoPlayer.setOnStateStart(() -> {
+//
+//        });
     }
 
     private void initView() {
