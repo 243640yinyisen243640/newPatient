@@ -39,11 +39,15 @@ public class UserFilesActivity extends UIBaseActivity {
         topViewManager().backTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_top_back_white, 0, 0, 0);
         topViewManager().titleTextView().setText("我的档案");
         topViewManager().lineViewVisibility(View.GONE);
+        initView();
+        initValue();
+    }
+
+    private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_center_files, null);
         radioGroup = view.findViewById(R.id.rg_user_files);
         viewPager = view.findViewById(R.id.vp_user_files_info);
         containerView().addView(view);
-        initValue();
     }
 
 

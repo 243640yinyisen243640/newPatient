@@ -17,10 +17,19 @@ public class MealInfo implements Serializable {
     private String color;
 
     private String id;
-
+    /**
+     * 全天
+     */
     private MealChildInfo dietNutritionVo;
+    /**
+     * 三餐分餐比例
+     */
     private MealChildInfo threeMealVo;
+    /**
+     * 7天专属饮食方案
+     */
     private List<MealSecondInfo> exclusiveDietPlanVos;
+
 
     public String getColor() {
         return color;

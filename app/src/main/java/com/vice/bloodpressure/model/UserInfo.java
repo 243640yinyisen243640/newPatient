@@ -14,7 +14,6 @@ public class UserInfo implements Serializable {
     private boolean isSelected;
 
     private String time;
-    private String type;
     private String img;
 
     private boolean isCheck;
@@ -142,6 +141,19 @@ public class UserInfo implements Serializable {
      * 糖尿病足
      */
     private String df;
+
+    /**
+     * 设备编号
+     */
+    private String deviceCode;
+    /**
+     * 测量时间
+     */
+    private String addTime;
+    /**
+     * 型1-8;9糖化血红蛋白
+     */
+    private String type;
 
     public UserInfo() {
     }
@@ -453,5 +465,21 @@ public class UserInfo implements Serializable {
 
     public void setDf(String df) {
         this.df = df;
+    }
+
+    public String getDeviceCode() {
+        return deviceCode;
+    }
+
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
     }
 }

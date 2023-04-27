@@ -63,6 +63,90 @@ public class ExerciseInfo implements Serializable {
      * 柔韧性运动
      */
     private ExerciseChildInfo sportPliable;
+    /**
+     * 步数
+     */
+    private String walk;
+    /**
+     * 有氧运动名称
+     */
+    private String aerobicsName;
+    /**
+     * 有氧运动需消耗热量
+     */
+    private String aerobicsNeedCalories;
+    /**
+     * 有氧运动需要时长
+     */
+    private String aerobicsTime;
+    /**
+     * 方案Id
+     */
+    private String sportPlanId;
+    /**
+     * 抗住运动ID
+     */
+    private String resistanceId;
+    /**
+     * 柔韧性运动ID
+     */
+    private String pliableId;
+
+    public String getWalk() {
+        return walk;
+    }
+
+    public void setWalk(String walk) {
+        this.walk = walk;
+    }
+
+    public String getAerobicsName() {
+        return aerobicsName;
+    }
+
+    public void setAerobicsName(String aerobicsName) {
+        this.aerobicsName = aerobicsName;
+    }
+
+    public String getAerobicsNeedCalories() {
+        return aerobicsNeedCalories;
+    }
+
+    public void setAerobicsNeedCalories(String aerobicsNeedCalories) {
+        this.aerobicsNeedCalories = aerobicsNeedCalories;
+    }
+
+    public String getAerobicsTime() {
+        return aerobicsTime;
+    }
+
+    public void setAerobicsTime(String aerobicsTime) {
+        this.aerobicsTime = aerobicsTime;
+    }
+
+    public String getSportPlanId() {
+        return sportPlanId;
+    }
+
+    public void setSportPlanId(String sportPlanId) {
+        this.sportPlanId = sportPlanId;
+    }
+
+    public String getResistanceId() {
+        return resistanceId;
+    }
+
+    public void setResistanceId(String resistanceId) {
+        this.resistanceId = resistanceId;
+    }
+
+    public String getPliableId() {
+        return pliableId;
+    }
+
+    public void setPliableId(String pliableId) {
+        this.pliableId = pliableId;
+    }
 
     public ExerciseInfo(String need, String time, String have) {
         this.need = need;

@@ -35,7 +35,7 @@ public class MealChildInfo implements Serializable {
      */
     private String oil;
     /**
-     * 总热量（千卡）
+     * 总热量（千卡） 这个是饮食智能饮食方案中的
      */
     private String sumCalorie;
     /**
@@ -85,11 +85,11 @@ public class MealChildInfo implements Serializable {
     /**
      * 午餐
      */
-    private  List<MealExclusiveInfo>  lunch;
+    private List<MealExclusiveInfo> lunch;
     /**
      * 晚餐
      */
-    private  List<MealExclusiveInfo>  dinner;
+    private List<MealExclusiveInfo> dinner;
     /**
      * *配料信息
      */
@@ -98,6 +98,54 @@ public class MealChildInfo implements Serializable {
      * 方案日期
      */
     private String planDate;
+    /**
+     * 需摄入总热量 这个是在首页饮食方案中用到的
+     */
+    private String sumCalories;
+    /**
+     * 三餐标识
+     */
+    private String meals;
+    /**
+     * 方案id
+     */
+    private String dietPlanId;
+    /**
+     * 饮食计划
+     */
+    private List<MealExclusiveInfo> dietPlan;
+
+    public String getSumCalories() {
+        return sumCalories;
+    }
+
+    public void setSumCalories(String sumCalories) {
+        this.sumCalories = sumCalories;
+    }
+
+    public String getMeals() {
+        return meals;
+    }
+
+    public void setMeals(String meals) {
+        this.meals = meals;
+    }
+
+    public String getDietPlanId() {
+        return dietPlanId;
+    }
+
+    public void setDietPlanId(String dietPlanId) {
+        this.dietPlanId = dietPlanId;
+    }
+
+    public List<MealExclusiveInfo> getDietPlan() {
+        return dietPlan;
+    }
+
+    public void setDietPlan(List<MealExclusiveInfo> dietPlan) {
+        this.dietPlan = dietPlan;
+    }
 
     public String getCereals() {
         return cereals;

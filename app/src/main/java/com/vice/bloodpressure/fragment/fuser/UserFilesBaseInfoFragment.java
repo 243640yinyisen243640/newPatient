@@ -139,7 +139,6 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
      * @param msg
      */
     private void showEditDialog(String type, String title, String msg) {
-
         Dialog dialog = new Dialog(getPageContext(), R.style.HuaHanSoft_Dialog_Base);
         View view = View.inflate(getPageContext(), R.layout.activity_user_info_dialog, null);
         TextView titleTextView = getViewByID(view, R.id.tv_dialog_title);
