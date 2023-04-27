@@ -345,6 +345,11 @@
         <activity
             android:name=".activity.aservice.ServiceMealVideoActivity"
             android:screenOrientation="portrait" />
+        <!--视频详情-->
+        <activity
+            android:name=".activity.aservice.ServiceMakeMealDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <!--饮食搜索-->
         <activity
             android:name=".activity.aservice.ServiceMealVideoSearchActivity"

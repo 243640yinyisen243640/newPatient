@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/ll_user_collect_video_click"
     android:orientation="vertical">
 
 
@@ -10,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/i_user_collect_bg"
+            android:id="@+id/iv_user_collect_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp" />

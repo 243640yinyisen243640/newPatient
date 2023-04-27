@@ -9,7 +9,8 @@ import java.util.List;
  * 传参:
  * 描述:
  */
-public class MealExclusiveInfo implements Serializable {
+public class MealExclusiveInfo implements Serializable, IClassInfo {
+    private String img;
     /**
      * 食谱id
      */
@@ -41,6 +42,10 @@ public class MealExclusiveInfo implements Serializable {
 
     private List<MealIngMapInfo> ingMap;
 
+    public MealExclusiveInfo(String img, String recName) {
+        this.img = img;
+        this.recName = recName;
+    }
 
     public String getRecId() {
         return recId;
@@ -104,5 +109,28 @@ public class MealExclusiveInfo implements Serializable {
 
     public void setIngMap(List<MealIngMapInfo> ingMap) {
         this.ingMap = ingMap;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    @Override
+    public String getImplClassID() {
+        return null;
+    }
+
+    @Override
+    public String getImplClassName() {
+        return recName;
+    }
+
+    @Override
+    public String getImplClassImg() {
+        return img;
     }
 }

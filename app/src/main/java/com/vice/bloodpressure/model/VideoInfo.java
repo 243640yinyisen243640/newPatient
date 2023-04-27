@@ -6,7 +6,7 @@ package com.vice.bloodpressure.model;
  * 传参:
  * 描述:
  */
-public class VideoInfo {
+public class VideoInfo implements IClassInfo{
     private String img;
     private String title;
 
@@ -29,5 +29,20 @@ public class VideoInfo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String getImplClassID() {
+        return null;
+    }
+
+    @Override
+    public String getImplClassName() {
+        return title;
+    }
+
+    @Override
+    public String getImplClassImg() {
+        return img;
     }
 }

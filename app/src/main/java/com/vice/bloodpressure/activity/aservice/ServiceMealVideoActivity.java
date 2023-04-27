@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.VideoInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
@@ -31,7 +33,7 @@ import java.util.List;
  * 描述:服务饮食视频
  */
 public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgActivity<VideoInfo> {
-    private List<VideoInfo> videoInfos = new ArrayList<>();
+    private List<MealExclusiveInfo> videoInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,16 +49,34 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "韭菜鸡蛋包子"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "银耳薏仁枸杞莲子荞麦..."));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "西红柿炒鸡蛋"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "清炒豌豆莲子"));
+        videoInfos.add(new MealExclusiveInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "韭菜鸡蛋包子"));
+        videoInfos.add(new MealExclusiveInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "银耳薏仁枸杞莲子荞麦..."));
+        videoInfos.add(new MealExclusiveInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "西红柿炒鸡蛋"));
+        videoInfos.add(new MealExclusiveInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "清炒豌豆莲子"));
         callBack.callBack(videoInfos);
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), videoInfos);
+        return new UserCollectVideoAdapter(getPageContext(), videoInfos, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.ll_user_collect_video_click:
+                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
     }
 
     @Override

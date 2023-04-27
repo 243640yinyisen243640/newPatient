@@ -127,6 +127,7 @@ public class HomeXueTangFragment extends UIBaseFragment {
         @Override
         public void refreshContent(Entry e, Highlight highlight) {
             tvData1.setText(String.valueOf(e.getY()));
+            tvData1.setText(String.valueOf(e.getX()));
             //            e.getData()  //这里获取上面放进去的数据在这里获取需要展示的数据
 
             super.refreshContent(e, highlight);
