@@ -18,7 +18,9 @@ import com.vice.bloodpressure.fragment.InputNumDialogFragment;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.window.JZVideoPlayer;
 
+import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 import retrofit2.Call;
 
@@ -29,7 +31,7 @@ import retrofit2.Call;
  * 描述:跟着视频运动
  */
 public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implements View.OnClickListener {
-    private JzvdStd jzVideoPlayer;
+    private JZVideoPlayer jzVideoPlayer;
     private ImageView pauseImageView;
     private ImageView stopImageView;
     private TextView recordTextView;
@@ -86,18 +88,23 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_exercise_hand_pause_flex:
+                //首先第一次进来  点击是开始 然后再次点击就是暂停了，暂停状态下，再点击是继续播放，不是重新开始，所以有三个数值
+                Log.i("yys", "startOrPause==" + startOrPause);
                 if ("1".equals(startOrPause)) {
                     startOrPause = "2";
                     pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                    jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
                     jzVideoPlayer.startVideo();
-                } else {
-                    Log.i("yys", "onStatePause==");
-                    //                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
-                    //                    jzVideoPlayer.onStatePause();
+                } else if ("2".equals(startOrPause)) {
+                    startOrPause = "3";
+                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
                     jzVideoPlayer.mediaInterface.pause();
+                    jzVideoPlayer.onStatePause();
+                } else {
+                    startOrPause = "2";
+                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
+                    jzVideoPlayer.mediaInterface.start();
+                    jzVideoPlayer.onStatePlaying();
                 }
-
                 break;
             case R.id.iv_exercise_hand_stop_flex:
                 BaseDataManager.EXERCISE_IS_COMPLETE = 2;
@@ -147,7 +154,19 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
         addRequestCallToMap("addPliableResistanceRecord", requestCall);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
+    }
 }
 
 

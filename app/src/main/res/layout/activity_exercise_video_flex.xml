@@ -5,7 +5,7 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <cn.jzvd.JzvdStd
+    <com.vice.bloodpressure.window.JZVideoPlayer
         android:id="@+id/jz_exercise_video_details_flex"
         android:layout_width="match_parent"
         android:layout_height="190dp" />

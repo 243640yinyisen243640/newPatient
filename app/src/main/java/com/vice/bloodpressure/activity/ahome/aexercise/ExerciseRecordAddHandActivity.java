@@ -38,6 +38,11 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), ExercisePlanAddRecordActivity.class)));
         initView();
         initListener();
+        initValues();
+    }
+
+    private void initValues() {
+        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
     }
 
     private void initListener() {
@@ -73,17 +78,34 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_exercise_hand_pause_oxy:
+                //首先第一次进来  点击是开始 然后再次点击就是暂停了，暂停状态下，再点击是继续播放，不是重新开始，所以有三个数值
+                Log.i("yys", "startOrPause==" + startOrPause);
                 if ("1".equals(startOrPause)) {
                     startOrPause = "2";
                     pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                    jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
                     jzVideoPlayer.startVideo();
-                } else {
-                    Log.i("yys", "onStatePause==");
-                    //                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
-                    //                    jzVideoPlayer.onStatePause();
+                } else if ("2".equals(startOrPause)) {
+                    startOrPause = "3";
+                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
                     jzVideoPlayer.mediaInterface.pause();
+                    jzVideoPlayer.onStatePause();
+                } else {
+                    startOrPause = "2";
+                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
+                    jzVideoPlayer.mediaInterface.start();
+                    jzVideoPlayer.onStatePlaying();
                 }
+
+                //                if ("1".equals(startOrPause)) {
+                //                    startOrPause = "2";
+                //                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
+                //                    jzVideoPlayer.startVideo();
+                //                } else {
+                //                    startOrPause = "1";
+                //                    //                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
+                //                    jzVideoPlayer.onStatePause();
+                //                    //                    jzVideoPlayer.mediaInterface.pause();
+                //                }
 
                 break;
             case R.id.iv_exercise_hand_stop_oxy:
@@ -95,7 +117,6 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                 break;
         }
     }
-
 
 
 }
