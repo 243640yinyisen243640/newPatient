@@ -125,6 +125,9 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
         }
     }
 
+    /**
+     * 这个是抗阻运动的弹出  输入个数的
+     */
     private void showNumDialog() {
         InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
             //TODO 提交反馈信息
@@ -132,7 +135,9 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
         });
         dialog.showNow(getSupportFragmentManager(), "inputRe");
     }
-
+    /**
+     * 这个是柔韧的弹出  时分秒的
+     */
     private void showFlexibilityNumDialog() {
         InputNumDialogAddFragment dialog = new InputNumDialogAddFragment((hour, min, second) -> {
             submitOxygen(hour, min, second);
