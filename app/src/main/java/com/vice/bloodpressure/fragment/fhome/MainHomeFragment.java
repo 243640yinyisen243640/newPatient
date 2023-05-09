@@ -163,7 +163,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     protected void onCreate() {
         super.onCreate();
         topViewManager().topView().removeAllViews();
-        topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
+//        topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
+//        StatusBarUtils.statusBarColor(getActivity(),R.color.defaultToastBg);
         initTopView();
         initView();
         initListener();
@@ -172,6 +173,14 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     }
 
+
+
+    private void initValues() {
+        initHealthy();
+        initMeal();
+        initExercise();
+        initEducation();
+    }
     private void initViewPager() {
         ArrayList<Fragment> fragments;
 
@@ -210,13 +219,6 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
             }
         });
-    }
-
-    private void initValues() {
-        initHealthy();
-        initMeal();
-        initExercise();
-        initEducation();
     }
 
     @Override

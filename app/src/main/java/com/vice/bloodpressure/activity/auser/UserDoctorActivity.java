@@ -8,9 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -71,6 +77,24 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = UserDataManager.getSelectDoctorInfo((call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                DoctorInfo doctorInfo = (DoctorInfo) response.object;
+                bindData(doctorInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+    }
 
+    private void bindData(DoctorInfo doctorInfo) {
+        XyImageUtils.loadCircleImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfo.getAvatar(), headImageView);
+        nameTextView.setText(doctorInfo.getDoctorName());
+        postTextView.setText(doctorInfo.getDeptName());
+        introduceTextView.setText(doctorInfo.getProfile());
     }
 }
