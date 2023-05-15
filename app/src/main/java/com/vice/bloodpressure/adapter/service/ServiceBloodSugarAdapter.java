@@ -47,7 +47,7 @@ public class ServiceBloodSugarAdapter extends RecyclerView.Adapter<ServiceBloodS
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BloodThirdInfo info = list.get(position);
         SimpleDateFormat sdf1 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D);
-        SimpleDateFormat sdf2 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_M_D);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
         Date date = null;
         try {
             date = sdf1.parse(info.getAddTime());

@@ -29,6 +29,17 @@ public class BloodThirdInfo {
      * 记录方式:1->自动记录;2->手动记录
      */
     private String recordType;
+    /**
+     * 1 空腹
+     * # 2 早餐后
+     * # 3 午餐前
+     * # 4 午餐后
+     * # 5 晚餐前
+     * # 6 晚餐后
+     * # 7 睡前
+     * # 8 凌晨
+     */
+    private String type;
 
     public String getBgStatus() {
         return bgStatus;
@@ -68,5 +79,13 @@ public class BloodThirdInfo {
 
     public void setRecordType(String recordType) {
         this.recordType = recordType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

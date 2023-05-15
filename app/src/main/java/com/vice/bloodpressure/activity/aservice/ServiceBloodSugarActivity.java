@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity.aservice;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -59,6 +60,7 @@ public class ServiceBloodSugarActivity extends UIBaseLoadActivity {
         super.onCreate(savedInstanceState);
         beginTime = getIntent().getStringExtra("beginTime");
         timeType = getIntent().getStringExtra("timeType");
+        Log.i("yys", "timeType==" + timeType);
         topViewManager().titleTextView().setText(beginTime);
         initView();
         initValues();
@@ -124,7 +126,7 @@ public class ServiceBloodSugarActivity extends UIBaseLoadActivity {
     }
 
     private void bindData(List<BloodThirdInfo> bloodThirdInfos) {
-        ServiceBloodSugarAdapter bloodSugarAdapter = new ServiceBloodSugarAdapter(getPageContext(),bloodThirdInfos);
+        ServiceBloodSugarAdapter bloodSugarAdapter = new ServiceBloodSugarAdapter(getPageContext(), bloodThirdInfos);
         valueRecyclerView.setAdapter(bloodSugarAdapter);
     }
 }

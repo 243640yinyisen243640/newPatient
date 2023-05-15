@@ -80,21 +80,19 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
         recyclerView.setAdapter(new SevenBottomAdapter(getPageContext(), bloodAllInfo.getRecords(), new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
-                BloodChildInfo bloodChildInfo = bloodAllInfo.getRecords().get(position);
-                Log.i("yys", "Size===" + bloodChildInfo.getValue());
-                for (int i = 0; i < bloodChildInfo.getValue().size(); i++) {
-                    if (Integer.parseInt(bloodChildInfo.getValue().get(i).getBgCount()) > 1) {
-                        Intent intent = new Intent(getPageContext(), ServiceBloodSugarActivity.class);
-                        intent.putExtra("beginTime", bloodAllInfo.getRecords().get(position).getDate());
-                        intent.putExtra("timeType", (i + 1) + "");
-                        startActivity(intent);
-                    }
-                }
+
             }
 
             @Override
             public void adapterClickListener(int position, int index, View view) {
-
+                Log.i("yys", "position==" + position + "===" + "index===" + index);
+                BloodChildInfo bloodChildInfo = bloodAllInfo.getRecords().get(position);
+                if (Integer.parseInt(bloodChildInfo.getValue().get(index).getBgCount()) > 1) {
+                    Intent intent = new Intent(getPageContext(), ServiceBloodSugarActivity.class);
+                    intent.putExtra("beginTime", bloodAllInfo.getRecords().get(position).getDate());
+                    intent.putExtra("timeType", bloodChildInfo.getValue().get(index).getType());
+                    startActivity(intent);
+                }
             }
         }));
     }

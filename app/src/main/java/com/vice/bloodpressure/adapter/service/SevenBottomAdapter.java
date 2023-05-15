@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.BloodChildInfo;
 
 import java.text.ParseException;
@@ -62,7 +63,7 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
 
         BloodChildInfo info = list.get(position);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf1 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D);
         SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
         Date date = null;
         try {
@@ -82,8 +83,15 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         //        if (paraStrs.length == 2) {
         //            holder.timeTextView.setText(paraStrs[0] + "/" + paraStrs[1]);
         //        }
-
-        onPositionClick click = new onPositionClick(position);
+        OnClick click = new OnClick(position);
+        holder.dawnFrameLayout.setTag(0);
+        holder.empFrameLayout.setTag(1);
+        holder.breLaterFrameLayout.setTag(2);
+        holder.lunchBeforeFrameLayout.setTag(3);
+        holder.lunchLaterFrameLayout.setTag(4);
+        holder.dinnerBeforeFrameLayout.setTag(5);
+        holder.dinnerLaterFrameLayout.setTag(6);
+        holder.bedTimeFrameLayout.setTag(7);
         holder.dawnFrameLayout.setOnClickListener(click);
         holder.empFrameLayout.setOnClickListener(click);
         holder.breLaterFrameLayout.setOnClickListener(click);
@@ -243,21 +251,17 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         }
     }
 
-    private class onPositionClick implements View.OnClickListener {
-        private int position;
+    class OnClick implements View.OnClickListener {
+        private int pos;
 
-        public onPositionClick(int position) {
-            this.position = position;
-
+        public OnClick(int pos) {
+            this.pos = pos;
         }
 
         @Override
         public void onClick(View v) {
-            if (clickListener != null) {
-                clickListener.adapterClickListener(position, v);
-            }
+            clickListener.adapterClickListener(pos, (Integer) v.getTag(), v);
         }
     }
-
 }
 
