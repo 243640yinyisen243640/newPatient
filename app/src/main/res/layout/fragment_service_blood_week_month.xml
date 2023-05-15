@@ -11,7 +11,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,11 +51,11 @@
                             android:text="mmol/L" />
 
                         <TextView
+                            android:id="@+id/tv_service_blood_seven_low_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="13dp"
                             android:includeFontPadding="false"
-                            android:text="7日血糖最低值"
                             android:textColor="@color/black_24"
                             android:textSize="13sp" />
 
@@ -87,11 +88,11 @@
                             android:text="mmol/L" />
 
                         <TextView
+                            android:id="@+id/tv_service_blood_seven_aver_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="13dp"
                             android:includeFontPadding="false"
-                            android:text="7日血糖平均值"
                             android:textColor="@color/black_24"
                             android:textSize="13sp" />
 
@@ -124,11 +125,11 @@
                             android:text="mmol/L" />
 
                         <TextView
+                            android:id="@+id/tv_service_blood_seven_high_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="13dp"
                             android:includeFontPadding="false"
-                            android:text="7日血糖最高值"
                             android:textColor="@color/black_24"
                             android:textSize="13sp" />
 
@@ -173,6 +174,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv_service_blood_seven_tips"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"

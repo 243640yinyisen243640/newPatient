@@ -362,6 +362,10 @@
         <activity
             android:name=".activity.aservice.ServiceBloodListActivity"
             android:screenOrientation="portrait" />
+        <!--血糖多条数据-->
+        <activity
+            android:name=".activity.aservice.ServiceBloodSugarActivity"
+            android:screenOrientation="portrait" />
         <!--血压添加-->
         <activity
             android:name=".activity.aservice.ServicePressureAddActivity"

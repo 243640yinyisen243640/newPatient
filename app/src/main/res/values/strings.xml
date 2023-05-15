@@ -46,4 +46,5 @@
 
     <string name="user_center_age">年龄：%1$s岁</string>
     <string name="service_test_history_num">评测分数：%1$s</string>
+    <string name="service_blood_data_tips_format">%1$s天内您一共检测%2$s次血糖值，其中空腹%3$s次，非空腹%4$s次。</string>
 </resources>

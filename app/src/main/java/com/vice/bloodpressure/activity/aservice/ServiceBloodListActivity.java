@@ -40,6 +40,9 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
 
     private String startTime;
 
+    private ArrayList<Fragment> fragments;
+    private int checkPosition = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +78,11 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
 
 
     private void initValue() {
-
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        String userid = "717272";
-        for (int i = 0; i < 2; i++) {
+        fragments = new ArrayList<>();
+        for (int i = 1; i < 3; i++) {
             SevenAndThirtyBloodSugarListFragment fragment = new SevenAndThirtyBloodSugarListFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("userid", userid);
+            bundle.putString("dateType", i + "");
             fragment.setArguments(bundle);
             fragments.add(fragment);
 
@@ -103,6 +104,7 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
 
                 @Override
                 public void onPageSelected(int i) {
+                    checkPosition = i;
                     radioGroup.check(radioGroup.getChildAt(i).getId());
 
                 }
@@ -137,14 +139,13 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
                 });
                 break;
             case R.id.tv_service_blood_data_end_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
-                            endTimeTextView.setText(object.toString());
-                        } else {
-                            ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
-                        }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                    if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                        endTimeTextView.setText(object.toString());
+                        SevenAndThirtyBloodSugarListFragment fragment = (SevenAndThirtyBloodSugarListFragment) fragments.get(checkPosition);
+                        fragment.refresh(startTime, object.toString());
+                    } else {
+                        ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                     }
                 });
                 break;

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
@@ -39,6 +40,8 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("添加饮食数据");
         initView();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
+        mealRv.setLayoutManager(layoutManager);
         initlistener();
     }
 

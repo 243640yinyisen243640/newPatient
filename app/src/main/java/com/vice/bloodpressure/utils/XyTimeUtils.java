@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.utils;
 
+import com.vice.bloodpressure.basemanager.DataFormatManager;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -94,7 +96,7 @@ public class XyTimeUtils {
      */
     public static boolean compareTwoTime(String starTime, String endString) {
         boolean isMoreThan = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D);
         try {
             Date startData = dateFormat.parse(starTime);
             Date endData = dateFormat.parse(endString);

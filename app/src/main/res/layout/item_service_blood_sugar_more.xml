@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_service_sugar_more_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="12:12"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="19dp"
+            android:paddingBottom="19dp">
+
+            <TextView
+                android:id="@+id/tv_service_sugar_more_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="23.0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mmol/L"
+                android:textColor="@color/black_24"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_service_sugar_more_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="自动上传"
+            android:textColor="@color/black_24"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <View style="@style/base_line" />
+
+
+</LinearLayout>

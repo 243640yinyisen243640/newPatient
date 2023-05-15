@@ -10,7 +10,8 @@ public class ConstantParamNew {
     /**
      * ip地址
      */
-    public static final String IP = "http://192.168.31.216:9000/";
+//    public static final String IP = "http://192.168.31.216:9000/";
+    public static final String IP = "http://192.168.31.183:9000/";
 
 
     public static final String APK_NAME = "huijiankang";
