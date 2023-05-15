@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.service.ServiceBloodSugarAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
@@ -68,7 +69,35 @@ public class ServiceBloodSugarActivity extends UIBaseLoadActivity {
     }
 
     private void initValues() {
-        timeTextView.setText(timeType);
+        switch (timeType) {
+            case "1":
+                timeTextView.setText("空腹");
+                break;
+            case "2":
+                timeTextView.setText("早餐后");
+                break;
+            case "3":
+                timeTextView.setText("午餐前");
+                break;
+            case "4":
+                timeTextView.setText("午餐后");
+                break;
+            case "5":
+                timeTextView.setText("晚餐前");
+                break;
+            case "6":
+                timeTextView.setText("晚餐后");
+                break;
+            case "7":
+                timeTextView.setText("睡前");
+                break;
+            case "8":
+                timeTextView.setText("凌晨");
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void initView() {
@@ -95,6 +124,7 @@ public class ServiceBloodSugarActivity extends UIBaseLoadActivity {
     }
 
     private void bindData(List<BloodThirdInfo> bloodThirdInfos) {
-
+        ServiceBloodSugarAdapter bloodSugarAdapter = new ServiceBloodSugarAdapter(getPageContext(),bloodThirdInfos);
+        valueRecyclerView.setAdapter(bloodSugarAdapter);
     }
 }

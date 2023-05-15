@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:text="430"
-                    android:textColor="#E54C4C"
+                    android:textColor="@color/red_E5"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

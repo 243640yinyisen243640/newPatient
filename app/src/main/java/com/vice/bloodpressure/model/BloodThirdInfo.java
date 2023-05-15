@@ -47,7 +47,7 @@ public class BloodThirdInfo {
     }
 
     public String getBgCount() {
-        return bgCount;
+        return "2";
     }
 
     public void setBgCount(String bgCount) {

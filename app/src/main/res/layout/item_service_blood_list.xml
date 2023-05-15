@@ -27,6 +27,7 @@
 
 
         <FrameLayout
+            android:id="@+id/fl_item_service_blood_seven_dawn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -62,6 +63,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_bre_emp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -92,6 +94,7 @@
                 android:background="#E6E6E6" />
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_bre_later"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -128,6 +131,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_lunch_before"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -158,6 +162,7 @@
                 android:background="#E6E6E6" />
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_lunch_later"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -194,6 +199,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_dinner_before"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -225,6 +231,7 @@
 
 
             <FrameLayout
+                android:id="@+id/fl_item_service_blood_seven_dinner_later"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -255,6 +262,7 @@
             android:background="#E6E6E6" />
 
         <FrameLayout
+            android:id="@+id/fl_item_service_blood_seven_bed_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

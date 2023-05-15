@@ -282,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="#4B89F7"
+                android:textColor="@color/blue_4B"
                 android:textSize="24sp" />
 
             <TextView
@@ -356,7 +356,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="5.6"
-                android:textColor="#4B89F7"
+                android:textColor="@color/blue_4B"
                 android:textSize="24sp" />
 
             <TextView

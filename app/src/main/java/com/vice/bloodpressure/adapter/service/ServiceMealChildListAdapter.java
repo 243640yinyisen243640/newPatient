@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -46,9 +45,9 @@ public class ServiceMealChildListAdapter extends RecyclerView.Adapter<ServiceMea
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceInfo info = list.get(position);
-        setTextStyle(holder.fireTextView, Color.parseColor("#E54C4C"), info.getData(), "千卡");
+        setTextStyle(holder.fireTextView, context.getResources().getColor(R.color.red_E5), info.getData(), "千卡");
         holder.titleTextView.setText(info.getTime());
-        holder.numTextView.setText(info.getType()+"g");
+        holder.numTextView.setText(info.getType() + "g");
     }
 
     @Override

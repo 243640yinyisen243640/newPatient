@@ -35,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="170"
-                android:textColor="#E54C4C"
+                android:textColor="@color/red_E5"
                 android:textSize="14sp" />
 
             <TextView

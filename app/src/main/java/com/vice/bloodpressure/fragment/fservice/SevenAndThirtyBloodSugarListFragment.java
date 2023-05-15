@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.fragment.fservice;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -80,10 +81,11 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
             @Override
             public void adapterClickListener(int position, View view) {
                 BloodChildInfo bloodChildInfo = bloodAllInfo.getRecords().get(position);
+                Log.i("yys", "Size===" + bloodChildInfo.getValue());
                 for (int i = 0; i < bloodChildInfo.getValue().size(); i++) {
                     if (Integer.parseInt(bloodChildInfo.getValue().get(i).getBgCount()) > 1) {
                         Intent intent = new Intent(getPageContext(), ServiceBloodSugarActivity.class);
-                        intent.putExtra("beginTime", bloodAllInfo.getRecords().get(i).getDate());
+                        intent.putExtra("beginTime", bloodAllInfo.getRecords().get(position).getDate());
                         intent.putExtra("timeType", (i + 1) + "");
                         startActivity(intent);
                     }
