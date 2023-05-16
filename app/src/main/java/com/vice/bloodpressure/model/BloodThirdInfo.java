@@ -40,6 +40,14 @@ public class BloodThirdInfo {
      * # 8 凌晨
      */
     private String type;
+    /**
+     * 这个是血糖控制目标的开始
+     */
+    private String start;
+    /**
+     * 这个是血糖控制目标的结束
+     */
+    private String end;
 
     public String getBgStatus() {
         return bgStatus;
@@ -58,7 +66,7 @@ public class BloodThirdInfo {
     }
 
     public String getBgCount() {
-        return "2";
+        return bgCount;
     }
 
     public void setBgCount(String bgCount) {
@@ -87,5 +95,21 @@ public class BloodThirdInfo {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

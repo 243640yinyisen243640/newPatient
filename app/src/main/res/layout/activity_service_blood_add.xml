@@ -43,7 +43,7 @@
                         android:id="@+id/tv_service_blood_add_control"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3.9-7.8"
+                        android:text="- -"
                         android:textColor="@color/main_base_color"
                         android:textSize="18sp" />
 
@@ -81,7 +81,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="20dp"
-                            android:text="午餐前"
+                            android:text="请选择"
                             android:textColor="@color/gray_8a"
                             android:textSize="15sp" />
 
@@ -116,7 +116,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="20dp"
-                            android:text="2021-02-03 15:20"
+                            android:text="请选择时间"
                             android:textColor="@color/gray_8a"
                             android:textSize="15sp" />
 
@@ -157,8 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="8.4"
-                        android:textColor="#00C27F"
+                        android:textColor="@color/red_E5"
                         android:textSize="36sp"
                         android:textStyle="bold" />
 
