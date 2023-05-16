@@ -96,6 +96,6 @@ public class ServiceDataManager {
         map.put("recordType", recordType);
         map.put("addTime", addTime);
         map.put("bgValue", bgValue);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_ARRAY, BloodThirdInfo.class, "monitor/home/saveMonitorBg", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/home/saveMonitorBg", map, successCallBack, failureCallBack);
     }
 }

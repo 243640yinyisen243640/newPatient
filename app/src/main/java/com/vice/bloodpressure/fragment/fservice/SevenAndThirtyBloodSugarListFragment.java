@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,8 @@ import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import retrofit2.Call;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * 类名：
@@ -32,6 +35,7 @@ import retrofit2.Call;
  * 创建日期: 2023/3/28 13:33
  */
 public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
+    private static final int REQUEST_CODE_FOR_REFRESH = 1;
     private TextView lowTextView;
     private TextView lowTextTextView;
     private TextView averTextView;
@@ -61,7 +65,11 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
     }
 
     private void initListener() {
-        sureLinearLayout.setOnClickListener(v -> startActivity(new Intent(getPageContext(), ServiceBloodAddActivity.class)));
+        sureLinearLayout.setOnClickListener(v ->
+        {
+            Intent intent = new Intent(getPageContext(), ServiceBloodAddActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+        });
     }
 
     private void initValue(BloodAllInfo bloodAllInfo) {
@@ -132,7 +140,17 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
         this.beginTime = beginTime;
         this.endTime = endTime;
         dateType = "";
-
         onPageLoad();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_REFRESH) {
+
+                onPageLoad();
+            }
+        }
     }
 }

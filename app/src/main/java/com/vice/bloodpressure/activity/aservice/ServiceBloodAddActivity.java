@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat;
 
 import com.lsp.RulerView;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
@@ -176,12 +175,9 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
                 });
                 break;
             case R.id.tv_service_blood_add_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, false}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        addTime = String.valueOf(object);
-                        timeTextView.setText(object.toString());
-                    }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
+                    addTime = String.valueOf(object);
+                    timeTextView.setText(object.toString());
                 });
                 break;
             case R.id.ll_service_blood_add_sure:
@@ -223,7 +219,13 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
         }
 
         Call<String> requestCall = ServiceDataManager.saveMonitorBg(UserInfoUtils.getArchivesId(getPageContext()), (optionAdd + 1) + "", "2", addTime, sugarValue, (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
         }, (call, t) -> {
             ToastUtils.getInstance().showToast(getPageContext(), "失败");
         });

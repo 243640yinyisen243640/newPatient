@@ -247,13 +247,9 @@ public class EducationIntelligenceListActivity extends UIBaseLoadActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE_FOE_REFRESH:
-                    mPageIndex = 1;
-                    onPageLoad();
-                    break;
-                default:
-                    break;
+            if (requestCode == REQUEST_CODE_FOE_REFRESH) {
+                mPageIndex = 1;
+                onPageLoad();
             }
         }
     }
