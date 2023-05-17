@@ -41,7 +41,7 @@ public class SaccharifySeekBar extends androidx.appcompat.widget.AppCompatSeekBa
         mPaint.setTextSize(DensityUtils.sp2px(context, 20));
 
         //设置SeekBar顶部数值文字预留空间，左右为数值背景图片的一半，顶部为数值背景图片高度加五的间隔
-        setPadding((int) Math.ceil(mBgWidth) / 2, (int) Math.ceil(mBgHeight) + 15, (int) Math.ceil(mBgWidth), 0);
+        setPadding((int) Math.ceil(mBgWidth)/2, (int) Math.ceil(mBgHeight) + 15, (int) Math.ceil(mBgWidth), 0);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class SaccharifySeekBar extends androidx.appcompat.widget.AppCompatSeekBa
         //计算数值背景X坐标
         float bgX = bgRect.width() * getProgress() / getMax();
         //计算数值文字X坐标
-        float textX = bgX + (mBgWidth - mTextWidth) / 2;
+        float textX = bgX + (mBgWidth - mTextWidth) /5;
         canvas.drawText(mText, textX, mTextBaseLineY, mPaint);
     }
 

@@ -18,6 +18,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.BloodThirdInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
@@ -227,7 +228,7 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), "失败");
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("saveMonitorBg", requestCall);
     }

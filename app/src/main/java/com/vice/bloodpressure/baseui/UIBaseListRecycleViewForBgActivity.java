@@ -40,6 +40,7 @@ public abstract class UIBaseListRecycleViewForBgActivity<T> extends UIBaseLoadAc
     //当前获取的是第几页的数据，当前可见的数据的数量，当前页获取的数据的条数
     private int mPageIndex = 1, mPageSize = 15, mVisibleCount = 0, mPageCount = 0;
     private String noDataText = "暂无数据";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,9 +137,11 @@ public abstract class UIBaseListRecycleViewForBgActivity<T> extends UIBaseLoadAc
             }
         });
     }
+
     protected void noDataText(String noDataText) {
         this.noDataText = noDataText;
     }
+
     /**
      * 获取页面集合
      *
@@ -199,5 +202,9 @@ public abstract class UIBaseListRecycleViewForBgActivity<T> extends UIBaseLoadAc
      */
     protected RecyclerView getPageListView() {
         return mRecyclerView;
+    }
+
+    protected void setPageIndex(int pageIndex) {
+        this.mPageIndex = pageIndex;
     }
 }

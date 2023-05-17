@@ -22,15 +22,19 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBg1Activity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -38,15 +42,20 @@ import java.util.List;
  * 传参:
  * 描述:bmi列表
  */
-public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<ServiceInfo> implements View.OnClickListener {
+public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<HealthyDataChildInfo> implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
     private TextView lowTextView;
+    private TextView avgTextView;
     private TextView highTextView;
 
     private String startTime;
+    private String endTime;
+
+    private HealthyDataAllInfo dataAllInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,8 +78,9 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
         TextView titleTextView = topView.findViewById(R.id.tv_service_blood_data_title);
         backImageView = topView.findViewById(R.id.iv_service_blood_data_back);
         LinearLayout allLinearLayout = topView.findViewById(R.id.ll_service_bmi_all);
-        lowTextView = topView.findViewById(R.id.tv_service_blood_oxygen_low);
-        highTextView = topView.findViewById(R.id.tv_service_blood_oxygen_high);
+        lowTextView = topView.findViewById(R.id.tv_service_bmi_low);
+        avgTextView = topView.findViewById(R.id.tv_service_bmi_aver);
+        highTextView = topView.findViewById(R.id.tv_service_bmi_high);
         titleTextView.setText("BMI数据");
         allLinearLayout.setVisibility(View.VISIBLE);
         return topView;
@@ -95,21 +105,37 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> oxygenList = new ArrayList<>();
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        oxygenList.add(new ServiceInfo("2022-05-06", "30.1", "170", "88"));
-        callBack.callBack(oxygenList);
+        Call<String> requestCall = ServiceDataManager.getBmiStatistic(UserInfoUtils.getArchivesId(getPageContext()), startTime, endTime, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                dataAllInfo = (HealthyDataAllInfo) response.object;
+                getPressureList(callBack);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getPressureStatistic", requestCall);
+    }
+
+    private void getPressureList(CallBack callBack) {
+        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, "2", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                lowTextView.setText(null == dataAllInfo.getMinValue() ? "" : dataAllInfo.getMinValue());
+                avgTextView.setText(null == dataAllInfo.getAvgValue() ? "" : dataAllInfo.getAvgValue());
+                highTextView.setText(null == dataAllInfo.getMaxValue() ? "" : dataAllInfo.getMaxValue());
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("selectMonitorHtnList", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
         return new ServiceBmiAdapter(getPageContext(), list);
     }
 
@@ -135,6 +161,7 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
                     @Override
                     public void callBack(Object object) {
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
@@ -146,10 +173,22 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
-                startActivity(new Intent(getPageContext(), ServiceBmiAddActivity.class));
+                Intent intent = new Intent(getPageContext(), ServiceBmiAddActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
         }
     }
 }

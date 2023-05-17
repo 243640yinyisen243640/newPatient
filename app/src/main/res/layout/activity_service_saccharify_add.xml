@@ -37,7 +37,6 @@
                 android:duplicateParentState="true"
                 android:max="1000"
                 android:maxHeight="10dp"
-                android:progress="555"
                 android:progressDrawable="@drawable/seek_bar"
                 android:thumb="@null" />
 
@@ -61,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
                     android:gravity="center"
-                    android:text="糖化值"
+                    android:text="糖化血红蛋白值"
                     android:textColor="@color/black_24"
                     android:textSize="15sp" />
 
@@ -121,7 +120,7 @@
                     android:paddingTop="20dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="20dp"
-                    android:text="2021-02-03 15:20"
+                    android:text="请选择时间"
                     android:textColor="@color/gray_8a"
                     android:textSize="15sp" />
 

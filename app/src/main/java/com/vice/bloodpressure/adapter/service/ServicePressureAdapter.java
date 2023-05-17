@@ -9,8 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,10 +26,10 @@ import java.util.List;
  */
 public class ServicePressureAdapter extends RecyclerView.Adapter<ServicePressureAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServicePressureAdapter(Context context, List<ServiceInfo> list) {
+    public ServicePressureAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,11 +45,20 @@ public class ServicePressureAdapter extends RecyclerView.Adapter<ServicePressure
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.valueTextView.setText(info.getData());
-        holder.rateTextView.setText(info.getRate());
-        holder.typeTextView.setText(info.getType());
+        HealthyDataChildInfo info = list.get(position);
+        SimpleDateFormat sdf1 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S);
+        SimpleDateFormat sdf2 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M);
+        Date date = null;
+        try {
+            date = sdf1.parse(info.getAddTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String format = sdf2.format(date);
+        holder.timeTextView.setText(format);
+        holder.valueTextView.setText(info.getSbp() + "/" + info.getDbp());
+        holder.rateTextView.setText(info.getHr());
+        holder.typeTextView.setText("1".equals(info.getRecordType()) ? "自动" : "手动");
     }
 
     @Override

@@ -202,7 +202,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="40%"
                 android:textColor="@color/main_base_color"
                 android:textSize="24sp" />
 
@@ -237,7 +236,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="53%"
                 android:textColor="@color/main_base_color"
                 android:textSize="24sp" />
 
@@ -281,7 +279,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="5.6"
                 android:textColor="@color/blue_4B"
                 android:textSize="24sp" />
 
@@ -318,7 +315,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="5.6"
                 android:textColor="#FF5750"
                 android:textSize="24sp" />
 
@@ -355,7 +351,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="5.6"
                 android:textColor="@color/blue_4B"
                 android:textSize="24sp" />
 
@@ -392,7 +387,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="5.6"
                 android:textColor="#FF5750"
                 android:textSize="24sp" />
 
@@ -444,7 +438,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="16.0"
                     android:textColor="@color/main_base_color"
                     android:textSize="24sp" />
 
@@ -471,11 +464,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_service_bmi_high"
+                    android:id="@+id/tv_service_bmi_aver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="20.0"
                     android:textColor="@color/main_base_color"
                     android:textSize="24sp" />
 
@@ -502,11 +494,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_service_bmi_aver"
+                    android:id="@+id/tv_service_bmi_high"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="30.2"
                     android:textColor="@color/main_base_color"
                     android:textSize="24sp" />
 

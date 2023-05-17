@@ -206,4 +206,7 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
         containerView().addView(view);
     }
 
+    protected void setPageIndex(int pageIndex) {
+        this.mPageIndex = pageIndex;
+    }
 }

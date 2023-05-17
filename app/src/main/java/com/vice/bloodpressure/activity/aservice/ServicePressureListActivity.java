@@ -21,15 +21,19 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -37,15 +41,21 @@ import java.util.List;
  * 传参:
  * 描述:血压列表
  */
-public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActivity<ServiceInfo> implements View.OnClickListener {
+public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActivity<HealthyDataChildInfo> implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
-    private TextView lowTextView;
-    private TextView highTextView;
+    private TextView sysLowTextView;
+    private TextView sysHighTextView;
+    private TextView diaLowTextView;
+    private TextView diaHighTextView;
 
-    private String startTime;
+    private String startTime = "";
+    private String endTime = "";
+
+    private HealthyDataAllInfo pressureInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,8 +78,10 @@ public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActiv
         TextView titleTextView = topView.findViewById(R.id.tv_service_blood_data_title);
         backImageView = topView.findViewById(R.id.iv_service_blood_data_back);
         LinearLayout allLinearLayout = topView.findViewById(R.id.ll_service_pressure_all);
-        lowTextView = topView.findViewById(R.id.tv_service_blood_oxygen_low);
-        highTextView = topView.findViewById(R.id.tv_service_blood_oxygen_high);
+        sysLowTextView = topView.findViewById(R.id.tv_service_sys_pressure_low);
+        sysHighTextView = topView.findViewById(R.id.tv_service_sys_pressure_high);
+        diaLowTextView = topView.findViewById(R.id.tv_service_dia_pressure_low);
+        diaHighTextView = topView.findViewById(R.id.tv_service_dia_pressure_high);
         titleTextView.setText("血压数据");
         allLinearLayout.setVisibility(View.VISIBLE);
         return topView;
@@ -96,19 +108,38 @@ public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActiv
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> oxygenList = new ArrayList<>();
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "80", "自动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "140/90", "60", "手动"));
-        callBack.callBack(oxygenList);
+        Call<String> requestCall = ServiceDataManager.getPressureStatistic(UserInfoUtils.getArchivesId(getPageContext()), startTime, endTime, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                pressureInfo = (HealthyDataAllInfo) response.object;
+                getPressureList(callBack);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getPressureStatistic", requestCall);
+    }
+
+    private void getPressureList(CallBack callBack) {
+        Call<String> requestCall = ServiceDataManager.getPressureList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                sysLowTextView.setText(null == pressureInfo.getMixSbpValue() ? "" : pressureInfo.getMixSbpValue());
+                sysHighTextView.setText(null == pressureInfo.getMaxSbpValue() ? "" : pressureInfo.getMaxSbpValue());
+                diaLowTextView.setText(null == pressureInfo.getMixDbpValue() ? "" : pressureInfo.getMixDbpValue());
+                diaHighTextView.setText(null == pressureInfo.getMaxDbpValue() ? "" : pressureInfo.getMaxDbpValue());
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("selectMonitorHtnList", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
         return new ServicePressureAdapter(getPageContext(), list);
     }
 
@@ -130,14 +161,14 @@ public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActiv
                 });
                 break;
             case R.id.tv_service_blood_data_end_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
-                            endTextView.setText(object.toString());
-                        } else {
-                            ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
-                        }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                    if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                        endTime = String.valueOf(object);
+                        endTextView.setText(object.toString());
+                        setPageIndex(1);
+                        onPageLoad();
+                    } else {
+                        ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                     }
                 });
                 break;
@@ -145,10 +176,22 @@ public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActiv
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
-                startActivity(new Intent(getPageContext(), ServicePressureAddActivity.class));
+                Intent intent = new Intent(getPageContext(), ServicePressureAddActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
         }
     }
 }

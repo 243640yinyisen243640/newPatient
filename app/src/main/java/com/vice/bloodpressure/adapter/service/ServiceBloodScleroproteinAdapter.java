@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import java.util.List;
  */
 public class ServiceBloodScleroproteinAdapter extends RecyclerView.Adapter<ServiceBloodScleroproteinAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServiceBloodScleroproteinAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceBloodScleroproteinAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,9 +41,9 @@ public class ServiceBloodScleroproteinAdapter extends RecyclerView.Adapter<Servi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.valueTextView.setText(info.getData());
+        HealthyDataChildInfo info = list.get(position);
+        holder.timeTextView.setText(info.getAddTime());
+        holder.valueTextView.setText(info.getBgValue() + "%");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity.aservice;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,9 +13,14 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.math.BigDecimal;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -31,8 +37,10 @@ public class ServiceBmiAddActivity extends UIBaseActivity implements View.OnClic
     private RulerView weightRulerView;
     private LinearLayout sureLinearLayout;
 
-    private String heightValue;
-    private String weightValue;
+    private String heightValue = "";
+    private String weightValue = "";
+
+    private String addTime = "";
 
 
     @Override
@@ -50,29 +58,33 @@ public class ServiceBmiAddActivity extends UIBaseActivity implements View.OnClic
         heightRulerView.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
-                heightValue = result;
+
                 //                sysValueTextView.setText(result);
                 heightValueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                heightValue = heightValueTextView.getText().toString().trim();
             }
 
             @Override
             public void onScrollResult(String result) {
                 //                sysValueTextView.setText(result);
                 heightValueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                heightValue = heightValueTextView.getText().toString().trim();
             }
         });
         weightRulerView.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
-                weightValue = result;
+
                 //                diaValueTextView.setText(result);
                 weightValueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                weightValue = weightValueTextView.getText().toString().trim();
             }
 
             @Override
             public void onScrollResult(String result) {
                 //                diaValueTextView.setText(result);
                 weightValueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                weightValue = weightValueTextView.getText().toString().trim();
             }
         });
     }
@@ -93,17 +105,40 @@ public class ServiceBmiAddActivity extends UIBaseActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_bmi_add_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, false}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M, new CallBack() {
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, new CallBack() {
                     @Override
                     public void callBack(Object object) {
-
+                        addTime = object.toString();
+                        timeTextView.setText(object.toString());
                     }
                 });
                 break;
             case R.id.ll_service_bmi_add_sure:
+                sureToAddData();
                 break;
             default:
                 break;
         }
+    }
+
+    private void sureToAddData() {
+       
+        if (TextUtils.isEmpty(addTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
+            return;
+        }
+
+        Call<String> requestCall = ServiceDataManager.insertMonitorOther(UserInfoUtils.getArchivesId(getPageContext()), "2", "2", addTime, "", "", "", heightValue, weightValue, "", "", "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), "失败");
+        });
+        addRequestCallToMap("insertMonitorOther", requestCall);
     }
 }

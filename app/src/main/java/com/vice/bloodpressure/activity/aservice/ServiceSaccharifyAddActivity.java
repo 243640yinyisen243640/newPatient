@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -12,12 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.utils.EditTextUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.SaccharifySeekBar;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -32,6 +38,8 @@ public class ServiceSaccharifyAddActivity extends UIBaseActivity implements View
     private LinearLayout sureLinearLayout;
     private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
     private TextWatcher textWatcher;
+
+    private String addTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,17 +113,43 @@ public class ServiceSaccharifyAddActivity extends UIBaseActivity implements View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_saccharify_add_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, false}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-
-                    }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
+                    addTime = object.toString();
+                    timeTextView.setText(object.toString());
                 });
                 break;
             case R.id.ll_service_saccharify_add_sure:
+                sureToAddData();
                 break;
             default:
                 break;
         }
+    }
+
+    private void sureToAddData() {
+        String sugarValue = rateEditText.getText().toString().trim();
+        if (TextUtils.isEmpty(sugarValue)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请输入糖化值");
+            return;
+        }
+
+        if (TextUtils.isEmpty(addTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
+            return;
+        }
+
+
+        Call<String> requestCall = ServiceDataManager.saveMonitorBg(UserInfoUtils.getArchivesId(getPageContext()), "9", "2", addTime, sugarValue, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("saveMonitorBg", requestCall);
     }
 }

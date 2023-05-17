@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import java.util.List;
  */
 public class ServiceBmiAdapter extends RecyclerView.Adapter<ServiceBmiAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServiceBmiAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceBmiAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,11 +41,11 @@ public class ServiceBmiAdapter extends RecyclerView.Adapter<ServiceBmiAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.heightTextView.setText(info.getRate()+"cm");
-        holder.weightTextView.setText(info.getType()+"kg");
-        holder.valueTextView.setText(info.getData());
+        HealthyDataChildInfo info = list.get(position);
+        holder.timeTextView.setText(info.getAddTime());
+        holder.heightTextView.setText(info.getHeight() + "cm");
+        holder.weightTextView.setText(info.getWeight() + "kg");
+        holder.valueTextView.setText(info.getBmi());
     }
 
     @Override
