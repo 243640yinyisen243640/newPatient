@@ -43,7 +43,7 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
     private TextView startTextView;
     private TextView endTextView;
 
-    private String startTime;
+    private String startTime="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

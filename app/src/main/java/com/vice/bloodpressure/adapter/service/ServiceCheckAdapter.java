@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.List;
@@ -24,10 +24,10 @@ import java.util.List;
  */
 public class ServiceCheckAdapter extends RecyclerView.Adapter<ServiceCheckAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServiceCheckAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceCheckAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,10 +43,10 @@ public class ServiceCheckAdapter extends RecyclerView.Adapter<ServiceCheckAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        XyImageUtils.loadRoundImage(context, R.drawable.choose_pic_default, info.getData(), holder.imgImageView);
-        holder.timeTextView.setText(info.getTime());
-        holder.nameTextView.setText(info.getType());
+        HealthyDataChildInfo info = list.get(position);
+        XyImageUtils.loadRoundImage(context, R.drawable.choose_pic_default, info.getAddTime(), holder.imgImageView);
+        holder.timeTextView.setText(info.getAddTime());
+        holder.nameTextView.setText(info.getAddTime());
     }
 
     @Override

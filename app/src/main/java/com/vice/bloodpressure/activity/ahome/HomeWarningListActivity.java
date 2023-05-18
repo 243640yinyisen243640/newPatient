@@ -55,7 +55,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
      */
     private TextView sureTv;
 
-    private String startTime;
+    private String startTime="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

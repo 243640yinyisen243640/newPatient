@@ -59,7 +59,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
      */
     private TextView cityTextView;
 
-    private String startTime;
+    private String startTime="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

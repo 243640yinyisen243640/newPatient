@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ import java.util.List;
  */
 public class ServiceTemperatureAdapter extends RecyclerView.Adapter<ServiceTemperatureAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServiceTemperatureAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceTemperatureAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,10 +41,10 @@ public class ServiceTemperatureAdapter extends RecyclerView.Adapter<ServiceTempe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.valueTextView.setText(info.getData());
-        holder.typeTextView.setText(info.getType());
+        HealthyDataChildInfo info = list.get(position);
+        holder.timeTextView.setText(info.getAddTime());
+        holder.valueTextView.setText(info.getTemp());
+        holder.typeTextView.setText("1".equals(info.getRecordType()) ? "自动上传" : "手动上传");
     }
 
     @Override

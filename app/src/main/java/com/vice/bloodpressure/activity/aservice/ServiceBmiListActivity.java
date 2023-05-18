@@ -52,8 +52,8 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
     private TextView avgTextView;
     private TextView highTextView;
 
-    private String startTime;
-    private String endTime;
+    private String startTime = "";
+    private String endTime = "";
 
     private HealthyDataAllInfo dataAllInfo;
 
@@ -163,6 +163,8 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                             endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
+                            setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }

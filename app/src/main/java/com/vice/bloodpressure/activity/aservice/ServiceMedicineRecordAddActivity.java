@@ -37,7 +37,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
     private TextView endTextView;
     private LinearLayout sureLinearLayout;
 
-    private String startTime;
+    private String startTime="";
     /**
      * 1：编辑 2：查看 3添加
      */

@@ -219,7 +219,7 @@ public class ServiceDataManager {
         map.put("bmi", bmi);
         map.put("spo", spo);
         map.put("temp", temp);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, null, "monitor/home/insertMonitorOther", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/home/insertMonitorOther", map, successCallBack, failureCallBack);
     }
 
 

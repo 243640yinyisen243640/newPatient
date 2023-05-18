@@ -36,7 +36,7 @@ public class ServiceMedicineRemindAddActivity extends UIBaseLoadActivity impleme
     private TextView timeTextView;
     private LinearLayout sureLinearLayout;
 
-    private String startTime;
+    private String startTime="";
     /**
      * 1：编辑 2：查看 3添加
      */

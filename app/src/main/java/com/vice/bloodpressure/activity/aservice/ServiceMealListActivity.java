@@ -43,7 +43,7 @@ public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<Servi
     private TextView startTextView;
     private TextView endTextView;
 
-    private String startTime;
+    private String startTime="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

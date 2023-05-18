@@ -21,15 +21,18 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -37,15 +40,15 @@ import java.util.List;
  * 传参:
  * 描述:检验检查列表
  */
-public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity<ServiceInfo> implements View.OnClickListener {
+public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity<HealthyDataChildInfo> implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
-    private TextView lowTextView;
-    private TextView highTextView;
 
-    private String startTime;
+    private String startTime="";
+    private String endTime="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +56,8 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
-        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
+        mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
         setPublicBottom();
@@ -66,8 +70,6 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         endTextView = topView.findViewById(R.id.tv_service_blood_data_end_time);
         TextView titleTextView = topView.findViewById(R.id.tv_service_blood_data_title);
         backImageView = topView.findViewById(R.id.iv_service_blood_data_back);
-        lowTextView = topView.findViewById(R.id.tv_service_blood_oxygen_low);
-        highTextView = topView.findViewById(R.id.tv_service_blood_oxygen_high);
         titleTextView.setText("检验检查");
         return topView;
     }
@@ -91,19 +93,20 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> oxygenList = new ArrayList<>();
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "项目名称"));
-        callBack.callBack(oxygenList);
+        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, "5", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("selectMonitorHtnList", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
         return new ServiceCheckAdapter(getPageContext(), list);
     }
 
@@ -140,10 +143,22 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
-                startActivity(new Intent(getPageContext(), ServiceCheckAddActivity.class));
+                Intent intent = new Intent(getPageContext(), ServiceCheckAddActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
         }
     }
 }

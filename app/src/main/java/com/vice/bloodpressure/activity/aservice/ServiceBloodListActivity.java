@@ -38,7 +38,7 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
 
-    private String startTime;
+    private String startTime="";
 
     private ArrayList<Fragment> fragments;
     private int checkPosition = 0;

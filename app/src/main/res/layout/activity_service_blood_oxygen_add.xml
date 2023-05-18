@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:gravity="center"
         android:orientation="horizontal"
@@ -42,8 +42,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="vertical"
@@ -122,8 +122,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="horizontal">
@@ -147,7 +147,7 @@
             android:paddingTop="20dp"
             android:paddingRight="15dp"
             android:paddingBottom="20dp"
-            android:text="2021-02-03 15:20"
+            android:text="请选择时间"
             android:textColor="@color/gray_8a"
             android:textSize="15sp" />
 

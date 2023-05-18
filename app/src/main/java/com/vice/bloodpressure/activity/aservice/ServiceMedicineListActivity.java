@@ -39,7 +39,7 @@ public class ServiceMedicineListActivity extends UIBaseActivity implements View.
     private RadioGroup radioGroup;
     private ViewPager2 viewPager;
 
-    private String startTime;
+    private String startTime="";
 
 
     @Override

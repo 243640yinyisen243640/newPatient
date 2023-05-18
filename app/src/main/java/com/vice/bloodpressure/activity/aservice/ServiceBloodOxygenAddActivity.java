@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity.aservice;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -9,12 +10,17 @@ import androidx.annotation.Nullable;
 
 import com.lsp.RulerView;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.math.BigDecimal;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -29,8 +35,8 @@ public class ServiceBloodOxygenAddActivity extends UIBaseActivity implements Vie
     private RulerView rulerView;
     private LinearLayout sureLinearLayout;
 
-    private String bloodValue;
-
+    private String bloodValue = "";
+    private String addTime = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,15 +53,17 @@ public class ServiceBloodOxygenAddActivity extends UIBaseActivity implements Vie
         rulerView.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
-                bloodValue = result;
+
                 //                valueTextView.setText(result);
                 valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                bloodValue = valueTextView.getText().toString().trim();
             }
 
             @Override
             public void onScrollResult(String result) {
                 //                valueTextView.setText(result);
                 valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                bloodValue = valueTextView.getText().toString().trim();
             }
         });
     }
@@ -74,17 +82,38 @@ public class ServiceBloodOxygenAddActivity extends UIBaseActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_blood_oxygen_add_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, false}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-
-                    }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
+                    addTime = object.toString();
+                    timeTextView.setText(object.toString());
                 });
+
                 break;
             case R.id.ll_service_blood_oxygen_add_sure:
+                sureToAddData();
                 break;
             default:
                 break;
         }
     }
+
+    private void sureToAddData() {
+        if (TextUtils.isEmpty(addTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
+            return;
+        }
+
+        Call<String> requestCall = ServiceDataManager.insertMonitorOther(UserInfoUtils.getArchivesId(getPageContext()), "5", "2", addTime, "", "", "", "", "", "", bloodValue, "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("insertMonitorOther", requestCall);
+    }
 }
+

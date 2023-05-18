@@ -45,7 +45,7 @@ public class ServiceBloodTypeActivity extends UIBaseLoadActivity implements View
     private int color6 = Color.parseColor("#5291FF");
     private int color7 = Color.parseColor("#3AD0BD");
     private int color8 = Color.parseColor("#7485E5");
-    private String startTime;
+    private String startTime="";
 
 
     @Override
