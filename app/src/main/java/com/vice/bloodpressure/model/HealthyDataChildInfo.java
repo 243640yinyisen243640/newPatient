@@ -61,6 +61,15 @@ public class HealthyDataChildInfo {
      */
     private String bgValue;
 
+    /**
+     * 运动类型
+     */
+    private String sportName;
+    /**
+     * 运动时间
+     */
+    private String sportTime;
+
 
     public String getRecordType() {
         return recordType;
@@ -156,5 +165,21 @@ public class HealthyDataChildInfo {
 
     public void setBgValue(String bgValue) {
         this.bgValue = bgValue;
+    }
+
+    public String getSportName() {
+        return sportName;
+    }
+
+    public void setSportName(String sportName) {
+        this.sportName = sportName;
+    }
+
+    public String getSportTime() {
+        return sportTime;
+    }
+
+    public void setSportTime(String sportTime) {
+        this.sportTime = sportTime;
     }
 }

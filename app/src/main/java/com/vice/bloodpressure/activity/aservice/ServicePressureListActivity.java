@@ -122,7 +122,7 @@ public class ServicePressureListActivity extends UIBaseListRecycleViewForBgActiv
     }
 
     private void getPressureList(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getPressureList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getPressureList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE+"", startTime, endTime, (call, response) -> {
             if ("0000".equals(response.code)) {
                 sysLowTextView.setText(null == pressureInfo.getMixSbpValue() ? "" : pressureInfo.getMixSbpValue());
                 sysHighTextView.setText(null == pressureInfo.getMaxSbpValue() ? "" : pressureInfo.getMaxSbpValue());

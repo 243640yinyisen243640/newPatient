@@ -119,7 +119,7 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<
     }
 
     private void getPressureList(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, "2", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE+"", startTime, endTime, "2", (call, response) -> {
             if ("0000".equals(response.code)) {
                 lowTextView.setText(null == dataAllInfo.getMinValue() ? "" : dataAllInfo.getMinValue());
                 avgTextView.setText(null == dataAllInfo.getAvgValue() ? "" : dataAllInfo.getAvgValue());

@@ -93,7 +93,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", startTime, endTime, "5", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "",BaseDataManager.PAGE_SIZE+"", startTime, endTime, "5", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {

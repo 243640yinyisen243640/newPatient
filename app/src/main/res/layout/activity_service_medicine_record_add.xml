@@ -78,22 +78,40 @@
                 android:textColorHint="@color/gray_8a"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tv_service_medicine_record_add_specs"
+            <LinearLayout
+                android:id="@+id/ll_service_medicine_record_add_specs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
                 android:background="@drawable/shape_bg_white_black_90_1"
-                android:drawableRight="@drawable/arrow_down_gray_little"
-                android:drawablePadding="13dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingStart="12dp"
                 android:paddingTop="7dp"
                 android:paddingEnd="12dp"
-                android:paddingBottom="7dp"
-                android:text="/盒"
-                android:textColor="@color/black_24"
-                android:textSize="15sp" />
+                android:paddingBottom="7dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/" />
+
+                <TextView
+                    android:id="@+id/tv_service_medicine_record_add_specs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="盒"
+                    android:textColor="@color/black_24"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13sp"
+                    android:drawableRight="@drawable/arrow_down_gray_little" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

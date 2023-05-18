@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.fragment.fservice;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,30 +29,39 @@ import com.vice.bloodpressure.utils.DialogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:用药提醒
  */
 public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFragment<ServiceInfo> {
-    public static ServiceMedicineRemindFragment getInstance(String text) {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
+    private TextView startTimeTextView;
+    private TextView endTimeTextView;
 
-        ServiceMedicineRemindFragment recordFragment = new ServiceMedicineRemindFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("", "");
-        recordFragment.setArguments(bundle);
-        return recordFragment;
-    }
+    private String startTime = "";
+    private String endTime = "";
 
     @Override
     protected void onCreate() {
         super.onCreate();
+        topViewManager().topView().removeAllViews();
+        topViewManager().topView().addView(initTopView());
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), false));
         mRecyclerView.setLayoutManager(layoutManager);
         setPublicBottom();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    private View initTopView() {
+        View topView = View.inflate(getPageContext(), R.layout.include_service_top_with_time_only, null);
+        startTimeTextView = topView.findViewById(R.id.tv_service_medicine_start_time);
+        endTimeTextView = topView.findViewById(R.id.tv_service_medicine_end_time);
+        return topView;
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
         addLinearLayout.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), ServiceMedicineRemindAddActivity.class);
             intent.putExtra("type", "3");
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
         });
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
@@ -122,5 +131,16 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }
     }
 }

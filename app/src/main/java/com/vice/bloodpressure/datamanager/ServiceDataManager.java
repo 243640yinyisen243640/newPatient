@@ -263,4 +263,126 @@ public class ServiceDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataChildInfo.class, "monitor/api/v2/otherApp/list", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * @param archivesId
+     * @param pageNum
+     * @param pageSize
+     * @param beginTime
+     * @param endTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getExerciseList(String archivesId, String pageNum, String pageSize, String beginTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataChildInfo.class, "monitor/api/v2/sportApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param patientId
+     * @param recordType      记录方式:1->自动记录;2->手动记录
+     * @param addTime         添加时间
+     * @param sportName       运动名称
+     * @param sportTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> saveMonitorSport(String patientId, String recordType, String addTime, String sportName, String sportTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("recordType", recordType);
+        map.put("addTime", addTime);
+        map.put("sportName", sportName);
+        map.put("sportTime", sportTime);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/home/saveMonitorSport", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 用药记录列表
+     *
+     * @param archivesId
+     * @param pageNum
+     * @param pageSize
+     * @param beginTime
+     * @param endTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getMedicineRecordList(String archivesId, String pageNum, String pageSize, String beginTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataChildInfo.class, "monitor/api/v2/drugApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 添加更新用药记录
+     *
+     * @param patientId
+     * @param pkId            更新的时候必填
+     * @param recordType      记录方式:1->自动记录;2->手动记录
+     * @param drugName        药品名称
+     * @param drugTimes       用药次数
+     * @param drugDose        用药剂量
+     * @param drugUnit        用药单位
+     * @param addTime         添加时间
+     * @param endTime         结束时间
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> medicineAdd(String patientId, String pkId, String recordType, String drugName,
+                                           String drugTimes, String drugDose, String drugUnit, String addTime,
+                                           String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pkId", pkId);
+        map.put("recordType", recordType);
+        map.put("drugName", drugName);
+        map.put("drugTimes", drugTimes);
+        map.put("drugDose", drugDose);
+        map.put("drugUnit", drugUnit);
+        map.put("addTime", addTime);
+        map.put("endTime", endTime);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugApp/add", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 删除用药记录
+     *
+     * @param pkId            药品ID
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> medicineDelete(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.deleteRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugApp/delete", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 用药记录查看
+     *
+     * @param pkId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> medicineLook(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataAllInfo.class, "monitor/api/v2/drugApp/select", map, successCallBack, failureCallBack);
+    }
+
 }

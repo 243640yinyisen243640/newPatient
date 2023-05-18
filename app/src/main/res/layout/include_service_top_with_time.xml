@@ -99,28 +99,6 @@
 
         </RadioGroup>
 
-        <RadioGroup
-            android:id="@+id/rg_service_medicine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/text_white"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <RadioButton
-                style="@style/service_medicine_rb_bottom"
-                android:checked="true"
-                android:paddingTop="15dp"
-                android:text="用药记录" />
-
-            <RadioButton
-                style="@style/service_medicine_rb_bottom"
-                android:paddingTop="15dp"
-                android:text="用药提醒" />
-
-
-        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"

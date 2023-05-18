@@ -52,6 +52,41 @@ public class HealthyDataAllInfo {
      */
 
     private String avgValue;
+    /**
+     * 药品名称
+     */
+
+    private String drugName;
+    /**
+     * 用药次数
+     */
+
+    private String drugTimes;
+    /**
+     * 用药剂量
+     */
+
+    private String drugDose;
+    /**
+     * 用药单位
+     */
+
+    private String drugUnit;
+    /**
+     * 添加时间
+     */
+
+    private String addTime;
+    /**
+     * 结束时间
+     */
+
+    private String endTime;
+    /**
+     * 记录方式:1->自动记录;2->手动记录
+     */
+
+    private String recordType;
 
 
     private List<HealthyDataChildInfo> value;
@@ -135,5 +170,61 @@ public class HealthyDataAllInfo {
 
     public void setAvgValue(String avgValue) {
         this.avgValue = avgValue;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getDrugTimes() {
+        return drugTimes;
+    }
+
+    public void setDrugTimes(String drugTimes) {
+        this.drugTimes = drugTimes;
+    }
+
+    public String getDrugDose() {
+        return drugDose;
+    }
+
+    public void setDrugDose(String drugDose) {
+        this.drugDose = drugDose;
+    }
+
+    public String getDrugUnit() {
+        return drugUnit;
+    }
+
+    public void setDrugUnit(String drugUnit) {
+        this.drugUnit = drugUnit;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getRecordType() {
+        return recordType;
+    }
+
+    public void setRecordType(String recordType) {
+        this.recordType = recordType;
     }
 }

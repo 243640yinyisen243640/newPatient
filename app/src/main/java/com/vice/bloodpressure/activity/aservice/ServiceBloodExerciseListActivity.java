@@ -21,15 +21,18 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -37,13 +40,15 @@ import java.util.List;
  * 传参:
  * 描述:运动列表
  */
-public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBgActivity<ServiceInfo> implements View.OnClickListener {
+public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBgActivity<HealthyDataChildInfo> implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
 
-    private String startTime="";
+    private String startTime = "";
+    private String endTime = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,17 +95,20 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> oxygenList = new ArrayList<>();
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "60", "步行工作/上学"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "60", "散步走"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "60", "步行工作/上学"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "60", "步行工作/上学"));
-        oxygenList.add(new ServiceInfo("2022-05-06 09:54", "60", "步行工作/上学"));
-        callBack.callBack(oxygenList);
+        Call<String> requestCall = ServiceDataManager.getExerciseList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE+"", startTime, endTime, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("selectMonitorHtnList", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
         return new ServiceBloodExerciseAdapter(getPageContext(), list);
     }
 
@@ -126,7 +134,10 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
                     @Override
                     public void callBack(Object object) {
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
+                            setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }
@@ -137,10 +148,22 @@ public class ServiceBloodExerciseListActivity extends UIBaseListRecycleViewForBg
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
-                startActivity(new Intent(getPageContext(), ServiceExerciseAddActivity.class));
+                Intent intent = new Intent(getPageContext(), ServiceExerciseAddActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
         }
     }
 }

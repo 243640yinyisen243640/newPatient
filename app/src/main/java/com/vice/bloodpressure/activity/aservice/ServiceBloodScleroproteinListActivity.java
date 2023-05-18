@@ -104,7 +104,7 @@ public class ServiceBloodScleroproteinListActivity extends UIBaseListRecycleView
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getBloodScleroproteinList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", "10", "9", startTime, endTime, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getBloodScleroproteinList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "",BaseDataManager.PAGE_SIZE+"", "9", startTime, endTime, (call, response) -> {
             if ("0000".equals(response.code)) {
                 HealthyDataAllInfo scleroproteinInfo = (HealthyDataAllInfo) response.object;
                 lowTextView.setText(null == scleroproteinInfo.getHbMin() ? "" : scleroproteinInfo.getHbMin());
