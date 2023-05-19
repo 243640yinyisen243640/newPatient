@@ -98,7 +98,7 @@ public class DataUtils {
             if (Integer.parseInt(mDay) > MaxDayFromDay_OF_MONTH(Integer.parseInt(mYear), (i + 1))) {
                 mDay = String.valueOf(MaxDayFromDay_OF_MONTH(Integer.parseInt(mYear), (i + 1)));
             }
-            String date = mMonth + "/" + mDay ;
+            String date = mMonth + "/" + mDay;
             dates.add(date);
         }
         return dates;
@@ -215,5 +215,23 @@ public class DataUtils {
         return mYear + "-" + (mMonth.length() == 1 ? "0" + mMonth : mMonth) + "-" + (mDay.length() == 1 ? "0" + mDay : mDay);
     }
 
-
+    /**
+     * @param beforeFormat
+     * @param laterFormat
+     * @param time
+     * @return
+     * @throws ParseException
+     */
+    public static String changeDataFormat(String beforeFormat, String laterFormat, String time)  {
+        SimpleDateFormat sdf1 = new SimpleDateFormat(beforeFormat);
+        SimpleDateFormat sdf2 = new SimpleDateFormat(laterFormat);
+        Date date = null;
+        try {
+            date = sdf1.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String format = sdf2.format(date);
+        return format;
+    }
 }

@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
+import com.vice.bloodpressure.utils.DataUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,16 +44,8 @@ public class ServicePressureAdapter extends RecyclerView.Adapter<ServicePressure
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataChildInfo info = list.get(position);
-        SimpleDateFormat sdf1 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S);
-        SimpleDateFormat sdf2 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M);
-        Date date = null;
-        try {
-            date = sdf1.parse(info.getAddTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String format = sdf2.format(date);
-        holder.timeTextView.setText(format);
+
+        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, info.getAddTime()));
         holder.valueTextView.setText(info.getSbp() + "/" + info.getDbp());
         holder.rateTextView.setText(info.getHr());
         holder.typeTextView.setText("1".equals(info.getRecordType()) ? "自动" : "手动");

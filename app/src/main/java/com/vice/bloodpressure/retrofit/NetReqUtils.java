@@ -217,6 +217,56 @@ public class NetReqUtils {
                         call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURL(methodName, requestParamsMap, files);
                     }
                 }
+            } else if (requestType == RequestType.DELETE) {
+                if (requestBodyType == RequestBodyType.FORM_URL_ENCODED_FIELD) {
+                    if (headerMap != null && headerMap.size() > 0) {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlWithHeader(methodName, paramMap, headerMap);
+                    } else {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrl(methodName, paramMap);
+                    }
+                } else if (requestBodyType == RequestBodyType.BODY_JSON) {
+                    // 遍历参数map，拼接成json
+                    StringBuilder paramStringBuilder = new StringBuilder();
+                    if (paramMap != null && paramMap.size() > 0) {
+                        paramStringBuilder.append("{");
+                        for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+                            paramStringBuilder.append("\"");
+                            paramStringBuilder.append(entry.getKey());
+                            paramStringBuilder.append("\"");
+                            paramStringBuilder.append(":");
+                            paramStringBuilder.append("\"");
+                            paramStringBuilder.append(entry.getValue());
+                            paramStringBuilder.append("\"");
+                            paramStringBuilder.append(",");
+                        }
+                        paramStringBuilder.deleteCharAt(paramStringBuilder.length() - 1);
+                        paramStringBuilder.append("}");
+                    }
+                    RequestBody requestBody = RequestBody.create(paramStringBuilder.toString(), MediaType.parse("application/json; charset=utf-8"));
+                    if (headerMap != null && headerMap.size() > 0) {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlWithHeaderForBody(methodName, headerMap, requestBody);
+                    } else {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlForBody(methodName, requestBody);
+                    }
+                } else if (requestBodyType == RequestBodyType.MULTIPART) {
+                    Map<String, RequestBody> requestParamsMap = new HashMap<>();
+                    if (paramMap != null && paramMap.size() > 0) {
+                        for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+                            requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
+                        }
+                    }
+                    List<MultipartBody.Part> files = new ArrayList<>();
+                    if (fileMap != null && fileMap.size() > 0) {
+                        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
+                            files.add(HHSoftNetworkUtils.toFileMultipartBodyPart(entry.getKey(), entry.getValue()));
+                        }
+                    }
+                    if (headerMap != null && headerMap.size() > 0) {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURLWithHeader(methodName, headerMap, requestParamsMap, files);
+                    } else {
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURL(methodName, requestParamsMap, files);
+                    }
+                }
             }
             if (call == null) {
                 throw new IllegalStateException("Object Call required is null.");
@@ -225,7 +275,7 @@ public class NetReqUtils {
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        Log.i(TAG,"response=="+response.toString());
+                        Log.i(TAG, "response==" + response.toString());
                         LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.ASYNC:onResponse：" + ip + methodName + "==" + response.code());
                         if (response.isSuccessful()) {
                             String respResult = response.body();

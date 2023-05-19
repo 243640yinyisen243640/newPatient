@@ -200,4 +200,17 @@ public abstract class UIBaseListRecycleViewForBgTopActivity<T> extends UIBaseLoa
     protected RecyclerView getPageListView() {
         return mRecyclerView;
     }
+
+    /**
+     * 获取页面列表数据
+     *
+     * @return
+     */
+    protected List<T> getPageListData() {
+        return mList;
+    }
+    protected void setPageIndex(int pageIndex) {
+        this.mPageIndex = pageIndex;
+    }
+
 }

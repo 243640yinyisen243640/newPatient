@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
 
@@ -23,12 +23,12 @@ import java.util.List;
  */
 public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicineAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
     private IAdapterViewClickListener clickListener;
     private String type;
 
 
-    public ServiceMedicineAdapter(Context context, List<ServiceInfo> list, String type, IAdapterViewClickListener clickListener) {
+    public ServiceMedicineAdapter(Context context, List<HealthyDataChildInfo> list, String type, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -46,14 +46,14 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.nameTextView.setText(info.getType());
-        holder.rateTextView.setText(info.getRate());
-        holder.valueTextView.setText(info.getData());
-        if ("1".equals(type)){
+        HealthyDataChildInfo info = list.get(position);
+        holder.timeTextView.setText(info.getWranTime());
+        holder.nameTextView.setText(info.getDrugName());
+        holder.rateTextView.setText(info.getDrugTimes());
+        holder.valueTextView.setText(info.getDrugDose());
+        if ("1".equals(type)) {
             holder.editTextView.setText("复制");
-        }else {
+        } else {
             holder.editTextView.setText("编辑");
         }
         clickOnClick clickOnClick = new clickOnClick(position);

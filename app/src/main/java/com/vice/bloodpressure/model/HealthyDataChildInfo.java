@@ -69,7 +69,63 @@ public class HealthyDataChildInfo {
      * 运动时间
      */
     private String sportTime;
+    /**
+     * 药品名称
+     */
 
+    private String drugName;
+    /**
+     * 药品规格单位
+     */
+
+    private String drugSpecUnit;
+    /**
+     * 药品规格
+     */
+
+    private String drugSpec;
+    /**
+     * 用药次数
+     */
+
+    private String drugTimes;
+    /**
+     * 用药剂量
+     */
+
+    private String drugDose;
+    /**
+     * 用药单位
+     */
+
+    private String drugUnit;
+
+    /**
+     * 结束时间
+     */
+
+    private String endTime;
+    /**
+     * 药品ID
+     */
+    private String pkId;
+
+    /**
+     * 提醒时间
+     */
+    private String wranTime;
+    /**
+     * 药品数量
+     */
+    private String drugNumber;
+    /**
+     * 药品用法(1饭前服,2饭后服,3舌下含服,4口服,5水煎服,6露化吸乳,7喉咙,8静滴,9肌注,10嚼服,11冲服,12外用,13外敷,14外洗,15皮下注射)
+     */
+    private String drugMode;
+    /**
+     * 用药剂量单位
+     */
+    private String drugDoseUnit;
 
     public String getRecordType() {
         return recordType;
@@ -181,5 +237,102 @@ public class HealthyDataChildInfo {
 
     public void setSportTime(String sportTime) {
         this.sportTime = sportTime;
+    }
+
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getDrugSpecUnit() {
+        return drugSpecUnit;
+    }
+
+    public void setDrugSpecUnit(String drugSpecUnit) {
+        this.drugSpecUnit = drugSpecUnit;
+    }
+
+    public String getDrugSpec() {
+        return drugSpec;
+    }
+
+    public void setDrugSpec(String drugSpec) {
+        this.drugSpec = drugSpec;
+    }
+
+    public String getDrugTimes() {
+        return drugTimes;
+    }
+
+    public void setDrugTimes(String drugTimes) {
+        this.drugTimes = drugTimes;
+    }
+
+    public String getDrugDose() {
+        return drugDose;
+    }
+
+    public void setDrugDose(String drugDose) {
+        this.drugDose = drugDose;
+    }
+
+    public String getDrugUnit() {
+        return drugUnit;
+    }
+
+    public void setDrugUnit(String drugUnit) {
+        this.drugUnit = drugUnit;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getPkId() {
+        return pkId;
+    }
+
+    public void setPkId(String pkId) {
+        this.pkId = pkId;
+    }
+
+    public String getWranTime() {
+        return wranTime;
+    }
+
+    public void setWranTime(String wranTime) {
+        this.wranTime = wranTime;
+    }
+
+    public String getDrugNumber() {
+        return drugNumber;
+    }
+
+    public void setDrugNumber(String drugNumber) {
+        this.drugNumber = drugNumber;
+    }
+
+    public String getDrugMode() {
+        return drugMode;
+    }
+
+    public void setDrugMode(String drugMode) {
+        this.drugMode = drugMode;
+    }
+
+    public String getDrugDoseUnit() {
+        return drugDoseUnit;
+    }
+
+    public void setDrugDoseUnit(String drugDoseUnit) {
+        this.drugDoseUnit = drugDoseUnit;
     }
 }

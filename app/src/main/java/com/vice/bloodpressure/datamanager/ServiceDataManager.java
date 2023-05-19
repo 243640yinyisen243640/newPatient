@@ -332,18 +332,20 @@ public class ServiceDataManager {
      * @param pkId            更新的时候必填
      * @param recordType      记录方式:1->自动记录;2->手动记录
      * @param drugName        药品名称
+     * @param drugSpec        药品规格
+     * @param drugSpecUnit    药品规格单位
      * @param drugTimes       用药次数
      * @param drugDose        用药剂量
      * @param drugUnit        用药单位
-     * @param addTime         添加时间
-     * @param endTime         结束时间
+     * @param addTime
+     * @param endTime
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
     public static Call<String> medicineAdd(String patientId, String pkId, String recordType, String drugName,
-                                           String drugTimes, String drugDose, String drugUnit, String addTime,
-                                           String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                           String drugSpec, String drugSpecUnit, String drugTimes, String drugDose, String drugUnit,
+                                           String addTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("pkId", pkId);
@@ -354,6 +356,8 @@ public class ServiceDataManager {
         map.put("drugUnit", drugUnit);
         map.put("addTime", addTime);
         map.put("endTime", endTime);
+        map.put("drugSpec", drugSpec);
+        map.put("drugSpecUnit", drugSpecUnit);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugApp/add", map, successCallBack, failureCallBack);
     }
 
@@ -382,7 +386,93 @@ public class ServiceDataManager {
     public static Call<String> medicineLook(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("pkId", pkId);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataAllInfo.class, "monitor/api/v2/drugApp/select", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataChildInfo.class, "monitor/api/v2/drugApp/select", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 用药提醒列表
+     *
+     * @param archivesId
+     * @param pageNum
+     * @param pageSize
+     * @param beginTime
+     * @param endTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDrugWarnAppList(String archivesId, String pageNum, String pageSize, String beginTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataChildInfo.class, "monitor/api/v2/drugWarnApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 删除用药提醒
+     *
+     * @param pkId            药品ID
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> drugWarnAppDelete(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.deleteRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugWarnApp/delete", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param patientId
+     * @param pkId
+     * @param recordType
+     * @param drugName
+     * @param drugSpec        药品规格
+     * @param drugSpecUnit    药品规格单位
+     * @param drugNumber      药品数量
+     * @param drugMode        药品用法(1饭前服,2饭后服,3舌下含服,4口服,5水煎服,6露化吸乳,7喉咙,8静滴,9肌注,10嚼服,11冲服,12外用,13外敷,14外洗,15皮下注射)
+     * @param drugTimes       用药次数(日)
+     * @param drugDose        用药剂量
+     * @param drugDoseUnit    用药剂量单位
+     * @param wranTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> drugWarnAppAdd(String patientId, String pkId, String recordType, String drugName,
+                                              String drugSpec, String drugSpecUnit, String drugNumber, String drugMode,
+                                              String drugTimes, String drugDose, String drugDoseUnit,
+                                              String wranTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pkId", pkId);
+        map.put("recordType", recordType);
+        map.put("drugName", drugName);
+        map.put("drugSpec", drugSpec);
+        map.put("drugSpecUnit", drugSpecUnit);
+        map.put("drugNumber", drugNumber);
+        map.put("drugMode", drugMode);
+        map.put("drugTimes", drugTimes);
+        map.put("drugDose", drugDose);
+        map.put("drugDoseUnit", drugDoseUnit);
+        map.put("wranTime", wranTime);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugWarnApp/add", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 查看药品提醒
+     *
+     * @param pkId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> drugWarnAppLook(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataChildInfo.class, "monitor/api/v2/drugWarnApp/select", map, successCallBack, failureCallBack);
+    }
 }

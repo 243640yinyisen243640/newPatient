@@ -10,12 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
-import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
+import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.utils.EditTextUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -31,7 +31,7 @@ import retrofit2.Call;
 /**
  * 作者: beauty
  * 类名:
- * 传参:type 1：编辑 2：查看
+ * 传参:type 1：编辑 2：查看   pkId 药品ID
  * 描述:添加用药
  */
 public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -85,13 +85,13 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
 
         if ("1".equals(type)) {
             topViewManager().titleTextView().setText("复制用药记录");
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
             nameEditText.setEnabled(false);
             isCanClick(true);
             sureLinearLayout.setVisibility(View.VISIBLE);
         } else if ("2".equals(type)) {
             topViewManager().titleTextView().setText("用药记录详情");
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
             nameEditText.setEnabled(false);
             isCanClick(false);
             sureLinearLayout.setVisibility(View.GONE);
@@ -119,25 +119,28 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
     protected void onPageLoad() {
         Call<String> requestCall = ServiceDataManager.medicineLook(pkId == null ? "" : pkId, (call, response) -> {
             if ("0000".equals(response.code)) {
-                HealthyDataAllInfo allInfo = (HealthyDataAllInfo) response.object;
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                HealthyDataChildInfo allInfo = (HealthyDataChildInfo) response.object;
                 bindData(allInfo);
             } else {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
         }, (call, t) -> {
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
-        addRequestCallToMap("saveMonitorBg", requestCall);
+        addRequestCallToMap("medicineLook", requestCall);
     }
 
-    private void bindData(HealthyDataAllInfo allInfo) {
+    private void bindData(HealthyDataChildInfo allInfo) {
         nameEditText.setText(allInfo.getDrugName());
-        specsEditText.setText(allInfo.getDrugDose());
-        specsTextView.setText(allInfo.getDrugUnit());
+        specsEditText.setText(allInfo.getDrugSpec());
+        specsTextView.setText(allInfo.getDrugSpecUnit());
         timesEditText.setText(allInfo.getDrugTimes());
         dosageEditText.setText(allInfo.getDrugDose());
-        startTextView.setText(allInfo.getAddTime());
-        endTextView.setText(allInfo.getEndTime());
+        dosageTextView.setText(allInfo.getDrugUnit());
+
+        startTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getAddTime()));
+        endTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getEndTime()));
     }
 
     private void initListener() {
@@ -176,24 +179,18 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
                 chooseTypeWindow("2", "药品剂量");
                 break;
             case R.id.tv_service_medicine_record_add_start:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        startTime = object.toString();
-                        startTextView.setText(object.toString());
-                    }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                    startTime = object.toString();
+                    startTextView.setText(object.toString());
                 });
                 break;
             case R.id.tv_service_medicine_record_add_end:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
-                    @Override
-                    public void callBack(Object object) {
-                        if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
-                            endTime = object.toString();
-                            endTextView.setText(object.toString());
-                        } else {
-                            ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
-                        }
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                    if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                        endTime = object.toString();
+                        endTextView.setText(object.toString());
+                    } else {
+                        ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                     }
                 });
                 break;
@@ -226,8 +223,16 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
             ToastUtils.getInstance().showToast(getPageContext(), "请输入服药剂量");
             return;
         }
+        if (TextUtils.isEmpty(startTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择开始时间");
+            return;
+        }
+        if (TextUtils.isEmpty(endTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择结束时间");
+            return;
+        }
 
-        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), "", "2", medicineName, medicineTimes, medicineDosage, specsTextView.getText().toString().trim(), startTime, endTime, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), pkId == null ? "" : pkId, "2", medicineName, medicineSpecs, specsTextView.getText().toString().trim(), medicineTimes, medicineDosage, dosageTextView.getText().toString().trim(), startTime + " 00:00:00", endTime + " 00:00:00", (call, response) -> {
             if ("0000".equals(response.code)) {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                 setResult(RESULT_OK);
@@ -238,7 +243,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("saveMonitorBg", requestCall);
+        addRequestCallToMap("medicineAdd", requestCall);
     }
 
     /**

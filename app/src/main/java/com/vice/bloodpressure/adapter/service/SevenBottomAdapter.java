@@ -14,10 +14,8 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.BloodChildInfo;
+import com.vice.bloodpressure.utils.DataUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,26 +61,8 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
 
         BloodChildInfo info = list.get(position);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat(DataFormatManager.TIME_FORMAT_Y_M_D);
-        SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
-        Date date = null;
-        try {
-            date = sdf1.parse(info.getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D, DataFormatManager.TIME_FORMAT_M_D_1, info.getDate()));
 
-        String format = sdf2.format(date);
-
-        holder.timeTextView.setText(format);
-
-        //        String paraStr = info.getDate().
-        //        substring(info.getDate().indexOf("-") + 1);
-        //        String[] paraStrs = paraStr.split("-");
-        //
-        //        if (paraStrs.length == 2) {
-        //            holder.timeTextView.setText(paraStrs[0] + "/" + paraStrs[1]);
-        //        }
         OnClick click = new OnClick(position);
         holder.dawnFrameLayout.setTag(0);
         holder.empFrameLayout.setTag(1);

@@ -24,10 +24,11 @@ import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgFragment;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
@@ -44,7 +45,7 @@ import static android.app.Activity.RESULT_OK;
  * 传参:
  * 描述:用药记录
  */
-public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFragment<ServiceInfo> implements View.OnClickListener {
+public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFragment<HealthyDataChildInfo> implements View.OnClickListener {
     private static final int REQUEST_CODE_FOR_FREFRESH = 1;
 
     private TextView startTimeTextView;
@@ -52,6 +53,8 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
 
     private String startTime = "";
     private String endTime = "";
+
+    private ServiceMedicineAdapter medicineAdapter;
 
     @Override
     protected void onCreate() {
@@ -102,15 +105,16 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
         addLinearLayout.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
             intent.putExtra("type", "3");
-            startActivityForResult(intent,REQUEST_CODE_FOR_FREFRESH);
+            intent.putExtra("pkId", "");
+            startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
         });
         f2.gravity = Gravity.BOTTOM;
         containerView().addView(view, f2);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
-        return new ServiceMedicineAdapter(getPageContext(), list, "1", new IAdapterViewClickListener() {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
+        return medicineAdapter = new ServiceMedicineAdapter(getPageContext(), list, "1", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 Intent intent;
@@ -119,18 +123,20 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
                         DialogUtils.showOperDialog(getPageContext(), "", "确定要删除吗？", "取消", "确定", (dialog, which) -> {
                             dialog.dismiss();
                             if (HHSoftDialogActionEnum.POSITIVE == which) {
-
+                                deleteData(position);
                             }
                         });
                         break;
                     case R.id.tv_item_service_medicine_edit:
                         intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
                         intent.putExtra("type", "1");
-                        startActivityForResult(intent,REQUEST_CODE_FOR_FREFRESH);
+                        intent.putExtra("pkId", getPageListData().get(position).getPkId());
+                        startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                         break;
                     case R.id.tv_item_service_medicine_look:
                         intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
                         intent.putExtra("type", "2");
+                        intent.putExtra("pkId", getPageListData().get(position).getPkId());
                         startActivity(intent);
                         break;
 
@@ -144,6 +150,19 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
 
             }
         });
+    }
+
+    private void deleteData(int position) {
+        Call<String> requestCall = ServiceDataManager.medicineDelete(getPageListData().get(position).getPkId(), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("medicineDelete", requestCall);
     }
 
     @Override
@@ -171,6 +190,7 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
                             endTime = object.toString();
                             endTimeTextView.setText(object.toString());
                             setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }

@@ -209,4 +209,12 @@ public abstract class UIBaseListRecycleViewActivity<T> extends UIBaseLoadActivit
     protected void setPageIndex(int pageIndex) {
         this.mPageIndex = pageIndex;
     }
+    /**
+     * 获取页面列表数据
+     *
+     * @return
+     */
+    protected List<T> getPageListData() {
+        return mList;
+    }
 }

@@ -192,5 +192,16 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
         mLoadingTextView = getViewByID(view, R.id.tv_load_status);
         containerView().addView(view);
     }
+    /**
+     * 获取页面列表数据
+     *
+     * @return
+     */
+    protected List<T> getPageListData() {
+        return mList;
+    }
+    protected void setPageIndex(int pageIndex) {
+        this.mPageIndex = pageIndex;
+    }
 
 }
