@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ import java.util.List;
  */
 public class ServiceMealChildListAdapter extends RecyclerView.Adapter<ServiceMealChildListAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataChildInfo> list;
 
 
-    public ServiceMealChildListAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceMealChildListAdapter(Context context, List<HealthyDataChildInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -44,10 +44,10 @@ public class ServiceMealChildListAdapter extends RecyclerView.Adapter<ServiceMea
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        setTextStyle(holder.fireTextView, context.getResources().getColor(R.color.red_E5), info.getData(), "千卡");
-        holder.titleTextView.setText(info.getTime());
-        holder.numTextView.setText(info.getType() + "g");
+        HealthyDataChildInfo info = list.get(position);
+        setTextStyle(holder.fireTextView, context.getResources().getColor(R.color.red_E5), info.getFoodBigCards(), "千卡");
+        holder.titleTextView.setText(info.getFoodName());
+        holder.numTextView.setText(info.getFoodWeight() + "g");
     }
 
     @Override

@@ -106,6 +106,11 @@ public class HealthyDataChildInfo {
 
     private String endTime;
     /**
+     * 结束时间
+     */
+
+    private String finishTime;
+    /**
      * 药品ID
      */
     private String pkId;
@@ -126,6 +131,18 @@ public class HealthyDataChildInfo {
      * 用药剂量单位
      */
     private String drugDoseUnit;
+    /**
+     * 食物名称
+     */
+    private String foodName;
+    /**
+     * 卡路里
+     */
+    private String foodBigCards;
+    /**
+     * 重量
+     */
+    private String foodWeight;
 
     public String getRecordType() {
         return recordType;
@@ -334,5 +351,37 @@ public class HealthyDataChildInfo {
 
     public void setDrugDoseUnit(String drugDoseUnit) {
         this.drugDoseUnit = drugDoseUnit;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getFoodBigCards() {
+        return foodBigCards;
+    }
+
+    public void setFoodBigCards(String foodBigCards) {
+        this.foodBigCards = foodBigCards;
+    }
+
+    public String getFoodWeight() {
+        return foodWeight;
+    }
+
+    public void setFoodWeight(String foodWeight) {
+        this.foodWeight = foodWeight;
+    }
+
+    public String getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
     }
 }

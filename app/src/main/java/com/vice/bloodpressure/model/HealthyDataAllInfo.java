@@ -52,7 +52,25 @@ public class HealthyDataAllInfo {
      */
 
     private String avgValue;
+    /**
+     * 添加时间
+     */
 
+    private String addTime;
+    /**
+     * 1：早餐  2：午餐  3：晚餐
+     */
+
+    private String eatPoint;
+    /**
+     * 总大卡
+     */
+
+    private String kcalCount;
+
+
+
+    private List<HealthyDataChildInfo> eatTypeDec;
 
 
     private List<HealthyDataChildInfo> value;
@@ -138,5 +156,35 @@ public class HealthyDataAllInfo {
         this.avgValue = avgValue;
     }
 
+    public String getAddTime() {
+        return addTime;
+    }
 
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    public String getEatPoint() {
+        return eatPoint;
+    }
+
+    public void setEatPoint(String eatPoint) {
+        this.eatPoint = eatPoint;
+    }
+
+    public String getKcalCount() {
+        return kcalCount;
+    }
+
+    public void setKcalCount(String kcalCount) {
+        this.kcalCount = kcalCount;
+    }
+
+    public List<HealthyDataChildInfo> getEatTypeDec() {
+        return eatTypeDec;
+    }
+
+    public void setEatTypeDec(List<HealthyDataChildInfo> eatTypeDec) {
+        this.eatTypeDec = eatTypeDec;
+    }
 }

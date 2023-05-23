@@ -47,8 +47,8 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
     private TextView startTextView;
     private TextView endTextView;
 
-    private String startTime="";
-    private String endTime="";
+    private String startTime = "";
+    private String endTime = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getBmiList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "",BaseDataManager.PAGE_SIZE+"", startTime, endTime, "5", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getCheckList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", startTime, endTime, "5", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {
@@ -102,7 +102,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
         }, (call, t) -> {
             callBack.callBack(null);
         });
-        addRequestCallToMap("selectMonitorHtnList", requestCall);
+        addRequestCallToMap("getCheckList", requestCall);
     }
 
     @Override
@@ -132,6 +132,7 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                     @Override
                     public void callBack(Object object) {
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");

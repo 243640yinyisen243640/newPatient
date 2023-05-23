@@ -21,15 +21,18 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -37,13 +40,15 @@ import java.util.List;
  * 传参:
  * 描述:饮食数据列表
  */
-public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<ServiceInfo> implements View.OnClickListener {
+public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<HealthyDataAllInfo> implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;
     private TextView startTextView;
     private TextView endTextView;
 
-    private String startTime="";
+    private String startTime = "";
+    private String endTime = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,23 +95,20 @@ public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<Servi
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> listText = new ArrayList<>();
-        listText.add(new ServiceInfo("2022-05-06", "午餐", "1260"));
-        listText.add(new ServiceInfo("2022-05-07", "早餐", "1260"));
-
-        List<ServiceInfo> childList = new ArrayList<>();
-        childList.add(new ServiceInfo("米饭", "118", "100"));
-        childList.add(new ServiceInfo("米饭", "118", "100"));
-        childList.add(new ServiceInfo("米饭", "118", "100"));
-
-        for (int i = 0; i < listText.size(); i++) {
-            listText.get(i).setList(childList);
-        }
-        callBack.callBack(listText);
+        Call<String> requestCall = ServiceDataManager.getMealList(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", startTime, endTime, "5", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getMealList", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataAllInfo> list) {
         return new ServiceMealAdapter(getPageContext(), list);
     }
 
@@ -132,6 +134,7 @@ public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<Servi
                     @Override
                     public void callBack(Object object) {
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
@@ -143,10 +146,22 @@ public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<Servi
                 finish();
                 break;
             case R.id.ll_service_base_bottom_sure:
-                startActivity(new Intent(getPageContext(), ServiceMealAddActivity.class));
+                Intent intent = new Intent(getPageContext(), ServiceMealAddActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_FREFRESH) {
+                setPageIndex(1);
+                onPageLoad();
+            }
         }
     }
 }

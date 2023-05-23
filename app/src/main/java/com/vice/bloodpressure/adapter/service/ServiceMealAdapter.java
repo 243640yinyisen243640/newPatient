@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
 
 import java.util.List;
 
@@ -23,10 +23,10 @@ import java.util.List;
  */
 public class ServiceMealAdapter extends RecyclerView.Adapter<ServiceMealAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataAllInfo> list;
 
 
-    public ServiceMealAdapter(Context context, List<ServiceInfo> list) {
+    public ServiceMealAdapter(Context context, List<HealthyDataAllInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -42,13 +42,20 @@ public class ServiceMealAdapter extends RecyclerView.Adapter<ServiceMealAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.valueTextView.setText(info.getData());
-        holder.fireTextView.setText(info.getType());
+        HealthyDataAllInfo info = list.get(position);
+        holder.timeTextView.setText(info.getAddTime());
+        if ("1".equals(info.getEatPoint())){
+            holder.valueTextView.setText("早餐");
+        }else if ("2".equals(info.getEatPoint())){
+            holder.valueTextView.setText("午餐");
+        }else {
+            holder.valueTextView.setText("晚餐");
+        }
+
+        holder.fireTextView.setText(info.getKcalCount());
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         holder.childRecyclerView.setLayoutManager(layoutManager);
-        ServiceMealChildListAdapter childListAdapter = new ServiceMealChildListAdapter(context, list.get(position).getList());
+        ServiceMealChildListAdapter childListAdapter = new ServiceMealChildListAdapter(context, list.get(position).getEatTypeDec());
         holder.childRecyclerView.setAdapter(childListAdapter);
     }
 

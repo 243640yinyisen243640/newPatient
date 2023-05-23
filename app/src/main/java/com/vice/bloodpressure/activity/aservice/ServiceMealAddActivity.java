@@ -35,6 +35,11 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     private TextView fireTextView;
     private LinearLayout sureLinearLayout;
 
+    /**
+     * 1:早餐  2：午餐  3：晚餐
+     */
+    private String eatPoint;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,11 +87,17 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
                 });
                 break;
             case R.id.ll_service_meal_add_sure:
+                sureToAddData();
                 break;
             default:
                 break;
         }
     }
+
+    private void sureToAddData() {
+
+    }
+
 
     private void chooseTypeWindow() {
         List<String> exerciseList = new ArrayList<>();
@@ -96,7 +107,7 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
 
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "饮食阶段", exerciseList, object -> {
                     stagetTextView.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-                    //                    exerciseType = exerciseList.get(Integer.parseInt(String.valueOf(object)));
+                    eatPoint = Integer.parseInt(String.valueOf(object)) + 1 + "";
                 }
         );
     }

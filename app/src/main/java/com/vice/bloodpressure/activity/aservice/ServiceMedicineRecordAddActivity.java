@@ -140,7 +140,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
         dosageTextView.setText(allInfo.getDrugUnit());
 
         startTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getAddTime()));
-        endTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getEndTime()));
+        endTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getFinishTime()));
     }
 
     private void initListener() {

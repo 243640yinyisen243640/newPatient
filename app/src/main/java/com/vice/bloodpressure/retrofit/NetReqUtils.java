@@ -6,7 +6,6 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +60,7 @@ public class NetReqUtils {
 
         private Map<String, String> headerMap;
         private Map<String, String> paramMap;
-        private Map<String, String> fileMap;
+        private List<MultipartBody.Part> files;
         private String ip;
         private String methodName;
 
@@ -74,7 +73,6 @@ public class NetReqUtils {
             this.requestBodyType = RequestBodyType.FORM_URL_ENCODED_FIELD;
             this.headerMap = new HashMap<>();
             this.paramMap = new HashMap<>();
-            this.fileMap = new LinkedHashMap<>();
         }
 
         public Call<String> build() {
@@ -105,11 +103,7 @@ public class NetReqUtils {
                 paramStringBuilder.append("}");
                 Log.i(TAG, "HHSoftNetReqUtils:paramJsonStr:" + paramStringBuilder.toString());
             }
-            if (fileMap != null && fileMap.size() > 0) {
-                for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-                    Log.i(TAG, "HHSoftNetReqUtils:fileMap:" + entry.getKey() + "==" + entry.getValue());
-                }
-            }
+
             Call<String> call = null;
             if (requestType == RequestType.GET) {
                 if (headerMap != null && headerMap.size() > 0) {
@@ -155,12 +149,7 @@ public class NetReqUtils {
                             requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
                         }
                     }
-                    List<MultipartBody.Part> files = new ArrayList<>();
-                    if (fileMap != null && fileMap.size() > 0) {
-                        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-                            files.add(HHSoftNetworkUtils.toFileMultipartBodyPart(entry.getKey(), entry.getValue()));
-                        }
-                    }
+
                     if (headerMap != null && headerMap.size() > 0) {
                         call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPostRequestMultipartURLWithHeader(methodName, headerMap, requestParamsMap, files);
                     } else {
@@ -206,11 +195,7 @@ public class NetReqUtils {
                         }
                     }
                     List<MultipartBody.Part> files = new ArrayList<>();
-                    if (fileMap != null && fileMap.size() > 0) {
-                        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-                            files.add(HHSoftNetworkUtils.toFileMultipartBodyPart(entry.getKey(), entry.getValue()));
-                        }
-                    }
+
                     if (headerMap != null && headerMap.size() > 0) {
                         call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURLWithHeader(methodName, headerMap, requestParamsMap, files);
                     } else {
@@ -255,12 +240,7 @@ public class NetReqUtils {
                             requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
                         }
                     }
-                    List<MultipartBody.Part> files = new ArrayList<>();
-                    if (fileMap != null && fileMap.size() > 0) {
-                        for (Map.Entry<String, String> entry : fileMap.entrySet()) {
-                            files.add(HHSoftNetworkUtils.toFileMultipartBodyPart(entry.getKey(), entry.getValue()));
-                        }
-                    }
+
                     if (headerMap != null && headerMap.size() > 0) {
                         call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURLWithHeader(methodName, headerMap, requestParamsMap, files);
                     } else {
@@ -375,9 +355,9 @@ public class NetReqUtils {
             return this;
         }
 
-        public Builder fileMap(LinkedHashMap<String, String> fileMap) {
-            if (fileMap != null && fileMap.size() > 0) {
-                this.fileMap = fileMap;
+        public Builder fileMap(List<MultipartBody.Part> files) {
+            if (files != null && files.size() > 0) {
+                this.files = files;
             }
             return this;
         }

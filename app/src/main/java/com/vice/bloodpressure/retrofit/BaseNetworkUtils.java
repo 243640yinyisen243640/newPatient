@@ -19,11 +19,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.functions.BiConsumer;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.HttpException;
 
@@ -61,7 +61,7 @@ public class BaseNetworkUtils {
      * @param accessToken     未保存token到本地之前，如果需要传token，此参数不能为空
      * @return
      */
-    public static Call<String> networkRequest(boolean isNeedAccessToken, String accessToken, NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> networkRequest(boolean isNeedAccessToken, String accessToken, NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, List<MultipartBody.Part> files, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> headerMap = new HashMap<>();
         headerMap.put("Authorization", UserInfoUtils.getAcceToken(XyApplication.getMyApplicationContext()));
         headerMap.put("Client-Tag", "app");
@@ -79,12 +79,12 @@ public class BaseNetworkUtils {
                 //请求参数
                 .paramMap(paramMap)
                 //传递的文件参数
-                .fileMap(fileMap)
+                .fileMap(files)
                 //请求成功
                 .successCallBack((call, result) -> processJsonParse(call, result, jsonParseMode, clazz, successCallBack))
                 //请求失败
                 .failureCallBack((call, t) -> {
-                    processFailureCallBack(requestType, requestBodyType, isNeedAccessToken, jsonParseMode, clazz, ConstantParamNew.IP, methodName, paramMap, fileMap, call, t, successCallBack, failureCallBack);
+                    processFailureCallBack(requestType, requestBodyType, isNeedAccessToken, jsonParseMode, clazz, ConstantParamNew.IP, methodName, paramMap, files, call, t, successCallBack, failureCallBack);
                 }).build();
     }
 
@@ -99,14 +99,14 @@ public class BaseNetworkUtils {
      * @param ip
      * @param methodName
      * @param paramMap
-     * @param fileMap
+     * @param files
      * @param failureCall
      * @param failureThrowable
      * @param successCallBack
      * @param failureCallBack
      * @throws Exception
      */
-    public static void processFailureCallBack(NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, boolean isNeedAccessToken, @JsonParseMode int parseMode, Class clazz, String ip, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, Call<String> failureCall, Throwable failureThrowable, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) throws Exception {
+    public static void processFailureCallBack(NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, boolean isNeedAccessToken, @JsonParseMode int parseMode, Class clazz, String ip, String methodName, Map<String, String> paramMap, List<MultipartBody.Part> files , Call<String> failureCall, Throwable failureThrowable, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) throws Exception {
         Log.i(TAG, "failureCallBack: ");
         if (failureThrowable instanceof HttpException && 401 == ((HttpException) failureThrowable).response().code()) {
 
@@ -178,8 +178,8 @@ public class BaseNetworkUtils {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.DELETE, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
-    public static Call<String> uploadImgRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, LinkedHashMap<String, String> fileMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.POST, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, fileMap, successCallBack, failureCallBack);
+    public static Call<String> uploadImgRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, List<MultipartBody.Part> files, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.POST, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, files, successCallBack, failureCallBack);
     }
 
 

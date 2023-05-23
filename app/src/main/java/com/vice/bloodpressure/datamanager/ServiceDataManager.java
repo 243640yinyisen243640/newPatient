@@ -2,15 +2,21 @@ package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.BloodAllInfo;
 import com.vice.bloodpressure.model.BloodThirdInfo;
+import com.vice.bloodpressure.model.GalleryInfo;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
+import com.vice.bloodpressure.retrofit.HHSoftNetworkUtils;
+import com.vice.bloodpressure.view.image.GalleryUploadImageInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.functions.BiConsumer;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 
 /**
@@ -337,7 +343,6 @@ public class ServiceDataManager {
      * @param drugTimes       用药次数
      * @param drugDose        用药剂量
      * @param drugUnit        用药单位
-     * @param addTime
      * @param endTime
      * @param successCallBack
      * @param failureCallBack
@@ -345,7 +350,7 @@ public class ServiceDataManager {
      */
     public static Call<String> medicineAdd(String patientId, String pkId, String recordType, String drugName,
                                            String drugSpec, String drugSpecUnit, String drugTimes, String drugDose, String drugUnit,
-                                           String addTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                           String finishTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("pkId", pkId);
@@ -354,7 +359,7 @@ public class ServiceDataManager {
         map.put("drugTimes", drugTimes);
         map.put("drugDose", drugDose);
         map.put("drugUnit", drugUnit);
-        map.put("addTime", addTime);
+        map.put("finishTime", finishTime);
         map.put("endTime", endTime);
         map.put("drugSpec", drugSpec);
         map.put("drugSpecUnit", drugSpecUnit);
@@ -474,5 +479,125 @@ public class ServiceDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("pkId", pkId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataChildInfo.class, "monitor/api/v2/drugWarnApp/select", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 获取食物列表
+     *
+     * @param patientId
+     * @param pageNum
+     * @param pageSize
+     * @param beginTime
+     * @param endTime
+     * @param type
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getMealList(String patientId, String pageNum, String pageSize, String beginTime, String endTime, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataAllInfo.class, "monitor/api/v2/dietApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 添加饮食数据
+     *
+     * @param patientId
+     * @param pkId
+     * @param recordType
+     * @param eatPoint
+     * @param addTime
+     * @param foodName
+     * @param foodBigCards
+     * @param foodWeight
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> mealAdd(String patientId, String pkId, String recordType, String eatPoint, String addTime,
+                                       String foodName, String foodBigCards, String foodWeight, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pkId", pkId);
+        map.put("recordType", recordType);
+        map.put("addTime", addTime);
+        map.put("eatPoint", eatPoint);
+        map.put("foodName", foodName);
+        map.put("foodBigCards", foodBigCards);
+        map.put("foodWeight", foodWeight);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/dietApp/saveOrUpdate", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 上传多图
+     *
+     * @param imagesList
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> userUploadImgMultipleSheets(List<GalleryUploadImageInfo> imagesList, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("bucketName", "inspect");
+        List<MultipartBody.Part> files = new ArrayList<>();
+        if (imagesList != null && imagesList.size() > 0) {
+            for (int i = 0; i < imagesList.size(); i++) {
+                files.add(HHSoftNetworkUtils.toFileMultipartBodyPart("files", imagesList.get(i).getThumbImage()));
+            }
+        }
+        return BaseNetworkUtils.uploadImgRequest(false, BaseNetworkUtils.JSON_OBJECT, GalleryInfo.class, "file/upload/v2", map, files, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 获取检验检查列表
+     *
+     * @param patientId
+     * @param pageNum
+     * @param pageSize
+     * @param beginTime
+     * @param endTime
+     * @param type
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCheckList(String patientId, String pageNum, String pageSize, String beginTime, String endTime, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HealthyDataChildInfo.class, "monitor/api/v2/inspectApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 检验检查添加
+     *
+     * @param patientId
+     * @param recordType
+     * @param projectName
+     * @param fileItem
+     * @param addTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> checkAdd(String patientId, String recordType, String projectName, String fileItem,
+                                        String addTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("recordType", recordType);
+        map.put("projectName", projectName);
+        map.put("fileItem", fileItem);
+        map.put("addTime", addTime);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/inspectApp/add", map, successCallBack, failureCallBack);
     }
 }
