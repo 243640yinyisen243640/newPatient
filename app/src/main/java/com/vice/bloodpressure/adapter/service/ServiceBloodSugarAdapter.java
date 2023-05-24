@@ -13,9 +13,6 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.BloodThirdInfo;
 import com.vice.bloodpressure.utils.DataUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +51,7 @@ public class ServiceBloodSugarAdapter extends RecyclerView.Adapter<ServiceBloodS
         //记录方式:1->自动记录;2->手动记录
         if ("1".equals(info.getRecordType())) {
             holder.typeTextView.setText("自动上传");
+
         } else {
             holder.typeTextView.setText("手动上传");
         }
