@@ -132,6 +132,8 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
     }
 
     private void bindData(HealthyDataChildInfo allInfo) {
+        startTime = allInfo.getAddTime();
+        startTime = allInfo.getFinishTime();
         nameEditText.setText(allInfo.getDrugName());
         specsEditText.setText(allInfo.getDrugSpec());
         specsTextView.setText(allInfo.getDrugSpecUnit());
@@ -232,7 +234,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
             return;
         }
 
-        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), pkId == null ? "" : pkId, "2", medicineName, medicineSpecs, specsTextView.getText().toString().trim(), medicineTimes, medicineDosage, dosageTextView.getText().toString().trim(), startTime + " 00:00:00", endTime + " 00:00:00", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), pkId == null ? "" : "", "2", medicineName, medicineSpecs, specsTextView.getText().toString().trim(), medicineTimes, medicineDosage, dosageTextView.getText().toString().trim(), startTime + " 00:00:00", endTime + " 00:00:00", (call, response) -> {
             if ("0000".equals(response.code)) {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                 setResult(RESULT_OK);

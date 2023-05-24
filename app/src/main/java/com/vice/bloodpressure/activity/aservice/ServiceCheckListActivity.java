@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.service.ServiceCheckAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
@@ -107,7 +108,26 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
-        return new ServiceCheckAdapter(getPageContext(), list);
+        return new ServiceCheckAdapter(getPageContext(), list, new IAdapterViewClickListener() {
+            @Override
+            public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.ll_item_service_check_click:
+                        Intent intent = new Intent(getPageContext(), ServiceCheckAddActivity.class);
+                        intent.putExtra("pkId", getPageListData().get(position).getPkId());
+                        intent.putExtra("type", "2");
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void adapterClickListener(int position, int index, View view) {
+
+            }
+        });
     }
 
     @Override
@@ -134,6 +154,8 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                             endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
+                            setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }
@@ -145,6 +167,8 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                 break;
             case R.id.ll_service_base_bottom_sure:
                 Intent intent = new Intent(getPageContext(), ServiceCheckAddActivity.class);
+                intent.putExtra("pkId", "");
+                intent.putExtra("type", "1");
                 startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
                 break;
             default:

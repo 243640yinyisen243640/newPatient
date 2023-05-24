@@ -600,4 +600,17 @@ public class ServiceDataManager {
         map.put("addTime", addTime);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/inspectApp/add", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 检验检查查看
+     * @param pkId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> checkLook(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataChildInfo.class, "monitor/api/v2/inspectApp/select", map, successCallBack, failureCallBack);
+    }
 }

@@ -13,10 +13,13 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IImageBrower;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.GalleryInfo;
+import com.vice.bloodpressure.model.HealthyDataChildInfo;
+import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -39,7 +42,7 @@ import static com.vice.bloodpressure.utils.config.PictureConfig.CHOOSE_REQUEST;
 /**
  * 作者: beauty
  * 类名:
- * 传参:
+ * 传参:type 1：添加 2：编辑   pkId：检验检查ID
  * 描述:添加检验检查数据
  */
 public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -51,14 +54,36 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
      * 添加时间
      */
     private String addTime = "";
+    /**
+     * 检验检查ID
+     */
+    private String pkId = "";
+    /**
+     * 1：添加 2:编辑
+     */
+    private String type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("添加检验检查数据");
+        pkId = getIntent().getStringExtra("pkId");
+        type = getIntent().getStringExtra("type");
+
+
         initView();
         initValues();
         initListener();
+        if ("1".equals(type)) {
+            topViewManager().titleTextView().setText("添加检验检查数据");
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+        } else {
+            topViewManager().titleTextView().setText("检验检查详情");
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
+            nameEditText.setEnabled(false);
+            timeTextView.setEnabled(false);
+            uploadImageView.setEnabled(false);
+        }
+
     }
 
     private void initValues() {
@@ -117,6 +142,37 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = ServiceDataManager.checkLook(pkId == null ? "" : pkId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                HealthyDataChildInfo allInfo = (HealthyDataChildInfo) response.object;
+                bindData(allInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("medicineLook", requestCall);
+    }
+
+    private void bindData(HealthyDataChildInfo allInfo) {
+
+        nameEditText.setText(allInfo.getProjectName());
+
+        timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getAddTime()));
+
+        //        List<GalleryInfo> serverAuthGalleryList = new ArrayList<>();
+        //        serverAuthGalleryList.addAll(goodsInfo.getAuditImgGalleryList());
+        //        List<GalleryUploadImageInfo> uploadImageAuthList = new ArrayList<>();
+        //        if (serverAuthGalleryList != null && serverAuthGalleryList.size() != 0) {
+        //            for (int i = 0; i < serverAuthGalleryList.size(); i++) {
+        //                GalleryUploadImageInfo imageInfo = new GalleryUploadImageInfo();
+        //                imageInfo.setThumbImage(serverAuthGalleryList.get(i).getThumbImg());
+        //                uploadImageAuthList.add(imageInfo);
+        //            }
+        //            uploadImageView.addItemsForServer(uploadImageAuthList);
+        //        }
 
     }
 
@@ -185,7 +241,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
             if ("0000".equals(response.code)) {
                 GalleryInfo galleryInfo = (GalleryInfo) response.object;
                 String imgString = "";
-                imgString = galleryInfo.getUrl();
+                imgString = galleryInfo.getName();
 
                 commentSure(content, imgString);
             }

@@ -143,6 +143,14 @@ public class HealthyDataChildInfo {
      * 重量
      */
     private String foodWeight;
+    /**
+     * 检验检查项目名称
+     */
+    private String projectName;
+    /**
+     * 检验检查项目封面图
+     */
+    private String fileItem;
 
     public String getRecordType() {
         return recordType;
@@ -383,5 +391,21 @@ public class HealthyDataChildInfo {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getFileItem() {
+        return fileItem;
+    }
+
+    public void setFileItem(String fileItem) {
+        this.fileItem = fileItem;
     }
 }

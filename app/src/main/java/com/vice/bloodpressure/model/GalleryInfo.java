@@ -16,8 +16,14 @@ public class GalleryInfo implements Serializable, IImageBrower {
     private String thumbImg;
     private String bigImg;
     private String sourceImg;
-
+    /**
+     * 检验检查图片路径
+     */
     private String url;
+    /**
+     * 检验检查图片名称
+     */
+    private String name;
 
     public String getUrl() {
         return url;
@@ -49,6 +55,14 @@ public class GalleryInfo implements Serializable, IImageBrower {
 
     public void setSourceImg(String sourceImg) {
         this.sourceImg = sourceImg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
