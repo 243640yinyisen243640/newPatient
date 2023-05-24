@@ -32,11 +32,12 @@
         <TextView
             android:id="@+id/tv_browser_download"
             style="@style/HuaHanSoft.Wrap"
-            android:textColor="@color/text_white"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="10dp"
             android:text="下载"
-            android:padding="10dp" />
+            android:textColor="@color/text_white"
+            android:visibility="gone" />
     </RelativeLayout>
 
 

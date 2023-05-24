@@ -47,7 +47,7 @@ public class ServiceCheckAdapter extends RecyclerView.Adapter<ServiceCheckAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataChildInfo info = list.get(position);
-        XyImageUtils.loadRoundImage(context, R.drawable.choose_pic_default, info.getFileItem(), holder.imgImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.choose_pic_default, info.getFileUrls().get(0), holder.imgImageView);
         holder.timeTextView.setText(info.getAddTime());
         holder.nameTextView.setText(info.getProjectName());
         clickOnClick clickOnClick = new clickOnClick(position);

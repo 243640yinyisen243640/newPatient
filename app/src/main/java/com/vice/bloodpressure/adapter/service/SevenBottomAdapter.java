@@ -35,13 +35,13 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
-
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < 8; j++) {
-                int v = (int) (Math.random() * 100);
-                list.get(i).getValue().get(j).setBgValue(v + "");
-            }
-        }
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            for (int j = 0; j < 8; j++) {
+//                int v = (int) (Math.random() * 100);
+//                list.get(i).getValue().get(j).setBgValue(v + "");
+//            }
+//        }
 
 
     }
@@ -107,7 +107,6 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         holder.dinnerBeforeTextView.setText(info.getValue().get(5).getBgValue());
         holder.dinnerLaterTextView.setText(info.getValue().get(6).getBgValue());
         holder.bedTimeTextView.setText(info.getValue().get(7).getBgValue());
-
     }
 
     /**

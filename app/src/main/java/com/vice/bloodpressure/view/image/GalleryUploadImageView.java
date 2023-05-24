@@ -64,7 +64,9 @@ public class GalleryUploadImageView extends LinearLayout {
         }
         this.setOrientation(VERTICAL);
         List<String> tempList = new ArrayList<>();
-        tempList.add("add");
+        if (builder.mIsEdit){
+            tempList.add("add");
+        }
         addItems(tempList);
     }
 
@@ -142,17 +144,9 @@ public class GalleryUploadImageView extends LinearLayout {
      */
     public List<GalleryUploadImageInfo> getChooseImageList() {
         List<GalleryUploadImageInfo> imageList = new ArrayList<>();
-        if (builder.mIsEdit) {
-            for (GalleryUploadImageInfo gallery : mList) {
-                if (!"add".equals(gallery.thumbImage()) && "0".equals(gallery.getGalleryId())) {
-                    imageList.add(gallery);
-                }
-            }
-        } else {
-            imageList.addAll(mList);
-            if ("add".equals(imageList.get(imageList.size() - 1).thumbImage())) {
-                imageList.remove(imageList.size() - 1);
-            }
+        imageList.addAll(mList);
+        if ("add".equals(imageList.get(imageList.size() - 1).thumbImage())) {
+            imageList.remove(imageList.size() - 1);
         }
         return imageList;
     }
@@ -226,29 +220,31 @@ public class GalleryUploadImageView extends LinearLayout {
         });
 
 
-        if ("add".equals(model.thumbImage())) {
-            imageView.setImageResource(R.drawable.choose_pic_default);
-            deleteImageView.setVisibility(GONE);
-        } else {
-            if (builder.mListener != null) {
-                builder.mListener.onLoadImage(model.getBigImage(), imageView);
-            }
-            XyImageUtils.loadRoundImage(getContext(), getDefaultImage(), model.thumbImage(), imageView);
-            deleteImageView.setVisibility(VISIBLE);
-            deleteImageView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (builder.mIsEdit) {
+        if (builder.mIsEdit){
+            if ("add".equals(model.thumbImage())) {
+                imageView.setImageResource(R.drawable.choose_pic_default);
+                deleteImageView.setVisibility(GONE);
+            } else {
+                if (builder.mListener != null) {
+                    builder.mListener.onLoadImage(model.getBigImage(), imageView);
+                }
+                XyImageUtils.loadRoundImage(getContext(), getDefaultImage(), model.thumbImage(), imageView);
+                deleteImageView.setVisibility(VISIBLE);
+                deleteImageView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteImage(position);
                         if (builder.mListener != null) {
                             builder.mListener.onDeleteImage(position, mList.get(position).getGalleryId());
                         }
-                    } else {
-                        deleteImage(position);
                     }
-
-                }
-            });
+                });
+            }
+        }else {
+            XyImageUtils.loadRoundImage(getContext(), getDefaultImage(), model.thumbImage(), imageView);
+            deleteImageView.setVisibility(GONE);
         }
+
         return view;
     }
 
@@ -268,6 +264,7 @@ public class GalleryUploadImageView extends LinearLayout {
         private int mPaddingWidth = 20;//默认20px
         private int mDefaultImageRes = -1;
         private int mDefaultAddRes = -1;
+        //是否编辑   编辑可删除
         private boolean mIsEdit = false;
         private IGalleryUploadImageListener mListener;
 

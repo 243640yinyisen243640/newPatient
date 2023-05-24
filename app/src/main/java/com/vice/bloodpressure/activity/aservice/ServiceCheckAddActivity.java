@@ -76,12 +76,14 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
         if ("1".equals(type)) {
             topViewManager().titleTextView().setText("添加检验检查数据");
             loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            sureLinearLayout.setVisibility(View.VISIBLE);
         } else {
             topViewManager().titleTextView().setText("检验检查详情");
             loadViewManager().changeLoadState(LoadStatus.LOADING);
             nameEditText.setEnabled(false);
             timeTextView.setEnabled(false);
             uploadImageView.setEnabled(false);
+            sureLinearLayout.setVisibility(View.GONE);
         }
 
     }
@@ -92,6 +94,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
                 .rowMaxCount(3)
                 .defaultImage(R.drawable.choose_pic_default)
                 .paddingWidth(DensityUtils.dip2px(getPageContext(), 10))
+                .isEdit("1".equals(type) ? true : false)
                 .totalWidth(ScreenUtils.screenWidth(getPageContext()) - DensityUtils.dip2px(getPageContext(), 40))
                 .uploadImageListener(new GalleryUploadImageView.IGalleryUploadImageListener() {
 
@@ -136,7 +139,6 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
         timeTextView = view.findViewById(R.id.tv_service_check_add_time);
         sureLinearLayout = view.findViewById(R.id.ll_service_check_sure);
         uploadImageView = view.findViewById(R.id.guiv_check_add);
-
         containerView().addView(view);
     }
 
@@ -162,19 +164,15 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
 
         timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getAddTime()));
 
-        //        List<GalleryInfo> serverAuthGalleryList = new ArrayList<>();
-        //        serverAuthGalleryList.addAll(goodsInfo.getAuditImgGalleryList());
-        //        List<GalleryUploadImageInfo> uploadImageAuthList = new ArrayList<>();
-        //        if (serverAuthGalleryList != null && serverAuthGalleryList.size() != 0) {
-        //            for (int i = 0; i < serverAuthGalleryList.size(); i++) {
-        //                GalleryUploadImageInfo imageInfo = new GalleryUploadImageInfo();
-        //                imageInfo.setThumbImage(serverAuthGalleryList.get(i).getThumbImg());
-        //                uploadImageAuthList.add(imageInfo);
-        //            }
-        //            uploadImageView.addItemsForServer(uploadImageAuthList);
-        //        }
 
+        List<GalleryUploadImageInfo> uploadImageAuthList = new ArrayList<>();
+        for (int i = 0; i < allInfo.getFileUrls().size(); i++) {
+            uploadImageAuthList.add(new GalleryUploadImageInfo(allInfo.getFileUrls().get(i)));
+        }
+
+        uploadImageView.addItemsForServer(uploadImageAuthList);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

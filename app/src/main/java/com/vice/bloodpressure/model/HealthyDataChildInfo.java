@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.model;
 
+import java.util.List;
+
 /**
  * 作者: beauty
  * 类名:
@@ -151,6 +153,8 @@ public class HealthyDataChildInfo {
      * 检验检查项目封面图
      */
     private String fileItem;
+
+    private List<String> fileUrls;
 
     public String getRecordType() {
         return recordType;
@@ -407,5 +411,14 @@ public class HealthyDataChildInfo {
 
     public void setFileItem(String fileItem) {
         this.fileItem = fileItem;
+    }
+
+
+    public List<String> getFileUrls() {
+        return fileUrls;
+    }
+
+    public void setFileUrls(List<String> fileUrls) {
+        this.fileUrls = fileUrls;
     }
 }
