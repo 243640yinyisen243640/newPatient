@@ -15,7 +15,6 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
-import com.vice.bloodpressure.utils.DataUtils;
 import com.vice.bloodpressure.utils.EditTextUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -54,6 +53,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
      */
     private EditText dosageEditText;
     private TextView dosageTextView;
+    private LinearLayout dosageLinearLayout;
     /**
      * 筛选的开始结束时间
      */
@@ -112,6 +112,8 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
         specsEditText.setEnabled(isCanClick);
         startTextView.setEnabled(isCanClick);
         endTextView.setEnabled(isCanClick);
+        specsLinearLayout.setEnabled(isCanClick);
+        dosageLinearLayout.setEnabled(isCanClick);
     }
 
 
@@ -141,13 +143,13 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
         dosageEditText.setText(allInfo.getDrugDose());
         dosageTextView.setText(allInfo.getDrugUnit());
 
-        startTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getAddTime()));
-        endTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, allInfo.getFinishTime()));
+        startTextView.setText(allInfo.getAddTime());
+        endTextView.setText(allInfo.getFinishTime());
     }
 
     private void initListener() {
         specsLinearLayout.setOnClickListener(this);
-        dosageTextView.setOnClickListener(this);
+        dosageLinearLayout.setOnClickListener(this);
         startTextView.setOnClickListener(this);
         endTextView.setOnClickListener(this);
         sureLinearLayout.setOnClickListener(this);
@@ -162,6 +164,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
         timesEditText = view.findViewById(R.id.et_service_medicine_record_add_times);
         dosageEditText = view.findViewById(R.id.et_service_medicine_record_add_dosage);
         dosageTextView = view.findViewById(R.id.tv_service_medicine_record_add_dosage);
+        dosageLinearLayout = view.findViewById(R.id.ll_service_medicine_record_add_dosage);
         startTextView = view.findViewById(R.id.tv_service_medicine_record_add_start);
         endTextView = view.findViewById(R.id.tv_service_medicine_record_add_end);
         sureLinearLayout = view.findViewById(R.id.ll_service_medicine_record_add_sure);
@@ -181,13 +184,13 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
                 chooseTypeWindow("2", "药品剂量");
                 break;
             case R.id.tv_service_medicine_record_add_start:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
                     startTime = object.toString();
                     startTextView.setText(object.toString());
                 });
                 break;
             case R.id.tv_service_medicine_record_add_end:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
                     if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                         endTime = object.toString();
                         endTextView.setText(object.toString());
@@ -234,7 +237,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
             return;
         }
 
-        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), pkId == null ? "" : "", "2", medicineName, medicineSpecs, specsTextView.getText().toString().trim(), medicineTimes, medicineDosage, dosageTextView.getText().toString().trim(), startTime + " 00:00:00", endTime + " 00:00:00", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.medicineAdd(UserInfoUtils.getArchivesId(getPageContext()), pkId == null ? "" : "", "2", medicineName, medicineSpecs, specsTextView.getText().toString().trim(), medicineTimes, medicineDosage, dosageTextView.getText().toString().trim(), startTime, endTime, (call, response) -> {
             if ("0000".equals(response.code)) {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                 setResult(RESULT_OK);

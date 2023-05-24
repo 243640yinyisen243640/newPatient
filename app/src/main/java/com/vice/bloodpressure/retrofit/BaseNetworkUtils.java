@@ -170,9 +170,6 @@ public class BaseNetworkUtils {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.PUT, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
-    public static Call<String> deleteRequest(boolean isNeedAccessToken, String accessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        return networkRequest(isNeedAccessToken, accessToken, NetReqUtils.RequestType.DELETE, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
-    }
 
     public static Call<String> deleteRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.DELETE, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);

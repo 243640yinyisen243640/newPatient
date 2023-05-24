@@ -205,9 +205,9 @@ public class NetReqUtils {
             } else if (requestType == RequestType.DELETE) {
                 if (requestBodyType == RequestBodyType.FORM_URL_ENCODED_FIELD) {
                     if (headerMap != null && headerMap.size() > 0) {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlWithHeader(methodName, paramMap, headerMap);
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callDeleteRequestFormUrlWithHeader(methodName, paramMap, headerMap);
                     } else {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrl(methodName, paramMap);
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callDeleteRequestFormUrl(methodName, paramMap);
                     }
                 } else if (requestBodyType == RequestBodyType.BODY_JSON) {
                     // 遍历参数map，拼接成json
@@ -229,22 +229,9 @@ public class NetReqUtils {
                     }
                     RequestBody requestBody = RequestBody.create(paramStringBuilder.toString(), MediaType.parse("application/json; charset=utf-8"));
                     if (headerMap != null && headerMap.size() > 0) {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlWithHeaderForBody(methodName, headerMap, requestBody);
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callDeleteRequestFormUrlWithHeaderForBody(methodName, headerMap, requestBody);
                     } else {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestFormUrlForBody(methodName, requestBody);
-                    }
-                } else if (requestBodyType == RequestBodyType.MULTIPART) {
-                    Map<String, RequestBody> requestParamsMap = new HashMap<>();
-                    if (paramMap != null && paramMap.size() > 0) {
-                        for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                            requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
-                        }
-                    }
-
-                    if (headerMap != null && headerMap.size() > 0) {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURLWithHeader(methodName, headerMap, requestParamsMap, files);
-                    } else {
-                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callPutRequestMultipartURL(methodName, requestParamsMap, files);
+                        call = RetrofitManager.getInstance().create(ip, RetrofitService.class).callDeleteRequestFormUrlForBody(methodName, requestBody);
                     }
                 }
             }

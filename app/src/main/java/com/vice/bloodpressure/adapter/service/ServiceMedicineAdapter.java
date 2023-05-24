@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
-import com.vice.bloodpressure.utils.DataUtils;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataChildInfo info = list.get(position);
 
-        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, info.getAddTime()));
+//        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, info.getWranTime()));
         holder.nameTextView.setText(info.getDrugName());
         holder.rateTextView.setText(info.getDrugTimes());
         holder.valueTextView.setText(info.getDrugDose());

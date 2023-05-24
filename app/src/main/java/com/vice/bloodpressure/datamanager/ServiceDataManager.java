@@ -350,7 +350,7 @@ public class ServiceDataManager {
      */
     public static Call<String> medicineAdd(String patientId, String pkId, String recordType, String drugName,
                                            String drugSpec, String drugSpecUnit, String drugTimes, String drugDose, String drugUnit,
-                                           String finishTime, String endTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                           String addTime, String finishTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("pkId", pkId);
@@ -359,8 +359,8 @@ public class ServiceDataManager {
         map.put("drugTimes", drugTimes);
         map.put("drugDose", drugDose);
         map.put("drugUnit", drugUnit);
+        map.put("addTime", addTime);
         map.put("finishTime", finishTime);
-        map.put("endTime", endTime);
         map.put("drugSpec", drugSpec);
         map.put("drugSpecUnit", drugSpecUnit);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/drugApp/add", map, successCallBack, failureCallBack);
@@ -603,6 +603,7 @@ public class ServiceDataManager {
 
     /**
      * 检验检查查看
+     *
      * @param pkId
      * @param successCallBack
      * @param failureCallBack

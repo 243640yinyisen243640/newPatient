@@ -9,10 +9,12 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
@@ -188,9 +190,58 @@ public interface RetrofitService {
     @PUT
     Call<String> callPutRequestFormUrlWithHeaderForBody(@Url String url, @HeaderMap Map<String, String> headerMap, @Body RequestBody requestBody);
 
+    /**
+     * Delete请求
+     * Content-Type: application/x-www-form-urlencoded
+     *
+     * @param url
+     * @param paramMap
+     * @return
+     */
+    @FormUrlEncoded
+    @DELETE
+    Call<String> callDeleteRequestFormUrl(@Url String url, @FieldMap Map<String, String> paramMap);
 
     /**
-     * POST请求，可传文件
+     * POST请求，可传请求头
+     * Content-Type: application/x-www-form-urlencoded
+     *
+     * @param url
+     * @param paramMap
+     * @return
+     */
+    @FormUrlEncoded
+    @DELETE
+    Call<String> callDeleteRequestFormUrlWithHeader(@Url String url, @HeaderMap Map<String, String> headerMap, @FieldMap Map<String, String> paramMap);
+
+
+    /**
+     * Delete请求
+     * Content-Type: application/x-www-form-urlencoded
+     *
+     * @param url
+     * @param requestBody
+     * @return
+     */
+    @HTTP(method = "DELETE", hasBody = true)
+    Call<String> callDeleteRequestFormUrlForBody(@Url String url, @Body RequestBody requestBody);
+
+
+    /**
+     * Delete，可传请求头
+     * Content-Type: application/json、application/xml
+     *
+     * @param url
+     * @param headerMap
+     * @param requestBody
+     * @return
+     */
+    @HTTP(method = "DELETE", hasBody = true)
+    Call<String> callDeleteRequestFormUrlWithHeaderForBody(@Url String url, @HeaderMap Map<String, String> headerMap, @Body RequestBody requestBody);
+
+
+    /**
+     * PUT请求，可传文件
      *
      * @param url
      * @param paramMap
