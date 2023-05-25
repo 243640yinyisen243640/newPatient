@@ -11,10 +11,13 @@ import com.vice.bloodpressure.adapter.service.ServiceChooseMealListAdapter;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.ServiceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -23,11 +26,17 @@ import java.util.List;
  * 描述:血压列表
  */
 public class ServiceMealChooseListFragment extends UIBaseLoadFragment {
+    private String classId;
+
+    public ServiceMealChooseListFragment(String classId) {
+        this.classId = classId;
+    }
 
     private TextView numTextView;
     private RecyclerView recyclerView;
     private TextView sureTextView;
     private ServiceChooseMealListAdapter adapter;
+
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
@@ -47,6 +56,16 @@ public class ServiceMealChooseListFragment extends UIBaseLoadFragment {
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = ServiceDataManager.getMealTypeList(classId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getPressureStatistic", requestCall);
         loadViewManager().changeLoadState(LoadStatus.SUCCESS);
         List<ServiceInfo> oxygenList = new ArrayList<>();
         oxygenList.add(new ServiceInfo("胡萝卜", "22", "100"));

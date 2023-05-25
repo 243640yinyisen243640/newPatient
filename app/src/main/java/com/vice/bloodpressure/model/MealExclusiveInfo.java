@@ -63,6 +63,14 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
 
 
     private List<MealIngMapInfo> ingMap;
+    /**
+     * 视频详情 材料列表
+     */
+    private List<MealIngMapInfo> materialList;
+    /**
+     * 视频详情 调料列表
+     */
+    private List<MealIngMapInfo> seasoningList;
 
     public MealExclusiveInfo(String img, String recName) {
         this.img = img;
@@ -179,6 +187,22 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
 
     public void setVid(String vid) {
         this.vid = vid;
+    }
+
+    public List<MealIngMapInfo> getSeasoningList() {
+        return seasoningList;
+    }
+
+    public void setSeasoningList(List<MealIngMapInfo> seasoningList) {
+        this.seasoningList = seasoningList;
+    }
+
+    public List<MealIngMapInfo> getMaterialList() {
+        return materialList;
+    }
+
+    public void setMaterialList(List<MealIngMapInfo> materialList) {
+        this.materialList = materialList;
     }
 
     @Override

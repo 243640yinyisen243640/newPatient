@@ -5,6 +5,7 @@ import com.vice.bloodpressure.model.BloodThirdInfo;
 import com.vice.bloodpressure.model.GalleryInfo;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
+import com.vice.bloodpressure.model.MealChildInfo;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -344,7 +345,7 @@ public class ServiceDataManager {
      * @param drugTimes       用药次数
      * @param drugDose        用药剂量
      * @param drugUnit        用药单位
-     * @param endTime
+     * @param
      * @param successCallBack
      * @param failureCallBack
      * @return
@@ -535,6 +536,17 @@ public class ServiceDataManager {
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/dietApp/saveOrUpdate", map, successCallBack, failureCallBack);
     }
 
+    public static Call<String> getMealType(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealChildInfo.class, "system/food/classify/list", map, successCallBack, failureCallBack);
+    }
+
+    public static Call<String> getMealTypeList(String classify, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("classify", classify);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealChildInfo.class, "system/food/library/list", map, successCallBack, failureCallBack);
+    }
+
     /**
      * 上传多图
      *
@@ -636,15 +648,17 @@ public class ServiceDataManager {
     }
 
     /**
-     * 饮食详情
-     *
-     * @param id
+     * @param patientId
+     * @param id              患者ID
+     * @param collectType     收藏模块 1.饮食模块 2教育模块
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> mealDetails(String id, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> mealDetails(String patientId, String id, String collectType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("collectType", collectType);
         map.put("id", id);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/detail", map, successCallBack, failureCallBack);
     }

@@ -115,6 +115,76 @@ public class MealChildInfo implements Serializable {
      */
     private List<MealExclusiveInfo> dietPlan;
 
+    /**
+     * 食物类别
+     */
+    private String foodlei;
+    /**
+     * 食物类别选中图标
+     */
+    private String imgurl;
+    /**
+     * 食物类别未选中图标
+     */
+    private String greyImgurl;
+    /**
+     * 当前类别的id
+     */
+    private String id;
+    /**
+     * 食物类型列表里面的食物名称
+     */
+    private String foodname;
+    /**
+     * 食物类型列表里面的食物重量说明 目前固定100
+     */
+    private String fixedWeight;
+    /**
+     * 食物类型列表里面的食物热量
+     */
+    private String kcalval;
+
+
+    public String getGreyImgurl() {
+        return greyImgurl;
+    }
+
+    public void setGreyImgurl(String greyImgurl) {
+        this.greyImgurl = greyImgurl;
+    }
+
+    public String getFoodname() {
+        return foodname;
+    }
+
+    public void setFoodname(String foodname) {
+        this.foodname = foodname;
+    }
+
+    public String getFixedWeight() {
+        return fixedWeight;
+    }
+
+    public void setFixedWeight(String fixedWeight) {
+        this.fixedWeight = fixedWeight;
+    }
+
+    public String getKcalval() {
+        return kcalval;
+    }
+
+    public void setKcalval(String kcalval) {
+        this.kcalval = kcalval;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getSumCalories() {
         return sumCalories;
     }
@@ -321,5 +391,29 @@ public class MealChildInfo implements Serializable {
 
     public void setPlanDate(String planDate) {
         this.planDate = planDate;
+    }
+
+    public String getFoodlei() {
+        return foodlei;
+    }
+
+    public void setFoodlei(String foodlei) {
+        this.foodlei = foodlei;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getGreyImgUrl() {
+        return greyImgurl;
+    }
+
+    public void setGreyImgUrl(String greyImgUrl) {
+        this.greyImgurl = greyImgUrl;
     }
 }

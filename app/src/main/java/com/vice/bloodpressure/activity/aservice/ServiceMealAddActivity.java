@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,10 +16,16 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -27,6 +34,7 @@ import java.util.List;
  * 描述:
  */
 public class ServiceMealAddActivity extends UIBaseActivity implements View.OnClickListener {
+    private static final int REQUEST_CODE_FOR_REFRESH = 1;
     private LinearLayout addLinearLayout;
     private TextView stagetTextView;
     private TextView timeTextView;
@@ -38,7 +46,21 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     /**
      * 1:早餐  2：午餐  3：晚餐
      */
-    private String eatPoint;
+    private String eatPoint = "";
+
+    private String addTime = "";
+    /**
+     * 食物名称
+     */
+    private String foodName = "";
+    /**
+     * 食物卡路里
+     */
+    private String foodBigCards = "";
+    /**
+     * 食物重量
+     */
+    private String foodWeight = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,15 +95,17 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_service_meal_add:
-                startActivity(new Intent(getPageContext(), ServiceMealChooseActivity.class));
+                Intent intent = new Intent(getPageContext(), ServiceMealChooseActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
                 break;
             case R.id.tv_service_meal_add_stage:
                 chooseTypeWindow();
                 break;
             case R.id.tv_service_meal_add_time:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, new CallBack() {
                     @Override
                     public void callBack(Object object) {
+
                         timeTextView.setText(object.toString());
                     }
                 });
@@ -95,7 +119,27 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     }
 
     private void sureToAddData() {
+        if (TextUtils.isEmpty(foodName)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请添加食物");
+            return;
+        }
+        if (TextUtils.isEmpty(addTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
+            return;
+        }
 
+        Call<String> requestCall = ServiceDataManager.mealAdd(UserInfoUtils.getArchivesId(getPageContext()), "", "2", eatPoint, addTime, foodName, foodBigCards, foodWeight, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("mealAdd", requestCall);
     }
 
 
@@ -110,5 +154,19 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
                     eatPoint = Integer.parseInt(String.valueOf(object)) + 1 + "";
                 }
         );
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOR_REFRESH:
+                    //拿到食物名称
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

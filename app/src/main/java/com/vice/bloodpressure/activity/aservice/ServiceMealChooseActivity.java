@@ -19,11 +19,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
-import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.fragment.fservice.ServiceMealChooseListFragment;
+import com.vice.bloodpressure.model.MealChildInfo;
+import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 类名：
@@ -33,12 +39,10 @@ import java.util.List;
  * 创建日期: 2023/2/1 14:59
  */
 
-public class ServiceMealChooseActivity extends UIBaseActivity {
+public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     private EditText etSearch;
-
-
     private List<Fragment> fragmentList;
-    private final String[] titles = {"主食", "肉类", "蔬菜", "饮品类", "其他"};
+    private List<MealChildInfo> titles = new ArrayList<>();
     private final int[] tabDrawable = {R.drawable.selector_choose_meal_one, R.drawable.selector_choose_meal_two,
             R.drawable.selector_choose_meal_three, R.drawable.selector_choose_meal_fore, R.drawable.selector_choose_meal_five};
     private ViewPager2 viewPager;
@@ -51,6 +55,23 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("食物类型");
         initView();
         initListener();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = ServiceDataManager.getMealType((call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                titles = (List<MealChildInfo>) response.object;
+                setTab();
+            } else {
+
+            }
+        }, (call, t) -> {
+
+        });
+        addRequestCallToMap("bgTargetByType", requestCall);
     }
 
     private void initListener() {
@@ -68,22 +89,14 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
             }
             return false;
         });
+    }
+
+    private void setTab() {
         fragmentList = new ArrayList<>();
-        for (int i = 0; i < titles.length; i++) {
-            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment();
+        for (int i = 0; i < titles.size(); i++) {
+            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment(titles.get(i).getId());
             fragmentList.add(fragment);
         }
-        //        ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment();
-        //        fragmentList.add(fragment);
-        //        ServiceMealChooseListFragment fragment1 = new ServiceMealChooseListFragment();
-        //        fragmentList.add(fragment1);
-        //        ServiceMealChooseListFragment fragment2 = new ServiceMealChooseListFragment();
-        //        fragmentList.add(fragment2);
-        //        ServiceMealChooseListFragment fragment3 = new ServiceMealChooseListFragment();
-        //        fragmentList.add(fragment3);
-        //        ServiceMealChooseListFragment fragment4= new ServiceMealChooseListFragment();
-        //        fragmentList.add(fragment4);
-
         //禁用预加载
         //        viewPager.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         //设置滑动方向
@@ -100,11 +113,15 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
                     TabLayout.Tab tabAt = tabLayout.getTabAt(i);
                     LinearLayout customView = (LinearLayout) tabAt.getCustomView();
                     TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
+                    ImageView ivTab = customView.findViewById(R.id.iv_choose_meal_tab);
                     tvTab.setTypeface(Typeface.DEFAULT);
                     tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_8a));
                     if (i == position) {
+                        XyImageUtils.loadRoundImage(getPageContext(), R.drawable.shape_defaultbackground_5, titles.get(i).getImgurl(), ivTab);
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
                         tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+                    }else {
+                        XyImageUtils.loadRoundImage(getPageContext(), R.drawable.shape_defaultbackground_5, titles.get(i).getGreyImgUrl(), ivTab);
                     }
                 }
             }
@@ -120,14 +137,12 @@ public class ServiceMealChooseActivity extends UIBaseActivity {
         containerView().addView(view);
     }
 
-
     private void setTab(TabLayout.Tab tab, int position) {
         LinearLayout customView = (LinearLayout) View.inflate(getPageContext(), R.layout.tab_choose_meal, null);
-        ImageView ivTab = customView.findViewById(R.id.iv_choose_meal_tab);
         TextView tvTab = customView.findViewById(R.id.tv_choose_meal_tab);
         ImageView ivIndicator = customView.findViewById(R.id.iv_choose_meal_tab_indicator);
-        tvTab.setText(titles[position]);
-        ivTab.setImageDrawable(getDrawable(tabDrawable[position]));
+        tvTab.setText(titles.get(position).getFoodlei());
+
         ivIndicator.setImageDrawable(getDrawable(R.drawable.selector_choose_meal_indicator));
         tab.setCustomView(customView);
     }

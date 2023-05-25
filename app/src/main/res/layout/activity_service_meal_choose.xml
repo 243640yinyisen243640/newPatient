@@ -32,11 +32,12 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_service_meal_choose"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/shape_bg_white_10"
         app:tabBackground="@null"
+        app:tabMode="scrollable"
         app:tabIndicator="@color/transparent"
         app:tabRippleColor="@null" />
 

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
@@ -94,7 +95,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = ServiceDataManager.mealDetails(mealId == null ? "" : mealId, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.mealDetails(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 MealExclusiveInfo allInfo = (MealExclusiveInfo) response.object;
@@ -130,6 +131,12 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         Jzvd.SAVE_PROGRESS = true;
         videoPlayer.setUp(allInfo.getVid(), "");
 
+        DietOneMealDetailsAdapter resourceAdapter = new DietOneMealDetailsAdapter(getPageContext(), allInfo.getMaterialList());
+        resourceListView.setAdapter(resourceAdapter);
+
+
+        DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), allInfo.getSeasoningList());
+        seasoningListView.setAdapter(seasoningAdapter);
     }
 
 

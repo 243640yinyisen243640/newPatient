@@ -22,8 +22,9 @@
 
             <ImageView
                 android:id="@+id/iv_choose_meal_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/diet_jitui_with_green"
                 android:padding="1dp"/>
 
