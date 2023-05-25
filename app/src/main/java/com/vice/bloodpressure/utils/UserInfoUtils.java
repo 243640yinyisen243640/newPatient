@@ -40,7 +40,13 @@ public class UserInfoUtils {
         return TextUtils.isEmpty(userID) ? "0" : userID;
     }
 
-
+    /**
+     * 判断用户是否登录
+     */
+    public static boolean isLogin(Context context) {
+        String userID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
+        return (TurnUtils.getInt(userID, 0) > 0);
+    }
     /**
      * 获取archives_id，默认是0
      */
@@ -55,7 +61,7 @@ public class UserInfoUtils {
     public static void resetUserInfo(Context context) {
         Map<String, String> map = new HashMap<>();
         map.put(SharedPreferencesConstant.USER_ID, "0");
-        map.put(SharedPreferencesConstant.ARCHIVES_ID, "");
+        map.put(SharedPreferencesConstant.ARCHIVES_ID, "0");
         map.put(SharedPreferencesConstant.ACCESS_TOKEN, "");
 
         SharedPreferencesUtils.saveInfo(context, map);
@@ -72,10 +78,8 @@ public class UserInfoUtils {
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.cancelAll();
             resetUserInfo(context);
-            updateDeviceState(context, "0");
         } else {
             resetUserInfo(context);
-            updateDeviceState(context, "0");
             if (handler != null) {
                 handler.post(() -> callBack.callBack(null));
             }
@@ -93,18 +97,7 @@ public class UserInfoUtils {
         return accessToken;
     }
 
-    /**
-     * 更新设备状态
-     */
-    public static void updateDeviceState(Context context, String userID) {
-        String clientID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.CLIENT_ID);
-        //        Call<String> requestCall = SettingDataManager.updateDeviceState(userID, clientID, (call, response) -> {
-        //
-        //        }, (call, throwable) -> {
-        //
-        //        });
 
-    }
 
     public static String getUserInfo(Context context, String infoKey) {
         return SharedPreferencesUtils.getInfo(context, infoKey);

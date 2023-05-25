@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.retrofit;
 
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.base.XyApplication;
 import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.utils.UserInfoUtils;
@@ -106,10 +108,15 @@ public class BaseNetworkUtils {
      * @param failureCallBack
      * @throws Exception
      */
-    public static void processFailureCallBack(NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, boolean isNeedAccessToken, @JsonParseMode int parseMode, Class clazz, String ip, String methodName, Map<String, String> paramMap, List<MultipartBody.Part> files , Call<String> failureCall, Throwable failureThrowable, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) throws Exception {
+    public static void processFailureCallBack(NetReqUtils.RequestType requestType, NetReqUtils.RequestBodyType requestBodyType, boolean isNeedAccessToken, @JsonParseMode int parseMode, Class clazz, String ip, String methodName, Map<String, String> paramMap, List<MultipartBody.Part> files, Call<String> failureCall, Throwable failureThrowable, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) throws Exception {
         Log.i(TAG, "failureCallBack: ");
         if (failureThrowable instanceof HttpException && 401 == ((HttpException) failureThrowable).response().code()) {
-
+            if (UserInfoUtils.isLogin(XyApplication.getMyApplicationContext())) {
+                UserInfoUtils.resetUserInfo(XyApplication.getMyApplicationContext());
+                Intent intent = new Intent(XyApplication.getMyApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                XyApplication.getMyApplicationContext().startActivity(intent);
+            }
         } else {
             if (failureCallBack != null) {
                 failureCallBack.accept(failureCall, failureThrowable);

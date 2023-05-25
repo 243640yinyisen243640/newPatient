@@ -56,6 +56,7 @@ public class SplashActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         getWindow().setBackgroundDrawable(null);
+        judgeIsToken();
         initView();
         setSplash();
     }
@@ -143,14 +144,37 @@ public class SplashActivity extends UIBaseActivity {
     }
 
 
+    private boolean isLoading = false;
+    private boolean isToken = false;
+
+
+    private Call<String> requestCall;
+
+    private void judgeIsToken() {
+        requestCall = LoginDataManager.checkToken(UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
+            isLoading = true;
+            if ("0000".equals(response.code) && response.data) {
+                isToken = true;
+            } else {
+                isToken = false;
+            }
+        }, (call, t) -> {
+            isLoading = true;
+            isToken = false;
+        });
+    }
+
     private void judgeIsTokenEmpty() {
+        if (timer != null) {
+            timer.cancel();
+        }
         if (TextUtils.isEmpty(UserInfoUtils.getAcceToken(getPageContext()))) {
             Intent intent = new Intent(getPageContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
-            Call<String> requestCall = LoginDataManager.checkToken(UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
-                if ("0000".equals(response.code) && response.data) {
+            if (isLoading) {
+                if (isToken) {
                     Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
                     startActivity(mainIntent);
                     finish();
@@ -159,12 +183,12 @@ public class SplashActivity extends UIBaseActivity {
                     startActivity(intent);
                     finish();
                 }
-            }, (call, t) -> {
+            }else {
+                requestCall.cancel();
                 Intent intent = new Intent(getPageContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
-            });
-            addRequestCallToMap("checkToken", requestCall);
+            }
         }
 
     }

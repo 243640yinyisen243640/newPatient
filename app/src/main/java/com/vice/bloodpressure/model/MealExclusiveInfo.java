@@ -40,6 +40,15 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      */
     private String practice;
 
+    /**
+     * 菜品名称
+     */
+    private String dishName;
+    /**
+     * 菜品图片
+     */
+    private String pic;
+
     private List<MealIngMapInfo> ingMap;
 
     public MealExclusiveInfo(String img, String recName) {
@@ -119,10 +128,22 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
         this.img = img;
     }
 
-    @Override
-    public String getImplClassID() {
-        return null;
+    public String getDishName() {
+        return dishName;
     }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
 
     @Override
     public String getImplClassName() {
@@ -132,5 +153,15 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
     @Override
     public String getImplClassImg() {
         return img;
+    }
+
+    @Override
+    public String getImplMealPic() {
+        return pic;
+    }
+
+    @Override
+    public String getImplDashName() {
+        return dishName;
     }
 }

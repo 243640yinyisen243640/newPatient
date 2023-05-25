@@ -5,6 +5,7 @@ import com.vice.bloodpressure.model.BloodThirdInfo;
 import com.vice.bloodpressure.model.GalleryInfo;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 import com.vice.bloodpressure.retrofit.HHSoftNetworkUtils;
@@ -613,5 +614,24 @@ public class ServiceDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("pkId", pkId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HealthyDataChildInfo.class, "monitor/api/v2/inspectApp/select", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param cid
+     * @param pageNum
+     * @param pageSize
+     * @param dishName
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getMealVideoList(String cid, String pageNum, String pageSize, String dishName, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("cid", cid);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("dishName", dishName);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/list", map, successCallBack, failureCallBack);
     }
 }

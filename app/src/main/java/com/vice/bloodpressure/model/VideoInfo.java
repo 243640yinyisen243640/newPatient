@@ -31,10 +31,7 @@ public class VideoInfo implements IClassInfo{
         this.title = title;
     }
 
-    @Override
-    public String getImplClassID() {
-        return null;
-    }
+
 
     @Override
     public String getImplClassName() {
@@ -44,5 +41,15 @@ public class VideoInfo implements IClassInfo{
     @Override
     public String getImplClassImg() {
         return img;
+    }
+
+    @Override
+    public String getImplMealPic() {
+        return null;
+    }
+
+    @Override
+    public String getImplDashName() {
+        return null;
     }
 }
