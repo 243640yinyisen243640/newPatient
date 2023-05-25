@@ -74,6 +74,7 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
                 switch (view.getId()) {
                     case R.id.ll_user_collect_video_click:
                         Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                        intent.putExtra("mealId", getPageListData().get(position).getId());
                         startActivity(intent);
                         break;
                     default:

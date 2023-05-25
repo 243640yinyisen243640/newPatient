@@ -48,6 +48,19 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      * 菜品图片
      */
     private String pic;
+    /**
+     * 菜品id
+     */
+    private String id;
+    /**
+     * 是否收藏  true 收藏 false 没收藏
+     */
+    private boolean isCollect;
+    /**
+     * 视频
+     */
+    private String vid;
+
 
     private List<MealIngMapInfo> ingMap;
 
@@ -144,6 +157,29 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
         this.pic = pic;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isCollect() {
+        return isCollect;
+    }
+
+    public void setCollect(boolean collect) {
+        isCollect = collect;
+    }
+
+    public String getVid() {
+        return vid;
+    }
+
+    public void setVid(String vid) {
+        this.vid = vid;
+    }
 
     @Override
     public String getImplClassName() {

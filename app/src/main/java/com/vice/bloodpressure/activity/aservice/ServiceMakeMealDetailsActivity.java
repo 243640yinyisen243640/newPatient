@@ -8,22 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.home.DietOneMealDetailsAdapter;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.model.MealIngMapInfo;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.ScreenUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
  * 类名:
- * 传参:
+ * 传参:mealId 饮食id
  * 描述:视频详情
  */
 public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
@@ -48,50 +49,37 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
      * 做法
      */
     private TextView practiceTextView;
+    /**
+     * 药品ID
+     */
+    private String mealId = "";
 
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("视频详情");
+        mealId = getIntent().getStringExtra("mealId");
         containerView().addView(initView());
-        setVideoInfo();
-        initValues();
-        initListener();
-        //        loadViewManager().changeLoadState(LoadStatus.LOADING);
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
-    private void initListener() {
-        collectTextView.setOnClickListener(v -> {
 
+    private void collectOperate(String isCollect) {
+        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", isCollect, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                MealExclusiveInfo allInfo = (MealExclusiveInfo) response.object;
+                bindData(allInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
+        addRequestCallToMap("medicineLook", requestCall);
     }
 
-    private void initValues() {
-        List<MealIngMapInfo> resourcelist = new ArrayList<>();
-        MealIngMapInfo mapInfo = new MealIngMapInfo();
-        mapInfo.setName("猪肉");
-        mapInfo.setIngK("60");
-        resourcelist.add(mapInfo);
-        MealIngMapInfo mapInfo1 = new MealIngMapInfo();
-        mapInfo1.setName("猪肉");
-        mapInfo1.setIngK("60");
-        resourcelist.add(mapInfo1);
-        DietOneMealDetailsAdapter resourceAdapter = new DietOneMealDetailsAdapter(getPageContext(), resourcelist);
-        resourceListView.setAdapter(resourceAdapter);
-
-        List<MealIngMapInfo> resourcelist1 = new ArrayList<>();
-        MealIngMapInfo mapInfo2 = new MealIngMapInfo();
-        mapInfo2.setName("猪肉");
-        mapInfo2.setIngK("60");
-        resourcelist1.add(mapInfo2);
-        MealIngMapInfo mapInfo3 = new MealIngMapInfo();
-        mapInfo3.setName("猪肉");
-        mapInfo3.setIngK("60");
-        resourcelist1.add(mapInfo3);
-        DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), resourcelist1);
-        seasoningListView.setAdapter(seasoningAdapter);
-    }
 
     private View initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_service_make_meal_details, null);
@@ -106,24 +94,44 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-
+        Call<String> requestCall = ServiceDataManager.mealDetails(mealId == null ? "" : mealId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                MealExclusiveInfo allInfo = (MealExclusiveInfo) response.object;
+                bindData(allInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("medicineLook", requestCall);
     }
 
+    private void bindData(MealExclusiveInfo allInfo) {
+        collectTextView.setOnClickListener(v -> {
+            collectOperate(allInfo.isCollect() ? "2" : "1");
+        });
 
-    /**
-     * 视频信息
-     *
-     * @param
-     */
-    private void setVideoInfo() {
+        nameTextView.setText(allInfo.getDishName());
+        practiceTextView.setText(allInfo.getPractice());
+        if (allInfo.isCollect()) {
+            collectTextView.setText("已收藏");
+            collectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.service_video_collect, 0, 0, 0);
+        } else {
+            collectTextView.setText("收藏");
+            collectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.service_video_uncollect, 0, 0, 0);
+        }
+        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_5, allInfo.getPic(), videoPlayer.posterImageView);
         int width = ScreenUtils.screenWidth(getPageContext());
         int height = width * 9 / 16;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
-        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
+        videoPlayer.setUp(allInfo.getVid(), "");
+
     }
+
 
     @Override
     public void onBackPressed() {

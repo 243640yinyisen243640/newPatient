@@ -634,4 +634,38 @@ public class ServiceDataManager {
         map.put("dishName", dishName);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/list", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 饮食详情
+     *
+     * @param id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> mealDetails(String id, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/detail", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 收藏
+     *
+     * @param patientId
+     * @param collectIds
+     * @param collectType     1代表饮食模块 2教育模块
+     * @param isCollect       1收藏/2取消收藏
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> mealCollectOperate(String patientId, String collectIds, String collectType, String isCollect, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("collectIds", collectIds);
+        map.put("collectType", collectType);
+        map.put("isCollect", isCollect);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/detail", map, successCallBack, failureCallBack);
+    }
 }
