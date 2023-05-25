@@ -43,8 +43,6 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     private EditText etSearch;
     private List<Fragment> fragmentList;
     private List<MealChildInfo> titles = new ArrayList<>();
-    private final int[] tabDrawable = {R.drawable.selector_choose_meal_one, R.drawable.selector_choose_meal_two,
-            R.drawable.selector_choose_meal_three, R.drawable.selector_choose_meal_fore, R.drawable.selector_choose_meal_five};
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
 
@@ -120,7 +118,7 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
                         XyImageUtils.loadRoundImage(getPageContext(), R.drawable.shape_defaultbackground_5, titles.get(i).getImgurl(), ivTab);
                         tvTab.setTypeface(Typeface.DEFAULT_BOLD);
                         tvTab.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-                    }else {
+                    } else {
                         XyImageUtils.loadRoundImage(getPageContext(), R.drawable.shape_defaultbackground_5, titles.get(i).getGreyImgUrl(), ivTab);
                     }
                 }
