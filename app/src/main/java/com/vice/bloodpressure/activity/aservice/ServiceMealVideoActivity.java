@@ -54,7 +54,7 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getMealVideoList(cid, BaseDataManager.PAGE_SIZE + "", getPageIndex() + "", "", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.getMealVideoList(cid,  getPageIndex() + "",BaseDataManager.PAGE_SIZE + "", "", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {

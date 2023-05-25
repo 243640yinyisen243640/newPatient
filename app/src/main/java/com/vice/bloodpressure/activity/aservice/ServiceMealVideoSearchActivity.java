@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,10 +35,7 @@ import retrofit2.Call;
  * 描述:饮食搜索
  */
 public class ServiceMealVideoSearchActivity extends UIBaseListRecycleViewForBgActivity<VideoInfo> {
-    /**
-     * 搜索的名字
-     */
-    private String dashName = "";
+    private EditText contentEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +51,8 @@ public class ServiceMealVideoSearchActivity extends UIBaseListRecycleViewForBgAc
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = ServiceDataManager.getMealVideoList("", BaseDataManager.PAGE_SIZE + "", getPageIndex() + "", dashName, (call, response) -> {
+        String dashName = TextUtils.isEmpty(contentEditText.getText().toString().trim()) ? "" : contentEditText.getText().toString().trim();
+        Call<String> requestCall = ServiceDataManager.getMealVideoList("", getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", dashName, (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {
@@ -97,12 +96,11 @@ public class ServiceMealVideoSearchActivity extends UIBaseListRecycleViewForBgAc
     private View initTopView() {
         View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_search, null);
         ImageView backImageView = topView.findViewById(R.id.iv_education_study_search_back);
-        EditText contentEditText = topView.findViewById(R.id.et_education_class_search);
+        contentEditText = topView.findViewById(R.id.et_education_class_search);
         TextView searchTextView = topView.findViewById(R.id.tv_education_class_search_sure);
         backImageView.setOnClickListener(v -> finish());
         String content = contentEditText.getText().toString().trim();
         searchTextView.setOnClickListener(v -> {
-            dashName = content;
             setPageIndex(1);
             onPageLoad();
         });
