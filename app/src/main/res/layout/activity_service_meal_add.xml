@@ -123,13 +123,11 @@
 
                     <com.vice.bloodpressure.view.NoScrollListView
                         android:id="@+id/lv_service_meal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/Base.ListView"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/shape_bg_white_10"
-                        android:scrollbars="none" />
+                        android:background="@drawable/shape_bg_white_10" />
                 </LinearLayout>
 
                 <LinearLayout

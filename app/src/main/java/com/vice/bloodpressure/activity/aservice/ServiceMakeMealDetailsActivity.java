@@ -13,7 +13,9 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
@@ -55,6 +57,8 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
      */
     private String mealId = "";
 
+    private MealExclusiveInfo allInfo;
+
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,20 +69,27 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
-
+    /**
+     * @param isCollect 1收藏/2取消收藏
+     */
     private void collectOperate(String isCollect) {
         Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", isCollect, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                MealExclusiveInfo allInfo = (MealExclusiveInfo) response.object;
-                bindData(allInfo);
-            } else {
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
+                if ("1".equals(isCollect)) {
+                    allInfo.setCollect(true);
+                    collectTextView.setText("已收藏");
+                    collectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.service_video_collect, 0, 0, 0);
+                } else {
+                    allInfo.setCollect(false);
+                    collectTextView.setText("收藏");
+                    collectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.service_video_uncollect, 0, 0, 0);
+                }
             }
         }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("medicineLook", requestCall);
+        addRequestCallToMap("mealCollectOperate", requestCall);
     }
 
 
@@ -98,8 +109,8 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         Call<String> requestCall = ServiceDataManager.mealDetails(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                MealExclusiveInfo allInfo = (MealExclusiveInfo) response.object;
-                bindData(allInfo);
+                allInfo = (MealExclusiveInfo) response.object;
+                bindData();
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -109,7 +120,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         addRequestCallToMap("medicineLook", requestCall);
     }
 
-    private void bindData(MealExclusiveInfo allInfo) {
+    private void bindData() {
         collectTextView.setOnClickListener(v -> {
             collectOperate(allInfo.isCollect() ? "2" : "1");
         });

@@ -680,6 +680,6 @@ public class ServiceDataManager {
         map.put("collectIds", collectIds);
         map.put("collectType", collectType);
         map.put("isCollect", isCollect);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/detail", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/collect/addOrUpdate", map, successCallBack, failureCallBack);
     }
 }
