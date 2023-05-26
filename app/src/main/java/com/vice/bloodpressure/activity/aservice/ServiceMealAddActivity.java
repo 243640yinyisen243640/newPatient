@@ -3,7 +3,6 @@ package com.vice.bloodpressure.activity.aservice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,7 +112,6 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, new CallBack() {
                     @Override
                     public void callBack(Object object) {
-
                         timeTextView.setText(object.toString());
                     }
                 });
