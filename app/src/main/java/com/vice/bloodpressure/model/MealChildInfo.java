@@ -143,7 +143,18 @@ public class MealChildInfo implements Serializable {
      * 食物类型列表里面的食物热量
      */
     private String kcalval;
+    /**
+     * 是否选中
+     */
+    private boolean isCheck;
 
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public String getGreyImgurl() {
         return greyImgurl;

@@ -102,7 +102,7 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragmentList));
         new TabLayoutMediator(tabLayout, viewPager, true, false, (tab, position) -> setTab(tab, position)).attach();
         ////true:滑动，false：禁止滑动
-        viewPager.setUserInputEnabled(true);
+        viewPager.setUserInputEnabled(false);
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

@@ -24,7 +24,7 @@
             android:id="@+id/tv_service_meal_add_have_choose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 2 "
+            android:text=" 0 "
             android:textColor="@color/main_base_color"
             android:textSize="15sp" />
 
