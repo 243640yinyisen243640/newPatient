@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -35,10 +37,30 @@ public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
         MealChildInfo info = getList().get(position);
+
+        holder.numEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                float fixedWeight = TurnUtils.getFloat(info.getFixedWeight(), 0);
+                float allK = TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * fixedWeight;
+                holder.fireTextView.setText(String.valueOf(allK));
+            }
+        });
+
+
+
         holder.titleTextView.setText(info.getFoodname());
-        float fixedWeight = TurnUtils.getFloat(info.getFixedWeight(), 0);
-        float allK = TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * fixedWeight;
-        holder.fireTextView.setText(String.valueOf(allK));
+
         return convertView;
     }
 
