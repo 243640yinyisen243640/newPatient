@@ -11,11 +11,11 @@ import com.vice.bloodpressure.model.UserInfo;
 
 import java.util.List;
 
-public class UserFilesPiusAdapter extends XyBaseAdapter<UserInfo> {
+public class UserFilesPlusAdapter extends XyBaseAdapter<UserInfo> {
     private List<UserInfo> list;
     private Context context;
 
-    public UserFilesPiusAdapter(Context context, List<UserInfo> list) {
+    public UserFilesPlusAdapter(Context context, List<UserInfo> list) {
         super(context, list);
         this.context = context;
         this.list = list;

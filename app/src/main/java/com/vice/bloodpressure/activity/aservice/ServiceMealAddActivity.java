@@ -3,24 +3,26 @@ package com.vice.bloodpressure.activity.aservice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.service.ServiceMealAddListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
+import com.vice.bloodpressure.model.MealChildInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +40,14 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     private LinearLayout addLinearLayout;
     private TextView stagetTextView;
     private TextView timeTextView;
-    private RecyclerView mealRv;
+    private NoScrollListView mealLv;
+    /**
+     * 热量图标
+     */
     private ImageView fireImageView;
+    /**
+     * 热量数字
+     */
     private TextView fireTextView;
     private LinearLayout sureLinearLayout;
 
@@ -62,13 +70,13 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
      */
     private String foodWeight = "";
 
+    private ServiceMealAddListAdapter addListAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("添加饮食数据");
         initView();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getPageContext());
-        mealRv.setLayoutManager(layoutManager);
         initlistener();
     }
 
@@ -84,7 +92,7 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
         addLinearLayout = view.findViewById(R.id.ll_service_meal_add);
         stagetTextView = view.findViewById(R.id.tv_service_meal_add_stage);
         timeTextView = view.findViewById(R.id.tv_service_meal_add_time);
-        mealRv = view.findViewById(R.id.rv_service_meal);
+        mealLv = view.findViewById(R.id.lv_service_meal);
         fireImageView = view.findViewById(R.id.iv_service_meal_all_fire);
         fireTextView = view.findViewById(R.id.tv_service_meal_all_fire);
         sureLinearLayout = view.findViewById(R.id.ll_service_meal_add_sure);
@@ -162,7 +170,13 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_FOR_REFRESH:
+                    Log.i("yys", "REQUEST_CODE_FOR_REFRESH");
                     //拿到食物名称
+                    if (data != null) {
+                        List<MealChildInfo> tempList = (List<MealChildInfo>) data.getSerializableExtra("tempList");
+                        addListAdapter = new ServiceMealAddListAdapter(getPageContext(), tempList);
+                        mealLv.setAdapter(addListAdapter);
+                    }
                     break;
                 default:
                     break;

@@ -11,6 +11,7 @@ import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.MealChildInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,14 +26,20 @@ public class ServiceMealChooseListFragment extends UIBaseLoadFragment {
     private String classId;
     private List<MealChildInfo> childInfos;
 
-    public ServiceMealChooseListFragment(String classId) {
+    private TextView numTextView;
+
+    public ServiceMealChooseListFragment(String classId, TextView numTextView) {
         this.classId = classId;
+        this.numTextView = numTextView;
     }
 
-    private TextView numTextView;
     private ListView contentListView;
-    private TextView sureTextView;
+
     private ServiceChooseMealListAdapter adapter;
+    /**
+     * 选中的列表
+     */
+    private List<MealChildInfo> tempList = new ArrayList<>();
 
     @Override
     protected void onCreate() {
@@ -43,17 +50,30 @@ public class ServiceMealChooseListFragment extends UIBaseLoadFragment {
     }
 
     private void initListener() {
+
         contentListView.setOnItemClickListener((parent, view, position, id) -> {
+            tempList.add(childInfos.get(position));
+            numTextView.setText(tempList.size()+"");
             childInfos.get(position).setCheck(!childInfos.get(position).isCheck());
             adapter.notifyDataSetChanged();
         });
     }
 
+    public List<MealChildInfo> getTempList() {
+        List<MealChildInfo> tempList = new ArrayList<>();
+        if (childInfos != null) {
+            for (int i = 0; i < childInfos.size(); i++) {
+                if (childInfos.get(i).isCheck()) {
+                    tempList.add(childInfos.get(i));
+                }
+            }
+        }
+        return tempList;
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_service_meal_type, null);
         contentListView = view.findViewById(R.id.lv_service_meal_type);
-        numTextView = view.findViewById(R.id.tv_service_meal_add_have_choose);
-        sureTextView = view.findViewById(R.id.tv_service_meal_add_have_sure);
         containerView().addView(view);
     }
 

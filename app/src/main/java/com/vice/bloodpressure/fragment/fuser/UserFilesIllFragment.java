@@ -9,7 +9,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.auser.UserIllImportantActivity;
 import com.vice.bloodpressure.activity.auser.UserIllOtherActivity;
 import com.vice.bloodpressure.activity.auser.UserIllPlusActivity;
-import com.vice.bloodpressure.adapter.user.UserFilesPiusAdapter;
+import com.vice.bloodpressure.adapter.user.UserFilesPlusAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.view.NoScrollListView;
@@ -35,7 +35,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     private TextView otherNameTextView;
     private TextView otherTimeTextView;
 
-    private UserFilesPiusAdapter adapter;
+    private UserFilesPlusAdapter adapter;
 
 
     @Override
@@ -58,7 +58,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
         List<UserInfo> list = new ArrayList<>();
         list.add(new UserInfo("2020-10-27", "糖尿病"));
         list.add(new UserInfo("2020-10-27", "糖尿病"));
-        adapter = new UserFilesPiusAdapter(getPageContext(), list);
+        adapter = new UserFilesPlusAdapter(getPageContext(), list);
         listView.setAdapter(adapter);
     }
 

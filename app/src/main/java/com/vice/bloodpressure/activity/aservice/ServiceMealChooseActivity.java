@@ -1,11 +1,16 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,8 +29,10 @@ import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.fragment.fservice.ServiceMealChooseListFragment;
 import com.vice.bloodpressure.model.MealChildInfo;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,13 +52,15 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     private List<MealChildInfo> titles = new ArrayList<>();
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
-
+    private TextView numTextView;
+    private TextView sureTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("食物类型");
         initView();
+        setPublicBottom();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
@@ -64,15 +73,41 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
                 titles = (List<MealChildInfo>) response.object;
                 setTab();
             } else {
-
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
         }, (call, t) -> {
-
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
         addRequestCallToMap("bgTargetByType", requestCall);
     }
 
+
     private void initListener() {
+        sureTextView.setOnClickListener(v -> {
+            List<MealChildInfo> listsAll = new ArrayList<>();
+
+            if (fragmentList != null || fragmentList.size() != 0) {
+                for (int i = 0; i < fragmentList.size(); i++) {
+                    ServiceMealChooseListFragment tempFragment = (ServiceMealChooseListFragment) fragmentList.get(i);
+                    List<MealChildInfo> lists = tempFragment.getTempList();
+                    if (lists != null) {
+                        listsAll.addAll(lists);
+                    }
+                }
+
+                if (listsAll.size() == 0) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请选择食物");
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("tempList", (Serializable) listsAll);
+                    setResult(Activity.RESULT_OK,intent);
+                    finish();
+                }
+
+            }
+
+
+        });
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String content = etSearch.getText().toString().trim();
@@ -92,7 +127,7 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     private void setTab() {
         fragmentList = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment(titles.get(i).getId());
+            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment(titles.get(i).getId(), numTextView);
             fragmentList.add(fragment);
         }
         //禁用预加载
@@ -133,6 +168,16 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
         tabLayout = view.findViewById(R.id.tl_service_meal_choose);
         viewPager = view.findViewById(R.id.vp_service_meal_choose);
         containerView().addView(view);
+    }
+
+    private void setPublicBottom() {
+        View view = View.inflate(getPageContext(), R.layout.include_service_bottom, null);
+        numTextView = view.findViewById(R.id.tv_service_meal_add_have_choose);
+        sureTextView = view.findViewById(R.id.tv_service_meal_add_have_sure);
+        FrameLayout.LayoutParams f2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        f2.gravity = Gravity.BOTTOM;
+        containerView().addView(view, f2);
     }
 
     private void setTab(TabLayout.Tab tab, int position) {
