@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/white_fb"
+                android:background="@color/text_white"
                 android:gravity="center"
                 android:hint="请输入"
                 android:inputType="number"
