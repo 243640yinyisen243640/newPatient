@@ -170,7 +170,6 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_FOR_REFRESH:
-                    Log.i("yys", "REQUEST_CODE_FOR_REFRESH");
                     //拿到食物名称
                     if (data != null) {
                         List<MealChildInfo> tempList = (List<MealChildInfo>) data.getSerializableExtra("tempList");
