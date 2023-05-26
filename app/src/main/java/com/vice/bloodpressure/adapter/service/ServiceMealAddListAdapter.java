@@ -2,6 +2,7 @@ package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
             holder.titleTextView = convertView.findViewById(R.id.tv_service_meal_add_title);
             holder.fireTextView = convertView.findViewById(R.id.tv_service_meal_add_fire);
             holder.numEditText = convertView.findViewById(R.id.ev_service_meal_add_num);
+            holder.numEditText.setTag(position);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -58,13 +60,18 @@ public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
                 float fixedWeight = TurnUtils.getFloat(info.getFixedWeight(), 0);
                 float kcalval = TurnUtils.getFloat(info.getKcalval(), 0) / fixedWeight;
                 int allK = (int) (TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * kcalval);
-                holder.fireTextView.setText(String.valueOf(allK));
-                float kcalAll = 0;
+                String num = String.valueOf(allK);
+                holder.fireTextView.setText(num);
+                getList().get((Integer) holder.numEditText.getTag()).setNum(num);
+                int nums = 0;
                 for (int i = 0; i < getList().size(); i++) {
-                    float kcal = TurnUtils.getFloat(holder.fireTextView.getText().toString(), 0);
-                    kcalAll = kcalAll + kcal;
+                    String num1 = getList().get(i).getNum();
+                    if (TextUtils.isEmpty(num1)){
+                        num1 = "0";
+                    }
+                    nums = nums + Integer.parseInt(num1);
                 }
-                fireTextView.setText(String.valueOf((int) (kcalAll)));
+                fireTextView.setText(nums+"");
                 fireImageView.setImageResource(R.drawable.service_meal_no_have_data);
             }
         });

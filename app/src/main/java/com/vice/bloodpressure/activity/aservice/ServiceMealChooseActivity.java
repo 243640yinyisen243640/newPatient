@@ -47,6 +47,9 @@ import retrofit2.Call;
  */
 
 public class ServiceMealChooseActivity extends UIBaseLoadActivity {
+    //选中的数据
+    private List<MealChildInfo> listsAll = new ArrayList<>();
+
     private EditText etSearch;
     private List<Fragment> fragmentList;
     private List<MealChildInfo> titles = new ArrayList<>();
@@ -84,29 +87,14 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
 
     private void initListener() {
         sureTextView.setOnClickListener(v -> {
-            List<MealChildInfo> listsAll = new ArrayList<>();
-
-            if (fragmentList != null || fragmentList.size() != 0) {
-                for (int i = 0; i < fragmentList.size(); i++) {
-                    ServiceMealChooseListFragment tempFragment = (ServiceMealChooseListFragment) fragmentList.get(i);
-                    List<MealChildInfo> lists = tempFragment.getTempList();
-                    if (lists != null) {
-                        listsAll.addAll(lists);
-                    }
-                }
-
-                if (listsAll.size() == 0) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请选择食物");
-                } else {
-                    Intent intent = new Intent();
-                    intent.putExtra("tempList", (Serializable) listsAll);
-                    setResult(Activity.RESULT_OK,intent);
-                    finish();
-                }
-
+            if (listsAll.size() == 0) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请选择食物");
+            } else {
+                Intent intent = new Intent();
+                intent.putExtra("tempList", (Serializable) listsAll);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
-
-
         });
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -127,7 +115,7 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     private void setTab() {
         fragmentList = new ArrayList<>();
         for (int i = 0; i < titles.size(); i++) {
-            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment(titles.get(i).getId(), numTextView);
+            ServiceMealChooseListFragment fragment = new ServiceMealChooseListFragment(titles.get(i).getId());
             fragmentList.add(fragment);
         }
         //禁用预加载
@@ -191,4 +179,12 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
     }
 
 
+    public void updateData(MealChildInfo mealChildInfo) {
+        if (mealChildInfo.isCheck()) {
+            listsAll.add(mealChildInfo);
+        } else {
+            listsAll.remove(mealChildInfo);
+        }
+        numTextView.setText(listsAll.size()+"");
+    }
 }
