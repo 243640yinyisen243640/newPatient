@@ -76,7 +76,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="20dp"
-                            android:text="午餐"
+                            android:text="早餐"
                             android:textColor="@color/gray_8a"
                             android:textSize="15sp" />
 

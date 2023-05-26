@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
@@ -16,10 +17,13 @@ import com.vice.bloodpressure.utils.TurnUtils;
 import java.util.List;
 
 public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
+    private ImageView fireImageView;
+    private TextView fireTextView;
 
-
-    public ServiceMealAddListAdapter(Context context, List<MealChildInfo> list) {
+    public ServiceMealAddListAdapter(Context context, List<MealChildInfo> list, ImageView fireImageView, TextView fireTextView) {
         super(context, list);
+        this.fireImageView = fireImageView;
+        this.fireTextView = fireTextView;
     }
 
 
@@ -52,17 +56,24 @@ public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
             @Override
             public void afterTextChanged(Editable s) {
                 float fixedWeight = TurnUtils.getFloat(info.getFixedWeight(), 0);
-                float allK = TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * fixedWeight;
+                float kcalval = TurnUtils.getFloat(info.getKcalval(), 0) / fixedWeight;
+                int allK = (int) (TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * kcalval);
                 holder.fireTextView.setText(String.valueOf(allK));
+                float kcalAll = 0;
+                for (int i = 0; i < getList().size(); i++) {
+                    float kcal = TurnUtils.getFloat(holder.fireTextView.getText().toString(), 0);
+                    kcalAll = kcalAll + kcal;
+                }
+                fireTextView.setText(String.valueOf((int) (kcalAll)));
+                fireImageView.setImageResource(R.drawable.service_meal_no_have_data);
             }
         });
-
-
 
         holder.titleTextView.setText(info.getFoodname());
 
         return convertView;
     }
+
 
     private class ViewHolder {
         TextView titleTextView;

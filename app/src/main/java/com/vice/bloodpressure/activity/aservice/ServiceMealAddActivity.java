@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +54,7 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
     /**
      * 1:早餐  2：午餐  3：晚餐
      */
-    private String eatPoint = "";
+    private String eatPoint = "1";
 
     private String addTime = "";
     /**
@@ -68,6 +69,8 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
      * 食物重量
      */
     private String foodWeight = "";
+
+    private List<MealChildInfo> tempList;
 
     private ServiceMealAddListAdapter addListAdapter;
 
@@ -112,6 +115,7 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, new CallBack() {
                     @Override
                     public void callBack(Object object) {
+                        addTime = object.toString();
                         timeTextView.setText(object.toString());
                     }
                 });
@@ -134,6 +138,14 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
             return;
         }
 
+        for (int i = 0; i < tempList.size(); i++) {
+            EditText temp = mealLv.getChildAt(i).findViewById(R.id.ev_service_meal_add_num);
+            if (TextUtils.isEmpty(temp.getText().toString().trim())) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请输入数量");
+                return;
+            }
+        }
+
         Call<String> requestCall = ServiceDataManager.mealAdd(UserInfoUtils.getArchivesId(getPageContext()), "", "2", eatPoint, addTime, foodName, foodBigCards, foodWeight, (call, response) -> {
             if ("0000".equals(response.code)) {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
@@ -154,7 +166,6 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
         exerciseList.add("早餐");
         exerciseList.add("午餐");
         exerciseList.add("晚餐");
-
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "饮食阶段", exerciseList, object -> {
                     stagetTextView.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
                     eatPoint = Integer.parseInt(String.valueOf(object)) + 1 + "";
@@ -170,8 +181,16 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
                 case REQUEST_CODE_FOR_REFRESH:
                     //拿到食物名称
                     if (data != null) {
-                        List<MealChildInfo> tempList = (List<MealChildInfo>) data.getSerializableExtra("tempList");
-                        addListAdapter = new ServiceMealAddListAdapter(getPageContext(), tempList);
+                        tempList = (List<MealChildInfo>) data.getSerializableExtra("tempList");
+                        StringBuilder builder = new StringBuilder();
+
+                        for (int i = 0; i < tempList.size(); i++) {
+                            builder.append(tempList.get(i).getFoodname());
+                            builder.append(",");
+                        }
+                        builder.deleteCharAt(builder.length() - 1);
+                        foodName = builder.toString();
+                        addListAdapter = new ServiceMealAddListAdapter(getPageContext(), tempList, fireImageView, fireTextView);
                         mealLv.setAdapter(addListAdapter);
                     }
                     break;
