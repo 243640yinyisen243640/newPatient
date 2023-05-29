@@ -680,6 +680,6 @@ public class ServiceDataManager {
         map.put("collectIds", collectIds);
         map.put("collectType", collectType);
         map.put("isCollect", isCollect);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/collect/addOrUpdate", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/patient/collect/addOrUpdate", map, successCallBack, failureCallBack);
     }
 }

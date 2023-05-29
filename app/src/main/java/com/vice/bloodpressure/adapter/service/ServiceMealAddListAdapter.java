@@ -59,10 +59,12 @@ public class ServiceMealAddListAdapter extends XyBaseAdapter<MealChildInfo> {
             public void afterTextChanged(Editable s) {
                 float fixedWeight = TurnUtils.getFloat(info.getFixedWeight(), 0);
                 float kcalval = TurnUtils.getFloat(info.getKcalval(), 0) / fixedWeight;
-                int allK = (int) (TurnUtils.getFloat(holder.numEditText.getText().toString().trim(), 0) * kcalval);
+                String s1 = holder.numEditText.getText().toString().trim();
+                int allK = (int) (TurnUtils.getFloat(s1, 0) * kcalval);
                 String num = String.valueOf(allK);
                 holder.fireTextView.setText(num);
                 getList().get((Integer) holder.numEditText.getTag()).setNum(num);
+                getList().get((Integer) holder.numEditText.getTag()).setNum1(s1);
                 int nums = 0;
                 for (int i = 0; i < getList().size(); i++) {
                     String num1 = getList().get(i).getNum();

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -137,14 +136,27 @@ public class ServiceMealAddActivity extends UIBaseActivity implements View.OnCli
             ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
             return;
         }
+        StringBuilder weightBuilder = new StringBuilder();
+        StringBuilder firebBuilder = new StringBuilder();
 
         for (int i = 0; i < tempList.size(); i++) {
-            EditText temp = mealLv.getChildAt(i).findViewById(R.id.ev_service_meal_add_num);
-            if (TextUtils.isEmpty(temp.getText().toString().trim())) {
+            if (TextUtils.isEmpty(tempList.get(i).getNum1())) {
                 ToastUtils.getInstance().showToast(getPageContext(), "请输入数量");
                 return;
             }
+
+            weightBuilder.append(tempList.get(i).getNum1());
+            weightBuilder.append(",");
+            foodWeight = weightBuilder.toString();
+
+            firebBuilder.append(tempList.get(i).getNum());
+            firebBuilder.append(",");
+            foodBigCards = firebBuilder.toString();
+
         }
+
+        weightBuilder.deleteCharAt(weightBuilder.length() - 1);
+        firebBuilder.deleteCharAt(firebBuilder.length() - 1);
 
         Call<String> requestCall = ServiceDataManager.mealAdd(UserInfoUtils.getArchivesId(getPageContext()), "", "2", eatPoint, addTime, foodName, foodBigCards, foodWeight, (call, response) -> {
             if ("0000".equals(response.code)) {

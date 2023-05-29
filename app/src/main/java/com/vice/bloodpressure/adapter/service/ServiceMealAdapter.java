@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.utils.DataUtils;
 
 import java.util.List;
 
@@ -43,12 +45,12 @@ public class ServiceMealAdapter extends RecyclerView.Adapter<ServiceMealAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataAllInfo info = list.get(position);
-        holder.timeTextView.setText(info.getAddTime());
-        if ("1".equals(info.getEatPoint())){
+        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, info.getAddTime()));
+        if ("1".equals(info.getEatPoint())) {
             holder.valueTextView.setText("早餐");
-        }else if ("2".equals(info.getEatPoint())){
+        } else if ("2".equals(info.getEatPoint())) {
             holder.valueTextView.setText("午餐");
-        }else {
+        } else {
             holder.valueTextView.setText("晚餐");
         }
 
