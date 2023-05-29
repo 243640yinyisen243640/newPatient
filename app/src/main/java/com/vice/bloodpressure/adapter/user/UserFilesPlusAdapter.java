@@ -7,15 +7,15 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 
 import java.util.List;
 
-public class UserFilesPlusAdapter extends XyBaseAdapter<UserInfo> {
-    private List<UserInfo> list;
+public class UserFilesPlusAdapter extends XyBaseAdapter<BaseLocalDataInfo> {
+    private List<BaseLocalDataInfo> list;
     private Context context;
 
-    public UserFilesPlusAdapter(Context context, List<UserInfo> list) {
+    public UserFilesPlusAdapter(Context context, List<BaseLocalDataInfo> list) {
         super(context, list);
         this.context = context;
         this.list = list;
@@ -34,7 +34,7 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<UserInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        UserInfo info = getList().get(position);
+        BaseLocalDataInfo info = getList().get(position);
 
         holder.typeTextView.setText("糖尿病");
         holder.timeTextView.setText("2023-10-27");

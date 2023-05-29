@@ -8,7 +8,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.auser.UserIllFamilyHistoryActivity;
 import com.vice.bloodpressure.adapter.user.UserFilesFamilyHistoryAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
@@ -34,9 +34,23 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
         initListener();
     }
 
+
+    private void initVlues() {
+        List<BaseLocalDataInfo> list = new ArrayList<>();
+        list.add(new BaseLocalDataInfo("子女", "无"));
+        list.add(new BaseLocalDataInfo("子女", "有"));
+        adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), list);
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPageLoad() {
+
+    }
+
+
     private void initListener() {
         listView.setOnItemClickListener((parent, view, position, id) -> {
-
             Intent intent = new Intent(getPageContext(), UserIllFamilyHistoryActivity.class);
             intent.putExtra("isAdd", "2");
             startActivity(intent);
@@ -55,16 +69,4 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
         containerView().addView(view);
     }
 
-    private void initVlues() {
-        List<UserInfo> list = new ArrayList<>();
-        list.add(new UserInfo("子女", "无"));
-        list.add(new UserInfo("子女", "有"));
-        adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), list);
-        listView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onPageLoad() {
-
-    }
 }

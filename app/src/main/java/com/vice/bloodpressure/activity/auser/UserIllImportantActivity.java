@@ -14,7 +14,7 @@ import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
@@ -61,33 +61,33 @@ public class UserIllImportantActivity extends UIBaseLoadActivity {
     }
 
     private void initValues() {
-        List<UserInfo> list = new ArrayList();
-        list.add(new UserInfo("1型糖尿病", "1"));
-        list.add(new UserInfo("2型糖尿病", "2"));
-        list.add(new UserInfo("妊娠糖尿病", "3"));
+        List<BaseLocalDataInfo> list = new ArrayList();
+        list.add(new BaseLocalDataInfo("1型糖尿病", "1"));
+        list.add(new BaseLocalDataInfo("2型糖尿病", "2"));
+        list.add(new BaseLocalDataInfo("妊娠糖尿病", "3"));
 
         PerfectDiseaseAdapter levelAdapter = new PerfectDiseaseAdapter(getPageContext(), list);
         mostGridView.setAdapter(levelAdapter);
 
-        List<UserInfo> diseaseList = new ArrayList<>();
-        UserInfo typeInfo1 = new UserInfo("1级高血压", "1");
+        List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
+        BaseLocalDataInfo typeInfo1 = new BaseLocalDataInfo("1级高血压", "1");
         diseaseList.add(typeInfo1);
-        UserInfo typeInfo2 = new UserInfo("2级高血压", "2");
+        BaseLocalDataInfo typeInfo2 = new BaseLocalDataInfo("2级高血压", "2");
         diseaseList.add(typeInfo2);
-        UserInfo typeInfo3 = new UserInfo("3级高血压", "3");
+        BaseLocalDataInfo typeInfo3 = new BaseLocalDataInfo("3级高血压", "3");
         diseaseList.add(typeInfo3);
 
         PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
         gaoMostGridView.setAdapter(adapter);
 
-        List<UserInfo> levelList = new ArrayList<>();
-        UserInfo levelInfo1 = new UserInfo("低危", "1");
+        List<BaseLocalDataInfo> levelList = new ArrayList<>();
+        BaseLocalDataInfo levelInfo1 = new BaseLocalDataInfo("低危", "1");
         levelList.add(levelInfo1);
-        UserInfo levelInfo2 = new UserInfo("中危", "2");
+        BaseLocalDataInfo levelInfo2 = new BaseLocalDataInfo("中危", "2");
         levelList.add(levelInfo2);
-        UserInfo levelInfo3 = new UserInfo("高危", "3");
+        BaseLocalDataInfo levelInfo3 = new BaseLocalDataInfo("高危", "3");
         levelList.add(levelInfo3);
-        UserInfo levelInfo4 = new UserInfo("很高危", "4");
+        BaseLocalDataInfo levelInfo4 = new BaseLocalDataInfo("很高危", "4");
         levelList.add(levelInfo4);
 
         PerfectDiseaseAdapter gaoLevelAdapter = new PerfectDiseaseAdapter(getPageContext(), levelList);

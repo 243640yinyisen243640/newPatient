@@ -20,6 +20,8 @@ public class BaseLocalDataInfo {
     private String calorie;
 
 
+
+
     public BaseLocalDataInfo(String name, String id) {
         this.name = name;
         this.id = id;

@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ import java.util.List;
  * Date: 2021/8/12 14:49
  * Description: 疾病类型
  */
-public class PerfectDiseaseAdapter extends XyBaseAdapter<UserInfo> {
+public class PerfectDiseaseAdapter extends XyBaseAdapter<BaseLocalDataInfo> {
 
     private int clickPosition = 0;
 
-    public PerfectDiseaseAdapter(Context context, List<UserInfo> list) {
+    public PerfectDiseaseAdapter(Context context, List<BaseLocalDataInfo> list) {
         super(context, list);
     }
 
@@ -41,8 +41,8 @@ public class PerfectDiseaseAdapter extends XyBaseAdapter<UserInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        UserInfo typeInfo = getList().get(position);
-        holder.contentTextView.setText(typeInfo.getUserId());
+        BaseLocalDataInfo typeInfo = getList().get(position);
+        holder.contentTextView.setText(typeInfo.getName());
 
 
         if (clickPosition == position) {

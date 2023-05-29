@@ -11,7 +11,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
@@ -51,14 +51,14 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
 
     private void initValues() {
 
-        List<UserInfo> diseaseList = new ArrayList<>();
-        UserInfo typeInfo1 = new UserInfo("子女", "1");
+        List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
+        BaseLocalDataInfo typeInfo1 = new BaseLocalDataInfo("子女", "1");
         diseaseList.add(typeInfo1);
-        UserInfo typeInfo2 = new UserInfo("父亲", "2");
+        BaseLocalDataInfo typeInfo2 = new BaseLocalDataInfo("父亲", "2");
         diseaseList.add(typeInfo2);
-        UserInfo typeInfo3 = new UserInfo("母亲", "3");
+        BaseLocalDataInfo typeInfo3 = new BaseLocalDataInfo("母亲", "3");
         diseaseList.add(typeInfo3);
-        UserInfo typeInfo4 = new UserInfo("兄弟姐妹", "4");
+        BaseLocalDataInfo typeInfo4 = new BaseLocalDataInfo("兄弟姐妹", "4");
         diseaseList.add(typeInfo4);
 
         PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);

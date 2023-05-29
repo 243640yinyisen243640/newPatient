@@ -11,7 +11,7 @@ import com.vice.bloodpressure.activity.auser.UserIllOtherActivity;
 import com.vice.bloodpressure.activity.auser.UserIllPlusActivity;
 import com.vice.bloodpressure.adapter.user.UserFilesPlusAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
@@ -55,9 +55,9 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     }
 
     private void initVlues() {
-        List<UserInfo> list = new ArrayList<>();
-        list.add(new UserInfo("2020-10-27", "糖尿病"));
-        list.add(new UserInfo("2020-10-27", "糖尿病"));
+        List<BaseLocalDataInfo> list = new ArrayList<>();
+        list.add(new BaseLocalDataInfo("2020-10-27", "糖尿病"));
+        list.add(new BaseLocalDataInfo("2020-10-27", "糖尿病"));
         adapter = new UserFilesPlusAdapter(getPageContext(), list);
         listView.setAdapter(adapter);
     }

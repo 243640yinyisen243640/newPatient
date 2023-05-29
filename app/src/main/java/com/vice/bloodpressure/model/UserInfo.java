@@ -10,11 +10,7 @@ import java.io.Serializable;
  */
 public class UserInfo implements Serializable {
     private String diseaseName;
-    private boolean checkID;
-    private boolean isSelected;
 
-
-    private boolean isCheck;
 
     /**
      * 档案ID
@@ -154,10 +150,91 @@ public class UserInfo implements Serializable {
     private String type;
 
 
-    public UserInfo(String userID, String diseaseName) {
-        this.user_id = userID;
-        this.diseaseName = diseaseName;
-    }
+    /**
+     * 姓名
+     */
+    private String nickName;
+    /**
+     * 电话
+     */
+    private String tel;
+    /**
+     * 身份证号
+     */
+    private String idCard;
+    /**
+     * 出生年月
+     */
+    private String birthday;
+    /**
+     * 性别
+     */
+    private String sex;
+    /**
+     * 年龄
+     */
+    private String age;
+    /**
+     * 紧急联系人
+     */
+    private String emergency;
+    /**
+     * 籍贯
+     */
+    private String nativePlace;
+    /**
+     * 抽烟  Y抽烟 N不抽烟
+     */
+    private String smokes;
+    /**
+     * 吸烟数量
+     */
+    private String smokesNum;
+    /**
+     * 喝酒 Y 是 N 否 3 未知
+     */
+    private String wine;
+    /**
+     * 喝酒类型 饮酒类型:1->红酒;2->啤酒;3->白酒; 4 黄酒
+     */
+    private String wineType;
+    /**
+     * 喝酒的数量
+     */
+    private String wineDose;
+    /**
+     * 1已婚 2未婚
+     */
+    private String marital;
+    /**
+     * 妊娠  Y/N
+     */
+    private String pregnancy;
+    /**
+     * 妊娠时间
+     */
+    private String pregnancyTime;
+    /**
+     * 是否独居 Y/N
+     */
+    private String liveAlone;
+    /**
+     * 文化程度   1:小学 2初中 3高中/技校/中专 4大学专科及以上
+     */
+    private String education;
+    /**
+     * 是否卧床  Y/N
+     */
+    private String bedridden;
+    /**
+     * 医疗支付方式
+     */
+    private String medicalPay;
+    /**
+     * 就诊卡号
+     */
+    private String medicalCard;
+
 
 
     public String getType() {
@@ -168,21 +245,6 @@ public class UserInfo implements Serializable {
         this.type = type;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public boolean isCheckID() {
-        return checkID;
-    }
-
-    public void setCheckID(boolean checkID) {
-        this.checkID = checkID;
-    }
 
     public String getDiseaseName() {
         return diseaseName;
@@ -209,21 +271,6 @@ public class UserInfo implements Serializable {
         this.user_id = userId;
     }
 
-    public boolean getIsCheck() {
-        return isCheck;
-    }
-
-    public void setIsCheck(boolean isCheck) {
-        this.isCheck = isCheck;
-    }
-
-    public boolean isCheck() {
-        return isCheck;
-    }
-
-    public void setCheck(boolean check) {
-        isCheck = check;
-    }
 
     public String getAccess_token() {
         return access_token;
@@ -455,5 +502,174 @@ public class UserInfo implements Serializable {
 
     public void setAddTime(String addTime) {
         this.addTime = addTime;
+    }
+
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getEmergency() {
+        return emergency;
+    }
+
+    public void setEmergency(String emergency) {
+        this.emergency = emergency;
+    }
+
+    public String getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
+    }
+
+    public String getSmokes() {
+        return smokes;
+    }
+
+    public void setSmokes(String smokes) {
+        this.smokes = smokes;
+    }
+
+    public String getSmokesNum() {
+        return smokesNum;
+    }
+
+    public void setSmokesNum(String smokesNum) {
+        this.smokesNum = smokesNum;
+    }
+
+    public String getWine() {
+        return wine;
+    }
+
+    public void setWine(String wine) {
+        this.wine = wine;
+    }
+
+    public String getWineType() {
+        return wineType;
+    }
+
+    public void setWineType(String wineType) {
+        this.wineType = wineType;
+    }
+
+    public String getWineDose() {
+        return wineDose;
+    }
+
+    public void setWineDose(String wineDose) {
+        this.wineDose = wineDose;
+    }
+
+    public String getMarital() {
+        return marital;
+    }
+
+    public void setMarital(String marital) {
+        this.marital = marital;
+    }
+
+    public String getPregnancy() {
+        return pregnancy;
+    }
+
+    public void setPregnancy(String pregnancy) {
+        this.pregnancy = pregnancy;
+    }
+
+    public String getPregnancyTime() {
+        return pregnancyTime;
+    }
+
+    public void setPregnancyTime(String pregnancyTime) {
+        this.pregnancyTime = pregnancyTime;
+    }
+
+    public String getLiveAlone() {
+        return liveAlone;
+    }
+
+    public void setLiveAlone(String liveAlone) {
+        this.liveAlone = liveAlone;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getBedridden() {
+        return bedridden;
+    }
+
+    public void setBedridden(String bedridden) {
+        this.bedridden = bedridden;
+    }
+
+    public String getMedicalPay() {
+        return medicalPay;
+    }
+
+    public void setMedicalPay(String medicalPay) {
+        this.medicalPay = medicalPay;
+    }
+
+    public String getMedicalCard() {
+        return medicalCard;
+    }
+
+    public void setMedicalCard(String medicalCard) {
+        this.medicalCard = medicalCard;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

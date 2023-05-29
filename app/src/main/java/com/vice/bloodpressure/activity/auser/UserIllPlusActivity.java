@@ -17,8 +17,8 @@ import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.EducationQuestionInvestigateModel;
-import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
@@ -114,18 +114,18 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
         }
 
 
-        List<UserInfo> diseaseList = new ArrayList<>();
-        UserInfo typeInfo1 = new UserInfo("1期", "1");
+        List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
+        BaseLocalDataInfo typeInfo1 = new BaseLocalDataInfo("1期", "1");
         diseaseList.add(typeInfo1);
-        UserInfo typeInfo2 = new UserInfo("2期", "2");
+        BaseLocalDataInfo typeInfo2 = new BaseLocalDataInfo("2期", "2");
         diseaseList.add(typeInfo2);
-        UserInfo typeInfo3 = new UserInfo("3a期", "3");
+        BaseLocalDataInfo typeInfo3 = new BaseLocalDataInfo("3a期", "3");
         diseaseList.add(typeInfo3);
-        UserInfo typeInfo4 = new UserInfo("3b期", "4");
+        BaseLocalDataInfo typeInfo4 = new BaseLocalDataInfo("3b期", "4");
         diseaseList.add(typeInfo4);
-        UserInfo typeInfo5 = new UserInfo("4期", "5");
+        BaseLocalDataInfo typeInfo5 = new BaseLocalDataInfo("4期", "5");
         diseaseList.add(typeInfo5);
-        UserInfo typeInfo6 = new UserInfo("5期", "6");
+        BaseLocalDataInfo typeInfo6 = new BaseLocalDataInfo("5期", "6");
         diseaseList.add(typeInfo6);
         PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
         gridView.setAdapter(adapter);

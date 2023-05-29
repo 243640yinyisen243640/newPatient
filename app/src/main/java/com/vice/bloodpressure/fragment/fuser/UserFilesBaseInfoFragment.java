@@ -24,6 +24,7 @@ import com.vice.bloodpressure.popwindow.ShowCityPopupWindow;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,30 +64,10 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
-    private void initListener() {
-        sexTv.setOnClickListener(this);
-        cityTv.setOnClickListener(this);
-        sosNameTv.setOnClickListener(this);
-        sosPhoneTv.setOnClickListener(this);
-    }
-
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.fragment_user_files_base_info, null);
-        nameTv = view.findViewById(R.id.tv_user_base_info_name);
-        idCardTv = view.findViewById(R.id.tv_user_base_info_id);
-        bornTv = view.findViewById(R.id.tv_user_base_info_born);
-        ageTv = view.findViewById(R.id.tv_user_base_info_age);
-        sexTv = view.findViewById(R.id.tv_user_base_info_sex);
-        cityTv = view.findViewById(R.id.tv_user_base_info_city);
-        sosNameTv = view.findViewById(R.id.tv_user_base_info_sos_name);
-        sosPhoneTv = view.findViewById(R.id.tv_user_base_info_sos_phone);
-        containerView().addView(view);
-    }
-
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.getSelectDoctorInfo((call, response) -> {
+        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 UserInfo userInfo = (UserInfo) response.object;
@@ -101,7 +82,11 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     }
 
     private void bindData(UserInfo userInfo) {
-
+        nameTv.setText(userInfo.getNickName());
+        idCardTv.setText(userInfo.getIdCard());
+        bornTv.setText(userInfo.getBedridden());
+        ageTv.setText(userInfo.getAge());
+        sexTv.setText(("1".equals(userInfo.getSex())?"男":"女"));
     }
 
     @Override
@@ -241,5 +226,25 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                     String sex = exerciseList.get(Integer.parseInt(String.valueOf(object)));
                 }
         );
+    }
+
+    private void initListener() {
+        sexTv.setOnClickListener(this);
+        cityTv.setOnClickListener(this);
+        sosNameTv.setOnClickListener(this);
+        sosPhoneTv.setOnClickListener(this);
+    }
+
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.fragment_user_files_base_info, null);
+        nameTv = view.findViewById(R.id.tv_user_base_info_name);
+        idCardTv = view.findViewById(R.id.tv_user_base_info_id);
+        bornTv = view.findViewById(R.id.tv_user_base_info_born);
+        ageTv = view.findViewById(R.id.tv_user_base_info_age);
+        sexTv = view.findViewById(R.id.tv_user_base_info_sex);
+        cityTv = view.findViewById(R.id.tv_user_base_info_city);
+        sosNameTv = view.findViewById(R.id.tv_user_base_info_sos_name);
+        sosPhoneTv = view.findViewById(R.id.tv_user_base_info_sos_phone);
+        containerView().addView(view);
     }
 }
