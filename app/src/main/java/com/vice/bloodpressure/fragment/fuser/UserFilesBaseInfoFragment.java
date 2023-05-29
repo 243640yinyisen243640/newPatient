@@ -43,12 +43,33 @@ import retrofit2.Call;
  */
 public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements View.OnClickListener {
     private TextView nameTv;
+    /**
+     * 身份证
+     */
     private TextView idCardTv;
+    /**
+     * 出生年月
+     */
     private TextView bornTv;
+    /**
+     * 年龄
+     */
     private TextView ageTv;
+    /**
+     * 性别
+     */
     private TextView sexTv;
+    /**
+     * 籍贯
+     */
     private TextView cityTv;
+    /**
+     * 紧急联系人
+     */
     private TextView sosNameTv;
+    /**
+     * 紧急联系人电话
+     */
     private TextView sosPhoneTv;
 
     private ShowCityPopupWindow cityPopupWindow;
@@ -86,7 +107,10 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         idCardTv.setText(userInfo.getIdCard());
         bornTv.setText(userInfo.getBedridden());
         ageTv.setText(userInfo.getAge());
-        sexTv.setText(("1".equals(userInfo.getSex())?"男":"女"));
+        sexTv.setText(("1".equals(userInfo.getSex()) ? "男" : "女"));
+        cityTv.setText(userInfo.getNativePlace());
+        sosNameTv.setText(userInfo.getEmergency());
+        sosPhoneTv.setText(userInfo.getTel());
     }
 
     @Override
