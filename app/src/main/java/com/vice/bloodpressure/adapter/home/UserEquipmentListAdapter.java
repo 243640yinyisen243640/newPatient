@@ -47,9 +47,9 @@ public class UserEquipmentListAdapter extends RecyclerView.Adapter<UserEquipment
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserInfo info = list.get(position);
         holder.titleTextView.setText(info.getDiseaseName());
-        holder.timeTextView.setText(info.getTime());
+        holder.timeTextView.setText(info.getDiseaseName());
         holder.typeTextView.setText(info.getType());
-        XyImageUtils.loadRoundImage(context, R.drawable.guogai_img, info.getImg(), holder.imgImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.guogai_img, info.getAccess_token(), holder.imgImageView);
         clickBreakOnClick clickBreakOnClick = new clickBreakOnClick(position);
         holder.breakTextView.setOnClickListener(clickBreakOnClick);
     }

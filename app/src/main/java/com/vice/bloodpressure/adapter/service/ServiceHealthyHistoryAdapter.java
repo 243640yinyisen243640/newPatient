@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import java.util.List;
  */
 public class ServiceHealthyHistoryAdapter extends RecyclerView.Adapter<ServiceHealthyHistoryAdapter.ViewHolder> {
     private Context context;
-    private List<ServiceInfo> list;
+    private List<HealthyDataAllInfo> list;
     private IAdapterViewClickListener clickListener;
 
 
-    public ServiceHealthyHistoryAdapter(Context context, List<ServiceInfo> list, IAdapterViewClickListener clickListener) {
+    public ServiceHealthyHistoryAdapter(Context context, List<HealthyDataAllInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -44,11 +44,11 @@ public class ServiceHealthyHistoryAdapter extends RecyclerView.Adapter<ServiceHe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ServiceInfo typeInfo = list.get(position);
-        holder.titleTextView.setText(typeInfo.getType());
-        holder.timeTextView.setText(typeInfo.getTime());
-        holder.numTextView.setText(typeInfo.getData());
-        holder.resultTextView.setText(typeInfo.getRate());
+        HealthyDataAllInfo typeInfo = list.get(position);
+//        holder.titleTextView.setText(typeInfo.getType());
+        //        holder.timeTextView.setText(typeInfo.getTime());
+        //        holder.numTextView.setText(typeInfo.getData());
+        //        holder.resultTextView.setText(typeInfo.getRate());
         ClickOnClick clickOnClick = new ClickOnClick(position);
         holder.lookResultTextView.setOnClickListener(clickOnClick);
 

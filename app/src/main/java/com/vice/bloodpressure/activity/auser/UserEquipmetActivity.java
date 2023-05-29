@@ -60,13 +60,7 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo
 
     @Override
     protected void getListData(CallBack callBack) {
-        equipmentInfos = new ArrayList<>();
-        equipmentInfos.add(new UserInfo("微策血糖仪", "2020-10-29", "血糖仪", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg"));
-        equipmentInfos.add(new UserInfo("小糖医血糖仪", "2020-10-29", "血糖仪", "http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg"));
-        equipmentInfos.add(new UserInfo("微策血糖仪", "2020-10-29", "血糖仪", "http://img.wxcha.com/m00/f0/f5/5e3999d5a8d62188ac5ba8ca32e058f.jpg"));
-
-        callBack.callBack(equipmentInfos);
-    }
+         }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<UserInfo> list) {

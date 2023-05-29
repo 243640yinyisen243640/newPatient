@@ -16,7 +16,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.addresspickerlib.ProvinceBean;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
+import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.popwindow.ShowCityPopupWindow;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
@@ -28,6 +31,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -55,6 +60,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         initView();
         initData();
         initListener();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     private void initListener() {
@@ -80,6 +86,21 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = UserDataManager.getSelectDoctorInfo((call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                UserInfo userInfo = (UserInfo) response.object;
+                bindData(userInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+    }
+
+    private void bindData(UserInfo userInfo) {
 
     }
 

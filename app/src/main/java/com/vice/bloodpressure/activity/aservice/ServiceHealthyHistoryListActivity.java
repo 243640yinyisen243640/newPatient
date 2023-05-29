@@ -18,7 +18,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ServiceInfo;
+import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
  * 传参:
  * 描述:历史评测
  */
-public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActivity<ServiceInfo> implements View.OnClickListener {
+public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActivity<HealthyDataAllInfo> implements View.OnClickListener {
     private TextView allTextView;
     private TextView tangTextView;
     private TextView mealTextView;
@@ -84,19 +84,12 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<ServiceInfo> normalInfoList = new ArrayList<>();
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        normalInfoList.add(new ServiceInfo("2022-06-02", "48", "低风险", "糖尿病风险评测"));
-        callBack.callBack(normalInfoList);
+
+        callBack.callBack(new ArrayList<>());
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ServiceInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataAllInfo> list) {
         return new ServiceHealthyHistoryAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
