@@ -136,6 +136,8 @@ public class ServiceMealListActivity extends UIBaseListRecycleViewActivity<Healt
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                             endTime = String.valueOf(object);
                             endTextView.setText(object.toString());
+                            setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }

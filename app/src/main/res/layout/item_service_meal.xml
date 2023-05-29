@@ -73,8 +73,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EEEEEE" />
+            android:layout_height="0.5dp"
+            android:background="#EEEEEE"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_item_service_meal_child"
