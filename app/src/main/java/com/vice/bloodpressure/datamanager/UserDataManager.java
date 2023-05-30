@@ -41,6 +41,23 @@ public class UserDataManager {
      */
     public static Call<String> getUserFilesInfo(String patientId, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("type", type);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "system/patient/detailApp", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 修改档案信息
+     *
+     * @param key
+     * @param values
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editUserFilesInfo(String key, String values, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put(key, values);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
     }
 }

@@ -3,25 +3,31 @@ package com.vice.bloodpressure.fragment.fuser;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.addresspickerlib.ProvinceBean;
+import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.popwindow.ShowCityPopupWindow;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
@@ -43,18 +49,22 @@ import retrofit2.Call;
  */
 public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements View.OnClickListener {
     private TextView nameTv;
+    private LinearLayout nameLinearLayout;
     /**
      * 身份证
      */
     private TextView idCardTv;
+    private LinearLayout idCardLinearLayout;
     /**
      * 出生年月
      */
     private TextView bornTv;
+    private LinearLayout bornLinearLayout;
     /**
      * 年龄
      */
     private TextView ageTv;
+    private LinearLayout ageLinearLayout;
     /**
      * 性别
      */
@@ -75,13 +85,14 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     private ShowCityPopupWindow cityPopupWindow;
     private List<ProvinceBean> mYwpAddressBean;
 
+    private UserInfo userInfo;
+
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
 
         initView();
         initData();
-        initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
@@ -91,8 +102,9 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                UserInfo userInfo = (UserInfo) response.object;
-                bindData(userInfo);
+                userInfo = (UserInfo) response.object;
+                initListener();
+                bindData();
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -102,7 +114,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         addRequestCallToMap("getSelectDoctorInfo", requestCall);
     }
 
-    private void bindData(UserInfo userInfo) {
+    private void bindData() {
         nameTv.setText(userInfo.getNickName());
         idCardTv.setText(userInfo.getIdCard());
         bornTv.setText(userInfo.getBedridden());
@@ -116,25 +128,44 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ll_user_base_info_name:
+                Log.i("yys", " userInfo.getNickName()==" + userInfo.getNickName());
+                showEditDialog("nickName", "1", "姓名", userInfo.getNickName());
+                break;
+
+            case R.id.ll_user_base_info_id:
+                showEditDialog("idCard", "2", "身份证号", userInfo.getIdCard());
+                break;
+
+            case R.id.ll_user_base_info_born:
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
+                    @Override
+                    public void callBack(Object object) {
+                        editInfo("3", "birthday", object.toString());
+                    }
+                });
+                break;
+            case R.id.ll_user_base_info_age:
+                showEditDialog("age", "4", "年龄", userInfo.getAge());
+                break;
             case R.id.tv_user_base_info_sex:
                 chooseSexWindow();
                 break;
             case R.id.tv_user_base_info_city:
                 cityPopupWindow = new ShowCityPopupWindow(getPageContext(),
                         (address, province, city, district) -> {
-
-                            Log.i("yys", "address==" + address);
-                            Log.i("yys", "provinceCode==" + province);
-                            Log.i("yys", "cityCode==" + city);
-                            Log.i("yys", "districtCode==" + district);
+                            editInfo("6", "nativePlace", address);
+                            cityPopupWindow.dismiss();
                         });
                 cityPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.BOTTOM);
                 break;
+
             case R.id.tv_user_base_info_sos_name:
-                showEditDialog("1", "紧急联系人", "");
+                showEditDialog("emergency", "7", "紧急联系人", userInfo.getEmergency());
                 break;
+
             case R.id.tv_user_base_info_sos_phone:
-                showEditDialog("2", "联系方式", "");
+                showEditDialog("tel", "8", "联系方式", userInfo.getTel());
                 break;
             default:
                 break;
@@ -165,10 +196,11 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
 
     /**
      * @param type  1:联系人  2：联系电话
+     * @param key   调取接口的key值
      * @param title
      * @param msg
      */
-    private void showEditDialog(String type, String title, String msg) {
+    private void showEditDialog(String key, String type, String title, String msg) {
         Dialog dialog = new Dialog(getPageContext(), R.style.HuaHanSoft_Dialog_Base);
         View view = View.inflate(getPageContext(), R.layout.activity_user_info_dialog, null);
         TextView titleTextView = getViewByID(view, R.id.tv_dialog_title);
@@ -178,18 +210,43 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
 
         titleTextView.setText(title);
         if ("1".equals(type)) {
-            if (TextUtils.isEmpty(msgEditText.getText())) {
+            if (TextUtils.isEmpty(msg)) {
+                msgEditText.setHint("请输入姓名");
+            } else {
+                msgEditText.setText(msg);
+                msgEditText.setSelection(msg.length());
+            }
+        } else if ("2".equals(type)) {
+            if (TextUtils.isEmpty(msg)) {
+                msgEditText.setHint("请输入身份证号");
+            } else {
+                msgEditText.setText(msg);
+                msgEditText.setSelection(msg.length());
+
+            }
+        } else if ("4".equals(type)) {
+            if (TextUtils.isEmpty(msg)) {
+                msgEditText.setHint("请输入年龄");
+            } else {
+                msgEditText.setText(msg);
+                msgEditText.setSelection(msg.length());
+
+            }
+        } else if ("7".equals(type)) {
+            if (TextUtils.isEmpty(msg)) {
                 msgEditText.setHint("请输入联系人姓名");
             } else {
-                msgEditText.setSelection(msg.length());
                 msgEditText.setText(msg);
+                msgEditText.setSelection(msg.length());
+
             }
         } else {
-            if (TextUtils.isEmpty(msgEditText.getText())) {
+            if (TextUtils.isEmpty(msg)) {
                 msgEditText.setHint("请输入联系人电话");
             } else {
-                msgEditText.setSelection(msg.length());
                 msgEditText.setText(msg);
+                msgEditText.setSelection(msg.length());
+
             }
         }
 
@@ -197,10 +254,23 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         //设置14个字长
         if ("1".equals(type)) {
             msgEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
+        } else if ("2".equals(type)) {
+            msgEditText.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
+            msgEditText.setKeyListener(DigitsKeyListener.getInstance("0123456789X"));
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(18)});
+
+        } else if ("4".equals(type)) {
+            msgEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
+        } else if ("7".equals(type)) {
+            msgEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
+
         } else {
             msgEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
         }
-        msgEditText.setMaxWidth(11);
         dialog.setContentView(view);
         android.view.WindowManager.LayoutParams attributes = dialog.getWindow().getAttributes();
         attributes.width = ScreenUtils.screenWidth(getPageContext()) - ScreenUtils.dip2px(getPageContext(), 1);
@@ -216,6 +286,8 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                 ToastUtils.getInstance().showToast(getPageContext(), msg);
                 return;
             }
+
+            editInfo(type, key, msgEditText.getText().toString().trim());
             dialog.dismiss();
         });
         dialog.show();
@@ -226,6 +298,50 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
             }
         }, 100);
 
+    }
+
+    /**
+     * @param type   1紧急联系人  2紧急联系人电话 3身份证号 4年龄
+     * @param key    上传接口的key
+     * @param values 上传接口的value
+     */
+    private void editInfo(String type, String key, String values) {
+        Call<String> requestCall = UserDataManager.editUserFilesInfo(key, values, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                switch (type) {
+                    case "1":
+                        nameTv.setText(values);
+                        break;
+                    case "2":
+                        idCardTv.setText(values);
+                        break;
+                    case "3":
+                        bornTv.setText(values);
+                        break;
+                    case "4":
+                        ageTv.setText(values);
+                        break;
+                    case "5":
+                        sexTv.setText((values.equals("1") ? "男" : "女"));
+                        break;
+                    case "6":
+                        cityTv.setText(values);
+                        break;
+                    case "7":
+                        sosNameTv.setText(values);
+                        break;
+                    case "8":
+                        sosPhoneTv.setText(values);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("editUserFilesInfo", requestCall);
     }
 
 
@@ -246,13 +362,16 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         exerciseList.add("女");
 
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "性别", exerciseList, object -> {
-                    sexTv.setText(exerciseList.get(Integer.parseInt(String.valueOf(object))));
-                    String sex = exerciseList.get(Integer.parseInt(String.valueOf(object)));
+                    editInfo("5", "sex", String.valueOf(object));
                 }
         );
     }
 
     private void initListener() {
+        nameLinearLayout.setOnClickListener(this);
+        idCardLinearLayout.setOnClickListener(this);
+        bornLinearLayout.setOnClickListener(this);
+        ageLinearLayout.setOnClickListener(this);
         sexTv.setOnClickListener(this);
         cityTv.setOnClickListener(this);
         sosNameTv.setOnClickListener(this);
@@ -261,9 +380,13 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_user_files_base_info, null);
+        nameLinearLayout = view.findViewById(R.id.ll_user_base_info_name);
         nameTv = view.findViewById(R.id.tv_user_base_info_name);
+        idCardLinearLayout = view.findViewById(R.id.ll_user_base_info_id);
         idCardTv = view.findViewById(R.id.tv_user_base_info_id);
+        bornLinearLayout = view.findViewById(R.id.ll_user_base_info_born);
         bornTv = view.findViewById(R.id.tv_user_base_info_born);
+        ageLinearLayout = view.findViewById(R.id.ll_user_base_info_age);
         ageTv = view.findViewById(R.id.tv_user_base_info_age);
         sexTv = view.findViewById(R.id.tv_user_base_info_sex);
         cityTv = view.findViewById(R.id.tv_user_base_info_city);

@@ -10,7 +10,6 @@
       android:id="@+id/pv_city_show"
       android:layout_width="match_parent"
       android:background="@drawable/shape_bg_white_10_0_10_0"
-
       android:layout_height="350dp"/>
 
 
