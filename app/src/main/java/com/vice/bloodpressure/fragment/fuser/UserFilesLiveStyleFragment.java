@@ -286,7 +286,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
     }
 
     /**
-     * @param type  3:是否妊娠 4妊娠时间 5是否结婚 6：是否独居 7：是否卧床 8：文化程度  9：职业情况
+     * @param type  3:是否妊娠 5是否结婚 6：是否独居 7：是否卧床 8：文化程度  9：职业情况
      * @param title
      * @param list
      */
@@ -296,9 +296,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         case "3":
                             editInfo("3", "pregnancy", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
-                        case "4":
-                            editInfo("3", "pregnancy", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
-                            break;
+
                         case "5":
                             editInfo("4", "marital", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;

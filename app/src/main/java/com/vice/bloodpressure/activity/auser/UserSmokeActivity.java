@@ -83,7 +83,7 @@ public class UserSmokeActivity extends UIBaseActivity {
     }
 
     private void editInfo() {
-        Call<String> requestCall = UserDataManager.editUserFilesInfoForSmoke(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", smokeNumEt.getText().toString().trim(), (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForSmoke(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", TextUtils.isEmpty(smokeNumEt.getText().toString().trim()) ? "" : smokeNumEt.getText().toString().trim(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 Intent intent = new Intent();

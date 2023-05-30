@@ -94,7 +94,7 @@ public class UserDrinkActivity extends UIBaseActivity {
     }
 
     private void editInfo() {
-        Call<String> requestCall = UserDataManager.editUserFilesInfoForDrink(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", drinkType, drinkNumEt.getText().toString().trim(), (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForDrink(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", drinkType,  TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 Intent intent = new Intent();
