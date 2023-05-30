@@ -73,9 +73,11 @@ public class UserSmokeActivity extends UIBaseActivity {
 
 
         sureTv.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(smokeNumEt.getText().toString().trim())) {
-                ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
-                return;
+            if (yesCb.isChecked()) {
+                if (TextUtils.isEmpty(smokeNumEt.getText().toString().trim())) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
+                    return;
+                }
             }
             editInfo();
         });

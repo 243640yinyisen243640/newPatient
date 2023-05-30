@@ -84,17 +84,20 @@ public class UserDrinkActivity extends UIBaseActivity {
             chooseDrinkTypeWindow();
         });
         sureTv.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(drinkNumEt.getText().toString().trim())) {
-                ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
-                return;
+            if (yesCb.isChecked()) {
+                if (TextUtils.isEmpty(drinkNumEt.getText().toString().trim())) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
+                    return;
+                }
             }
+
             editInfo();
         });
 
     }
 
     private void editInfo() {
-        Call<String> requestCall = UserDataManager.editUserFilesInfoForDrink(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", drinkType,  TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim(), (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForDrink(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", drinkType, TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 Intent intent = new Intent();
