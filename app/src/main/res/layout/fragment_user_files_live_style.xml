@@ -14,8 +14,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/shape_green_4_18_2"
             android:drawablePadding="7dp"
-            android:paddingTop="20dp"
             android:paddingStart="10dp"
+            android:paddingTop="20dp"
             android:paddingEnd="10dp"
             android:paddingBottom="20dp"
             android:text="生活方式"
@@ -28,9 +28,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -42,16 +42,17 @@
                 android:text="一条鱼" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -63,16 +64,17 @@
                 android:text="一条鱼" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -84,17 +86,18 @@
                 android:text="一条鱼" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:id="@+id/ll_user_live_style_pregnant_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:visibility="gone">
 
             <TextView
@@ -110,14 +113,14 @@
         <View
             android:id="@+id/view_user_live_style_pregnant_time_line"
             style="@style/base_line"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -132,16 +135,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -155,16 +159,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -178,16 +183,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:paddingEnd="10dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -201,16 +207,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -224,16 +231,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
@@ -247,16 +255,17 @@
                 android:text="请选择" />
         </LinearLayout>
 
-        <View style="@style/base_line"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+        <View
+            style="@style/base_line"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
 
             <TextView
                 style="@style/user_file_left"
