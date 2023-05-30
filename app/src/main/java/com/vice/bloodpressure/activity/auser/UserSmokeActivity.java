@@ -14,6 +14,12 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -31,7 +37,6 @@ public class UserSmokeActivity extends UIBaseActivity {
     private ImageView arrowImageView;
     private LinearLayout drinkLinerLayout;
     private TextView sureTv;
-
 
 
     @Override
@@ -68,16 +73,30 @@ public class UserSmokeActivity extends UIBaseActivity {
 
 
         sureTv.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-            intent.putExtra("smokeNum", TextUtils.isEmpty(smokeNumEt.getText().toString().trim())?"":smokeNumEt.getText().toString().trim());
-            setResult(RESULT_OK, intent);
-            finish();
+            if (TextUtils.isEmpty(smokeNumEt.getText().toString().trim())) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
+                return;
+            }
+            editInfo();
         });
 
     }
 
-
+    private void editInfo() {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForSmoke(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", smokeNumEt.getText().toString().trim(), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                Intent intent = new Intent();
+                intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
+                intent.putExtra("smokeNum", TextUtils.isEmpty(smokeNumEt.getText().toString().trim()) ? "" : smokeNumEt.getText().toString().trim());
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("editUserFilesInfoForSmoke", requestCall);
+    }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_smoke_drink, null);

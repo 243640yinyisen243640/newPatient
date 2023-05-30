@@ -174,7 +174,7 @@ public class BaseNetworkUtils {
     }
 
     public static Call<String> putRequest(boolean isNeedAccessToken, @JsonParseMode int jsonParseMode, Class clazz, String methodName, Map<String, String> paramMap, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.PUT, NetReqUtils.RequestBodyType.MULTIPART, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
+        return networkRequest(isNeedAccessToken, "", NetReqUtils.RequestType.PUT, NetReqUtils.RequestBodyType.BODY_JSON, jsonParseMode, clazz, methodName, paramMap, null, successCallBack, failureCallBack);
     }
 
 

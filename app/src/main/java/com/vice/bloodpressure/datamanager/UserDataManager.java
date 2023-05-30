@@ -55,9 +55,48 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> editUserFilesInfo(String key, String values, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> editUserFilesInfo(String archivesId, String key, String values, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
         map.put(key, values);
-        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 修改个人档案抽烟
+     *
+     * @param archivesId
+     * @param smokes
+     * @param smokesNum
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editUserFilesInfoForSmoke(String archivesId, String smokes, String smokesNum, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("smokes", smokes);
+        map.put("smokesNum", smokesNum);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 修改档案饮酒
+     *
+     * @param archivesId
+     * @param wine
+     * @param wineType
+     * @param wineDose
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editUserFilesInfoForDrink(String archivesId, String wine, String wineType, String wineDose, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("wine", wine);
+        map.put("wineType", wineType);
+        map.put("wineDose", wineDose);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
     }
 }

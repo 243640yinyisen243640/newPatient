@@ -14,10 +14,17 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -38,7 +45,7 @@ public class UserDrinkActivity extends UIBaseActivity {
     private TextView sureTv;
 
 
-    private String drinkType = "0";
+    private String drinkType = "1";
     private String drinkName;
 
     @Override
@@ -77,32 +84,48 @@ public class UserDrinkActivity extends UIBaseActivity {
             chooseDrinkTypeWindow();
         });
         sureTv.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
-            intent.putExtra("drinkNum", TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim());
-            intent.putExtra("drinkType", drinkType);
-            intent.putExtra("drinkName", drinkName);
-            setResult(RESULT_OK, intent);
-            finish();
+            if (TextUtils.isEmpty(drinkNumEt.getText().toString().trim())) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请输入数值");
+                return;
+            }
+            editInfo();
         });
 
     }
 
+    private void editInfo() {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForDrink(UserInfoUtils.getArchivesId(getPageContext()), yesCb.isChecked() ? "Y" : "N", drinkType, drinkNumEt.getText().toString().trim(), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                Intent intent = new Intent();
+                intent.putExtra("isCheck", yesCb.isChecked() ? "Y" : "N");
+                intent.putExtra("drinkNum", TextUtils.isEmpty(drinkNumEt.getText().toString().trim()) ? "" : drinkNumEt.getText().toString().trim());
+                intent.putExtra("drinkType", drinkType);
+                intent.putExtra("drinkName", drinkName);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("editUserFilesInfoForDrink", requestCall);
+    }
 
     /**
      * 酒的种类
+     * 1->红酒;2->啤酒;3->白酒; 4 黄酒
      */
     private void chooseDrinkTypeWindow() {
-        List<String> drinkList = new ArrayList<>();
-        drinkList.add("白酒");
-        drinkList.add("啤酒");
-        drinkList.add("红酒");
-        drinkList.add("黄酒");
+        List<BaseLocalDataInfo> drinkList = new ArrayList<>();
+        drinkList.add(new BaseLocalDataInfo("红酒", "1"));
+        drinkList.add(new BaseLocalDataInfo("啤酒", "1"));
+        drinkList.add(new BaseLocalDataInfo("白酒", "1"));
+        drinkList.add(new BaseLocalDataInfo("黄酒", "1"));
 
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", drinkList, object -> {
-                    drinkName = drinkList.get(Integer.parseInt(String.valueOf(object)));
+                    drinkName = drinkList.get(Integer.parseInt(String.valueOf(object))).getName();
                     typeTv.setText(drinkName);
-                    drinkType = drinkList.get(Integer.parseInt(String.valueOf(object)));
+                    drinkType = drinkList.get(Integer.parseInt(String.valueOf(object))).getId();
 
                 }
         );

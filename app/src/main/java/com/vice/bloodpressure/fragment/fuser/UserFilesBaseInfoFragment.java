@@ -7,7 +7,6 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -117,7 +116,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     private void bindData() {
         nameTv.setText(userInfo.getNickName());
         idCardTv.setText(userInfo.getIdCard());
-        bornTv.setText(userInfo.getBedridden());
+        bornTv.setText(userInfo.getBirthday());
         ageTv.setText(userInfo.getAge());
         sexTv.setText(("1".equals(userInfo.getSex()) ? "男" : "女"));
         cityTv.setText(userInfo.getNativePlace());
@@ -129,10 +128,8 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_user_base_info_name:
-                Log.i("yys", " userInfo.getNickName()==" + userInfo.getNickName());
                 showEditDialog("nickName", "1", "姓名", userInfo.getNickName());
                 break;
-
             case R.id.ll_user_base_info_id:
                 showEditDialog("idCard", "2", "身份证号", userInfo.getIdCard());
                 break;
@@ -301,12 +298,12 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     }
 
     /**
-     * @param type   1紧急联系人  2紧急联系人电话 3身份证号 4年龄
+     * @param type   1姓名  2身份证号 3出生年月 4年龄 5性别 6籍贯 7紧急联系人  8紧急联系人电话
      * @param key    上传接口的key
      * @param values 上传接口的value
      */
     private void editInfo(String type, String key, String values) {
-        Call<String> requestCall = UserDataManager.editUserFilesInfo(key, values, (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), key, values, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 switch (type) {
@@ -362,7 +359,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         exerciseList.add("女");
 
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "性别", exerciseList, object -> {
-                    editInfo("5", "sex", String.valueOf(object));
+                    editInfo("5", "sex", (Integer.parseInt(String.valueOf(object)) + 1) + "");
                 }
         );
     }

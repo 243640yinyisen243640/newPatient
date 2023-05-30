@@ -203,7 +203,7 @@ public class UserInfo implements Serializable {
      */
     private String wineDose;
     /**
-     * 1已婚 2未婚
+     * 1已婚 2未婚 3其他
      */
     private String marital;
     /**
@@ -219,7 +219,7 @@ public class UserInfo implements Serializable {
      */
     private String liveAlone;
     /**
-     * 文化程度   1:小学 2初中 3高中/技校/中专 4大学专科及以上
+     * 文化程度   1:研究生 2:大学本科 3大学专科和专科学院 4中等专业学校5:技工学校6:高中7:初中8:小学9:文盲或半文盲10:未知
      */
     private String education;
     /**
@@ -227,14 +227,17 @@ public class UserInfo implements Serializable {
      */
     private String bedridden;
     /**
-     * 医疗支付方式
+     * 1轻体力 2 中体力 3 重体力
+     */
+    private String profession;
+    /**
+     * 医疗支付方式 1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
      */
     private String medicalPay;
     /**
      * 就诊卡号
      */
     private String medicalCard;
-
 
 
     public String getType() {
@@ -314,6 +317,14 @@ public class UserInfo implements Serializable {
 
     public String getUser_id() {
         return user_id;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
     public void setUser_id(String user_id) {
