@@ -238,6 +238,14 @@ public class UserInfo implements Serializable {
      * 就诊卡号
      */
     private String medicalCard;
+    /**
+     * 亲属名称
+     */
+    private String familyDec;
+    /**
+     * 亲属有无病症
+     */
+    private String isContain;
 
 
     public String getType() {
@@ -682,5 +690,21 @@ public class UserInfo implements Serializable {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getFamilyDec() {
+        return familyDec;
+    }
+
+    public void setFamilyDec(String familyDec) {
+        this.familyDec = familyDec;
+    }
+
+    public String getIsContain() {
+        return isContain;
+    }
+
+    public void setIsContain(String isContain) {
+        this.isContain = isContain;
     }
 }

@@ -9,8 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
-import com.vice.bloodpressure.baseimp.LoadStatus;
-import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
@@ -23,7 +22,7 @@ import java.util.List;
  * 传参:isAdd 1：添加  2：编辑
  * 描述:家族史
  */
-public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
+public class UserIllFamilyHistoryActivity extends UIBaseActivity {
     /**
      * 1：添加  2：编辑
      */
@@ -38,12 +37,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("其他诊断");
-        isAdd = getIntent().getStringExtra("isAdd");
-        if ("1".equals(isAdd)) {
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        } else {
-            loadViewManager().changeLoadState(LoadStatus.LOADING);
-        }
+        //        isAdd = getIntent().getStringExtra("isAdd");
         initView();
         initListener();
         initValues();
@@ -85,6 +79,8 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
         });
         saveTv.setOnClickListener(v -> {
 
+            setResult(RESULT_OK);
+            finish();
         });
     }
 
@@ -97,9 +93,5 @@ public class UserIllFamilyHistoryActivity extends UIBaseLoadActivity {
         containerView().addView(view);
     }
 
-    @Override
-    protected void onPageLoad() {
-
-    }
 
 }

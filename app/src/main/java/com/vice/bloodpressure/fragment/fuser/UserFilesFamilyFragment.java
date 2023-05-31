@@ -4,15 +4,23 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.auser.UserIllFamilyHistoryActivity;
 import com.vice.bloodpressure.adapter.user.UserFilesFamilyHistoryAdapter;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
-import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * 作者: beauty
@@ -21,44 +29,46 @@ import java.util.List;
  * 描述:
  */
 public class UserFilesFamilyFragment extends UIBaseLoadFragment {
+    private static final int REQUEST_CODE_FOR_REFRESH = 1;
     private TextView addTextView;
     private NoScrollListView listView;
 
     private UserFilesFamilyHistoryAdapter adapter;
+    private UserInfo userInfo;
 
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
         initView();
-        initVlues();
         initListener();
     }
 
 
-    private void initVlues() {
-        List<BaseLocalDataInfo> list = new ArrayList<>();
-        list.add(new BaseLocalDataInfo("子女", "无"));
-        list.add(new BaseLocalDataInfo("子女", "有"));
-        adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), list);
-        listView.setAdapter(adapter);
-    }
-
     @Override
     protected void onPageLoad() {
-
+        Call<String> requestCall = UserDataManager.getUserFilesInfoForFamily(UserInfoUtils.getArchivesId(getPageContext()), "4", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), (List<UserInfo>) response.object);
+                listView.setAdapter(adapter);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getUserFilesInfoForFamily", requestCall);
     }
 
 
     private void initListener() {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), UserIllFamilyHistoryActivity.class);
-            intent.putExtra("isAdd", "2");
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
         addTextView.setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), UserIllFamilyHistoryActivity.class);
-            intent.putExtra("isAdd", "1");
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
         });
     }
 
@@ -69,4 +79,17 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
         containerView().addView(view);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOR_REFRESH:
+                    onPageLoad();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

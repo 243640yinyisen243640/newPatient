@@ -39,6 +39,9 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
     private String isAdd;
 
     private ImageView arrowImageView;
+    private LinearLayout tangLinearLayout;
+    private TextView tangTimeTextView;
+    private HHAtMostGridView tangGridView;
     private LinearLayout bgLinearLayout;
     private FlexboxLayout typeFl;
     private HHAtMostGridView typeGridView;
@@ -92,15 +95,20 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
             textView.setTag(list.get(i).getId());
             typeFl.addView(textView, lp);
             textView.setOnClickListener(v -> {
+                arrowImageView.setVisibility(View.GONE);
+                tangLinearLayout.setVisibility(View.GONE);
+                bgLinearLayout.setVisibility(View.GONE);
+                if ("1".equals(v.getTag())) {
+                    arrowImageView.setVisibility(View.VISIBLE);
+                    tangLinearLayout.setVisibility(View.VISIBLE);
+                }
+
+
                 if ("2".equals(v.getTag())) {
                     arrowImageView.setVisibility(View.VISIBLE);
                     bgLinearLayout.setVisibility(View.VISIBLE);
-                } else {
-                    arrowImageView.setVisibility(View.GONE);
-                    bgLinearLayout.setVisibility(View.GONE);
                 }
                 for (int j = 0; j < list.size(); j++) {
-
                     if (v.getTag().equals(list.get(j).getId())) {
                         //设置选中
                         list.get(j).setCheck(true);
@@ -116,6 +124,13 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
             });
         }
 
+
+        List<BaseLocalDataInfo> tangList = new ArrayList();
+        tangList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
+        tangList.add(new BaseLocalDataInfo("2型糖尿病", "2"));
+        tangList.add(new BaseLocalDataInfo("妊娠糖尿病", "3"));
+        PerfectDiseaseAdapter tangLevelAdapter = new PerfectDiseaseAdapter(getPageContext(), tangList);
+        tangGridView.setAdapter(tangLevelAdapter);
 
         List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
         BaseLocalDataInfo typeInfo1 = new BaseLocalDataInfo("1级高血压", "1");
@@ -157,6 +172,9 @@ public class UserIllOtherActivity extends UIBaseLoadActivity {
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_ill_other, null);
         arrowImageView = view.findViewById(R.id.iv_user_ill_other);
+        tangLinearLayout = view.findViewById(R.id.ll_user_ill_tang_other);
+        tangGridView = view.findViewById(R.id.gv_user_ill_tang_other);
+        tangTimeTextView = view.findViewById(R.id.tv_user_ill_tang_other_time);
         bgLinearLayout = view.findViewById(R.id.ll_user_ill_other);
         typeFl = view.findViewById(R.id.fl_user_ill_other);
         typeGridView = view.findViewById(R.id.gv_user_ill_other_type);

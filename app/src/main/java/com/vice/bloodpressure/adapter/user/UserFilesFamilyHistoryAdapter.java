@@ -7,15 +7,15 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.UserInfo;
 
 import java.util.List;
 
-public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<BaseLocalDataInfo> {
-    private List<BaseLocalDataInfo> list;
+public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<UserInfo> {
+    private List<UserInfo> list;
     private Context context;
 
-    public UserFilesFamilyHistoryAdapter(Context context, List<BaseLocalDataInfo> list) {
+    public UserFilesFamilyHistoryAdapter(Context context, List<UserInfo> list) {
         super(context, list);
         this.context = context;
         this.list = list;
@@ -33,9 +33,9 @@ public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<BaseLocalDataIn
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        BaseLocalDataInfo info = getList().get(position);
+        UserInfo info = getList().get(position);
 
-        holder.typeTextView.setText("子女 无");
+        holder.typeTextView.setText(info.getFamilyDec() + " " + info.getIsContain());
         return convertView;
     }
 

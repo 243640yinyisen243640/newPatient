@@ -17,6 +17,10 @@ public class MealIngMapInfo implements Serializable {
      * 食材克数
      */
     private String ingK;
+    /**
+     * 食材克数
+     */
+    private String weight;
 
     public String getName() {
         return name;
@@ -32,5 +36,14 @@ public class MealIngMapInfo implements Serializable {
 
     public void setIngK(String ingK) {
         this.ingK = ingK;
+    }
+
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 }

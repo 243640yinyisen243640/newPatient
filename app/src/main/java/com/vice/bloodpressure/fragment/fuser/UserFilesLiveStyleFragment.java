@@ -52,6 +52,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
      * 喝酒
      */
     private static final int REQUEST_CODE_FOR_DRINK_STYLE = 2;
+    private static final int REQUEST_CODE_FOR_PAY_STYLE = 3;
     /**
      * 是否吸烟
      */
@@ -131,7 +132,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
+        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "2", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 userInfo = (UserInfo) response.object;
@@ -143,7 +144,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         }, (call, t) -> {
             loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
-        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+        addRequestCallToMap("getUserFilesInfo", requestCall);
     }
 
     private void bindData() {
@@ -340,7 +341,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 break;
             case R.id.tv_user_live_style_pay:
                 intent = new Intent(getPageContext(), UserPayStyleActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_FOR_PAY_STYLE);
                 break;
             case R.id.tv_user_live_style_hos_card:
                 showEditDialog("就诊卡号", userInfo.getMedicalCard());
@@ -508,6 +509,12 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         } else {
                             drinkTv.setText("否");
                         }
+                    }
+                    break;
+                case REQUEST_CODE_FOR_PAY_STYLE:
+                    if (data != null) {
+                        String checkName = data.getStringExtra("checkName");
+                        paystyleTv.setText(checkName);
                     }
                     break;
                 default:

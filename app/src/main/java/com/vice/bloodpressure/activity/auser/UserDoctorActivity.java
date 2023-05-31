@@ -44,6 +44,7 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         type = getIntent().getStringExtra("type");
         initView();
         initlistener();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     private void initlistener() {

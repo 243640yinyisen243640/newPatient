@@ -47,6 +47,16 @@ public class UserDataManager {
     }
 
     /**
+     * 档案的家族史
+     */
+    public static Call<String> getUserFilesInfoForFamily(String patientId, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, UserInfo.class, "system/patient/detailApp", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 修改档案信息
      *
      * @param key
