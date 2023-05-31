@@ -147,8 +147,25 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
     }
 
     private void bindData() {
-        smokeTv.setText(("Y".equals(userInfo.getSmokes()) ? "是" : "否"));
-        drinkTv.setText(("Y".equals(userInfo.getWine()) ? "是" : "否"));
+        if ("Y".equals(userInfo.getSmokes())) {
+            smokeTv.setText("是 " + userInfo.getSmokesNum() + "支/日");
+        } else {
+            smokeTv.setText("否");
+        }
+        //饮酒类型:1->红酒;2->啤酒;3->白酒; 4 黄酒
+        if ("Y".equals(userInfo.getWine())) {
+            if ("1".equals(userInfo.getWineType())) {
+                drinkTv.setText("是 " + " 红酒" + userInfo.getWineDose() + "ml/日");
+            } else if ("2".equals(userInfo.getWineType())) {
+                drinkTv.setText("是 " + " 啤酒" + userInfo.getWineDose() + "ml/日");
+            } else if ("3".equals(userInfo.getWineType())) {
+                drinkTv.setText("是 " + " 白酒" + userInfo.getWineDose() + "ml/日");
+            } else {
+                drinkTv.setText("是 " + " 黄酒" + userInfo.getWineDose() + "ml/日");
+            }
+        } else {
+            drinkTv.setText("否");
+        }
         pregnantTv.setText(("Y".equals(userInfo.getPregnancy()) ? "是" : "否"));
         if ("1".equals(userInfo.getMarital())) {
             marriageTv.setText("已婚");
@@ -159,8 +176,28 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         }
         aloneTv.setText(("Y".equals(userInfo.getLiveAlone()) ? "是" : "否"));
         bedTv.setText(("Y".equals(userInfo.getBedridden()) ? "是" : "否"));
-
-        cultureTv.setText(userInfo.getEducation());
+        //1:研究生 2:大学本科 3大学专科和专科学院 4中等专业学校5:技工学校6:高中7:初中8:小学9:文盲或半文盲10:未知
+        if ("1".equals(userInfo.getEducation())) {
+            cultureTv.setText("研究生");
+        } else if ("2".equals(userInfo.getEducation())) {
+            paystyleTv.setText("大学本科");
+        } else if ("3".equals(userInfo.getEducation())) {
+            paystyleTv.setText("大学专科和专科学院");
+        } else if ("4".equals(userInfo.getEducation())) {
+            paystyleTv.setText("中等专业学校5");
+        } else if ("5".equals(userInfo.getEducation())) {
+            paystyleTv.setText("技工学校");
+        } else if ("6".equals(userInfo.getEducation())) {
+            paystyleTv.setText("高中");
+        } else if ("7".equals(userInfo.getEducation())) {
+            paystyleTv.setText("初中");
+        } else if ("8".equals(userInfo.getEducation())) {
+            paystyleTv.setText("小学");
+        } else if ("9".equals(userInfo.getEducation())) {
+            paystyleTv.setText("文盲或半文盲");
+        } else {
+            paystyleTv.setText("未知");
+        }
         //1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
         if ("1".equals(userInfo.getMedicalPay())) {
             paystyleTv.setText("社会医疗保险");
@@ -212,11 +249,16 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 startActivityForResult(intent, REQUEST_CODE_FOR_DRINK_STYLE);
                 break;
             case R.id.tv_user_live_style_pregnant:
-                List<BaseLocalDataInfo> pregnantList = new ArrayList<>();
-                pregnantList.add(new BaseLocalDataInfo("是", "Y"));
-                pregnantList.add(new BaseLocalDataInfo("否", "N"));
+                List<BaseLocalDataInfo> allPregnantList = new ArrayList<>();
+                allPregnantList.add(new BaseLocalDataInfo("是", "Y"));
+                allPregnantList.add(new BaseLocalDataInfo("否", "N"));
+                allPregnantList.add(new BaseLocalDataInfo("未知", "3"));
+                List<String> pregnantList = new ArrayList<>();
+                for (int i = 0; i < allPregnantList.size(); i++) {
+                    pregnantList.add(allPregnantList.get(i).getName());
+                }
 
-                chooseWindow("1", "妊娠", pregnantList);
+                chooseWindow("3", "妊娠", allPregnantList, pregnantList);
 
                 break;
             case R.id.tv_user_live_style_pregnant_time:
@@ -228,57 +270,80 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 });
                 break;
             case R.id.tv_user_live_style_marriage:
-                List<BaseLocalDataInfo> marriageList = new ArrayList<>();
-                marriageList.add(new BaseLocalDataInfo("已婚", "1"));
-                marriageList.add(new BaseLocalDataInfo("未婚", "2"));
-                marriageList.add(new BaseLocalDataInfo("其他", "3"));
-                chooseWindow("2", "婚姻", marriageList);
+                List<BaseLocalDataInfo> allMarriageList = new ArrayList<>();
+                allMarriageList.add(new BaseLocalDataInfo("已婚", "1"));
+                allMarriageList.add(new BaseLocalDataInfo("未婚", "2"));
+                allMarriageList.add(new BaseLocalDataInfo("未知", "3"));
+                List<String> marriageList = new ArrayList<>();
+                for (int i = 0; i < allMarriageList.size(); i++) {
+                    marriageList.add(allMarriageList.get(i).getName());
+                }
+
+                chooseWindow("4", "婚姻", allMarriageList, marriageList);
                 break;
             case R.id.tv_user_live_style_alone:
-                List<BaseLocalDataInfo> aloneList = new ArrayList<>();
-                aloneList.add(new BaseLocalDataInfo("是", "Y"));
-                aloneList.add(new BaseLocalDataInfo("否", "N"));
-                aloneList.add(new BaseLocalDataInfo("未知", "3"));
+                List<BaseLocalDataInfo> allAloneList = new ArrayList<>();
+                allAloneList.add(new BaseLocalDataInfo("是", "Y"));
+                allAloneList.add(new BaseLocalDataInfo("否", "N"));
+                allAloneList.add(new BaseLocalDataInfo("未知", "3"));
+                List<String> aloneList = new ArrayList<>();
+                for (int i = 0; i < allAloneList.size(); i++) {
+                    aloneList.add(allAloneList.get(i).getName());
+                }
 
-                chooseWindow("3", "独居", aloneList);
+                chooseWindow("5", "独居", allAloneList, aloneList);
                 break;
             case R.id.tv_user_live_style_bed:
 
-                List<BaseLocalDataInfo> isInBedList = new ArrayList<>();
-                isInBedList.add(new BaseLocalDataInfo("是", "Y"));
-                isInBedList.add(new BaseLocalDataInfo("否", "N"));
-                isInBedList.add(new BaseLocalDataInfo("未知", "3"));
-                chooseWindow("4", "卧床", isInBedList);
+                List<BaseLocalDataInfo> allIsInBedList = new ArrayList<>();
+                allIsInBedList.add(new BaseLocalDataInfo("是", "Y"));
+                allIsInBedList.add(new BaseLocalDataInfo("否", "N"));
+                allIsInBedList.add(new BaseLocalDataInfo("未知", "3"));
+
+                List<String> isInBedList = new ArrayList<>();
+                for (int i = 0; i < allIsInBedList.size(); i++) {
+                    isInBedList.add(allIsInBedList.get(i).getName());
+                }
+                chooseWindow("6", "卧床", allIsInBedList, isInBedList);
                 break;
             case R.id.tv_user_live_style_culture:
-                List<BaseLocalDataInfo> cultureList = new ArrayList<>();
-                cultureList.add(new BaseLocalDataInfo("研究生", "1"));
-                cultureList.add(new BaseLocalDataInfo("大学本科", "2"));
-                cultureList.add(new BaseLocalDataInfo("大学专科和专科学院", "3"));
-                cultureList.add(new BaseLocalDataInfo("中等专业学校", "4"));
-                cultureList.add(new BaseLocalDataInfo("技工学校", "5"));
-                cultureList.add(new BaseLocalDataInfo("高中", "6"));
-                cultureList.add(new BaseLocalDataInfo("初中", "7"));
-                cultureList.add(new BaseLocalDataInfo("小学", "8"));
-                cultureList.add(new BaseLocalDataInfo("文盲或半文盲", "9"));
-                cultureList.add(new BaseLocalDataInfo("未知", "10"));
+                List<BaseLocalDataInfo> allCultureList = new ArrayList<>();
+                allCultureList.add(new BaseLocalDataInfo("研究生", "1"));
+                allCultureList.add(new BaseLocalDataInfo("大学本科", "2"));
+                allCultureList.add(new BaseLocalDataInfo("大学专科和专科学院", "3"));
+                allCultureList.add(new BaseLocalDataInfo("中等专业学校", "4"));
+                allCultureList.add(new BaseLocalDataInfo("技工学校", "5"));
+                allCultureList.add(new BaseLocalDataInfo("高中", "6"));
+                allCultureList.add(new BaseLocalDataInfo("初中", "7"));
+                allCultureList.add(new BaseLocalDataInfo("小学", "8"));
+                allCultureList.add(new BaseLocalDataInfo("文盲或半文盲", "9"));
+                allCultureList.add(new BaseLocalDataInfo("未知", "10"));
+                List<String> cultureList = new ArrayList<>();
+                for (int i = 0; i < allCultureList.size(); i++) {
+                    cultureList.add(allCultureList.get(i).getName());
+                }
 
-                chooseWindow("5", "文化程度", cultureList);
+
+                chooseWindow("7", "文化程度", allCultureList, cultureList);
 
                 break;
             case R.id.tv_user_live_style_work:
-                List<BaseLocalDataInfo> workList = new ArrayList<>();
-                workList.add(new BaseLocalDataInfo("轻体力", "1"));
-                workList.add(new BaseLocalDataInfo("中体力", "2"));
-                workList.add(new BaseLocalDataInfo("重体力", "3"));
-                chooseWindow("6", "职业情况", workList);
+                List<BaseLocalDataInfo> allWorkList = new ArrayList<>();
+                allWorkList.add(new BaseLocalDataInfo("轻体力", "1"));
+                allWorkList.add(new BaseLocalDataInfo("中体力", "2"));
+                allWorkList.add(new BaseLocalDataInfo("重体力", "3"));
+                List<String> workList = new ArrayList<>();
+                for (int i = 0; i < allWorkList.size(); i++) {
+                    workList.add(allWorkList.get(i).getName());
+                }
+                chooseWindow("8", "职业情况", allWorkList, workList);
                 break;
             case R.id.tv_user_live_style_pay:
                 intent = new Intent(getPageContext(), UserPayStyleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_user_live_style_hos_card:
-                showEditDialog("就诊卡号", "请输入就诊卡号");
+                showEditDialog("就诊卡号", userInfo.getMedicalCard());
                 break;
             default:
                 break;
@@ -290,27 +355,27 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
      * @param title
      * @param list
      */
-    private void chooseWindow(String type, String title, List<BaseLocalDataInfo> list) {
+    private void chooseWindow(String type, String title, List<BaseLocalDataInfo> allList, List<String> list) {
         PickerViewUtils.showChooseSinglePicker(getPageContext(), title, list, object -> {
                     switch (type) {
                         case "3":
-                            editInfo("3", "pregnancy", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("3", "pregnancy", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
 
                         case "5":
-                            editInfo("4", "marital", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("4", "marital", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "6":
-                            editInfo("5", "liveAlone", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("5", "liveAlone", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "7":
-                            editInfo("6", "bedridden", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("6", "bedridden", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "8":
-                            editInfo("7", "education", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("7", "education", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "9":
-                            editInfo("8", "profession", list.get(Integer.parseInt(String.valueOf(object))).getName(), list.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("8", "profession", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         default:
                             break;
@@ -333,10 +398,13 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         TextView sureTextView = getViewByID(view, R.id.tv_dialog_sure);
 
         titleTextView.setText(title);
-        msgEditText.setText(msg);
-        //  msgEditText.setSelection(msg.length());
-        //设置14个字长
-        msgEditText.setMaxWidth(11);
+        if (TextUtils.isEmpty(msg)) {
+            msgEditText.setHint("请输入就诊卡号");
+        } else {
+            msgEditText.setText(msg);
+            msgEditText.setSelection(msg.length());
+        }
+
         dialog.setContentView(view);
         android.view.WindowManager.LayoutParams attributes = dialog.getWindow().getAttributes();
         attributes.width = ScreenUtils.screenWidth(getPageContext()) - ScreenUtils.dip2px(getPageContext(), 1);
@@ -420,8 +488,8 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                     if (data != null) {
                         String isSmoke = data.getStringExtra("isCheck");
                         String smokeNum = data.getStringExtra("smokeNum");
-                        if ("1".equals(isSmoke)) {
-                            smokeTv.setText("是 " + smokeNum + "日/支");
+                        if ("Y".equals(isSmoke)) {
+                            smokeTv.setText("是 " + smokeNum + "支/日");
                         } else {
                             smokeTv.setText("否");
                         }
@@ -435,7 +503,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         String drinkNum = data.getStringExtra("drinkNum");
                         String drinkType = data.getStringExtra("drinkType");
                         String drinkName = data.getStringExtra("drinkName");
-                        if ("1".equals(isDrink)) {
+                        if ("Y".equals(isDrink)) {
                             drinkTv.setText("是 " + drinkName + " " + drinkNum + "ml/日");
                         } else {
                             drinkTv.setText("否");

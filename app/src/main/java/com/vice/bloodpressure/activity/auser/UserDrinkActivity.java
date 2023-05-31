@@ -46,7 +46,7 @@ public class UserDrinkActivity extends UIBaseActivity {
 
 
     private String drinkType = "1";
-    private String drinkName;
+    private String drinkName="红酒";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
