@@ -65,81 +65,19 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/ll_user_files_ill_important"
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/lv_user_files_ill_important"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="疾病类型"
-                        android:textColor="#555555"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_user_files_ill_important_type"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/arrow_right_gray"
-                        android:drawablePadding="10dp"
-                        android:gravity="center|right"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="高血压  2级高血压  中危"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="确诊时间"
-                        android:textColor="#555555"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_user_files_ill_important_time"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/arrow_right_gray"
-                        android:drawablePadding="10dp"
-                        android:gravity="center|right"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="2020-10-29"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
+                android:divider="@color/transparent"
+                android:dividerHeight="10dp"
+                android:layout_marginTop="10dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@color/transparent" />
 
             <View style="@style/base_line"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
@@ -218,79 +156,15 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:id="@+id/ll_user_files_ill_other"
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/lv_user_files_ill_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="疾病类型"
-                        android:textColor="#555555"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_user_files_ill_other_name"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/arrow_right_gray"
-                        android:drawablePadding="10dp"
-                        android:gravity="center|right"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="高血压  2级高血压  中危"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="确诊时间"
-                        android:textColor="#555555"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_user_files_ill_other_time"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/arrow_right_gray"
-                        android:drawablePadding="10dp"
-                        android:gravity="center|right"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="2020-10-29"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
+                android:divider="@color/transparent"
+                android:dividerHeight="10dp"
+                android:layout_marginTop="10dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@color/transparent" />
 
 
         </LinearLayout>

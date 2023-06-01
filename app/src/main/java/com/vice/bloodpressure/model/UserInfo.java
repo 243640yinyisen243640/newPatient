@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -246,6 +247,18 @@ public class UserInfo implements Serializable {
      * 亲属有无病症
      */
     private String isContain;
+    /**
+     * 并发症
+     */
+    private List<DiseaseInfo> complication;
+    /**
+     * 主要诊断
+     */
+    private List<DiseaseInfo> mainDiagnosis;
+    /**
+     * 其他诊断
+     */
+    private List<DiseaseInfo> otherDiagnosis;
 
 
     public String getType() {
@@ -706,5 +719,29 @@ public class UserInfo implements Serializable {
 
     public void setIsContain(String isContain) {
         this.isContain = isContain;
+    }
+
+    public List<DiseaseInfo> getComplication() {
+        return complication;
+    }
+
+    public void setComplication(List<DiseaseInfo> complication) {
+        this.complication = complication;
+    }
+
+    public List<DiseaseInfo> getMainDiagnosis() {
+        return mainDiagnosis;
+    }
+
+    public void setMainDiagnosis(List<DiseaseInfo> mainDiagnosis) {
+        this.mainDiagnosis = mainDiagnosis;
+    }
+
+    public List<DiseaseInfo> getOtherDiagnosis() {
+        return otherDiagnosis;
+    }
+
+    public void setOtherDiagnosis(List<DiseaseInfo> otherDiagnosis) {
+        this.otherDiagnosis = otherDiagnosis;
     }
 }

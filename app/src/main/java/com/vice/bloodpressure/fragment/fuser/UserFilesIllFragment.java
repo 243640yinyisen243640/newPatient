@@ -1,9 +1,11 @@
 package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.auser.UserIllOtherActivity;
@@ -18,6 +20,8 @@ import com.vice.bloodpressure.view.NoScrollListView;
 
 import retrofit2.Call;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * 作者: beauty
  * 类名:
@@ -25,18 +29,22 @@ import retrofit2.Call;
  * 描述:
  */
 public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnClickListener {
-    private LinearLayout importantLinearLayout;
-    private TextView importantTypeTextView;
-    private TextView importantTimeTextView;
+    private static final int REQUEST_CODE_FOR_ILL_REFRESH = 1;
+    /**
+     * 主要诊断
+     */
     private TextView importantAddTextView;
-    private TextView plusAddTextView;
-    private NoScrollListView listView;
-    private LinearLayout otherLinearLayout;
+    private NoScrollListView importantListView;
+    /**
+     * 其他诊断
+     */
     private TextView otherAddTextView;
-    private TextView otherNameTextView;
-    private TextView otherTimeTextView;
-
-    private UserFilesPlusAdapter adapter;
+    private NoScrollListView otherListView;
+    /**
+     * 合并症
+     */
+    private TextView plusAddTextView;
+    private NoScrollListView plusListView;
 
     private UserInfo userInfo;
 
@@ -49,10 +57,8 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     }
 
     private void initListener() {
-        importantLinearLayout.setOnClickListener(this);
         importantAddTextView.setOnClickListener(this);
         plusAddTextView.setOnClickListener(this);
-        otherLinearLayout.setOnClickListener(this);
         otherAddTextView.setOnClickListener(this);
     }
 
@@ -64,8 +70,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 userInfo = (UserInfo) response.object;
                 initListener();
-//                adapter = new UserFilesPlusAdapter(getPageContext(), list);
-//                listView.setAdapter(adapter);
+                bindData(userInfo);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -75,27 +80,73 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
         addRequestCallToMap("getSelectDoctorInfo", requestCall);
     }
 
+    private void bindData(UserInfo userInfo) {
+        if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {
+            UserFilesPlusAdapter plusAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getComplication(), "1", (position, view) -> {
+                switch (view.getId()) {
+                    case R.id.ll_disease_click:
+                        Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
+                        intent.putExtra("isAdd", "1");
+                        startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            plusListView.setAdapter(plusAdapter);
+        }
+        if (userInfo.getMainDiagnosis() != null && userInfo.getMainDiagnosis().size() > 0) {
+            UserFilesPlusAdapter importantAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getMainDiagnosis(), "2", (position, view) -> {
+                switch (view.getId()) {
+                    case R.id.ll_disease_click:
+                        Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
+                        intent.putExtra("isAdd", "1");
+                        intent.putExtra("type", "1");
+                        startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            importantListView.setAdapter(importantAdapter);
+        }
+
+        if (userInfo.getOtherDiagnosis() != null && userInfo.getOtherDiagnosis().size() > 0) {
+
+            UserFilesPlusAdapter otherAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getOtherDiagnosis(), "3", (position, view) -> {
+                switch (view.getId()) {
+                    case R.id.ll_disease_click:
+                        Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
+                        intent.putExtra("isAdd", "1");
+                        intent.putExtra("type", "2");
+                        startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            otherListView.setAdapter(otherAdapter);
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.ll_user_files_ill_important:
-                intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                intent.putExtra("isAdd", "2");
-                startActivity(intent);
-                break;
+
             case R.id.tv_user_files_ill_important_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                 intent.putExtra("isAdd", "1");
+                intent.putExtra("type", "1");
                 startActivity(intent);
                 break;
-            case R.id.ll_user_files_ill_other:
 
-                break;
             case R.id.tv_user_files_ill_other_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                 intent.putExtra("isAdd", "1");
-                startActivity(intent);
+                intent.putExtra("type", "2");
+                startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
             case R.id.tv_user_files_ill_plus_add:
                 intent = new Intent(getPageContext(), UserIllPlusActivity.class);
@@ -109,22 +160,33 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_FOR_ILL_REFRESH:
+                    onPageLoad();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_user_files_ill, null);
-        importantLinearLayout = view.findViewById(R.id.ll_user_files_ill_important);
-        importantTypeTextView = view.findViewById(R.id.tv_user_files_ill_important_type);
-        importantTimeTextView = view.findViewById(R.id.tv_user_files_ill_important_time);
         importantAddTextView = view.findViewById(R.id.tv_user_files_ill_important_add);
+        importantListView = view.findViewById(R.id.lv_user_files_ill_important);
 
+        otherAddTextView = view.findViewById(R.id.tv_user_files_ill_other_add);
+        otherListView = view.findViewById(R.id.lv_user_files_ill_other);
 
         plusAddTextView = view.findViewById(R.id.tv_user_files_ill_plus_add);
-        listView = view.findViewById(R.id.lv_user_files_ill_plus);
+        plusListView = view.findViewById(R.id.lv_user_files_ill_plus);
 
-        otherLinearLayout = view.findViewById(R.id.ll_user_files_ill_other);
-        otherNameTextView = view.findViewById(R.id.tv_user_files_ill_other_name);
-        otherTimeTextView = view.findViewById(R.id.tv_user_files_ill_other_time);
-        otherAddTextView = view.findViewById(R.id.tv_user_files_ill_other_add);
+
         containerView().addView(view);
     }
 }

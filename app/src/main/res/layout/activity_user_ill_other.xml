@@ -61,7 +61,7 @@
                     android:paddingTop="20dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="25dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -69,6 +69,20 @@
                         android:text="类型"
                         android:textColor="@color/black_24"
                         android:textSize="15sp" />
+
+                    <com.vice.bloodpressure.view.HHAtMostGridView
+                        android:id="@+id/gv_user_ill_other_type_tang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:fadingEdge="none"
+                        android:fadingEdgeLength="0dp"
+                        android:horizontalSpacing="10dp"
+                        android:listSelector="@color/transparent"
+                        android:numColumns="3"
+                        android:scrollbars="none"
+                        android:verticalSpacing="10dp" />
 
                     <com.vice.bloodpressure.view.HHAtMostGridView
                         android:id="@+id/gv_user_ill_other_type"
@@ -82,16 +96,19 @@
                         android:listSelector="@color/transparent"
                         android:numColumns="3"
                         android:scrollbars="none"
+                        android:visibility="gone"
                         android:verticalSpacing="10dp" />
 
 
                     <TextView
+                        android:id="@+id/tv_user_ill_other_level"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="程度"
                         android:textColor="@color/black_24"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:visibility="gone" />
 
                     <com.vice.bloodpressure.view.HHAtMostGridView
                         android:id="@+id/gv_user_ill_other_level"
@@ -105,7 +122,8 @@
                         android:listSelector="@color/transparent"
                         android:numColumns="4"
                         android:scrollbars="none"
-                        android:verticalSpacing="10dp" />
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -132,62 +150,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_user_ill_tang_other"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_defaultbackground_5"
-                    android:orientation="vertical"
-                    android:paddingStart="15dp"
-                    android:paddingTop="20dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="25dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="类型"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-                    <com.vice.bloodpressure.view.HHAtMostGridView
-                        android:id="@+id/gv_user_ill_tang_other"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fadingEdge="none"
-                        android:fadingEdgeLength="0dp"
-                        android:horizontalSpacing="10dp"
-                        android:listSelector="@color/transparent"
-                        android:numColumns="3"
-                        android:scrollbars="none"
-                        android:verticalSpacing="10dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="确诊时间"
-                        android:textColor="@color/black_24"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_user_ill_tang_other_time"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/shape_bg_white_black_90_1"
-                        android:drawableLeft="@drawable/user_ill_time"
-                        android:drawablePadding="10dp"
-                        android:paddingLeft="15dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="请选择日期"
-                        android:textColor="#9D9D9D"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

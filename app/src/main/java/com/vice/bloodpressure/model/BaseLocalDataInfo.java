@@ -19,8 +19,13 @@ public class BaseLocalDataInfo {
      */
     private String calorie;
 
+    private String isSelect;
 
-
+    public BaseLocalDataInfo(String name, String id, String isSelect) {
+        this.name = name;
+        this.id = id;
+        this.isSelect = isSelect;
+    }
 
     public BaseLocalDataInfo(String name, String id) {
         this.name = name;
@@ -73,5 +78,13 @@ public class BaseLocalDataInfo {
 
     public void setCalorie(String calorie) {
         this.calorie = calorie;
+    }
+
+    public String getIsSelect() {
+        return isSelect;
+    }
+
+    public void setIsSelect(String isSelect) {
+        this.isSelect = isSelect;
     }
 }
