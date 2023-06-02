@@ -10,6 +10,22 @@ import java.util.List;
  * 描述:
  */
 public class UserInfo implements Serializable {
+
+    /**
+     * 头像
+     */
+    private String avatar;
+    /**
+     * 糖尿病
+     */
+    private String diabetesType;
+    /**
+     * 糖尿病
+     */
+    private String hypertensionType;
+
+
+
     private String diseaseName;
 
 
@@ -743,5 +759,29 @@ public class UserInfo implements Serializable {
 
     public void setOtherDiagnosis(List<DiseaseInfo> otherDiagnosis) {
         this.otherDiagnosis = otherDiagnosis;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getDiabetesType() {
+        return diabetesType;
+    }
+
+    public void setDiabetesType(String diabetesType) {
+        this.diabetesType = diabetesType;
+    }
+
+    public String getHypertensionType() {
+        return hypertensionType;
+    }
+
+    public void setHypertensionType(String hypertensionType) {
+        this.hypertensionType = hypertensionType;
     }
 }

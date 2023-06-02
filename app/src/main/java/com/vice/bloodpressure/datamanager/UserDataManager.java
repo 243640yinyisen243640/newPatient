@@ -136,6 +136,29 @@ public class UserDataManager {
     }
 
     /**
+     * 添加并发症
+     *
+     * @param patientId
+     * @param complicationName 并发症名称
+     * @param complicationType 并发症类型
+     * @param diseaseChildType
+     * @param level            患病程度
+     * @param complicationDate 并发症确诊日期
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> putDiseasePlus(String patientId, String complicationType, String diseaseChildType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("complicationType", complicationType);
+        map.put("diseaseChildType", diseaseChildType);
+        map.put("level", level);
+        map.put("complicationDate", complicationDate);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/complication/add", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * @param patientId
      * @param diagnosticType  :1->主要诊断;2->其他诊断
      * @param successCallBack
@@ -147,5 +170,33 @@ public class UserDataManager {
         map.put("patientId", patientId);
         map.put("diagnosticType", diagnosticType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/diseaseApp/isExists", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * APP-查询合并症是否存在
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> lookDiseasePlus(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/complication/isExists", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 个人中心
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getUserInfo(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "system/patient/app/patientCenter", map, successCallBack, failureCallBack);
     }
 }

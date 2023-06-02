@@ -8,12 +8,24 @@ package com.vice.bloodpressure.model;
  */
 public class DiseaseInfo {
     /**
-     * 1~6* 1 糖尿病    0已经存在过  1不存在
-     * * 2 高血压
-     * * 3 糖尿病前期
-     * * 4 冠心病
-     * * 5 脑卒中
-     * * 6 慢阻肺
+     * 在主要诊断和其他诊断中
+     * 0已经存在过  1不存在
+     * 1 糖尿病
+     * 2 高血压
+     * 3 糖尿病前期
+     * 4 冠心病
+     * 5 脑卒中
+     * 6 慢阻肺
+     * <p>
+     * <p>
+     * 在合并症中
+     * 1'糖尿病肾病',
+     * 2'糖尿病视网膜病变',
+     * 3'糖尿病神经病变',
+     * 4'糖尿病下肢血管病变',
+     * 5'糖尿病足',
+     * 6'糖尿病酮症酸中毒',
+     * 7'高渗性高血糖'
      */
     private String diseaseType1 = "1";
     private String diseaseType2 = "1";
@@ -21,6 +33,7 @@ public class DiseaseInfo {
     private String diseaseType4 = "1";
     private String diseaseType5 = "1";
     private String diseaseType6 = "1";
+    private String diseaseType7 = "1";
 
     /**
      * 并发症
@@ -191,5 +204,11 @@ public class DiseaseInfo {
         this.diagnoseDate = diagnoseDate;
     }
 
+    public String getDiseaseType7() {
+        return diseaseType7;
+    }
 
+    public void setDiseaseType7(String diseaseType7) {
+        this.diseaseType7 = diseaseType7;
+    }
 }

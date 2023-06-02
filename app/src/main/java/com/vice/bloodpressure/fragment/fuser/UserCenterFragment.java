@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,8 +18,10 @@ import com.vice.bloodpressure.activity.auser.UserQRCodeActivity;
 import com.vice.bloodpressure.activity.auser.UserSetActivity;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 /**
@@ -134,28 +137,39 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
      * 获取用户中心信息
      */
     private void loadUserCenterInfo() {
-        //        UserDataManager.getUserModel(UserInfoUtils.getUserID(getPageContext()),
-        //                (call, response) -> {
-        //                    if (response.code == 100) {
-        //                        userInfo = (UserInfo) response.object;
-        //                        setData();
-        //                    }
-        //                }, (call, throwable) -> {
-        //                });
+        UserDataManager.getUserInfo(UserInfoUtils.getUserID(getPageContext()),
+                (call, response) -> {
+                    if ("0000".equals(response.code)) {
+                        userInfo = (UserInfo) response.object;
+                        UserInfoUtils.saveUserInfo(getPageContext(), userInfo);
+                        setData();
+                    }
+                }, (call, throwable) -> {
+                });
     }
 
     /**
      * 已登录
      */
     private void setData() {
-        //        //头像
-        //        XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getHeadImg(), avatarImageView);
-        //        SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.HEAD_IMG, userInfo.getHeadImg());
-        //        //昵称
-        //        nickNameTextView.setText(userInfo.getNickName());
-        //        SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME, userInfo.getNickName());
-        //
-        //
+        //头像
+        XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
+        //昵称
+        nickNameTextView.setText(userInfo.getNickName());
+        ageTextView.setText(String.format(getString(R.string.user_center_age), userInfo.getAge()));
+        if ("1".equals(userInfo.getSex())) {
+            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
+        } else {
+            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
+        }
+        if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {
+            illTextView.setText(userInfo.getDiabetesType() + " | " + userInfo.getHypertensionType());
+        } else if (TextUtils.isEmpty(userInfo.getDiabetesType())) {
+            illTextView.setText(userInfo.getHypertensionType());
+        } else {
+            illTextView.setText(userInfo.getDiabetesType());
+        }
+
         //        //待付款
         //        int orderUnreadCount = TurnUtils.getInt(userInfo.getConfirmationCount(), 0);
         //        if (orderUnreadCount > 0) {
@@ -170,49 +184,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        } else {
         //            payCountTextView.setVisibility(View.GONE);
         //        }
-        //
-        //        //待发货数
-        //        int orderUnSendCount = TurnUtils.getInt(userInfo.getSendCount(), 0);
-        //        if (orderUnSendCount > 0) {
-        //            pushCountTextView.setVisibility(View.VISIBLE);
-        //            if (orderUnSendCount > 99) {
-        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                pushCountTextView.setText("99+");
-        //            } else {
-        //                pushCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                pushCountTextView.setText(orderUnSendCount + "");
-        //            }
-        //        } else {
-        //            pushCountTextView.setVisibility(View.GONE);
-        //        }
-        //
-        //        //待收货数
-        //        int orderUnReceiptCount = TurnUtils.getInt(userInfo.getReceivedCount(), 0);
-        //        if (orderUnReceiptCount > 0) {
-        //            receivedCountTextView.setVisibility(View.VISIBLE);
-        //            if (orderUnReceiptCount > 99) {
-        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                receivedCountTextView.setText("99+");
-        //            } else {
-        //                receivedCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                receivedCountTextView.setText(orderUnReceiptCount + "");
-        //            }
-        //        } else {
-        //            receivedCountTextView.setVisibility(View.GONE);
-        //        }     //待收货数
-        //        int orderFinishCount = TurnUtils.getInt(userInfo.getReceivedCount(), 0);
-        //        if (orderUnReceiptCount > 0) {
-        //            finishCountTextView.setVisibility(View.VISIBLE);
-        //            if (orderUnReceiptCount > 99) {
-        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                finishCountTextView.setText("99+");
-        //            } else {
-        //                finishCountTextView.setBackground(getResources().getDrawable(R.drawable.shape_red_3_3_circle));
-        //                finishCountTextView.setText(orderUnReceiptCount + "");
-        //            }
-        //        } else {
-        //            finishCountTextView.setVisibility(View.GONE);
-        //        }
+
 
     }
 
@@ -224,6 +196,11 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //先取本地数据
         String avatar = SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.HEAD_IMG);
         String name = SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME);
+        if ("1".equals(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.SEX))) {
+            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
+        } else {
+            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
+        }
         XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, avatar, avatarImageView);
         nickNameTextView.setText(name);
     }
@@ -297,7 +274,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
             //我的医生
             case R.id.tv_user_center_doctor:
                 intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                intent.putExtra("type","1");
+                intent.putExtra("type", "1");
                 startActivity(intent);
                 break;
             //订单

@@ -46,7 +46,7 @@
                         android:id="@+id/tv_user_center_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/user_center_female"
+                        android:drawableRight="@drawable/user_center_male"
                         android:drawablePadding="7dp"
                         android:gravity="center"
                         android:text="@string/app_name"

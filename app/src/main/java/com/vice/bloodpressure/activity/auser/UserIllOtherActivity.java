@@ -6,8 +6,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -43,15 +41,7 @@ import retrofit2.Call;
  */
 public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnClickListener {
 
-    /**
-     * 尖箭头
-     */
-    private ImageView arrowImageView;
 
-    /**
-     * 灰色的背景
-     */
-    private LinearLayout bgLinearLayout;
     /**
      * 疾病类型
      */
@@ -115,7 +105,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         initListener();
     }
 
-    private void initValues(DiseaseInfo diseaseInfo) {
+    private void bindData(DiseaseInfo diseaseInfo) {
         setAllRtpeList(diseaseInfo);
         tangDiseaseList = new ArrayList<>();
         tangDiseaseList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
@@ -215,7 +205,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                     if ("0".equals(diseaseAllTypeList.get(j).getIsSelect())) {
                         typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_defaultbackground_90);
                         ((TextView) typeFl.getChildAt(j)).setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-                    }else {
+                    } else {
                         if (v.getTag().equals(diseaseAllTypeList.get(j).getId())) {
                             //设置选中
                             diseaseAllTypeList.get(j).setCheck(true);
@@ -272,7 +262,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 DiseaseInfo dataInfo = (DiseaseInfo) response.object;
-                initValues(dataInfo);
+                bindData(dataInfo);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -302,8 +292,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_ill_other, null);
-        arrowImageView = view.findViewById(R.id.iv_user_ill_other);
-        bgLinearLayout = view.findViewById(R.id.ll_user_ill_other);
         tangTypeTextView = view.findViewById(R.id.tv_user_ill_other_type_tang);
         typeFl = view.findViewById(R.id.fl_user_ill_other);
         allTypeTextView = view.findViewById(R.id.tv_user_ill_other_level);

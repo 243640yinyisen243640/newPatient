@@ -47,6 +47,7 @@ public class UserInfoUtils {
         String userID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.ARCHIVES_ID);
         return (TurnUtils.getInt(userID, 0) > 0);
     }
+
     /**
      * 获取archives_id，默认是0
      */
@@ -98,7 +99,6 @@ public class UserInfoUtils {
     }
 
 
-
     public static String getUserInfo(Context context, String infoKey) {
         return SharedPreferencesUtils.getInfo(context, infoKey);
     }
@@ -125,10 +125,18 @@ public class UserInfoUtils {
     /**
      * 保存个人中心信息
      */
-    public static void saveUserInfoForModel(Context context, UserInfo userInfo) {
+    public static void saveUserInfo(Context context, UserInfo userInfo) {
 
         Map<String, String> map = new HashMap<>();
-        //        map.put(SharedPreferencesConstant.LOGIN_NAME, userInfo.getLoginName());
+        //        map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserId());
+        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
+        map.put(SharedPreferencesConstant.NICK_NAME, userInfo.getNickName());
+        map.put(SharedPreferencesConstant.SEX, userInfo.getSex());
+
+        map.put(SharedPreferencesConstant.AGE, userInfo.getAge());
+
+        map.put(SharedPreferencesConstant.DIABETES_TYPE, userInfo.getDiabetesType());
+        map.put(SharedPreferencesConstant.HYPERTENSION_TYPE, userInfo.getHypertensionType());
 
         SharedPreferencesUtils.saveInfo(context, map);
     }

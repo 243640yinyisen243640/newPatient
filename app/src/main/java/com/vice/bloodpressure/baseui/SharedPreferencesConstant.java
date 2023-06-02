@@ -22,6 +22,10 @@ public class SharedPreferencesConstant {
 
     public static final String HEAD_IMG = "head_img";
     public static final String NICK_NAME = "nick_name";
+    public static final String SEX = "sex";
+    public static final String AGE = "age";
+    public static final String DIABETES_TYPE = "diabetes_type";
+    public static final String HYPERTENSION_TYPE = "hypertension_type";
     /**
      * token
      */
