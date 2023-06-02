@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -86,7 +85,6 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 switch (view.getId()) {
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
-                        intent.putExtra("isAdd", "1");
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
                     default:
@@ -100,7 +98,6 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 switch (view.getId()) {
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                        intent.putExtra("isAdd", "1");
                         intent.putExtra("type", "1");
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
@@ -117,7 +114,6 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 switch (view.getId()) {
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                        intent.putExtra("isAdd", "1");
                         intent.putExtra("type", "2");
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
@@ -137,20 +133,17 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
 
             case R.id.tv_user_files_ill_important_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                intent.putExtra("isAdd", "1");
                 intent.putExtra("type", "1");
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
 
             case R.id.tv_user_files_ill_other_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                intent.putExtra("isAdd", "1");
                 intent.putExtra("type", "2");
                 startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
             case R.id.tv_user_files_ill_plus_add:
                 intent = new Intent(getPageContext(), UserIllPlusActivity.class);
-                intent.putExtra("isAdd", "1");
                 startActivity(intent);
                 break;
 

@@ -57,7 +57,6 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<DiseaseInfo> {
     }
 
     private void setTextName(ViewHolder holder, DiseaseInfo info) {
-        Log.i("yys","info.getDiseaseType()==" + info.getDiseaseType());
         switch (info.getDiseaseType()) {
             case "1":
                 holder.typeTextView.setText("糖尿病");
@@ -80,7 +79,7 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<DiseaseInfo> {
             default:
                 break;
         }
-        holder.typeTextView.setText(info.getDiagnoseDate());
+        holder.timeTextView.setText(info.getDiagnoseDate());
     }
 
     private class ViewHolder {

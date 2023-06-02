@@ -146,6 +146,6 @@ public class UserDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("diagnosticType", diagnosticType);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, DiseaseInfo.class, "system/patient/diseaseApp/isExists", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/diseaseApp/isExists", map, successCallBack, failureCallBack);
     }
 }

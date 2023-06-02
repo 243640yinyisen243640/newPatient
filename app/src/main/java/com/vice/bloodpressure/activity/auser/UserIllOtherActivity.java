@@ -42,10 +42,7 @@ import retrofit2.Call;
  * 描述:其他诊断
  */
 public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnClickListener {
-    /**
-     * 1：添加  2：编辑
-     */
-    private String isAdd;
+
     /**
      * 尖箭头
      */
@@ -67,6 +64,10 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 疾病类型的糖尿病
      */
     private HHAtMostGridView tangTypeGridView;
+    /**
+     * 疾病类型的糖尿病
+     */
+    private TextView tangTypeTextView;
     /**
      * 疾病类型的高血压的程度
      */
@@ -102,26 +103,20 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     private List<BaseLocalDataInfo> diseaseList;
     private List<BaseLocalDataInfo> levelList;
 
-    private String checkId = "1";
+    private String checkId = "-1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("诊断");
-        isAdd = getIntent().getStringExtra("isAdd");
         type = getIntent().getStringExtra("type");
-        if ("1".equals(isAdd)) {
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        } else {
-            loadViewManager().changeLoadState(LoadStatus.LOADING);
-        }
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
         initView();
         initListener();
-        initValues();
     }
 
-    private void initValues() {
-        setAllRtpeList(new DiseaseInfo());
+    private void initValues(DiseaseInfo diseaseInfo) {
+        setAllRtpeList(diseaseInfo);
         tangDiseaseList = new ArrayList<>();
         tangDiseaseList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
         tangDiseaseList.add(new BaseLocalDataInfo("2型糖尿病", "2"));
@@ -160,13 +155,13 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         diseaseAllTypeList.add(new BaseLocalDataInfo("脑卒中", "5", diseaseInfo.getDiseaseType5()));
         diseaseAllTypeList.add(new BaseLocalDataInfo("慢性阻塞性肺疾病", "6", diseaseInfo.getDiseaseType6()));
 
-        diseaseAllTypeList.get(0).setCheck(true);
+        //        diseaseAllTypeList.get(0).setCheck(true);
         for (int i = 0; i < diseaseAllTypeList.size(); i++) {
             FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
             TextView checkTextView = new TextView(getPageContext());
             checkTextView.setTextSize(15f);
-            if ("0".equals(diseaseAllTypeList.get(i).getIsSelect())) {
+            if ("1".equals(diseaseAllTypeList.get(i).getIsSelect())) {
                 if (diseaseAllTypeList.get(i).isCheck()) {
                     checkTextView.setBackgroundResource(R.drawable.shape_bg_main_gra_90);
                     checkTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_white));
@@ -189,43 +184,48 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             typeFl.addView(checkTextView, lp);
             int finalI = i;
             checkTextView.setOnClickListener(v -> {
-                if ("1".equals(diseaseAllTypeList.get(finalI).getIsSelect())) {
+                if ("0".equals(diseaseAllTypeList.get(finalI).getIsSelect())) {
                     ToastUtils.getInstance().showToast(getPageContext(), "已经添加过此病种了");
                     return;
                 }
                 checkId = v.getTag().toString();
-                arrowImageView.setVisibility(View.GONE);
+
+                tangTypeGridView.setVisibility(View.GONE);
+                tangTypeTextView.setVisibility(View.GONE);
                 allTypeTextView.setVisibility(View.GONE);
                 levelGridView.setVisibility(View.GONE);
-                bgLinearLayout.setVisibility(View.GONE);
                 typeGridView.setVisibility(View.GONE);
                 if ("1".equals(v.getTag())) {
-                    arrowImageView.setVisibility(View.VISIBLE);
-                    bgLinearLayout.setVisibility(View.VISIBLE);
+                    tangTypeTextView.setVisibility(View.VISIBLE);
                     tangTypeGridView.setVisibility(View.VISIBLE);
                 }
 
 
                 if ("2".equals(v.getTag())) {
-                    arrowImageView.setVisibility(View.VISIBLE);
                     tangTypeGridView.setVisibility(View.GONE);
-                    bgLinearLayout.setVisibility(View.VISIBLE);
+                    tangTypeTextView.setVisibility(View.VISIBLE);
                     allTypeTextView.setVisibility(View.VISIBLE);
                     levelGridView.setVisibility(View.VISIBLE);
                     typeGridView.setVisibility(View.VISIBLE);
                 }
                 for (int j = 0; j < diseaseAllTypeList.size(); j++) {
-                    if (v.getTag().equals(diseaseAllTypeList.get(j).getId())) {
-                        //设置选中
-                        diseaseAllTypeList.get(j).setCheck(true);
-                        typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_main_gra_90);
-                        ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#FFFFFF"));
+                    if ("1".equals(diseaseAllTypeList.get(j).getIsSelect())) {
+                        if (v.getTag().equals(diseaseAllTypeList.get(j).getId())) {
+                            //设置选中
+                            diseaseAllTypeList.get(j).setCheck(true);
+                            typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_main_gra_90);
+                            ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#FFFFFF"));
+                        } else {
+                            //设置不选中
+                            diseaseAllTypeList.get(j).setCheck(false);
+                            typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
+                            ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#242424"));
+                        }
                     } else {
-                        //设置不选中
-                        diseaseAllTypeList.get(j).setCheck(false);
-                        typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
-                        ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#242424"));
+                        checkTextView.setBackgroundResource(R.drawable.shape_defaultbackground_90);
+                        checkTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
                     }
+
                 }
             });
         }
@@ -236,6 +236,15 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 确定上传数据
      */
     private void sureToAddData() {
+
+        if ("-1".equals(checkId)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择疾病类型");
+            return;
+        }
+        if (TextUtils.isEmpty(addTime)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择时间");
+            return;
+        }
         String diseaseRisk = "";
         if ("2".equals(checkId)) {
             diseaseRisk = levelList.get(levelAdapter.getClickPosition()).getId();
@@ -256,11 +265,10 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     @Override
     protected void onPageLoad() {
         Call<String> requestCall = UserDataManager.lookDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, (call, response) -> {
-
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 DiseaseInfo dataInfo = (DiseaseInfo) response.object;
-                setAllRtpeList(dataInfo);
+                initValues(dataInfo);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -280,10 +288,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                 });
                 break;
             case R.id.tv_user_ill_other_save:
-                if (TextUtils.isEmpty(addTime)) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请选择时间");
-                    return;
-                }
+
                 sureToAddData();
                 break;
             default:
@@ -295,6 +300,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         View view = View.inflate(getPageContext(), R.layout.activity_user_ill_other, null);
         arrowImageView = view.findViewById(R.id.iv_user_ill_other);
         bgLinearLayout = view.findViewById(R.id.ll_user_ill_other);
+        tangTypeTextView = view.findViewById(R.id.tv_user_ill_other_type_tang);
         typeFl = view.findViewById(R.id.fl_user_ill_other);
         allTypeTextView = view.findViewById(R.id.tv_user_ill_other_level);
         tangTypeGridView = view.findViewById(R.id.gv_user_ill_other_type_tang);

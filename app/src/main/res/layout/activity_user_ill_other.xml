@@ -48,8 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="45dp"
                     android:layout_marginTop="7dp"
-                    android:src="@drawable/user_files_gray_arrow"
-                    android:visibility="visible" />
+                    android:src="@drawable/user_files_gray_arrow"/>
 
                 <LinearLayout
                     android:id="@+id/ll_user_ill_other"
@@ -64,11 +63,13 @@
                     android:visibility="visible">
 
                     <TextView
+                        android:id="@+id/tv_user_ill_other_type_tang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="类型"
                         android:textColor="@color/black_24"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:visibility="gone" />
 
                     <com.vice.bloodpressure.view.HHAtMostGridView
                         android:id="@+id/gv_user_ill_other_type_tang"
@@ -82,7 +83,8 @@
                         android:listSelector="@color/transparent"
                         android:numColumns="3"
                         android:scrollbars="none"
-                        android:verticalSpacing="10dp" />
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" />
 
                     <com.vice.bloodpressure.view.HHAtMostGridView
                         android:id="@+id/gv_user_ill_other_type"
@@ -96,8 +98,8 @@
                         android:listSelector="@color/transparent"
                         android:numColumns="3"
                         android:scrollbars="none"
-                        android:visibility="gone"
-                        android:verticalSpacing="10dp" />
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" />
 
 
                     <TextView

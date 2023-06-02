@@ -8,19 +8,19 @@ package com.vice.bloodpressure.model;
  */
 public class DiseaseInfo {
     /**
-     * 1~6* 1 糖尿病
+     * 1~6* 1 糖尿病    0已经存在过  1不存在
      * * 2 高血压
      * * 3 糖尿病前期
      * * 4 冠心病
      * * 5 脑卒中
      * * 6 慢阻肺
      */
-    private String diseaseType1 = "0";
-    private String diseaseType2 = "0";
-    private String diseaseType3 = "0";
-    private String diseaseType4 = "0";
-    private String diseaseType5 = "0";
-    private String diseaseType6 = "0";
+    private String diseaseType1 = "1";
+    private String diseaseType2 = "1";
+    private String diseaseType3 = "1";
+    private String diseaseType4 = "1";
+    private String diseaseType5 = "1";
+    private String diseaseType6 = "1";
 
     /**
      * 并发症
