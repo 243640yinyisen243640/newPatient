@@ -58,6 +58,18 @@ public class DiseaseInfo {
      */
     private String diagnoseDate;
     private String complicationDate;
+    /**
+     * 诊断详情  是拼接起来的
+     */
+    private String diseaseDetail;
+
+    public String getDiseaseDetail() {
+        return diseaseDetail;
+    }
+
+    public void setDiseaseDetail(String diseaseDetail) {
+        this.diseaseDetail = diseaseDetail;
+    }
 
     public String getComplicationDate() {
         return complicationDate;

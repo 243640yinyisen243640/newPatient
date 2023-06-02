@@ -99,6 +99,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("type", "1");
+//                        intent.putExtra("", userInfo.getMainDiagnosis().get(position).getComplicationDate());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
                     default:

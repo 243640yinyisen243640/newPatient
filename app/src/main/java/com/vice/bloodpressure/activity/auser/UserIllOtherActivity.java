@@ -188,6 +188,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                     ToastUtils.getInstance().showToast(getPageContext(), "已经添加过此病种了");
                     return;
                 }
+
                 checkId = v.getTag().toString();
 
                 tangTypeGridView.setVisibility(View.GONE);
@@ -208,8 +209,13 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                     levelGridView.setVisibility(View.VISIBLE);
                     typeGridView.setVisibility(View.VISIBLE);
                 }
+
+
                 for (int j = 0; j < diseaseAllTypeList.size(); j++) {
-                    if ("1".equals(diseaseAllTypeList.get(j).getIsSelect())) {
+                    if ("0".equals(diseaseAllTypeList.get(j).getIsSelect())) {
+                        typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_defaultbackground_90);
+                        ((TextView) typeFl.getChildAt(j)).setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+                    }else {
                         if (v.getTag().equals(diseaseAllTypeList.get(j).getId())) {
                             //设置选中
                             diseaseAllTypeList.get(j).setCheck(true);
@@ -221,13 +227,11 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                             typeFl.getChildAt(j).setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
                             ((TextView) typeFl.getChildAt(j)).setTextColor(Color.parseColor("#242424"));
                         }
-                    } else {
-                        checkTextView.setBackgroundResource(R.drawable.shape_defaultbackground_90);
-                        checkTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
                     }
-
                 }
+
             });
+
         }
     }
 

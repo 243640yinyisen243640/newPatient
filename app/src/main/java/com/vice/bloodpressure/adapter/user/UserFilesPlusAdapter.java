@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.adapter.user;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -48,7 +47,8 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<DiseaseInfo> {
             holder.timeTextView.setText(info.getComplicationDate());
             holder.typeTextView.setText(info.getComplicationName());
         } else {
-            setTextName(holder, info);
+            holder.typeTextView.setText(info.getDiseaseDetail());
+            holder.timeTextView.setText(info.getDiagnoseDate());
         }
         ClickOnClick clickOnClick = new ClickOnClick(position);
         holder.clickLinearLayout.setOnClickListener(clickOnClick);
@@ -56,31 +56,6 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<DiseaseInfo> {
         return convertView;
     }
 
-    private void setTextName(ViewHolder holder, DiseaseInfo info) {
-        switch (info.getDiseaseType()) {
-            case "1":
-                holder.typeTextView.setText("糖尿病");
-                break;
-            case "2":
-                holder.typeTextView.setText("高血压");
-                break;
-            case "3":
-                holder.typeTextView.setText("糖尿病前期");
-                break;
-            case "4":
-                holder.typeTextView.setText("冠心病");
-                break;
-            case "5":
-                holder.typeTextView.setText("脑卒中");
-                break;
-            case "6":
-                holder.typeTextView.setText("慢性阻塞性肺疾病");
-                break;
-            default:
-                break;
-        }
-        holder.timeTextView.setText(info.getDiagnoseDate());
-    }
 
     private class ViewHolder {
         TextView typeTextView;

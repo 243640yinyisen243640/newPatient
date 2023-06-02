@@ -18,7 +18,9 @@ public class BaseLocalDataInfo {
      * 运动项目消耗每分的热量
      */
     private String calorie;
-
+    /**
+     * 0已经存在过  1没存在过
+     */
     private String isSelect;
 
     public BaseLocalDataInfo(String name, String id, String isSelect) {
