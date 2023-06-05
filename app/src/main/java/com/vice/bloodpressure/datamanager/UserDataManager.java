@@ -68,6 +68,23 @@ public class UserDataManager {
     }
 
     /**
+     * 添加家族史
+     * @param archivesId
+     * @param familyType
+     * @param familyValue
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editUserFilesInfoForFamily(String archivesId, String familyType, String familyValue, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("familyType", familyType);
+        map.put("familyValue", familyValue);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 修改个人档案抽烟
      *
      * @param archivesId

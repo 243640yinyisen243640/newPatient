@@ -55,10 +55,10 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
     private void initValues() {
 
         diseaseList = new ArrayList<>();
-        diseaseList.add(new BaseLocalDataInfo("子女", "1"));
-        diseaseList.add(new BaseLocalDataInfo("父亲", "2"));
-        diseaseList.add(new BaseLocalDataInfo("母亲", "3"));
-        diseaseList.add(new BaseLocalDataInfo("兄弟姐妹", "4"));
+        diseaseList.add(new BaseLocalDataInfo("子女", "zc"));
+        diseaseList.add(new BaseLocalDataInfo("父亲", "fu"));
+        diseaseList.add(new BaseLocalDataInfo("母亲", "mu"));
+        diseaseList.add(new BaseLocalDataInfo("兄弟姐妹", "xd"));
 
         PerfectDiseaseAdapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
         relationshipGridView.setAdapter(PerfectDiseaseAdapter);
@@ -90,9 +90,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
      * 确定上传数据
      */
     private void sureToAddData() {
-
-
-        Call<String> requestCall = UserDataManager.putFamilyIll(UserInfoUtils.getArchivesId(getPageContext()), diseaseList.get(PerfectDiseaseAdapter.getClickPosition()).getId(), haveCheckBox.isChecked() ? "1" : "0", (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForFamily(UserInfoUtils.getArchivesId(getPageContext()), diseaseList.get(PerfectDiseaseAdapter.getClickPosition()).getId(), haveCheckBox.isChecked() ? "99" : "1", (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
@@ -101,7 +99,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("putFamilyIll", requestCall);
+        addRequestCallToMap("editUserFilesInfoForFamily", requestCall);
     }
 
     private void initView() {
