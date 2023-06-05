@@ -15,15 +15,20 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.EquipmetInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -31,8 +36,7 @@ import java.util.List;
  * 传参:
  * 描述:我的设备
  */
-public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo> {
-    private List<UserInfo> equipmentInfos = new ArrayList<>();
+public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<EquipmetInfo> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,19 +55,32 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo
     }
 
 
-    private void initView() {
-        //        View view = View.inflate(getPageContext(), R.layout.activity_user_equipment, null);
-        //        recyclerView = view.findViewById(R.id.rv_user_equipment);
-        //        containerView().addView(view);
+    @Override
+    protected boolean isRefresh() {
+        return false;
     }
 
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
 
     @Override
     protected void getListData(CallBack callBack) {
-         }
+        Call<String> requestCall = UserDataManager.getUserEquipmetList(UserInfoUtils.getArchivesId(getPageContext()), "", "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getUserEquipmetList", requestCall);
+    }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<UserInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<EquipmetInfo> list) {
         return new UserEquipmentListAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
@@ -71,8 +88,8 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo
                     case R.id.tv_user_equipment_break:
                         DialogUtils.showOperDialog(getPageContext(), "", "是否解除该设备？", "取消", "确定", (dialog, which) -> {
                             dialog.dismiss();
-                            if (HHSoftDialogActionEnum.NEGATIVE == which) {
-                                dialog.dismiss();
+                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+                                breakEquipmet(getPageListData().get(position).getPkId(), getPageListData().get(position).getDeviceId());
                             }
                         });
                         break;
@@ -86,6 +103,18 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<UserInfo
 
             }
         });
+    }
+
+    private void breakEquipmet(String pkid, String deviceId) {
+        Call<String> requestCall = UserDataManager.userUnbindDevice(pkid, deviceId, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("userUnbindDevice", requestCall);
     }
 
     @Override

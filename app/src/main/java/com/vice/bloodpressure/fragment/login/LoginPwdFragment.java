@@ -192,7 +192,6 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
-                Log.i("yys","userInfo=="+userInfo.getUserId());
                 if ("1".equals(userInfo.getInfo_status())) {
                     Intent intent = new Intent(getPageContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

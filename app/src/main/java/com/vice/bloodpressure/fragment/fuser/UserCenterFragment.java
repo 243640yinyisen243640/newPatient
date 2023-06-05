@@ -24,22 +24,12 @@ import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
-/**
- * 作者: beauty
- * 类名:
- * 传参:
- * 描述:个人中心
- */
 
 /**
  * 类描述： 我的
  * 类传参：
- * <p>
  * 一、登录判断
  * 二、登录：先加载本地数据；静默加载数据，刷新数据、页面
- *
- * @author android.lyl
- * @date 2021/01/12
  */
 public class UserCenterFragment extends UIBaseFragment implements View.OnClickListener {
 
@@ -132,12 +122,19 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         loadUserCenterInfo();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            loadUserCenterInfo();
+        }
+    }
 
     /**
      * 获取用户中心信息
      */
     private void loadUserCenterInfo() {
-        UserDataManager.getUserInfo(UserInfoUtils.getUserID(getPageContext()),
+        UserDataManager.getUserInfo(UserInfoUtils.getArchivesId(getPageContext()),
                 (call, response) -> {
                     if ("0000".equals(response.code)) {
                         userInfo = (UserInfo) response.object;

@@ -10,11 +10,17 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.login.PerfectDiseaseAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -33,11 +39,14 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
     private CheckBox noCheckBox;
     private TextView saveTv;
 
+    private PerfectDiseaseAdapter PerfectDiseaseAdapter;
+
+    private List<BaseLocalDataInfo> diseaseList;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText("其他诊断");
-        //        isAdd = getIntent().getStringExtra("isAdd");
+        topViewManager().titleTextView().setText("家族史");
         initView();
         initListener();
         initValues();
@@ -45,18 +54,14 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
 
     private void initValues() {
 
-        List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
-        BaseLocalDataInfo typeInfo1 = new BaseLocalDataInfo("子女", "1");
-        diseaseList.add(typeInfo1);
-        BaseLocalDataInfo typeInfo2 = new BaseLocalDataInfo("父亲", "2");
-        diseaseList.add(typeInfo2);
-        BaseLocalDataInfo typeInfo3 = new BaseLocalDataInfo("母亲", "3");
-        diseaseList.add(typeInfo3);
-        BaseLocalDataInfo typeInfo4 = new BaseLocalDataInfo("兄弟姐妹", "4");
-        diseaseList.add(typeInfo4);
+        diseaseList = new ArrayList<>();
+        diseaseList.add(new BaseLocalDataInfo("子女", "1"));
+        diseaseList.add(new BaseLocalDataInfo("父亲", "2"));
+        diseaseList.add(new BaseLocalDataInfo("母亲", "3"));
+        diseaseList.add(new BaseLocalDataInfo("兄弟姐妹", "4"));
 
-        PerfectDiseaseAdapter adapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
-        relationshipGridView.setAdapter(adapter);
+        PerfectDiseaseAdapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
+        relationshipGridView.setAdapter(PerfectDiseaseAdapter);
 
     }
 
@@ -64,10 +69,8 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
         haveCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 noCheckBox.setChecked(false);
-
             } else {
                 noCheckBox.setChecked(true);
-
             }
         });
         noCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -78,10 +81,27 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
             }
         });
         saveTv.setOnClickListener(v -> {
-
-            setResult(RESULT_OK);
-            finish();
+            sureToAddData();
         });
+    }
+
+
+    /**
+     * 确定上传数据
+     */
+    private void sureToAddData() {
+
+
+        Call<String> requestCall = UserDataManager.putFamilyIll(UserInfoUtils.getArchivesId(getPageContext()), diseaseList.get(PerfectDiseaseAdapter.getClickPosition()).getId(), haveCheckBox.isChecked() ? "1" : "0", (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("putFamilyIll", requestCall);
     }
 
     private void initView() {

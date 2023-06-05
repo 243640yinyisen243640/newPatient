@@ -76,6 +76,32 @@ public class DiseaseInfo {
      */
     private String diseaseDetail;
 
+
+    /**
+     * 亲属名称
+     */
+    private String familyDec;
+    /**
+     * 亲属有无病症
+     */
+    private String isContain;
+
+    public String getFamilyDec() {
+        return familyDec;
+    }
+
+    public void setFamilyDec(String familyDec) {
+        this.familyDec = familyDec;
+    }
+
+    public String getIsContain() {
+        return isContain;
+    }
+
+    public void setIsContain(String isContain) {
+        this.isContain = isContain;
+    }
+
     public String getDiseaseDetail() {
         return diseaseDetail;
     }

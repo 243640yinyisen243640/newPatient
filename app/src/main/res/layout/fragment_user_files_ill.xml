@@ -69,59 +69,18 @@
                 android:id="@+id/lv_user_files_ill_important"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:divider="@color/transparent"
                 android:dividerHeight="10dp"
-                android:layout_marginTop="10dp"
                 android:footerDividersEnabled="false"
                 android:listSelector="@color/transparent" />
 
-            <View style="@style/base_line"
+            <View
+                style="@style/base_line"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="合并症"
-                    android:textColor="@color/black_24"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_user_files_ill_plus_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_bg_white_green_90_1"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="6dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="6dp"
-                    android:text="添加"
-                    android:textColor="@color/main_base_color"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <com.vice.bloodpressure.view.NoScrollListView
-                android:id="@+id/lv_user_files_ill_plus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@color/transparent"
-                android:dividerHeight="10dp"
-                android:layout_marginTop="10dp"
-                android:footerDividersEnabled="false"
-                android:listSelector="@color/transparent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,13 +119,61 @@
                 android:id="@+id/lv_user_files_ill_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:divider="@color/transparent"
                 android:dividerHeight="10dp"
-                android:layout_marginTop="10dp"
                 android:footerDividersEnabled="false"
                 android:listSelector="@color/transparent" />
 
+            <View
+                style="@style/base_line"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone" />
 
+            <LinearLayout
+                android:id="@+id/ll_user_files_ill_plus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="合并症"
+                    android:textColor="@color/black_24"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_user_files_ill_plus_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_white_green_90_1"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="6dp"
+                    android:text="添加"
+                    android:textColor="@color/main_base_color"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <com.vice.bloodpressure.view.NoScrollListView
+                android:id="@+id/lv_user_files_ill_plus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:divider="@color/transparent"
+                android:dividerHeight="10dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@color/transparent" />
         </LinearLayout>
 
 

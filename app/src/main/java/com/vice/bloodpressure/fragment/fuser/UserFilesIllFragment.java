@@ -2,6 +2,7 @@ package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     /**
      * 合并症
      */
+    private LinearLayout plusLinearLayout;
     private TextView plusAddTextView;
     private NoScrollListView plusListView;
 
@@ -80,18 +82,27 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     }
 
     private void bindData(UserInfo userInfo) {
-        if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {
-            UserFilesPlusAdapter plusAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getComplication(), "1", (position, view) -> {
-                switch (view.getId()) {
-                    case R.id.ll_disease_click:
-                        Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
-                        startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
-                        break;
-                    default:
-                        break;
-                }
-            });
-            plusListView.setAdapter(plusAdapter);
+        if ("0".equals(userInfo.getIsDiabetesExists())) {
+            plusLinearLayout.setVisibility(View.VISIBLE);
+            if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {
+                UserFilesPlusAdapter plusAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getComplication(), "1", (position, view) -> {
+                    switch (view.getId()) {
+                        case R.id.ll_disease_click:
+                            Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
+                            intent.putExtra("isAdd", "2");
+                            intent.putExtra("diseaseType", userInfo.getDiabetesType());
+                            intent.putExtra("diagnosticType", userInfo.getDiagnosticType());
+                            startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                plusListView.setAdapter(plusAdapter);
+            }
+
+        }else {
+            plusLinearLayout.setVisibility(View.GONE);
         }
         if (userInfo.getMainDiagnosis() != null && userInfo.getMainDiagnosis().size() > 0) {
             UserFilesPlusAdapter importantAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getMainDiagnosis(), "2", (position, view) -> {
@@ -142,7 +153,10 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 break;
             case R.id.tv_user_files_ill_plus_add:
                 intent = new Intent(getPageContext(), UserIllPlusActivity.class);
-                startActivity(intent);
+                intent.putExtra("diseaseType", userInfo.getDiabetesType());
+                intent.putExtra("diagnosticType", userInfo.getDiagnosticType());
+                intent.putExtra("isAdd", "1");
+                startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
 
             default:
@@ -174,6 +188,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
         otherAddTextView = view.findViewById(R.id.tv_user_files_ill_other_add);
         otherListView = view.findViewById(R.id.lv_user_files_ill_other);
 
+        plusLinearLayout = view.findViewById(R.id.ll_user_files_ill_plus);
         plusAddTextView = view.findViewById(R.id.tv_user_files_ill_plus_add);
         plusListView = view.findViewById(R.id.lv_user_files_ill_plus);
 

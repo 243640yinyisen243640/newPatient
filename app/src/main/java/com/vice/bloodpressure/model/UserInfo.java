@@ -20,10 +20,9 @@ public class UserInfo implements Serializable {
      */
     private String diabetesType;
     /**
-     * 糖尿病
+     * 高血压
      */
     private String hypertensionType;
-
 
 
     private String diseaseName;
@@ -255,14 +254,11 @@ public class UserInfo implements Serializable {
      * 就诊卡号
      */
     private String medicalCard;
+
     /**
-     * 亲属名称
+     * 家族史
      */
-    private String familyDec;
-    /**
-     * 亲属有无病症
-     */
-    private String isContain;
+    private List<DiseaseInfo> patientFamily;
     /**
      * 并发症
      */
@@ -275,7 +271,62 @@ public class UserInfo implements Serializable {
      * 其他诊断
      */
     private List<DiseaseInfo> otherDiagnosis;
+    /**
+     * 紧急联系人电话
+     */
+    private String emergencyMode;
+    /**
+     * 0 存在 1不存在 判断合并症是不是需要展示
+     */
+    private String isDiabetesExists;
+    /**
+     * 疾病类型
+     */
+    private String diseaseType;
+    /**
+     * //诊断类型 1主要 2其他
+     */
+    private String diagnosticType;
 
+    public List<DiseaseInfo> getPatientFamily() {
+        return patientFamily;
+    }
+
+    public void setPatientFamily(List<DiseaseInfo> patientFamily) {
+        this.patientFamily = patientFamily;
+    }
+
+    public String getDiagnosticType() {
+        return diagnosticType;
+    }
+
+    public void setDiagnosticType(String diagnosticType) {
+        this.diagnosticType = diagnosticType;
+    }
+
+    public String getDiseaseType() {
+        return diseaseType;
+    }
+
+    public void setDiseaseType(String diseaseType) {
+        this.diseaseType = diseaseType;
+    }
+
+    public String getIsDiabetesExists() {
+        return isDiabetesExists;
+    }
+
+    public void setIsDiabetesExists(String isDiabetesExists) {
+        this.isDiabetesExists = isDiabetesExists;
+    }
+
+    public String getEmergencyMode() {
+        return emergencyMode;
+    }
+
+    public void setEmergencyMode(String emergencyMode) {
+        this.emergencyMode = emergencyMode;
+    }
 
     public String getType() {
         return type;
@@ -721,21 +772,6 @@ public class UserInfo implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getFamilyDec() {
-        return familyDec;
-    }
-
-    public void setFamilyDec(String familyDec) {
-        this.familyDec = familyDec;
-    }
-
-    public String getIsContain() {
-        return isContain;
-    }
-
-    public void setIsContain(String isContain) {
-        this.isContain = isContain;
-    }
 
     public List<DiseaseInfo> getComplication() {
         return complication;

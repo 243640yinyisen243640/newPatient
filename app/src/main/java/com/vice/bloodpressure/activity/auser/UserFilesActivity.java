@@ -3,7 +3,9 @@ package com.vice.bloodpressure.activity.auser;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,11 +13,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.fuser.UserFilesBaseInfoFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesFamilyFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesIllFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesLiveStyleFragment;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.view.NestRadioGroup;
 
 import java.util.ArrayList;
@@ -29,6 +33,8 @@ import java.util.ArrayList;
 public class UserFilesActivity extends UIBaseActivity {
     private NestRadioGroup radioGroup;
     private ViewPager2 viewPager;
+    private ImageView imgImageView;
+    private TextView nameTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +51,8 @@ public class UserFilesActivity extends UIBaseActivity {
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_center_files, null);
+        imgImageView = view.findViewById(R.id.iv_user_files_avatar);
+        nameTextView = view.findViewById(R.id.tv_user_files_nickname);
         radioGroup = view.findViewById(R.id.rg_user_files);
         viewPager = view.findViewById(R.id.vp_user_files_info);
         containerView().addView(view);
@@ -52,6 +60,8 @@ public class UserFilesActivity extends UIBaseActivity {
 
 
     private void initValue() {
+        nameTextView.setText(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME, ""));
+
         ArrayList<Fragment> fragments = new ArrayList<>();
         UserFilesBaseInfoFragment infoFragment = new UserFilesBaseInfoFragment();
         UserFilesLiveStyleFragment liveStyleFragment = new UserFilesLiveStyleFragment();

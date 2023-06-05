@@ -36,6 +36,8 @@ import retrofit2.Call;
  * 作者: beauty
  * 类名:
  * 传参:isAdd 1：添加  2：编辑
+ * diseaseType 疾病类型
+ * diagnosticType 诊断类型 1主要 2其他
  * 描述:合并症
  */
 public class UserIllPlusActivity extends UIBaseLoadActivity {
@@ -54,27 +56,30 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
      * 选中的id
      */
     private String checkId = "-1";
-    /**
-     * 选中的名字
-     */
-    private String checkName = "";
+
 
     private String addTime = "";
 
     private List<BaseLocalDataInfo> levelList;
 
     private PerfectDiseaseAdapter adapter;
+    /**
+     * 疾病类型
+     */
+    private String diseaseType;
+    /**
+     * 诊断类型 1主要 2其他
+     */
+    private String diagnosticType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("合并症");
         isAdd = getIntent().getStringExtra("isAdd");
-        if ("1".equals(isAdd)) {
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        } else {
-            loadViewManager().changeLoadState(LoadStatus.LOADING);
-        }
+        diseaseType = getIntent().getStringExtra("isAdd");
+        diagnosticType = getIntent().getStringExtra("isAdd");
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
         initView();
         initListener();
     }
@@ -83,6 +88,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
     private void initListener() {
         timeTv.setOnClickListener(v -> {
             PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                addTime = object.toString();
                 timeTv.setText(object.toString());
             });
         });
@@ -129,7 +135,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.lookDiseasePlus(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+        Call<String> requestCall = UserDataManager.lookDiseasePlus(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, diseaseType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 DiseaseInfo dataInfo = (DiseaseInfo) response.object;

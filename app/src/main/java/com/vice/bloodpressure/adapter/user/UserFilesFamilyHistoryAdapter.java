@@ -7,15 +7,15 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.DiseaseInfo;
 
 import java.util.List;
 
-public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<UserInfo> {
-    private List<UserInfo> list;
+public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<DiseaseInfo> {
+    private List<DiseaseInfo> list;
     private Context context;
 
-    public UserFilesFamilyHistoryAdapter(Context context, List<UserInfo> list) {
+    public UserFilesFamilyHistoryAdapter(Context context, List<DiseaseInfo> list) {
         super(context, list);
         this.context = context;
         this.list = list;
@@ -33,7 +33,7 @@ public class UserFilesFamilyHistoryAdapter extends XyBaseAdapter<UserInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        UserInfo info = getList().get(position);
+        DiseaseInfo info = getList().get(position);
 
         holder.typeTextView.setText(info.getFamilyDec() + " " + info.getIsContain());
         return convertView;

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.EquipmetInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.List;
@@ -25,10 +25,10 @@ import java.util.List;
  */
 public class UserEquipmentListAdapter extends RecyclerView.Adapter<UserEquipmentListAdapter.ViewHolder> {
     private Context context;
-    private List<UserInfo> list;
+    private List<EquipmetInfo> list;
     private IAdapterViewClickListener clickListener;
 
-    public UserEquipmentListAdapter(Context context, List<UserInfo> list, IAdapterViewClickListener clickListener) {
+    public UserEquipmentListAdapter(Context context, List<EquipmetInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -45,11 +45,11 @@ public class UserEquipmentListAdapter extends RecyclerView.Adapter<UserEquipment
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserInfo info = list.get(position);
-        holder.titleTextView.setText(info.getDiseaseName());
-        holder.timeTextView.setText(info.getDiseaseName());
-        holder.typeTextView.setText(info.getType());
-        XyImageUtils.loadRoundImage(context, R.drawable.guogai_img, info.getAccess_token(), holder.imgImageView);
+        EquipmetInfo info = list.get(position);
+        holder.titleTextView.setText(info.getBrandName());
+        holder.timeTextView.setText(info.getCreateTime());
+        holder.typeTextView.setText(("1".equals(info.getDeviceCategory()))?"血糖仪":"血压计");
+        XyImageUtils.loadRoundImage(context, R.drawable.weice_xuetangyi, info.getBrandImg(), holder.imgImageView);
         clickBreakOnClick clickBreakOnClick = new clickBreakOnClick(position);
         holder.breakTextView.setOnClickListener(clickBreakOnClick);
     }

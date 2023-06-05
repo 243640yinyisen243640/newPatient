@@ -129,7 +129,7 @@ public class UserInfoUtils {
 
         Map<String, String> map = new HashMap<>();
         //        map.put(SharedPreferencesConstant.USER_ID, userInfo.getUserId());
-        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
+//        map.put(SharedPreferencesConstant.ARCHIVES_ID, userInfo.getArchivesId());
         map.put(SharedPreferencesConstant.NICK_NAME, userInfo.getNickName());
         map.put(SharedPreferencesConstant.SEX, userInfo.getSex());
 

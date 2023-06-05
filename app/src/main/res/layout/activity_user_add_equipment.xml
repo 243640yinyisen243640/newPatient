@@ -53,11 +53,11 @@
                     style="@style/user_add_left"
                     android:text="品牌名称" />
 
-                <EditText
-                    android:id="@+id/et_add_equipment_name"
-                    style="@style/user_add_right"
+                <TextView
+                    android:id="@+id/tv_add_equipment_name"
+                    style="@style/user_add_right_choose"
                     android:gravity="right|center"
-                    android:hint="请输入品牌名称"
+                    android:text="请选择品牌名称"
                     android:textColor="@color/black_24" />
 
             </LinearLayout>
@@ -79,7 +79,6 @@
                     android:gravity="right|center"
                     android:hint="请输入设备号"
                     android:imeOptions="actionSearch"
-                    android:inputType="phone"
                     android:lines="1"
                     android:textColor="@color/black_24" />
 

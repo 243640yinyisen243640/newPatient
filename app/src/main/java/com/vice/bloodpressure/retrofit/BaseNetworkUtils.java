@@ -140,19 +140,27 @@ public class BaseNetworkUtils {
         response.code = jsonObject.optString("code");
         response.msg = jsonObject.optString("msg");
         response.result = jsonObject.optString("data");
-        if (JSON_OBJECT == parseMode) {
-            if ("0000".equals(response.code)) {
-                response.object = new Gson().fromJson(response.result, clazz);
+        if ("401".equals(response.code)){
+            UserInfoUtils.resetUserInfo(XyApplication.getMyApplicationContext());
+            Intent intent = new Intent(XyApplication.getMyApplicationContext(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            XyApplication.getMyApplicationContext().startActivity(intent);
+        }else {
+            if (JSON_OBJECT == parseMode) {
+                if ("0000".equals(response.code)) {
+                    response.object = new Gson().fromJson(response.result, clazz);
+                }
+            } else if (JSON_ARRAY == parseMode) {
+                if ("0000".equals(response.code)) {
+                    response.object = fromJsonToList(response.result, clazz);
+                } else if ("1009".equals(response.code)) {
+                    response.object = new ArrayList<>();
+                }
+            } else {
+                response.data = jsonObject.optBoolean("data", false);
             }
-        } else if (JSON_ARRAY == parseMode) {
-            if ("0000".equals(response.code)) {
-                response.object = fromJsonToList(response.result, clazz);
-            } else if ("1009".equals(response.code)) {
-                response.object = new ArrayList<>();
-            }
-        } else {
-            response.data = jsonObject.optBoolean("data", false);
         }
+
         successCallBack.accept(call, response);
     }
 

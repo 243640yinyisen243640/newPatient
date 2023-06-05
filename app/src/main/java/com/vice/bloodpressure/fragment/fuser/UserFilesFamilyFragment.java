@@ -16,8 +16,6 @@ import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
-import java.util.List;
-
 import retrofit2.Call;
 
 import static android.app.Activity.RESULT_OK;
@@ -46,10 +44,11 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.getUserFilesInfoForFamily(UserInfoUtils.getArchivesId(getPageContext()), "4", (call, response) -> {
+        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "4", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), (List<UserInfo>) response.object);
+                UserInfo userInfo = (UserInfo) response.object;
+                adapter = new UserFilesFamilyHistoryAdapter(getPageContext(), userInfo.getPatientFamily());
                 listView.setAdapter(adapter);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);

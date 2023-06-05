@@ -14,6 +14,7 @@ import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import retrofit2.Call;
@@ -51,9 +52,7 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         breakTextView.setOnClickListener(v -> {
             DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
                 dialog.dismiss();
-                if (HHSoftDialogActionEnum.NEGATIVE == which) {
-                    dialog.dismiss();
-                } else {
+                if (HHSoftDialogActionEnum.POSITIVE == which) {
 
                 }
             });
@@ -78,7 +77,7 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.getSelectDoctorInfo((call, response) -> {
+        Call<String> requestCall = UserDataManager.getSelectDoctorInfo(UserInfoUtils.getArchivesId(getPageContext()),(call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 DoctorInfo doctorInfo = (DoctorInfo) response.object;
