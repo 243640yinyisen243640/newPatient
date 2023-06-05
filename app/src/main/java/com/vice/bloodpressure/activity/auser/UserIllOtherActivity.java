@@ -248,8 +248,11 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
+            } else {
+                saveTv.setClickable(true);
             }
         }, (call, t) -> {
+            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("putDiseaseImportant", requestCall);
@@ -282,7 +285,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                 });
                 break;
             case R.id.tv_user_ill_other_save:
-
+                saveTv.setClickable(false);
                 sureToAddData();
                 break;
             default:

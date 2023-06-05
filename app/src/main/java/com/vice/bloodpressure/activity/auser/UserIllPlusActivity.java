@@ -93,6 +93,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             });
         });
         saveTv.setOnClickListener(v -> {
+            saveTv.setClickable(false);
             sureToAddData();
         });
     }
@@ -116,8 +117,11 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
+            } else {
+                saveTv.setClickable(true);
             }
         }, (call, t) -> {
+            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("putDiseaseImportant", requestCall);

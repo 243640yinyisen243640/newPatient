@@ -81,6 +81,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
             }
         });
         saveTv.setOnClickListener(v -> {
+            saveTv.setClickable(false);
             sureToAddData();
         });
     }
@@ -95,8 +96,11 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
+            }else {
+                saveTv.setClickable(true);
             }
         }, (call, t) -> {
+            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("editUserFilesInfoForFamily", requestCall);
