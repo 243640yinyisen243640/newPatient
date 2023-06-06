@@ -39,8 +39,8 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
         topViewManager().topView().removeAllViews();
         initView();
         initListener();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
-
 
 
     @Override

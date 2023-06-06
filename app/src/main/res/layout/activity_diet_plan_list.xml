@@ -131,8 +131,7 @@
                 android:id="@+id/tv_diet_plan_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="1. 当空腹血糖控制在7.0mmol/L(126mg/dl)以 下，餐后2小时血糖小于10mmol/L(180ma/dl)糖化" />
+                android:layout_marginTop="15dp" />
         </LinearLayout>
 
 

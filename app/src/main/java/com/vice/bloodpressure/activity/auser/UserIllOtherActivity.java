@@ -94,19 +94,85 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     private List<BaseLocalDataInfo> levelList;
 
     private String checkId = "-1";
+    /**
+     * 疾病类型  1, 糖尿病2, 高血压3, 糖尿病前期4,冠心病5, 脑卒中6, 慢阻肺
+     */
+    private String diseaseType = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("诊断");
         type = getIntent().getStringExtra("type");
-        loadViewManager().changeLoadState(LoadStatus.LOADING);
+        diseaseType = getIntent().getStringExtra("diseaseType");
         initView();
         initListener();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
+
+    @Override
+    protected void onPageLoad() {
+
+        getAddData();
+    }
+
+    /**
+     * 诊断详情的接口
+     */
+    private void getDetailsData() {
+        Call<String> requestCall = UserDataManager.getDiseaseImportantDetails(UserInfoUtils.getArchivesId(getPageContext()), diseaseType, type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                DiseaseInfo dataInfo = (DiseaseInfo) response.object;
+                bindDataDetailsData(dataInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getDiseaseImportantDetails", requestCall);
+    }
+
+    /**
+     * 查看详情
+     *
+     * @param dataInfo
+     */
+    private void bindDataDetailsData(DiseaseInfo dataInfo) {
+        //调取详情，疾病类型不能修改，疾病类型下的类型程度是可以修改的
+        typeFl.setClickable(false);
+
+    }
+
+    /**
+     * 添加时，调的接口，查看疾病是否已经被选择过
+     */
+    private void getAddData() {
+        Call<String> requestCall = UserDataManager.lookDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                DiseaseInfo dataInfo = (DiseaseInfo) response.object;
+                bindData(dataInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("lookDiseaseImportant", requestCall);
+    }
+
+    /**
+     * 绑定数据
+     *
+     * @param diseaseInfo
+     */
     private void bindData(DiseaseInfo diseaseInfo) {
+        //设置疾病类型
         setAllRtpeList(diseaseInfo);
+        //设置糖尿病
         tangDiseaseList = new ArrayList<>();
         tangDiseaseList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
         tangDiseaseList.add(new BaseLocalDataInfo("2型糖尿病", "2"));
@@ -136,6 +202,11 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         levelGridView.setAdapter(levelAdapter);
     }
 
+    /**
+     * 设置疾病类型
+     *
+     * @param diseaseInfo
+     */
     private void setAllRtpeList(DiseaseInfo diseaseInfo) {
         List<BaseLocalDataInfo> diseaseAllTypeList = new ArrayList();
         diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病", "1", diseaseInfo.getDiseaseType1()));
@@ -145,7 +216,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         diseaseAllTypeList.add(new BaseLocalDataInfo("脑卒中", "5", diseaseInfo.getDiseaseType5()));
         diseaseAllTypeList.add(new BaseLocalDataInfo("慢性阻塞性肺疾病", "6", diseaseInfo.getDiseaseType6()));
 
-        //        diseaseAllTypeList.get(0).setCheck(true);
         for (int i = 0; i < diseaseAllTypeList.size(); i++) {
             FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
@@ -225,12 +295,28 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_user_ill_other:
+                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
+                    addTime = object.toString();
+                    timeTv.setText(object.toString());
+                });
+                break;
+            case R.id.tv_user_ill_other_save:
+                saveTv.setClickable(false);
+                sureToAddData();
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * 确定上传数据
      */
     private void sureToAddData() {
-
         if ("-1".equals(checkId)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择疾病类型");
             return;
@@ -256,41 +342,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("putDiseaseImportant", requestCall);
-    }
-
-
-    @Override
-    protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.lookDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, (call, response) -> {
-            if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                DiseaseInfo dataInfo = (DiseaseInfo) response.object;
-                bindData(dataInfo);
-            } else {
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-        });
-        addRequestCallToMap("lookDiseaseImportant", requestCall);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_user_ill_other:
-                PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
-                    addTime = object.toString();
-                    timeTv.setText(object.toString());
-                });
-                break;
-            case R.id.tv_user_ill_other_save:
-                saveTv.setClickable(false);
-                sureToAddData();
-                break;
-            default:
-                break;
-        }
     }
 
     private void initView() {

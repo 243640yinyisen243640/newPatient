@@ -69,6 +69,7 @@ public class UserDataManager {
 
     /**
      * 添加家族史
+     *
      * @param archivesId
      * @param familyType
      * @param familyValue
@@ -180,6 +181,22 @@ public class UserDataManager {
         map.put("patientId", patientId);
         map.put("diagnosticType", diagnosticType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/diseaseApp/isExists", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param patientId
+     * @param diseaseType     疾病类型  1, 糖尿病2, 高血压3, 糖尿病前期4,冠心病5, 脑卒中6, 慢阻肺
+     * @param diagnosticType  诊断类型 1主要诊断 2其他诊断
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDiseaseImportantDetails(String patientId, String diseaseType, String diagnosticType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("diseaseType", diseaseType);
+        map.put("diagnosticType", diagnosticType);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/app/diseaseDetail", map, successCallBack, failureCallBack);
     }
 
     /**

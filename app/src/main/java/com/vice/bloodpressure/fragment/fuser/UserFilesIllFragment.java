@@ -82,34 +82,14 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     }
 
     private void bindData(UserInfo userInfo) {
-        if ("0".equals(userInfo.getIsDiabetesExists())) {
-            plusLinearLayout.setVisibility(View.VISIBLE);
-            if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {
-                UserFilesPlusAdapter plusAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getComplication(), "1", (position, view) -> {
-                    switch (view.getId()) {
-                        case R.id.ll_disease_click:
-                            Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
-                            intent.putExtra("isAdd", "2");
-                            intent.putExtra("diseaseType", userInfo.getDiabetesType());
-                            intent.putExtra("diagnosticType", userInfo.getDiagnosticType());
-                            startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-                plusListView.setAdapter(plusAdapter);
-            }
 
-        }else {
-            plusLinearLayout.setVisibility(View.GONE);
-        }
         if (userInfo.getMainDiagnosis() != null && userInfo.getMainDiagnosis().size() > 0) {
             UserFilesPlusAdapter importantAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getMainDiagnosis(), "2", (position, view) -> {
                 switch (view.getId()) {
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("type", "1");
+                        intent.putExtra("diseaseType", userInfo.getMainDiagnosis().get(position).getDiseaseType());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
                     default:
@@ -126,6 +106,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("type", "2");
+                        intent.putExtra("diseaseType", userInfo.getOtherDiagnosis().get(position).getDiseaseType());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
                     default:
@@ -133,6 +114,28 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 }
             });
             otherListView.setAdapter(otherAdapter);
+        }
+        if ("0".equals(userInfo.getIsDiabetesExists())) {
+            plusLinearLayout.setVisibility(View.VISIBLE);
+            if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {
+                UserFilesPlusAdapter plusAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getComplication(), "1", (position, view) -> {
+                    switch (view.getId()) {
+                        case R.id.ll_disease_click:
+                            Intent intent = new Intent(getPageContext(), UserIllPlusActivity.class);
+                            intent.putExtra("isAdd", "2");
+                            intent.putExtra("diseaseType", userInfo.getComplication().get(position).getDiseaseType());
+                            intent.putExtra("diagnosticType", userInfo.getComplication().get(position).getDiagnoseDate());
+                            startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                plusListView.setAdapter(plusAdapter);
+            }
+
+        } else {
+            plusLinearLayout.setVisibility(View.GONE);
         }
     }
 
