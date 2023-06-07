@@ -3,7 +3,6 @@ package com.vice.bloodpressure.activity.auser;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,7 +153,13 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择时间");
             return;
         }
-        String level = levelList.get(adapter.getClickPosition()).getId();
+        String level = "";
+        if ("1".equals(checkId)) {
+            level = levelList.get(adapter.getClickPosition()).getId();
+        } else {
+            level = "";
+        }
+
         Call<String> requestCall = UserDataManager.putDiseasePlus(UserInfoUtils.getArchivesId(getPageContext()), checkId, levelList.get(adapter.getClickPosition()).getId(), level, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
