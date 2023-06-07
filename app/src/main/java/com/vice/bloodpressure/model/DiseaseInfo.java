@@ -40,6 +40,10 @@ public class DiseaseInfo {
      */
     private String complicationName;
     /**
+     * 并发症详情拼接
+     */
+    private String complicationDetail;
+    /**
      * 疾病类型
      * * 1 糖尿病
      * * 2 高血压
@@ -100,6 +104,14 @@ public class DiseaseInfo {
     private String complicationType5;
     private String complicationType6;
     private String complicationType7;
+
+    public String getComplicationDetail() {
+        return complicationDetail;
+    }
+
+    public void setComplicationDetail(String complicationDetail) {
+        this.complicationDetail = complicationDetail;
+    }
 
     public String getComplicationType1() {
         return complicationType1;

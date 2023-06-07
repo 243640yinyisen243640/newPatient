@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.auser;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ import retrofit2.Call;
  * 作者: beauty
  * 类名:
  * 传参:isAdd 1：添加  2：编辑
- * type  1:主要诊断   2其他诊断
+ * diagnosticType  1:主要诊断   2其他诊断
  * 描述:其他诊断
  */
 public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnClickListener {
@@ -73,14 +74,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 保存按钮
      */
     private TextView saveTv;
-    /**
-     * 1:主要诊断   2其他诊断
-     */
-    private String type;
-    /**
-     * 添加时间
-     */
-    private String addTime = "";
+
     /**
      * 糖尿病的类型adapter
      */
@@ -94,12 +88,20 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      */
     private PerfectDiseaseAdapter levelAdapter;
     /**
-     * 疾病列表
+     * 糖尿病 疾病列表
      */
     private List<BaseLocalDataInfo> tangDiseaseList = new ArrayList<>();
-    private List<BaseLocalDataInfo> diseaseList = new ArrayList<>();
-    private List<BaseLocalDataInfo> levelList = new ArrayList<>();
-
+    /**
+     * 高血压 疾病列表
+     */
+    private List<BaseLocalDataInfo> yaDiseaseList = new ArrayList<>();
+    /**
+     * 高血压等级 列表
+     */
+    private List<BaseLocalDataInfo> yaLevelList = new ArrayList<>();
+    /**
+     * 疾病类型列表
+     */
 
     private List<BaseLocalDataInfo> diseaseAllTypeList = new ArrayList<>();
 
@@ -113,6 +115,14 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      */
     private String isAdd = "";
     /**
+     * 1:主要诊断   2其他诊断
+     */
+    private String diagnosticType;
+    /**
+     * 添加时间
+     */
+    private String addTime = "";
+    /**
      * 获取详情时得到的数据
      */
     private DiseaseInfo dataInfo;
@@ -122,8 +132,10 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("诊断");
         isAdd = getIntent().getStringExtra("isAdd");
-        type = getIntent().getStringExtra("type");
-        diseaseType = getIntent().getStringExtra("diseaseType");
+        diagnosticType = getIntent().getStringExtra("diagnosticType");
+        if ("2".equals(isAdd)) {
+            diseaseType = getIntent().getStringExtra("diseaseType");
+        }
         initView();
         initValues();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -143,7 +155,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 诊断详情的接口
      */
     private void getDetailsData() {
-        Call<String> requestCall = UserDataManager.getDiseaseImportantDetails(UserInfoUtils.getArchivesId(getPageContext()), diseaseType, type, (call, response) -> {
+        Call<String> requestCall = UserDataManager.getDiseaseImportantDetails(UserInfoUtils.getArchivesId(getPageContext()), diseaseType, diagnosticType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 initListener();
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
@@ -166,6 +178,15 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         typeFl.setClickable(false);
         addTime = dataInfo.getDiagnoseDate();
         diseaseAllTypeList.get(Integer.parseInt(dataInfo.getDiseaseType()) - 1).setCheck(true);
+        Log.i("yys", "dataInfo.getDiseaseType()==" + dataInfo.getDiseaseType() + "dataInfo.getDiseaseChildType()==" + dataInfo.getDiseaseChildType() + "dataInfo.getDiseaseRisk()==" + dataInfo.getDiseaseRisk());
+        if ("1".equals(dataInfo.getDiseaseType())) {
+            tangTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseChildType()) - 1);
+        } else if ("2".equals(dataInfo.getDiseaseType())) {
+            yaTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseChildType()) - 1);
+            levelAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseRisk()) - 1);
+        } else {
+
+        }
         for (int i = 0; i < diseaseAllTypeList.size(); i++) {
             FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
@@ -194,7 +215,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         if ("1".equals(dataInfo.getDiseaseType())) {
             tangTypeTextView.setVisibility(View.VISIBLE);
             tangTypeGridView.setVisibility(View.VISIBLE);
-            tangTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseType()) - 1);
         }
 
 
@@ -204,8 +224,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             allTypeTextView.setVisibility(View.VISIBLE);
             levelGridView.setVisibility(View.VISIBLE);
             typeGridView.setVisibility(View.VISIBLE);
-            yaTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseType()) - 1);
-            levelAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseType()) - 1);
         }
         timeTv.setText(dataInfo.getDiagnoseDate());
     }
@@ -214,7 +232,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 添加时，调的接口，查看疾病是否已经被选择过
      */
     private void getAddData() {
-        Call<String> requestCall = UserDataManager.lookDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, (call, response) -> {
+        Call<String> requestCall = UserDataManager.lookDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 initListener();
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
@@ -339,19 +357,19 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         tangTypeAdapter = new PerfectDiseaseAdapter(getPageContext(), tangDiseaseList);
         tangTypeGridView.setAdapter(tangTypeAdapter);
 
-        diseaseList.add(new BaseLocalDataInfo("1级高血压", "1"));
-        diseaseList.add(new BaseLocalDataInfo("2级高血压", "2"));
-        diseaseList.add(new BaseLocalDataInfo("3级高血压", "3"));
+        yaDiseaseList.add(new BaseLocalDataInfo("1级高血压", "1"));
+        yaDiseaseList.add(new BaseLocalDataInfo("2级高血压", "2"));
+        yaDiseaseList.add(new BaseLocalDataInfo("3级高血压", "3"));
 
-        yaTypeAdapter = new PerfectDiseaseAdapter(getPageContext(), diseaseList);
+        yaTypeAdapter = new PerfectDiseaseAdapter(getPageContext(), yaDiseaseList);
         typeGridView.setAdapter(yaTypeAdapter);
 
-        levelList.add(new BaseLocalDataInfo("低危", "1"));
-        levelList.add(new BaseLocalDataInfo("中危", "2"));
-        levelList.add(new BaseLocalDataInfo("高危", "3"));
-        levelList.add(new BaseLocalDataInfo("很高危", "4"));
+        yaLevelList.add(new BaseLocalDataInfo("低危", "1"));
+        yaLevelList.add(new BaseLocalDataInfo("中危", "2"));
+        yaLevelList.add(new BaseLocalDataInfo("高危", "3"));
+        yaLevelList.add(new BaseLocalDataInfo("很高危", "4"));
 
-        levelAdapter = new PerfectDiseaseAdapter(getPageContext(), levelList);
+        levelAdapter = new PerfectDiseaseAdapter(getPageContext(), yaLevelList);
         levelGridView.setAdapter(levelAdapter);
 
     }
@@ -366,7 +384,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
                 });
                 break;
             case R.id.tv_user_ill_other_save:
-                saveTv.setClickable(false);
                 if ("1".equals(isAdd)) {
                     sureToAddData();
                 } else {
@@ -389,21 +406,18 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         if ("1".equals(dataInfo.getDiseaseType())) {
             diseaseChildType = tangTypeAdapter.getClickPosition() + 1 + "";
         } else if ("2".equals(dataInfo.getDiseaseType())) {
-            diseaseRisk = levelList.get(levelAdapter.getClickPosition()).getId();
+            diseaseRisk = yaLevelList.get(levelAdapter.getClickPosition()).getId();
             diseaseChildType = yaTypeAdapter.getClickPosition() + 1 + "";
         } else {
             diseaseRisk = "";
         }
-        Call<String> requestCall = UserDataManager.editDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, dataInfo.getDiagnosticType(), diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+        Call<String> requestCall = UserDataManager.editDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, dataInfo.getDiagnosticType(), diseaseChildType, diseaseRisk, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                saveTv.setClickable(true);
             }
         }, (call, t) -> {
-            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("editDiseaseImportant", requestCall);
@@ -426,19 +440,16 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         if ("1".equals(checkId)) {
             diseaseChildType = tangTypeAdapter.getClickPosition() + 1 + "";
         } else {
-            diseaseRisk = levelList.get(levelAdapter.getClickPosition()).getId();
+            diseaseRisk = yaLevelList.get(levelAdapter.getClickPosition()).getId();
             diseaseChildType = yaTypeAdapter.getClickPosition() + 1 + "";
         }
-        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), type, checkId, diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, checkId, diseaseChildType, diseaseRisk, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                saveTv.setClickable(true);
             }
         }, (call, t) -> {
-            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("putDiseaseImportant", requestCall);

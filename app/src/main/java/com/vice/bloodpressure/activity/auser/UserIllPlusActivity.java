@@ -97,9 +97,11 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("合并症");
         isAdd = getIntent().getStringExtra("isAdd");
-        diseaseType = getIntent().getStringExtra("diseaseType");
         diagnosticType = getIntent().getStringExtra("diagnosticType");
-        complicationType = getIntent().getStringExtra("complicationType");
+        if ("2".equals(isAdd)) {
+            diseaseType = getIntent().getStringExtra("diseaseType");
+            complicationType = getIntent().getStringExtra("complicationType");
+        }
         initView();
         initValues();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -130,11 +132,8 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                saveTv.setClickable(true);
             }
         }, (call, t) -> {
-            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("editDiseasePlus", requestCall);
@@ -165,11 +164,8 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                saveTv.setClickable(true);
             }
         }, (call, t) -> {
-            saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("putDiseaseImportant", requestCall);
@@ -180,7 +176,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
      * 诊断详情的接口
      */
     private void getDetailsData() {
-        Call<String> requestCall = UserDataManager.getDiseasePlusDetails(UserInfoUtils.getArchivesId(getPageContext()), "2", diseaseType, complicationType, (call, response) -> {
+        Call<String> requestCall = UserDataManager.getDiseasePlusDetails(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, diseaseType, complicationType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 initListener();
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
@@ -344,7 +340,6 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
             });
         });
         saveTv.setOnClickListener(v -> {
-            saveTv.setClickable(false);
             if ("1".equals(isAdd)) {
                 sureToAddData();
             } else {

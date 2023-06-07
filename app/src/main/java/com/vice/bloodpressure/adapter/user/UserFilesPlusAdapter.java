@@ -45,7 +45,7 @@ public class UserFilesPlusAdapter extends XyBaseAdapter<DiseaseInfo> {
         DiseaseInfo info = getList().get(position);
         if ("1".equals(type)) {
             holder.timeTextView.setText(info.getComplicationDate());
-            holder.typeTextView.setText(info.getComplicationName());
+            holder.typeTextView.setText(info.getComplicationDetail());
         } else {
             holder.typeTextView.setText(info.getDiseaseDetail());
             holder.timeTextView.setText(info.getDiagnoseDate());
