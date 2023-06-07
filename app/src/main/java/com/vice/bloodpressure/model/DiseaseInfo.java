@@ -70,6 +70,10 @@ public class DiseaseInfo {
      * 诊断日期
      */
     private String diagnoseDate;
+    /**
+     * 疾病类型
+     */
+    private String diagnosticType;
     private String complicationDate;
     /**
      * 诊断详情  是拼接起来的
@@ -85,6 +89,14 @@ public class DiseaseInfo {
      * 亲属有无病症
      */
     private String isContain;
+
+    public String getDiagnosticType() {
+        return diagnosticType;
+    }
+
+    public void setDiagnosticType(String diagnosticType) {
+        this.diagnosticType = diagnosticType;
+    }
 
     public String getFamilyDec() {
         return familyDec;

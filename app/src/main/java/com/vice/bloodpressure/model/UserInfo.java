@@ -33,6 +33,10 @@ public class UserInfo implements Serializable {
      */
     private String archives_id;
     /**
+     * 医生ID
+     */
+    private String doctor_id;
+    /**
      * userId
      */
     private String user_id;
@@ -287,6 +291,14 @@ public class UserInfo implements Serializable {
      * //诊断类型 1主要 2其他
      */
     private String diagnosticType;
+
+    public String getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(String doctor_id) {
+        this.doctor_id = doctor_id;
+    }
 
     public List<DiseaseInfo> getPatientFamily() {
         return patientFamily;

@@ -89,6 +89,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("type", "1");
+                        intent.putExtra("isAdd", "2");
                         intent.putExtra("diseaseType", userInfo.getMainDiagnosis().get(position).getDiseaseType());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
@@ -106,6 +107,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("type", "2");
+                        intent.putExtra("isAdd", "2");
                         intent.putExtra("diseaseType", userInfo.getOtherDiagnosis().get(position).getDiseaseType());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                         break;
@@ -147,11 +149,13 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
             case R.id.tv_user_files_ill_important_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                 intent.putExtra("type", "1");
+                intent.putExtra("isAdd", "1");
                 startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
             case R.id.tv_user_files_ill_other_add:
                 intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                 intent.putExtra("type", "2");
+                intent.putExtra("isAdd", "1");
                 startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);
                 break;
             case R.id.tv_user_files_ill_plus_add:

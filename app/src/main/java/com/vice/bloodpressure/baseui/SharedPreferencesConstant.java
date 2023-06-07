@@ -14,6 +14,10 @@ public class SharedPreferencesConstant {
      * 档案号
      */
     public static String ARCHIVES_ID = "archives_id";
+    /**
+     * 医生id
+     */
+    public static String DOCTOR_ID = "doctor_id";
 
     /**
      * 推送的token
