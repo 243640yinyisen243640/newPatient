@@ -112,7 +112,9 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      * 1：添加  2：编辑
      */
     private String isAdd = "";
-
+    /**
+     * 获取详情时得到的数据
+     */
     private DiseaseInfo dataInfo;
 
     @Override
@@ -234,16 +236,6 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
      */
     private void bindData(DiseaseInfo diseaseInfo) {
         //设置疾病类型
-        setAllRtpeList(diseaseInfo);
-
-    }
-
-    /**
-     * 设置疾病类型
-     *
-     * @param diseaseInfo
-     */
-    private void setAllRtpeList(DiseaseInfo diseaseInfo) {
         diseaseAllTypeList.get(0).setIsSelect(diseaseInfo.getDiseaseType1());
         diseaseAllTypeList.get(1).setIsSelect(diseaseInfo.getDiseaseType2());
         diseaseAllTypeList.get(2).setIsSelect(diseaseInfo.getDiseaseType3());
@@ -328,7 +320,9 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             });
 
         }
+
     }
+
 
     private void initValues() {
         diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病", "1"));
@@ -412,7 +406,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             saveTv.setClickable(true);
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("putDiseaseImportant", requestCall);
+        addRequestCallToMap("editDiseaseImportant", requestCall);
     }
 
     /**

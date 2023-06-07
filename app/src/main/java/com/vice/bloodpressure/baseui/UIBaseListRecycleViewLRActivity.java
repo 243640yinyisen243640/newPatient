@@ -25,7 +25,7 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/3/23 9:42
  */
-public abstract class UIBaseListRecycleViewForBg1Activity<T> extends UIBaseLoadActivity {
+public abstract class UIBaseListRecycleViewLRActivity<T> extends UIBaseLoadActivity {
 
     protected SmartRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
@@ -187,7 +187,7 @@ public abstract class UIBaseListRecycleViewForBg1Activity<T> extends UIBaseLoadA
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view_for_bg1, null);
+        View view = View.inflate(getPageContext(), R.layout.ui_fragment_base_list_recycle_view_for_bg_lr, null);
         mRefreshLayout = getViewByID(view, R.id.refresh_layout);
         mRecyclerView = getViewByID(view, R.id.recycler_view);
         mNestedScrollView = getViewByID(view, R.id.nsv_present_load);

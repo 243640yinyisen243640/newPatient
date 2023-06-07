@@ -650,7 +650,7 @@ public class ServiceDataManager {
     /**
      * @param patientId
      * @param id              患者ID
-     * @param collectType     收藏模块 1.饮食模块 2教育模块
+     * @param collectType     收藏模块  1教育模块  2.饮食模块
      * @param successCallBack
      * @param failureCallBack
      * @return
@@ -668,7 +668,7 @@ public class ServiceDataManager {
      *
      * @param patientId
      * @param collectIds
-     * @param collectType     1代表饮食模块 2教育模块
+     * @param collectType    1教育模块  2代表饮食模块
      * @param isCollect       1收藏/2取消收藏
      * @param successCallBack
      * @param failureCallBack

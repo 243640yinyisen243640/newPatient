@@ -21,7 +21,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
-import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBg1Activity;
+import com.vice.bloodpressure.baseui.UIBaseListRecycleViewLRActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
@@ -42,7 +42,7 @@ import retrofit2.Call;
  * 传参:
  * 描述:bmi列表
  */
-public class ServiceBmiListActivity extends UIBaseListRecycleViewForBg1Activity<HealthyDataChildInfo> implements View.OnClickListener {
+public class ServiceBmiListActivity extends UIBaseListRecycleViewLRActivity<HealthyDataChildInfo> implements View.OnClickListener {
     private static final int REQUEST_CODE_FOR_FREFRESH = 1;
     private ImageView backImageView;
     private LinearLayout addLinearLayout;

@@ -73,7 +73,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
      * @param isCollect 1收藏/2取消收藏
      */
     private void collectOperate(String isCollect) {
-        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", isCollect, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "2", isCollect, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 if ("1".equals(isCollect)) {
@@ -106,7 +106,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = ServiceDataManager.mealDetails(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "1", (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.mealDetails(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "2", (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 allInfo = (MealExclusiveInfo) response.object;
@@ -134,7 +134,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
             collectTextView.setText("收藏");
             collectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.service_video_uncollect, 0, 0, 0);
         }
-        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_5, allInfo.getPic(), videoPlayer.posterImageView);
+        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, allInfo.getPic(), videoPlayer.posterImageView);
         int width = ScreenUtils.screenWidth(getPageContext());
         int height = width * 9 / 16;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);

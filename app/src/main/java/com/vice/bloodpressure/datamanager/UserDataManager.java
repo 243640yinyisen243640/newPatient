@@ -3,6 +3,7 @@ package com.vice.bloodpressure.datamanager;
 import com.vice.bloodpressure.model.DiseaseInfo;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.model.EquipmetInfo;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -172,6 +173,30 @@ public class UserDataManager {
     }
 
     /**
+     * APP-合并症修改
+     *
+     * @param patientId
+     * @param diseaseType
+     * @param diagnosticType
+     * @param complicationType
+     * @param level
+     * @param complicationDate
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editDiseasePlus(String patientId, String diseaseType, String diagnosticType, String complicationType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("diagnosticType", diagnosticType);
+        map.put("diseaseType", diseaseType);
+        map.put("complicationType", complicationType);
+        map.put("level", level);
+        map.put("complicationDate", complicationDate);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/app/updateComplication", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 添加并发症
      *
      * @param patientId
@@ -221,6 +246,24 @@ public class UserDataManager {
         map.put("diseaseType", diseaseType);
         map.put("diagnosticType", diagnosticType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/app/diseaseDetail", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param patientId
+     * @param diagnosticType   诊断类型  1主要诊断 2其他诊断
+     * @param diseaseType
+     * @param complicationType
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDiseasePlusDetails(String patientId, String diagnosticType, String diseaseType, String complicationType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("diagnosticType", diagnosticType);
+        map.put("diseaseType", diseaseType);
+        map.put("complicationType", complicationType);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/app/complicationDetail", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -335,4 +378,21 @@ public class UserDataManager {
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/diseaseApp/add", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * @param patientId
+     * @param collectType     收藏类型 1文章 2视频 3商品
+     * @param pageNum
+     * @param pageSize
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCollectMealList(String patientId, String collectType, String pageNum, String pageSize,  BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("collectType", collectType);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
+    }
 }

@@ -32,7 +32,7 @@ public abstract class UIBaseListRecycleViewForBgFragment<T> extends UIBaseLoadFr
 
     @Override
     protected void onCreate() {
-
+        topViewManager().topView().removeAllViews();
         initView();
         mIsLoadMore = isLoadMore();
         mRefreshLayout.setEnableLoadMore(mIsLoadMore);

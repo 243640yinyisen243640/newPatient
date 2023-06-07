@@ -60,7 +60,9 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
     private String addTime = "";
 
-    private List<BaseLocalDataInfo> levelList;
+    /**
+     * 等级的adapter
+     */
 
     private PerfectDiseaseAdapter adapter;
     /**
@@ -71,17 +73,58 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
      * 诊断类型 1主要 2其他
      */
     private String diagnosticType;
+    /**
+     * 合并症类型
+     */
+    private String complicationType;
+    /**
+     * 疾病类型的列表
+     */
+    private List<BaseLocalDataInfo> diseaseAllTypeList = new ArrayList<>();
+    /**
+     * 等级的列表
+     */
+    private List<BaseLocalDataInfo> levelList = new ArrayList<>();
+
+    /**
+     * 获取详情时得到的数据
+     */
+    private DiseaseInfo dataInfo;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("合并症");
         isAdd = getIntent().getStringExtra("isAdd");
-        diseaseType = getIntent().getStringExtra("isAdd");
-        diagnosticType = getIntent().getStringExtra("isAdd");
+        diseaseType = getIntent().getStringExtra("diseaseType");
+        diagnosticType = getIntent().getStringExtra("diagnosticType");
+        complicationType = getIntent().getStringExtra("complicationType");
         loadViewManager().changeLoadState(LoadStatus.LOADING);
         initView();
+        initValues();
         initListener();
+    }
+
+    private void initValues() {
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病肾病", "1"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病视网膜病变", "2"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病神经病变", "3"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病下肢血管病变", "4"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病足", "5"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病酮症酸中毒", "6"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("高渗性高血糖", "7"));
+
+
+        levelList = new ArrayList<>();
+        levelList.add(new BaseLocalDataInfo("1期", "1"));
+        levelList.add(new BaseLocalDataInfo("2期", "2"));
+        levelList.add(new BaseLocalDataInfo("3a期", "3"));
+        levelList.add(new BaseLocalDataInfo("3b期", "4"));
+        levelList.add(new BaseLocalDataInfo("4期", "5"));
+        levelList.add(new BaseLocalDataInfo("5期", "6"));
+        adapter = new PerfectDiseaseAdapter(getPageContext(), levelList);
+        typeGridView.setAdapter(adapter);
     }
 
 
@@ -94,10 +137,41 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
         });
         saveTv.setOnClickListener(v -> {
             saveTv.setClickable(false);
-            sureToAddData();
+            if ("1".equals(isAdd)) {
+                sureToAddData();
+            } else {
+                sureToEditData();
+            }
         });
     }
-
+    /**
+     * 确定上传编辑数据
+     */
+    private void sureToEditData() {
+//        String diseaseRisk = "";
+//        String diseaseChildType = "";
+//        if ("1".equals(dataInfo.getDiseaseType())) {
+//            diseaseChildType = tangTypeAdapter.getClickPosition() + 1 + "";
+//        } else if ("2".equals(dataInfo.getDiseaseType())) {
+//            diseaseRisk = levelList.get(levelAdapter.getClickPosition()).getId();
+//            diseaseChildType = yaTypeAdapter.getClickPosition() + 1 + "";
+//        } else {
+//            diseaseRisk = "";
+//        }
+//        Call<String> requestCall = UserDataManager.editDiseasePlus(UserInfoUtils.getArchivesId(getPageContext()), type, dataInfo.getDiagnosticType(), diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+//            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+//            if ("0000".equals(response.code)) {
+//                setResult(RESULT_OK);
+//                finish();
+//            } else {
+//                saveTv.setClickable(true);
+//            }
+//        }, (call, t) -> {
+//            saveTv.setClickable(true);
+//            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+//        });
+//        addRequestCallToMap("editDiseasePlus", requestCall);
+    }
     /**
      * 确定上传数据
      */
@@ -139,11 +213,81 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
+        if ("1".equals(isAdd)) {
+            getAddData();
+        } else {
+            getDetailsData();
+        }
+
+    }
+
+    /**
+     * 诊断详情的接口
+     */
+    private void getDetailsData() {
+        Call<String> requestCall = UserDataManager.getDiseasePlusDetails(UserInfoUtils.getArchivesId(getPageContext()), "2", diseaseType, "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                initListener();
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                dataInfo = (DiseaseInfo) response.object;
+                bindDataDetailsData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getDiseaseImportantDetails", requestCall);
+    }
+
+    /**
+     * 查看详情
+     */
+    private void bindDataDetailsData() {
+        //调取详情，疾病类型不能修改，疾病类型下的类型程度是可以修改的
+        typeFl.setClickable(false);
+        addTime = dataInfo.getComplicationDate();
+        diseaseAllTypeList.get(Integer.parseInt(dataInfo.getDiseaseType()) - 1).setCheck(true);
+        for (int i = 0; i < diseaseAllTypeList.size(); i++) {
+            FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
+            TextView checkTextView = new TextView(getPageContext());
+            checkTextView.setTextSize(15f);
+            if (diseaseAllTypeList.get(i).isCheck()) {
+                checkTextView.setBackgroundResource(R.drawable.shape_bg_main_gra_90);
+                checkTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.text_white));
+            } else {
+                checkTextView.setBackgroundResource(R.drawable.shape_bg_white_black_90_1);
+                checkTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+            }
+            checkTextView.setGravity(Gravity.CENTER);
+            checkTextView.setText(diseaseAllTypeList.get(i).getName());
+            checkTextView.setMaxLines(1);
+            checkTextView.setPadding(DensityUtils.dip2px(getPageContext(), 15f), DensityUtils.dip2px(getPageContext(), 8f), DensityUtils.dip2px(getPageContext(), 15f), DensityUtils.dip2px(getPageContext(), 8f));
+            typeFl.addView(checkTextView, lp);
+
+        }
+        typeTextView.setVisibility(View.GONE);
+        typeGridView.setVisibility(View.GONE);
+        if ("1".equals(dataInfo.getComplicationType())) {
+            typeTextView.setVisibility(View.VISIBLE);
+            typeGridView.setVisibility(View.VISIBLE);
+
+        }
+
+
+        timeTv.setText(dataInfo.getDiagnoseDate());
+    }
+
+    /**
+     * 获取添加数据   哪些病种添加过
+     */
+    private void getAddData() {
         Call<String> requestCall = UserDataManager.lookDiseasePlus(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, diseaseType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 DiseaseInfo dataInfo = (DiseaseInfo) response.object;
-                bindData(dataInfo);
+                bindAddData(dataInfo);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -153,15 +297,20 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
         addRequestCallToMap("lookDiseaseImportant", requestCall);
     }
 
-    private void bindData(DiseaseInfo dataInfo) {
-        List<BaseLocalDataInfo> diseaseAllTypeList = new ArrayList();
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病肾病", "1", dataInfo.getDiseaseType1()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病视网膜病变", "2", dataInfo.getDiseaseType2()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病神经病变", "3", dataInfo.getDiseaseType3()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病下肢血管病变", "4", dataInfo.getDiseaseType4()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病足", "5", dataInfo.getDiseaseType5()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病酮症酸中毒", "6", dataInfo.getDiseaseType6()));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("高渗性高血糖", "7", dataInfo.getDiseaseType7()));
+    /**
+     * 绑定
+     *
+     * @param dataInfo
+     */
+    private void bindAddData(DiseaseInfo dataInfo) {
+        //设置疾病类型
+        diseaseAllTypeList.get(0).setIsSelect(dataInfo.getDiseaseType1());
+        diseaseAllTypeList.get(1).setIsSelect(dataInfo.getDiseaseType2());
+        diseaseAllTypeList.get(2).setIsSelect(dataInfo.getDiseaseType3());
+        diseaseAllTypeList.get(3).setIsSelect(dataInfo.getDiseaseType4());
+        diseaseAllTypeList.get(4).setIsSelect(dataInfo.getDiseaseType5());
+        diseaseAllTypeList.get(5).setIsSelect(dataInfo.getDiseaseType6());
+        diseaseAllTypeList.get(6).setIsSelect(dataInfo.getDiseaseType7());
         for (int i = 0; i < diseaseAllTypeList.size(); i++) {
             FlexboxLayout.LayoutParams lp = new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(0, DensityUtils.dip2px(getPageContext(), 10f), DensityUtils.dip2px(getPageContext(), 10f), 0);
@@ -228,16 +377,6 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
 
         }
 
-
-        levelList = new ArrayList<>();
-        levelList.add(new BaseLocalDataInfo("1期", "1"));
-        levelList.add(new BaseLocalDataInfo("2期", "2"));
-        levelList.add(new BaseLocalDataInfo("3a期", "3"));
-        levelList.add(new BaseLocalDataInfo("3b期", "4"));
-        levelList.add(new BaseLocalDataInfo("4期", "5"));
-        levelList.add(new BaseLocalDataInfo("5期", "6"));
-        adapter = new PerfectDiseaseAdapter(getPageContext(), levelList);
-        typeGridView.setAdapter(adapter);
     }
 
 }
