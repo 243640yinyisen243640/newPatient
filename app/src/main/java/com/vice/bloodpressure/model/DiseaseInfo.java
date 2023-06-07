@@ -90,6 +90,73 @@ public class DiseaseInfo {
      */
     private String isContain;
 
+    /**
+     * 合并症的类型
+     */
+    private String complicationType1;
+    private String complicationType2;
+    private String complicationType3;
+    private String complicationType4;
+    private String complicationType5;
+    private String complicationType6;
+    private String complicationType7;
+
+    public String getComplicationType1() {
+        return complicationType1;
+    }
+
+    public void setComplicationType1(String complicationType1) {
+        this.complicationType1 = complicationType1;
+    }
+
+    public String getComplicationType2() {
+        return complicationType2;
+    }
+
+    public void setComplicationType2(String complicationType2) {
+        this.complicationType2 = complicationType2;
+    }
+
+    public String getComplicationType3() {
+        return complicationType3;
+    }
+
+    public void setComplicationType3(String complicationType3) {
+        this.complicationType3 = complicationType3;
+    }
+
+    public String getComplicationType4() {
+        return complicationType4;
+    }
+
+    public void setComplicationType4(String complicationType4) {
+        this.complicationType4 = complicationType4;
+    }
+
+    public String getComplicationType5() {
+        return complicationType5;
+    }
+
+    public void setComplicationType5(String complicationType5) {
+        this.complicationType5 = complicationType5;
+    }
+
+    public String getComplicationType6() {
+        return complicationType6;
+    }
+
+    public void setComplicationType6(String complicationType6) {
+        this.complicationType6 = complicationType6;
+    }
+
+    public String getComplicationType7() {
+        return complicationType7;
+    }
+
+    public void setComplicationType7(String complicationType7) {
+        this.complicationType7 = complicationType7;
+    }
+
     public String getDiagnosticType() {
         return diagnosticType;
     }

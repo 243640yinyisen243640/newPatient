@@ -176,8 +176,8 @@ public class UserDataManager {
      * APP-合并症修改
      *
      * @param patientId
-     * @param diseaseType
-     * @param diagnosticType
+     * @param diagnosticType 诊断类型1主要 2其他
+     * @param diseaseType 疾病类型
      * @param complicationType
      * @param level
      * @param complicationDate
@@ -185,7 +185,7 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> editDiseasePlus(String patientId, String diseaseType, String diagnosticType, String complicationType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> editDiseasePlus(String patientId,String diagnosticType, String diseaseType,  String complicationType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("diagnosticType", diagnosticType);
@@ -270,15 +270,11 @@ public class UserDataManager {
      * APP-查询合并症是否存在
      *
      * @param patientId
-     * @param successCallBack
-     * @param failureCallBack
      * @return
      */
-    public static Call<String> lookDiseasePlus(String patientId, String diagnosticType, String diseaseType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> lookDiseasePlus(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
-        map.put("diagnosticType", diagnosticType);
-        map.put("diseaseType", diseaseType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DiseaseInfo.class, "system/patient/complication/isExists", map, successCallBack, failureCallBack);
     }
 
