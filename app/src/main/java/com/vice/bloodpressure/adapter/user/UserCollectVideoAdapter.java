@@ -53,7 +53,7 @@ public class UserCollectVideoAdapter extends RecyclerView.Adapter<UserCollectVid
         int width = (ScreenUtils.screenWidth(context) - DensityUtils.dip2px(context, 55)) / 2;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, width / 2);
         holder.coverImageView.setLayoutParams(ll);
-        XyImageUtils.loadRoundImage(context, R.drawable.default_img_1_1, info.getImplMealPic(), holder.coverImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.shape_defaultbackground_5, info.getImplMealPic(), holder.coverImageView);
         holder.nameTextView.setText(info.getImplDashName());
         clickOnClick clickListener = new clickOnClick(position);
         holder.clickLinearLayout.setOnClickListener(clickListener);
