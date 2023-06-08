@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -186,6 +185,10 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
         String pwd = passwordEditText.getText().toString().trim();
         if (TextUtils.isEmpty(pwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
+            return;
+        }
+        if (!agreeTextView.isSelected()) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请先同意隐私政策和用户协议");
             return;
         }
         Call<String> requestCall = LoginDataManager.userLoginForPwd(phone, pwd, (call, response) -> {

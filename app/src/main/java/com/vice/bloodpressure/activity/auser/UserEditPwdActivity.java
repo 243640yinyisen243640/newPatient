@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.auser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -11,9 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -64,18 +70,35 @@ public class UserEditPwdActivity extends UIBaseActivity implements View.OnClickL
         if (TextUtils.isEmpty(beforePwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入原有密码");
             return;
-        } String pwd = beforeEditText.getText().toString().trim();
+        }
+        String pwd = passwordEditText.getText().toString().trim();
         if (TextUtils.isEmpty(pwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入新密码");
             return;
         }
-        String pwdAgain = beforeEditText.getText().toString().trim();
+        String pwdAgain = passwordAgainEditText.getText().toString().trim();
         if (TextUtils.isEmpty(pwdAgain)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请再次输入新密码");
             return;
         }
 
-        String deviceToken = UserInfoUtils.getClientID(getPageContext());
+        if (!pwd.equals(pwdAgain)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "两次输入的密码不一致");
+            return;
+        }
+
+        Call<String> requestCall = UserDataManager.editLoginPwd(UserInfoUtils.getUserID(getPageContext()), beforePwd, pwd, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                Intent mainIntent = new Intent(getPageContext(), LoginActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainIntent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("editLoginPwd", requestCall);
 
     }
 

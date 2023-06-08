@@ -9,9 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -53,13 +60,32 @@ public class UserAccountSafeActivity extends UIBaseActivity implements View.OnCl
             case R.id.ll_user_account_off:
                 DialogUtils.showOperDialog(getPageContext(), "", "确定要注销吗？", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.NEGATIVE == which) {
-                        dialog.dismiss();
+                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                        sureToOffAccount();
                     }
                 });
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 注销
+     */
+    private void sureToOffAccount() {
+        Call<String> requestCall = UserDataManager.offAccount((call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                UserInfoUtils.outlog(getPageContext(), null, null);
+                Intent mainIntent = new Intent(getPageContext(), LoginActivity.class);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(mainIntent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("offAccount", requestCall);
     }
 }

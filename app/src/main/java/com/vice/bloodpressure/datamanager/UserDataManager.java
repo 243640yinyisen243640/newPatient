@@ -176,8 +176,8 @@ public class UserDataManager {
      * APP-合并症修改
      *
      * @param patientId
-     * @param diagnosticType 诊断类型1主要 2其他
-     * @param diseaseType 疾病类型
+     * @param diagnosticType   诊断类型1主要 2其他
+     * @param diseaseType      疾病类型
      * @param complicationType
      * @param level
      * @param complicationDate
@@ -185,7 +185,7 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> editDiseasePlus(String patientId,String diagnosticType, String diseaseType,  String complicationType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> editDiseasePlus(String patientId, String diagnosticType, String diseaseType, String complicationType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("diagnosticType", diagnosticType);
@@ -383,12 +383,41 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getCollectMealList(String patientId, String collectType, String pageNum, String pageSize,  BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getCollectMealList(String patientId, String collectType, String pageNum, String pageSize, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("collectType", collectType);
         map.put("pageNum", pageNum);
         map.put("pageSize", pageSize);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 注销
+     *
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> offAccount(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, null, "auth/logoff", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 修改登录密码
+     * @param userId
+     * @param password
+     * @param newPassword
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> editLoginPwd(String userId,String password,String newPassword,BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("password", password);
+        map.put("newPassword", newPassword);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, null, "system/user/updatePassword", map, successCallBack, failureCallBack);
     }
 }
