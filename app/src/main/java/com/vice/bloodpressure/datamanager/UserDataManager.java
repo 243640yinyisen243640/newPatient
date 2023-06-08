@@ -406,6 +406,7 @@ public class UserDataManager {
 
     /**
      * 修改登录密码
+     *
      * @param userId
      * @param password
      * @param newPassword
@@ -413,11 +414,11 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> editLoginPwd(String userId,String password,String newPassword,BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> editLoginPwd(String userId, String password, String newPassword, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
         map.put("password", password);
         map.put("newPassword", newPassword);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, null, "system/user/updatePassword", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/user/updatePassword", map, successCallBack, failureCallBack);
     }
 }
