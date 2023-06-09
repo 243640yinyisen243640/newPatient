@@ -438,12 +438,16 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         String diseaseRisk = "";
         String diseaseChildType = "";
         if ("1".equals(checkId)) {
+            diseaseRisk="";
             diseaseChildType = tangTypeAdapter.getClickPosition() + 1 + "";
-        } else {
+        } else if ("2".equals(checkId)){
             diseaseRisk = yaLevelList.get(levelAdapter.getClickPosition()).getId();
             diseaseChildType = yaTypeAdapter.getClickPosition() + 1 + "";
+        }else {
+            diseaseRisk = "";
+            diseaseChildType = "";
         }
-        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, checkId, diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()),checkId,diagnosticType,  diseaseChildType, diseaseRisk, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);

@@ -88,7 +88,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                 switch (view.getId()) {
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
-                        intent.putExtra("type", "1");
+                        intent.putExtra("diagnosticType", "1");
                         intent.putExtra("isAdd", "2");
                         intent.putExtra("diseaseType", userInfo.getMainDiagnosis().get(position).getDiseaseType());
                         intent.putExtra("diagnosticType", userInfo.getMainDiagnosis().get(position).getDiagnosticType());
@@ -108,7 +108,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
                     case R.id.ll_disease_click:
                         Intent intent = new Intent(getPageContext(), UserIllOtherActivity.class);
                         intent.putExtra("isAdd", "2");
-                        intent.putExtra("type", "2");
+                        intent.putExtra("diagnosticType", "2");
                         intent.putExtra("diseaseType", userInfo.getOtherDiagnosis().get(position).getDiseaseType());
                         intent.putExtra("diagnosticType", userInfo.getOtherDiagnosis().get(position).getDiagnosticType());
                         startActivityForResult(intent, REQUEST_CODE_FOR_ILL_REFRESH);

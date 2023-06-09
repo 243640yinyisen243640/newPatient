@@ -128,8 +128,8 @@ public class UserDataManager {
      * APP-添加主要诊断疾病/其他诊断
      *
      * @param patientId
-     * @param diseaseType      诊断类型:1->主要诊断;2->其他诊断
-     * @param diagnosticType   疾病类型
+     * @param diseaseType      疾病类型
+     * @param diagnosticType   疾病类型 诊断类型:1->主要诊断;2->其他诊断
      * @param diseaseChildType 疾病等级
      * @param diseaseRisk      高血压程度
      * @param diagnoseDate     诊断日期

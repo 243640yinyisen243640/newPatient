@@ -19,12 +19,19 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.ProvinceInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -59,14 +66,18 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
      */
     private TextView cityTextView;
 
-    private String startTime="";
+    private String startTime = "";
+
+    private List<ProvinceInfo> provinceList;
+
+    private String provinceID = "-1";
+    private String cityID = "-1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
-//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         initListener();
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
@@ -139,9 +150,13 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                 finish();
                 break;
             case R.id.ll_out_hos_province:
-
+                getProvinceList();
                 break;
             case R.id.ll_out_hos_city:
+                if ("-1".equals(provinceID)) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择省份");
+                    return;
+                }
 
 
                 break;
@@ -149,6 +164,37 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
             default:
                 break;
         }
+    }
+
+    private void getProvinceList() {
+        Call<String> requestCall = OutDataManager.getProvinceList((call, response) -> {
+            if ("0000".equals(response.code)) {
+                provinceList = (List<ProvinceInfo>) response.object;
+                List<String> list = new ArrayList<>();
+                if (provinceList != null && provinceList.size() > 0) {
+                    for (int i = 0; i < provinceList.size(); i++) {
+                        String typeName = provinceList.get(i).getProvinceName();
+                        list.add(typeName);
+                    }
+                }
+                chooseTypeWindow(list);
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getProvinceList", requestCall);
+    }
+
+    /**
+     * 选择品牌名称
+     */
+    private void chooseTypeWindow(List<String> stringList) {
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择省份", stringList, object -> {
+            provinceID = provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
+            provinceTv.setText(provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
+        });
     }
 
 }
