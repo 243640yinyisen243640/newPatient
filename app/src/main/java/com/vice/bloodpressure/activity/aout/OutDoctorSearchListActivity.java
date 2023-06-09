@@ -39,7 +39,6 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<H
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
-//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
@@ -64,11 +63,7 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<H
 
     @Override
     protected void getListData(CallBack callBack) {
-        List<HospitalInfo> list = new ArrayList<>();
-        list.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "张蕙兰", "副院长", "中华医学会血液学分会青年委员，省医学会血液学分会秘书。199...年毕...", "内分泌科", ""));
-        list.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "冯超杰", "主治医师", "中华医学会血液学分会青年委员，省医学会血液学分会秘书。199...年毕...", "高血压教育门诊", ""));
-        list.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "刘文文", "主任医师", "暂无", "泌尿科", ""));
-        callBack.callBack(list);
+          callBack.callBack(new ArrayList<>());
     }
 
     @Override

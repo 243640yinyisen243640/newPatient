@@ -69,6 +69,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     private String startTime = "";
 
     private List<ProvinceInfo> provinceList;
+    private List<ProvinceInfo> cityList;
 
     private String provinceID = "-1";
     private String cityID = "-1";
@@ -108,12 +109,14 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "河南省人民医院", "郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教...、科研、预防、保健、康复为一体的综合性", "郑州市金水区东十里铺社区", "三甲医院"));
-        listText.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "郑州大学第一附属医院", "郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教...、科研、预防、保健、康复为一体的综合性", "郑州市金水区东十里铺社区", "三甲医院"));
-        listText.add(new HospitalInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "河南省肿瘤医院", "郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教...、科研、预防、保健、康复为一体的综合性", "郑州市金水区东十里铺社区", "三甲医院"));
-
-        //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
-        callBack.callBack(listText);
+        Call<String> requestCall = OutDataManager.gethospitalList(provinceID, cityID, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("gethospitalList", requestCall);
     }
 
     @Override
@@ -157,7 +160,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                     ToastUtils.getInstance().showToast(getPageContext(), "请先选择省份");
                     return;
                 }
-
+                getCityList();
 
                 break;
 
@@ -166,6 +169,9 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
         }
     }
 
+    /**
+     * 获取省份的
+     */
     private void getProvinceList() {
         Call<String> requestCall = OutDataManager.getProvinceList((call, response) -> {
             if ("0000".equals(response.code)) {
@@ -177,7 +183,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                         list.add(typeName);
                     }
                 }
-                chooseTypeWindow(list);
+                chooseTypeWindow(list, "选择省份");
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
@@ -188,12 +194,42 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     }
 
     /**
+     * 获取省份的
+     */
+    private void getCityList() {
+        Call<String> requestCall = OutDataManager.getCityList(provinceID, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                cityList = (List<ProvinceInfo>) response.object;
+                List<String> list = new ArrayList<>();
+                if (cityList != null && cityList.size() > 0) {
+                    for (int i = 0; i < cityList.size(); i++) {
+                        String typeName = cityList.get(i).getProvinceName();
+                        list.add(typeName);
+                    }
+                }
+                chooseTypeWindow(list, "选择城市");
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getCityList", requestCall);
+    }
+
+    /**
      * 选择品牌名称
      */
-    private void chooseTypeWindow(List<String> stringList) {
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "选择省份", stringList, object -> {
-            provinceID = provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
-            provinceTv.setText(provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
+    private void chooseTypeWindow(List<String> stringList, String title) {
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), title, stringList, object -> {
+            if ("选择省份".equals(title)) {
+                provinceID = provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
+                provinceTv.setText(provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
+            } else {
+                cityID = cityList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
+                cityTextView.setText(cityList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
+            }
+
         });
     }
 

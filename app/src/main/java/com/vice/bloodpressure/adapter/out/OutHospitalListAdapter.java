@@ -48,11 +48,11 @@ public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HospitalInfo info = list.get(position);
-        XyImageUtils.loadRoundImage(context, R.drawable.diet_guogai_gray, info.getImg(), holder.coverImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.diet_guogai_gray, info.getLogo(), holder.coverImageView);
         holder.nameTextView.setText(info.getName());
-        holder.introduceTextView.setText(info.getIntroduce());
-        holder.locationTextView.setText(info.getLocation());
-        holder.levelTextView.setText(info.getLevel());
+        holder.introduceTextView.setText(info.getIntroduction());
+        holder.locationTextView.setText(info.getDetailedAddress());
+        holder.levelTextView.setText(info.getCategory());
         DoctorInfoOnClick click = new DoctorInfoOnClick(position);
         holder.clickLinearLayout.setOnClickListener(click);
     }

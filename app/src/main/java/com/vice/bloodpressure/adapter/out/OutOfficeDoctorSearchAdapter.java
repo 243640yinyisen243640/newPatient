@@ -53,7 +53,7 @@ public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOffice
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HospitalInfo info = list.get(position);
-        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getDoctorImg(), holder.headImageView);
+        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getLogo(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
         holder.postTextView.setText(info.getDoctorPost());
         holder.officeTextView.setText(info.getOffice());

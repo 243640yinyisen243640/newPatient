@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.List;
@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeDoctorRightAdapter.ViewHolder> {
     private Context context;
-    private List<HospitalInfo> list;
+    private List<DoctorInfo> list;
 
     private IAdapterViewClickListener clickListener;
 
 
-    public OutOfficeDoctorRightAdapter(Context context, List<HospitalInfo> list,  IAdapterViewClickListener clickListener) {
+    public OutOfficeDoctorRightAdapter(Context context, List<DoctorInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -52,16 +52,16 @@ public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeD
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HospitalInfo info = list.get(position);
-        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getDoctorImg(), holder.headImageView);
+        DoctorInfo info = list.get(position);
+        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getAvatar(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
-        holder.postTextView.setText(info.getDoctorPost());
+        holder.postTextView.setText(info.getDeptName());
 
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("简介：");
         int length1 = builder.length();
-        builder.append(info.getDoctorIntroduce());
+        builder.append(info.getProfile());
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#3A3939")), 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         holder.introduceTextView.setText(builder);
         DoctorInfoOnClick expandOnClick = new DoctorInfoOnClick(position);

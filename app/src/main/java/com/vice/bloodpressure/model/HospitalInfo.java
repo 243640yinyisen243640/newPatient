@@ -9,48 +9,53 @@ import java.io.Serializable;
  * 描述:
  */
 public class HospitalInfo implements Serializable {
-    private String img;
-    private String name;
-    private String introduce;
-    private String location;
-    private String level;
     private String office;
 
     private String isCheck;
 
-    private String doctorImg;
     private String doctorName;
     private String doctorPost;
     private String doctorIntroduce;
 
-    public HospitalInfo(String doctorImg, String doctorName, String doctorPost, String doctorIntroduce, String office, String isCheck) {
-        this.doctorImg = doctorImg;
-        this.doctorName = doctorName;
-        this.doctorPost = doctorPost;
-        this.doctorIntroduce = doctorIntroduce;
-        this.office = office;
-    }
+    /**
+     * 医院图标
+     */
+    private String logo;
+    /**
+     * 医院名称
+     */
+    private String name;
+    /**
+     * 简写
+     */
+    private String shortName;
+    /**
+     * 等级  三甲
+     */
+    private String category;
+    /**
+     * 地址
+     */
+    private String detailedAddress;
+    /**
+     * 简介
+     */
+    private String introduction;
+
 
     public HospitalInfo(String office, String isCheck) {
         this.office = office;
         this.isCheck = isCheck;
     }
 
-    public HospitalInfo(String img, String name, String introduce, String location, String level) {
-        this.img = img;
-        this.name = name;
-        this.introduce = introduce;
-        this.location = location;
-        this.level = level;
+    public String getLogo() {
+        return logo;
     }
 
-    public String getDoctorImg() {
-        return doctorImg;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
-    public void setDoctorImg(String doctorImg) {
-        this.doctorImg = doctorImg;
-    }
 
     public String getDoctorName() {
         return doctorName;
@@ -92,13 +97,6 @@ public class HospitalInfo implements Serializable {
         this.office = office;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 
     public String getName() {
         return name;
@@ -108,27 +106,36 @@ public class HospitalInfo implements Serializable {
         this.name = name;
     }
 
-    public String getIntroduce() {
-        return introduce;
+
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setIntroduce(String introduce) {
-        this.introduce = introduce;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCategory() {
+        return category;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getLevel() {
-        return level;
+    public String getDetailedAddress() {
+        return detailedAddress;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }
