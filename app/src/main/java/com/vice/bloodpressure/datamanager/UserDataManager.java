@@ -201,18 +201,18 @@ public class UserDataManager {
      *
      * @param patientId
      * @param complicationType 并发症类型
-     * @param diseaseChildType
+     * @param complicationName
      * @param level            患病程度
      * @param complicationDate 并发症确诊日期
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> putDiseasePlus(String patientId, String complicationType, String diseaseChildType, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> putDiseasePlus(String patientId, String complicationType, String complicationName, String level, String complicationDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("complicationType", complicationType);
-        map.put("diseaseChildType", diseaseChildType);
+        map.put("complicationName", complicationName);
         map.put("level", level);
         map.put("complicationDate", complicationDate);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/patient/complication/add", map, successCallBack, failureCallBack);
