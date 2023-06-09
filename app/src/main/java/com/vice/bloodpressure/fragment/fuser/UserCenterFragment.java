@@ -159,12 +159,15 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         } else {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
         }
-        if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {
+
+        if (userInfo.getDiabetesType() != null && userInfo.getHypertensionType() != null) {
             illTextView.setText("主要诊断：" + userInfo.getDiabetesType() + " | " + userInfo.getHypertensionType());
-        } else if (TextUtils.isEmpty(userInfo.getDiabetesType())) {
+        } else if (userInfo.getDiabetesType() != null) {
+            illTextView.setText("主要诊断：" + userInfo.getDiabetesType());
+        } else if (userInfo.getHypertensionType() != null) {
             illTextView.setText("主要诊断：" + userInfo.getHypertensionType());
         } else {
-            illTextView.setText("主要诊断：" + userInfo.getDiabetesType());
+            illTextView.setVisibility(View.GONE);
         }
 
         //        //待付款
