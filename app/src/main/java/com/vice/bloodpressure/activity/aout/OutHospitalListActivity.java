@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,8 +72,8 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     private List<ProvinceInfo> provinceList;
     private List<ProvinceInfo> cityList;
 
-    private String provinceID = "-1";
-    private String cityID = "-1";
+    private String provinceID = "";
+    private String cityID = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,24 +89,6 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
 
     }
 
-    private void initListener() {
-        backIm.setOnClickListener(this);
-        searchEditText.setOnClickListener(this);
-        provinceLinearLayout.setOnClickListener(this);
-        provinceTv.setOnClickListener(this);
-        cityLinearLayout.setOnClickListener(this);
-    }
-
-    private View initTopView() {
-        View topView = View.inflate(getPageContext(), R.layout.include_out_hospital_list_top, null);
-        backIm = topView.findViewById(R.id.iv_out_hos_back);
-        searchEditText = topView.findViewById(R.id.et_out_hos_search);
-        provinceLinearLayout = topView.findViewById(R.id.ll_out_hos_province);
-        provinceTv = topView.findViewById(R.id.tv_out_hos_province);
-        cityLinearLayout = topView.findViewById(R.id.ll_out_hos_city);
-        cityTextView = topView.findViewById(R.id.tv_out_hos_city);
-        return topView;
-    }
 
     @Override
     protected void getListData(CallBack callBack) {
@@ -156,7 +139,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                 getProvinceList();
                 break;
             case R.id.ll_out_hos_city:
-                if ("-1".equals(provinceID)) {
+                if (TextUtils.isEmpty(provinceID)) {
                     ToastUtils.getInstance().showToast(getPageContext(), "请先选择省份");
                     return;
                 }
@@ -233,4 +216,22 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
         });
     }
 
+    private void initListener() {
+        backIm.setOnClickListener(this);
+        searchEditText.setOnClickListener(this);
+        provinceLinearLayout.setOnClickListener(this);
+        provinceTv.setOnClickListener(this);
+        cityLinearLayout.setOnClickListener(this);
+    }
+
+    private View initTopView() {
+        View topView = View.inflate(getPageContext(), R.layout.include_out_hospital_list_top, null);
+        backIm = topView.findViewById(R.id.iv_out_hos_back);
+        searchEditText = topView.findViewById(R.id.et_out_hos_search);
+        provinceLinearLayout = topView.findViewById(R.id.ll_out_hos_province);
+        provinceTv = topView.findViewById(R.id.tv_out_hos_province);
+        cityLinearLayout = topView.findViewById(R.id.ll_out_hos_city);
+        cityTextView = topView.findViewById(R.id.tv_out_hos_city);
+        return topView;
+    }
 }
