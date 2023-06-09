@@ -270,9 +270,14 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 break;
             //我的医生
             case R.id.tv_user_center_doctor:
-                intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                intent.putExtra("type", "1");
-                startActivity(intent);
+                if (!TextUtils.isEmpty(UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+                    intent = new Intent(getPageContext(), UserDoctorActivity.class);
+                    intent.putExtra("type", "1");
+                    startActivity(intent);
+                } else {
+
+                }
+
                 break;
             //订单
             case R.id.ll_user_center_order:
