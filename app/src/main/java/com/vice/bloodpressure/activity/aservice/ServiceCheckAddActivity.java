@@ -239,7 +239,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
             if ("0000".equals(response.code)) {
                 GalleryInfo galleryInfo = (GalleryInfo) response.object;
                 String imgString = "";
-                imgString = galleryInfo.getName();
+                imgString = galleryInfo.getUrl();
 
                 commentSure(content, imgString);
             }
@@ -253,11 +253,10 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
     private void commentSure(String content, String commentImgStr) {
         Call<String> requestCall = ServiceDataManager.checkAdd(UserInfoUtils.getArchivesId(getPageContext()), "2", content, commentImgStr, addTime, (call, response) ->
         {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
                 finish();
-            } else {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
 
         }, (call, throwable) -> {
