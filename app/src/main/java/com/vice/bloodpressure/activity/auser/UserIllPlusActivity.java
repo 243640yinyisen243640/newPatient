@@ -223,12 +223,9 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
         if ("1".equals(editDataInfo.getComplicationType())) {
             typeTextView.setVisibility(View.VISIBLE);
             typeGridView.setVisibility(View.VISIBLE);
+            adapter.setClickPosition(Integer.parseInt(editDataInfo.getLevel()) - 1);
 
         }
-        if ("1".equals(editDataInfo.getComplicationType())) {
-            levelList.get(Integer.parseInt(editDataInfo.getLevel()) - 1).setCheck(true);
-        }
-
         timeTv.setText(editDataInfo.getComplicationDate());
     }
 
