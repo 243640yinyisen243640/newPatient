@@ -17,17 +17,21 @@ import com.vice.bloodpressure.adapter.out.OutOfficeDoctorLeftAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.fragment.fout.OutOfficeDoctorListFragment;
 import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+
 /**
  * 作者: beauty
  * 类名:
- * 传参:
- * 描述:
+ * 传参:hospitalId  医生id
+ * 描述:科室医生列表
  */
 public class OutOfficeActivity extends UIBaseLoadActivity {
 
@@ -41,20 +45,87 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
     private TextView levelTextView;
     private ViewPager2 viewPager;
 
-    private List<HospitalInfo> officeInfos;
-
 
     private List<Fragment> fragments;
+    /**
+     * 医生id
+     */
+    private String hospitalId = "";
+
+
+    private String deptId = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("科室医生列表");
-        topViewManager().lineViewVisibility(View.VISIBLE);
+        hospitalId = getIntent().getStringExtra("hospitalId");
         initView();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = OutDataManager.getDeptList(hospitalId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                HospitalInfo hospitalInfo = (HospitalInfo) response.object;
+                deptId = hospitalInfo.getDeptAppVoList().get(0).getDeptId();
+                bindData(hospitalInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getDeptList", requestCall);
+    }
+
+    private void bindData(HospitalInfo hospitalInfo) {
+        XyImageUtils.loadRoundImage(getPageContext(), R.drawable.out_hospital_default, hospitalInfo.getLogo(), headImageView);
+        nameTextView.setText(hospitalInfo.getHospitalName());
+        introduceTextView.setText(hospitalInfo.getIntroduction());
+        locationTextView.setText(hospitalInfo.getDetailedAddress());
+        if (hospitalInfo.getCategory() == null) {
+            levelTextView.setVisibility(View.GONE);
+        } else {
+            levelTextView.setText(hospitalInfo.getCategory());
+        }
+
+        fragments = new ArrayList<>();
+        for (int i = 0; i < hospitalInfo.getDeptAppVoList().size(); i++) {
+            fragments.add(OutOfficeDoctorListFragment.newInstance(deptId));
+        }
+        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments) {
+        });
+        hospitalInfo.getDeptAppVoList().get(0).setIsCheck("1");
+        viewPager.setCurrentItem(0);//默认选中项
+        viewPager.setOffscreenPageLimit(fragments.size());
+
+
+        OutOfficeDoctorLeftAdapter leftAdapter = new OutOfficeDoctorLeftAdapter(getPageContext(), hospitalInfo.getDeptAppVoList());
+        leftListView.setAdapter(leftAdapter);
+
+        leftListView.setOnItemClickListener((parent, view, position, id) -> {
+            viewPager.setCurrentItem(position);
+            deptId = hospitalInfo.getDeptAppVoList().get(position).getDeptId();
+            OutOfficeDoctorListFragment fragment = (OutOfficeDoctorListFragment) fragments.get(position);
+            fragment.setDeptIdRefresh(deptId);
+            //初始化
+            for (int i = 0; i < hospitalInfo.getDeptAppVoList().size(); i++) {
+                if (position == i) {
+                    hospitalInfo.getDeptAppVoList().get(i).setIsCheck("1");
+
+                } else {
+                    hospitalInfo.getDeptAppVoList().get(i).setIsCheck("0");
+                }
+            }
+            leftAdapter.notifyDataSetChanged();
+
+        });
+    }
+
 
     private void initListener() {
         searchTextView.setOnClickListener(v -> {
@@ -81,48 +152,6 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
         leftListView = getViewByID(view, R.id.lv_office_first);
         viewPager = getViewByID(view, R.id.vp_office_second);
         containerView().addView(view);
-    }
-
-
-    @Override
-    protected void onPageLoad() {
-        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-
-        officeInfos = new ArrayList<>();
-        officeInfos.add(new HospitalInfo("泌尿科", "0"));
-        officeInfos.add(new HospitalInfo("内科", "0"));
-        officeInfos.add(new HospitalInfo("外科", "0"));
-        officeInfos.add(new HospitalInfo("护理科", "0"));
-
-        fragments = new ArrayList<>();
-        for (int i = 0; i < officeInfos.size(); i++) {
-            fragments.add(OutOfficeDoctorListFragment.newInstance(i + ""));
-        }
-        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments) {
-        });
-        officeInfos.get(0).setIsCheck("1");
-        viewPager.setCurrentItem(0);//默认选中项
-        viewPager.setOffscreenPageLimit(fragments.size());
-
-
-        OutOfficeDoctorLeftAdapter leftAdapter = new OutOfficeDoctorLeftAdapter(getPageContext(), officeInfos);
-        leftListView.setAdapter(leftAdapter);
-
-        leftListView.setOnItemClickListener((parent, view, position, id) -> {
-            viewPager.setCurrentItem(position);
-
-            //初始化
-            for (int i = 0; i < officeInfos.size(); i++) {
-                if (position == i) {
-                    officeInfos.get(i).setIsCheck("1");
-                } else {
-                    officeInfos.get(i).setIsCheck("0");
-                }
-            }
-            leftAdapter.notifyDataSetChanged();
-
-        });
-
     }
 
 

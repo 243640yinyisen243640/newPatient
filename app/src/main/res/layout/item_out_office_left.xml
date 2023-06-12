@@ -6,10 +6,10 @@
 
     <TextView
         android:id="@+id/tv_out_office_name"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawablePadding="10dp"
-        android:gravity="center|left"
+        android:drawablePadding="7dp"
+        android:layout_gravity="center"
         android:maxLines="1"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"

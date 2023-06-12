@@ -1,6 +1,6 @@
 package com.vice.bloodpressure.model;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
  * 作者: beauty
@@ -8,44 +8,44 @@ import java.io.Serializable;
  * 传参:
  * 描述:
  */
-public class HospitalInfo implements Serializable {
-    private String office;
-
-    private String isCheck;
-
-    private String doctorName;
-    private String doctorPost;
-    private String doctorIntroduce;
-
-    /**
-     * 医院图标
-     */
-    private String logo;
+public class HospitalInfo {
+    private List<DoctorInfo> deptAppVoList;
     /**
      * 医院名称
      */
-    private String name;
+    private String hospitalName;
     /**
-     * 简写
+     * 医院头像
      */
-    private String shortName;
+    private String logo;
     /**
-     * 等级  三甲
+     * 医院简介
+     */
+    private String introduction;
+    /**
+     * 医院等级
      */
     private String category;
     /**
-     * 地址
+     * 医院地址
      */
     private String detailedAddress;
-    /**
-     * 简介
-     */
-    private String introduction;
 
 
-    public HospitalInfo(String office, String isCheck) {
-        this.office = office;
-        this.isCheck = isCheck;
+    public List<DoctorInfo> getDeptAppVoList() {
+        return deptAppVoList;
+    }
+
+    public void setDeptAppVoList(List<DoctorInfo> deptAppVoList) {
+        this.deptAppVoList = deptAppVoList;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getLogo() {
@@ -56,63 +56,12 @@ public class HospitalInfo implements Serializable {
         this.logo = logo;
     }
 
-
-    public String getDoctorName() {
-        return doctorName;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
-    public String getDoctorPost() {
-        return doctorPost;
-    }
-
-    public void setDoctorPost(String doctorPost) {
-        this.doctorPost = doctorPost;
-    }
-
-    public String getDoctorIntroduce() {
-        return doctorIntroduce;
-    }
-
-    public void setDoctorIntroduce(String doctorIntroduce) {
-        this.doctorIntroduce = doctorIntroduce;
-    }
-
-    public String getIsCheck() {
-        return isCheck;
-    }
-
-    public void setIsCheck(String isCheck) {
-        this.isCheck = isCheck;
-    }
-
-    public String getOffice() {
-        return office;
-    }
-
-    public void setOffice(String office) {
-        this.office = office;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public String getCategory() {
@@ -129,13 +78,5 @@ public class HospitalInfo implements Serializable {
 
     public void setDetailedAddress(String detailedAddress) {
         this.detailedAddress = detailedAddress;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
     }
 }

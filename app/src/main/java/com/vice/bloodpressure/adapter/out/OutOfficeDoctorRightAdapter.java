@@ -57,13 +57,16 @@ public class OutOfficeDoctorRightAdapter extends RecyclerView.Adapter<OutOfficeD
         holder.nameTextView.setText(info.getDoctorName());
         holder.postTextView.setText(info.getDeptName());
 
+        if (info.getProfile()!=null){
+            SpannableStringBuilder builder = new SpannableStringBuilder();
+            builder.append("简介：");
+            int length1 = builder.length();
 
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append("简介：");
-        int length1 = builder.length();
-        builder.append(info.getProfile());
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#3A3939")), 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        holder.introduceTextView.setText(builder);
+            builder.append(info.getProfile());
+            builder.setSpan(new ForegroundColorSpan(Color.parseColor("#3A3939")), 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            holder.introduceTextView.setText(builder);
+        }
+
         DoctorInfoOnClick expandOnClick = new DoctorInfoOnClick(position);
         holder.clickLinearLayout.setOnClickListener(expandOnClick);
     }

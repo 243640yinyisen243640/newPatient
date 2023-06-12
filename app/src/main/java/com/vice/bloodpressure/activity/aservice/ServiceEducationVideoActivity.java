@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgTopActivity;
@@ -55,7 +55,7 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), videoInfos, new IAdapterViewClickListener() {
+        return new UserCollectVideoAdapter(getPageContext(), videoInfos, new IAdapterViewClickOneListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
@@ -67,11 +67,6 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
                         break;
 
                 }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
-
             }
         });
     }

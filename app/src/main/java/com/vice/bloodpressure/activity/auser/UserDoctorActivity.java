@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
@@ -37,12 +38,19 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
      * 1:我的医生  2：其他医生
      */
     private String type;
+    /**
+     * 医生id
+     */
+    private String doctorId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("我的医生");
         type = getIntent().getStringExtra("type");
+        if ("2".equals(type)) {
+            doctorId = getIntent().getStringExtra("doctorId");
+        }
         initView();
         initlistener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -77,18 +85,33 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = UserDataManager.getSelectDoctorInfo(UserInfoUtils.getArchivesId(getPageContext()),(call, response) -> {
-            if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                DoctorInfo doctorInfo = (DoctorInfo) response.object;
-                bindData(doctorInfo);
-            } else {
+        if ("1".equals(type)) {
+            Call<String> requestCall = UserDataManager.getSelectDoctorInfo(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+                if ("0000".equals(response.code)) {
+                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                    DoctorInfo doctorInfo = (DoctorInfo) response.object;
+                    bindData(doctorInfo);
+                } else {
+                    loadViewManager().changeLoadState(LoadStatus.FAILED);
+                }
+            }, (call, t) -> {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-        });
-        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+            });
+            addRequestCallToMap("getSelectDoctorInfo", requestCall);
+        } else {
+            Call<String> requestCall = OutDataManager.getDeptDoctorInfo(doctorId, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+                if ("0000".equals(response.code)) {
+                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                    DoctorInfo doctorInfo = (DoctorInfo) response.object;
+                    bindData(doctorInfo);
+                } else {
+                    loadViewManager().changeLoadState(LoadStatus.FAILED);
+                }
+            }, (call, t) -> {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            });
+            addRequestCallToMap("getDeptDoctorInfo", requestCall);
+        }
     }
 
     private void bindData(DoctorInfo doctorInfo) {

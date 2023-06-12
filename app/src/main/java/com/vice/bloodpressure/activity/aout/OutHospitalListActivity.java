@@ -21,7 +21,7 @@ import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.model.ProvinceInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
@@ -39,7 +39,7 @@ import retrofit2.Call;
  * 传参:
  * 描述:医院列表
  */
-public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<HospitalInfo> implements View.OnClickListener {
+public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<DoctorInfo> implements View.OnClickListener {
     /**
      * 返回键
      */
@@ -100,11 +100,13 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<HospitalInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<DoctorInfo> list) {
         return new OutHospitalListAdapter(getPageContext(), list, (position, view) -> {
             switch (view.getId()) {
                 case R.id.ll_out_hos_click:
-                    startActivity(new Intent(getPageContext(), OutOfficeActivity.class));
+                    Intent intent = new Intent(getPageContext(), OutOfficeActivity.class);
+                    intent.putExtra("hospitalId", getPageListData().get(position).getId());
+                    startActivity(intent);
                     break;
 
                 default:
@@ -121,7 +123,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_home_warning_back:
+            case R.id.iv_out_hos_back:
                 finish();
                 break;
             case R.id.ll_out_hos_province:

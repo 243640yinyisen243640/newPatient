@@ -16,7 +16,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aservice.ServiceMedicineRemindAddActivity;
 import com.vice.bloodpressure.adapter.service.ServiceMedicineAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
@@ -110,7 +110,7 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
-        return new ServiceMedicineAdapter(getPageContext(), list, "2", new IAdapterViewClickListener() {
+        return new ServiceMedicineAdapter(getPageContext(), list, "2", new IAdapterViewClickOneListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 Intent intent;
@@ -138,11 +138,6 @@ public class ServiceMedicineRemindFragment extends UIBaseListRecycleViewForBgFra
                     default:
                         break;
                 }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
-
             }
         });
     }

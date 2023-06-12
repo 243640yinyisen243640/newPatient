@@ -15,12 +15,14 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -30,17 +32,23 @@ import java.util.List;
  */
 public class OutOfficeDoctorListFragment extends UIBaseListRecycleViewFragment<DoctorInfo> {
 
-    public static OutOfficeDoctorListFragment newInstance(String firstClassID) {
+    public static OutOfficeDoctorListFragment newInstance(String deptId) {
         Bundle bundle = new Bundle();
-        bundle.putString("firstClassID", firstClassID);
+        bundle.putString("deptId", deptId);
         OutOfficeDoctorListFragment fragment = new OutOfficeDoctorListFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
+    /**
+     * 科室id
+     */
+    private String deptId = "";
+
     @Override
     protected void onCreate() {
         super.onCreate();
+        deptId = getArguments().getString("deptId");
         getPageListView().setBackgroundColor(getResources().getColor(R.color.text_white));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
@@ -51,18 +59,26 @@ public class OutOfficeDoctorListFragment extends UIBaseListRecycleViewFragment<D
 
     @Override
     protected void getListData(CallBack callBack) {
-          callBack.callBack(new ArrayList<>());
+        Call<String> requestCall = OutDataManager.getDeptDoctorList("", "3", deptId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getDeptDoctorList", requestCall);
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<DoctorInfo> list) {
-        return new OutOfficeDoctorRightAdapter(getPageContext(), list,new IAdapterViewClickListener() {
+        return new OutOfficeDoctorRightAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
                     case R.id.ll_office_doctor_click:
                         Intent intent = new Intent(getPageContext(), UserDoctorActivity.class);
                         intent.putExtra("type", "2");
+                        intent.putExtra("doctorId", getPageListData().get(position).getId());
                         startActivity(intent);
                         break;
                     default:
@@ -81,5 +97,12 @@ public class OutOfficeDoctorListFragment extends UIBaseListRecycleViewFragment<D
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+
+    public void setDeptIdRefresh(String deptId) {
+        this.deptId = deptId;
+        setPageIndex(1);
+        onPageLoad();
     }
 }

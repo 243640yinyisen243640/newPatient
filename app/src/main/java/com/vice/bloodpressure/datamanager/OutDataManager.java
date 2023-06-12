@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.datamanager;
 
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.model.HospitalInfo;
 import com.vice.bloodpressure.model.ProvinceInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
@@ -44,11 +45,65 @@ public class OutDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ProvinceInfo.class, "system/area/getAreaCityApp", map, successCallBack, failureCallBack);
     }
 
-
-    public static Call<String> gethospitalList(String provinceId,String cityId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    /**
+     * 获取医院列表
+     *
+     * @param provinceId
+     * @param cityId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> gethospitalList(String provinceId, String cityId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("provinceId", provinceId);
         map.put("cityId", cityId);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, HospitalInfo.class, "system/hosp/v2/appHospitalList", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, DoctorInfo.class, "system/hosp/v2/appHospitalList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * APP-查询医院下所有科室
+     *
+     * @param hospitalId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDeptList(String hospitalId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("hospitalId", hospitalId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HospitalInfo.class, "system/dept/appListDept", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param name            医生名称
+     * @param roleId          角色ID   1主任2副主任3医生4护士
+     * @param deptId          科室ID
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDeptDoctorList(String name, String roleId, String deptId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", name);
+        map.put("roleId", roleId);
+        map.put("deptId", deptId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, DoctorInfo.class, "system/doctor/v2/appDoctorList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 院外管理获取医生详情
+     *
+     * @param doctorId
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDeptDoctorInfo(String doctorId, String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("doctorId", doctorId);
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DoctorInfo.class, "system/doctor/v2/appDoctor/detail", map, successCallBack, failureCallBack);
     }
 }

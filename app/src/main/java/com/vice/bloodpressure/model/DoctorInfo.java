@@ -60,6 +60,112 @@ public class DoctorInfo {
      */
     private String deptName;
 
+
+    private String isCheck;
+
+
+    private String doctorPost;
+    private String doctorIntroduce;
+
+    /**
+     * 医院图标
+     */
+    private String logo;
+    /**
+     * 医院名称
+     */
+    private String name;
+    /**
+     * 简写
+     */
+    private String shortName;
+    /**
+     * 等级  三甲
+     */
+    private String category;
+    /**
+     * 地址
+     */
+    private String detailedAddress;
+    /**
+     * 简介
+     */
+    private String introduction;
+
+
+
+    public String getIsCheck() {
+        return isCheck;
+    }
+
+    public void setIsCheck(String isCheck) {
+        this.isCheck = isCheck;
+    }
+
+    public String getDoctorPost() {
+        return doctorPost;
+    }
+
+    public void setDoctorPost(String doctorPost) {
+        this.doctorPost = doctorPost;
+    }
+
+    public String getDoctorIntroduce() {
+        return doctorIntroduce;
+    }
+
+    public void setDoctorIntroduce(String doctorIntroduce) {
+        this.doctorIntroduce = doctorIntroduce;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDetailedAddress() {
+        return detailedAddress;
+    }
+
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     public String getId() {
         return id;
     }

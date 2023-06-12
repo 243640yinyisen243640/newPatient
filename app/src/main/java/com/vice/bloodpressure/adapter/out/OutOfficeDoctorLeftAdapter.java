@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.DoctorInfo;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/2/28 17:09
  */
-public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<HospitalInfo> {
+public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<DoctorInfo> {
     private Context context;
 
-    public OutOfficeDoctorLeftAdapter(Context context, List<HospitalInfo> list) {
+    public OutOfficeDoctorLeftAdapter(Context context, List<DoctorInfo> list) {
         super(context, list);
         this.context = context;
     }
@@ -40,7 +40,7 @@ public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<HospitalInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        HospitalInfo educationInfo = getList().get(position);
+        DoctorInfo educationInfo = getList().get(position);
         if ("1".equals(educationInfo.getIsCheck())) {
             holder.typeTextView.setTextSize(16);
             holder.typeTextView.setTypeface(Typeface.DEFAULT_BOLD);
@@ -53,7 +53,7 @@ public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<HospitalInfo> {
             holder.typeTextView.setBackground(ContextCompat.getDrawable(context, R.color.defaultBackground));
             holder.typeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shape_tran_20_3_2, 0, 0, 0);
         }
-        holder.typeTextView.setText(educationInfo.getOffice());
+        holder.typeTextView.setText(educationInfo.getDeptName());
         return convertView;
     }
 

@@ -20,7 +20,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.List;
  * 传参:
  * 描述:医生搜索列表
  */
-public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<HospitalInfo> implements View.OnClickListener {
+public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<DoctorInfo> implements View.OnClickListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<H
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<HospitalInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<DoctorInfo> list) {
         return new OutOfficeDoctorSearchAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {

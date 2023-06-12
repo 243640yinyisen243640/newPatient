@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.List;
@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOfficeDoctorSearchAdapter.ViewHolder> {
     private Context context;
-    private List<HospitalInfo> list;
+    private List<DoctorInfo> list;
 
     private IAdapterViewClickListener clickListener;
 
 
-    public OutOfficeDoctorSearchAdapter(Context context, List<HospitalInfo> list, IAdapterViewClickListener clickListener) {
+    public OutOfficeDoctorSearchAdapter(Context context, List<DoctorInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -52,11 +52,11 @@ public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOffice
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HospitalInfo info = list.get(position);
+        DoctorInfo info = list.get(position);
         XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getLogo(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
         holder.postTextView.setText(info.getDoctorPost());
-        holder.officeTextView.setText(info.getOffice());
+        holder.officeTextView.setText(info.getDeptName());
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
         builder.append("简介：");
