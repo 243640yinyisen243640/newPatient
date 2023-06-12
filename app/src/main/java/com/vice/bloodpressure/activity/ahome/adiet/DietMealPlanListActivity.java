@@ -85,7 +85,6 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
     protected void onPageLoad() {
         Call<String> requestCall = HomeDataManager.getDietPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
-
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);

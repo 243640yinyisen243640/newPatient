@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
-import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,7 +10,6 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aservice.ServiceMakeMealDetailsActivity;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
@@ -61,22 +59,14 @@ public class UserCollectVideoFragment extends UIBaseListRecycleViewFragment<Vide
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), list, new IAdapterViewClickListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_user_collect_video_click:
-                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
-
-                }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
+        return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_user_collect_video_click:
+                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
 
             }
         });

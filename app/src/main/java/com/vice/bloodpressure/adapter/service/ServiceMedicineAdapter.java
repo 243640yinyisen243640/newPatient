@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
 
 import java.util.List;
@@ -24,11 +24,11 @@ import java.util.List;
 public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicineAdapter.ViewHolder> {
     private Context context;
     private List<HealthyDataChildInfo> list;
-    private IAdapterViewClickListener clickListener;
+    private IAdapterViewClickOneListener clickListener;
     private String type;
 
 
-    public ServiceMedicineAdapter(Context context, List<HealthyDataChildInfo> list, String type, IAdapterViewClickListener clickListener) {
+    public ServiceMedicineAdapter(Context context, List<HealthyDataChildInfo> list, String type, IAdapterViewClickOneListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;

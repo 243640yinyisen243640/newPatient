@@ -20,7 +20,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.DietMealDetailsThreeMealAdapter;
 import com.vice.bloodpressure.adapter.home.DietMealPlanWeekAdapter;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
@@ -144,25 +143,17 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
 
         mealInfo.getExclusiveDietPlanVos().get(0).setCheck(true);
         chanData(0);
-        weekAdapter = new DietMealPlanWeekAdapter(getPageContext(), mealInfo.getExclusiveDietPlanVos(), new IAdapterViewClickListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_diet_week_click:
-                        weekAdapter.setClickPosition(position);
-                        chanData(position);
-                        breakFastAdapter.notifyDataSetChanged();
-                        dinnerAdapter.notifyDataSetChanged();
-                        lunchAdapter.notifyDataSetChanged();
-                        break;
-                    default:
-                        break;
-
-                }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
+        weekAdapter = new DietMealPlanWeekAdapter(getPageContext(), mealInfo.getExclusiveDietPlanVos(), (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_diet_week_click:
+                    weekAdapter.setClickPosition(position);
+                    chanData(position);
+                    breakFastAdapter.notifyDataSetChanged();
+                    dinnerAdapter.notifyDataSetChanged();
+                    lunchAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
 
             }
         });

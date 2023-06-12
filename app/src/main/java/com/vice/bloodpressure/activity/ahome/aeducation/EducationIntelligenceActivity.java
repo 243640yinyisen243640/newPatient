@@ -79,7 +79,6 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         return adapter = new EducationIntelligenceAdapter(getPageContext(), list,"1", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
-                Log.i("yys", "click===");
                 //那个按钮的展示状态 0展开 1收起状态 2没有数据隐藏
                 switch (view.getId()) {
                     case R.id.ll_education_study_click:

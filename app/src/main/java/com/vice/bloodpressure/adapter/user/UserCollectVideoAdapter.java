@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.IClassInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
@@ -30,9 +30,9 @@ import java.util.List;
 public class UserCollectVideoAdapter extends RecyclerView.Adapter<UserCollectVideoAdapter.ViewHolder> {
     private Context context;
     private List<? extends IClassInfo> list;
-    private IAdapterViewClickListener clickListener;
+    private IAdapterViewClickOneListener clickListener;
 
-    public UserCollectVideoAdapter(Context context, List<? extends IClassInfo> list, IAdapterViewClickListener clickListener) {
+    public UserCollectVideoAdapter(Context context, List<? extends IClassInfo> list, IAdapterViewClickOneListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;

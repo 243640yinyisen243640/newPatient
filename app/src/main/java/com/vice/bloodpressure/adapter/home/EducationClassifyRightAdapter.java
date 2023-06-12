@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.EducationInfo;
 
 import java.util.List;
@@ -25,11 +25,11 @@ public class EducationClassifyRightAdapter extends RecyclerView.Adapter<Educatio
     private Context context;
     private List<EducationInfo> list;
 
-    private IAdapterViewClickListener clickListener;
+    private IAdapterViewClickOneListener clickListener;
 
     private EducationIntelligenceChildAdapter adapter;
 
-    public EducationClassifyRightAdapter(Context context, List<EducationInfo> list, IAdapterViewClickListener clickListener) {
+    public EducationClassifyRightAdapter(Context context, List<EducationInfo> list, IAdapterViewClickOneListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.HospitalInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
@@ -27,10 +27,10 @@ import java.util.List;
 public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalListAdapter.ViewHolder> {
     private Context context;
     private List<HospitalInfo> list;
-    private IAdapterViewClickListener clickListener;
+    private IAdapterViewClickOneListener clickListener;
 
 
-    public OutHospitalListAdapter(Context context, List<HospitalInfo> list, IAdapterViewClickListener clickListener) {
+    public OutHospitalListAdapter(Context context, List<HospitalInfo> list, IAdapterViewClickOneListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -52,7 +52,13 @@ public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalList
         holder.nameTextView.setText(info.getName());
         holder.introduceTextView.setText(info.getIntroduction());
         holder.locationTextView.setText(info.getDetailedAddress());
-        holder.levelTextView.setText(info.getCategory());
+        if (info.getCategory() == null) {
+            holder.levelTextView.setVisibility(View.GONE);
+        } else {
+            holder.levelTextView.setVisibility(View.VISIBLE);
+            holder.levelTextView.setText(info.getCategory());
+        }
+
         DoctorInfoOnClick click = new DoctorInfoOnClick(position);
         holder.clickLinearLayout.setOnClickListener(click);
     }

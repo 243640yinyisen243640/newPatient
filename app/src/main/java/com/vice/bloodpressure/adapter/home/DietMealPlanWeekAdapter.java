@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.MealSecondInfo;
 
 import java.util.List;
@@ -27,10 +27,10 @@ import java.util.List;
 public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWeekAdapter.ViewHolder> {
     private Context context;
     private List<MealSecondInfo> list;
-    private IAdapterViewClickListener clickListener;
+    private IAdapterViewClickOneListener clickListener;
     private int clickPosition = 0;
 
-    public DietMealPlanWeekAdapter(Context context, List<MealSecondInfo> list, IAdapterViewClickListener clickListener) {
+    public DietMealPlanWeekAdapter(Context context, List<MealSecondInfo> list, IAdapterViewClickOneListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;

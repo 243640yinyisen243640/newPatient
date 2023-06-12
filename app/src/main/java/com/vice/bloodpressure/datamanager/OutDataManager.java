@@ -41,7 +41,7 @@ public class OutDataManager {
     public static Call<String> getCityList(String provinceId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("provinceId", provinceId);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ProvinceInfo.class, "systemarea/getAreaCityApp", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ProvinceInfo.class, "system/area/getAreaCityApp", map, successCallBack, failureCallBack);
     }
 
 

@@ -20,7 +20,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationClassifyActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationInteCatalogueListActivity;
 import com.vice.bloodpressure.adapter.home.EducationClassifyRightAdapter;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
@@ -104,16 +104,10 @@ public class EducationClassifySecondFragment extends UIBaseLoadFragment {
         List<EducationInfo> childList = new ArrayList<>();
         childList.add(new EducationInfo("基础知识", ""));
         childList.add(new EducationInfo("异常指标", ""));
-        EducationClassifyRightAdapter rightAdapter = new EducationClassifyRightAdapter(getPageContext(), childList, new IAdapterViewClickListener() {
+        EducationClassifyRightAdapter rightAdapter = new EducationClassifyRightAdapter(getPageContext(), childList, new IAdapterViewClickOneListener() {
             @Override
             public void adapterClickListener(int position, View view) {
-                //跳转页面
                 startActivity(new Intent(getPageContext(), EducationInteCatalogueListActivity.class));
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
-
             }
         });
         mRecyclerView.setAdapter(rightAdapter);

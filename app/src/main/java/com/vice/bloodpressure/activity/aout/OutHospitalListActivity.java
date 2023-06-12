@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.out.OutHospitalListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
@@ -41,7 +40,6 @@ import retrofit2.Call;
  * 描述:医院列表
  */
 public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<HospitalInfo> implements View.OnClickListener {
-    private List<HospitalInfo> listText = new ArrayList<>();
     /**
      * 返回键
      */
@@ -67,7 +65,6 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
      */
     private TextView cityTextView;
 
-    private String startTime = "";
 
     private List<ProvinceInfo> provinceList;
     private List<ProvinceInfo> cityList;
@@ -104,22 +101,14 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<HospitalInfo> list) {
-        return new OutHospitalListAdapter(getPageContext(), list, new IAdapterViewClickListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_out_hos_click:
-                        startActivity(new Intent(getPageContext(), OutOfficeActivity.class));
-                        break;
+        return new OutHospitalListAdapter(getPageContext(), list, (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_out_hos_click:
+                    startActivity(new Intent(getPageContext(), OutOfficeActivity.class));
+                    break;
 
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void adapterClickListener(int position, int index, View view) {
-
+                default:
+                    break;
             }
         });
     }
@@ -177,7 +166,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
     }
 
     /**
-     * 获取省份的
+     * 获取省份下的城市
      */
     private void getCityList() {
         Call<String> requestCall = OutDataManager.getCityList(provinceID, (call, response) -> {
@@ -186,7 +175,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                 List<String> list = new ArrayList<>();
                 if (cityList != null && cityList.size() > 0) {
                     for (int i = 0; i < cityList.size(); i++) {
-                        String typeName = cityList.get(i).getProvinceName();
+                        String typeName = cityList.get(i).getCityName();
                         list.add(typeName);
                     }
                 }
@@ -209,18 +198,19 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Hospi
                 provinceID = provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
                 provinceTv.setText(provinceList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
             } else {
-                cityID = cityList.get(Integer.parseInt(String.valueOf(object))).getProvinceId();
-                cityTextView.setText(cityList.get(Integer.parseInt(String.valueOf(object))).getProvinceName());
+                cityID = cityList.get(Integer.parseInt(String.valueOf(object))).getCityId();
+                cityTextView.setText(cityList.get(Integer.parseInt(String.valueOf(object))).getCityName());
+                setPageIndex(1);
+                onPageLoad();
             }
 
         });
     }
 
+
     private void initListener() {
         backIm.setOnClickListener(this);
-        searchEditText.setOnClickListener(this);
         provinceLinearLayout.setOnClickListener(this);
-        provinceTv.setOnClickListener(this);
         cityLinearLayout.setOnClickListener(this);
     }
 
