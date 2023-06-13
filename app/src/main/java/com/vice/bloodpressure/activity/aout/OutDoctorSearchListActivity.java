@@ -19,12 +19,14 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -32,7 +34,8 @@ import java.util.List;
  * 传参:
  * 描述:医生搜索列表
  */
-public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<DoctorInfo> implements View.OnClickListener {
+public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<DoctorInfo> {
+    private String hospitalName = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,14 +59,24 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<D
         backImageView.setOnClickListener(v -> finish());
         String content = contentEditText.getText().toString().trim();
         searchTextView.setOnClickListener(v -> {
-
+            hospitalName = content;
+            setPageIndex(1);
+            onPageLoad();
         });
         return topView;
     }
 
     @Override
     protected void getListData(CallBack callBack) {
-          callBack.callBack(new ArrayList<>());
+        String deptId = getIntent().getStringExtra("deptId");
+        Call<String> requestCall = OutDataManager.getDeptDoctorList(hospitalName, "3", deptId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getDeptDoctorList", requestCall);
     }
 
     @Override
@@ -95,23 +108,5 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<D
         return BaseDataManager.PAGE_SIZE;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_home_warning_back:
-                finish();
-                break;
-            case R.id.ll_out_hos_province:
-
-                break;
-            case R.id.ll_out_hos_city:
-
-
-                break;
-
-            default:
-                break;
-        }
-    }
 
 }

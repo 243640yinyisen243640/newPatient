@@ -134,7 +134,9 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
 
     private void initListener() {
         searchTextView.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), OutDoctorSearchListActivity.class));
+            Intent intent = new Intent(getPageContext(), OutDoctorSearchListActivity.class);
+            intent.putExtra("deptId", deptId);
+            startActivity(intent);
         });
         hosClickLinearLayout.setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), OutHospitalInfoActivity.class));
