@@ -2,6 +2,8 @@ package com.vice.bloodpressure.activity.aout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.util.List;
 
@@ -57,9 +60,12 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<D
         EditText contentEditText = topView.findViewById(R.id.et_education_class_search);
         TextView searchTextView = topView.findViewById(R.id.tv_education_class_search_sure);
         backImageView.setOnClickListener(v -> finish());
-        String content = contentEditText.getText().toString().trim();
         searchTextView.setOnClickListener(v -> {
-            hospitalName = content;
+            if (TextUtils.isEmpty(contentEditText.getText().toString().trim())) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请输入关键字");
+                return;
+            }
+            hospitalName = contentEditText.getText().toString().trim();
             setPageIndex(1);
             onPageLoad();
         });

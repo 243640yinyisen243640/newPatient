@@ -72,7 +72,6 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_education_class_search_sure"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"

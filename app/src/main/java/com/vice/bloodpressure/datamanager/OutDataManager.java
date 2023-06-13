@@ -110,6 +110,7 @@ public class OutDataManager {
 
     /**
      * 解绑医生
+     *
      * @param doctorId
      * @param patientId
      * @param successCallBack
@@ -121,5 +122,21 @@ public class OutDataManager {
         map.put("doctorId", doctorId);
         map.put("patientId", patientId);
         return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/app/unbindExternal", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 绑定医生
+     *
+     * @param archivesId
+     * @param doctorId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> bindDoctor(String archivesId, String doctorId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("doctorId", doctorId);
+        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
     }
 }

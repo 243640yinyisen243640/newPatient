@@ -76,6 +76,10 @@ public class DoctorInfo {
      */
     private String name;
     /**
+     * 医院名称
+     */
+    private String hospitalName;
+    /**
      * 简写
      */
     private String shortName;
@@ -96,7 +100,13 @@ public class DoctorInfo {
      */
     private boolean bindExternal;
 
+    public String getHospitalName() {
+        return hospitalName;
+    }
 
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
 
     public String getIsCheck() {
         return isCheck;

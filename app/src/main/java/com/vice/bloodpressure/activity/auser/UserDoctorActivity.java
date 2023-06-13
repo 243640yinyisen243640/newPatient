@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.activity.auser;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +17,9 @@ import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
@@ -55,84 +56,41 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
 
     private TextView breakTextView;
 
-    /**
-     * 1:我的医生  2：其他医生
-     */
-    private String type;
-    /**
-     * 医生id
-     */
-    private String doctorId;
-    /**
-     * 医生详情的
-     */
-    private DoctorInfo doctorInfoOther;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        type = getIntent().getStringExtra("type");
-        if ("1".equals(type)) {
-            topViewManager().titleTextView().setText("我的医生");
-        } else {
-            topViewManager().titleTextView().setText("医生详情");
-            doctorId = getIntent().getStringExtra("doctorId");
-        }
+        topViewManager().titleTextView().setText("我的医生");
         initView();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
     private void initlistener() {
-        if ("1".equals(type)) {
-            breakTextView.setOnClickListener(v -> {
-                DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
-                    dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
-                        unBindDoctor();
-                    }
-                });
-            });
-        } else {
-            if (doctorInfoOther.isBindExternal()) {
-                DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
-                    dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
-                        unBindDoctor();
-                    }
-                });
-            } else {
-                if (!TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""))) {
-                    DialogUtils.showOperDialog(getPageContext(), "", "确认绑定该医生吗？", "我在想想", "确定", (dialog, which) -> {
-                        dialog.dismiss();
-                        if (HHSoftDialogActionEnum.POSITIVE == which) {
-                            unBindDoctor();
-                        }
-                    });
+        breakTextView.setOnClickListener(v -> {
+            DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
+                dialog.dismiss();
+                if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    unBindDoctor();
                 }
-            }
-        }
+            });
+        });
     }
 
     /**
      * 解绑医生
      */
     private void unBindDoctor() {
-        Call<String> requestCall = OutDataManager.unBindDoctor(UserInfoUtils.getArchivesId(getPageContext()), doctorId, (call, response) -> {
+        Call<String> requestCall = OutDataManager.unBindDoctor(UserInfoUtils.getArchivesId(getPageContext()), SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                DoctorInfo doctorInfo = (DoctorInfo) response.object;
-                initlistener();
-                bindData(doctorInfo);
-                breakTextView.setText("解除绑定");
-            } else {
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
+                finish();
             }
         }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+        addRequestCallToMap("unBindDoctor", requestCall);
     }
+
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_my_doctor, null);
@@ -143,46 +101,25 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         introduceTextView = view.findViewById(R.id.tv_user_my_doctor_introduce);
         introduceLinearLayout = view.findViewById(R.id.ll_user_my_doctor_introduce);
         breakTextView = view.findViewById(R.id.tv_user_my_doctor_break);
+        breakTextView.setText("解除绑定");
         containerView().addView(view);
     }
 
     @Override
     protected void onPageLoad() {
-        if ("1".equals(type)) {
-            Call<String> requestCall = UserDataManager.getSelectDoctorInfo(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-                if ("0000".equals(response.code)) {
-                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                    DoctorInfo doctorInfo = (DoctorInfo) response.object;
-                    initlistener();
-                    bindData(doctorInfo);
-                    breakTextView.setText("解除绑定");
-                } else {
-                    loadViewManager().changeLoadState(LoadStatus.FAILED);
-                }
-            }, (call, t) -> {
+        Call<String> requestCall = UserDataManager.getSelectDoctorInfo(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                DoctorInfo doctorInfo = (DoctorInfo) response.object;
+                initlistener();
+                bindData(doctorInfo);
+            } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
-            });
-            addRequestCallToMap("getSelectDoctorInfo", requestCall);
-        } else {
-            Call<String> requestCall = OutDataManager.getDeptDoctorInfo(doctorId, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-                if ("0000".equals(response.code)) {
-                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                    doctorInfoOther = (DoctorInfo) response.object;
-                    initlistener();
-                    bindData(doctorInfoOther);
-                    if (doctorInfoOther.isBindExternal()) {
-                        breakTextView.setText("解除绑定");
-                    } else {
-                        breakTextView.setText("绑定");
-                    }
-                } else {
-                    loadViewManager().changeLoadState(LoadStatus.FAILED);
-                }
-            }, (call, t) -> {
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
-            });
-            addRequestCallToMap("getDeptDoctorInfo", requestCall);
-        }
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getSelectDoctorInfo", requestCall);
     }
 
 
@@ -190,6 +127,7 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         XyImageUtils.loadCircleImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfo.getAvatar(), headImageView);
         nameTextView.setText(doctorInfo.getDoctorName());
         postTextView.setText(doctorInfo.getDeptName());
+        hospitalTextView.setText(doctorInfo.getHospitalName());
         if (doctorInfo.getProfile() == null) {
             introduceLinearLayout.setVisibility(View.GONE);
         } else {
