@@ -160,11 +160,11 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
         }
 
-        if (userInfo.getDiabetesType() != null && userInfo.getHypertensionType() != null) {
+        if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {
             illTextView.setText("主要诊断：" + userInfo.getDiabetesType() + " | " + userInfo.getHypertensionType());
-        } else if (userInfo.getDiabetesType() != null) {
+        } else if (!TextUtils.isEmpty(userInfo.getDiabetesType())) {
             illTextView.setText("主要诊断：" + userInfo.getDiabetesType());
-        } else if (userInfo.getHypertensionType() != null) {
+        } else if (!TextUtils.isEmpty(userInfo.getHypertensionType())) {
             illTextView.setText("主要诊断：" + userInfo.getHypertensionType());
         } else {
             illTextView.setVisibility(View.GONE);

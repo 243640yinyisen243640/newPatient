@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -71,6 +72,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Docto
 
     private String provinceID = "";
     private String cityID = "";
+    private String hospitalName = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Docto
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = OutDataManager.gethospitalList(provinceID, cityID, (call, response) -> {
+        Call<String> requestCall = OutDataManager.gethospitalList(provinceID, cityID, hospitalName, (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }
@@ -214,6 +216,22 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Docto
         backIm.setOnClickListener(this);
         provinceLinearLayout.setOnClickListener(this);
         cityLinearLayout.setOnClickListener(this);
+        searchEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String content = searchEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    //提示
+                    ToastUtils.getInstance().showToast(getPageContext(), "请输入医院名称");
+                    return true;
+                }
+                //开始搜索
+                hospitalName = content;
+                setPageIndex(1);
+                onPageLoad();
+                return true;
+            }
+            return false;
+        });
     }
 
     private View initTopView() {

@@ -54,10 +54,11 @@ public class OutDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> gethospitalList(String provinceId, String cityId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> gethospitalList(String provinceId, String cityId, String hospitalName, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("provinceId", provinceId);
         map.put("cityId", cityId);
+        map.put("hospitalName", hospitalName);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, DoctorInfo.class, "system/hosp/v2/appHospitalList", map, successCallBack, failureCallBack);
     }
 

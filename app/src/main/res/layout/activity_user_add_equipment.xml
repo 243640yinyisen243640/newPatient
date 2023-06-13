@@ -78,7 +78,6 @@
                     style="@style/user_add_right"
                     android:gravity="right|center"
                     android:hint="请输入设备号"
-                    android:imeOptions="actionSearch"
                     android:lines="1"
                     android:textColor="@color/black_24" />
 
