@@ -85,12 +85,17 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
     private void bindData(HospitalInfo hospitalInfo) {
         XyImageUtils.loadRoundImage(getPageContext(), R.drawable.out_hospital_default, hospitalInfo.getLogo(), headImageView);
         nameTextView.setText(hospitalInfo.getHospitalName());
-        introduceTextView.setText(hospitalInfo.getIntroduction());
+
         locationTextView.setText(hospitalInfo.getDetailedAddress());
         if (hospitalInfo.getCategory() == null) {
             levelTextView.setVisibility(View.GONE);
         } else {
             levelTextView.setText(hospitalInfo.getCategory());
+        }
+        if (hospitalInfo.getIntroduction() == null) {
+            introduceTextView.setVisibility(View.GONE);
+        } else {
+            introduceTextView.setText(hospitalInfo.getIntroduction());
         }
 
         fragments = new ArrayList<>();

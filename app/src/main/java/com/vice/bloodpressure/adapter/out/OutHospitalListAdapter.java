@@ -50,10 +50,12 @@ public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalList
         DoctorInfo info = list.get(position);
         XyImageUtils.loadRoundImage(context, R.drawable.shape_defaultbackground_5, info.getLogo(), holder.coverImageView);
         holder.nameTextView.setText(info.getName());
-//        if (){
-//
-//        }
-        holder.introduceTextView.setText(info.getIntroduction());
+        if (info.getIntroduction() == null) {
+            holder.introduceTextView.setVisibility(View.GONE);
+        } else {
+            holder.introduceTextView.setText(info.getIntroduction());
+        }
+
         holder.locationTextView.setText(info.getDetailedAddress());
         if (info.getCategory() == null) {
             holder.levelTextView.setVisibility(View.GONE);
