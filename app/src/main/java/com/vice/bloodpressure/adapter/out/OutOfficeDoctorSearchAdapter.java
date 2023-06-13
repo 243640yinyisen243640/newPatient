@@ -53,17 +53,19 @@ public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOffice
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DoctorInfo info = list.get(position);
-        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getLogo(), holder.headImageView);
+        XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getAvatar(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
-        holder.postTextView.setText(info.getDoctorPost());
+        holder.postTextView.setText(info.getTitles());
         holder.officeTextView.setText(info.getDeptName());
+        if (info.getProfile() != null) {
+            SpannableStringBuilder builder = new SpannableStringBuilder();
+            builder.append("简介：");
+            int length1 = builder.length();
+            builder.append(info.getProfile());
+            builder.setSpan(new ForegroundColorSpan(Color.parseColor("#3A3939")), 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            holder.introduceTextView.setText(builder);
+        }
 
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append("简介：");
-        int length1 = builder.length();
-        builder.append(info.getDoctorIntroduce());
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#3A3939")), 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        holder.introduceTextView.setText(builder);
         DoctorInfoOnClick expandOnClick = new DoctorInfoOnClick(position);
         holder.clickLinearLayout.setOnClickListener(expandOnClick);
     }
@@ -81,12 +83,14 @@ public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOffice
         private TextView introduceTextView;
         private TextView officeTextView;
         private LinearLayout clickLinearLayout;
+        private View lineView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             headImageView = itemView.findViewById(R.id.iv_office_doctor_head_search);
             nameTextView = itemView.findViewById(R.id.tv_office_doctor_name_search);
+            lineView = itemView.findViewById(R.id.view_post);
             postTextView = itemView.findViewById(R.id.tv_office_doctor_post_search);
             introduceTextView = itemView.findViewById(R.id.tv_office_doctor_introduce_search);
             officeTextView = itemView.findViewById(R.id.tv_office_doctor_office_search);

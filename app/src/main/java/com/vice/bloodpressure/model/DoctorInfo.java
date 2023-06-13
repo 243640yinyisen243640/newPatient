@@ -91,6 +91,10 @@ public class DoctorInfo {
      * 简介
      */
     private String introduction;
+    /**
+     * true已绑定/false未绑定
+     */
+    private boolean bindExternal;
 
 
 
@@ -268,5 +272,14 @@ public class DoctorInfo {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+
+    public boolean isBindExternal() {
+        return bindExternal;
+    }
+
+    public void setBindExternal(boolean bindExternal) {
+        this.bindExternal = bindExternal;
     }
 }
