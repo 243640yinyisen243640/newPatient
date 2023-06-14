@@ -139,4 +139,18 @@ public class OutDataManager {
         map.put("doctorId", doctorId);
         return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 医院详情
+     *
+     * @param hospitalId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getHospitalInfo(String hospitalId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("hospitalId", hospitalId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HospitalInfo.class, "system/hosp/v2/app/select", map, successCallBack, failureCallBack);
+    }
 }

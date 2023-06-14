@@ -49,7 +49,7 @@ public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DoctorInfo info = list.get(position);
         XyImageUtils.loadRoundImage(context, R.drawable.shape_defaultbackground_5, info.getLogo(), holder.coverImageView);
-        holder.nameTextView.setText(info.getName());
+        holder.nameTextView.setText(info.getHospitalName());
         if (info.getIntroduction() == null) {
             holder.introduceTextView.setVisibility(View.GONE);
         } else {
