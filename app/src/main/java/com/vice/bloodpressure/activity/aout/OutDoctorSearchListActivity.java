@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
 import com.vice.bloodpressure.adapter.out.OutOfficeDoctorSearchAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
@@ -91,8 +90,8 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<D
             public void adapterClickListener(int position, View view) {
                 switch (view.getId()) {
                     case R.id.ll_office_doctor_click:
-                        Intent intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                        intent.putExtra("type", "2");
+                        Intent intent = new Intent(getPageContext(), OutDoctorInfoActivity.class);
+                        intent.putExtra("doctorId", getPageListData().get(position).getId());
                         startActivity(intent);
                         break;
                     default:

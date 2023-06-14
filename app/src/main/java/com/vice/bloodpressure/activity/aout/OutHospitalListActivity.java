@@ -107,7 +107,7 @@ public class OutHospitalListActivity extends UIBaseListRecycleViewActivity<Docto
             switch (view.getId()) {
                 case R.id.ll_out_hos_click:
                     Intent intent = new Intent(getPageContext(), OutOfficeActivity.class);
-                    intent.putExtra("hospitalId", getPageListData().get(position).getId());
+                    intent.putExtra("hospitalId", getPageListData().get(position).getHospitalId());
                     startActivity(intent);
                     break;
 

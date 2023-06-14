@@ -11,12 +11,15 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -25,7 +28,6 @@ import java.util.List;
  * 描述:消息提醒
  */
 public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
-    private List<MessageInfo> listText = new ArrayList<>();
 
 
     @Override
@@ -45,14 +47,14 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new MessageInfo("你有一条新的绑定医生通知", "绑定医生通知", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血糖了，请保持良好 的测量习惯。", "血糖未测提醒", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("测试内容", "测试标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("您已经连续多天没有测量血压了，请保持良好 的测量习惯。", "血压未测提醒", "2022-07-12 12:20:23"));
-
-        //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
-        callBack.callBack(listText);
+        Call<String> requestCall = UserDataManager.getMessageList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getMessageList", requestCall);
     }
 
     @Override

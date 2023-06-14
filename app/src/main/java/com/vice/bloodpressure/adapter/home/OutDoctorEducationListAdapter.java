@@ -48,9 +48,23 @@ public class OutDoctorEducationListAdapter extends RecyclerView.Adapter<OutDocto
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageInfo info = list.get(position);
         holder.titleTextView.setText(info.getTitle());
-        holder.timeTextView.setText(info.getTime());
-        holder.contentTextView.setText(info.getContent());
-        holder.imgImageView.setImageResource(R.drawable.out_doctor_education_audio);
+        holder.timeTextView.setText(info.getSendTime());
+        holder.contentTextView.setText(info.getBi());
+        //宣教类型:1->图文;2->音频;3->视频;
+        if ("1".equals(info.getType())) {
+            holder.imgImageView.setImageResource(R.drawable.out_doctor_education_text);
+        } else if ("2".equals(info.getType())) {
+            holder.imgImageView.setImageResource(R.drawable.out_doctor_education_audio);
+        } else {
+            holder.imgImageView.setImageResource(R.drawable.out_doctor_education_video);
+        }
+        //0 未阅读 1 已阅读
+        if ("0".equals(info.getStatus())) {
+            holder.readImageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.readImageView.setVisibility(View.GONE);
+        }
+
         DoctorInfoOnClick click = new DoctorInfoOnClick(position);
         holder.clickLinearLayout.setOnClickListener(click);
     }

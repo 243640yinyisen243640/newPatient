@@ -501,6 +501,10 @@
             android:name=".activity.aout.OutDoctorEducationInfoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+        <!--医生详情-->
+        <activity
+            android:name=".activity.aout.OutDoctorInfoActivity"
+            android:screenOrientation="portrait" />
         <!--院外管理结束-->
 
 

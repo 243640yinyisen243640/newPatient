@@ -7,7 +7,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.ahome.HomeMessageListActivity;
 import com.vice.bloodpressure.activity.auser.UserCollectActivity;
 import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
@@ -19,10 +22,14 @@ import com.vice.bloodpressure.activity.auser.UserSetActivity;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.datamanager.UserDataManager;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -33,6 +40,7 @@ import com.vice.bloodpressure.utils.XyImageUtils;
  */
 public class UserCenterFragment extends UIBaseFragment implements View.OnClickListener {
 
+    private static final int REQUEST_CODE_FOR_UN_BIND_DOCTOR = 1;
     /**
      * 头像
      */
@@ -276,9 +284,18 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 if (!TextUtils.isEmpty(UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
                     intent = new Intent(getPageContext(), UserDoctorActivity.class);
                     intent.putExtra("type", "1");
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUEST_CODE_FOR_UN_BIND_DOCTOR);
                 } else {
-
+                    DialogUtils.showOperDialog(getPageContext(), "", "您还没有绑定医生", "我在想想", "去绑定", (dialog, which) -> {
+                        dialog.dismiss();
+                        if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            if (getActivity() != null) {
+                                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                                mainIntent.putExtra("checkId", R.id.tv_main_home_out_hospital);
+                                startActivity(mainIntent);
+                            }
+                        }
+                    });
                 }
 
                 break;
@@ -328,6 +345,14 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOR_UN_BIND_DOCTOR) {
+                SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, "");
+            }
+        }
+    }
 }
 

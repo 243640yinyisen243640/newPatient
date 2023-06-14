@@ -2,6 +2,7 @@ package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.model.ProvinceInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -111,15 +112,13 @@ public class OutDataManager {
     /**
      * 解绑医生
      *
-     * @param doctorId
      * @param patientId
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> unBindDoctor(String doctorId, String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> unBindDoctor(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("doctorId", doctorId);
         map.put("patientId", patientId);
         return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/app/unbindExternal", map, successCallBack, failureCallBack);
     }
@@ -153,4 +152,23 @@ public class OutDataManager {
         map.put("hospitalId", hospitalId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HospitalInfo.class, "system/hosp/v2/app/select", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 医生宣教列表
+     *
+     * @param patientId
+     * @param pageSize
+     * @param pageNum
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getPropagandaAndEducation(String patientId, String pageSize, String pageNum, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("pageSize", pageSize);
+        map.put("pageNum", pageNum);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MessageInfo.class, "system/preach/app/pageList", map, successCallBack, failureCallBack);
+    }
+
 }

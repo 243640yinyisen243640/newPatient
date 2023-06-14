@@ -30,7 +30,7 @@ import cn.jzvd.JzvdStd;
 /**
  * 作者: beauty
  * 类名:
- * 传参:type 1:视频  2：音频 3：文本
+ * 传参:type :宣教类型:1->图文;2->音频;3->视频;
  * 描述:宣教详情
  */
 public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
@@ -45,7 +45,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
     private X5WebView webView;
     private ProgressBar progressBar;
     /**
-     * 1:视频  2：音频
+     * 1->图文;2->音频;3->视频;
      */
     private String type;
 
@@ -91,15 +91,18 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         webView = view.findViewById(R.id.web_education_details_web_doctor);
         progressBar = view.findViewById(R.id.pb_education_details_web_doctor);
         containerView().addView(view);
+        //1->图文;2->音频;3->视频;
         if ("1".equals(type)) {
             audioLinearLayout.setVisibility(View.GONE);
-            videoJz.setVisibility(View.VISIBLE);
-        } else if ("2".equals(type)){
+            videoJz.setVisibility(View.GONE);
+        } else if ("2".equals(type)) {
             audioLinearLayout.setVisibility(View.VISIBLE);
             videoJz.setVisibility(View.GONE);
-        }else {
+        } else {
             audioLinearLayout.setVisibility(View.GONE);
-            videoJz.setVisibility(View.GONE);
+            videoJz.setVisibility(View.VISIBLE);
+
+
         }
         startImageView.setOnClickListener(v -> {
             setAudioClick();

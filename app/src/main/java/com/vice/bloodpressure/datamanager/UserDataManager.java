@@ -4,6 +4,7 @@ import com.vice.bloodpressure.model.DiseaseInfo;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.model.EquipmetInfo;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -420,5 +421,19 @@ public class UserDataManager {
         map.put("password", password);
         map.put("newPassword", newPassword);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/user/updatePassword", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 消息列表
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getMessageList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/message/list", map, successCallBack, failureCallBack);
     }
 }

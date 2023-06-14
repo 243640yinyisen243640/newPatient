@@ -68,6 +68,10 @@ public class DoctorInfo {
     private String doctorIntroduce;
 
     /**
+     * id
+     */
+    private String hospitalId;
+    /**
      * 医院图标
      */
     private String logo;
@@ -99,6 +103,14 @@ public class DoctorInfo {
      * true已绑定/false未绑定
      */
     private boolean bindExternal;
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
 
     public String getHospitalName() {
         return hospitalName;

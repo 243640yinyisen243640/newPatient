@@ -44,8 +44,8 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageInfo info = list.get(position);
         holder.titleTextView.setText(info.getTitle());
-        holder.timeTextView.setText(info.getTime());
-        holder.contentTextView.setText(info.getContent());
+        holder.timeTextView.setText(info.getCreateTime());
+        holder.contentTextView.setText(info.getDetail());
     }
 
     @Override

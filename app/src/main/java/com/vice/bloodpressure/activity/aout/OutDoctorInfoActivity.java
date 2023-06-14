@@ -76,25 +76,29 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
 
     private void initlistener() {
         //如果我已经绑定这个医生了，就要解绑这个医生
-        if (doctorInfoOther.isBindExternal()) {
-            DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
-                dialog.dismiss();
-                if (HHSoftDialogActionEnum.POSITIVE == which) {
-                    unBindDoctor();
-                }
-            });
-        } else {
-            //如果没有绑定这个医生，那就在看看我有绑定医生嘛，我如果没有绑定医生，那就去绑定，如果绑定过了这个按钮应该隐藏的
-            if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""))) {
-                DialogUtils.showOperDialog(getPageContext(), "", "确认绑定该医生吗？", "我在想想", "确定", (dialog, which) -> {
+
+        breakTextView.setOnClickListener(v -> {
+            if (doctorInfoOther.isBindExternal()) {
+                DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
                     dialog.dismiss();
                     if (HHSoftDialogActionEnum.POSITIVE == which) {
-                        bindDoctor();
+                        unBindDoctor();
                     }
                 });
-            }
+            } else {
+                //如果没有绑定这个医生，那就在看看我有绑定医生嘛，我如果没有绑定医生，那就去绑定，如果绑定过了这个按钮应该隐藏的
+                if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""))) {
+                    DialogUtils.showOperDialog(getPageContext(), "", "确认绑定该医生吗？", "我在想想", "确定", (dialog, which) -> {
+                        dialog.dismiss();
+                        if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            bindDoctor();
+                        }
+                    });
+                }
 
-        }
+            }
+        });
+
 
     }
 
@@ -102,9 +106,10 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
      * 解绑医生
      */
     private void unBindDoctor() {
-        Call<String> requestCall = OutDataManager.unBindDoctor(UserInfoUtils.getArchivesId(getPageContext()), doctorId, (call, response) -> {
+        Call<String> requestCall = OutDataManager.unBindDoctor(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
+                SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, "");
                 onPageLoad();
             }
         }, (call, t) -> {
@@ -117,6 +122,7 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
         Call<String> requestCall = OutDataManager.bindDoctor(UserInfoUtils.getArchivesId(getPageContext()), doctorId, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
+                SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, doctorId);
                 onPageLoad();
             }
         }, (call, t) -> {
@@ -134,12 +140,19 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
                 doctorInfoOther = (DoctorInfo) response.object;
                 initlistener();
                 bindData(doctorInfoOther);
+                //true已绑定/false未绑定  我有没有绑定这个医生
+                //先去判断我好这个医生的关系，如果bindExternal 这个字段是true 就是说我已经绑定了这个医生，我可以解绑，
                 if (doctorInfoOther.isBindExternal()) {
                     breakTextView.setVisibility(View.VISIBLE);
                     breakTextView.setText("解除绑定");
                 } else {
+                    //如果我没有绑定这个医生,我的医生id不空的话，就说明，我已经绑定过医生了，不能在绑定了
                     if (!TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""))) {
                         breakTextView.setVisibility(View.GONE);
+                    } else {
+                        //
+                        breakTextView.setText("绑定医生");
+                        breakTextView.setVisibility(View.VISIBLE);
                     }
                 }
             } else {

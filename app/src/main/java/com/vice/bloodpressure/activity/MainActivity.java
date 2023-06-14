@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,6 +34,8 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     private TextView mallTextView;
     private TextView myTextView;
 
+    private int mItemPosi = -1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
         initValue();
         initListener();
 
-//        VersionUtils.getInstance().updateNewVersion(getPageContext(), this, false);
+        //        VersionUtils.getInstance().updateNewVersion(getPageContext(), this, false);
     }
 
     private View initView() {
@@ -220,4 +223,13 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             finish();
         }
     }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        checkFragment(intent.getIntExtra("checkId",0));
+        setTextViewColor(R.id.tv_main_home_out_hospital);
+    }
+
 }

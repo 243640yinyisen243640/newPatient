@@ -15,12 +15,16 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -37,7 +41,6 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("医生宣教");
         topViewManager().moreTextView().setText("全部已读");
-//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
@@ -48,10 +51,14 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "标题", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("宣教内容展示两行，超出的部分用... 表示宣教内容展示两行，超出的部分用... 表...。宣教内容展示两行，超出的部分用...", "糖尿病遗传的概率有多大？", "2022-07-12 12:20:23"));
-
-        callBack.callBack(listText);
+        Call<String> requestCall = OutDataManager.getPropagandaAndEducation(UserInfoUtils.getArchivesId(getPageContext()), BaseDataManager.PAGE_SIZE + "", getPageIndex() + "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getPropagandaAndEducation", requestCall);
     }
 
     @Override
@@ -62,7 +69,7 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
                 switch (view.getId()) {
                     case R.id.ll_doctor_education_click:
                         Intent intent = new Intent(getPageContext(), OutDoctorEducationInfoActivity.class);
-                        intent.putExtra("type", "1");
+                        intent.putExtra("type", getPageListData().get(position).getType());
                         startActivity(intent);
                         break;
                     default:

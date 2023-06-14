@@ -139,7 +139,9 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
             startActivity(intent);
         });
         hosClickLinearLayout.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), OutHospitalInfoActivity.class));
+            Intent intent = new Intent(getPageContext(), OutHospitalInfoActivity.class);
+            intent.putExtra("hospitalId", hospitalId);
+            startActivity(intent);
         });
         viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
         ////true:滑动，false：禁止滑动

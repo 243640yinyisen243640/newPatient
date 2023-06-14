@@ -35,6 +35,7 @@ public class OutHospitalInfoActivity extends UIBaseLoadActivity {
     private LinearLayout phoneLinearLayout;
     private String phoneNumber;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,5 +86,7 @@ public class OutHospitalInfoActivity extends UIBaseLoadActivity {
     private void bindData(HospitalInfo hospitalInfo) {
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, hospitalInfo.getLogo(), backImageView);
         nameTexView.setText(hospitalInfo.getHospitalName());
+        levelTexView.setText(hospitalInfo.getCategory());
+        locationTexView.setText(hospitalInfo.getDetailedAddress());
     }
 }
