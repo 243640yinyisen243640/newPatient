@@ -14,6 +14,10 @@ public class EquipmetInfo {
     /**
      * 设备id
      */
+    private String brandId;
+    /**
+     * 设备id
+     */
     private String id;
     /**
      * 设备名称
@@ -43,6 +47,14 @@ public class EquipmetInfo {
      * 关系id
      */
     private String pkId;
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
 
     public String getPkId() {
         return pkId;

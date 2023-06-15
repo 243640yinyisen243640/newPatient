@@ -5,6 +5,7 @@ import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
 import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 
@@ -212,5 +213,12 @@ public class HomeDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportResistance", map, successCallBack, failureCallBack);
+    }
+
+
+    public static Call<String> getHomeWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/exceptionApp/list", map, successCallBack, failureCallBack);
     }
 }

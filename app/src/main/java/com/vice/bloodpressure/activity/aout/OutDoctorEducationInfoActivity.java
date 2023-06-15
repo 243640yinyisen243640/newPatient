@@ -22,10 +22,14 @@ import com.lzx.starrysky.utils.TimerTaskManager;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.OutDataManager;
+import com.vice.bloodpressure.model.MessageInfo;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.X5WebView;
 
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -53,6 +57,8 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
     private TimerTaskManager taskManager;
 
+    private MessageInfo messageInfo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +66,6 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         type = getIntent().getStringExtra("type");
         initView();
         initAudioProgress();
-        setVideoInfo();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
@@ -75,8 +80,8 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         //        videoJz.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoJz.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
-        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
+        videoJz.setUp(messageInfo.getFileUrl(), "");
+        XyImageUtils.loadVideoScreenshot(getPageContext(), messageInfo.getFileUrl(), videoJz.posterImageView);
     }
 
     private void initView() {
@@ -111,24 +116,18 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
 
     private void setAudioClick() {
-        Log.i("yys", "setAudioClick");
         audioSeekBar.setEnabled(true);
         clickCount = clickCount + 1;
         AnimationDrawable am = (AnimationDrawable) startImageView.getBackground();
         Boolean oddNumber = isOddNumber(clickCount);
-        Log.i("yys", "oddNumber==" + oddNumber);
         if (oddNumber) {
-            Log.i("yys", "oddNumber=====");
             am.start();
-            //            int id = getIntent().getExtras().getInt("id", 1);
             int id = 2;
-            //            String audioUrl = getIntent().getExtras().getString("url");
             String audioUrl = "http://video.xiyuns.cn/1633773952000.mp3";
             //开始播放
             SongInfo info = new SongInfo();
             info.setSongId(id + "");
             info.setSongUrl(audioUrl);
-            Log.i("yys", "info==" + info == null ? "1" : "0");
             StarrySky.with().playMusicByInfo(info);
             //开始更新进度
             taskManager.startToUpdateProgress(1000);
@@ -144,8 +143,30 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        setWebViewData(webView, "http://chronics.xiyuns.cn/index/caseapp");
+        Call<String> requestCall = OutDataManager.getDoctorEducationInfo("", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                messageInfo = (MessageInfo) response.object;
+                bindData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getDoctorEducationInfo", requestCall);
+
+    }
+
+    private void bindData() {
+        //宣教类型:1->图文;2->音频;3->视频;
+        if ("1".equals(messageInfo.getType())) {
+
+        } else if ("2".equals(messageInfo.getType())) {
+            setWebViewData(webView, messageInfo.getFileUrl());
+        } else {
+            setVideoInfo();
+        }
     }
 
     protected void setWebViewData(final X5WebView webView, final String url) {

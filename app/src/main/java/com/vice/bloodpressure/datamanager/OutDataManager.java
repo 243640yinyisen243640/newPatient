@@ -168,7 +168,32 @@ public class OutDataManager {
         map.put("patientId", patientId);
         map.put("pageSize", pageSize);
         map.put("pageNum", pageNum);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MessageInfo.class, "system/preach/app/pageList", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "system/preach/app/pageList", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 患者宣教全部已读
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readEducationList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/preach/article/readAll", map, successCallBack, failureCallBack);
+    }
+    /**
+     * 患者宣教详情
+     *
+     * @param pkId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDoctorEducationInfo(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MessageInfo.class, "system/preach/app/articleDetail", map, successCallBack, failureCallBack);
+    }
 }

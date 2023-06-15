@@ -9,9 +9,14 @@ import java.io.Serializable;
  * 描述:
  */
 public class MessageInfo implements Serializable {
+    /**
+     * 内容
+     */
     private String content;
+    /**
+     * 标题
+     */
     private String title;
-    private String time;
 
 
     private String num = "";
@@ -56,6 +61,18 @@ public class MessageInfo implements Serializable {
      * 时间
      */
     private String createTime;
+    /**
+     * 文件路径
+     */
+    private String fileUrl;
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
 
     public String getCreateTime() {
         return createTime;
@@ -129,11 +146,7 @@ public class MessageInfo implements Serializable {
         this.num = num;
     }
 
-    public MessageInfo(String content, String title, String time) {
-        this.content = content;
-        this.title = title;
-        this.time = time;
-    }
+
 
     public MessageInfo(String title) {
         this.title = title;
@@ -156,13 +169,6 @@ public class MessageInfo implements Serializable {
         this.content = content;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getMsgType() {
         return msgType;

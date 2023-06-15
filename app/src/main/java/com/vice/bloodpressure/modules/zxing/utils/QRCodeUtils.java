@@ -67,6 +67,7 @@ public class QRCodeUtils {
     private static void dealQRCode(Context context, String content, CallBack callBack) {
         Intent intent = new Intent(context, UserAddEquipmentActivity.class);
         intent.putExtra("deviceCode", content);
+        intent.putExtra("type", "2");
         context.startActivity(intent);
         ((Activity) context).finish();
     }

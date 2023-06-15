@@ -93,7 +93,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
                 DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", true, (dialog, which) -> {
 
                     if (HHSoftDialogActionEnum.POSITIVE == which) {
-                        startActivity(new Intent(getPageContext(), OutDoctorEducationListActivity.class));
+                        startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
                     }
                 });
             } else {

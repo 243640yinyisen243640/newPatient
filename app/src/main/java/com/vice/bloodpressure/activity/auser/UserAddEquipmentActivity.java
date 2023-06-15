@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.model.EquipmetInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
@@ -26,10 +27,10 @@ import retrofit2.Call;
 /**
  * 作者: beauty
  * 类名:
- * 传参:
+ * 传参: type  1 手动添加  2扫一扫
  * 描述:手动添加设备
  */
-public class UserAddEquipmentActivity extends UIBaseActivity implements View.OnClickListener {
+public class UserAddEquipmentActivity extends UIBaseLoadActivity implements View.OnClickListener {
     private TextView typeTextView;
     private TextView nameTextView;
     private EditText numEditText;
@@ -49,14 +50,56 @@ public class UserAddEquipmentActivity extends UIBaseActivity implements View.OnC
      * 设备号
      */
     private String deviceCode = "";
+    /**
+     * 1 手动添加  2扫一扫
+     */
+    private String type = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("手动添加");
         deviceCode = getIntent().getStringExtra("deviceCode");
+        type = getIntent().getStringExtra("type");
         initView();
         initListener();
+        if ("2".equals(type)) {
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
+        } else {
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+        }
+    }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = UserDataManager.getScanInfo(deviceCode, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                EquipmetInfo equipmetInfo = (EquipmetInfo) response.object;
+                bindData(equipmetInfo);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getScanInfo", requestCall);
+    }
+
+    private void bindData(EquipmetInfo equipmetInfo) {
+        equipmentType = equipmetInfo.getDeviceCategory();
+        if ("1".equals(equipmetInfo.getDeviceCategory())) {
+            typeTextView.setText("血糖仪");
+        } else {
+            typeTextView.setText("血压计");
+        }
+
+        nameTextView.setText(equipmetInfo.getBrandName());
+        equipmentID = equipmetInfo.getBrandId();
+        numEditText.setText(deviceCode);
+        typeTextView.setClickable(false);
+        nameTextView.setClickable(false);
+        numEditText.setClickable(false);
     }
 
     private void initListener() {

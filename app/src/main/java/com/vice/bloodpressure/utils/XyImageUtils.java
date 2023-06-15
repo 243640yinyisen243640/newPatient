@@ -3,6 +3,8 @@ package com.vice.bloodpressure.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,8 +16,10 @@ import androidx.core.util.Consumer;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
@@ -39,8 +43,11 @@ import com.vice.bloodpressure.utils.widget.PictureSelector;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bumptech.glide.load.resource.bitmap.VideoDecoder.FRAME_OPTION;
 
 /**
  * @类说明 图片加载工具类
@@ -136,8 +143,8 @@ public class XyImageUtils {
      */
     public static void loadCircleImage(Context context, int defaultImageResourceId, String imagePath, ImageView imageView) {
         RequestOptions options = RequestOptions.circleCropTransform();
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)//不做磁盘缓存
-//                .skipMemoryCache(true);//不做内存缓存
+        //                .diskCacheStrategy(DiskCacheStrategy.NONE)//不做磁盘缓存
+        //                .skipMemoryCache(true);//不做内存缓存
         Glide.with(context)
                 .asBitmap()
                 .load(imagePath)
@@ -146,6 +153,35 @@ public class XyImageUtils {
                 .apply(options)
                 .into(imageView);
     }
+
+    /**
+     * 获取视频的第一帧
+     *
+     * @param context
+     * @param uri
+     * @param imageView
+     */
+    public static void loadVideoScreenshot(final Context context, String uri, ImageView imageView) {
+        RequestOptions requestOptions = RequestOptions.frameOf(0);
+        requestOptions.set(FRAME_OPTION, MediaMetadataRetriever.OPTION_CLOSEST);
+        requestOptions.transform(new BitmapTransformation() {
+            @Override
+            protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+                return toTransform;
+            }
+
+            @Override
+            public void updateDiskCacheKey(MessageDigest messageDigest) {
+                try {
+                    messageDigest.update((context.getPackageName() + "RotateTransform").getBytes("utf-8"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Glide.with(context).load(uri).apply(requestOptions).into(imageView);
+    }
+
 
     /**
      * 加载动画，只播放一次
@@ -465,6 +501,7 @@ public class XyImageUtils {
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .into(imageView);
     }
+
     /**
      * @param context
      * @param mimeType   回调code

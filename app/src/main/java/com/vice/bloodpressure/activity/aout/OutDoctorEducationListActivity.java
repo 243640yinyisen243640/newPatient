@@ -16,9 +16,12 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.List;
@@ -37,6 +40,9 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("医生宣教");
         topViewManager().moreTextView().setText("全部已读");
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            readAll();
+        });
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
@@ -45,16 +51,31 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
 
     }
 
-    @Override
-    protected void getListData(CallBack callBack) {
-        Call<String> requestCall = OutDataManager.getPropagandaAndEducation(UserInfoUtils.getArchivesId(getPageContext()), BaseDataManager.PAGE_SIZE + "", getPageIndex() + "", (call, response) -> {
+    private void readAll() {
+        Call<String> requestCall = UserDataManager.readMessageList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                callBack.callBack(response.object);
+                setPageIndex(1);
+                onPageLoad();
             }
         }, (call, t) -> {
-            callBack.callBack(null);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("getPropagandaAndEducation", requestCall);
+        addRequestCallToMap("getMessageList", requestCall);
+    }
+
+    @Override
+    protected void getListData(CallBack callBack) {
+        Call<String> requestCall = OutDataManager.readEducationList(UserInfoUtils.getArchivesId(getPageContext()),  (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("readEducationList", requestCall);
     }
 
     @Override

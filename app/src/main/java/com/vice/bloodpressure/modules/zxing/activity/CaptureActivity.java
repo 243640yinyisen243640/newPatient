@@ -112,6 +112,7 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
             topViewManager().moreTextView().setText("手动添加");
             topViewManager().moreTextView().setOnClickListener(v -> {
                 Intent intent = new Intent(getPageContext(), UserAddEquipmentActivity.class);
+                intent.putExtra("type", "2");
                 startActivity(intent);
             });
         }

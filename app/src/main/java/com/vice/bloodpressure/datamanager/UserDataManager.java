@@ -450,4 +450,17 @@ public class UserDataManager {
         map.put("patientId", patientId);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/message/readAll", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 根据设备号获取设备详情
+     * @param deviceCode
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getScanInfo(String deviceCode, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("deviceCode", deviceCode);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_OBJECT, EquipmetInfo.class, "system/device/v2/app/selectDeviceByCode", map, successCallBack, failureCallBack);
+    }
 }

@@ -44,8 +44,6 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageInfo info = list.get(position);
         holder.titleTextView.setText(info.getTitle());
-        holder.timeTextView.setText(info.getTime());
-        holder.timeTextView.setText(info.getNum());
     }
 
     @Override

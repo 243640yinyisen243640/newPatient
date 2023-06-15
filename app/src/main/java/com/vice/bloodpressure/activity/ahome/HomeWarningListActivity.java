@@ -16,15 +16,20 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -92,14 +97,16 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
-        listText.add(new MessageInfo("", "", "2022-07-12 12:20:23"));
-
-        //        HomeMessageListAdapter adapter = new HomeMessageListAdapter(getPageContext(),);
-        callBack.callBack(listText);
+        Call<String> requestCall = HomeDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getHomeWarningList", requestCall);
     }
 
     @Override

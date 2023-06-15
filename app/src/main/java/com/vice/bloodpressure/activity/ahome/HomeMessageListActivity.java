@@ -58,7 +58,7 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("getMessageList", requestCall);
+        addRequestCallToMap("readMessageList", requestCall);
     }
 
     @Override
