@@ -81,7 +81,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         //        videoJz.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
         videoJz.setUp(messageInfo.getFileUrl(), "");
-        XyImageUtils.loadVideoScreenshot(getPageContext(), messageInfo.getFileUrl(), videoJz.posterImageView);
+        XyImageUtils.getFirst(messageInfo.getFileUrl(), videoJz.posterImageView);
     }
 
     private void initView() {

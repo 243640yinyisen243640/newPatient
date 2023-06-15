@@ -154,6 +154,19 @@ public class XyImageUtils {
                 .into(imageView);
     }
 
+    public static  void getFirst(String url,ImageView imageView){
+        RequestOptions options = new RequestOptions();
+        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .frame(1000000)
+                .centerCrop();
+
+        Glide.with(imageView)
+                .setDefaultRequestOptions(options)
+                .load(url)
+                .into(imageView);
+
+    }
+
     /**
      * 获取视频的第一帧
      *
