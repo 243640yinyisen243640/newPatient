@@ -436,4 +436,18 @@ public class UserDataManager {
         map.put("patientId", patientId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/message/list", map, successCallBack, failureCallBack);
     }
+
+    /**
+     * 全部已读
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readMessageList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/message/readAll", map, successCallBack, failureCallBack);
+    }
 }

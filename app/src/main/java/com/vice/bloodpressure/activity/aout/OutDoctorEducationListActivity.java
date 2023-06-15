@@ -21,7 +21,6 @@ import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,12 +29,9 @@ import retrofit2.Call;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:消息提醒
+ * 描述:医生宣教
  */
 public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
-    private List<MessageInfo> listText = new ArrayList<>();
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

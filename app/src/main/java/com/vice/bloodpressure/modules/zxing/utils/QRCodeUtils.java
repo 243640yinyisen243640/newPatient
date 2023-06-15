@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.modules.zxing.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import com.google.zxing.Result;
 import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
+import com.vice.bloodpressure.activity.auser.UserAddEquipmentActivity;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.modules.zxing.decode.BitmapDecoder;
 
@@ -56,12 +58,17 @@ public class QRCodeUtils {
     }
 
     /**
-     * 二维码结果处理
-     * http://web.diaodiaoyu.com/download.html?mark=1&ud=30
-     * 其中key是一个json的拼接   {"type":"NMS","values":"NMS338D2E53","token":"个推的推送KEY"}
+     * 二维码处理结果
+     *
+     * @param context
+     * @param content
+     * @param callBack
      */
     private static void dealQRCode(Context context, String content, CallBack callBack) {
-
+        Intent intent = new Intent(context, UserAddEquipmentActivity.class);
+        intent.putExtra("deviceCode", content);
+        context.startActivity(intent);
+        ((Activity) context).finish();
     }
 
 

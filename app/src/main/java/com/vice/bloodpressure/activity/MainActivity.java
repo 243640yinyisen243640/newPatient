@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -228,7 +229,8 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        checkFragment(intent.getIntExtra("checkId",0));
+        Log.i("yys", "onNewIntent");
+        checkFragment(intent.getIntExtra("checkId", 0));
         setTextViewColor(R.id.tv_main_home_out_hospital);
     }
 

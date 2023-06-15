@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.fragment.fout;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,7 +10,18 @@ import android.widget.TextView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aout.OutDoctorEducationListActivity;
 import com.vice.bloodpressure.activity.aout.OutHospitalListActivity;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
+import com.vice.bloodpressure.datamanager.OutDataManager;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.model.DoctorInfo;
+import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -38,6 +50,38 @@ public class OutMainFragment extends UIBaseLoadFragment {
         topViewManager().lineViewVisibility(View.GONE);
         initView();
         initListener();
+        if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            initValues();
+        } else {
+            loadViewManager().changeLoadState(LoadStatus.LOADING);
+        }
+
+    }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = OutDataManager.getDeptDoctorInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID), UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                DoctorInfo doctorInfoOther = (DoctorInfo) response.object;
+                bindData(doctorInfoOther);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getDeptDoctorInfo", requestCall);
+    }
+
+    private void bindData(DoctorInfo doctorInfoOther) {
+        unbandLinearLayout.setVisibility(View.GONE);
+        bandLinearLayout.setVisibility(View.VISIBLE);
+        XyImageUtils.loadImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfoOther.getAvatar(), headImageView);
+        nameTextView.setText(doctorInfoOther.getDoctorName());
+        postTextView.setText(doctorInfoOther.getDeptName());
+        hospitalTextView.setText(doctorInfoOther.getHospitalName());
     }
 
     private void initListener() {
@@ -45,17 +89,21 @@ public class OutMainFragment extends UIBaseLoadFragment {
             startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
         });
         educationTextView.setOnClickListener(v -> {
-            //            DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", true, (dialog, which) -> {
-            //                dialog.dismiss();
-            //                if (HHSoftDialogActionEnum.NEGATIVE == which) {
-            //                    dialog.dismiss();
-            //                } else {
-            //                    startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
-            //                }
-            //            });
+            if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+                DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", true, (dialog, which) -> {
 
-            startActivity(new Intent(getPageContext(), OutDoctorEducationListActivity.class));
+                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                        startActivity(new Intent(getPageContext(), OutDoctorEducationListActivity.class));
+                    }
+                });
+            } else {
+                startActivity(new Intent(getPageContext(), OutDoctorEducationListActivity.class));
+            }
+
+
         });
+
+
 
     }
 
@@ -74,8 +122,14 @@ public class OutMainFragment extends UIBaseLoadFragment {
         containerView().addView(view);
     }
 
-    @Override
-    protected void onPageLoad() {
 
+    private void initValues() {
+        if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+            unbandLinearLayout.setVisibility(View.VISIBLE);
+            bandLinearLayout.setVisibility(View.GONE);
+        } else {
+            unbandLinearLayout.setVisibility(View.GONE);
+            bandLinearLayout.setVisibility(View.VISIBLE);
+        }
     }
 }

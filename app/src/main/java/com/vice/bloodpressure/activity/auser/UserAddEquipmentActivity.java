@@ -45,11 +45,16 @@ public class UserAddEquipmentActivity extends UIBaseActivity implements View.OnC
      * 设备id
      */
     private String equipmentID = "-1";
+    /**
+     * 设备号
+     */
+    private String deviceCode = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("手动添加");
+        deviceCode = getIntent().getStringExtra("deviceCode");
         initView();
         initListener();
     }

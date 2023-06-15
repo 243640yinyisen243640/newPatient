@@ -15,6 +15,8 @@ import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
 import java.util.List;
@@ -36,6 +38,7 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
         topViewManager().titleTextView().setText("消息提醒");
         topViewManager().moreTextView().setText("全部已读");
         topViewManager().moreTextView().setOnClickListener(v -> {
+            readAllMessage();
         });
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
@@ -43,6 +46,19 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
 
+    }
+
+    private void readAllMessage() {
+        Call<String> requestCall = UserDataManager.readMessageList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getMessageList", requestCall);
     }
 
     @Override
