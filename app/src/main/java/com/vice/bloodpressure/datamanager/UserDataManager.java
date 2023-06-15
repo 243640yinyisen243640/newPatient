@@ -402,7 +402,7 @@ public class UserDataManager {
      */
     public static Call<String> offAccount(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.NONE, null, "auth/logoff", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "auth/logoff", map, successCallBack, failureCallBack);
     }
 
     /**

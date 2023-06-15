@@ -89,7 +89,7 @@ public class LoginDataManager {
         map.put("archivesId", archivesId);
         map.put("userId", userId);
         map.put("accessToken", accessToken);
-        return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "app/v2/savePatientInfo", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.NONE, null, "app/v2/savePatientInfo", map, successCallBack, failureCallBack);
     }
 
     /**

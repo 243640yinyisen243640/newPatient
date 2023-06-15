@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
@@ -170,9 +171,9 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
         //igr
         String qian = qianCheckBox.isChecked() ? "0" : "1";
 
-        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()),UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
+        Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()), UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
-                Intent intent = new Intent(getPageContext(), LoginActivity.class);
+                Intent intent = new Intent(getPageContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             } else {
