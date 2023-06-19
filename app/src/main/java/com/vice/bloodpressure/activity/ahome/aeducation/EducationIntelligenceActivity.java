@@ -28,7 +28,7 @@ import java.util.List;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:智能学习 这里还有一个页面EducationIntelligenceListActivity 等真正用的时候要换成这个页面，背景图不是公共的
+ * 描述:智能学习
  */
 public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity<EducationInfo> {
     private List<EducationInfo> educationInfos;
