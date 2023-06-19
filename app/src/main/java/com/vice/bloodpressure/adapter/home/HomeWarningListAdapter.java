@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
@@ -46,15 +47,27 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageInfo info = list.get(position);
-        holder.titleTextView.setText(info.getTitle());
+        // 1血糖数据  2 血压数据
+        if ("1".equals(info.getType())) {
+            holder.titleTextView.setText("血糖");
+        }else {
+            holder.titleTextView.setText("血压");
+        }
+
+        holder.numTextView.setText(info.getValue());
+        holder.unitTextView.setText(info.getUnit());
         holder.timeTextView.setText(info.getCreateTime());
-       clickOnClick onClick = new clickOnClick(position);
+        clickOnClick onClick = new clickOnClick(position);
         holder.clickLinearLayout.setOnClickListener(onClick);
-        //0 未读 1已读
+        holder.deleteTextView.setOnClickListener(onClick);
+        holder.moreTextView.setOnClickListener(onClick);
+        //1偏低 2 正常 3 偏高
         if ("1".equals(info.getStatus())) {
-            holder.readImageView.setVisibility(View.GONE);
-        } else {
-            holder.readImageView.setVisibility(View.VISIBLE);
+            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.blue_4B));
+        } else if ("2".equals(info.getStatus())){
+            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.black_24));
+        }else {
+            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.red_E5));
         }
     }
 
@@ -69,6 +82,7 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         private TextView titleTextView;
         private ImageView readImageView;
         private TextView numTextView;
+        private TextView unitTextView;
         private TextView timeTextView;
         private TextView deleteTextView;
         private TextView moreTextView;
@@ -80,7 +94,8 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
             clickLinearLayout = itemView.findViewById(R.id.ll_warning_click);
             titleTextView = itemView.findViewById(R.id.tv_warning_xt_xy);
             readImageView = itemView.findViewById(R.id.iv_warning_read);
-            numTextView = itemView.findViewById(R.id.tv_warning_num);
+            numTextView = itemView.findViewById(R.id.tv_warning_unit);
+            unitTextView = itemView.findViewById(R.id.tv_warning_num);
             timeTextView = itemView.findViewById(R.id.tv_warning_time);
             deleteTextView = itemView.findViewById(R.id.tv_warning_delete);
             moreTextView = itemView.findViewById(R.id.tv_warning_more);

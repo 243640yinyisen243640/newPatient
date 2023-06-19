@@ -71,9 +71,34 @@ public class MessageInfo implements Serializable {
      */
     private String id;
     /**
-     *  异常类型   1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
+     * 异常类型   1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
      */
     private String exceptionType;
+
+    /**
+     *值
+     */
+    private String value;
+    /**
+     * 单位
+     */
+    private String unit;
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     public String getExceptionType() {
         return exceptionType;
@@ -170,7 +195,6 @@ public class MessageInfo implements Serializable {
     public void setNum(String num) {
         this.num = num;
     }
-
 
 
     public MessageInfo(String title) {

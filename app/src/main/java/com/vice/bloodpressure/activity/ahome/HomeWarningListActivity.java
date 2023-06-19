@@ -56,11 +56,20 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
      */
     private TextView endTv;
     /**
+     * 1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
+     */
+    private TextView warningTypeTv;
+    /**
      * 确认
      */
     private TextView sureTv;
 
+
     private String startTime = "";
+    private String endTime = "";
+    private String exceptionType = "";
+
+    private HomeWarningListAdapter warningListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +90,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         allTv.setOnClickListener(this);
         startTv.setOnClickListener(this);
         endTv.setOnClickListener(this);
+        warningTypeTv.setOnClickListener(this);
         sureTv.setOnClickListener(this);
     }
 
@@ -90,13 +100,14 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         allTv = topView.findViewById(R.id.tv_warning_all_read);
         startTv = topView.findViewById(R.id.tv_warning_start);
         endTv = topView.findViewById(R.id.tv_warning_end);
+        warningTypeTv = topView.findViewById(R.id.tv_warning_warning_type);
         sureTv = topView.findViewById(R.id.tv_warning_sure);
         return topView;
     }
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = UserDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+        Call<String> requestCall = UserDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), startTime, endTime, "", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }
@@ -108,14 +119,16 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
-        return new HomeWarningListAdapter(getPageContext(), list, (position, view) -> {
+        return warningListAdapter = new HomeWarningListAdapter(getPageContext(), list, (position, view) -> {
             switch (view.getId()) {
                 //
                 case R.id.ll_warning_click:
+
                     break;
                 //删除
                 case R.id.tv_warning_delete:
                     deleteOneMessage(position);
+
                     break;
                 //获取更多数据
                 case R.id.tv_warning_more:
@@ -128,7 +141,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     }
 
     /**
-     * 读某一条消息
+     * 删除消息
      *
      * @param position
      */
@@ -136,12 +149,13 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         Call<String> requestCall = UserDataManager.deleteOneWarning(getPageListData().get(position).getId(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-
+                getPageListData().remove(position);
+                warningListAdapter.notifyDataSetChanged();
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("readOneMessage", requestCall);
+        addRequestCallToMap("deleteOneWarning", requestCall);
     }
 
     @Override
@@ -169,11 +183,11 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 });
                 break;
             case R.id.tv_warning_end:
-
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
                     @Override
                     public void callBack(Object object) {
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
+                            endTime = object.toString();
                             endTv.setText(object.toString());
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
@@ -181,11 +195,31 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                     }
                 });
                 break;
+            case R.id.tv_warning_warning_type:
+                List<String> typeList = new ArrayList<>();
+                typeList.add("全部");
+                typeList.add("血压偏高");
+                typeList.add("血压偏低");
+                typeList.add("血糖偏高");
+                typeList.add("血糖偏低");
+                typeList.add("血糖偏低");
+                typeList.add("血糖全部");
+                typeList.add("血压全部");
+                PickerViewUtils.showChooseSinglePicker(getPageContext(), "异常类型", typeList, object -> {
+                    warningTypeTv.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
+                    exceptionType = Integer.parseInt(String.valueOf(object)) + 1 + "";
+
+                });
+
+                break;
             case R.id.tv_warning_sure:
+                setPageIndex(1);
+                onPageLoad();
                 break;
             default:
                 break;
         }
     }
+
 
 }

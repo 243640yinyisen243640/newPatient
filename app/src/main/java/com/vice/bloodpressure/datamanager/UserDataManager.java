@@ -479,35 +479,25 @@ public class UserDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EquipmetInfo.class, "system/device/v2/app/selectDeviceByCode", map, successCallBack, failureCallBack);
     }
 
-
     /**
      * 异常数据列表
      *
      * @param patientId
+     * @param beginTime
+     * @param endTime
+     * @param exceptionType   异常类型   1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getHomeWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getHomeWarningList(String patientId, String beginTime, String endTime, String exceptionType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
+        map.put("beginTime", beginTime);
+        map.put("endTime", endTime);
+        map.put("exceptionType", exceptionType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/exceptionApp/list", map, successCallBack, failureCallBack);
     }
-
-    /**
-     * 全部已读
-     *
-     * @param patientId
-     * @param successCallBack
-     * @param failureCallBack
-     * @return
-     */
-    public static Call<String> readWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        Map<String, String> map = new HashMap<>();
-        map.put("patientId", patientId);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/message/readAll", map, successCallBack, failureCallBack);
-    }
-
     /**
      * 已读单个消息
      *
