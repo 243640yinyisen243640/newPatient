@@ -89,6 +89,7 @@ public class UserAddEquipmentActivity extends UIBaseLoadActivity implements View
     private void bindData(EquipmetInfo equipmetInfo) {
         equipmentType = equipmetInfo.getDeviceCategory();
         if ("1".equals(equipmetInfo.getDeviceCategory())) {
+
             typeTextView.setText("血糖仪");
         } else {
             typeTextView.setText("血压计");
