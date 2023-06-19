@@ -76,13 +76,25 @@ public class MessageInfo implements Serializable {
     private String exceptionType;
 
     /**
-     *值
+     * 值
      */
     private String value;
     /**
      * 单位
      */
     private String unit;
+    /**
+     * 时间
+     */
+    private String addTime;
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
 
     public String getUnit() {
         return unit;

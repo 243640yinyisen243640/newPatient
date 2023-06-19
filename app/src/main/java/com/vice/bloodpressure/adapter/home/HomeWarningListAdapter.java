@@ -50,24 +50,26 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         // 1血糖数据  2 血压数据
         if ("1".equals(info.getType())) {
             holder.titleTextView.setText("血糖");
-        }else {
+        } else {
             holder.titleTextView.setText("血压");
         }
 
         holder.numTextView.setText(info.getValue());
         holder.unitTextView.setText(info.getUnit());
-        holder.timeTextView.setText(info.getCreateTime());
+        holder.timeTextView.setText(info.getAddTime());
         clickOnClick onClick = new clickOnClick(position);
         holder.clickLinearLayout.setOnClickListener(onClick);
         holder.deleteTextView.setOnClickListener(onClick);
         holder.moreTextView.setOnClickListener(onClick);
         //1偏低 2 正常 3 偏高
         if ("1".equals(info.getStatus())) {
-            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.blue_4B));
-        } else if ("2".equals(info.getStatus())){
-            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.black_24));
-        }else {
-            holder.numTextView.setTextColor(ContextCompat.getColor(context,R.color.red_E5));
+            holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.blue_4B));
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.warn_low,0);
+        } else if ("2".equals(info.getStatus())) {
+            holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.black_24));
+        } else {
+            holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.red_E5));
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.warning_high,0);
         }
     }
 
