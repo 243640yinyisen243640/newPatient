@@ -305,9 +305,6 @@
             android:name=".activity.ahome.aeducation.EducationIntelligenceActivity"
             android:screenOrientation="portrait" />
         <!-- 教育 智能学习 -->
-        <activity
-            android:name=".activity.ahome.aeducation.EducationIntelligenceListActivity"
-            android:screenOrientation="portrait" />
         <!-- 教育 分类 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationClassifyActivity"

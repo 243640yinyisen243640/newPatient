@@ -2,7 +2,6 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,7 +39,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         initTopView();
-//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
+        noDataText("抱歉，没有找到相关课程");
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
@@ -54,7 +53,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
         TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
         backImageView.setOnClickListener(v -> finish());
-        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(),EducationClassifyActivity.class)));
+        classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(), EducationClassifyActivity.class)));
         topViewManager().topView().addView(topView);
     }
 
@@ -76,7 +75,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
-        return adapter = new EducationIntelligenceAdapter(getPageContext(), list,"1", new IAdapterViewClickListener() {
+        return adapter = new EducationIntelligenceAdapter(getPageContext(), list, "1", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 //那个按钮的展示状态 0展开 1收起状态 2没有数据隐藏
@@ -84,7 +83,7 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
                     case R.id.ll_education_study_click:
                         if (list.get(position).getIsExpand() == 1) {
                             list.get(position).setIsExpand(0);
-                        }else if (list.get(position).getIsExpand() == 0){
+                        } else if (list.get(position).getIsExpand() == 0) {
                             list.get(position).setIsExpand(1);
                         }
                         adapter.notifyDataSetChanged();

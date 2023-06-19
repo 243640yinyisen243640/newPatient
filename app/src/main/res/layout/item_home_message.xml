@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/fl_message_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/text_white"

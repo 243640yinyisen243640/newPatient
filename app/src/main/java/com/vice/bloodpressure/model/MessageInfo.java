@@ -66,6 +66,19 @@ public class MessageInfo implements Serializable {
      */
     private String fileUrl;
 
+    /**
+     * id
+     */
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getFileUrl() {
         return fileUrl;
     }

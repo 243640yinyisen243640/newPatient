@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceListActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceEducationVideoActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceHealthyDataActivity;
@@ -71,7 +71,7 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
                     startActivity(intent);
                     break;
                 case 2:
-                    intent = new Intent(getPageContext(), EducationIntelligenceListActivity.class);
+                    intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
                     startActivity(intent);
                     break;
                 case 3:

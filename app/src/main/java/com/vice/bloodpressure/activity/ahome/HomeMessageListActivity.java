@@ -1,11 +1,16 @@
 package com.vice.bloodpressure.activity.ahome;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
+import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
+import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
 import com.vice.bloodpressure.adapter.home.HomeMessageListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -30,7 +35,7 @@ import retrofit2.Call;
  * 描述:消息提醒
  */
 public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<MessageInfo> {
-
+    private HomeMessageListAdapter messageListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +53,9 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
 
     }
 
+    /**
+     * 全部已读
+     */
     private void readAllMessage() {
         Call<String> requestCall = UserDataManager.readMessageList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
@@ -75,7 +83,50 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
-        return new HomeMessageListAdapter(getPageContext(), list);
+        return messageListAdapter = new HomeMessageListAdapter(getPageContext(), list, (position, view) -> {
+            Intent intent;
+            //  //1. 绑定医生 2. 血糖 3. 血压  4 智能教育
+            switch (getPageListData().get(position).getType()) {
+                case "1":
+                    intent = new Intent(getPageContext(), UserDoctorActivity.class);
+                    startActivity(intent);
+                    break;
+                case "2":
+                    intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+                    startActivity(intent);
+                    break;
+                case "3":
+                    intent = new Intent(getPageContext(), ServicePressureListActivity.class);
+                    startActivity(intent);
+                    break;
+                case "4":
+                    intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+
+            readOneMessage(position);
+        });
+    }
+
+    /**
+     * 读某一条消息
+     *
+     * @param position
+     */
+    private void readOneMessage(int position) {
+        Call<String> requestCall = UserDataManager.readOneMessage(getPageListData().get(position).getId(), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                getPageListData().get(position).setStatus("1");
+                messageListAdapter.notifyDataSetChanged();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("readOneMessage", requestCall);
     }
 
     @Override

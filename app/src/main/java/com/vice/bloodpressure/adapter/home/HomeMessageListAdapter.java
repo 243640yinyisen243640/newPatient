@@ -3,6 +3,7 @@ package com.vice.bloodpressure.adapter.home;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.MessageInfo;
 
 import java.util.List;
@@ -24,11 +26,13 @@ import java.util.List;
 public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageListAdapter.ViewHolder> {
     private Context context;
     private List<MessageInfo> list;
+    private IAdapterViewClickOneListener clickOneListener;
 
 
-    public HomeMessageListAdapter(Context context, List<MessageInfo> list) {
+    public HomeMessageListAdapter(Context context, List<MessageInfo> list, IAdapterViewClickOneListener clickOneListener) {
         this.context = context;
         this.list = list;
+        this.clickOneListener = clickOneListener;
     }
 
     @NonNull
@@ -46,6 +50,14 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         holder.titleTextView.setText(info.getTitle());
         holder.timeTextView.setText(info.getCreateTime());
         holder.contentTextView.setText(info.getDetail());
+        clickOnClick onClick = new clickOnClick(position);
+        holder.clickFrameLayout.setOnClickListener(onClick);
+        //0 未读 1已读
+        if ("1".equals(info.getStatus())) {
+            holder.readImageView.setVisibility(View.GONE);
+        } else {
+            holder.readImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -59,15 +71,33 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         private TextView timeTextView;
         private TextView contentTextView;
         private ImageView readImageView;
+        private FrameLayout clickFrameLayout;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+            clickFrameLayout = itemView.findViewById(R.id.fl_message_click);
             imgImageView = itemView.findViewById(R.id.iv_message_img);
             titleTextView = itemView.findViewById(R.id.tv_message_title);
             timeTextView = itemView.findViewById(R.id.tv_message_time);
             contentTextView = itemView.findViewById(R.id.tv_message_content);
             readImageView = itemView.findViewById(R.id.iv_message_read);
+        }
+    }
+
+    private class clickOnClick implements View.OnClickListener {
+        private int position;
+
+        public clickOnClick(int position) {
+            this.position = position;
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickOneListener != null) {
+                clickOneListener.adapterClickListener(position, v);
+            }
         }
     }
 

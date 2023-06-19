@@ -452,6 +452,19 @@ public class UserDataManager {
     }
 
     /**
+     * 已读单个消息
+     * @param messageId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readOneMessage(String messageId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("messageId", messageId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "mointor/api/v2/message/read", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 根据设备号获取设备详情
      * @param deviceCode
      * @param successCallBack

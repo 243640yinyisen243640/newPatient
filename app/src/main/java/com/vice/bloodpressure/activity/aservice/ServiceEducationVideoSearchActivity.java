@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
@@ -57,18 +56,15 @@ public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewFo
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), videoInfos, new IAdapterViewClickOneListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_user_collect_video_click:
-                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
+        return new UserCollectVideoAdapter(getPageContext(), videoInfos, (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_user_collect_video_click:
+                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
 
-                }
             }
         });
     }
