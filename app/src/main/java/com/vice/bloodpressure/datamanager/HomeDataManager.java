@@ -215,10 +215,4 @@ public class HomeDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportResistance", map, successCallBack, failureCallBack);
     }
 
-
-    public static Call<String> getHomeWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
-        Map<String, String> map = new HashMap<>();
-        map.put("patientId", patientId);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/exceptionApp/list", map, successCallBack, failureCallBack);
-    }
 }

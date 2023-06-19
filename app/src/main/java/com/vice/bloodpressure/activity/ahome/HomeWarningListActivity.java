@@ -16,7 +16,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
-import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -60,14 +60,13 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
      */
     private TextView sureTv;
 
-    private String startTime="";
+    private String startTime = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         topViewManager().topView().addView(initTopView());
-//        getPageListView().setBackgroundColor(getResources().getColor(R.color.background));
         initListener();
         //设置每一个item间距
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
@@ -97,21 +96,52 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = HomeDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+        Call<String> requestCall = UserDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
-                setPageIndex(1);
-                onPageLoad();
+                callBack.callBack(response.object);
             }
         }, (call, t) -> {
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            callBack.callBack(null);
         });
         addRequestCallToMap("getHomeWarningList", requestCall);
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
-        return new HomeWarningListAdapter(getPageContext(), list);
+        return new HomeWarningListAdapter(getPageContext(), list, (position, view) -> {
+            switch (view.getId()) {
+                //
+                case R.id.ll_warning_click:
+                    break;
+                //删除
+                case R.id.tv_warning_delete:
+                    deleteOneMessage(position);
+                    break;
+                //获取更多数据
+                case R.id.tv_warning_more:
+
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+
+    /**
+     * 读某一条消息
+     *
+     * @param position
+     */
+    private void deleteOneMessage(int position) {
+        Call<String> requestCall = UserDataManager.deleteOneWarning(getPageListData().get(position).getId(), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("readOneMessage", requestCall);
     }
 
     @Override
@@ -126,7 +156,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 finish();
                 break;
             case R.id.tv_warning_all_read:
-                ToastUtils.getInstance().showToast(getPageContext(), "测试弹出");
+
                 break;
             case R.id.tv_warning_start:
 

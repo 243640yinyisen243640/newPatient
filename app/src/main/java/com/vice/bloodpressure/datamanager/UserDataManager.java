@@ -453,6 +453,7 @@ public class UserDataManager {
 
     /**
      * 已读单个消息
+     *
      * @param messageId
      * @param successCallBack
      * @param failureCallBack
@@ -466,6 +467,7 @@ public class UserDataManager {
 
     /**
      * 根据设备号获取设备详情
+     *
      * @param deviceCode
      * @param successCallBack
      * @param failureCallBack
@@ -474,6 +476,63 @@ public class UserDataManager {
     public static Call<String> getScanInfo(String deviceCode, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("deviceCode", deviceCode);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_OBJECT, EquipmetInfo.class, "system/device/v2/app/selectDeviceByCode", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EquipmetInfo.class, "system/device/v2/app/selectDeviceByCode", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * 异常数据列表
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getHomeWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/exceptionApp/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 全部已读
+     *
+     * @param patientId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readWarningList(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/message/readAll", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 已读单个消息
+     *
+     * @param messageId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readOneWarning(String messageId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("messageId", messageId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "mointor/api/v2/message/read", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 异常数据删除
+     *
+     * @param pkId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> deleteOneWarning(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/exceptionApp/delete", map, successCallBack, failureCallBack);
     }
 }

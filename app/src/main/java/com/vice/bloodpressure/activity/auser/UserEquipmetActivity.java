@@ -54,6 +54,11 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<Equipmet
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
 
     @Override
     protected boolean isRefresh() {

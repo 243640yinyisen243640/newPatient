@@ -31,13 +31,9 @@ import java.util.Map;
  */
 
 public class QRCodeUtils {
-    private static boolean isShop = false;
-    private static String shop_id = "";
     private static Context mContext;
 
     public static void qrCodeOper(Context context, String content, Intent intent) {
-        isShop = intent.getBooleanExtra("input", false);
-        shop_id = intent.getStringExtra("id");
         qrCodeOper(context, content);
     }
 
@@ -73,17 +69,6 @@ public class QRCodeUtils {
     }
 
 
-    private static void handleQrcodeJump(Context context, String content) {
-        // 格式：http://116.255.236.229:8495/register.html?mark=2&content=31
-        //返回的是Url的话 要分割取出对应的字段和值
-        Log.i("yys", "content==" + content);
-        //截取从最后一个问号，取出来paraStr = mark=1&ud=30
-        String paraStr = content.substring(content.lastIndexOf("?") + 1);
-        //paraStrs = 【0】mark = 1； 【1】ud = 30 这样的一个数组
-        //mark=2是群二维码  mark=1 是用户二维码
-        String[] paraStrs = paraStr.split("&");
-
-    }
 
     /**
      * 长按识别二维码

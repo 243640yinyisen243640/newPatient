@@ -101,6 +101,5 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         }
     }
 
-
 }
 

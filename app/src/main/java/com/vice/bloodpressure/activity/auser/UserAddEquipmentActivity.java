@@ -100,6 +100,7 @@ public class UserAddEquipmentActivity extends UIBaseLoadActivity implements View
         typeTextView.setClickable(false);
         nameTextView.setClickable(false);
         numEditText.setClickable(false);
+        numEditText.setEnabled(false);
     }
 
     private void initListener() {

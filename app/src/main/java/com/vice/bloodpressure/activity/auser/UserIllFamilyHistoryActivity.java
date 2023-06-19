@@ -81,7 +81,6 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
             }
         });
         saveTv.setOnClickListener(v -> {
-            saveTv.setClickable(false);
             sureToAddData();
         });
     }

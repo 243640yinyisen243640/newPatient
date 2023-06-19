@@ -70,6 +70,18 @@ public class MessageInfo implements Serializable {
      * id
      */
     private String id;
+    /**
+     *  异常类型   1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
+     */
+    private String exceptionType;
+
+    public String getExceptionType() {
+        return exceptionType;
+    }
+
+    public void setExceptionType(String exceptionType) {
+        this.exceptionType = exceptionType;
+    }
 
     public String getId() {
         return id;

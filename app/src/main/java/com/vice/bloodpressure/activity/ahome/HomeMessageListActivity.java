@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
 import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
@@ -84,30 +85,39 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
         return messageListAdapter = new HomeMessageListAdapter(getPageContext(), list, (position, view) -> {
-            Intent intent;
-            //  //1. 绑定医生 2. 血糖 3. 血压  4 智能教育
-            switch (getPageListData().get(position).getType()) {
-                case "1":
-                    intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                    startActivity(intent);
-                    break;
-                case "2":
-                    intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
-                    startActivity(intent);
-                    break;
-                case "3":
-                    intent = new Intent(getPageContext(), ServicePressureListActivity.class);
-                    startActivity(intent);
-                    break;
-                case "4":
-                    intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
-                    startActivity(intent);
+            switch (view.getId()) {
+                case R.id.fl_message_click:
+                    Intent intent;
+                    getPageListData().get(position).setStatus("1");
+                    messageListAdapter.notifyDataSetChanged();
+                    readOneMessage(position);
+                    //  //1. 绑定医生 2. 血糖 3. 血压  4 智能教育
+                    switch (getPageListData().get(position).getType()) {
+                        case "1":
+                            intent = new Intent(getPageContext(), UserDoctorActivity.class);
+                            startActivity(intent);
+                            break;
+                        case "2":
+                            intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+                            startActivity(intent);
+                            break;
+                        case "3":
+                            intent = new Intent(getPageContext(), ServicePressureListActivity.class);
+                            startActivity(intent);
+                            break;
+                        case "4":
+                            intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+                            startActivity(intent);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;
             }
 
-            readOneMessage(position);
+
         });
     }
 
@@ -118,10 +128,8 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
      */
     private void readOneMessage(int position) {
         Call<String> requestCall = UserDataManager.readOneMessage(getPageListData().get(position).getId(), (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                getPageListData().get(position).setStatus("1");
-                messageListAdapter.notifyDataSetChanged();
+
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
