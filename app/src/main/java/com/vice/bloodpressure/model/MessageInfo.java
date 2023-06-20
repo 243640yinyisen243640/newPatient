@@ -87,6 +87,18 @@ public class MessageInfo implements Serializable {
      * 时间
      */
     private String addTime;
+    /**
+     * 0未读 1 已读
+     */
+    private String readStatus;
+
+    public String getReadStatus() {
+        return readStatus;
+    }
+
+    public void setReadStatus(String readStatus) {
+        this.readStatus = readStatus;
+    }
 
     public String getAddTime() {
         return addTime;

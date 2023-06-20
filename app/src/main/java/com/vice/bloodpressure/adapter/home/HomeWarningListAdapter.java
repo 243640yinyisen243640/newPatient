@@ -64,12 +64,23 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         //1偏低 2 正常 3 偏高
         if ("1".equals(info.getStatus())) {
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.blue_4B));
-            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.warn_low,0);
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warn_low, 0);
+            holder.tipTextView.setVisibility(View.VISIBLE);
+            holder.tipTextView.setText("血糖偏低，请咨询医生，调整管理方案。");
         } else if ("2".equals(info.getStatus())) {
+            holder.tipTextView.setVisibility(View.GONE);
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.black_24));
         } else {
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.red_E5));
-            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.warning_high,0);
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warning_high, 0);
+            holder.tipTextView.setVisibility(View.VISIBLE);
+            holder.tipTextView.setText("血糖偏高，请咨询医生，调整管理方案。");
+        }
+        //        0未读 1 已读
+        if ("0".equals(info.getReadStatus())) {
+            holder.readImageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.readImageView.setVisibility(View.GONE);
         }
     }
 
