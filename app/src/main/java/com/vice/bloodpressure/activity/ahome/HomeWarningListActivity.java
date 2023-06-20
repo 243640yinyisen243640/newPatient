@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
 import com.vice.bloodpressure.adapter.home.HomeWarningListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -120,24 +122,39 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
         return warningListAdapter = new HomeWarningListAdapter(getPageContext(), list, (position, view) -> {
+            getPageListData().get(position).setReadStatus("1");
+            warningListAdapter.notifyDataSetChanged();
+            readOneWarning(position);
             switch (view.getId()) {
-                //
-                case R.id.ll_warning_click:
-
-                    break;
                 //删除
                 case R.id.tv_warning_delete:
                     deleteOneMessage(position);
-
                     break;
                 //获取更多数据
                 case R.id.tv_warning_more:
-
+                    Intent intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+                    startActivity(intent);
                     break;
                 default:
                     break;
             }
         });
+    }
+
+    /**
+     * 读某一条消息
+     *
+     * @param position
+     */
+    private void readOneWarning(int position) {
+        Call<String> requestCall = UserDataManager.readOneWarning(getPageListData().get(position).getId(), getPageListData().get(position).getType(), getPageListData().get(position).getPkId(), (call, response) -> {
+            if ("0000".equals(response.code)) {
+
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("readOneMessage", requestCall);
     }
 
     /**

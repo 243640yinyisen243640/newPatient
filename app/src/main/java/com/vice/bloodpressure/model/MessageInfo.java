@@ -38,7 +38,8 @@ public class MessageInfo implements Serializable {
      */
     private String pkId;
     /**
-     * 宣教类型:1->图文;2->音频;3->视频;
+     * 在宣教列表宣教类型:1->图文;2->音频;3->视频;
+     * 在异常数据列表中，表示 1血糖数据  2 血压数据
      */
     private String type;
     /**

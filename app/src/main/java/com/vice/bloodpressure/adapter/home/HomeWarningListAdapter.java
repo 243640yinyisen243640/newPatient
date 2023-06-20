@@ -53,12 +53,10 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         } else {
             holder.titleTextView.setText("血压");
         }
-
         holder.numTextView.setText(info.getValue());
         holder.unitTextView.setText(info.getUnit());
         holder.timeTextView.setText(info.getAddTime());
         clickOnClick onClick = new clickOnClick(position);
-        holder.clickLinearLayout.setOnClickListener(onClick);
         holder.deleteTextView.setOnClickListener(onClick);
         holder.moreTextView.setOnClickListener(onClick);
         //1偏低 2 正常 3 偏高

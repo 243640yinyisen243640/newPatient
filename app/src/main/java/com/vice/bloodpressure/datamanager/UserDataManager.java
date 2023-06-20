@@ -501,15 +501,19 @@ public class UserDataManager {
     /**
      * 已读单个消息
      *
-     * @param messageId
+     * @param patientId
+     * @param type 1 血糖 2 血压
+     * @param pkId 血糖ID或者血压ID
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> readOneWarning(String messageId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> readOneWarning(String patientId,String type,String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("messageId", messageId);
-        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "mointor/api/v2/message/read", map, successCallBack, failureCallBack);
+        map.put("patientId", patientId);
+        map.put("type", type);
+        map.put("pkId", pkId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/exceptionApp/read", map, successCallBack, failureCallBack);
     }
 
     /**
