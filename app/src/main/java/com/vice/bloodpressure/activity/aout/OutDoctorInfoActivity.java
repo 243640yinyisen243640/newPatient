@@ -71,8 +71,11 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
         topViewManager().titleTextView().setText("医生详情");
         doctorId = getIntent().getStringExtra("doctorId");
         initView();
+
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
+
+
 
     private void initlistener() {
         //如果我已经绑定这个医生了，就要解绑这个医生

@@ -2,6 +2,7 @@ package com.vice.bloodpressure.fragment.fout;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,23 +59,42 @@ public class OutMainFragment extends UIBaseLoadFragment {
         }
 
     }
-
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = OutDataManager.getDeptDoctorInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID), UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-            if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                DoctorInfo doctorInfoOther = (DoctorInfo) response.object;
-                bindData(doctorInfoOther);
-            } else {
+        if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            initValues();
+        } else {
+            Call<String> requestCall = OutDataManager.getDeptDoctorInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID), UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+                if ("0000".equals(response.code)) {
+                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                    DoctorInfo doctorInfoOther = (DoctorInfo) response.object;
+                    bindData(doctorInfoOther);
+                } else {
+                    loadViewManager().changeLoadState(LoadStatus.FAILED);
+                }
+            }, (call, t) -> {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-        });
-        addRequestCallToMap("getDeptDoctorInfo", requestCall);
+            });
+            addRequestCallToMap("getDeptDoctorInfo", requestCall);
+        }
+
     }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            onPageLoad();
+        }
+    }
     private void bindData(DoctorInfo doctorInfoOther) {
         unbandLinearLayout.setVisibility(View.GONE);
         bandLinearLayout.setVisibility(View.VISIBLE);
@@ -102,7 +122,6 @@ public class OutMainFragment extends UIBaseLoadFragment {
 
 
         });
-
 
 
     }

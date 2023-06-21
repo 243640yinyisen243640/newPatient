@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.datamanager.UserDataManager;
@@ -17,6 +18,7 @@ import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
@@ -81,6 +83,7 @@ public class UserDoctorActivity extends UIBaseLoadActivity {
         Call<String> requestCall = OutDataManager.unBindDoctor(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
+                SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, "");
                 finish();
             }
         }, (call, t) -> {
