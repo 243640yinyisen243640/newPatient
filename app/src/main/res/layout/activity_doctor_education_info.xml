@@ -17,17 +17,16 @@
             android:id="@+id/tv_education_details_audio_title_doctor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="系列一：高血压的基础知识"
             android:textColor="@color/black_24"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_education_details_audio_time_doctor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            android:text="2021-2-21 13:50"
             android:textColor="@color/gray_A9"
             android:textSize="13sp" />
 
@@ -36,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,6 +103,7 @@
             android:id="@+id/jz_education_details_video_doctor"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:visibility="gone"
             android:layout_marginBottom="10dp" />
 
         <LinearLayout

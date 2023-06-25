@@ -37,10 +37,11 @@ import retrofit2.Call;
  * 传参:type :宣教类型:1->图文;2->音频;3->视频;
  * 描述:宣教详情
  */
-public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
+public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implements View.OnClickListener {
 
     private LinearLayout audioLinearLayout;
     private TextView titleTextView;
+    private TextView timeTextView;
     private SeekBar audioSeekBar;
     private TextView startTimeTextView;
     private TextView allTimeTextView;
@@ -64,9 +65,33 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("宣教详情");
         type = getIntent().getStringExtra("type");
+
         initView();
+        initListener();
         initAudioProgress();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    private void initListener() {
+        startImageView.setOnClickListener(this);
+
+        //设置滑动监听
+        audioSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                StarrySky.with().seekTo(seekBar.getProgress(), true);
+            }
+        });
     }
 
     /**
@@ -88,6 +113,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_doctor_education_info, null);
         audioLinearLayout = view.findViewById(R.id.ll_education_details_audio_doctor);
         titleTextView = view.findViewById(R.id.tv_education_details_audio_title_doctor);
+        timeTextView = view.findViewById(R.id.tv_education_details_audio_time_doctor);
         audioSeekBar = view.findViewById(R.id.sb_education_details_audio_doctor);
         startTimeTextView = view.findViewById(R.id.tv_education_details_audio_start_time_doctor);
         allTimeTextView = view.findViewById(R.id.tv_education_details_audio_all_time_doctor);
@@ -96,22 +122,8 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         webView = view.findViewById(R.id.web_education_details_web_doctor);
         progressBar = view.findViewById(R.id.pb_education_details_web_doctor);
         containerView().addView(view);
-        //1->图文;2->音频;3->视频;
-        if ("1".equals(type)) {
-            audioLinearLayout.setVisibility(View.GONE);
-            videoJz.setVisibility(View.GONE);
-        } else if ("2".equals(type)) {
-            audioLinearLayout.setVisibility(View.VISIBLE);
-            videoJz.setVisibility(View.GONE);
-        } else {
-            audioLinearLayout.setVisibility(View.GONE);
-            videoJz.setVisibility(View.VISIBLE);
 
 
-        }
-        startImageView.setOnClickListener(v -> {
-            setAudioClick();
-        });
     }
 
 
@@ -123,7 +135,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         if (oddNumber) {
             am.start();
             int id = 2;
-            String audioUrl = "http://video.xiyuns.cn/1633773952000.mp3";
+            String audioUrl = messageInfo.getFileUrl();
             //开始播放
             SongInfo info = new SongInfo();
             info.setSongId(id + "");
@@ -143,7 +155,8 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = OutDataManager.getDoctorEducationInfo("", (call, response) -> {
+        String pkid = getIntent().getStringExtra("pkid");
+        Call<String> requestCall = OutDataManager.getDoctorEducationInfo(pkid, (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 messageInfo = (MessageInfo) response.object;
@@ -160,11 +173,19 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
 
     private void bindData() {
         //宣教类型:1->图文;2->音频;3->视频;
-        if ("1".equals(messageInfo.getType())) {
+        titleTextView.setText(messageInfo.getTitle());
+        timeTextView.setText(messageInfo.getSendTime());
 
+        if ("1".equals(messageInfo.getType())) {
+            audioLinearLayout.setVisibility(View.GONE);
+            videoJz.setVisibility(View.GONE);
         } else if ("2".equals(messageInfo.getType())) {
+            audioLinearLayout.setVisibility(View.VISIBLE);
+            videoJz.setVisibility(View.GONE);
             setWebViewData(webView, messageInfo.getFileUrl());
         } else {
+            audioLinearLayout.setVisibility(View.GONE);
+            videoJz.setVisibility(View.VISIBLE);
             setVideoInfo();
         }
     }
@@ -210,48 +231,27 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         //未开始播放
         audioSeekBar.setEnabled(false);
         taskManager = new TimerTaskManager();
-        taskManager.setUpdateProgressTask(new Runnable() {
-            @Override
-            public void run() {
-                //设置进度条
-                //总时长
-                long duration = StarrySky.with().getDuration();
-                Log.i("yys", "duration==" + duration);
-                //播放位置
-                long position = StarrySky.with().getPlayingPosition();
-                Log.i("yys", "position==" + position);
-                //缓冲位置
-                long buffered = StarrySky.with().getBufferedPosition();
-                Log.i("yys", "buffered==" + buffered);
-                if (audioSeekBar.getMax() != duration) {
-                    audioSeekBar.setMax((int) duration);
-                }
-                audioSeekBar.setProgress((int) position);
-                audioSeekBar.setSecondaryProgress((int) buffered);
-
-                //设置进度文字
-                startTimeTextView.setText(formatMusicTime(position));
+        taskManager.setUpdateProgressTask(() -> {
+            //设置进度条
+            //总时长
+            long duration = StarrySky.with().getDuration();
+            Log.i("yys", "duration==" + duration);
+            //播放位置
+            long position = StarrySky.with().getPlayingPosition();
+            Log.i("yys", "position==" + position);
+            //缓冲位置
+            long buffered = StarrySky.with().getBufferedPosition();
+            Log.i("yys", "buffered==" + buffered);
+            if (audioSeekBar.getMax() != duration) {
+                audioSeekBar.setMax((int) duration);
             }
+            audioSeekBar.setProgress((int) position);
+            audioSeekBar.setSecondaryProgress((int) buffered);
+
+            //设置进度文字
+            startTimeTextView.setText(formatMusicTime(position));
         });
 
-
-        //设置滑动监听
-        audioSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                StarrySky.with().seekTo(seekBar.getProgress(), true);
-            }
-        });
 
     }
 
@@ -295,5 +295,16 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity {
         super.onDestroy();
         StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_education_details_audio_start_doctor:
+                setAudioClick();
+                break;
+            default:
+                break;
+        }
     }
 }

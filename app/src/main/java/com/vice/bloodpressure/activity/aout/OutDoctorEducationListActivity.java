@@ -16,7 +16,6 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
-import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -52,7 +51,7 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
     }
 
     private void readAll() {
-        Call<String> requestCall = UserDataManager.readMessageList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+        Call<String> requestCall = OutDataManager.readEducationList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setPageIndex(1);
@@ -61,12 +60,12 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        addRequestCallToMap("getMessageList", requestCall);
+        addRequestCallToMap("readEducationList", requestCall);
     }
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = OutDataManager.getPropagandaAndEducation(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", (call, response) -> {
+        Call<String> requestCall = OutDataManager.getPropagandaAndEducation(UserInfoUtils.getArchivesId(getPageContext()), BaseDataManager.PAGE_SIZE + "", getPageIndex() + "", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }
@@ -85,6 +84,7 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
                     case R.id.ll_doctor_education_click:
                         Intent intent = new Intent(getPageContext(), OutDoctorEducationInfoActivity.class);
                         intent.putExtra("type", getPageListData().get(position).getType());
+                        intent.putExtra("pkid", getPageListData().get(position).getPkId());
                         startActivity(intent);
                         break;
                     default:
