@@ -66,16 +66,14 @@ public class OutDoctorEducationListActivity extends UIBaseListRecycleViewActivit
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = OutDataManager.readEducationList(UserInfoUtils.getArchivesId(getPageContext()),  (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+        Call<String> requestCall = OutDataManager.getPropagandaAndEducation(UserInfoUtils.getArchivesId(getPageContext()), getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", (call, response) -> {
             if ("0000".equals(response.code)) {
-                setPageIndex(1);
-                onPageLoad();
+                callBack.callBack(response.object);
             }
         }, (call, t) -> {
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+            callBack.callBack(null);
         });
-        addRequestCallToMap("readEducationList", requestCall);
+        addRequestCallToMap("getPropagandaAndEducation", requestCall);
     }
 
     @Override
