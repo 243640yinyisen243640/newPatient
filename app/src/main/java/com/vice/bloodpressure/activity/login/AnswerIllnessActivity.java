@@ -51,11 +51,11 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
     }
 
     private void intView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_answer_ill, null);
-        progressBar = view.findViewById(R.id.pb_answer_ill);
-        listView = view.findViewById(R.id.lv_answer_ill_investigate);
-        tvUp = view.findViewById(R.id.tv_answer_ill_back);
-        tvNext = view.findViewById(R.id.tv_answer_ill_next);
+        View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
+        progressBar = view.findViewById(R.id.pb_answer_content);
+        listView = view.findViewById(R.id.lv_answer_content_investigate);
+        tvUp = view.findViewById(R.id.tv_answer_content_up);
+        tvNext = view.findViewById(R.id.tv_answer_content_next);
         containerView().addView(view);
 
     }
@@ -106,11 +106,11 @@ public class AnswerIllnessActivity extends UIBaseActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_answer_ill_back:
+            case R.id.tv_answer_content_up:
                 finish();
                 break;
             //下一题
-            case R.id.tv_answer_ill_next:
+            case R.id.tv_answer_content_next:
                 StringBuilder builder = new StringBuilder();
 //                for (EducationQuestionInvestigateModel model : list) {
 //                    //                    builder.append("{");

@@ -23,15 +23,31 @@ public class BaseLocalDataInfo {
      */
     private String isSelect;
 
+    private Class className;
+
     public BaseLocalDataInfo(String name, String id, String isSelect) {
         this.name = name;
         this.id = id;
         this.isSelect = isSelect;
     }
 
+    public BaseLocalDataInfo(String name, String id,Class className) {
+        this.name = name;
+        this.id = id;
+        this.className = className;
+    }
+
     public BaseLocalDataInfo(String name, String id) {
         this.name = name;
         this.id = id;
+    }
+
+    public Class getClassName() {
+        return className;
+    }
+
+    public void setClassName(Class className) {
+        this.className = className;
     }
 
     public String getName() {

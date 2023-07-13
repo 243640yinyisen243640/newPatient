@@ -102,7 +102,7 @@ public class AnswerFirstTypeActivity extends UIBaseActivity {
                 ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
                 return;
             }
-            Intent intent = new Intent(getPageContext(), AnswerSecondActivity.class);
+            Intent intent = new Intent(getPageContext(), AnswerTangActivity.class);
             intent.putExtra("position", adapter.getClickPosition());
             startActivity(intent);
         });

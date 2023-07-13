@@ -26,7 +26,7 @@ import java.util.List;
  * 传参:
  * 描述:登录答题
  */
-public class AnswerSecondActivity extends UIBaseActivity {
+public class AnswerTangActivity extends UIBaseActivity {
     private EducationQuestionInvestigateAdapter adapter;
     private List<EducationQuestionInvestigateModel> list = new ArrayList<>();
     private ListView listView;

@@ -251,8 +251,9 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
                 String answerMew = "";
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).isCheck()) {
-                        answerMew = answerMew + i + "_";
-                    }
+                        answerMew = answerMew + (i+1) + ",";
+
+                     }
                 }
                 if (TextUtils.isEmpty(answerMew)) {
                     Toast.makeText(getPageContext(), "请选择答案", Toast.LENGTH_SHORT).show();
@@ -283,7 +284,7 @@ public class EducationQuestionInvestigateActivity extends UIBaseActivity impleme
                             + "\n" + answer[1]
                             + "\n" + answer[2]
                             + "\n" + answer[3]
-                            + "\n" + answer[4]
+
                             + "\n" + answer[5]);
                 } else {
                     intent.putExtra("questionNowNum", questionNowNum + 1);

@@ -29,8 +29,11 @@ public class EducationQuestionInvestigateBeginActivity extends UIBaseActivity {
         TextView tvQuestionInvestigateBegin = findViewById(R.id.tv_education_question_investigate_begin);
         //问卷调查开始答题
         tvQuestionInvestigateBegin.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), EducationQuestionInvestigateActivity.class);
-            intent.putExtra("questionNowNum", 1);
+//            Intent intent = new Intent(getPageContext(), EducationQuestionInvestigateActivity.class);
+//            intent.putExtra("questionNowNum", 1);
+//            startActivity(intent);
+
+            Intent intent = new Intent(getPageContext(), EducationHeightWeightActivity.class);
             startActivity(intent);
         });
     }

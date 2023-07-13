@@ -138,7 +138,7 @@
             android:name=".activity.login.AnswerFirstTypeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.login.AnswerSecondActivity"
+            android:name=".activity.login.AnswerTangActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.login.AnswerThirdActivity"
@@ -299,6 +299,32 @@
         <!-- 教育 问卷调查 -->
         <activity
             android:name=".activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity"
+            android:screenOrientation="portrait" />
+        <!--智能教育 答题身高体重-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationHeightWeightActivity"
+            android:screenOrientation="portrait" />
+        <!--第一步选病种-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationIllnessActivity"
+            android:screenOrientation="portrait" />
+        <!--  糖尿病下的类型-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationAnswerTangActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.ahome.aeducation.EducationGaoKnowledgeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ahome.aeducation.EducationGaoTimeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ahome.aeducation.EducationGuanTimeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ahome.aeducation.EducationNaoTimeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ahome.aeducation.EducationFeiTimeActivity"
+            android:screenOrientation="portrait"/>
+        <!-- 糖尿病并发症-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationTangConcurrencyActivity"
             android:screenOrientation="portrait" />
         <!--弃用页面，等接口出来以后看是不是需要删除-->
         <activity
