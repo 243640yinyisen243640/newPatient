@@ -36,28 +36,36 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
     private List<Class> classList;
     private int index;
     private EducationAnswerInfo answerInfo;
+    private int allPage;
+    private int page;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
         init();
-        initValues();
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0) ;
-        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
-        if (classList.size() == index+1) {
-            //最后一题  修改下一题为完成
-
-        }
+        index = getIntent().getIntExtra("index", 0);
+        answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
+        initValues();
     }
 
     private void initValues() {
         //进度
+        tvTitle.setText("您患高血压有多长时间了？");
+        tvMoro.setVisibility(View.GONE);
+        progressBar.setMax(allPage);
+        progressBar.setProgress(page);
+
+
         list.add(new BaseLocalDataInfo("小于1年", "1"));
         list.add(new BaseLocalDataInfo("1~5年", "2"));
         list.add(new BaseLocalDataInfo("大于5年", "3"));
-
+        list.get(0).setCheck(true);
+        answerInfo.setHbpTime("1");
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -65,13 +73,11 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
                 list.get(i).setCheck(false);
             }
             list.get(position).setCheck(true);
+            answerInfo.setHbpTime(list.get(position).getId());
             adapter.notifyDataSetChanged();
 
         });
-        tvTitle.setText("您患高血压有多长时间了？");
-        tvMoro.setVisibility(View.GONE);
-        progressBar.setMax(12);
-        progressBar.setProgress(3);
+
     }
 
     private void init() {
@@ -87,10 +93,12 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             //          跳转页面
-            Intent intent  =new Intent(getPageContext(),EducationGaoKnowledgeActivity.class);
+            Intent intent = new Intent(getPageContext(), EducationGaoKnowledgeActivity.class);
             intent.putExtra("index", index);
             intent.putExtra("classList", (Serializable) classList);
             intent.putExtra("answerInfo", answerInfo);
+            intent.putExtra("page", page + 1);
+            intent.putExtra("allPage", allPage);
             startActivity(intent);
         });
     }

@@ -36,17 +36,22 @@ public class EducationTangQianKnowledgeActivity extends UIBaseActivity {
     private List<Class> classList;
     private int index;
     private EducationAnswerInfo answerInfo;
+    private int allPage;
+    private int page;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
         init();
-        initValues();
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0) ;
-        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
-        if (classList.size() == index+1) {
+        index = getIntent().getIntExtra("index", 0);
+        answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
+        initValues();
+        if (classList.size() == index + 1) {
             //最后一题  修改下一题为完成
 
         }
@@ -54,9 +59,15 @@ public class EducationTangQianKnowledgeActivity extends UIBaseActivity {
 
     private void initValues() {
         //进度
+        tvTitle.setText("是否了解糖尿病的基础知识？");
+        tvMoro.setVisibility(View.GONE);
+        progressBar.setMax(allPage);
+        progressBar.setProgress(page);
+
         list.add(new BaseLocalDataInfo("是", "1"));
         list.add(new BaseLocalDataInfo("否", "2"));
-
+        list.get(0).setCheck(true);
+        answerInfo.setDmBasics("1");
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -64,13 +75,11 @@ public class EducationTangQianKnowledgeActivity extends UIBaseActivity {
                 list.get(i).setCheck(false);
             }
             list.get(position).setCheck(true);
+            answerInfo.setDmBasics(list.get(position).getId());
             adapter.notifyDataSetChanged();
 
         });
-        tvTitle.setText("是否了解糖尿病的基础知识？");
-        tvMoro.setVisibility(View.GONE);
-        progressBar.setMax(12);
-        progressBar.setProgress(3);
+
     }
 
     private void init() {
@@ -89,10 +98,12 @@ public class EducationTangQianKnowledgeActivity extends UIBaseActivity {
             //          跳转页面
             if (classList.size() > index + 1) {
                 //有下一题
-                Intent intent = new Intent(this, classList.get(index+1));
-                intent.putExtra("index", index+1);
+                Intent intent = new Intent(this, classList.get(index + 1));
+                intent.putExtra("index", index + 1);
                 intent.putExtra("classList", (Serializable) classList);
                 intent.putExtra("answerInfo", answerInfo);
+                intent.putExtra("page", page + 1);
+                intent.putExtra("allPage", allPage);
                 //其他的你自己传
                 startActivity(intent);
             } else {

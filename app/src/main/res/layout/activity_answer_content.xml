@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"
                     android:textColor="#242424"
+                    android:textStyle="bold"
                     android:textSize="20sp" />
 
                 <TextView

@@ -14,11 +14,11 @@ import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapt
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.EducationAnswerInfo;
-import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 类名：
  * 传参：
@@ -40,12 +40,18 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
     private List<Class> classList;
     private int index;
     private EducationAnswerInfo answerInfo;
+    private int allPage;
+    private int page;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
-        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0);
+        answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
         intView();
         initValues();
         initListener();
@@ -69,16 +75,10 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
     }
 
     private void initValues() {
-        //判断是下一题还是完成
-        classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0);
-        if (classList.size() == index + 1) {
-            //最后一题  修改下一题为完成
-
-        }
-        //        progressBar.setProgress(6);
-        //        progressBar.setMax(9);
+        progressBar.setProgress(page);
+        progressBar.setMax(allPage);
         tvMore.setVisibility(View.VISIBLE);
+        tvTitle.setText("您的糖尿病类型是什么？");
 
         list.add(new BaseLocalDataInfo("无", "1"));
         list.add(new BaseLocalDataInfo("糖尿病足", "2"));
@@ -86,7 +86,7 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
         list.add(new BaseLocalDataInfo("糖尿病视网膜病变", "4"));
         list.add(new BaseLocalDataInfo("糖尿病神经病变", "5"));
         list.add(new BaseLocalDataInfo("糖尿病下肢血管病变", "6"));
-
+        list.get(0).setCheck(true);
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -103,6 +103,7 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
                 }
                 list.get(position).setCheck(!list.get(position).isCheck());
             }
+
             adapter.notifyDataSetChanged();
         });
     }
@@ -124,16 +125,13 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
                     }
                 }
                 builder.deleteCharAt(builder.length() - 1);
-                if (builder.length() == 0) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
-                    return;
-                }
-
-
+                answerInfo.setDmComplication(builder.toString());
                 //跳页面
-                Intent intent = new Intent(getPageContext(),EducationTangKnowledgeActivity.class);
+                Intent intent = new Intent(getPageContext(), EducationTangKnowledgeActivity.class);
                 intent.putExtra("index", index);
                 intent.putExtra("classList", (Serializable) classList);
+                intent.putExtra("page", page + 1);
+                intent.putExtra("allPage", allPage);
                 intent.putExtra("answerInfo", answerInfo);
                 startActivity(intent);
                 break;

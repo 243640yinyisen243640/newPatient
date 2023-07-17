@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -37,25 +38,32 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
     private int index;
     private EducationAnswerInfo answerInfo;
 
+    private int allPage;
+    private int page;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
         init();
-        initValues();
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
         index = getIntent().getIntExtra("index", 0);
-        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
-        if (classList.size() == index + 1) {
-            //最后一题  修改下一题为完成
+        answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
+        initValues();
 
-        }
     }
 
     private void initValues() {
         //进度
+        tvTitle.setText("您的糖尿病类型是什么？");
+        tvMore.setVisibility(View.GONE);
+        progressBar.setMax(allPage);
+        progressBar.setProgress(page);
+
+        Log.i("yys", "answerInfo==null" + (answerInfo == null));
         list.add(new BaseLocalDataInfo("1型糖尿病", "1"));
         list.add(new BaseLocalDataInfo("2型糖尿病", "2"));
         list.add(new BaseLocalDataInfo("妊娠糖尿病", "3"));
@@ -63,18 +71,18 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
 
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
+        list.get(0).setCheck(true);
+        answerInfo.setDmType("1");
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).setCheck(false);
             }
             list.get(position).setCheck(true);
+            answerInfo.setDmType(list.get(position).getId());
             adapter.notifyDataSetChanged();
-
         });
-        tvTitle.setText("您的糖尿病类型是什么？");
-        tvMore.setVisibility(View.GONE);
-        progressBar.setMax(12);
-        progressBar.setProgress(3);
+
     }
 
     private void init() {
@@ -91,18 +99,12 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
         tvNext.setOnClickListener(v -> {
             //          跳转页面
 
-            //如果不是一个大类型的最后一题
-            //写自己的正常跳转逻辑
-
-            //如果是一个大类型的最后一题
-            //写下面一段代码
-
-
-
-            Intent intent = new Intent(getPageContext(),EducationTangConcurrencyActivity.class);
+            Intent intent = new Intent(getPageContext(), EducationTangConcurrencyActivity.class);
             intent.putExtra("index", index);
             intent.putExtra("classList", (Serializable) classList);
             intent.putExtra("answerInfo", answerInfo);
+            intent.putExtra("page", page + 1);
+            intent.putExtra("allPage", allPage);
             startActivity(intent);
         });
     }

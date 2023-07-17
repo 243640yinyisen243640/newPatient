@@ -25,21 +25,32 @@ public class BaseLocalDataInfo {
 
     private Class className;
 
+    private int page;
+
     public BaseLocalDataInfo(String name, String id, String isSelect) {
         this.name = name;
         this.id = id;
         this.isSelect = isSelect;
     }
 
-    public BaseLocalDataInfo(String name, String id,Class className) {
+    public BaseLocalDataInfo(String name, String id,Class className,int page) {
         this.name = name;
         this.id = id;
         this.className = className;
+        this.page = page;
     }
 
     public BaseLocalDataInfo(String name, String id) {
         this.name = name;
         this.id = id;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     public Class getClassName() {
