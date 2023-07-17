@@ -107,7 +107,7 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
         });
     }
 
-    private List<Class> classList;
+    private List<Class> classList=new ArrayList<>();
 
     @Override
     public void onClick(View v) {
