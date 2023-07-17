@@ -13,6 +13,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
@@ -36,11 +37,18 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
     private TextView tvUp;
     private TextView tvNext;
     private ProgressBar progressBar;
+    //身高
+    private String height;
+    //体重
+    private String weight;
+    private EducationAnswerInfo answerInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
+        height = getIntent().getStringExtra("height");
+        weight = getIntent().getStringExtra("weight");
         intView();
         initValues();
         initListener();
@@ -79,6 +87,7 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
+
             if (list.get(position).getName().equals("都没有")) {
                 for (int i = 0; i < list.size(); i++) {
                     list.get(i).setCheck(false);
@@ -112,13 +121,18 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                     ToastUtils.getInstance().showToast(getPageContext(), "请选择答案");
                     return;
                 }
+
+                answerInfo = new EducationAnswerInfo();
+                answerInfo.setHeight(height);
+                answerInfo.setWeight(weight);
+
                 classList = new ArrayList<>();
                 if (list.size() == 1 && list.get(0).getId().equals(7)) {
                     //都没有
 
                 } else {
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).isCheck()){
+                        if (list.get(i).isCheck()) {
                             classList.add(list.get(i).getClassName());
                         }
                     }
@@ -126,6 +140,7 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                     int index = 0;
                     Intent intent = new Intent(this, classList.get(index));
                     intent.putExtra("index", index);
+                    intent.putExtra("answerInfo", answerInfo);
                     intent.putExtra("classList", (Serializable) classList);
                     //其他的你自己传
                     startActivity(intent);

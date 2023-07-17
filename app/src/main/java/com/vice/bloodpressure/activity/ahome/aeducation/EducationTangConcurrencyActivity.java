@@ -13,6 +13,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
@@ -38,11 +39,13 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
 
     private List<Class> classList;
     private int index;
+    private EducationAnswerInfo answerInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
+        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
         intView();
         initValues();
         initListener();
@@ -131,9 +134,8 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
                 Intent intent = new Intent(getPageContext(),EducationTangKnowledgeActivity.class);
                 intent.putExtra("index", index);
                 intent.putExtra("classList", (Serializable) classList);
+                intent.putExtra("answerInfo", answerInfo);
                 startActivity(intent);
-
-
                 break;
             default:
                 break;

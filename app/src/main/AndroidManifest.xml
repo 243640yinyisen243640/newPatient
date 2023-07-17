@@ -319,6 +319,9 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationAnswerTangActivity"
             android:screenOrientation="portrait" />
+        <!--糖尿病前期-->
+        <activity android:name=".activity.ahome.aeducation.EducationTangQianKnowledgeActivity"
+            android:screenOrientation="portrait"/>
         <!--高血压知识-->
         <activity android:name=".activity.ahome.aeducation.EducationGaoKnowledgeActivity"
             android:screenOrientation="portrait"/>

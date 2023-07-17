@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -12,7 +14,9 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,9 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
     private TextView tvMore;
     private ProgressBar progressBar;
     private TextView tvMoro;
+    private List<Class> classList;
+    private int index;
+    private EducationAnswerInfo answerInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +47,14 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
     }
 
     private void initValues() {
+
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0) ;
+        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
+        if (classList.size() == index+1) {
+            //最后一题  修改下一题为完成
+
+        }
         //进度
         list.add(new BaseLocalDataInfo("是", "1"));
         list.add(new BaseLocalDataInfo("否", "2"));
@@ -72,8 +87,20 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
+            //          跳转页面  我自己写的
+            Log.i("yys", "classList.size=="+classList.size());
+            Log.i("yys", "index=="+index);
+            if (classList.size() > index + 1) {
+                //有下一题
+                Intent intent = new Intent(this, classList.get(index+1));
+                intent.putExtra("index", index+1);
+                intent.putExtra("classList", (Serializable) classList);
+                intent.putExtra("answerInfo", answerInfo);
+                //其他的你自己传
+                startActivity(intent);
+            } else {
 
-            //          跳转页面
+            }
 
         });
     }

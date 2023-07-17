@@ -2,7 +2,6 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -14,6 +13,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
     private TextView tvMoro;
     private List<Class> classList;
     private int index;
+    private EducationAnswerInfo answerInfo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
         index = getIntent().getIntExtra("index", 0) ;
+        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
         if (classList.size() == index+1) {
             //最后一题  修改下一题为完成
 
@@ -85,20 +87,11 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             //          跳转页面
-            Log.i("yys", "classList.size=="+classList.size());
-            Log.i("yys", "index=="+index);
-            if (classList.size() > index + 1) {
-                //有下一题
-                Intent intent = new Intent(this, classList.get(index+1));
-                intent.putExtra("index", index+1);
-                intent.putExtra("classList", (Serializable) classList);
-                //其他的你自己传
-                startActivity(intent);
-            } else {
-                //最后一题
-                Intent intent = new Intent(getPageContext(),EducationGaoKnowledgeActivity.class);
-                startActivity(intent);
-            }
+            Intent intent  =new Intent(getPageContext(),EducationGaoKnowledgeActivity.class);
+            intent.putExtra("index", index);
+            intent.putExtra("classList", (Serializable) classList);
+            intent.putExtra("answerInfo", answerInfo);
+            startActivity(intent);
         });
     }
 

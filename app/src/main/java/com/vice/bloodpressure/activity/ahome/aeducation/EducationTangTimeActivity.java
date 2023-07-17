@@ -13,6 +13,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class EducationTangTimeActivity extends UIBaseActivity {
 
     private List<Class> classList;
     private int index;
-
+    private EducationAnswerInfo answerInfo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class EducationTangTimeActivity extends UIBaseActivity {
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
         index = getIntent().getIntExtra("index", 0) ;
+        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
         if (classList.size() == index+1) {
             //最后一题  修改下一题为完成
 
@@ -92,6 +94,7 @@ public class EducationTangTimeActivity extends UIBaseActivity {
                 Intent intent = new Intent(this, classList.get(index+1));
                 intent.putExtra("index", index+1);
                 intent.putExtra("classList", (Serializable) classList);
+                intent.putExtra("answerInfo", answerInfo);
                 //其他的你自己传
                 startActivity(intent);
             } else {

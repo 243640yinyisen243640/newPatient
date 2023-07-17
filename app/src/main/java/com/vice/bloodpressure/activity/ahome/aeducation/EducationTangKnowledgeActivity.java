@@ -13,6 +13,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAnswerInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
     private TextView tvMoro;
     private List<Class> classList;
     private int index;
+    private EducationAnswerInfo answerInfo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
     private void initValues() {
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
         index = getIntent().getIntExtra("index", 0);
+        answerInfo = (EducationAnswerInfo) getIntent().getCharSequenceExtra("answerInfo");
         if (classList.size() == index + 1) {
             //最后一题  修改下一题为完成
 
@@ -86,6 +89,7 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
             Intent intent = new Intent(getPageContext(),EducationTangTimeActivity.class);
             intent.putExtra("index", index);
             intent.putExtra("classList", (Serializable) classList);
+            intent.putExtra("answerInfo", answerInfo);
             startActivity(intent);
 
         });
