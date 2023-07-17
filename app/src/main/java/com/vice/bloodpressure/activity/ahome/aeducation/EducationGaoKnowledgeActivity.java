@@ -47,7 +47,10 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            list.get(position).setCheck(!list.get(position).isCheck());
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setCheck(false);
+            }
+            list.get(position).setCheck(true);
             adapter.notifyDataSetChanged();
 
         });

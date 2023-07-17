@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.ToastUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -33,6 +35,9 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
     private TextView tvUp;
     private TextView tvNext;
     private ProgressBar progressBar;
+
+    private List<Class> classList;
+    private int index;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +66,13 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
     }
 
     private void initValues() {
+        //判断是下一题还是完成
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0);
+        if (classList.size() == index + 1) {
+            //最后一题  修改下一题为完成
+
+        }
         //        progressBar.setProgress(6);
         //        progressBar.setMax(9);
         tvMore.setVisibility(View.VISIBLE);
@@ -116,6 +128,10 @@ public class EducationTangConcurrencyActivity extends UIBaseActivity implements 
 
 
                 //跳页面
+                Intent intent = new Intent(getPageContext(),EducationTangKnowledgeActivity.class);
+                intent.putExtra("index", index);
+                intent.putExtra("classList", (Serializable) classList);
+                startActivity(intent);
 
 
                 break;

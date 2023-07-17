@@ -1,6 +1,8 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -13,6 +15,7 @@ import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapt
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +33,21 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
     private ProgressBar progressBar;
     private TextView tvTitle;
     private TextView tvMoro;
-
+    private List<Class> classList;
+    private int index;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
         init();
         initValues();
+        //判断是下一题还是完成
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0) ;
+        if (classList.size() == index+1) {
+            //最后一题  修改下一题为完成
+
+        }
     }
 
     private void initValues() {
@@ -48,7 +59,10 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            list.get(position).setCheck(!list.get(position).isCheck());
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setCheck(false);
+            }
+            list.get(position).setCheck(true);
             adapter.notifyDataSetChanged();
 
         });
@@ -70,9 +84,21 @@ public class EducationGaoTimeActivity extends UIBaseActivity {
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
-
             //          跳转页面
-
+            Log.i("yys", "classList.size=="+classList.size());
+            Log.i("yys", "index=="+index);
+            if (classList.size() > index + 1) {
+                //有下一题
+                Intent intent = new Intent(this, classList.get(index+1));
+                intent.putExtra("index", index+1);
+                intent.putExtra("classList", (Serializable) classList);
+                //其他的你自己传
+                startActivity(intent);
+            } else {
+                //最后一题
+                Intent intent = new Intent(getPageContext(),EducationGaoKnowledgeActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

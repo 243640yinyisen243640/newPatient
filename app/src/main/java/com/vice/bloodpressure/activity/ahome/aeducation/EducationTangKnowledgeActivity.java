@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapt
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
     private TextView tvMore;
     private ProgressBar progressBar;
     private TextView tvMoro;
-
+    private List<Class> classList;
+    private int index;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,12 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
     }
 
     private void initValues() {
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0);
+        if (classList.size() == index + 1) {
+            //最后一题  修改下一题为完成
+
+        }
         //进度
         list.add(new BaseLocalDataInfo("是", "1"));
         list.add(new BaseLocalDataInfo("否", "2"));
@@ -47,7 +56,10 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            list.get(position).setCheck(!list.get(position).isCheck());
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setCheck(false);
+            }
+            list.get(position).setCheck(true);
             adapter.notifyDataSetChanged();
 
         });
@@ -71,6 +83,10 @@ public class EducationTangKnowledgeActivity extends UIBaseActivity {
         tvNext.setOnClickListener(v -> {
 
             //          跳转页面
+            Intent intent = new Intent(getPageContext(),EducationTangTimeActivity.class);
+            intent.putExtra("index", index);
+            intent.putExtra("classList", (Serializable) classList);
+            startActivity(intent);
 
         });
     }

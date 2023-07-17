@@ -308,25 +308,39 @@
         <activity
             android:name=".activity.ahome.aeducation.EducationIllnessActivity"
             android:screenOrientation="portrait" />
+        <!--慢阻肺时间-->
+        <activity android:name=".activity.ahome.aeducation.EducationFeiTimeActivity"
+            android:screenOrientation="portrait"/>
         <!--  糖尿病下的类型-->
+   <!--糖尿病知识-->
+        <activity android:name=".activity.ahome.aeducation.EducationTangKnowledgeActivity"
+            android:screenOrientation="portrait"/>
+        <!--糖尿病类型-->
         <activity
             android:name=".activity.ahome.aeducation.EducationAnswerTangActivity"
             android:screenOrientation="portrait" />
+        <!--高血压知识-->
         <activity android:name=".activity.ahome.aeducation.EducationGaoKnowledgeActivity"
             android:screenOrientation="portrait"/>
+        <!--高血压时间-->
         <activity android:name=".activity.ahome.aeducation.EducationGaoTimeActivity"
             android:screenOrientation="portrait"/>
+        <!--冠心病时间-->
         <activity android:name=".activity.ahome.aeducation.EducationGuanTimeActivity"
             android:screenOrientation="portrait"/>
+        <!--脑卒中时间-->
         <activity android:name=".activity.ahome.aeducation.EducationNaoTimeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ahome.aeducation.EducationFeiTimeActivity"
+
+        <!--糖尿病时间-->
+        <activity android:name=".activity.ahome.aeducation.EducationTangTimeActivity"
             android:screenOrientation="portrait"/>
+
         <!-- 糖尿病并发症-->
         <activity
             android:name=".activity.ahome.aeducation.EducationTangConcurrencyActivity"
             android:screenOrientation="portrait" />
-        <!--弃用页面，等接口出来以后看是不是需要删除-->
+
         <activity
             android:name=".activity.ahome.aeducation.EducationIntelligenceActivity"
             android:screenOrientation="portrait" />

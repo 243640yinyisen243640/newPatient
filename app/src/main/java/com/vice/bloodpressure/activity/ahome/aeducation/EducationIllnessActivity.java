@@ -118,7 +118,9 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
 
                 } else {
                     for (int i = 0; i < list.size(); i++) {
-                        classList.add(list.get(i).getClassName());
+                        if (list.get(i).isCheck()){
+                            classList.add(list.get(i).getClassName());
+                        }
                     }
                     //跳转页面
                     int index = 0;

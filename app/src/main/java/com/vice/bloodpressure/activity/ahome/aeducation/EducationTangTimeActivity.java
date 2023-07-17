@@ -44,8 +44,8 @@ public class EducationTangTimeActivity extends UIBaseActivity {
         initValues();
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0) + 1;
-        if (classList.size() == index) {
+        index = getIntent().getIntExtra("index", 0) ;
+        if (classList.size() == index+1) {
             //最后一题  修改下一题为完成
 
         }
@@ -61,7 +61,10 @@ public class EducationTangTimeActivity extends UIBaseActivity {
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            list.get(position).setCheck(!list.get(position).isCheck());
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setCheck(false);
+            }
+            list.get(position).setCheck(true);
             adapter.notifyDataSetChanged();
 
         });
@@ -86,8 +89,8 @@ public class EducationTangTimeActivity extends UIBaseActivity {
             //          跳转页面
             if (classList.size() > index + 1) {
                 //有下一题
-                Intent intent = new Intent(this, classList.get(index));
-                intent.putExtra("index", index);
+                Intent intent = new Intent(this, classList.get(index+1));
+                intent.putExtra("index", index+1);
                 intent.putExtra("classList", (Serializable) classList);
                 //其他的你自己传
                 startActivity(intent);

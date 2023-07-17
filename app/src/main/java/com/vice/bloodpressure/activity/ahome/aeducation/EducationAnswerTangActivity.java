@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapt
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
     private TextView tvTitle;
     private TextView tvMore;
     private ProgressBar progressBar;
-    private TextView tvMoro;
+    private List<Class> classList;
+    private int index;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +40,13 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("制定教育方案");
         init();
         initValues();
+        //判断是下一题还是完成
+        classList = (List<Class>) getIntent().getSerializableExtra("classList");
+        index = getIntent().getIntExtra("index", 0);
+        if (classList.size() == index + 1) {
+            //最后一题  修改下一题为完成
+
+        }
     }
 
     private void initValues() {
@@ -49,12 +59,15 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            list.get(position).setCheck(!list.get(position).isCheck());
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setCheck(false);
+            }
+            list.get(position).setCheck(true);
             adapter.notifyDataSetChanged();
 
         });
         tvTitle.setText("您的糖尿病类型是什么？");
-        tvMoro.setVisibility(View.GONE);
+        tvMore.setVisibility(View.GONE);
         progressBar.setMax(12);
         progressBar.setProgress(3);
     }
@@ -63,7 +76,7 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_answer_content, null);
         progressBar = view.findViewById(R.id.pb_answer_content);
         tvTitle = view.findViewById(R.id.tv_answer_content_title);
-        tvMoro = view.findViewById(R.id.tv_answer_content_more);
+        tvMore = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
         TextView tvNext = view.findViewById(R.id.tv_answer_content_next);
@@ -71,9 +84,20 @@ public class EducationAnswerTangActivity extends UIBaseActivity {
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
-
             //          跳转页面
 
+            //如果不是一个大类型的最后一题
+            //写自己的正常跳转逻辑
+
+            //如果是一个大类型的最后一题
+            //写下面一段代码
+
+
+
+            Intent intent = new Intent(getPageContext(),EducationTangConcurrencyActivity.class);
+            intent.putExtra("index", index);
+            intent.putExtra("classList", (Serializable) classList);
+            startActivity(intent);
         });
     }
 
