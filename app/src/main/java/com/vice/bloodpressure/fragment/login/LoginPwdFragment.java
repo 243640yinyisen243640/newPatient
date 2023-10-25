@@ -19,7 +19,6 @@ import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationHeightWeightActivity;
 import com.vice.bloodpressure.activity.login.ForgetPwdActivity;
 import com.vice.bloodpressure.activity.login.PerfectUserInfoActivity;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
@@ -158,7 +157,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_login_pwd_sure:
-                 intent = new Intent(getPageContext(), EducationHeightWeightActivity.class);
+                 intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
                 startActivity(intent);
 //                login();
                 break;
