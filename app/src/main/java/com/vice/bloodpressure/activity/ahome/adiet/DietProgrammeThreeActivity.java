@@ -44,10 +44,9 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        topViewManager().titleTextView().setText("饮食方案");
         View view = View.inflate(getPageContext(), R.layout.intelligence_diet_programme_three, null);
         containerView().addView(view);
-        topViewManager().titleTextView().setText("饮食方案");
-
 
         radioGroup = findViewById(R.id.rg_diet_paogramme);
         TextView tvSubmit = findViewById(R.id.tv_diet_programme_three_submit);
@@ -108,7 +107,7 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
                         startActivity(intent);
                     });
         }
-        programmePopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+        programmePopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
 
     }
 

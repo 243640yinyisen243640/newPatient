@@ -73,7 +73,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             }
 
 
-            successPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+            successPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
         });
 
         habitYesCb.setOnCheckedChangeListener((buttonView, isChecked) -> {

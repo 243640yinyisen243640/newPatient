@@ -45,7 +45,7 @@ public class AnswerBeginActivity extends UIBaseActivity {
                             startActivity(new Intent(getPageContext(), AnswerFirstActivity.class));
                         });
             }
-            forPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+            forPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
 
 
         });

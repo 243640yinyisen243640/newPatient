@@ -248,7 +248,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         //                    });
         //            answerForPopupWindow.dismiss();
         //        }
-        //        answerForPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.CENTER);
+//                answerForPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
 
         Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
         startActivity(intent);

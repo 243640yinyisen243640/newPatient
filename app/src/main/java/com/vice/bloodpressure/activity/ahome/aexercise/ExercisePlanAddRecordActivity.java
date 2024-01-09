@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -93,6 +94,7 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 String weight = UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.WEIGHT);
+                Log.i("yys", "weight====" + weight);
                 double calorieDouble = Double.parseDouble(calorieString);
                 finishCalorieString = String.valueOf(new BigDecimal(String.valueOf(Double.parseDouble(weight) * calorieDouble * Double.parseDouble(result))).setScale(0, BigDecimal.ROUND_HALF_UP));
                 fireTv.setText(finishCalorieString);

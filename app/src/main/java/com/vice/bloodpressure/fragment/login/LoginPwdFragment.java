@@ -157,9 +157,9 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.tv_login_pwd_sure:
-                 intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                startActivity(intent);
-//                login();
+//                 intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
+//                startActivity(intent);
+                login();
                 break;
             case R.id.tv_login_pwd_agreement:
                 agreeTextView.setSelected(!agreeTextView.isSelected());
@@ -207,7 +207,6 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
                     startActivity(intent);
                     getActivity().finish();
                 }
-
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }

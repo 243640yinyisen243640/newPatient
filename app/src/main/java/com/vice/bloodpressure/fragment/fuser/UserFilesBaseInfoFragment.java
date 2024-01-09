@@ -154,7 +154,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                             editInfo("6", "nativePlace", address);
                             cityPopupWindow.dismiss();
                         });
-                cityPopupWindow.showAsDropDown(containerView(), 0, 0, Gravity.BOTTOM);
+                cityPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.BOTTOM);
                 break;
 
             case R.id.tv_user_base_info_sos_name:
