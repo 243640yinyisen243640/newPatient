@@ -10,7 +10,7 @@ public class ConstantParamNew {
     /**
      * ip地址
      */
-    public static final String IP = "http://192.168.31.216:9500/";
+    public static final String IP = "http://192.168.31.134:9500/";
 //    public static final String IP = "http://39.106.101.129:9500";
 
 

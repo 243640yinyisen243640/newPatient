@@ -291,7 +291,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                         if (HHSoftDialogActionEnum.POSITIVE == which) {
                             if (getActivity() != null) {
                                 Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
-                                mainIntent.putExtra("checkId", R.id.tv_main_home_out_hospital);
+                                mainIntent.putExtra("checkId", 2);
                                 startActivity(mainIntent);
                             }
                         }

@@ -183,7 +183,10 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
             tangTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseChildType()) - 1);
         } else if ("2".equals(dataInfo.getDiseaseType())) {
             yaTypeAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseChildType()) - 1);
-            levelAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseRisk()) - 1);
+            if (dataInfo.getDiseaseRisk() != null) {
+                levelAdapter.setClickPosition(Integer.parseInt(dataInfo.getDiseaseRisk()) - 1);
+            }
+
         } else {
 
         }
@@ -411,7 +414,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         } else {
             diseaseRisk = "";
         }
-        Call<String> requestCall = UserDataManager.editDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diagnosticType, dataInfo.getDiagnosticType(), diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+        Call<String> requestCall = UserDataManager.editDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), diseaseType, dataInfo.getDiagnosticType(), diseaseChildType, diseaseRisk, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);
@@ -438,16 +441,16 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         String diseaseRisk = "";
         String diseaseChildType = "";
         if ("1".equals(checkId)) {
-            diseaseRisk="";
+            diseaseRisk = "";
             diseaseChildType = tangTypeAdapter.getClickPosition() + 1 + "";
-        } else if ("2".equals(checkId)){
+        } else if ("2".equals(checkId)) {
             diseaseRisk = yaLevelList.get(levelAdapter.getClickPosition()).getId();
             diseaseChildType = yaTypeAdapter.getClickPosition() + 1 + "";
-        }else {
+        } else {
             diseaseRisk = "";
             diseaseChildType = "";
         }
-        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()),checkId,diagnosticType,  diseaseChildType, diseaseRisk, addTime, (call, response) -> {
+        Call<String> requestCall = UserDataManager.putDiseaseImportant(UserInfoUtils.getArchivesId(getPageContext()), checkId, diagnosticType, diseaseChildType, diseaseRisk, addTime, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);

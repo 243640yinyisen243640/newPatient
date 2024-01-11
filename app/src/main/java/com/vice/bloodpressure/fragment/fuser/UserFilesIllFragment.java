@@ -82,7 +82,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
     }
 
     private void bindData(UserInfo userInfo) {
-
+        //主要诊断
         if (userInfo.getMainDiagnosis() != null && userInfo.getMainDiagnosis().size() > 0) {
             UserFilesPlusAdapter importantAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getMainDiagnosis(), "2", (position, view) -> {
                 switch (view.getId()) {
@@ -100,7 +100,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
             });
             importantListView.setAdapter(importantAdapter);
         }
-
+        //其他诊断
         if (userInfo.getOtherDiagnosis() != null && userInfo.getOtherDiagnosis().size() > 0) {
 
             UserFilesPlusAdapter otherAdapter = new UserFilesPlusAdapter(getPageContext(), userInfo.getOtherDiagnosis(), "3", (position, view) -> {
@@ -119,6 +119,7 @@ public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnC
             });
             otherListView.setAdapter(otherAdapter);
         }
+        //合并症
         if ("0".equals(userInfo.getIsDiabetesExists())) {
             plusLinearLayout.setVisibility(View.VISIBLE);
             if (userInfo.getComplication() != null && userInfo.getComplication().size() > 0) {

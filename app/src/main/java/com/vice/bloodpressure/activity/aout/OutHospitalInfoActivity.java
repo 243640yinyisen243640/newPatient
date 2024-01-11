@@ -16,6 +16,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.model.HospitalInfo;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import retrofit2.Call;
@@ -48,7 +49,7 @@ public class OutHospitalInfoActivity extends UIBaseLoadActivity {
     private void initListener() {
         phoneLinearLayout.setOnClickListener(v -> {
             if (TextUtils.isEmpty(phoneNumber)) {
-                phoneNumber = "15295201816";
+                ToastUtils.getInstance().showToast(getPageContext(),"暂无手机号");
             }
             Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));//跳转到拨号界面，同时传递电话号码
             startActivity(dialIntent);
@@ -88,5 +89,6 @@ public class OutHospitalInfoActivity extends UIBaseLoadActivity {
         nameTexView.setText(hospitalInfo.getHospitalName());
         levelTexView.setText(hospitalInfo.getCategory());
         locationTexView.setText(hospitalInfo.getDetailedAddress());
+        phoneNumber = hospitalInfo.getContactInfo();
     }
 }

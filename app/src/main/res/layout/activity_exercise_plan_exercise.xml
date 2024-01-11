@@ -273,6 +273,7 @@
                                 android:maxLines="1"
                                 android:paddingTop="7dp"
                                 android:paddingBottom="7dp"
+                                android:digits="1234567"
                                 android:textColor="@color/black_24"
                                 android:textColorHint="@color/gray_8a"
                                 android:textSize="15sp" />

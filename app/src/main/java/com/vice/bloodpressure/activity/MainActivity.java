@@ -164,7 +164,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             serviceTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
             outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_98));
-            outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
+            outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_out_hospital_unselected, 0, 0);
 
             mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
             mallTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_mall_selected, 0, 0);
@@ -179,7 +179,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             serviceTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
 
             outHospitalTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_98));
-            outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_service_unselected, 0, 0);
+            outHospitalTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_home_out_hospital_unselected, 0, 0);
 
             mallTextView.setTextColor(ContextCompat.getColor(getPageContext(), R.color.gray_98));
             mallTextView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.main_mall_unselected, 0, 0);
@@ -230,8 +230,25 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         Log.i("yys", "onNewIntent");
-        checkFragment(intent.getIntExtra("checkId", 0));
-        setTextViewColor(R.id.tv_main_home_out_hospital);
+        int checkId = intent.getIntExtra("checkId", 0);
+
+        if (checkId == 0) {
+            setTextViewColor(R.id.tv_main_home_page);
+            checkFragment(R.id.tv_main_home_page);
+        } else if (checkId == 1) {
+            setTextViewColor(R.id.tv_main_home_service);
+            checkFragment(R.id.tv_main_home_service);
+        } else if (checkId == 2) {
+            setTextViewColor(R.id.tv_main_home_out_hospital);
+            checkFragment(R.id.tv_main_home_out_hospital);
+        } else if (checkId == 3) {
+            setTextViewColor(R.id.tv_main_home_mall);
+            checkFragment(R.id.tv_main_home_mall);
+        } else {
+            setTextViewColor(R.id.tv_main_home_my);
+            checkFragment(R.id.tv_main_home_my);
+        }
+
     }
 
 }

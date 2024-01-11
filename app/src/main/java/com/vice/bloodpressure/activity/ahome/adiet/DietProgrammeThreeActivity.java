@@ -87,8 +87,9 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
                         Call<String> requestCall = HomeDataManager.recommendDietPlan(height, weight, chronicDisease, workWeight, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
                             if ("0000".equals(response.code)) {
                                 //成功的话回到首页
-                                Intent intent = new Intent(getPageContext(), MainActivity.class);
-                                startActivity(intent);
+                                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                                mainIntent.putExtra("checkId", 0);
+                                startActivity(mainIntent);
                                 finish();
                             } else {
                                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);

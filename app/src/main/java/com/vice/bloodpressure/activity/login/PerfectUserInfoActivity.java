@@ -1,9 +1,11 @@
 package com.vice.bloodpressure.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -96,6 +98,7 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_perfect_born:
+                closeKeyboard();
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, new CallBack() {
                     @Override
                     public void callBack(Object object) {
@@ -139,7 +142,15 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
                 break;
         }
     }
-
+    //只是关闭软键盘  隐藏所有的软键盘
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
     private void sureToPerfect() {
         String name = nameEditText.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
@@ -163,13 +174,13 @@ public class PerfectUserInfoActivity extends UIBaseActivity implements View.OnCl
 
         String gender = maleCheckBox.isChecked() ? "1" : "2";
         //chd
-        String guan = guanCheckBox.isChecked() ? "0" : "1";
+        String guan = guanCheckBox.isChecked() ? "1" : "0";
         //cva
-        String nao = naoCheckBox.isChecked() ? "0" : "1";
+        String nao = naoCheckBox.isChecked() ? "1" : "0";
         //copd
-        String fei = feiCheckBox.isChecked() ? "0" : "1";
+        String fei = feiCheckBox.isChecked() ? "1" : "0";
         //igr
-        String qian = qianCheckBox.isChecked() ? "0" : "1";
+        String qian = qianCheckBox.isChecked() ? "1" : "0";
 
         Call<String> requestCall = LoginDataManager.userPerfect(name, idCardEditText.getText().toString().trim(), born, gender, tangType, gaoType, guan, fei, nao, qian, UserInfoUtils.getArchivesId(getPageContext()), UserInfoUtils.getUserID(getPageContext()), UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {

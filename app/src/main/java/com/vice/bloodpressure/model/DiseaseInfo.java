@@ -57,17 +57,17 @@ public class DiseaseInfo {
     private String level;
 
     /**
-     * 疾病类型
+     * 疾病类型 1, 糖尿病2, 高血压3, 糖尿病前期4,冠心病5, 脑卒中6, 慢阻肺
      */
     private String diseaseType;
     /**
-     * 疾病等级
+     * 疾病等级   1 一级 2 2级 3 3级
      */
     private String diseaseChildType;
 
 
     /**
-     * 高血压程度
+     * 高血压程度  1 低危 2中危 3高危
      */
     private String diseaseRisk;
     /**

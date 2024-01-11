@@ -238,7 +238,6 @@
                         android:paddingTop="20dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="20dp"
-                        android:text="2021-02-03 15:20"
                         android:textColor="@color/gray_8a"
                         android:textSize="15sp" />
 

@@ -21,6 +21,7 @@ import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -70,12 +71,15 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
         radioGroup = view.findViewById(R.id.rg_service_blood_data);
         viewPager = view.findViewById(R.id.vp_service_blood_data);
         radioGroup.setVisibility(View.VISIBLE);
-        moreTextView.setVisibility(View.VISIBLE);
+        moreTextView.setVisibility(View.GONE);
 
         titleTextView.setText("血糖数据");
         containerView().addView(view);
     }
 
+    public List<Fragment> getFragments(){
+        return fragments;
+    }
 
     private void initValue() {
         fragments = new ArrayList<>();

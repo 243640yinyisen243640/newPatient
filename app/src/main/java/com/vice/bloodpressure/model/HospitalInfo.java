@@ -30,7 +30,18 @@ public class HospitalInfo {
      * 医院地址
      */
     private String detailedAddress;
+    /**
+     * 手机号
+     */
+    private String contactInfo;
 
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
 
     public List<DoctorInfo> getDeptAppVoList() {
         return deptAppVoList;

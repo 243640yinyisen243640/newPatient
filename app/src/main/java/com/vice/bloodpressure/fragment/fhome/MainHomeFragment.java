@@ -163,24 +163,16 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     protected void onCreate() {
         super.onCreate();
         topViewManager().topView().removeAllViews();
-//        topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
-//        StatusBarUtils.statusBarColor(getActivity(),R.color.defaultToastBg);
+        //        topViewManager().statusBarView().setBackgroundColor(Color.parseColor("#00C27F"));
+        //        StatusBarUtils.statusBarColor(getActivity(),R.color.defaultToastBg);
         initTopView();
         initView();
         initListener();
-        initValues();
         initViewPager();
 
     }
 
 
-
-    private void initValues() {
-        initHealthy();
-        initMeal();
-        initExercise();
-        initEducation();
-    }
     private void initViewPager() {
         ArrayList<Fragment> fragments;
 
@@ -228,12 +220,22 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
     private void getHomeData() {
         Call<String> requestCall = HomeDataManager.getHomeData(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-
+            if ("0000".equals(response.code)) {
+                setData();
+            }
 
         }, (call, t) -> {
 
         });
         addRequestCallToMap("getHomeData", requestCall);
+    }
+
+    private void setData() {
+        initHealthy();
+        setBaseInfo();
+        initMeal();
+        initExercise();
+        initEducation();
     }
 
 
@@ -261,6 +263,10 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         }
         healthyTipRv.setLayoutParams(params);
         healthyTipAdapter.notifyDataSetChanged();
+    }
+
+    private void setBaseInfo() {
+
     }
 
     /**

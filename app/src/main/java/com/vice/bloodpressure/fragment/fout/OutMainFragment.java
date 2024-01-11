@@ -2,7 +2,6 @@ package com.vice.bloodpressure.fragment.fout;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,6 +58,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
         }
 
     }
+
     @Override
     protected void onPageLoad() {
         if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
@@ -82,12 +82,12 @@ public class OutMainFragment extends UIBaseLoadFragment {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
         onPageLoad();
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -95,6 +95,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             onPageLoad();
         }
     }
+
     private void bindData(DoctorInfo doctorInfoOther) {
         unbandLinearLayout.setVisibility(View.GONE);
         bandLinearLayout.setVisibility(View.VISIBLE);
@@ -110,8 +111,8 @@ public class OutMainFragment extends UIBaseLoadFragment {
         });
         educationTextView.setOnClickListener(v -> {
             if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
-                DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", true, (dialog, which) -> {
-
+                DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", (dialog, which) -> {
+                    dialog.dismiss();
                     if (HHSoftDialogActionEnum.POSITIVE == which) {
                         startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
                     }

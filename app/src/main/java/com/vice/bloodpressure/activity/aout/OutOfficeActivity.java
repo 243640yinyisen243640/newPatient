@@ -71,7 +71,10 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 HospitalInfo hospitalInfo = (HospitalInfo) response.object;
-                deptId = hospitalInfo.getDeptAppVoList().get(0).getDeptId();
+                if (hospitalInfo.getDeptAppVoList() != null && hospitalInfo.getDeptAppVoList().size() > 0) {
+                    deptId = hospitalInfo.getDeptAppVoList().get(0).getDeptId();
+                }
+
                 bindData(hospitalInfo);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
@@ -104,10 +107,11 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
         }
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments) {
         });
-        hospitalInfo.getDeptAppVoList().get(0).setIsCheck("1");
-        viewPager.setCurrentItem(0);//默认选中项
-        viewPager.setOffscreenPageLimit(fragments.size());
-
+        if (hospitalInfo.getDeptAppVoList() != null && hospitalInfo.getDeptAppVoList().size() > 0) {
+            hospitalInfo.getDeptAppVoList().get(0).setIsCheck("1");
+            viewPager.setCurrentItem(0);//默认选中项
+            viewPager.setOffscreenPageLimit(fragments.size());
+        }
 
         OutOfficeDoctorLeftAdapter leftAdapter = new OutOfficeDoctorLeftAdapter(getPageContext(), hospitalInfo.getDeptAppVoList());
         leftListView.setAdapter(leftAdapter);

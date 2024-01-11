@@ -7,11 +7,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aservice.ServiceBloodAddActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceBloodSugarActivity;
 import com.vice.bloodpressure.adapter.service.SevenBottomAdapter;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
@@ -21,6 +23,8 @@ import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.BloodAllInfo;
 import com.vice.bloodpressure.model.BloodChildInfo;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -148,8 +152,13 @@ public class SevenAndThirtyBloodSugarListFragment extends UIBaseLoadFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_REFRESH) {
-
-                onPageLoad();
+                ServiceBloodListActivity activity = (ServiceBloodListActivity) getActivity();
+                List<Fragment> fragments = activity.getFragments();
+                for (int i = 0; i < fragments.size(); i++) {
+                    SevenAndThirtyBloodSugarListFragment fragment = (SevenAndThirtyBloodSugarListFragment) fragments.get(i);
+                    fragment.onPageLoad();
+                }
+//                onPageLoad();
             }
         }
     }
