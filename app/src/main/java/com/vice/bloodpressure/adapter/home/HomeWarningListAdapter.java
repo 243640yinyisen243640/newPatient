@@ -60,19 +60,19 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         holder.deleteTextView.setOnClickListener(onClick);
         holder.moreTextView.setOnClickListener(onClick);
         //1偏低 2 正常 3 偏高
+        holder.tipTextView.setText(info.getPromptText());
         if ("1".equals(info.getStatus())) {
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.blue_4B));
-            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warn_low, 0);
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warning_low, 0);
             holder.tipTextView.setVisibility(View.VISIBLE);
-            holder.tipTextView.setText("血糖偏低，请咨询医生，调整管理方案。");
+
         } else if ("2".equals(info.getStatus())) {
             holder.tipTextView.setVisibility(View.GONE);
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.black_24));
         } else {
             holder.numTextView.setTextColor(ContextCompat.getColor(context, R.color.red_E5));
-            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warning_high, 0);
+            holder.unitTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.warn_high, 0);
             holder.tipTextView.setVisibility(View.VISIBLE);
-            holder.tipTextView.setText("血糖偏高，请咨询医生，调整管理方案。");
         }
         //        0未读 1 已读
         if ("0".equals(info.getReadStatus())) {
@@ -105,8 +105,8 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
             clickLinearLayout = itemView.findViewById(R.id.ll_warning_click);
             titleTextView = itemView.findViewById(R.id.tv_warning_xt_xy);
             readImageView = itemView.findViewById(R.id.iv_warning_read);
-            numTextView = itemView.findViewById(R.id.tv_warning_unit);
-            unitTextView = itemView.findViewById(R.id.tv_warning_num);
+            numTextView = itemView.findViewById(R.id.tv_warning_num);
+            unitTextView = itemView.findViewById(R.id.tv_warning_unit);
             timeTextView = itemView.findViewById(R.id.tv_warning_time);
             deleteTextView = itemView.findViewById(R.id.tv_warning_delete);
             moreTextView = itemView.findViewById(R.id.tv_warning_more);

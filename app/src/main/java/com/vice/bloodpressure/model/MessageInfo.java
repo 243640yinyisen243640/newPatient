@@ -92,6 +92,32 @@ public class MessageInfo implements Serializable {
      * 0未读 1 已读
      */
     private String readStatus;
+    /**
+     *
+     *提示
+     */
+    private String promptText;
+
+    /**
+     * 消息id
+     */
+    private String msgId;
+
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
+    public String getPromptText() {
+        return promptText;
+    }
+
+    public void setPromptText(String promptText) {
+        this.promptText = promptText;
+    }
 
     public String getReadStatus() {
         return readStatus;

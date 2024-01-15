@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aout.OutDoctorEducationListActivity;
+import com.vice.bloodpressure.activity.aout.OutDoctorInfoActivity;
 import com.vice.bloodpressure.activity.aout.OutHospitalListActivity;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
@@ -40,6 +41,8 @@ public class OutMainFragment extends UIBaseLoadFragment {
     private TextView hospitalTextView;
     private TextView educationTextView;
 
+    private DoctorInfo doctorInfoOther;
+
     @Override
     protected void onCreate() {
         topViewManager().titleTextView().setText("院外管理");
@@ -68,7 +71,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             Call<String> requestCall = OutDataManager.getDeptDoctorInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID), UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
                 if ("0000".equals(response.code)) {
                     loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                    DoctorInfo doctorInfoOther = (DoctorInfo) response.object;
+                    doctorInfoOther = (DoctorInfo) response.object;
                     bindData(doctorInfoOther);
                 } else {
                     loadViewManager().changeLoadState(LoadStatus.FAILED);
@@ -103,6 +106,13 @@ public class OutMainFragment extends UIBaseLoadFragment {
         nameTextView.setText(doctorInfoOther.getDoctorName());
         postTextView.setText(doctorInfoOther.getDeptName());
         hospitalTextView.setText(doctorInfoOther.getHospitalName());
+        if (doctorInfoOther.isBindExternal()) {
+            unbandLinearLayout.setVisibility(View.GONE);
+            bandLinearLayout.setVisibility(View.VISIBLE);
+        } else {
+            unbandLinearLayout.setVisibility(View.VISIBLE);
+            bandLinearLayout.setVisibility(View.GONE);
+        }
     }
 
     private void initListener() {
@@ -123,7 +133,11 @@ public class OutMainFragment extends UIBaseLoadFragment {
 
 
         });
-
+        bandLinearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), OutDoctorInfoActivity.class);
+            intent.putExtra("doctorId", doctorInfoOther.getId());
+            startActivity(intent);
+        });
 
     }
 

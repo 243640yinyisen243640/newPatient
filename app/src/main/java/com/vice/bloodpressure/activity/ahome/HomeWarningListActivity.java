@@ -20,8 +20,10 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
@@ -122,13 +124,18 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
         return warningListAdapter = new HomeWarningListAdapter(getPageContext(), list, (position, view) -> {
-            getPageListData().get(position).setReadStatus("1");
-            warningListAdapter.notifyDataSetChanged();
+
             readOneWarning(position);
             switch (view.getId()) {
                 //删除
                 case R.id.tv_warning_delete:
-                    deleteOneMessage(position);
+                    DialogUtils.showOperDialog(getPageContext(), "", "确认要删除吗？", "我在想想", "确定", (dialog, which) -> {
+                        dialog.dismiss();
+                        if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            deleteOneMessage(position);
+                        }
+                    });
+
                     break;
                 //获取更多数据
                 case R.id.tv_warning_more:
@@ -149,7 +156,11 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
     private void readOneWarning(int position) {
         Call<String> requestCall = UserDataManager.readOneWarning(getPageListData().get(position).getId(), getPageListData().get(position).getType(), getPageListData().get(position).getPkId(), (call, response) -> {
             if ("0000".equals(response.code)) {
-
+                getPageListData().get(position).setReadStatus("1");
+                warningListAdapter.notifyDataSetChanged();
+                //                //0未读 1 已读
+                //                getPageListData().get(position).setReadStatus("1");
+                //                warningListAdapter.notifyDataSetChanged();
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -163,11 +174,13 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
      * @param position
      */
     private void deleteOneMessage(int position) {
-        Call<String> requestCall = UserDataManager.deleteOneWarning(getPageListData().get(position).getId(), (call, response) -> {
+        Call<String> requestCall = UserDataManager.deleteOneWarning(getPageListData().get(position).getMsgId(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                getPageListData().remove(position);
-                warningListAdapter.notifyDataSetChanged();
+                //                getPageListData().remove(position);
+                //                warningListAdapter.notifyDataSetChanged();
+
+                onPageLoad();
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -187,7 +200,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 finish();
                 break;
             case R.id.tv_warning_all_read:
-
+                readAllMessage();
                 break;
             case R.id.tv_warning_start:
 
@@ -238,5 +251,17 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         }
     }
 
+    private void readAllMessage() {
+        Call<String> requestCall = UserDataManager.readWarningList(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                setPageIndex(1);
+                onPageLoad();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("readWarningList", requestCall);
+    }
 
 }

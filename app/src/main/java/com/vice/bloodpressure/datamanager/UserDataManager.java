@@ -482,7 +482,7 @@ public class UserDataManager {
     /**
      * 异常数据列表
      *
-     * @param patientId
+     * @param archivesId
      * @param beginTime
      * @param endTime
      * @param exceptionType   异常类型   1 全部 2 血压偏高 3 血压偏低 4 血糖偏高 5 血糖偏低 6 血糖全部 7 血压全部
@@ -490,9 +490,9 @@ public class UserDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getHomeWarningList(String patientId, String beginTime, String endTime, String exceptionType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getHomeWarningList(String archivesId, String beginTime, String endTime, String exceptionType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("patientId", patientId);
+        map.put("archivesId", archivesId);
         map.put("beginTime", beginTime);
         map.put("endTime", endTime);
         map.put("exceptionType", exceptionType);
@@ -519,14 +519,27 @@ public class UserDataManager {
     /**
      * 异常数据删除
      *
-     * @param pkId
+     * @param msgId
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> deleteOneWarning(String pkId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> deleteOneWarning(String msgId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("pkId", pkId);
+        map.put("msgId", msgId);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/exceptionApp/delete", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 异常数据全部已读
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> readWarningList(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/exceptionApp/readAll", map, successCallBack, failureCallBack);
     }
 }

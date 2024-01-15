@@ -136,7 +136,7 @@ public class OutDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         map.put("doctorId", doctorId);
-        return BaseNetworkUtils.putRequest(true, BaseNetworkUtils.NONE, null, "system/patient/patientApp/update", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "monitor/api/v2/extramural/add", map, successCallBack, failureCallBack);
     }
 
     /**
