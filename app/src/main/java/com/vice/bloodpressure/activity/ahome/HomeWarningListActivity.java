@@ -154,7 +154,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
      * @param position
      */
     private void readOneWarning(int position) {
-        Call<String> requestCall = UserDataManager.readOneWarning(getPageListData().get(position).getId(), getPageListData().get(position).getType(), getPageListData().get(position).getPkId(), (call, response) -> {
+        Call<String> requestCall = UserDataManager.readOneWarning(getPageListData().get(position).getMsgId(), (call, response) -> {
             if ("0000".equals(response.code)) {
                 getPageListData().get(position).setReadStatus("1");
                 warningListAdapter.notifyDataSetChanged();

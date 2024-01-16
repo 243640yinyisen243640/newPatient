@@ -78,7 +78,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="04:18"
                         android:textColor="@color/gray_8a"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -116,6 +115,7 @@
                 android:id="@+id/web_education_details_web_doctor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:fadingEdge="none"
                 android:overScrollMode="never"
                 android:scrollbars="none" />

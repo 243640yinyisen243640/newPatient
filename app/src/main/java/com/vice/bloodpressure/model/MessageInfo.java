@@ -93,8 +93,7 @@ public class MessageInfo implements Serializable {
      */
     private String readStatus;
     /**
-     *
-     *提示
+     * 提示
      */
     private String promptText;
 
@@ -102,6 +101,19 @@ public class MessageInfo implements Serializable {
      * 消息id
      */
     private String msgId;
+
+    /**
+     * 患者宣教中h5的链接
+     */
+    private String iframeUrl;
+
+    public String getIframeUrl() {
+        return iframeUrl;
+    }
+
+    public void setIframeUrl(String iframeUrl) {
+        this.iframeUrl = iframeUrl;
+    }
 
     public String getMsgId() {
         return msgId;

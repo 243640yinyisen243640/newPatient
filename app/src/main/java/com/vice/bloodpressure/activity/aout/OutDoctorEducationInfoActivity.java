@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.activity.aout;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,8 @@ import com.vice.bloodpressure.datamanager.OutDataManager;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.X5WebView;
+
+import java.io.IOException;
 
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
@@ -107,6 +110,15 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         Jzvd.SAVE_PROGRESS = true;
         videoJz.setUp(messageInfo.getFileUrl(), "");
         XyImageUtils.getFirst(messageInfo.getFileUrl(), videoJz.posterImageView);
+
+        //视频高度充满
+        Jzvd.setTextureViewRotation(90);   //视频旋转90度
+
+        Jzvd.setVideoImageDisplayType(Jzvd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_PARENT);
+        Jzvd.setVideoImageDisplayType(Jzvd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
+
+        Jzvd.setVideoImageDisplayType(Jzvd.VIDEO_IMAGE_DISPLAY_TYPE_ORIGINAL);  //原始大小
+
     }
 
     private void initView() {
@@ -176,18 +188,40 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         titleTextView.setText(messageInfo.getTitle());
         timeTextView.setText(messageInfo.getSendTime());
 
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(messageInfo.getFileUrl());
+            mediaPlayer.prepare();
+            int duration = mediaPlayer.getDuration();
+            if (0 != duration) {
+                int s = duration / 1000;
+                //设置文件时长，单位 "分:秒" 格式
+                String total = s / 60 + ":" + s % 60;
+                allTimeTextView.setText(total);
+                //记得释放资源
+                mediaPlayer.release();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if ("1".equals(messageInfo.getType())) {
             audioLinearLayout.setVisibility(View.GONE);
             videoJz.setVisibility(View.GONE);
+            setWebViewData(webView, messageInfo.getIframeUrl());
         } else if ("2".equals(messageInfo.getType())) {
             audioLinearLayout.setVisibility(View.VISIBLE);
             videoJz.setVisibility(View.GONE);
-            setWebViewData(webView, messageInfo.getFileUrl());
+            setWebViewData(webView, messageInfo.getIframeUrl());
         } else {
             audioLinearLayout.setVisibility(View.GONE);
             videoJz.setVisibility(View.VISIBLE);
             setVideoInfo();
+            setWebViewData(webView, messageInfo.getIframeUrl());
         }
+
+
     }
 
     protected void setWebViewData(final X5WebView webView, final String url) {
@@ -295,7 +329,9 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         super.onDestroy();
         StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
+        videoJz.onStatePause();
     }
+
 
     @Override
     public void onClick(View v) {
