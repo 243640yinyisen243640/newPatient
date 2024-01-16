@@ -5,7 +5,6 @@ import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
 import com.vice.bloodpressure.model.MealInfo;
-import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 
@@ -213,6 +212,48 @@ public class HomeDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportResistance", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 智能教育提交答案
+     * @param archivesId
+     * @param height
+     * @param weight
+     * @param mainDisease
+     * @param dmType
+     * @param dmComplication
+     * @param dmBasics
+     * @param dmTime
+     * @param hbpBasics
+     * @param hbpTime
+     * @param chdTime
+     * @param copdTime
+     * @param strokeTime
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> educationAddAnswer(String archivesId,String height,
+                                                  String weight,String mainDisease,
+                                                  String dmType, String dmComplication,
+                                                  String dmBasics, String dmTime,
+                                                  String hbpBasics,String hbpTime,
+                                                  String chdTime,String copdTime,String strokeTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("height", height);
+        map.put("weight", weight);
+        map.put("mainDisease", mainDisease);
+        map.put("dmType", dmType);
+        map.put("dmComplication", dmComplication);
+        map.put("dmBasics", dmBasics);
+        map.put("dmTime", dmTime);
+        map.put("hbpBasics", hbpBasics);
+        map.put("hbpTime", hbpTime);
+        map.put("chdTime", chdTime);
+        map.put("copdTime", copdTime);
+        map.put("strokeTime", strokeTime);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/wellness/v2/addAnswer", map, successCallBack, failureCallBack);
     }
 
 }

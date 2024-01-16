@@ -10,14 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.EducationAnswerInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -110,11 +118,31 @@ public class EducationTangTimeActivity extends UIBaseActivity {
                 intent.putExtra("allPage", allPage);
                 //其他的你自己传
                 startActivity(intent);
+                finish();
             } else {
                 //最后一题
+                sendAnswer();
 
             }
         });
     }
 
+    private void sendAnswer() {
+        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID),
+                answerInfo.getHeight(), answerInfo.getWeight(), answerInfo.getMainDisease(),
+                answerInfo.getDmType(), answerInfo.getDmComplication(), answerInfo.getDmBasics(),
+                answerInfo.getDmTime(), answerInfo.getHbpBasics(), answerInfo.getHbpTime(),
+                answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
+                    ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                    if ("0000".equals(response.code)) {
+                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, (call, t) -> {
+                    ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                });
+        addRequestCallToMap("educationAddAnswer", requestCall);
+    }
 }

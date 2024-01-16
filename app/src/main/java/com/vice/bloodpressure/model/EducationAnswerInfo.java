@@ -28,39 +28,39 @@ public class EducationAnswerInfo implements Serializable {
     /**
      * 糖尿病类型  1 1型糖尿病 2 2型糖尿病 3 妊娠糖尿病 4 其他
      */
-    private String dmType;
+    private String dmType="";
     /**
      * * 糖尿病并发症   1 无 2 糖尿病足 3 糖尿病肾病 4 糖尿病视网膜病变 5 糖尿病神经病变 6 糖尿病下肢血管病变
      */
-    private String dmComplication;
+    private String dmComplication="";
     /**
-     * * 糖尿病基础知识 Y 是 N 否
+     * * 糖尿病基础知识 1 是 2 否
      */
-    private String dmBasics;
+    private String dmBasics="";
     /**
      * 糖尿病患病时间 1 小于1年 2 1-5年 3 大于5年
      */
-    private String dmTime;
+    private String dmTime="";
     /**
-     * 高血压基础知识 Y 是 N 否
+     * 高血压基础知识 1 是 2 否
      */
-    private String hbpBasics;
+    private String hbpBasics="";
     /**
      * 高血压患病时间 1 小于1年 2 1-5年 3 大于5年
      */
-    private String hbpTime;
+    private String hbpTime="";
     /**
      * 冠心病患病时间 1 小于1年 2 1-5年 3 大于5年
      */
-    private String chdTime;
+    private String chdTime="";
     /**
      * 慢性阻塞性肺疾病患病时间 1 小于1年 2 1-5年 3 大于5年
      */
-    private String copdTime;
+    private String copdTime="";
     /**
      * 脑卒中患病时间 1 小于1年 2 1-5年 3 大于5年
      */
-    private String strokeTime;
+    private String strokeTime="";
 
     public String getPatientId() {
         return patientId;

@@ -11,14 +11,22 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.EducationAnswerInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -45,16 +53,16 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制定教育方案");
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0) ;
+        index = getIntent().getIntExtra("index", 0);
         answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
-        allPage = getIntent().getIntExtra("allPage",0);
-        page = getIntent().getIntExtra("page",0);
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
         init();
         initValues();
     }
 
     private void initValues() {
-        if (classList.size() == index+1) {
+        if (classList.size() == index + 1) {
             //最后一题  修改下一题为完成
             tvNext.setText("完成");
         }
@@ -87,18 +95,18 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
         tvMoro = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
-         tvNext = view.findViewById(R.id.tv_answer_content_next);
+        tvNext = view.findViewById(R.id.tv_answer_content_next);
         containerView().addView(view);
 
         tvUp.setOnClickListener(v -> finish());
         tvNext.setOnClickListener(v -> {
             //          跳转页面  我自己写的
-            Log.i("yys", "classList.size=="+classList.size());
-            Log.i("yys", "index=="+index);
+            Log.i("yys", "classList.size==" + classList.size());
+            Log.i("yys", "index==" + index);
             if (classList.size() > index + 1) {
                 //有下一题
-                Intent intent = new Intent(this, classList.get(index+1));
-                intent.putExtra("index", index+1);
+                Intent intent = new Intent(this, classList.get(index + 1));
+                intent.putExtra("index", index + 1);
                 intent.putExtra("classList", (Serializable) classList);
                 intent.putExtra("answerInfo", answerInfo);
                 intent.putExtra("page", page + 1);
@@ -106,10 +114,27 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
                 //其他的你自己传
                 startActivity(intent);
             } else {
-
+                sendAnswer();
             }
 
         });
     }
 
+    /**
+     * 提交答案
+     */
+    private void sendAnswer() {
+        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), "", "", "", "", "", "", "", "", "", "", "", "7", (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                Intent intent = new Intent(getPageContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("educationAddAnswer", requestCall);
+    }
 }

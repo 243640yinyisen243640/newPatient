@@ -10,14 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.EducationAnswerInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -110,10 +118,26 @@ public class EducationNaoTimeActivity extends UIBaseActivity {
                 startActivity(intent);
             } else {
                 //最后一题
-
+                sendAnswer();
             }
         });
     }
 
-
+    /**
+     * 提交答案
+     */
+    private void sendAnswer() {
+        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), "", "", "", "", "", "", "", "", "", "", "", "7", (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                Intent intent = new Intent(getPageContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("educationAddAnswer", requestCall);
+    }
 }
