@@ -265,7 +265,13 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
             //qrcode
             case R.id.tv_user_center_qrcode:
                 // 跳二维码页面
-                startActivity(new Intent(getPageContext(), UserQRCodeActivity.class));
+
+                intent = new Intent(getPageContext(), UserQRCodeActivity.class);
+                intent.putExtra("archivesId",userInfo.getArchivesId());
+                intent.putExtra("nickName",userInfo.getNickName());
+                intent.putExtra("phoneNumber",userInfo.getPhoneNumber());
+                intent.putExtra("avatar",userInfo.getAvatar());
+                startActivity(intent);
                 break;
             //我的档案
             case R.id.tv_user_center_files:

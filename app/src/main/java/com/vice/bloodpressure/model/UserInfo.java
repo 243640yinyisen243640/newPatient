@@ -292,6 +292,19 @@ public class UserInfo implements Serializable {
      */
     private String diagnosticType;
 
+    /**
+     * 个人中心电话号码
+     */
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getDoctor_id() {
         return doctor_id;
     }

@@ -332,6 +332,19 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         videoJz.onStatePause();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
+    }
 
     @Override
     public void onClick(View v) {

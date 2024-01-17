@@ -16,15 +16,15 @@ public class EducationAnswerInfo implements Serializable {
     /**
      * 身高
      */
-    private String height;
+    private String height="160";
     /**
      * 体重
      */
-    private String weight;
+    private String weight="60";
     /**
      * 主要疾病   1糖尿病 2高血压 3冠心病 4慢性阻塞性肺疾病  5脑卒中 6糖尿病前期 7 都没有
      */
-    private String mainDisease;
+    private String mainDisease="7";
     /**
      * 糖尿病类型  1 1型糖尿病 2 2型糖尿病 3 妊娠糖尿病 4 其他
      */

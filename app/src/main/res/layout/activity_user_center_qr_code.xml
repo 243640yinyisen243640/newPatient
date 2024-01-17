@@ -75,11 +75,22 @@
                 android:gravity="center"
                 android:background="@drawable/shape_bg_white_10">
 
-                <ImageView
-                    android:id="@+id/iv_user_qr_code"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content" />
+                <FrameLayout
+                    android:layout_width="150dp"
+                    android:layout_height="150dp">
+
+                    <ImageView
+                        android:id="@+id/iv_user_qr_code"
+                        android:layout_width="150dp"
+                        android:layout_gravity="center"
+                        android:layout_height="150dp" />
+                    <ImageView
+                        android:id="@+id/iv_user_qr_code_head"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
+
             </LinearLayout>
 
 
