@@ -99,6 +99,7 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
         list.add(new BaseLocalDataInfo("脑卒中", "6", EducationNaoTimeActivity.class, 1));
         list.add(new BaseLocalDataInfo("都没有", "7"));
         list.get(6).setCheck(true);
+        tvNext.setText("完成");
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
