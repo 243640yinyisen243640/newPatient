@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,12 +14,15 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
+import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -45,7 +47,7 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
         GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 0), true));
         mRecyclerView.setLayoutManager(layoutManager);
-        getPageListView().setBackgroundColor(ContextCompat.getColor(getPageContext(), R.color.background));
+//        getPageListView().setBackgroundColor(ContextCompat.getColor(getPageContext(), R.color.background));
         loadViewManager().changeLoadState(LoadStatus.LOADING);
         loadViewManager().setOnClickListener(LoadStatus.NODATA, view -> loadViewManager().changeLoadState(LoadStatus.LOADING));
 
@@ -53,19 +55,29 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
 
     @Override
     protected void getListData(CallBack callBack) {
-
-        educationInfos = new ArrayList<>();
-        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
-        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
-        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
-
-        List<EducationInfo> childList = new ArrayList<>();
-        childList.add(new EducationInfo("第一节:知晓血压，了解血压!", "学习中"));
-        childList.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
-        for (int i = 0; i < educationInfos.size(); i++) {
-            educationInfos.get(i).setChildList(childList);
-        }
-        callBack.callBack(educationInfos);
+        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "1", getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getCollectMealList", requestCall);
+//
+//        educationInfos = new ArrayList<>();
+//        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
+//        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
+//        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
+//
+//        List<EducationInfo> childList = new ArrayList<>();
+//        childList.add(new EducationInfo("第一节:知晓血压，了解血压!", "学习中"));
+//        childList.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
+//        for (int i = 0; i < educationInfos.size(); i++) {
+//            educationInfos.get(i).setChildList(childList);
+//        }
+//        callBack.callBack(educationInfos);
     }
 
     @Override

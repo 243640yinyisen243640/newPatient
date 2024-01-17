@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:收藏
+ * 描述:我的收藏
  */
 public class UserCollectActivity extends UIBaseActivity {
     private RadioGroup radioGroup;

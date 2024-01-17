@@ -8,8 +8,8 @@
         android:id="@+id/rg_user_collect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/text_white"
         android:gravity="center"
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <RadioButton
@@ -26,6 +26,7 @@
         <RadioButton
             style="@style/community_rb_bottom"
             android:paddingTop="15dp"
+            android:visibility="gone"
             android:text="商品" />
 
 
@@ -34,10 +35,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_user_collect"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:backgroundTint="@color/background"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:paddingTop="10dp"
-        android:paddingEnd="10dp" />
+        android:layout_height="match_parent"/>
 </LinearLayout>
