@@ -71,10 +71,17 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      * 视频详情 调料列表
      */
     private List<MealIngMapInfo> seasoningList;
+    /**
+     * 饮食封面图
+     */
+    private String coverUrl;
 
-    public MealExclusiveInfo(String img, String recName) {
-        this.img = img;
-        this.recName = recName;
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     public String getRecId() {

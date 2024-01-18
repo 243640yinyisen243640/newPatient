@@ -312,19 +312,19 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
                 break;
             case R.id.fl_meal_plan_details_breakfast:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meal", "早餐");
+                intent.putExtra("meals", "早餐");
                 intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
                 startActivity(intent);
                 break;
             case R.id.fl_meal_plan_details_lunch:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meal", "午餐");
+                intent.putExtra("meals", "午餐");
                 intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
                 startActivity(intent);
                 break;
             case R.id.fl_meal_plan_details_dinner:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meal", "晚餐");
+                intent.putExtra("meals", "晚餐");
                 intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
                 startActivity(intent);
                 break;

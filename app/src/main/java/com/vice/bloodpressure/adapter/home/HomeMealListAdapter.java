@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.List;
@@ -24,10 +24,10 @@ import java.util.List;
  */
 public class HomeMealListAdapter extends RecyclerView.Adapter<HomeMealListAdapter.ViewHolder> {
     private Context context;
-    private List<MealInfo> list;
+    private List<MealExclusiveInfo> list;
 
 
-    public HomeMealListAdapter(Context context, List<MealInfo> list) {
+    public HomeMealListAdapter(Context context, List<MealExclusiveInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,10 +43,10 @@ public class HomeMealListAdapter extends RecyclerView.Adapter<HomeMealListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealInfo info = list.get(position);
+        MealExclusiveInfo info = list.get(position);
         int[] radius = new int[]{5, 5, 5, 5};
-        XyImageUtils.loadCustomuRoundImage(context, R.drawable.guogai_img, info.getImg(), holder.coverImageView, radius);
-        holder.nameTextView.setText(info.getTitle());
+        XyImageUtils.loadCustomuRoundImage(context, R.drawable.guogai_img, info.getCoverUrl(), holder.coverImageView, radius);
+        holder.nameTextView.setText(info.getRecName());
 
     }
 

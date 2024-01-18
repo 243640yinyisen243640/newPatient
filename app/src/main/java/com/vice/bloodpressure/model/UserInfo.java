@@ -89,11 +89,11 @@ public class UserInfo implements Serializable {
      */
     private String sbp;
     /**
-     * 身高
+     * 舒张压
      */
     private String dbp;
     /**
-     * 舒张压
+     * 血压测量日期
      */
     private String bpDate;
     /**
@@ -112,10 +112,11 @@ public class UserInfo implements Serializable {
      */
     private String bgDate;
     /**
-     * 血糖状态
-     * 1 偏低
+     * bmi状态
+     * 1 偏瘦
      * 2 正常
-     * 3 偏高
+     * 3 超重
+     * 4 肥胖
      */
     private String bgStatus;
     /**
@@ -135,8 +136,8 @@ public class UserInfo implements Serializable {
     private String hrDate;
     /**
      * 肾脏病变
-     * true 是
-     * false 否
+     * 1 是
+     * 0 否
      */
     private String dn;
     /**

@@ -4,6 +4,7 @@ import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
@@ -181,7 +182,7 @@ public class HomeDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getSportAerobics( BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getSportAerobics(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, BaseLocalDataInfo.class, "system/sport/v2/getSportAerobics", map, successCallBack, failureCallBack);
     }
@@ -216,6 +217,7 @@ public class HomeDataManager {
 
     /**
      * 智能教育提交答案
+     *
      * @param archivesId
      * @param height
      * @param weight
@@ -233,12 +235,12 @@ public class HomeDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> educationAddAnswer(String archivesId,String height,
-                                                  String weight,String mainDisease,
+    public static Call<String> educationAddAnswer(String archivesId, String height,
+                                                  String weight, String mainDisease,
                                                   String dmType, String dmComplication,
                                                   String dmBasics, String dmTime,
-                                                  String hbpBasics,String hbpTime,
-                                                  String chdTime,String copdTime,String strokeTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+                                                  String hbpBasics, String hbpTime,
+                                                  String chdTime, String copdTime, String strokeTime, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         map.put("height", height);
@@ -256,4 +258,35 @@ public class HomeDataManager {
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/wellness/v2/addAnswer", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * @param archivesId
+     * @param planDate        食谱热量
+     * @param meals           三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> dietDetailsToDayMeals(String archivesId, String planDate, String meals, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("planDate", planDate);
+        map.put("meals", meals);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/diet/v2/dietDetailsToDayMeals", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 更换一餐饮食方案
+     *
+     * @param archivesId
+     * @param meals 三餐标识 三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> randomMealsPlanToDay(String archivesId, String meals, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("meals", meals);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/randomMealsPlanToDay", map, successCallBack, failureCallBack);
+    }
 }

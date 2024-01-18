@@ -54,9 +54,9 @@
             android:gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
             android:layout_marginEnd="20dp"
             android:textColor="#00C27F"
+            android:visibility="gone"
             android:textSize="15sp"/>
 
         <TextView
@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:text="该方案为本日全天饮食推荐，如已进食则不适用"
             android:textSize="12sp"
+            android:layout_marginTop="15dp"
             android:gravity="center|left"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="12dp"

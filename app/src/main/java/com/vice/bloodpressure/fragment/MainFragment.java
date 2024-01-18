@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.adiet.DietChangeDietActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMakeMealDetailsActivity;
-import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeBeginActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
@@ -107,9 +106,7 @@ public class MainFragment extends UIBaseLoadFragment implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.text6:
-                intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meal", "早餐");
-                startActivity(intent);
+
                 break;
             case R.id.text7:
                 intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);

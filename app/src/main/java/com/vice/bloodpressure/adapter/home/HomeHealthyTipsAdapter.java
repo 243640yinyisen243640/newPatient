@@ -7,13 +7,13 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.XyBaseAdapter;
-import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.model.MessageInfo;
 
 import java.util.List;
 
-public class HomeHealthyTipsAdapter extends XyBaseAdapter<MealInfo> {
+public class HomeHealthyTipsAdapter extends XyBaseAdapter<MessageInfo> {
 
-    public HomeHealthyTipsAdapter(Context context, List<MealInfo> list) {
+    public HomeHealthyTipsAdapter(Context context, List<MessageInfo> list) {
         super(context, list);
     }
 
@@ -29,7 +29,7 @@ public class HomeHealthyTipsAdapter extends XyBaseAdapter<MealInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        MealInfo info = getList().get(position);
+        MessageInfo info = getList().get(position);
         holder.nameTextView.setText(info.getTitle());
         return convertView;
     }

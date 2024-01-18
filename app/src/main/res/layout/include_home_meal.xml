@@ -97,7 +97,8 @@
                 android:id="@+id/tv_meal_make_yourself"
                 style="@style/sure_green_13sp_p12"
                 android:layout_marginRight="10dp"
-                android:text="自定义饮食" />
+                android:text="自定义饮食"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_meal_plan"

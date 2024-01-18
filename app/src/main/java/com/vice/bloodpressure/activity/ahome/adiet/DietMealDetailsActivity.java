@@ -9,11 +9,16 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
-import com.vice.bloodpressure.baseui.UIBaseActivity;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.List;
+
+import retrofit2.Call;
 
 
 /**
@@ -23,7 +28,7 @@ import java.util.List;
  * 作者: beauty
  * 创建日期: 2023/2/3 16:55
  */
-public class DietMealDetailsActivity extends UIBaseActivity {
+public class DietMealDetailsActivity extends UIBaseLoadActivity {
     /**
      * 早餐
      */
@@ -35,22 +40,41 @@ public class DietMealDetailsActivity extends UIBaseActivity {
     private NoScrollListView mealTitleRv;
 
     private String titleMeal;
+    private String planDate;
 
-    private List<MealExclusiveInfo> mealExclusiveInfoList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titleMeal = getIntent().getStringExtra("meal");
-        mealExclusiveInfoList = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("list");
-        topViewManager().moreTextView().setText("换我想吃");
+        titleMeal = getIntent().getStringExtra("meals");
+        planDate = getIntent().getStringExtra("planDate");
+        //        topViewManager().moreTextView().setText("换我想吃");
         topViewManager().moreTextView().setOnClickListener(v -> {
             Intent intent = new Intent(getPageContext(), DietChangeDietActivity.class);
             startActivity(intent);
         });
         initView();
-        topViewManager().titleTextView().setText(titleMeal);
+        topViewManager().titleTextView().setText(titleMeal.equals("breakfast")?"早餐":titleMeal.equals("lunch")?"午餐":"晚餐");
         initValues();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = HomeDataManager.dietDetailsToDayMeals(UserInfoUtils.getArchivesId(getPageContext()), planDate, titleMeal, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list);
+                mealTitleRv.setAdapter(adapter);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("dietDetailsToDayMeals", requestCall);
+
     }
 
     private void initView() {
@@ -69,8 +93,7 @@ public class DietMealDetailsActivity extends UIBaseActivity {
         } else {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0, R.drawable.diet_change_my_like, 0);
         }
-        DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealExclusiveInfoList);
-        mealTitleRv.setAdapter(adapter);
+
 
         mealTitleRv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);

@@ -59,7 +59,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("饮食方案列表");
-        topViewManager().moreTextView().setText("换我想吃");
+//        topViewManager().moreTextView().setText("换我想吃");
         breakLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("breaklist");
         lunchLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("lunchlist");
         dinnerLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("dinnerlist");

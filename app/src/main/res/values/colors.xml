@@ -91,4 +91,6 @@
     <color name="blue_2a">#2A96F2</color>
     <color name="blue_4B">#4B89F7</color>
     <color name="red_E5">#E54C4C</color>
+    <color name="red_ED">#ED4646</color>
+    <color name="orange_ff">#FF7A32</color>
 </resources>

@@ -38,6 +38,102 @@ public class HomeAllInfo {
      * 运动模块
      */
     private ExerciseInfo sportModule;
+    /**
+     * 健康贴士是否开启 1开启 0不开启
+     */
+    private String healthyStatus;
+    /**
+     * 个人信息是否开启 1开启 0不开启
+     */
+    private String basicInfoStatus;
+    /**
+     * 血糖是否开启
+     */
+    private String bgModuleStatus;
+    /**
+     * 血压是否开启
+     */
+    private String bpModuleStatus;
+    /**
+     * BMI是否开启
+     */
+    private String bmiModuleStatus;
+    /**
+     * 智能饮食是否开启  1开启 0不开启
+     */
+    private String dietModuleStatus;
+    /**
+     * 智能运动是否开启 1开启 0不开启
+     */
+    private String sportModuleStatus;
+    /**
+     * 智能教育是否开启 1开启 0不开启
+     */
+    private String todayArticleModuleStatus;
+
+    public String getHealthyStatus() {
+        return healthyStatus;
+    }
+
+    public void setHealthyStatus(String healthyStatus) {
+        this.healthyStatus = healthyStatus;
+    }
+
+    public String getBasicInfoStatus() {
+        return basicInfoStatus;
+    }
+
+    public void setBasicInfoStatus(String basicInfoStatus) {
+        this.basicInfoStatus = basicInfoStatus;
+    }
+
+    public String getBgModuleStatus() {
+        return bgModuleStatus;
+    }
+
+    public void setBgModuleStatus(String bgModuleStatus) {
+        this.bgModuleStatus = bgModuleStatus;
+    }
+
+    public String getBpModuleStatus() {
+        return bpModuleStatus;
+    }
+
+    public void setBpModuleStatus(String bpModuleStatus) {
+        this.bpModuleStatus = bpModuleStatus;
+    }
+
+    public String getBmiModuleStatus() {
+        return bmiModuleStatus;
+    }
+
+    public void setBmiModuleStatus(String bmiModuleStatus) {
+        this.bmiModuleStatus = bmiModuleStatus;
+    }
+
+    public String getDietModuleStatus() {
+        return dietModuleStatus;
+    }
+
+    public void setDietModuleStatus(String dietModuleStatus) {
+        this.dietModuleStatus = dietModuleStatus;
+    }
+
+    public String getSportModuleStatus() {
+        return sportModuleStatus;
+    }
+
+    public void setSportModuleStatus(String sportModuleStatus) {
+        this.sportModuleStatus = sportModuleStatus;
+    }
+
+    public String getTodayArticleModuleStatus() {
+        return todayArticleModuleStatus;
+    }
+
+    public void setTodayArticleModuleStatus(String todayArticleModuleStatus) {
+        this.todayArticleModuleStatus = todayArticleModuleStatus;
+    }
 
     public String getArchivesId() {
         return archivesId;
