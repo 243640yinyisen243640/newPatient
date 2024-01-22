@@ -110,6 +110,7 @@ public class MainFragment extends UIBaseLoadFragment implements View.OnClickList
                 break;
             case R.id.text7:
                 intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+//                intent.putExtra("recHeat", );
                 startActivity(intent);
                 break;
             case R.id.text8:

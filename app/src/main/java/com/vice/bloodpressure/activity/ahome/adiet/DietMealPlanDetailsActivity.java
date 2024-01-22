@@ -31,7 +31,6 @@ import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,15 +164,6 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
             List<MealExclusiveInfo> breakfastList = mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast();
             breakFastAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), breakfastList);
             breakfastLv.setAdapter(breakFastAdapter);
-
-            //            StringBuilder builder = new StringBuilder();
-            //
-            //            for (int i = 0; i < mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast().size(); i++) {
-            //                builder.append(mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast().get(i).getRecName()).append("\n");
-            //            }
-            //            builder.deleteCharAt(builder.length() - 1);
-            //            breakFastTextView.setText(builder.toString());
-
             List<MealExclusiveInfo> lunchList = mealInfo.getExclusiveDietPlanVos().get(position).getLunch();
             lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
             lunchLv.setAdapter(lunchAdapter);
@@ -270,6 +260,46 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         return mPie;
     }
 
+    /**
+     * 更换一天饮食
+     */
+
+    private void getOneDayMeals() {
+        Call<String> requestCall = HomeDataManager.randomDietPlanToDay(UserInfoUtils.getArchivesId(getPageContext()),
+                mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getPlanDate(), (call, response) -> {
+                    ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                    if (response.data) {
+                        getOneDayMealsDataChange();
+                    }
+                }, (call, t) -> {
+                    ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                });
+        addRequestCallToMap("randomDietPlanToDay", requestCall);
+    }
+
+    private void getOneDayMealsDataChange() {
+        Call<String> requestCall = HomeDataManager.getDietPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                MealInfo mealInfoSecond = (MealInfo) response.object;
+                List<MealExclusiveInfo> breakfastList = mealInfoSecond.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast();
+                breakFastAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), breakfastList);
+                breakfastLv.setAdapter(breakFastAdapter);
+                List<MealExclusiveInfo> lunchList = mealInfoSecond.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch();
+                lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
+                lunchLv.setAdapter(lunchAdapter);
+
+                List<MealExclusiveInfo> dinnerList = mealInfoSecond.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast();
+                dinnerAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), dinnerList);
+                dinnerLv.setAdapter(dinnerAdapter);
+            }
+
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getDietPlan", requestCall);
+    }
+
     private void initViews() {
         View view = View.inflate(getPageContext(), R.layout.activity_meal_plan_details, null);
         zhushiTv = view.findViewById(R.id.tv_zhushi_num);
@@ -302,30 +332,35 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         switch (v.getId()) {
             case R.id.tv_seven_more:
                 intent = new Intent(getPageContext(), DietMealPlanListActivity.class);
-                intent.putExtra("meal", "早餐");
-                intent.putExtra("breaklist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
-                intent.putExtra("lunchlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
-                intent.putExtra("dinnerlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
+                intent.putExtra("planDate", mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getPlanDate());
+                // intent.putExtra("meal", "早餐");
+                //   intent.putExtra("breaklist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
+                //intent.putExtra("lunchlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
+                //  intent.putExtra("dinnerlist", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
                 startActivity(intent);
                 break;
             case R.id.tv_seven_refresh:
+                getOneDayMeals();
                 break;
             case R.id.fl_meal_plan_details_breakfast:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meals", "早餐");
-                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
+//                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast());
+                intent.putExtra("meals", "breakfast");
+                intent.putExtra("planDate", mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getPlanDate());
                 startActivity(intent);
                 break;
             case R.id.fl_meal_plan_details_lunch:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meals", "午餐");
-                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
+                intent.putExtra("meals", "lunch");
+                intent.putExtra("planDate", mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getPlanDate());
+                //                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getLunch());
                 startActivity(intent);
                 break;
             case R.id.fl_meal_plan_details_dinner:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
-                intent.putExtra("meals", "晚餐");
-                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
+                intent.putExtra("meals", "dinner");
+                intent.putExtra("planDate", mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getPlanDate());
+//                intent.putExtra("list", (Serializable) mealInfo.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner());
                 startActivity(intent);
                 break;
             default:

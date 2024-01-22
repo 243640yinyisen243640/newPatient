@@ -473,7 +473,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     }
 
     private void getOneDayMeals() {
-        Call<String> requestCall = HomeDataManager.randomMealsPlanToDay(UserInfoUtils.getArchivesId(getPageContext()), allInfo.getDietModule().getMeals(), (call, response) -> {
+        Call<String> requestCall = HomeDataManager.randomMealsPlanToDay(UserInfoUtils.getArchivesId(getPageContext()), allInfo.getDietModule().getMeals(),allInfo.getDietModule().getPlanDate(), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
@@ -552,7 +552,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             case R.id.ll_meal_more:
                 intent = new Intent(getPageContext(), DietMealDetailsActivity.class);
                 intent.putExtra("meals", allInfo.getDietModule().getMeals());
-                intent.putExtra("planDate", "currentData");
+                intent.putExtra("planDate", allInfo.getDietModule().getPlanDate());
                 startActivity(intent);
                 break;
             //教育关于你

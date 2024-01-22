@@ -78,7 +78,7 @@ public class DietChangeDietActivity extends UIBaseActivity {
 
     private void initValues() {
 
-        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit);
+        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), breakLsit,"3");
         breakfastNlv.setAdapter(breakAdapter);
         breakfastNlv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
@@ -86,7 +86,7 @@ public class DietChangeDietActivity extends UIBaseActivity {
             startActivity(intent);
         });
 
-        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit);
+        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), lunchLsit,"3");
         lunchNlv.setAdapter(lunchAdapter);
         lunchNlv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);
@@ -94,7 +94,7 @@ public class DietChangeDietActivity extends UIBaseActivity {
             startActivity(intent);
         });
 
-        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit);
+        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), dinnerLsit,"3");
         dinnerNlv.setAdapter(dinnerAdapter);
         dinnerNlv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), DietProgrammeChooseMealActivity.class);

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.ResourceProportionInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
@@ -23,11 +24,11 @@ import java.util.List;
 public class DietResourceProportionFragment extends UIBaseFragment {
     private List<ResourceProportionInfo> proportionInfos;
 
-    public static DietResourceProportionFragment getInstance(String text) {
+    public static DietResourceProportionFragment getInstance(MealExclusiveInfo mealExclusiveInfo) {
 
         DietResourceProportionFragment resourceProportionFragment = new DietResourceProportionFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("", "");
+        bundle.putSerializable("mealExclusiveInfo", mealExclusiveInfo);
         resourceProportionFragment.setArguments(bundle);
         return resourceProportionFragment;
     }

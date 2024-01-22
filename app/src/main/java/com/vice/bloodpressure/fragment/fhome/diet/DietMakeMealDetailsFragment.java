@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.DietOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealIngMapInfo;
 import com.vice.bloodpressure.view.NoScrollListView;
 
@@ -24,11 +25,11 @@ public class DietMakeMealDetailsFragment extends UIBaseFragment {
     private NoScrollListView seasoningLv;
     private TextView makeTextView;
 
-    public static DietMakeMealDetailsFragment getInstance(String text) {
+    public static DietMakeMealDetailsFragment getInstance(MealExclusiveInfo mealExclusiveInfo) {
 
         DietMakeMealDetailsFragment detailsFragment = new DietMakeMealDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("", "");
+        bundle.putSerializable("mealExclusiveInfo", mealExclusiveInfo);
         detailsFragment.setArguments(bundle);
         return detailsFragment;
     }

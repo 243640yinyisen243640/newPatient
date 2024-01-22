@@ -64,6 +64,10 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
 
     private List<MealIngMapInfo> ingMap;
     /**
+     * 食材清单-材料
+     */
+    private List<MealIngMapInfo> ingData;
+    /**
      * 视频详情 材料列表
      */
     private List<MealIngMapInfo> materialList;
@@ -75,6 +79,23 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      * 饮食封面图
      */
     private String coverUrl;
+    private String videoUrl;
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public List<MealIngMapInfo> getIngData() {
+        return ingData;
+    }
+
+    public void setIngData(List<MealIngMapInfo> ingData) {
+        this.ingData = ingData;
+    }
 
     public String getCoverUrl() {
         return coverUrl;

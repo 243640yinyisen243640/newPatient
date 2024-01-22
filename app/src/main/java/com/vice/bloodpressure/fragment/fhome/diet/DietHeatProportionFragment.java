@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.TurnUtils;
 import com.vice.bloodpressure.view.HHAtMostGridView;
 
@@ -28,11 +29,11 @@ public class DietHeatProportionFragment extends UIBaseFragment {
     private PieChart proportionPc;
     private HHAtMostGridView proportionGv;
 
-    public static DietHeatProportionFragment getInstance(String text) {
+    public static DietHeatProportionFragment getInstance(MealExclusiveInfo mealExclusiveInfo) {
 
         DietHeatProportionFragment proportionFragment = new DietHeatProportionFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("", "");
+        bundle.putSerializable("mealExclusiveInfo", mealExclusiveInfo);
         proportionFragment.setArguments(bundle);
         return proportionFragment;
     }

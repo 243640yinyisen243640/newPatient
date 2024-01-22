@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -14,16 +15,23 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.fragment.fhome.diet.DietHeatProportionFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietMakeMealDetailsFragment;
 import com.vice.bloodpressure.fragment.fhome.diet.DietResourceProportionFragment;
+import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 
 import java.util.ArrayList;
 
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -39,15 +47,19 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
     private RadioGroup mealVideoGg;
     private ViewPager2 mealVideoVp;
 
+    private String recHeat;
+    private String recId;
+
+    private MealExclusiveInfo mealExclusiveInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("制作饮食");
+        recHeat = getIntent().getStringExtra("recHeat");
+        recId = getIntent().getStringExtra("recId");
         containerView().addView(initView());
-        initValue();
-        setVideoInfo();
-        //        loadViewManager().changeLoadState(LoadStatus.LOADING);
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
 
@@ -64,13 +76,32 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
 
     @Override
     protected void onPageLoad() {
+        Call<String> requestCall = HomeDataManager.dietDetailsByRec(recId, recHeat, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                mealExclusiveInfo = (MealExclusiveInfo) response.object;
+                bindData();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("dietDetailsByRec", requestCall);
+    }
 
+    private void bindData() {
+        if (!TextUtils.isEmpty(mealExclusiveInfo.getCoverUrl())) {
+            videoFl.setVisibility(View.VISIBLE);
+            setVideoInfo();
+        } else {
+            videoFl.setVisibility(View.GONE);
+        }
+        mealNameTv.setText(mealExclusiveInfo.getRecName());
+        initValue();
     }
 
 
     private void initValue() {
-
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        ArrayList<Fragment> fragments;
 
         /**
          * 原料做法
@@ -80,9 +111,9 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         DietHeatProportionFragment heatProportionFragment = new DietHeatProportionFragment();
 
         fragments = new ArrayList<>();
-        fragments.add(detailsFragment.getInstance("11"));
-        fragments.add(resourceProportionFragment.getInstance("11"));
-        fragments.add(heatProportionFragment.getInstance("11"));
+        fragments.add(detailsFragment.getInstance(mealExclusiveInfo));
+        fragments.add(resourceProportionFragment.getInstance(mealExclusiveInfo));
+        fragments.add(heatProportionFragment.getInstance(mealExclusiveInfo));
 
         mealVideoVp.setAdapter(new MyFragmentStateAdapter(this, fragments));
         mealVideoVp.setOffscreenPageLimit(fragments.size());
@@ -131,8 +162,8 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
-        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
+        videoPlayer.setUp(mealExclusiveInfo.getVideoUrl(), "");
+        XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_1_1, mealExclusiveInfo.getCoverUrl(), videoPlayer.posterImageView);
     }
 
     @Override
@@ -142,6 +173,7 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         }
         super.onBackPressed();
     }
+
     @Override
     protected void onPause() {
         super.onPause();

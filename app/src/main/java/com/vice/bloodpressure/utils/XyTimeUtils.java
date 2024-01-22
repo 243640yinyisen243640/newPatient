@@ -4,7 +4,9 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * author：luck
@@ -112,5 +114,58 @@ public class XyTimeUtils {
         return isMoreThan;
 
     }
+
+    /**
+     * 根据日期获取周几
+     */
+    private static int getDayofWeek(String dateTime) {
+        Calendar cal = Calendar.getInstance();
+        if (dateTime.equals("")) {
+            cal.setTime(new Date(System.currentTimeMillis()));
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Date date;
+            try {
+                date = sdf.parse(dateTime);
+            } catch (ParseException e) {
+                date = null;
+                e.printStackTrace();
+            }
+            if (date != null) {
+                cal.setTime(new Date(date.getTime()));
+            }
+        }
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
+
+
+    public static String Week(String dateTime) {
+        String week = "";
+        switch (getDayofWeek(dateTime)) {
+            case 1:
+                week = "星期日";
+                break;
+            case 2:
+                week = "星期一";
+                break;
+            case 3:
+                week = "星期二";
+                break;
+            case 4:
+                week = "星期三";
+                break;
+            case 5:
+                week = "星期四";
+                break;
+            case 6:
+                week = "星期五";
+                break;
+            case 7:
+                week = "星期六";
+                break;
+        }
+        return week;
+    }
+
 
 }

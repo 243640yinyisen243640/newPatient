@@ -4,6 +4,7 @@ import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
+import com.vice.bloodpressure.model.MealChildInfo;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
@@ -259,8 +260,9 @@ public class HomeDataManager {
     }
 
     /**
+     * 一餐展示详情
      * @param archivesId
-     * @param planDate        食谱热量
+     * @param planDate        当前时间
      * @param meals           三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
      * @param successCallBack
      * @param failureCallBack
@@ -278,15 +280,64 @@ public class HomeDataManager {
      * 更换一餐饮食方案
      *
      * @param archivesId
-     * @param meals 三餐标识 三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
+     * @param meals           三餐标识 三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
+     * @param planDate
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> randomMealsPlanToDay(String archivesId, String meals, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> randomMealsPlanToDay(String archivesId, String meals, String planDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         map.put("meals", meals);
+        map.put("planDate", planDate);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/randomMealsPlanToDay", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 饮食详情
+     * @param recId
+     * @param recHeat
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> dietDetailsByRec(String recId, String recHeat, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("recId", recId);
+        map.put("recHeat", recHeat);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/dietDetailsByRec", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 更换一天饮食
+     *
+     * @param archivesId
+     * @param planDate
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> randomDietPlanToDay(String archivesId, String planDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("planDate", planDate);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/diet/v2/randomDietPlanToDay", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 获取饮食方案列表
+     *
+     * @param archivesId
+     * @param planDate
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getDietPlanList(String archivesId, String planDate, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("planDate", planDate);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealChildInfo.class, "ai/diet/v2/getDietPlanList", map, successCallBack, failureCallBack);
     }
 }

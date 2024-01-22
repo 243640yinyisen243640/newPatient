@@ -13,6 +13,8 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
@@ -42,6 +44,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
     private String titleMeal;
     private String planDate;
 
+    private List<MealExclusiveInfo> list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +57,8 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             startActivity(intent);
         });
         initView();
-        topViewManager().titleTextView().setText(titleMeal.equals("breakfast")?"早餐":titleMeal.equals("lunch")?"午餐":"晚餐");
+        topViewManager().titleTextView().setText(titleMeal.equals("breakfast") ? "早餐" : titleMeal.equals("lunch") ? "午餐" : "晚餐");
+        mealTitleTv.setText(titleMeal.equals("breakfast") ? "早餐" : titleMeal.equals("lunch") ? "午餐" : "晚餐");
         initValues();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
@@ -64,8 +68,8 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
         Call<String> requestCall = HomeDataManager.dietDetailsToDayMeals(UserInfoUtils.getArchivesId(getPageContext()), planDate, titleMeal, (call, response) -> {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list);
+                list = (List<MealExclusiveInfo>) response.object;
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1");
                 mealTitleRv.setAdapter(adapter);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
@@ -77,11 +81,29 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
 
     }
 
+    private void getOneDayMeals() {
+        Call<String> requestCall = HomeDataManager.randomMealsPlanToDay(UserInfoUtils.getArchivesId(getPageContext()), titleMeal, planDate, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                List<MealExclusiveInfo> listSecond = (List<MealExclusiveInfo>) response.object;
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2");
+                mealTitleRv.setAdapter(adapter);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("randomMealsPlanToDay", requestCall);
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_mall_details, null);
         containerView().addView(view);
         mealTitleTv = view.findViewById(R.id.tv_diet_mall_details_title);
         mealTitleRv = view.findViewById(R.id.rv_diet_mall_details);
+
+        mealTitleTv.setOnClickListener(v -> {
+            getOneDayMeals();
+        });
     }
 
     private void initValues() {
@@ -97,6 +119,8 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
 
         mealTitleRv.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+            intent.putExtra("recHeat", list.get(position).getRecHeat());
+            intent.putExtra("recId", list.get(position).getRecId());
             startActivity(intent);
         });
 

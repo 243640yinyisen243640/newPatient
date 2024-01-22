@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.model.MealSecondInfo;
+import com.vice.bloodpressure.utils.XyTimeUtils;
 
 import java.util.List;
 
@@ -47,8 +48,18 @@ public class DietMealPlanWeekAdapter extends RecyclerView.Adapter<DietMealPlanWe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealSecondInfo info = list.get(position);
-        holder.weekTextView.setText(info.getPlanDate());
-        holder.monthTextView.setText(info.getPlanDate());
+        String times[] = info.getPlanDate().split("-");
+
+        String a = info.getPlanDate();
+        String end = "";
+        String[] split = a.split("-");
+        if (split.length == 3) {
+//            start = split[0];
+            end = split[1] + "-" + split[2];
+        }
+
+        holder.weekTextView.setText(XyTimeUtils.Week(info.getPlanDate()));
+        holder.monthTextView.setText(end);
         if (clickPosition == position) {
             holder.clickLinearLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.shape_green_3));
             holder.monthTextView.setTextColor(ContextCompat.getColor(context, R.color.text_white));
