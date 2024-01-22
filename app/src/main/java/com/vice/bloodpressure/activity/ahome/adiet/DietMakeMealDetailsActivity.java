@@ -79,6 +79,7 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         Call<String> requestCall = HomeDataManager.dietDetailsByRec(recId, recHeat, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 mealExclusiveInfo = (MealExclusiveInfo) response.object;
                 bindData();
             }
