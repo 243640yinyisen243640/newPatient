@@ -21,6 +21,43 @@ public class MealIngMapInfo implements Serializable {
      * 食材克数
      */
     private String weight;
+    /**
+     * 原料占比
+     */
+    private String ingRatio;
+
+    /**
+     * 卡路里占比
+     */
+    private String calorieRatio;
+    /**
+     * 调料名称
+     */
+    private String seasonings;
+
+    public String getSeasonings() {
+        return seasonings;
+    }
+
+    public void setSeasonings(String seasonings) {
+        this.seasonings = seasonings;
+    }
+
+    public String getCalorieRatio() {
+        return calorieRatio;
+    }
+
+    public void setCalorieRatio(String calorieRatio) {
+        this.calorieRatio = calorieRatio;
+    }
+
+    public String getIngRatio() {
+        return ingRatio;
+    }
+
+    public void setIngRatio(String ingRatio) {
+        this.ingRatio = ingRatio;
+    }
 
     public String getName() {
         return name;

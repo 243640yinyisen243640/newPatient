@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.adapter.home.DietOneMealDetailsAdapter;
+import com.vice.bloodpressure.adapter.service.ServiceOneMealDetailsAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
@@ -142,11 +142,11 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         Jzvd.SAVE_PROGRESS = true;
         videoPlayer.setUp(allInfo.getVid(), "");
 
-        DietOneMealDetailsAdapter resourceAdapter = new DietOneMealDetailsAdapter(getPageContext(), allInfo.getMaterialList());
+        ServiceOneMealDetailsAdapter resourceAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), allInfo.getMaterialList());
         resourceListView.setAdapter(resourceAdapter);
 
 
-        DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), allInfo.getSeasoningList());
+        ServiceOneMealDetailsAdapter seasoningAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), allInfo.getSeasoningList());
         seasoningListView.setAdapter(seasoningAdapter);
     }
 

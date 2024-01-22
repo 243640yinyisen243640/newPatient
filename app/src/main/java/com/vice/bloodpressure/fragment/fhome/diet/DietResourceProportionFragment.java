@@ -8,12 +8,8 @@ import android.widget.TextView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
-import com.vice.bloodpressure.model.ResourceProportionInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 作者: beauty
@@ -22,7 +18,8 @@ import java.util.List;
  * 描述:
  */
 public class DietResourceProportionFragment extends UIBaseFragment {
-    private List<ResourceProportionInfo> proportionInfos;
+
+    private MealExclusiveInfo mealExclusiveInfo;
 
     public static DietResourceProportionFragment getInstance(MealExclusiveInfo mealExclusiveInfo) {
 
@@ -36,6 +33,7 @@ public class DietResourceProportionFragment extends UIBaseFragment {
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
+        mealExclusiveInfo= (MealExclusiveInfo) getArguments().getSerializable("mealExclusiveInfo");
         containerView().addView(initView());
 
     }
@@ -48,26 +46,20 @@ public class DietResourceProportionFragment extends UIBaseFragment {
 
 
     private void initValues(View view){
-        proportionInfos = new ArrayList<>();
-        //这是模拟数据的
-        proportionInfos.add(new ResourceProportionInfo("猪瘦肉", "24.5"));
-        proportionInfos.add(new ResourceProportionInfo("莴笋", "73.54"));
-        proportionInfos.add(new ResourceProportionInfo("香葱", "1.96"));
-
         int maxLengthIndex = 0;
         int maxLength = 0;
-        for (int i = 0; i < proportionInfos.size(); i++) {
-            if (proportionInfos.get(i).getName().length() > maxLength) {
-                maxLength = proportionInfos.get(i).getName().length();
+        for (int i = 0; i < mealExclusiveInfo.getIngRatio().size(); i++) {
+            if (mealExclusiveInfo.getIngRatio().get(i).getName().length() > maxLength) {
+                maxLength = mealExclusiveInfo.getIngRatio().get(i).getName().length();
                 maxLengthIndex = i;
             }
 
-            if (proportionInfos.get(i).getName().length() >= 3) {
-                proportionInfos.get(i).setName(proportionInfos.get(i).getName().substring(0, 3));
+            if (mealExclusiveInfo.getIngRatio().get(i).getName().length() >= 3) {
+                mealExclusiveInfo.getIngRatio().get(i).setName(mealExclusiveInfo.getIngRatio().get(i).getName().substring(0, 3));
             }
         }
 
-        String name = proportionInfos.get(maxLengthIndex).getName();
+        String name = mealExclusiveInfo.getIngRatio().get(maxLengthIndex).getName();
 
         LinearLayout linearLayout = view.findViewById(R.id.ll_test);
 
@@ -87,17 +79,17 @@ public class DietResourceProportionFragment extends UIBaseFragment {
 
         float v2Width = screenWidth - text1Width - text2Width - width;
 
-        for (int i = 0; i < proportionInfos.size(); i++) {
+        for (int i = 0; i < mealExclusiveInfo.getIngRatio().size(); i++) {
             LinearLayout linearLayout1 = (LinearLayout) View.inflate(getPageContext(), R.layout.item_fragment_diet_resource_meal, null);
             TextView tv11 = linearLayout1.findViewById(R.id.tv_1);
             TextView v22 = linearLayout1.findViewById(R.id.v_2);
             TextView tv33 = linearLayout1.findViewById(R.id.tv_3);
             tv11.setWidth((int) text1Width);
             tv33.setWidth((int) text2Width);
-            v22.setWidth((int) (v2Width * Double.parseDouble(proportionInfos.get(i).getProportion()) / 100));
+            v22.setWidth((int) (v2Width * Double.parseDouble(mealExclusiveInfo.getIngRatio().get(i).getIngRatio()) / 100));
 
-            tv11.setText(proportionInfos.get(i).getName());
-            tv33.setText(proportionInfos.get(i).getProportion() + "%");
+            tv11.setText(mealExclusiveInfo.getIngRatio().get(i).getName());
+            tv33.setText(mealExclusiveInfo.getIngRatio().get(i).getIngRatio() + "%");
             linearLayout.addView(linearLayout1);
         }
 

@@ -1,4 +1,4 @@
-package com.vice.bloodpressure.adapter.home;
+package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
 import android.view.View;
@@ -11,17 +11,14 @@ import com.vice.bloodpressure.model.MealIngMapInfo;
 
 import java.util.List;
 
-public class DietOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> {
+public class ServiceOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> {
     private List<MealIngMapInfo> list;
     private Context context;
 
-    private String type;
-
-    public DietOneMealDetailsAdapter(Context context, List<MealIngMapInfo> list,String type) {
+    public ServiceOneMealDetailsAdapter(Context context, List<MealIngMapInfo> list) {
         super(context, list);
         this.context = context;
         this.list = list;
-        this.type = type;
     }
 
 
@@ -38,14 +35,8 @@ public class DietOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
         MealIngMapInfo info = getList().get(position);
-        if ("1".equals(type)){
-            holder.nameTextView.setText(info.getName());
-            holder.numTextView.setText(info.getIngK() + "g");
-        }else {
-            holder.nameTextView.setText(info.getSeasonings());
-            holder.numTextView.setText(info.getIngK() + "g");
-        }
-
+        holder.nameTextView.setText(info.getName());
+        holder.numTextView.setText(info.getIngK() + "g");
         return convertView;
     }
 

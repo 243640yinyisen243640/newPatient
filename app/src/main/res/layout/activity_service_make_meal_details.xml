@@ -121,6 +121,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_bg_white_10"
                 android:orientation="vertical"
+                android:layout_marginBottom="50dp"
                 android:padding="15dp">
 
                 <TextView

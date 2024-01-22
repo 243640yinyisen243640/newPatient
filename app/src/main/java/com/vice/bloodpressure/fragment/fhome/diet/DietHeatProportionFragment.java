@@ -29,6 +29,8 @@ public class DietHeatProportionFragment extends UIBaseFragment {
     private PieChart proportionPc;
     private HHAtMostGridView proportionGv;
 
+    private MealExclusiveInfo mealExclusiveInfo;
+
     public static DietHeatProportionFragment getInstance(MealExclusiveInfo mealExclusiveInfo) {
 
         DietHeatProportionFragment proportionFragment = new DietHeatProportionFragment();
@@ -41,23 +43,24 @@ public class DietHeatProportionFragment extends UIBaseFragment {
     @Override
     protected void onCreate() {
         topViewManager().topView().removeAllViews();
+        mealExclusiveInfo= (MealExclusiveInfo) getArguments().getSerializable("mealExclusiveInfo");
         containerView().addView(initView());
 
         initValues();
     }
 
     private void initValues() {
-
         List<String> nameString = new ArrayList<>();
-        nameString.add("小米");
-        nameString.add("鸡蛋");
-        nameString.add("蔬菜");
-        nameString.add("饮品");
         List<String> rateString = new ArrayList<>();
-        rateString.add("50");
-        rateString.add("20");
-        rateString.add("10");
-        rateString.add("20");
+        for (int i = 0; i < mealExclusiveInfo.getCalorieRatio().size(); i++) {
+            nameString.add(mealExclusiveInfo.getCalorieRatio().get(i).getName());
+        }
+
+
+        for (int i = 0; i < mealExclusiveInfo.getCalorieRatio().size(); i++) {
+            rateString.add(mealExclusiveInfo.getCalorieRatio().get(i).getCalorieRatio());
+        }
+
 
 
         showPieChart(proportionPc, getPieChartData(rateString, nameString));
@@ -92,7 +95,7 @@ public class DietHeatProportionFragment extends UIBaseFragment {
 
         pieChart.setHighlightPerTapEnabled(false);//点击是否放大
 
-        pieChart.setCenterText("菜的名字");//设置环中的文字
+        pieChart.setCenterText(mealExclusiveInfo.getRecName());//设置环中的文字
         pieChart.setCenterTextSize(15f);//设置环中文字的大小
         pieChart.setDrawCenterText(true);//设置绘制环中文字
         //设置初始旋转角度

@@ -68,6 +68,10 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      */
     private List<MealIngMapInfo> ingData;
     /**
+     * 制作饮食原料占比
+     */
+    private List<MealIngMapInfo> ingRatio;
+    /**
      * 视频详情 材料列表
      */
     private List<MealIngMapInfo> materialList;
@@ -80,6 +84,24 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      */
     private String coverUrl;
     private String videoUrl;
+
+    private List<MealIngMapInfo> calorieRatio;
+
+    public List<MealIngMapInfo> getCalorieRatio() {
+        return calorieRatio;
+    }
+
+    public void setCalorieRatio(List<MealIngMapInfo> calorieRatio) {
+        this.calorieRatio = calorieRatio;
+    }
+
+    public List<MealIngMapInfo> getIngRatio() {
+        return ingRatio;
+    }
+
+    public void setIngRatio(List<MealIngMapInfo> ingRatio) {
+        this.ingRatio = ingRatio;
+    }
 
     public String getVideoUrl() {
         return videoUrl;
