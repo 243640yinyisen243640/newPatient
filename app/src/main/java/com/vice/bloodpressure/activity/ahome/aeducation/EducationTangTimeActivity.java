@@ -118,7 +118,6 @@ public class EducationTangTimeActivity extends UIBaseActivity {
                 intent.putExtra("allPage", allPage);
                 //其他的你自己传
                 startActivity(intent);
-                finish();
             } else {
                 //最后一题
                 sendAnswer();

@@ -197,16 +197,31 @@
                         android:textColor="@color/black_2A"
                         android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tv_main_exercise_need_fire"
+                    <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/main_base_color"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_main_exercise_need_fire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/main_base_color"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:textColor="#81A197"
+                            android:text="千卡"
+                            android:textSize="13sp" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -320,6 +335,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/shape_bg_white_10"

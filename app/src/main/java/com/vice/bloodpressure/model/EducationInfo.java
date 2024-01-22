@@ -19,6 +19,30 @@ public class EducationInfo implements Serializable {
     private List<EducationInfo> list;
 
     private String classifyId;
+    /**
+     * 首页用到的文章字数
+     */
+    private String wordSize;
+    /**
+     * 首页用到的阅读时间
+     */
+    private String readTime;
+
+    public String getWordSize() {
+        return wordSize;
+    }
+
+    public void setWordSize(String wordSize) {
+        this.wordSize = wordSize;
+    }
+
+    public String getReadTime() {
+        return readTime;
+    }
+
+    public void setReadTime(String readTime) {
+        this.readTime = readTime;
+    }
 
     public EducationInfo(String title, String state) {
         this.title = title;

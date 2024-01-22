@@ -44,13 +44,14 @@ public class DiseaseInfo {
      */
     private String complicationDetail;
     /**
-     * 疾病类型
-     * * 1 糖尿病
-     * * 2 高血压
-     * * 3 糖尿病前期
-     * * 4 冠心病
-     * * 5 脑卒中
-     * * 6 慢阻肺
+     * 并发症类型
+     * 1 糖尿病肾病
+     * 2 糖尿病视网膜病变
+     * 3 糖尿病神经病变
+     * 4 糖尿病下肢血管病变
+     * 5 糖尿病足
+     * 6 糖尿病酮症酸中毒
+     * 7 高渗性高血糖
      */
     private String complicationType;
     private String isConfirm;

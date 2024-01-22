@@ -39,6 +39,10 @@ public class HomeAllInfo {
      */
     private ExerciseInfo sportModule;
     /**
+     * 教育模块
+     */
+    private EducationInfo todayArticle;
+    /**
      * 健康贴士是否开启 1开启 0不开启
      */
     private String healthyStatus;
@@ -70,6 +74,14 @@ public class HomeAllInfo {
      * 智能教育是否开启 1开启 0不开启
      */
     private String todayArticleModuleStatus;
+
+    public EducationInfo getTodayArticle() {
+        return todayArticle;
+    }
+
+    public void setTodayArticle(EducationInfo todayArticle) {
+        this.todayArticle = todayArticle;
+    }
 
     public String getHealthyStatus() {
         return healthyStatus;

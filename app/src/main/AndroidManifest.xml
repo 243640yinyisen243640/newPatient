@@ -281,6 +281,10 @@
         <activity
             android:name=".activity.ahome.aexercise.ExercisePlanAddRecordActivity"
             android:screenOrientation="portrait" />
+        <!--智能运动倒计时-->
+        <activity
+            android:name=".activity.ahome.aexercise.ExerciseCountdownActivity"
+            android:screenOrientation="portrait" />
         <!--手动添加运动记录有氧-->
         <activity
             android:name=".activity.ahome.aexercise.ExerciseRecordAddHandActivity"

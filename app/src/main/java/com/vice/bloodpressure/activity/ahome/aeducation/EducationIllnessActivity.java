@@ -103,7 +103,6 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
         adapter = new EducationQuestionInvestigateRealAdapter(list, getPageContext());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
-
             if (list.get(position).getName().equals("都没有")) {
                 for (int i = 0; i < list.size(); i++) {
                     list.get(i).setCheck(false);
@@ -114,6 +113,20 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getName().equals("都没有")) {
                         list.get(i).setCheck(false);
+                    }
+                }
+                if (list.get(position).getName().equals("糖尿病")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getName().equals("糖尿病前期")) {
+                            list.get(i).setCheck(false);
+                        }
+                    }
+                }
+                if (list.get(position).getName().equals("糖尿病前期")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getName().equals("糖尿病")) {
+                            list.get(i).setCheck(false);
+                        }
                     }
                 }
                 list.get(position).setCheck(!list.get(position).isCheck());

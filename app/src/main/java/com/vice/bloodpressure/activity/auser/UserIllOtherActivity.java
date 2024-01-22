@@ -107,7 +107,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
 
     private String checkId = "-1";
     /**
-     * 疾病类型  1, 糖尿病2, 高血压3, 糖尿病前期4,冠心病5, 脑卒中6, 慢阻肺
+     * 疾病类型  1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      */
     private String diseaseType = "";
     /**
@@ -348,10 +348,10 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     private void initValues() {
         diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病", "1"));
         diseaseAllTypeList.add(new BaseLocalDataInfo("高血压", "2"));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病前期", "3"));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("冠心病", "4"));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("脑卒中", "5"));
-        diseaseAllTypeList.add(new BaseLocalDataInfo("慢性阻塞性肺疾病", "6"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("冠心病", "3"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("脑卒中", "4"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("慢性阻塞性肺疾病", "5"));
+        diseaseAllTypeList.add(new BaseLocalDataInfo("糖尿病前期", "6"));
 
         //设置糖尿病
         tangDiseaseList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
