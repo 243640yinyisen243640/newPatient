@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
@@ -68,7 +70,9 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
                     //点击确定的操作
-                    successPopupWindow.dismiss();
+                    Intent intent = new Intent(getPageContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 });
             }
 

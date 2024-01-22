@@ -137,7 +137,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     /**
      * 没有答题时的开启，制定计划，重新制定运动计划，步数的数据，还需消耗多少热量，消耗了多少热量，立即完成，运动类型，需要消耗热量，运动时间，抗阻运动，柔韧性运动
      */
-    private TextView exerciseOpenTv, makePlanTv, makeExerciseAgainPlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, typeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
+    private TextView exerciseOpenTv, makePlanTv, makeExerciseAgainPlanTv, stepNumTv, exerciseNumTv, fireNumTv, finishTv, exerciseTypeTv, needFireTv, timeTv, resistanceTv, flexibilityTv;
 
     private LinearLayout exerciseNoLinearLayout, exerciseHaveLinearLayout;
     //教育
@@ -398,10 +398,12 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 给运动赋值
      */
     private void initExercise() {
-        exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " 1700 ", "千卡"));
-        stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " 2000 ", "步"));
-        fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量 ", " 90 ", "千卡"));
-
+        exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " "+allInfo.getSportModule().getNeedConsumeCalories()+" ", "千卡"));
+        stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " "+allInfo.getSportModule().getWalk()+" ", "步"));
+        fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量 ", " "+allInfo.getSportModule().getWalkCalories()+" ", "千卡"));
+        exerciseTypeTv.setText(allInfo.getSportModule().getAerobicsName());
+        needFireTv.setText(allInfo.getSportModule().getAerobicsNeedCalories());
+        timeTv.setText(allInfo.getSportModule().getAerobicsTime());
     }
 
     /**
@@ -635,7 +637,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         stepNumTv = view.findViewById(R.id.tv_exercise_step_num);
         fireNumTv = view.findViewById(R.id.tv_exercise_fire_num);
         finishTv = view.findViewById(R.id.tv_exercise_finish);
-        typeTv = view.findViewById(R.id.tv_exercise_type);
+        exerciseTypeTv = view.findViewById(R.id.tv_exercise_type);
         needFireTv = view.findViewById(R.id.tv_main_exercise_need_fire);
         timeTv = view.findViewById(R.id.tv_exercise_time);
         resistanceTv = view.findViewById(R.id.tv_exercise_resistance);

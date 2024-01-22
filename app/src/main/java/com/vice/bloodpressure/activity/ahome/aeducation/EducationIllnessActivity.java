@@ -185,17 +185,21 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
      * 提交答案
      */
     private void sendAnswer() {
-        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID),answerInfo.getHeight(), answerInfo.getWeight(), "7", "", "", "", "", "", "", "", "", "", (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-            if ("0000".equals(response.code)) {
-                Intent intent = new Intent(getPageContext(), MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            }
-        }, (call, t) -> {
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        });
+        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID),
+                answerInfo.getHeight(), answerInfo.getWeight(), answerInfo.getMainDisease(),
+                answerInfo.getDmType(), answerInfo.getDmComplication(), answerInfo.getDmBasics(),
+                answerInfo.getDmTime(), answerInfo.getHbpBasics(), answerInfo.getHbpTime(),
+                answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
+                    ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                    if ("0000".equals(response.code)) {
+                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, (call, t) -> {
+                    ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                });
         addRequestCallToMap("educationAddAnswer", requestCall);
     }
 }

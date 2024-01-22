@@ -47,6 +47,7 @@ public class EducationGuanTimeActivity extends UIBaseActivity {
     private EducationAnswerInfo answerInfo;
     private int allPage;
     private int page;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +55,16 @@ public class EducationGuanTimeActivity extends UIBaseActivity {
         init();
         //判断是下一题还是完成
         classList = (List<Class>) getIntent().getSerializableExtra("classList");
-        index = getIntent().getIntExtra("index", 0) ;
+        index = getIntent().getIntExtra("index", 0);
         answerInfo = (EducationAnswerInfo) getIntent().getSerializableExtra("answerInfo");
-        allPage = getIntent().getIntExtra("allPage",0);
-        page = getIntent().getIntExtra("page",0);
+        allPage = getIntent().getIntExtra("allPage", 0);
+        page = getIntent().getIntExtra("page", 0);
         initValues();
 
     }
 
     private void initValues() {
-        if (classList.size() == index+1) {
+        if (classList.size() == index + 1) {
             //最后一题  修改下一题为完成
             tvNext.setText("完成");
         }
@@ -99,7 +100,7 @@ public class EducationGuanTimeActivity extends UIBaseActivity {
         tvMoro = view.findViewById(R.id.tv_answer_content_more);
         listView = view.findViewById(R.id.lv_answer_content_investigate);
         TextView tvUp = view.findViewById(R.id.tv_answer_content_up);
-         tvNext = view.findViewById(R.id.tv_answer_content_next);
+        tvNext = view.findViewById(R.id.tv_answer_content_next);
         containerView().addView(view);
 
         tvUp.setOnClickListener(v -> finish());
@@ -108,8 +109,8 @@ public class EducationGuanTimeActivity extends UIBaseActivity {
             //          跳转页面
             if (classList.size() > index + 1) {
                 //有下一题
-                Intent intent = new Intent(this, classList.get(index+1));
-                intent.putExtra("index", index+1);
+                Intent intent = new Intent(this, classList.get(index + 1));
+                intent.putExtra("index", index + 1);
                 intent.putExtra("classList", (Serializable) classList);
                 intent.putExtra("answerInfo", answerInfo);
                 intent.putExtra("page", page + 1);
@@ -118,25 +119,30 @@ public class EducationGuanTimeActivity extends UIBaseActivity {
                 startActivity(intent);
             } else {
                 //最后一题
-sendAnswer();
+                sendAnswer();
             }
         });
     }
+
     /**
      * 提交答案
      */
     private void sendAnswer() {
-        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), "", "", "", "", "", "", "", "", "", "", "", "7", (call, response) -> {
-            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-            if ("0000".equals(response.code)) {
-                Intent intent = new Intent(getPageContext(), MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            }
-        }, (call, t) -> {
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        });
+        Call<String> requestCall = HomeDataManager.educationAddAnswer(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID),
+                answerInfo.getHeight(), answerInfo.getWeight(), answerInfo.getMainDisease(),
+                answerInfo.getDmType(), answerInfo.getDmComplication(), answerInfo.getDmBasics(),
+                answerInfo.getDmTime(), answerInfo.getHbpBasics(), answerInfo.getHbpTime(),
+                answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
+                    ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                    if ("0000".equals(response.code)) {
+                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, (call, t) -> {
+                    ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                });
         addRequestCallToMap("educationAddAnswer", requestCall);
     }
 }

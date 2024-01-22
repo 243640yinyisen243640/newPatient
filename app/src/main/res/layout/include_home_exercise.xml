@@ -168,7 +168,6 @@
                         android:layout_marginTop="6.5dp"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="慢跑"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -205,7 +204,6 @@
                         android:layout_marginTop="6.5dp"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="1100 千卡"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -242,7 +240,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6.5dp"
                         android:includeFontPadding="false"
-                        android:text="00:24:10"
                         android:textColor="@color/main_base_color"
                         android:textSize="15sp"
                         android:textStyle="bold" />
