@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -60,7 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
             android:background="@drawable/shape_bg_white_10"
             android:orientation="vertical"
             android:padding="15dp">

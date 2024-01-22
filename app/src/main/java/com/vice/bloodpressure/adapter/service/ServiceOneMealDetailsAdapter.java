@@ -36,7 +36,7 @@ public class ServiceOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> 
         }
         MealIngMapInfo info = getList().get(position);
         holder.nameTextView.setText(info.getName());
-        holder.numTextView.setText(info.getIngK() + "g");
+        holder.numTextView.setText(info.getWeight() + "g");
         return convertView;
     }
 

@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.fragment.fhome.diet;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,7 +48,6 @@ public class DietMakeMealDetailsFragment extends UIBaseFragment {
 
         DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), mealExclusiveInfo.getSeasoningList(),"2");
         seasoningLv.setAdapter(seasoningAdapter);
-        Log.i("yys","getPractice=="+mealExclusiveInfo.getPractice());
         makeTextView.setText(mealExclusiveInfo.getPractice());
     }
 
