@@ -69,7 +69,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 list = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1");
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1",null);
                 mealTitleRv.setAdapter(adapter);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
@@ -86,7 +86,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 List<MealExclusiveInfo> listSecond = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2");
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2",null);
                 mealTitleRv.setAdapter(adapter);
             }
         }, (call, t) -> {

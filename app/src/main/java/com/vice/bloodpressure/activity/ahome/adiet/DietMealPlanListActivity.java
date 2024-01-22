@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.adiet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -121,15 +122,30 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
 
     private void bindData() {
 
-        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getBreakfast(), "1");
+        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getBreakfast(), "1", (position, view) -> {
+            Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+            intent.putExtra("recHeat", mealInfo.getBreakfast().get(position).getRecHeat());
+            intent.putExtra("recId", mealInfo.getBreakfast().get(position).getRecId());
+            startActivity(intent);
+        });
         breakFastRv.setAdapter(breakAdapter);
 
 
-        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getLunch(), "1");
+        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getLunch(), "1",(position, view) -> {
+            Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+            intent.putExtra("recHeat", mealInfo.getLunch().get(position).getRecHeat());
+            intent.putExtra("recId", mealInfo.getLunch().get(position).getRecId());
+            startActivity(intent);
+        });
         lunchFastRv.setAdapter(lunchAdapter);
 
 
-        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getDinner(), "1");
+        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getDinner(), "1",(position, view) -> {
+            Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+            intent.putExtra("recHeat", mealInfo.getDinner().get(position).getRecHeat());
+            intent.putExtra("recId", mealInfo.getDinner().get(position).getRecId());
+            startActivity(intent);
+        });
         dinnerFastRv.setAdapter(dinnerAdapter);
 
     }
@@ -155,13 +171,13 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
             if ("0000".equals(response.code)) {
                 List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
                 if ("breakfast".equals(meals)) {
-                    DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4");
+                    DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4",null);
                     breakFastRv.setAdapter(breakAdapter);
                 } else if ("lunch".equals(meals)) {
-                    DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4");
+                    DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4",null);
                     lunchFastRv.setAdapter(lunchAdapter);
                 } else {
-                    DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4");
+                    DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4",null);
                     dinnerFastRv.setAdapter(dinnerAdapter);
                 }
 
