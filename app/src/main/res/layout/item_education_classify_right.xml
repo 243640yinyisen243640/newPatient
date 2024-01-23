@@ -4,8 +4,9 @@
     android:id="@+id/tv_education_right"
     android:layout_height="wrap_content"
     android:background="@drawable/education_classify_right"
-    android:text="基础知识"
     android:padding="13dp"
+    android:maxLines="1"
+    android:ellipsize="end"
     android:textStyle="bold"
     android:textColor="@color/black_24"
     android:textSize="15sp">

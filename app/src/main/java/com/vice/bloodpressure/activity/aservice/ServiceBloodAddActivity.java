@@ -196,8 +196,8 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
             if ("0000".equals(response.code)) {
                 optionAdd = option;
                 thirdInfo = (BloodThirdInfo) response.object;
-                thirdInfo.setStart("3.8");
-                thirdInfo.setEnd("7.8");
+                thirdInfo.setStart(thirdInfo.getStart());
+                thirdInfo.setEnd(thirdInfo.getEnd());
                 controlTextView.setText(thirdInfo.getStart() + "-" + thirdInfo.getEnd());
             } else {
                 timeSlotTextView.setText("请选择");

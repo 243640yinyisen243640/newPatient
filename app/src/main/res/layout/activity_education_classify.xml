@@ -39,15 +39,25 @@
             android:scrollbars="none" />
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_education_class_second"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_education_class_second"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:visibility="gone"/>
 
-<!--        <FrameLayout-->
-<!--            android:id="@+id/fl_education_class_second"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+        <TextView
+            android:id="@+id/tv_education_class_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/education_no_data_bg"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="暂时没有内容，先看看其他的吧"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </LinearLayout>

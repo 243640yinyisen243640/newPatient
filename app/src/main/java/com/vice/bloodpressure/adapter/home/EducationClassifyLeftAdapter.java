@@ -53,7 +53,7 @@ public class EducationClassifyLeftAdapter extends XyBaseAdapter<EducationInfo> {
             holder.typeTextView.setBackground(ContextCompat.getDrawable(getContext(), R.color.defaultBackground));
             holder.typeTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.shape_tran_20_3_2);
         }
-        holder.typeTextView.setText(educationInfo.getTitle());
+        holder.typeTextView.setText(educationInfo.getTypeName());
         return convertView;
     }
     private class ViewHolder {

@@ -22,18 +22,89 @@ public class EducationInfo implements Serializable {
     /**
      * 首页用到的文章字数
      */
-    private String wordSize;
+    private String wordNumber;
     /**
      * 首页用到的阅读时间
      */
     private String readTime;
+    /**
+     * 首页文章名字
+     */
+    private String essayName;
+    /**
+     * 文章简介
+     */
+    private String essayProfile;
+    /**
+     *系列名字
+     */
+    private String sname;
+    /**
+     *文章名字
+     */
+    private String sid;
 
-    public String getWordSize() {
-        return wordSize;
+    /**
+     * 文章id
+     */
+    private String essayId;
+
+    private List<EducationInfo> teachTypeDomains;
+
+    public List<EducationInfo> getTeachTypeDomains() {
+        return teachTypeDomains;
     }
 
-    public void setWordSize(String wordSize) {
-        this.wordSize = wordSize;
+    public void setTeachTypeDomains(List<EducationInfo> teachTypeDomains) {
+        this.teachTypeDomains = teachTypeDomains;
+    }
+
+    public String getEssayProfile() {
+        return essayProfile;
+    }
+
+    public void setEssayProfile(String essayProfile) {
+        this.essayProfile = essayProfile;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getEssayId() {
+        return essayId;
+    }
+
+    public void setEssayId(String essayId) {
+        this.essayId = essayId;
+    }
+
+    public String getEssayName() {
+        return essayName;
+    }
+
+    public void setEssayName(String essayName) {
+        this.essayName = essayName;
+    }
+
+    public String getWordNumber() {
+        return wordNumber;
+    }
+
+    public void setWordNumber(String wordNumber) {
+        this.wordNumber = wordNumber;
     }
 
     public String getReadTime() {
@@ -69,6 +140,28 @@ public class EducationInfo implements Serializable {
     private int isExpand = 1;
 
     private String isCheck;
+
+    /**
+     * 智能教育 类型名称
+     */
+    private String typeName;
+    private String typeId;
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
     public String getIsCheck() {
         return isCheck;

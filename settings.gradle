@@ -1,3 +1,4 @@
 include ':app'
 include ':update-app'
+include ':libsteps'
 rootProject.name = "XyPatient"

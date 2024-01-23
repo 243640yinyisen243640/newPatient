@@ -429,16 +429,22 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             SpannableStringBuilder builder = new SpannableStringBuilder();
             builder.append("本节共");
             int length = builder.length();
-            builder.append(allInfo.getTodayArticle().getWordSize());
+//            builder.append(allInfo.getTodayArticle().getWordNumber());
+            builder.append("100");
             int length1 = builder.length();
             builder.append("字，阅读时间约");
             int length2 = builder.length();
-            builder.append(allInfo.getTodayArticle().getReadTime());
+//            builder.append(allInfo.getTodayArticle().getReadTime());
+            builder.append("20");
             int length3 = builder.length();
             builder.append("分钟");
+
             builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length, length1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new ForegroundColorSpan(Color.parseColor("#00C27F")), length2, length3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             educationNumTv.setText(builder);
+            titleTv.setText(allInfo.getTodayArticle().getEssayName());
+            containTv.setText(allInfo.getTodayArticle().getSname());
+            contentTv.setText(allInfo.getTodayArticle().getEssayProfile());
         } else {
             educationNoLinearLayout.setVisibility(View.VISIBLE);
             educationHaveLinearLayout.setVisibility(View.GONE);
@@ -591,13 +597,13 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 break;
             //教育关于你
             case R.id.tv_education_about_you:
-                intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
+                intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
                 startActivity(intent);
                 break;
             //教育重新制定
             case R.id.tv_education_make_again:
             case R.id.tv_main_no_answer_education:
-                intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+                intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
                 startActivity(intent);
                 break;
             default:

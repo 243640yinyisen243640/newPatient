@@ -27,7 +27,6 @@ public class EducationClassifyRightAdapter extends RecyclerView.Adapter<Educatio
 
     private IAdapterViewClickOneListener clickListener;
 
-    private EducationIntelligenceChildAdapter adapter;
 
     public EducationClassifyRightAdapter(Context context, List<EducationInfo> list, IAdapterViewClickOneListener clickListener) {
         this.context = context;
@@ -48,7 +47,7 @@ public class EducationClassifyRightAdapter extends RecyclerView.Adapter<Educatio
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EducationInfo info = list.get(position);
 
-
+        holder.titleTextView.setText(info.getTypeName());
         clickExpandOnClick expandOnClick = new clickExpandOnClick(position);
         holder.titleTextView.setOnClickListener(expandOnClick);
     }
@@ -59,16 +58,12 @@ public class EducationClassifyRightAdapter extends RecyclerView.Adapter<Educatio
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         private TextView titleTextView;
-
-
         public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.tv_education_right);
         }
     }
-
 
     private class clickExpandOnClick implements View.OnClickListener {
         private int position;

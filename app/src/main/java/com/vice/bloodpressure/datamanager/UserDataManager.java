@@ -129,7 +129,7 @@ public class UserDataManager {
      * APP-添加主要诊断疾病/其他诊断
      *
      * @param patientId
-     * @param diseaseType      疾病类型
+     * @param diseaseType      疾病类型 1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      * @param diagnosticType   疾病类型 诊断类型:1->主要诊断;2->其他诊断
      * @param diseaseChildType 疾病等级
      * @param diseaseRisk      高血压程度
@@ -153,8 +153,8 @@ public class UserDataManager {
      * APP-修改患者疾病详情
      *
      * @param patientId
-     * @param diseaseType      诊断类型:1->主要诊断;2->其他诊断
-     * @param diagnosticType   疾病类型
+     * @param diseaseType      1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
+     * @param diagnosticType   诊断类型 1主要诊断 2其他诊断
      * @param diseaseChildType 疾病等级
      * @param diseaseRisk      高血压程度
      * @param diagnoseDate     诊断日期
@@ -178,7 +178,7 @@ public class UserDataManager {
      *
      * @param patientId
      * @param diagnosticType   诊断类型1主要 2其他
-     * @param diseaseType      疾病类型
+     * @param diseaseType      疾病类型 1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      * @param complicationType
      * @param level
      * @param complicationDate
@@ -235,7 +235,7 @@ public class UserDataManager {
 
     /**
      * @param patientId
-     * @param diseaseType     疾病类型  1, 糖尿病2, 高血压3, 糖尿病前期4,冠心病5, 脑卒中6, 慢阻肺
+     * @param diseaseType     疾病类型  1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      * @param diagnosticType  诊断类型 1主要诊断 2其他诊断
      * @param successCallBack
      * @param failureCallBack
@@ -252,7 +252,7 @@ public class UserDataManager {
     /**
      * @param patientId
      * @param diagnosticType   诊断类型  1主要诊断 2其他诊断
-     * @param diseaseType
+     * @param diseaseType 1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      * @param complicationType
      * @param successCallBack
      * @param failureCallBack

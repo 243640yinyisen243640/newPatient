@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.model.HomeAllInfo;
@@ -261,6 +262,7 @@ public class HomeDataManager {
 
     /**
      * 一餐展示详情
+     *
      * @param archivesId
      * @param planDate        当前时间
      * @param meals           三餐标识  breakfast 早餐，lunch 午餐 ，dinner 晚餐
@@ -296,6 +298,7 @@ public class HomeDataManager {
 
     /**
      * 饮食详情
+     *
      * @param recId
      * @param recHeat
      * @param successCallBack
@@ -340,4 +343,38 @@ public class HomeDataManager {
         map.put("planDate", planDate);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealChildInfo.class, "ai/diet/v2/getDietPlanList", map, successCallBack, failureCallBack);
     }
+
+
+    //教育模块
+
+    /**
+     * 智能教育系列列表
+     *
+     * @param archivesId
+     * @param typeId          类型ID
+     * @param sname           系列名字过滤字段
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> teachSeriesList(String archivesId, String typeId, String sname, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("typeId", typeId);
+        map.put("sname", sname);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, EducationInfo.class, "ai/wellness/v2/teachSeriesList", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 智能教育分类列表
+     *
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> teachTypeList(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, EducationInfo.class, "ai/wellness/v2/teachTypeList", map, successCallBack, failureCallBack);
+    }
+
 }
