@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * 类名：
- * 传参：type 1:智能学习 搜索  显示还有多少节课未学完 学习状态显示  2：我的收藏 显示收藏目录  学习状态不显示
+ * 传参：type 1:智能学习 显示还有多少节课未学完 学习状态显示 2搜索 不显示学习状态   3：我的收藏 显示收藏目录  学习状态不显示
  * 描述:
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
@@ -34,7 +34,6 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
 
     private IAdapterViewClickListener clickListener;
 
-    private EducationIntelligenceChildAdapter adapter;
 
     public EducationIntelligenceAdapter(Context context, List<EducationInfo> list, String type, IAdapterViewClickListener clickListener) {
         this.context = context;
@@ -54,28 +53,35 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         EducationInfo info = list.get(position);
         holder.expandImageView.setVisibility(View.VISIBLE);
 
-        if (adapter == null) {
-            GridLayoutManager layoutManager = new GridLayoutManager(context, 1);
-            holder.recyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(context, 10), false));
-            holder.recyclerView.setLayoutManager(layoutManager);
-            adapter = new EducationIntelligenceChildAdapter(context, list.get(position).getTeachEssayAppVos(), position, clickListener);
-            holder.recyclerView.setAdapter(adapter);
-        }
+        GridLayoutManager layoutManager = new GridLayoutManager(context, 1);
+        holder.recyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(context, 10), false));
+        holder.recyclerView.setLayoutManager(layoutManager);
+        EducationIntelligenceChildAdapter adapter = new EducationIntelligenceChildAdapter(context, list.get(position).getTeachEssayAppVos(), position, type, clickListener);
+        holder.recyclerView.setAdapter(adapter);
 
-        XyImageUtils.loadRoundImage(context, R.drawable.education_study_bg, info.getCoverUrl(), holder.bgImageView);
+        XyImageUtils.loadRoundImage(context, R.drawable.shape_defaultbackground_5, info.getCoverUrl(), holder.bgImageView);
         holder.titleTextView.setText(info.getSname());
         holder.contentTextView.setText(info.getBrief());
         if ("1".equals(type)) {
+            holder.stateTextView.setVisibility(View.VISIBLE);
             holder.line.setVisibility(View.GONE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
-            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachTypeDomains().size() + ""));
+            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachEssayAppVos().size() + ""));
+        } else if ("2".equals(type)) {
+            holder.stateTextView.setVisibility(View.GONE);
+            holder.line.setVisibility(View.GONE);
+            holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
+            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachEssayAppVos().size() + ""));
         } else {
+            holder.stateTextView.setVisibility(View.GONE);
             holder.subjectTextView.setText("收藏目录");
             holder.line.setVisibility(View.VISIBLE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.gray_8a));
+
         }
 
         //那个按钮的展示状态 0展开 1收起状态

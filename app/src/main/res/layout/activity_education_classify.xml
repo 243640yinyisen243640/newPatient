@@ -56,7 +56,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="暂时没有内容，先看看其他的吧"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 

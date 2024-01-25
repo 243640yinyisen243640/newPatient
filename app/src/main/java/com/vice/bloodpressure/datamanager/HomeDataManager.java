@@ -356,7 +356,7 @@ public class HomeDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> teachSeriesList( String typeId, String sname, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> teachSeriesList(String typeId, String sname, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("typeId", typeId);
         map.put("sname", sname);
@@ -375,4 +375,41 @@ public class HomeDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, EducationInfo.class, "ai/wellness/v2/teachTypeList", map, successCallBack, failureCallBack);
     }
 
+    /**
+     * 智能教育详情
+     *
+     * @param archivesId
+     * @param sid
+     * @param essayId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> teachEssayInfo(String archivesId, String sid, String essayId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("sid", sid);
+        map.put("essayId", essayId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationInfo.class, "ai/wellness/v2/teachEssay/select", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 更改学习状态
+     *
+     * @param archivesId
+     * @param sid
+     * @param essayId
+     * @param status          1 学习中 2 已完成
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> teachEssayAddOrUpdate(String archivesId, String sid, String essayId, String status, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("sid", sid);
+        map.put("essayId", essayId);
+        map.put("status", status);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationInfo.class, "ai/wellness/v2/teachPatient/addOrUpdate", map, successCallBack, failureCallBack);
+    }
 }

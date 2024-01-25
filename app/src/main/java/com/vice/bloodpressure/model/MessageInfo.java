@@ -107,6 +107,46 @@ public class MessageInfo implements Serializable {
      */
     private String iframeUrl;
 
+    /**
+     * 血糖目标：1
+     * 血压目标：2
+     * 用药提醒：3
+     * 运动目标：4
+     */
+    private String tagType;
+    /**
+     * 消息数据
+     */
+    private String tagData;
+    /**
+     * 消息数据
+     */
+    private String tagDate;
+
+    public String getTagType() {
+        return tagType;
+    }
+
+    public void setTagType(String tagType) {
+        this.tagType = tagType;
+    }
+
+    public String getTagData() {
+        return tagData;
+    }
+
+    public void setTagData(String tagData) {
+        this.tagData = tagData;
+    }
+
+    public String getTagDate() {
+        return tagDate;
+    }
+
+    public void setTagDate(String tagDate) {
+        this.tagDate = tagDate;
+    }
+
     public String getIframeUrl() {
         return iframeUrl;
     }

@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
@@ -70,14 +69,11 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 list = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1", new IAdapterViewClickOneListener() {
-                    @Override
-                    public void adapterClickListener(int position, View view) {
-                        Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
-                        intent.putExtra("recHeat", list.get(position).getRecHeat());
-                        intent.putExtra("recId", list.get(position).getRecId());
-                        startActivity(intent);
-                    }
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1", (position, view) -> {
+                    Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+                    intent.putExtra("recHeat", list.get(position).getRecHeat());
+                    intent.putExtra("recId", list.get(position).getRecId());
+                    startActivity(intent);
                 });
                 mealTitleLv.setAdapter(adapter);
             } else {

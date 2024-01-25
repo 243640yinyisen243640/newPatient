@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -51,6 +52,16 @@ public class EducationIntelligenceSearchActivity extends UIBaseListRecycleViewAc
 
     }
 
+    @Override
+    protected boolean isRefresh() {
+        return false;
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
+
     private void initTopView() {
         View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_search, null);
         ImageView backImageView = topView.findViewById(R.id.iv_education_study_search_back);
@@ -82,7 +93,7 @@ public class EducationIntelligenceSearchActivity extends UIBaseListRecycleViewAc
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
-        return adapter = new EducationIntelligenceAdapter(getPageContext(), list, "1", new IAdapterViewClickListener() {
+        return adapter = new EducationIntelligenceAdapter(getPageContext(), list, "2", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 //那个按钮的展示状态 0展开 1收起状态 2没有数据隐藏
@@ -104,6 +115,12 @@ public class EducationIntelligenceSearchActivity extends UIBaseListRecycleViewAc
             public void adapterClickListener(int position, int index, View view) {
                 switch (view.getId()) {
                     case R.id.ll_education_study_child_click:
+                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                        intent.putExtra("type", list.get(position).getTeachEssayAppVos().get(index).getType());
+                        intent.putExtra("sid", list.get(position).getSid());
+                        intent.putExtra("essayId", list.get(position).getTeachEssayAppVos().get(index).getEssayId());
+                        intent.putExtra("fromWhere", "2");
+                        startActivity(intent);
                         break;
                     default:
                         break;

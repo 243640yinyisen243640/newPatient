@@ -33,9 +33,7 @@ import com.vice.bloodpressure.utils.UserInfoUtils;
 import retrofit2.Call;
 
 /**
- * 描述: 启动页
- * 作者: LYD
- * 创建日期: 2019/3/25 15:06
+ *
  */
 public class SplashActivity extends UIBaseActivity {
     private long countDownTime = 3000;//单位毫秒

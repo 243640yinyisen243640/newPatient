@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,7 +16,6 @@ import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,9 +70,9 @@ public class EducationInteCatalogueListActivity extends UIBaseLoadActivity {
                 switch (view.getId()) {
                     case R.id.ll_education_catalogue_click:
                         //跳到详情
-                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
-                        intent.putExtra("type", "2");
-                        startActivity(intent);
+//                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+//                        intent.putExtra("type", "2");
+//                        startActivity(intent);
                         break;
                     default:
                         break;

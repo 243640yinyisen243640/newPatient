@@ -29,11 +29,14 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
     private IAdapterViewClickListener clickListener;
     private int parentPosition;
 
-    public EducationIntelligenceChildAdapter(Context context, List<EducationInfo> list, int position, IAdapterViewClickListener clickListener) {
+    private String type;
+
+    public EducationIntelligenceChildAdapter(Context context, List<EducationInfo> list, int position, String type, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
         this.parentPosition = position;
+        this.type = type;
     }
 
     @NonNull
@@ -47,11 +50,17 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         EducationInfo info = list.get(position);
 
         holder.titleTextView.setText(info.getEssayName());
-        holder.stateTextView.setText(info.getStatus());
+
+        if ("1".equals(type)) {
+            holder.stateTextView.setVisibility(View.VISIBLE);
+        } else if ("2".equals(type)) {
+            holder.stateTextView.setVisibility(View.GONE);
+        } else {
+            holder.stateTextView.setVisibility(View.GONE);
+        }
 
         clickExpandOnClick expandOnClick = new clickExpandOnClick(position);
         holder.clickLinearLayout.setOnClickListener(expandOnClick);

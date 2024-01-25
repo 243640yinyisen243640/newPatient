@@ -69,7 +69,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="04:18"
                         android:textColor="@color/gray_8a"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -129,16 +128,19 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_education_details_study_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/tv_education_details_study_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/education_details_start_unbg"
+            android:background="@drawable/education_details_start_bg"
             android:gravity="center"
             android:paddingBottom="9dp"
             android:text="我已学习(110s)"

@@ -93,6 +93,12 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
             public void adapterClickListener(int position, int index, View view) {
                 switch (view.getId()) {
                     case R.id.ll_education_study_child_click:
+                        Intent intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                        intent.putExtra("type", list.get(position).getTeachEssayAppVos().get(index).getType());
+                        intent.putExtra("sid", list.get(position).getSid());
+                        intent.putExtra("essayId", list.get(position).getTeachEssayAppVos().get(index).getEssayId());
+                        intent.putExtra("fromWhere", "1");
+                        startActivity(intent);
                         break;
                     default:
                         break;

@@ -52,6 +52,43 @@ public class EducationInfo implements Serializable {
      * 背景图
      */
     private String coverUrl;
+    /**
+     * h5链接
+     */
+    private String iframeUrl;
+
+    /**
+     * 是音频的时候代表音频的url  是视频就是视频的url
+     */
+    private String videoUrl;
+    /**
+     * 音视频时长
+     */
+    private String videoTime;
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getVideoTime() {
+        return videoTime;
+    }
+
+    public void setVideoTime(String videoTime) {
+        this.videoTime = videoTime;
+    }
+
+    public String getIframeUrl() {
+        return iframeUrl;
+    }
+
+    public void setIframeUrl(String iframeUrl) {
+        this.iframeUrl = iframeUrl;
+    }
 
     public String getBrief() {
         return brief;
@@ -148,6 +185,18 @@ public class EducationInfo implements Serializable {
      */
     private String typeName;
     private String typeId;
+    /**
+     * 课程目录的类型 type1视频 2图文 3音频
+     */
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getTypeId() {
         return typeId;

@@ -11,7 +11,6 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -46,11 +45,13 @@ import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.HomeAllInfo;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
 
 import java.util.ArrayList;
@@ -65,6 +66,11 @@ import retrofit2.Call;
  * 描述: 首页
  */
 public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.OnClickListener {
+    //更多切换
+    private final List<MessageInfo> messageInfos = new ArrayList<>();
+    //总列表
+    private List<MessageInfo> messageInfoList;
+
     //头部
     /**
      * 消息，扫一扫，异常提醒
@@ -225,26 +231,52 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 给赋值
      */
     private void initHealthy() {
+        //血糖目标：1
+        //血压目标：2
+        //用药提醒：3
+        //运动目标：4
         if ("1".equals(allInfo.getHealthyStatus())) {
             healthyTipLl.setVisibility(View.VISIBLE);
-            healthyTipAdapter = new HomeHealthyTipsAdapter(getPageContext(), allInfo.getHealthyTag());
+            messageInfoList = allInfo.getHealthyTag();
+            if (messageInfoList.size() <= 3) {
+                spreadIm.setVisibility(View.GONE);
+                messageInfos.clear();
+                messageInfos.addAll(messageInfoList);
+            } else {
+                spreadIm.setVisibility(View.VISIBLE);
+                messageInfos.clear();
+                for (int i = 0; i < 3; i++) {
+                    messageInfos.add(messageInfoList.get(i));
+                }
+            }
+            healthyTipAdapter = new HomeHealthyTipsAdapter(getPageContext(), messageInfos, (position, view) -> {
+                switch (messageInfos.get(position).getTagType()) {
+                    //1:血糖目标 2:血压目标： 3:用药提醒 4:运动目标
+                    case "1":
+
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    default:
+                        break;
+                }
+            });
             healthyTipRv.setAdapter(healthyTipAdapter);
+
         } else {
             healthyTipLl.setVisibility(View.GONE);
         }
-
-
     }
 
+    //展示更多
     public void notifyWithLimitItemNumb() {
-        ViewGroup.LayoutParams params = healthyTipRv.getLayoutParams();
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        if (allInfo.getHealthyTag().size() <= 3) {
-            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        } else {
-            params.height = DensityUtils.dip2px(getPageContext(), 15) * 3;
-        }
-        healthyTipRv.setLayoutParams(params);
+        spreadIm.setVisibility(View.GONE);
+        messageInfos.clear();
+        messageInfos.addAll(messageInfoList);
         healthyTipAdapter.notifyDataSetChanged();
     }
 
@@ -404,7 +436,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             exerciseHaveLinearLayout.setVisibility(View.VISIBLE);
             exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " " + allInfo.getSportModule().getNeedConsumeCalories() + " ", "千卡"));
             stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " " + allInfo.getSportModule().getWalk() + " ", "步"));
-            fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量 ", " " + allInfo.getSportModule().getWalkCalories() + " ", "千卡"));
+            fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量", " " + allInfo.getSportModule().getWalkCalories() + " ", "千卡"));
             exerciseTypeTv.setText(allInfo.getSportModule().getAerobicsName());
             needFireTv.setText(allInfo.getSportModule().getAerobicsNeedCalories());
             timeTv.setText(allInfo.getSportModule().getAerobicsTime());
@@ -441,6 +473,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             titleTv.setText(allInfo.getTodayArticle().getEssayName());
             containTv.setText(allInfo.getTodayArticle().getSname());
             contentTv.setText(allInfo.getTodayArticle().getEssayProfile());
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.shape_defaultbackground_5, allInfo.getTodayArticle().getCoverUrl(), articleBgIm);
         } else {
             educationNoLinearLayout.setVisibility(View.VISIBLE);
             educationHaveLinearLayout.setVisibility(View.GONE);

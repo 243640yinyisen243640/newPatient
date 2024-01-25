@@ -98,6 +98,8 @@
                     android:layout_marginTop="10dp"
                     android:includeFontPadding="false"
                     android:text="这个是内容"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:textColor="@color/gray_9F"
                     android:textSize="13sp" />
             </LinearLayout>

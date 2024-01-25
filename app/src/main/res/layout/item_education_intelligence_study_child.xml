@@ -28,6 +28,7 @@
         android:paddingTop="4dp"
         android:paddingRight="7.5dp"
         android:paddingBottom="4dp"
+        android:visibility="gone"
         android:text="学习中"
         android:textColor="#00AEFF"
         android:textSize="12sp" />

@@ -1,8 +1,10 @@
 package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -15,25 +17,40 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.lzx.starrysky.SongInfo;
 import com.lzx.starrysky.StarrySky;
 import com.lzx.starrysky.utils.TimerTaskManager;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.model.EducationInfo;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.TurnUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.X5WebView;
+
+import java.io.IOException;
 
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
  * 类名:
- * 传参:type 1:视频  2：音频 3：文本
+ * 传参:type 1视频 2图文 3音频
+ * fromWhere  1:智能学习详情  2：智能学习搜索  3：我的收藏
  * 描述:教育详情
  */
 public class EducationDetailsActivity extends UIBaseLoadActivity {
+    /**
+     * 倒计时
+     */
+    private CountDownTimer timer;
 
     private LinearLayout audioLinearLayout;
     private TextView titleTextView;
@@ -44,24 +61,103 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     private JzvdStd videoJz;
     private X5WebView webView;
     private ProgressBar progressBar;
+    private TextView countdownTextView;
+    private LinearLayout countdownCollectLl;
     /**
-     * 1:视频  2：音频
+     * 1视频 2图文 3音频
      */
     private String type;
+    /**
+     * 1:智能学习详情  2：智能学习搜索  3：我的收藏
+     */
+    private String fromWhere;
 
     private int clickCount;
 
     private TimerTaskManager taskManager;
+
+    private EducationInfo educationInfo;
+    ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("详情");
         type = getIntent().getStringExtra("type");
+        fromWhere = getIntent().getStringExtra("fromWhere");
+
+        Log.i("yys", "type===" + type + "fromWhere==" + fromWhere);
         initView();
         initAudioProgress();
-        setVideoInfo();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    @Override
+    protected void onPageLoad() {
+        if ("1".equals(fromWhere)) {
+            editStudyStates("1");
+        } else {
+            getEducationInfo();
+        }
+    }
+
+
+    private void editStudyStates(String status) {
+        String sid = getIntent().getStringExtra("sid");
+        String essayId = getIntent().getStringExtra("essayId");
+        Call<String> requestCall = HomeDataManager.teachEssayAddOrUpdate(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), sid, essayId, status, (call, response) -> {
+            if (response.data) {
+                if ("2".equals(status)) {
+                    countdownTextView.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.education_details_start_unbg));
+                } else {
+                    getEducationInfo();
+                }
+
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, throwable) -> loadViewManager().changeLoadState(LoadStatus.FAILED));
+        addRequestCallToMap("teachEssayAddOrUpdate", requestCall);
+    }
+
+    private void getEducationInfo() {
+        String sid = getIntent().getStringExtra("sid");
+        String essayId = getIntent().getStringExtra("essayId");
+        Call<String> requestCall = HomeDataManager.teachEssayInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), sid, essayId, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                educationInfo = (EducationInfo) response.object;
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                setData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, throwable) -> loadViewManager().changeLoadState(LoadStatus.FAILED));
+        addRequestCallToMap("teachEssayInfo", requestCall);
+    }
+
+    private void setData() {
+        timer = new CountDownTimer(TurnUtils.getInt(educationInfo.getVideoTime(), 0) * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                editStudyStates("2");
+            }
+        };
+        timer.start();
+
+        if ("1".equals(type)) {
+            setVideoInfo();
+            setWebViewData(webView, educationInfo.getIframeUrl());
+        } else if ("2".equals(type)) {
+            setAudioClick();
+            setWebViewData(webView, educationInfo.getIframeUrl());
+        } else {
+            setWebViewData(webView, educationInfo.getIframeUrl());
+        }
     }
 
     /**
@@ -75,32 +171,8 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         //        videoJz.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = true;
-        videoJz.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
-        // XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_16_9, courseChapter.getVideoCover(), jzvdStd.posterImageView);
-    }
-
-    private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.activity_education_details, null);
-        audioLinearLayout = view.findViewById(R.id.ll_education_details_audio);
-        titleTextView = view.findViewById(R.id.tv_education_details_audio_title);
-        audioSeekBar = view.findViewById(R.id.sb_education_details_audio);
-        startTimeTextView = view.findViewById(R.id.tv_education_details_audio_start_time);
-        allTimeTextView = view.findViewById(R.id.tv_education_details_audio_all_time);
-        startImageView = view.findViewById(R.id.iv_education_details_audio_start);
-        videoJz = view.findViewById(R.id.jz_education_details_video);
-        webView = view.findViewById(R.id.web_education_details_web);
-        progressBar = view.findViewById(R.id.pb_education_details_web);
-        containerView().addView(view);
-        if ("1".equals(type)) {
-            audioLinearLayout.setVisibility(View.GONE);
-            videoJz.setVisibility(View.VISIBLE);
-        } else {
-            audioLinearLayout.setVisibility(View.VISIBLE);
-            videoJz.setVisibility(View.GONE);
-        }
-        startImageView.setOnClickListener(v -> {
-            setAudioClick();
-        });
+        videoJz.setUp(educationInfo.getVideoUrl(), "");
+        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, educationInfo.getCoverUrl(), videoJz.posterImageView);
     }
 
 
@@ -110,14 +182,14 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         clickCount = clickCount + 1;
         AnimationDrawable am = (AnimationDrawable) startImageView.getBackground();
         Boolean oddNumber = isOddNumber(clickCount);
-        Log.i("yys", "oddNumber=="+oddNumber);
+        Log.i("yys", "oddNumber==" + oddNumber);
         if (oddNumber) {
             Log.i("yys", "oddNumber=====");
             am.start();
             //            int id = getIntent().getExtras().getInt("id", 1);
             int id = 2;
             //            String audioUrl = getIntent().getExtras().getString("url");
-            String audioUrl = "http://video.xiyuns.cn/1633773952000.mp3";
+            String audioUrl = educationInfo.getVideoUrl();
             //开始播放
             SongInfo info = new SongInfo();
             info.setSongId(id + "");
@@ -134,12 +206,24 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
             //结束更新进度
             taskManager.stopToUpdateProgress();
         }
-    }
+        titleTextView.setText(educationInfo.getEssayName());
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(educationInfo.getVideoUrl());
+            mediaPlayer.prepare();
+            int duration = mediaPlayer.getDuration();
+            if (0 != duration) {
+                int s = duration / 1000;
+                //设置文件时长，单位 "分:秒" 格式
+                String total = s / 60 + ":" + s % 60;
+                allTimeTextView.setText(total);
+                //记得释放资源
+                mediaPlayer.release();
+            }
 
-    @Override
-    protected void onPageLoad() {
-        loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        setWebViewData(webView, "http://chronics.xiyuns.cn/index/caseapp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void setWebViewData(final X5WebView webView, final String url) {
@@ -189,13 +273,13 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
                 //设置进度条
                 //总时长
                 long duration = StarrySky.with().getDuration();
-                Log.i("yys", "duration=="+duration);
+                Log.i("yys", "duration==" + duration);
                 //播放位置
                 long position = StarrySky.with().getPlayingPosition();
-                Log.i("yys", "position=="+position);
+                Log.i("yys", "position==" + position);
                 //缓冲位置
                 long buffered = StarrySky.with().getBufferedPosition();
-                Log.i("yys", "buffered=="+buffered);
+                Log.i("yys", "buffered==" + buffered);
                 if (audioSeekBar.getMax() != duration) {
                     audioSeekBar.setMax((int) duration);
                 }
@@ -260,6 +344,44 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         }
     }
 
+    private void initView() {
+        View view = View.inflate(getPageContext(), R.layout.activity_education_details, null);
+        audioLinearLayout = view.findViewById(R.id.ll_education_details_audio);
+        titleTextView = view.findViewById(R.id.tv_education_details_audio_title);
+        audioSeekBar = view.findViewById(R.id.sb_education_details_audio);
+        startTimeTextView = view.findViewById(R.id.tv_education_details_audio_start_time);
+        allTimeTextView = view.findViewById(R.id.tv_education_details_audio_all_time);
+        startImageView = view.findViewById(R.id.iv_education_details_audio_start);
+        videoJz = view.findViewById(R.id.jz_education_details_video);
+        webView = view.findViewById(R.id.web_education_details_web);
+        progressBar = view.findViewById(R.id.pb_education_details_web);
+        countdownTextView = view.findViewById(R.id.tv_education_details_study_time);
+        countdownCollectLl = view.findViewById(R.id.ll_education_details_study_time);
+        containerView().addView(view);
+        // 1视频 2图文 3音频
+        if ("1".equals(type)) {
+            audioLinearLayout.setVisibility(View.GONE);
+            videoJz.setVisibility(View.VISIBLE);
+        } else if ("2".equals(type)) {
+            audioLinearLayout.setVisibility(View.GONE);
+            videoJz.setVisibility(View.GONE);
+        } else {
+            audioLinearLayout.setVisibility(View.VISIBLE);
+            videoJz.setVisibility(View.GONE);
+        }
+
+        if ("1".equals(fromWhere)) {
+            countdownCollectLl.setVisibility(View.VISIBLE);
+        } else if ("2".equals(fromWhere)) {
+            countdownCollectLl.setVisibility(View.GONE);
+        } else {
+            countdownCollectLl.setVisibility(View.GONE);
+        }
+        startImageView.setOnClickListener(v -> {
+            setAudioClick();
+        });
+    }
+
     /**
      * 停止播放
      */
@@ -268,5 +390,19 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         super.onDestroy();
         StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
     }
 }
