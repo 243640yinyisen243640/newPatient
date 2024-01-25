@@ -96,10 +96,10 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
             educationInfos.get(0).setIsCheck("1");
             rightList.clear();
             rightList.addAll(educationInfos.get(0).getTeachTypeDomains());
-            if (rightList.size()==0){
+            if (rightList.size() == 0) {
                 noDataTextView.setVisibility(View.VISIBLE);
                 secondRv.setVisibility(View.GONE);
-            }else {
+            } else {
                 noDataTextView.setVisibility(View.GONE);
                 secondRv.setVisibility(View.VISIBLE);
             }
@@ -108,6 +108,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
             EducationClassifyRightAdapter rightAdapter = new EducationClassifyRightAdapter(getPageContext(), rightList, (position, view) -> {
                 Intent intent = new Intent(getPageContext(), EducationIntelligenceSearchActivity.class);
+                intent.putExtra("typeId", rightList.get(position).getTypeId());
                 startActivity(intent);
             });
             GridLayoutManager layoutManager = new GridLayoutManager(getPageContext(), 1);
@@ -119,10 +120,10 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
             leftListView.setOnItemClickListener((parent, view, position, id) -> {
                 rightList.clear();
                 rightList.addAll(educationInfos.get(position).getTeachTypeDomains());
-                if (rightList.size()==0){
+                if (rightList.size() == 0) {
                     noDataTextView.setVisibility(View.VISIBLE);
                     secondRv.setVisibility(View.GONE);
-                }else {
+                } else {
                     noDataTextView.setVisibility(View.GONE);
                     secondRv.setVisibility(View.VISIBLE);
                 }

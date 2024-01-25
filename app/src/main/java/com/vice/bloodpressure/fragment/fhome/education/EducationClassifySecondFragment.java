@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.fragment.fhome.education;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -8,22 +7,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationInteCatalogueListActivity;
 import com.vice.bloodpressure.adapter.home.EducationClassifyRightAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
-import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
-import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
-import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 
 import java.util.List;
-
-import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -62,24 +55,24 @@ public class EducationClassifySecondFragment extends UIBaseListRecycleViewFragme
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = HomeDataManager.teachSeriesList(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), typeId, "", (call, response) -> {
-            if ("0000".equals(response.code)) {
-                callBack.callBack(response.object);
-            } else {
-                callBack.callBack(null);
-            }
-        }, (call, t) -> {
-            callBack.callBack(null);
-        });
-
-        addRequestCallToMap("teachSeriesList", requestCall);
+//        Call<String> requestCall = HomeDataManager.teachSeriesList(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), typeId, "", (call, response) -> {
+//            if ("0000".equals(response.code)) {
+//                callBack.callBack(response.object);
+//            } else {
+//                callBack.callBack(null);
+//            }
+//        }, (call, t) -> {
+//            callBack.callBack(null);
+//        });
+//
+//        addRequestCallToMap("teachSeriesList", requestCall);
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
         return new EducationClassifyRightAdapter(getPageContext(), list, (position, view) -> {
-            Intent intent = new Intent(getPageContext(), EducationInteCatalogueListActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getPageContext(), EducationInteCatalogueListActivity.class);
+//            startActivity(intent);
         });
     }
 

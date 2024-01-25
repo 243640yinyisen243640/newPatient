@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_white_10"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +51,8 @@
                     android:paddingBottom="4dp"
                     android:text="学习中"
                     android:textColor="#00AEFF"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_education_study_content"
@@ -116,7 +119,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
 
 
     <View

@@ -64,10 +64,7 @@ public class EducationInteCatalogueListActivity extends UIBaseLoadActivity {
     @Override
     protected void onPageLoad() {
         loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-        educationInfos = new ArrayList<>();
-        educationInfos.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
-        educationInfos.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
-        educationInfos.add(new EducationInfo("第二节:高血压，隐形的杀手!", "未完成"));
+
 
         mAdapter = new EducationCatalogueAdapter(getPageContext(), educationInfos, new IAdapterViewClickListener() {
             @Override

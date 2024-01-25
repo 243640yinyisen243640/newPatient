@@ -119,7 +119,7 @@ public class HomeXueYaH5Fragment extends UIBaseFragment {
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_home_xueya_h5, null);
-        addTv = view.findViewById(R.id.tv_home_fm_xt_add_h5);
+        addTv = view.findViewById(R.id.tv_home_fm_xy_add_h5);
         x5WebView = view.findViewById(R.id.web_home_fm_xy_data);
         numTv = view.findViewById(R.id.tv_home_fm_xy_num_h5);
         addTv.setOnClickListener(v -> {

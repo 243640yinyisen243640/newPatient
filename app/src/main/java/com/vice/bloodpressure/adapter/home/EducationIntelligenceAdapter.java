@@ -55,29 +55,24 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EducationInfo info = list.get(position);
-
-
         holder.expandImageView.setVisibility(View.VISIBLE);
 
         if (adapter == null) {
             GridLayoutManager layoutManager = new GridLayoutManager(context, 1);
             holder.recyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(context, 10), false));
             holder.recyclerView.setLayoutManager(layoutManager);
-            adapter = new EducationIntelligenceChildAdapter(context, list.get(position).getChildList(), position, clickListener);
+            adapter = new EducationIntelligenceChildAdapter(context, list.get(position).getTeachEssayAppVos(), position, clickListener);
             holder.recyclerView.setAdapter(adapter);
         }
 
-        XyImageUtils.loadRoundImage(context, R.drawable.education_study_bg, info.getBg(), holder.bgImageView);
-        holder.titleTextView.setText(info.getTitle());
-        holder.contentTextView.setText(info.getContent());
+        XyImageUtils.loadRoundImage(context, R.drawable.education_study_bg, info.getCoverUrl(), holder.bgImageView);
+        holder.titleTextView.setText(info.getSname());
+        holder.contentTextView.setText(info.getBrief());
         if ("1".equals(type)) {
-            holder.stateTextView.setVisibility(View.VISIBLE);
-            holder.stateTextView.setText(info.getState());
             holder.line.setVisibility(View.GONE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
-            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getSubject()));
+            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachTypeDomains().size() + ""));
         } else {
-            holder.stateTextView.setVisibility(View.GONE);
             holder.subjectTextView.setText("收藏目录");
             holder.line.setVisibility(View.VISIBLE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.gray_8a));

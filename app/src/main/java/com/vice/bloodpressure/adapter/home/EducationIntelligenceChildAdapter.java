@@ -50,8 +50,8 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
 
         EducationInfo info = list.get(position);
 
-        holder.titleTextView.setText(info.getTitle());
-        holder.stateTextView.setText(info.getState());
+        holder.titleTextView.setText(info.getEssayName());
+        holder.stateTextView.setText(info.getStatus());
 
         clickExpandOnClick expandOnClick = new clickExpandOnClick(position);
         holder.clickLinearLayout.setOnClickListener(expandOnClick);

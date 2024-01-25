@@ -50,8 +50,8 @@ public class EducationCatalogueAdapter extends RecyclerView.Adapter<EducationCat
 
         EducationInfo info = list.get(position);
 
-        holder.titleTextView.setText(info.getTitle());
-        if ("学习中".equals(info.getState())) {
+        holder.titleTextView.setText(info.getEssayName());
+        if ("学习中".equals(info.getStatus())) {
             holder.titleTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.audio_star, 0, 0, 0);
             holder.titleTextView.setTextColor(context.getResources().getColor(R.color.black_24));
         } else {

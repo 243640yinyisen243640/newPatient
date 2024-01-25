@@ -10,12 +10,8 @@ import java.util.List;
  * 描述:
  */
 public class EducationInfo implements Serializable {
-    private String bg;
-    private String title;
-    private String content;
-    private String state;
-    private String subject;
-    private List<EducationInfo> childList;
+    private String status;
+    private List<EducationInfo> teachEssayAppVos;
     private List<EducationInfo> list;
 
     private String classifyId;
@@ -36,18 +32,42 @@ public class EducationInfo implements Serializable {
      */
     private String essayProfile;
     /**
-     *系列名字
+     * 系列名字
      */
     private String sname;
     /**
-     *文章名字
+     * 简介
+     */
+    private String brief;
+    /**
+     * 文章名字
      */
     private String sid;
 
     /**
-     * 文章id
+     * 目录
      */
     private String essayId;
+    /**
+     * 背景图
+     */
+    private String coverUrl;
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
 
     private List<EducationInfo> teachTypeDomains;
 
@@ -115,24 +135,6 @@ public class EducationInfo implements Serializable {
         this.readTime = readTime;
     }
 
-    public EducationInfo(String title, String state) {
-        this.title = title;
-        this.state = state;
-    }
-
-    public EducationInfo(String bg, String title, String content, String state, String subject) {
-        this.bg = bg;
-        this.title = title;
-        this.content = content;
-        this.state = state;
-        this.subject = subject;
-    }
-
-    public EducationInfo(String title, String content, String classifyId) {
-        this.title = title;
-        this.content = content;
-        this.classifyId = classifyId;
-    }
 
     /**
      * 那个按钮的展示状态 0展开 1收起状态，展开更多
@@ -195,51 +197,21 @@ public class EducationInfo implements Serializable {
         this.isExpand = isExpand;
     }
 
-    public String getBg() {
-        return bg;
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setBg(String bg) {
-        this.bg = bg;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+
+    public List<EducationInfo> getTeachEssayAppVos() {
+        return teachEssayAppVos;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public List<EducationInfo> getChildList() {
-        return childList;
-    }
-
-    public void setChildList(List<EducationInfo> childList) {
-        this.childList = childList;
+    public void setTeachEssayAppVos(List<EducationInfo> teachEssayAppVos) {
+        this.teachEssayAppVos = teachEssayAppVos;
     }
 }

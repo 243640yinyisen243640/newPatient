@@ -350,16 +350,14 @@ public class HomeDataManager {
     /**
      * 智能教育系列列表
      *
-     * @param archivesId
      * @param typeId          类型ID
      * @param sname           系列名字过滤字段
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> teachSeriesList(String archivesId, String typeId, String sname, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> teachSeriesList( String typeId, String sname, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("archivesId", archivesId);
         map.put("typeId", typeId);
         map.put("sname", sname);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, EducationInfo.class, "ai/wellness/v2/teachSeriesList", map, successCallBack, failureCallBack);
