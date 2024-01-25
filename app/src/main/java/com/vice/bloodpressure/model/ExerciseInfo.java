@@ -66,7 +66,7 @@ public class ExerciseInfo implements Serializable {
     /**
      * 步数
      */
-    private String walk;
+    private String walkNum;
     /**
      * 有氧运动名称
      */
@@ -92,12 +92,12 @@ public class ExerciseInfo implements Serializable {
      */
     private String pliableId;
 
-    public String getWalk() {
-        return walk;
+    public String getWalkNum() {
+        return walkNum;
     }
 
-    public void setWalk(String walk) {
-        this.walk = walk;
+    public void setWalkNum(String walkNum) {
+        this.walkNum = walkNum;
     }
 
     public String getAerobicsName() {

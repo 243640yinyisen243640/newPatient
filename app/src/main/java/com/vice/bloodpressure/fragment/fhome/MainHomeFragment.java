@@ -480,7 +480,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             exerciseNoLinearLayout.setVisibility(View.GONE);
             exerciseHaveLinearLayout.setVisibility(View.VISIBLE);
             exerciseNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要消耗热量", " " + allInfo.getSportModule().getNeedConsumeCalories() + " ", "千卡"));
-            stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " " + allInfo.getSportModule().getWalk() + " ", "步"));
+            stepNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 15, "步行", " " + allInfo.getSportModule().getWalkNum() + " ", "步"));
             fireNumTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#F98515"), 15, "消耗热量", " " + allInfo.getSportModule().getWalkCalories() + " ", "千卡"));
             exerciseTypeTv.setText(allInfo.getSportModule().getAerobicsName());
             needFireTv.setText(allInfo.getSportModule().getAerobicsNeedCalories());
