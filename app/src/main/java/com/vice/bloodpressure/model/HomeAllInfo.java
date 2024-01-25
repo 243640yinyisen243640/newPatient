@@ -21,7 +21,7 @@ public class HomeAllInfo {
     /**
      * 血糖模块
      */
-    private UserInfo monitorBgs;
+    private UserInfo bgModule;
     /**
      * 血压模块
      */
@@ -29,7 +29,7 @@ public class HomeAllInfo {
     /**
      * bmi模块
      */
-    private UserInfo BmiModule;
+    private UserInfo bmiModule;
     /**
      * 饮食模块
      */
@@ -171,12 +171,12 @@ public class HomeAllInfo {
         this.basicInfo = basicInfo;
     }
 
-    public UserInfo getMonitorBgs() {
-        return monitorBgs;
+    public UserInfo getBgModule() {
+        return bgModule;
     }
 
-    public void setMonitorBgs(UserInfo monitorBgs) {
-        this.monitorBgs = monitorBgs;
+    public void setBgModule(UserInfo bgModule) {
+        this.bgModule = bgModule;
     }
 
     public UserInfo getBpModule() {
@@ -188,11 +188,11 @@ public class HomeAllInfo {
     }
 
     public UserInfo getBmiModule() {
-        return BmiModule;
+        return bmiModule;
     }
 
     public void setBmiModule(UserInfo bmiModule) {
-        BmiModule = bmiModule;
+        this.bmiModule = bmiModule;
     }
 
     public MealChildInfo getDietModule() {

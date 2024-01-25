@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/home_more_fat_all_person" />
+                android:src="@drawable/home_normal_all_person" />
 
             <LinearLayout
                 android:id="@+id/ll_home_xy_people_value"
@@ -155,6 +155,7 @@
                 android:layout_height="17dp"
                 android:layout_gravity="center|top"
                 android:layout_marginStart="30dp"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/home_retina" />
 
@@ -165,6 +166,7 @@
                 android:layout_gravity="center|top"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="60dp"
+                android:visibility="gone"
                 android:src="@drawable/home_nerve" />
 
             <TextView
@@ -179,6 +181,7 @@
                 android:text="神经病变"
                 android:textColor="@color/black_2A"
                 android:textSize="15sp"
+                android:visibility="gone"
                 android:textStyle="bold" />
 
             <TextView
@@ -186,6 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
+                android:visibility="gone"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/shape_bg_gray_black_90_1"
@@ -314,6 +318,7 @@
                 android:layout_marginStart="44dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="50dp"
+                android:visibility="gone"
                 android:src="@drawable/home_kidney" />
 
             <TextView
@@ -323,6 +328,7 @@
                 android:layout_gravity="bottom|right"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="106dp"
+                android:visibility="gone"
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="肾脏病变"
@@ -337,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginStart="50dp"
+                android:visibility="gone"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="12dp"
                 android:src="@drawable/home_foot" />
@@ -348,6 +355,7 @@
                 android:layout_gravity="bottom|right"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="2dp"
+                android:visibility="gone"
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="糖尿病足"
@@ -361,6 +369,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/xueguan_thin" />
 
@@ -371,6 +380,7 @@
                 android:layout_gravity="center|bottom"
                 android:layout_marginEnd="43dp"
                 android:layout_marginBottom="60dp"
+                android:visibility="gone"
                 android:background="@drawable/xueguan_line" />
 
             <TextView
@@ -379,6 +389,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="295dp"
+                android:visibility="gone"
                 android:background="@drawable/shape_bg_gray_black_90_1"
                 android:padding="9dp"
                 android:text="下肢血管病变"
@@ -527,6 +538,7 @@
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/shape_bg_white_blue_31_17_2"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:includeFontPadding="false"
                         android:paddingLeft="4dp"
                         android:paddingTop="3dp"

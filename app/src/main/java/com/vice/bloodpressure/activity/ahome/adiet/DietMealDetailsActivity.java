@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.home.DietMealOneMealDetailsAdapter;
+import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
@@ -39,7 +40,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
     /**
      * 早餐列表
      */
-    private NoScrollListView mealTitleRv;
+    private NoScrollListView mealTitleLv;
 
     private String titleMeal;
     private String planDate;
@@ -69,8 +70,16 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 list = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1",null);
-                mealTitleRv.setAdapter(adapter);
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1", new IAdapterViewClickOneListener() {
+                    @Override
+                    public void adapterClickListener(int position, View view) {
+                        Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+                        intent.putExtra("recHeat", list.get(position).getRecHeat());
+                        intent.putExtra("recId", list.get(position).getRecId());
+                        startActivity(intent);
+                    }
+                });
+                mealTitleLv.setAdapter(adapter);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
             }
@@ -87,7 +96,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 List<MealExclusiveInfo> listSecond = (List<MealExclusiveInfo>) response.object;
                 DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2",null);
-                mealTitleRv.setAdapter(adapter);
+                mealTitleLv.setAdapter(adapter);
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -99,7 +108,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
         View view = View.inflate(getPageContext(), R.layout.activity_diet_mall_details, null);
         containerView().addView(view);
         mealTitleTv = view.findViewById(R.id.tv_diet_mall_details_title);
-        mealTitleRv = view.findViewById(R.id.rv_diet_mall_details);
+        mealTitleLv = view.findViewById(R.id.rv_diet_mall_details);
 
         mealTitleTv.setOnClickListener(v -> {
             getOneDayMeals();
@@ -117,12 +126,6 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
         }
 
 
-        mealTitleRv.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
-            intent.putExtra("recHeat", list.get(position).getRecHeat());
-            intent.putExtra("recId", list.get(position).getRecId());
-            startActivity(intent);
-        });
 
     }
 }

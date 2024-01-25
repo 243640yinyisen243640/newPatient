@@ -180,7 +180,6 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         initTopView();
         initView();
         initListener();
-        initViewPager();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
@@ -215,6 +214,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     private void setData() {
         initHealthy();
         setBaseInfo();
+        initViewPager();
         initMeal();
         initExercise();
         initEducation();
@@ -249,130 +249,126 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     }
 
     private void setBaseInfo() {
-        if ("1".equals(allInfo.getBasicInfoStatus())) {
-            //bmi  1 偏瘦 2 正常 3 超重 4 肥胖
-            String bmiStatus = allInfo.getBasicInfo().getBmiStatus();
-            bmiStateTv.setVisibility(View.VISIBLE);
-            if ("1".equals(bmiStatus)) {
-                shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_thin_all_person));
-                bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
-                //            bmiStateTv.setText("偏瘦");
-                bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_blue_31_17_2));
-            } else if ("2".equals(bmiStatus)) {
-                shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
-                bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
-                //            bmiStateTv.setText("正常");
-                bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_green_31_17_2));
-            } else if ("3".equals(bmiStatus)) {
-                shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_more_fat_all_person));
-                bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.orange_ff));
-                //            bmiStateTv.setText("超重");
-                bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_orange_31_17_2));
-            } else if ("4".equals(bmiStatus)) {
-                shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_fat_all_person));
-                bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_E5));
-                //            bmiStateTv.setText("肥胖");
-                bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_red_31_17_2));
-            } else {
-                shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
-                bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-                bmiStateTv.setVisibility(View.GONE);
-            }
-
-            heightNumTv.setText(allInfo.getBasicInfo().getHeight());
-            weightNumTv.setText(allInfo.getBasicInfo().getWeight());
-            bmiNumTv.setText(allInfo.getBasicInfo().getBmi());
-            bmiStateTv.setText(allInfo.getBasicInfo().getBmiTag());
-            bmiNormalTv.setText("正常BMI参考值:" + allInfo.getBasicInfo().getBmiNormal());
-            xyValueTv.setText(allInfo.getBasicInfo().getSbp() + "/" + allInfo.getBasicInfo().getDbp());
-
-            //血压状态 1 偏低2 正常3 偏高
-            String bpStatus = allInfo.getBasicInfo().getBpStatus();
-            if ("1".equals(bpStatus)) {
-                xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
-            } else if ("2".equals(bpStatus)) {
-                xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
-            } else if ("3".equals(bpStatus)) {
-                xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
-            } else {
-                xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-            }
-            //血压值
-            xyValueTv.setText(allInfo.getBasicInfo().getSbp() + "/" + allInfo.getBasicInfo().getDbp());
-            xyTimeTv.setText(allInfo.getBasicInfo().getBpDate());
-            //血糖值
-            xtValueTv.setText(allInfo.getBasicInfo().getBgValue());
-            xtTimeTv.setText(allInfo.getBasicInfo().getBgDate());
-            //血糖状态1 偏低  2 正常  3 偏高
-            String bgStatus = allInfo.getBasicInfo().getBgStatus();
-            if ("1".equals(bgStatus)) {
-                xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
-            } else if ("2".equals(bgStatus)) {
-                xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
-            } else if ("3".equals(bgStatus)) {
-                xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
-            } else {
-                xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-            }
-
-            //心率值
-            xlValueTv.setText(allInfo.getBasicInfo().getHr());
-            xlTimeTv.setText(allInfo.getBasicInfo().getHrDate());
-            //心率状态1 偏低  2 正常  3 偏高
-            String hrStatus = allInfo.getBasicInfo().getHrStatus();
-            if ("1".equals(hrStatus)) {
-                xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
-            } else if ("2".equals(hrStatus)) {
-                xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
-            } else if ("3".equals(hrStatus)) {
-                xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
-            } else {
-                xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
-            }
-            //肾脏病变
-            if ("1".equals(allInfo.getBasicInfo().getDn())) {
-                szIllnessTv.setVisibility(View.VISIBLE);
-                szIllnessIm.setVisibility(View.VISIBLE);
-            } else {
-                szIllnessTv.setVisibility(View.GONE);
-                szIllnessIm.setVisibility(View.GONE);
-            }
-            //视网膜病变
-            if ("1".equals(allInfo.getBasicInfo().getDr())) {
-                swmIllnessTv.setVisibility(View.VISIBLE);
-                swmIllnessIm.setVisibility(View.VISIBLE);
-            } else {
-                swmIllnessTv.setVisibility(View.GONE);
-                swmIllnessIm.setVisibility(View.GONE);
-            }
-            //神经病变
-            if ("1".equals(allInfo.getBasicInfo().getDpn())) {
-                sjIllnessTv.setVisibility(View.VISIBLE);
-                sjIllnessIm.setVisibility(View.VISIBLE);
-            } else {
-                sjIllnessTv.setVisibility(View.GONE);
-                sjIllnessIm.setVisibility(View.GONE);
-            }
-            //下肢血管病变
-            if ("1".equals(allInfo.getBasicInfo().getLead())) {
-                xgIllnessTv.setVisibility(View.VISIBLE);
-                xgIllnessIm.setVisibility(View.VISIBLE);
-                xgIllnesslineIm.setVisibility(View.VISIBLE);
-            } else {
-                xgIllnessTv.setVisibility(View.GONE);
-                xgIllnessIm.setVisibility(View.GONE);
-                xgIllnesslineIm.setVisibility(View.GONE);
-            }
-            //糖尿病足
-            if ("1".equals(allInfo.getBasicInfo().getDf())) {
-                tzIllnessIm.setVisibility(View.VISIBLE);
-                tzIllnessTv.setVisibility(View.VISIBLE);
-            } else {
-                tzIllnessIm.setVisibility(View.GONE);
-                tzIllnessTv.setVisibility(View.GONE);
-            }
+        //bmi  1 偏瘦 2 正常 3 超重 4 肥胖
+        String bmiStatus = allInfo.getBasicInfo().getBmiStatus();
+        bmiStateTv.setVisibility(View.VISIBLE);
+        if ("1".equals(bmiStatus)) {
+            shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_thin_all_person));
+            bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
+            //            bmiStateTv.setText("偏瘦");
+            bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_blue_31_17_2));
+        } else if ("2".equals(bmiStatus)) {
+            shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
+            bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
+            //            bmiStateTv.setText("正常");
+            bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_green_31_17_2));
+        } else if ("3".equals(bmiStatus)) {
+            shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_more_fat_all_person));
+            bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.orange_ff));
+            //            bmiStateTv.setText("超重");
+            bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_orange_31_17_2));
+        } else if ("4".equals(bmiStatus)) {
+            shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_fat_all_person));
+            bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_E5));
+            //            bmiStateTv.setText("肥胖");
+            bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_red_31_17_2));
         } else {
+            shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
+            bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+            bmiStateTv.setVisibility(View.GONE);
+        }
 
+        heightNumTv.setText(allInfo.getBasicInfo().getHeight());
+        weightNumTv.setText(allInfo.getBasicInfo().getWeight());
+        bmiNumTv.setText(allInfo.getBasicInfo().getBmi());
+        bmiStateTv.setText(allInfo.getBasicInfo().getBmiTag());
+        bmiNormalTv.setText("正常BMI参考值:" + allInfo.getBasicInfo().getBmiNormal());
+        xyValueTv.setText(allInfo.getBasicInfo().getSbp() + "/" + allInfo.getBasicInfo().getDbp());
+
+        //血压状态 1 偏低2 正常3 偏高
+        String bpStatus = allInfo.getBasicInfo().getBpStatus();
+        if ("1".equals(bpStatus)) {
+            xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
+        } else if ("2".equals(bpStatus)) {
+            xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
+        } else if ("3".equals(bpStatus)) {
+            xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
+        } else {
+            xyValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+        }
+        //血压值
+        xyValueTv.setText(allInfo.getBasicInfo().getSbp() + "/" + allInfo.getBasicInfo().getDbp());
+        xyTimeTv.setText(allInfo.getBasicInfo().getBpDate());
+        //血糖值
+        xtValueTv.setText(allInfo.getBasicInfo().getBgValue());
+        xtTimeTv.setText(allInfo.getBasicInfo().getBgDate());
+        //血糖状态1 偏低  2 正常  3 偏高
+        String bgStatus = allInfo.getBasicInfo().getBgStatus();
+        if ("1".equals(bgStatus)) {
+            xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
+        } else if ("2".equals(bgStatus)) {
+            xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
+        } else if ("3".equals(bgStatus)) {
+            xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
+        } else {
+            xtValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+        }
+
+        //心率值
+        xlValueTv.setText(allInfo.getBasicInfo().getHr());
+        xlTimeTv.setText(allInfo.getBasicInfo().getHrDate());
+        //心率状态1 偏低  2 正常  3 偏高
+        String hrStatus = allInfo.getBasicInfo().getHrStatus();
+        if ("1".equals(hrStatus)) {
+            xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
+        } else if ("2".equals(hrStatus)) {
+            xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
+        } else if ("3".equals(hrStatus)) {
+            xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.red_ED));
+        } else {
+            xlValueTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+        }
+        //肾脏病变
+        if ("1".equals(allInfo.getBasicInfo().getDn())) {
+            szIllnessTv.setVisibility(View.VISIBLE);
+            szIllnessIm.setVisibility(View.VISIBLE);
+        } else {
+            szIllnessTv.setVisibility(View.GONE);
+            szIllnessIm.setVisibility(View.GONE);
+        }
+        //视网膜病变
+        if ("1".equals(allInfo.getBasicInfo().getDr())) {
+            swmIllnessTv.setVisibility(View.VISIBLE);
+            swmIllnessIm.setVisibility(View.VISIBLE);
+        } else {
+            swmIllnessTv.setVisibility(View.GONE);
+            swmIllnessIm.setVisibility(View.GONE);
+        }
+        //神经病变
+        if ("1".equals(allInfo.getBasicInfo().getDpn())) {
+            sjIllnessTv.setVisibility(View.VISIBLE);
+            sjIllnessIm.setVisibility(View.VISIBLE);
+        } else {
+            sjIllnessTv.setVisibility(View.GONE);
+            sjIllnessIm.setVisibility(View.GONE);
+        }
+        //下肢血管病变
+        if ("1".equals(allInfo.getBasicInfo().getLead())) {
+            xgIllnessTv.setVisibility(View.VISIBLE);
+            xgIllnessIm.setVisibility(View.VISIBLE);
+            xgIllnesslineIm.setVisibility(View.VISIBLE);
+        } else {
+            xgIllnessTv.setVisibility(View.GONE);
+            xgIllnessIm.setVisibility(View.GONE);
+            xgIllnesslineIm.setVisibility(View.GONE);
+        }
+        //糖尿病足
+        if ("1".equals(allInfo.getBasicInfo().getDf())) {
+            tzIllnessIm.setVisibility(View.VISIBLE);
+            tzIllnessTv.setVisibility(View.VISIBLE);
+        } else {
+            tzIllnessIm.setVisibility(View.GONE);
+            tzIllnessTv.setVisibility(View.GONE);
         }
 
 
@@ -429,12 +425,12 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             SpannableStringBuilder builder = new SpannableStringBuilder();
             builder.append("本节共");
             int length = builder.length();
-//            builder.append(allInfo.getTodayArticle().getWordNumber());
+            //            builder.append(allInfo.getTodayArticle().getWordNumber());
             builder.append("100");
             int length1 = builder.length();
             builder.append("字，阅读时间约");
             int length2 = builder.length();
-//            builder.append(allInfo.getTodayArticle().getReadTime());
+            //            builder.append(allInfo.getTodayArticle().getReadTime());
             builder.append("20");
             int length3 = builder.length();
             builder.append("分钟");
@@ -458,14 +454,14 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
     private void initViewPager() {
         ArrayList<Fragment> fragments;
 
-        HomeXueTangFragment detailsFragment = new HomeXueTangFragment();
-        HomeXueYaFragment resourceProportionFragment = new HomeXueYaFragment();
-        HomeBmiFragment bmiFragment = new HomeBmiFragment();
+        HomeXueTangH5Fragment detailsFragment = new HomeXueTangH5Fragment();
+        HomeXueYaH5Fragment resourceProportionFragment = new HomeXueYaH5Fragment();
+        HomeBmiH5Fragment bmiFragment = new HomeBmiH5Fragment();
 
         fragments = new ArrayList<>();
-        fragments.add(detailsFragment.getInstance("11"));
-        fragments.add(resourceProportionFragment.getInstance("11"));
-        fragments.add(bmiFragment.getInstance("11"));
+        fragments.add(detailsFragment.getInstance(allInfo.getBgModule()));
+        fragments.add(resourceProportionFragment.getInstance(allInfo.getBpModule()));
+        fragments.add(bmiFragment.getInstance(allInfo.getBmiModule()));
 
         threeVp.setAdapter(new MyFragmentStateAdapter(getActivity(), fragments));
         threeVp.setOffscreenPageLimit(fragments.size());

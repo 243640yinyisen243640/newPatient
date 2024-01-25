@@ -298,6 +298,92 @@ public class UserInfo implements Serializable {
      */
     private String phoneNumber;
 
+
+    /**
+     * 有关首页血糖血压bmi模块
+     */
+    private String iframeUrl;
+    /**
+     * 总测量次数
+     */
+    private String takeSum;
+    /**
+     *偏高次数
+     */
+    private String takeHeightNum;
+    /**
+     *正常次数
+     */
+    private String takeNormalNum;
+    /**
+     *偏低次数
+     */
+    private String takeLowNum;
+    /**
+     *bmi值  状态1偏低 2正常 3偏高
+     */
+    private String bmiValue;
+    /**
+     *时间
+     */
+    private String bmiDate;
+
+    public String getTakeSum() {
+        return takeSum;
+    }
+
+    public void setTakeSum(String takeSum) {
+        this.takeSum = takeSum;
+    }
+
+    public String getTakeHeightNum() {
+        return takeHeightNum;
+    }
+
+    public void setTakeHeightNum(String takeHeightNum) {
+        this.takeHeightNum = takeHeightNum;
+    }
+
+    public String getTakeNormalNum() {
+        return takeNormalNum;
+    }
+
+    public void setTakeNormalNum(String takeNormalNum) {
+        this.takeNormalNum = takeNormalNum;
+    }
+
+    public String getTakeLowNum() {
+        return takeLowNum;
+    }
+
+    public void setTakeLowNum(String takeLowNum) {
+        this.takeLowNum = takeLowNum;
+    }
+
+    public String getBmiValue() {
+        return bmiValue;
+    }
+
+    public void setBmiValue(String bmiValue) {
+        this.bmiValue = bmiValue;
+    }
+
+    public String getBmiDate() {
+        return bmiDate;
+    }
+
+    public void setBmiDate(String bmiDate) {
+        this.bmiDate = bmiDate;
+    }
+
+    public String getIframeUrl() {
+        return iframeUrl;
+    }
+
+    public void setIframeUrl(String iframeUrl) {
+        this.iframeUrl = iframeUrl;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

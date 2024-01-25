@@ -1,9 +1,11 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -204,6 +206,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_check_add_time:
+                closeKeyboard();
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
                     addTime = object.toString();
                     timeTextView.setText(object.toString());
@@ -217,6 +220,14 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
         }
     }
 
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
 
     private void sureToAddData() {
 
