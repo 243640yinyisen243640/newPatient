@@ -39,6 +39,13 @@ public class HomeDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, HomeAllInfo.class, "app/v2/home", map, successCallBack, failureCallBack);
     }
 
+    public static Call<String> saveSportWalk(String archivesId, String walkNum, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("walkNum", walkNum);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/saveSportWalk", map, successCallBack, failureCallBack);
+    }
+
 
     /**
      * 智能饮食

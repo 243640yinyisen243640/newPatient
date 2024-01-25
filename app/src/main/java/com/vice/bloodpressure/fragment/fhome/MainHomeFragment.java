@@ -1,8 +1,10 @@
 package com.vice.bloodpressure.fragment.fhome;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -23,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.lyd.libsteps.StepUtil;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.vice.bloodpressure.R;
@@ -187,8 +190,37 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         initView();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+        requestMotionPermission();
     }
 
+    private String[] perms = {Manifest.permission.ACTIVITY_RECOGNITION};
+
+    //请求运动权限
+    private void requestMotionPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (checkPermission(perms)) {
+                //获取首页运动
+                upSteps();
+            } else {
+                requestPermission("获取健身运动信息", perms);
+            }
+        } else {
+            //获取首页运动
+            upSteps();
+        }
+    }
+
+    @Override
+    protected void permissionsGranted() {
+        //获取首页运动  权限请求成功
+        upSteps();
+    }
+
+    @Override
+    protected void permissionsDenied(List<String> perms) {
+        //权限请求失败
+        getHomeData();
+    }
 
     @Override
     protected void onPageLoad() {
@@ -215,6 +247,19 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
         addRequestCallToMap("getHomeData", requestCall);
+    }
+
+
+    private void upSteps() {
+        int todayStep = StepUtil.getTodayStep(getPageContext());
+        Call<String> requestCall = HomeDataManager.saveSportWalk(UserInfoUtils.getArchivesId(getPageContext()), todayStep + "", (call, response) -> {
+            if (response.data) {
+                getHomeData();
+            }
+
+        }, (call, t) -> {
+        });
+        addRequestCallToMap("saveSportWalk", requestCall);
     }
 
     private void setData() {
