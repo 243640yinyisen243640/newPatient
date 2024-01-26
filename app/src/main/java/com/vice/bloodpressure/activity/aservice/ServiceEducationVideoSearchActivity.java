@@ -87,8 +87,9 @@ public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewFo
         EditText contentEditText = topView.findViewById(R.id.et_education_class_search);
         TextView searchTextView = topView.findViewById(R.id.tv_education_class_search_sure);
         backImageView.setOnClickListener(v -> finish());
-        content = contentEditText.getText().toString().trim();
+
         searchTextView.setOnClickListener(v -> {
+            content = contentEditText.getText().toString().trim();
             setPageIndex(1);
             onPageLoad();
         });

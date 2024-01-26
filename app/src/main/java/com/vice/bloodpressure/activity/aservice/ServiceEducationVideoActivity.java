@@ -37,6 +37,8 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
 
     private String cid = "";
 
+    private TextView typeTextView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +88,7 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
         ImageView backImageView = topView.findViewById(R.id.iv_service_video_back);
         TextView titleTextView = topView.findViewById(R.id.tv_service_video_title);
         TextView searchTextView = topView.findViewById(R.id.tv_service_video_search);
-        TextView typeTextView = topView.findViewById(R.id.tv_service_video_type);
+         typeTextView = topView.findViewById(R.id.tv_service_video_type);
         titleTextView.setText("教育视频");
         backImageView.setOnClickListener(v -> finish());
         searchTextView.setOnClickListener(v -> {
@@ -110,6 +112,7 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
         typeList.add("高血压");
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "分类", typeList, object -> {
             cid = Integer.parseInt(String.valueOf(object)) + 1 + "";
+            typeTextView.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
             setPageIndex(1);
             onPageLoad();
         });
