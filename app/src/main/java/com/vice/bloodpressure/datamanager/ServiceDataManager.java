@@ -2,6 +2,7 @@ package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.BloodAllInfo;
 import com.vice.bloodpressure.model.BloodThirdInfo;
+import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.model.GalleryInfo;
 import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
@@ -645,6 +646,25 @@ public class ServiceDataManager {
         map.put("pageSize", pageSize);
         map.put("dishName", dishName);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 教育视频列表
+     * @param searchKey
+     * @param pageNum
+     * @param pageSize
+     * @param videoType
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getEduVideoPage(String searchKey, String pageNum, String pageSize, String videoType, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("searchKey", searchKey);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        map.put("videoType", videoType);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationInfo.class, "ai/edu/v2/getEduVideoPage", map, successCallBack, failureCallBack);
     }
 
     /**

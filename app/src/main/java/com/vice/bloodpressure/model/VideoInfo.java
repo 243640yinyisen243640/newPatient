@@ -10,10 +10,6 @@ public class VideoInfo implements IClassInfo{
     private String img;
     private String title;
 
-    public VideoInfo(String img, String title) {
-        this.img = img;
-        this.title = title;
-    }
 
     public String getImg() {
         return img;

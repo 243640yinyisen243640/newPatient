@@ -9,10 +9,11 @@ import java.util.List;
  * 传参:
  * 描述:
  */
-public class EducationInfo implements Serializable {
+public class EducationInfo implements Serializable, IClassInfo {
     private String status;
     private List<EducationInfo> teachEssayAppVos;
     private List<EducationInfo> list;
+    private List<EducationInfo> records;
 
     private String classifyId;
     /**
@@ -69,6 +70,14 @@ public class EducationInfo implements Serializable {
      * 0:收藏，1：未收藏
      */
     private String collectOrNot;
+
+    public List<EducationInfo> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<EducationInfo> records) {
+        this.records = records;
+    }
 
     public String getCollectOrNot() {
         return collectOrNot;
@@ -274,5 +283,25 @@ public class EducationInfo implements Serializable {
 
     public void setTeachEssayAppVos(List<EducationInfo> teachEssayAppVos) {
         this.teachEssayAppVos = teachEssayAppVos;
+    }
+
+    @Override
+    public String getImplClassName() {
+        return essayName;
+    }
+
+    @Override
+    public String getImplClassImg() {
+        return coverUrl;
+    }
+
+    @Override
+    public String getImplMealPic() {
+        return coverUrl;
+    }
+
+    @Override
+    public String getImplDashName() {
+        return essayName;
     }
 }

@@ -108,7 +108,7 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
     }
 
     /**
-     * 选择运动类型
+     * 选择饮食视频类型
      */
     private void chooseTypeWindow(TextView typeTextView) {
         List<String> typeList = new ArrayList<>();

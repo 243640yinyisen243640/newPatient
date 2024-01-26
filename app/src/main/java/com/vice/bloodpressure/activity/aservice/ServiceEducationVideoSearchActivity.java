@@ -17,12 +17,14 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.VideoInfo;
+import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -30,8 +32,8 @@ import java.util.List;
  * 传参:
  * 描述:服务教育视频
  */
-public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewForBgActivity<VideoInfo> {
-    private List<VideoInfo> videoInfos = new ArrayList<>();
+public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewForBgActivity<EducationInfo> {
+    private String content = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,16 +49,20 @@ public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewFo
 
     @Override
     protected void getListData(CallBack callBack) {
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "血糖高的症状及危害"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "糖尿病人能吃什么水果..."));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "糖尿病怎么饮食？"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "胖是因为湿气太重吗？"));
-        callBack.callBack(videoInfos);
+        Call<String> requestCall = ServiceDataManager.getEduVideoPage(content, getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", "", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                EducationInfo educationInfo = (EducationInfo) response.object;
+                callBack.callBack(educationInfo.getRecords());
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getEduVideoPage", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), videoInfos, (position, view) -> {
+    protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
+        return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
             switch (view.getId()) {
                 case R.id.ll_user_collect_video_click:
                     Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
@@ -81,9 +87,10 @@ public class ServiceEducationVideoSearchActivity extends UIBaseListRecycleViewFo
         EditText contentEditText = topView.findViewById(R.id.et_education_class_search);
         TextView searchTextView = topView.findViewById(R.id.tv_education_class_search_sure);
         backImageView.setOnClickListener(v -> finish());
-        String content = contentEditText.getText().toString().trim();
+        content = contentEditText.getText().toString().trim();
         searchTextView.setOnClickListener(v -> {
-
+            setPageIndex(1);
+            onPageLoad();
         });
         return topView;
     }

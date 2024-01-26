@@ -13,16 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgTopActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.VideoInfo;
+import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.PickerViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -30,8 +33,9 @@ import java.util.List;
  * 传参:
  * 描述:服务教育视频
  */
-public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTopActivity<VideoInfo> {
-    private List<VideoInfo> videoInfos = new ArrayList<>();
+public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTopActivity<EducationInfo> {
+
+    private String cid = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,27 +50,28 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
 
     @Override
     protected void getListData(CallBack callBack) {
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "血糖高的症状及危害"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "糖尿病人能吃什么水果..."));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "糖尿病怎么饮食？"));
-        videoInfos.add(new VideoInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "胖是因为湿气太重吗？"));
-        callBack.callBack(videoInfos);
+        Call<String> requestCall = ServiceDataManager.getEduVideoPage("", getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", cid, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                EducationInfo educationInfo = (EducationInfo) response.object;
+                callBack.callBack(educationInfo.getRecords());
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getEduVideoPage", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<VideoInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), videoInfos, new IAdapterViewClickOneListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_user_collect_video_click:
-                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
+    protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
+        return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_user_collect_video_click:
+                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
 
-                }
             }
         });
     }
@@ -88,8 +93,25 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
             startActivity(new Intent(getPageContext(), ServiceEducationVideoSearchActivity.class));
         });
         typeTextView.setOnClickListener(v -> {
-
+            chooseTypeWindow();
         });
         return topView;
+    }
+
+    /**
+     * 选择教育视频类型
+     */
+    private void chooseTypeWindow() {
+        List<String> typeList = new ArrayList<>();
+        typeList.add("1型");
+        typeList.add("2型");
+        typeList.add("妊娠");
+        typeList.add("其他");
+        typeList.add("高血压");
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "分类", typeList, object -> {
+            cid = Integer.parseInt(String.valueOf(object)) + 1 + "";
+            setPageIndex(1);
+            onPageLoad();
+        });
     }
 }
