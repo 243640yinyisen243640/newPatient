@@ -252,7 +252,7 @@ public class UserDataManager {
     /**
      * @param patientId
      * @param diagnosticType   诊断类型  1主要诊断 2其他诊断
-     * @param diseaseType 1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
+     * @param diseaseType      1, 糖尿病2, 高血压3, 冠心病,4：脑卒中 5, 慢阻肺6, 糖尿病前期
      * @param complicationType
      * @param successCallBack
      * @param failureCallBack
@@ -377,19 +377,15 @@ public class UserDataManager {
 
     /**
      * @param patientId
-     * @param collectType     收藏类型 1文章 2视频 3商品
-     * @param pageNum
-     * @param pageSize
+     * @param collectTag      （1，文章；2，视频（教育视频、饮食视频）；3，商品）
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getCollectMealList(String patientId, String collectType, String pageNum, String pageSize, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getCollectMealList(String patientId, String collectTag, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
-        map.put("collectType", collectType);
-        map.put("pageNum", pageNum);
-        map.put("pageSize", pageSize);
+        map.put("collectTag", collectTag);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
     }
 
@@ -498,6 +494,7 @@ public class UserDataManager {
         map.put("exceptionType", exceptionType);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MessageInfo.class, "monitor/api/v2/exceptionApp/list", map, successCallBack, failureCallBack);
     }
+
     /**
      * 已读单个消息
      *
@@ -528,6 +525,7 @@ public class UserDataManager {
 
     /**
      * 异常数据全部已读
+     *
      * @param archivesId
      * @param successCallBack
      * @param failureCallBack

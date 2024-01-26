@@ -55,8 +55,19 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
     }
 
     @Override
+    protected boolean isRefresh() {
+        return false;
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
+
+    @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "1", getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", (call, response) -> {
+        //（1，文章；2，视频（教育视频、饮食视频）；3，商品）
+        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {
@@ -66,19 +77,7 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
             callBack.callBack(null);
         });
         addRequestCallToMap("getCollectMealList", requestCall);
-        //
-        //        educationInfos = new ArrayList<>();
-        //        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列一：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识 来越多的人患...高...", "学习中", "5"));
-        //        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列二：高血压的基础知识", "非药物治疗是高血压治疗的基础方法。", "学习中", "6"));
-        //        educationInfos.add(new EducationInfo("http://img.wxcha.com/m00/f0/f5/5e3999ad5a8d62188ac5ba8ca32e058f.jpg", "系列三：高血压的基础知识", "由于生活环境和生活条件的影响，导致越高血压基础知识。", "学习中", "7"));
-        //
-        //        List<EducationInfo> childList = new ArrayList<>();
-        //        childList.add(new EducationInfo("第一节:知晓血压，了解血压!", "学习中"));
-        //        childList.add(new EducationInfo("第二节:高血压，隐形的杀手!", "学习中"));
-        //        for (int i = 0; i < educationInfos.size(); i++) {
-        //            educationInfos.get(i).setChildList(childList);
-        //        }
-        //        callBack.callBack(educationInfos);
+
     }
 
     @Override

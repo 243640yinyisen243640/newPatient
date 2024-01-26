@@ -45,7 +45,8 @@ public class UserCollectVideoFragment extends UIBaseListRecycleViewFragment<Vide
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "2", getPageIndex() + "", BaseDataManager.PAGE_SIZE + "", (call, response) -> {
+        //（1，文章；2，视频（教育视频、饮食视频）；3，商品）
+        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "2", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {
