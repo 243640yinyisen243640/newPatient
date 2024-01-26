@@ -27,9 +27,13 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.model.EducationInfo;
+import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.X5WebView;
 
@@ -62,6 +66,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     private X5WebView webView;
     private ProgressBar progressBar;
     private TextView countdownTextView;
+    private ImageView collectImageView;
     private LinearLayout countdownCollectLl;
     /**
      * 1视频 2图文 3音频
@@ -157,6 +162,12 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
             setWebViewData(webView, educationInfo.getIframeUrl());
         } else {
             setWebViewData(webView, educationInfo.getIframeUrl());
+        }
+        //0:收藏，1：未收藏
+        if ("0".equals(educationInfo.getCollectOrNot())) {
+            collectImageView.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.education_audio_star_check));
+        } else {
+            collectImageView.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.education_audio_star_uncheck));
         }
     }
 
@@ -356,6 +367,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         webView = view.findViewById(R.id.web_education_details_web);
         progressBar = view.findViewById(R.id.pb_education_details_web);
         countdownTextView = view.findViewById(R.id.tv_education_details_study_time);
+        collectImageView = view.findViewById(R.id.iv_education_details_study_collect);
         countdownCollectLl = view.findViewById(R.id.ll_education_details_study_time);
         containerView().addView(view);
         // 1视频 2图文 3音频
@@ -380,6 +392,33 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         startImageView.setOnClickListener(v -> {
             setAudioClick();
         });
+        collectImageView.setOnClickListener(v -> {
+            //操作1 收藏  2取消收藏
+            // collectOrNot 0:收藏，1：未收藏
+            collectOperate("0".equals(educationInfo.getCollectOrNot()) ? "2" : "1");
+        });
+    }
+
+    /**
+     * @param isCollect 1收藏/2取消收藏
+     */
+    private void collectOperate(String isCollect) {
+        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), educationInfo.getEssayId(), "1", isCollect, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if (response.data) {
+                if ("1".equals(isCollect)) {
+                    // 0:收藏，1：未收藏
+                    educationInfo.setCollectOrNot("0");
+                    collectImageView.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.education_audio_star_check));
+                } else {
+                    educationInfo.setCollectOrNot("1");
+                    collectImageView.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.education_audio_star_uncheck));
+                }
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("mealCollectOperate", requestCall);
     }
 
     /**

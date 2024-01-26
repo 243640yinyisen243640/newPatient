@@ -626,19 +626,24 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             case R.id.tv_exercise_finish:
                 intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
                 intent.putExtra("type", "O");
+                intent.putExtra("exerciseName", allInfo.getSportModule().getAerobicsName());
+                intent.putExtra("sportId", allInfo.getSportModule().getAerobicsId());
                 startActivity(intent);
                 break;
-
             //抗阻运动
             case R.id.tv_exercise_resistance:
                 intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
-                intent.putExtra("type", "P");
+                intent.putExtra("type", "R");
+                intent.putExtra("exerciseName", allInfo.getSportModule().getAerobicsName());
+                intent.putExtra("videoUrl", allInfo.getSportModule().getAerobicsName());
+                intent.putExtra("coverUrl", allInfo.getSportModule().getAerobicsName());
                 startActivity(intent);
                 break;
             //柔韧性运动
             case R.id.tv_exercise_flexibility:
                 intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
-                intent.putExtra("type", "R");
+                intent.putExtra("type", "P");
+                intent.putExtra("exerciseName", allInfo.getSportModule().getAerobicsName());
                 startActivity(intent);
                 break;
             //重新制定 饮食

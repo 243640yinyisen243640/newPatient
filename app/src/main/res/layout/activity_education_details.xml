@@ -148,6 +148,7 @@
             android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/iv_education_details_study_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/education_audio_star_check" />

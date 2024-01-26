@@ -26,6 +26,10 @@ public class ExerciseChildInfo implements Serializable {
      */
     private String calorie;
     /**
+     * 体重
+     */
+    private String weight;
+    /**
      * 运动目的
      */
     private String purpose;
@@ -65,6 +69,14 @@ public class ExerciseChildInfo implements Serializable {
      * type
      */
     private String type;
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
 
     public ExerciseChildInfo(String type, String exerciseTime, String onceFire) {
         this.type = type;

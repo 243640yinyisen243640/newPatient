@@ -65,6 +65,18 @@ public class EducationInfo implements Serializable {
      * 音视频时长
      */
     private String videoTime;
+    /**
+     * 0:收藏，1：未收藏
+     */
+    private String collectOrNot;
+
+    public String getCollectOrNot() {
+        return collectOrNot;
+    }
+
+    public void setCollectOrNot(String collectOrNot) {
+        this.collectOrNot = collectOrNot;
+    }
 
     public String getVideoUrl() {
         return videoUrl;

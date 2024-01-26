@@ -73,9 +73,9 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
      * @param isCollect 1收藏/2取消收藏
      */
     private void collectOperate(String isCollect) {
-        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "2", isCollect, (call, response) -> {
+        Call<String> requestCall = ServiceDataManager.mealCollectOperate(UserInfoUtils.getArchivesId(getPageContext()), mealId == null ? "" : mealId, "3", isCollect, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-            if ("0000".equals(response.code)) {
+            if (response.data) {
                 if ("1".equals(isCollect)) {
                     allInfo.setCollect(true);
                     collectTextView.setText("已收藏");

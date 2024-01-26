@@ -91,6 +91,18 @@ public class ExerciseInfo implements Serializable {
      * 柔韧性运动ID
      */
     private String pliableId;
+    /**
+     * 有氧运动id
+     */
+    private String aerobicsId;
+
+    public String getAerobicsId() {
+        return aerobicsId;
+    }
+
+    public void setAerobicsId(String aerobicsId) {
+        this.aerobicsId = aerobicsId;
+    }
 
     public String getWalkNum() {
         return walkNum;

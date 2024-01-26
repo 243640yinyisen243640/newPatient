@@ -121,10 +121,10 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
 
     private void initListener() {
         backIm.setOnClickListener(v -> finish());
-        addRecordTv.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-        });
+//        addRecordTv.setOnClickListener(v -> {
+//            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
+//            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+//        });
     }
 
     @Override

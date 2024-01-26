@@ -668,7 +668,7 @@ public class ServiceDataManager {
      *
      * @param patientId
      * @param collectIds
-     * @param collectType    1教育模块  2代表饮食模块
+     * @param collectType     1，智能教育文章；2，教育视频；3，饮食模块
      * @param isCollect       1收藏/2取消收藏
      * @param successCallBack
      * @param failureCallBack

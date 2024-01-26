@@ -248,7 +248,7 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         //                    });
         //            answerForPopupWindow.dismiss();
         //        }
-//                answerForPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
+        //                answerForPopupWindow.showAtLocation(containerView(), 0, 0, Gravity.CENTER);
 
         Intent intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
         startActivity(intent);
@@ -268,25 +268,32 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
                 break;
             //开始运动
             case R.id.tv_exercise_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("title", exerciseType);
+                intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
+                intent.putExtra("type", "O");
                 intent.putExtra("sportId", oxygenSportId);
                 startActivity(intent);
                 break;
             //抗阻开始
+            //R 抗阻  P 柔韧
             case R.id.tv_exercise_resistance_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
-                intent.putExtra("title", info.getSportResistance().getSportName());
-                intent.putExtra("sportId", resistanceSportId);
+                intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
                 intent.putExtra("type", "R");
+                intent.putExtra("exerciseName", info.getSportResistance().getSportName());
+                intent.putExtra("sportId", resistanceSportId);
+                intent.putExtra("coverUrl", info.getSportResistance().getCoverUrl());
+                intent.putExtra("videoUrl", info.getSportResistance().getVideoUrl());
                 startActivity(intent);
+
                 break;
             //柔韧性开始
+            // R 抗阻  P 柔韧
             case R.id.tv_exercise_flexibility_begin:
-                intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
-                intent.putExtra("title", info.getSportPliable().getSportName());
+                intent = new Intent(getPageContext(), ExerciseCountdownActivity.class);
+                intent.putExtra("exerciseName", info.getSportPliable().getSportName());
                 intent.putExtra("sportId", flexSportId);
                 intent.putExtra("type", "P");
+                intent.putExtra("coverUrl", info.getSportPliable().getCoverUrl());
+                intent.putExtra("videoUrl", info.getSportPliable().getVideoUrl());
                 startActivity(intent);
                 break;
 

@@ -2,6 +2,8 @@ package com.vice.bloodpressure.activity.ahome.aexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,10 +11,24 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.lzx.starrysky.StarrySky;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.basemanager.BaseDataManager;
+import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
+import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.model.ExerciseChildInfo;
+import com.vice.bloodpressure.utils.DialogUtils;
+import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.TurnUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.window.JZVideoPlayer;
+
+import cn.jzvd.Jzvd;
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -21,29 +37,38 @@ import com.vice.bloodpressure.window.JZVideoPlayer;
  * 描述:跟着视频运动
  */
 public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements View.OnClickListener {
+    private static final int START_TIME = 10;
     private JZVideoPlayer jzVideoPlayer;
     private TextView timeTv;
     private TextView fireTv;
     private ImageView pauseImageView;
     private ImageView stopImageView;
 
+    private long allTime = 0;
+
 
     private String startOrPause = "1";
+
+    private ExerciseChildInfo exerciseChildInfo;
+    /**
+     * 运动时间
+     */
+    private int minuteTime;
+    /**
+     * 运动时间消耗的热量
+     */
+    private String fireNum = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topViewManager().titleTextView().setText(getIntent().getStringExtra("title"));
         topViewManager().moreTextView().setText("手动添加记录");
-        topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), ExercisePlanAddRecordActivity.class)));
+
         initView();
         initListener();
-        initValues();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
     }
 
-    private void initValues() {
-        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
-    }
 
     private void initListener() {
         pauseImageView.setOnClickListener(this);
@@ -52,9 +77,9 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
             //点击直接播放完
 
         });
-//        jzVideoPlayer.setOnStateStart(() -> {
-//
-//        });
+        //        jzVideoPlayer.setOnStateStart(() -> {
+        //
+        //        });
     }
 
     private void initView() {
@@ -64,13 +89,66 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         fireTv = view.findViewById(R.id.tv_exercise_hand_fire_oxy);
         pauseImageView = view.findViewById(R.id.iv_exercise_hand_pause_oxy);
         stopImageView = view.findViewById(R.id.iv_exercise_hand_stop_oxy);
-
         containerView().addView(view);
     }
 
     @Override
     protected void onPageLoad() {
+        String id = getIntent().getStringExtra("sportId");
+        Call<String> requestCall = HomeDataManager.aerobicsDetails(id, SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                exerciseChildInfo = (ExerciseChildInfo) response.object;
+                setData();
+                mHandler.sendEmptyMessage(START_TIME);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("aerobicsDetails", requestCall);
+    }
 
+    @Override
+    protected void processHandlerMsg(Message msg) {
+        super.processHandlerMsg(msg);
+        if (msg.what == START_TIME) {
+            mHandler.sendEmptyMessageDelayed(START_TIME, 1_000);
+            if (TextUtils.equals(startOrPause, "2")) {
+                allTime = allTime + 1_000;
+                Log.i("yys", "allTime==" + allTime);
+                if (allTime % (1_000 * 60) == 0) {
+                    //更新ui
+                    minuteTime = (int) (allTime / 1000);
+                    Log.i("yys", "minuteTime==" + minuteTime);
+                    //TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())
+                    fireNum = String.valueOf(TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight()));
+                    timeTv.setText(String.valueOf(minuteTime / 60));
+                    fireTv.setText(fireNum);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    private void setData() {
+        topViewManager().titleTextView().setText(exerciseChildInfo.getSportName());
+        Log.i("yys", "exerciseChildInfo.getVideoUrl()==" + exerciseChildInfo.getVideoUrl());
+        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
+        //        jzVideoPlayer.setUp("http://120.55.60.103:9000/educational/c331a553f39c3453781474bbe22061b5.mp4", "");
+        //        jzVideoPlayer.setUp("http://120.55.60.103:9000/diet/2fb763bb78694982a610806038e86f0f.mp4", "");
+        //        jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "");
+        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, exerciseChildInfo.getCoverUrl(), jzVideoPlayer.posterImageView);
+        jzVideoPlayer.startVideo();
+        startOrPause = "2";
+        topViewManager().moreTextView().setOnClickListener(v -> {
+            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
+            intent.putExtra("weight", exerciseChildInfo.getWeight());
+            startActivity(intent);
+        });
     }
 
 
@@ -97,8 +175,12 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                 }
                 break;
             case R.id.iv_exercise_hand_stop_oxy:
-                BaseDataManager.EXERCISE_IS_COMPLETE = 2;
-                jzVideoPlayer.onStateAutoComplete();
+                DialogUtils.showOperDialog(getPageContext(), "", "确定要结束运动吗？", "取消", "确定", (dialog, which) -> {
+                    dialog.dismiss();
+                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                        stopExercise();
+                    }
+                });
                 break;
 
             default:
@@ -106,7 +188,42 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         }
     }
 
+    private void stopExercise() {
+        String id = getIntent().getStringExtra("sportId");
+        Call<String> requestCall = HomeDataManager.endSport(minuteTime + "", SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), fireNum, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if (response.data) {
+                finish();
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("endSport", requestCall);
+    }
 
+    /**
+     * 停止播放
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        StarrySky.with().stopMusic();
+        jzVideoPlayer.onStatePause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Jzvd.releaseAllVideos();
+    }
 }
 
 

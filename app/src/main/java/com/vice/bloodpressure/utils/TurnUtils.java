@@ -50,6 +50,7 @@ public class TurnUtils {
             return defaultValue;
         }
     }
+
     /**
      * @param content
      * @param defaultValue 当输出内容为null 时需要返回的值
@@ -63,6 +64,7 @@ public class TurnUtils {
             return defaultValue;
         }
     }
+
     /**
      * 小数位数补0
      *
@@ -79,6 +81,7 @@ public class TurnUtils {
         String dataStr = decimalFormat.format(data);
         return dataStr;
     }
+
     /**
      * 小数位数补0
      *
@@ -95,6 +98,7 @@ public class TurnUtils {
         String dataStr = decimalFormat.format(data);
         return dataStr;
     }
+
     /**
      * 小数位数补0
      *
@@ -150,5 +154,32 @@ public class TurnUtils {
         } else {
             return mobiles.matches(telRegex);
         }
+    }
+
+    /**
+     * String 转为Double 保留4位小数
+     *
+     * @param a
+     * @return
+     */
+    public static double stringToDoubleFour(String a) {
+        double b = Double.valueOf(a);
+        DecimalFormat df = new DecimalFormat("#.0000");//此为保留1位小数，若想保留2位小数，则填写#.00  ，以此类推
+        String temp = df.format(b);
+        b = Double.valueOf(temp);
+        return b;
+    }
+
+    /**
+     * String 转为Double 保留1位小数
+     * @param a
+     * @return
+     */
+    public static double stringToDoubleOne(String a) {
+        double b = Double.valueOf(a);
+        DecimalFormat df = new DecimalFormat("#.0");//此为保留1位小数，若想保留2位小数，则填写#.00  ，以此类推
+        String temp = df.format(b);
+        b = Double.valueOf(temp);
+        return b;
     }
 }

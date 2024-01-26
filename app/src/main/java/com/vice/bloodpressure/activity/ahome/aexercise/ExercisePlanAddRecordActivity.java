@@ -1,5 +1,6 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.lsp.RulerView;
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
@@ -55,11 +56,14 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
 
     private String finishCalorieString = "";
 
+    private String weight = "";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("添加运动记录");
+        weight = getIntent().getStringExtra("weight");
         initView();
         initListener();
         initValue();
@@ -78,7 +82,6 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
 
-                String weight = UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.WEIGHT);
                 double calorieDouble = Double.parseDouble(calorieString);
                 finishCalorieString = String.valueOf(new BigDecimal(String.valueOf(Double.parseDouble(weight) * calorieDouble * Double.parseDouble(result))).setScale(0, BigDecimal.ROUND_HALF_UP));
                 fireTv.setText(finishCalorieString);
@@ -93,7 +96,6 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
                 exerciseTime = String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP));
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
-                String weight = UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.WEIGHT);
                 Log.i("yys", "weight====" + weight);
                 double calorieDouble = Double.parseDouble(calorieString);
                 finishCalorieString = String.valueOf(new BigDecimal(String.valueOf(Double.parseDouble(weight) * calorieDouble * Double.parseDouble(result))).setScale(0, BigDecimal.ROUND_HALF_UP));
@@ -135,8 +137,8 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
     private void sureToAdd() {
         Call<String> requestCall = HomeDataManager.addAerobicsRecord(sportId, exerciseTime, finishCalorieString, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                setResult(RESULT_OK);
+                Intent intent = new Intent(getPageContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);

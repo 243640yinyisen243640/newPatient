@@ -51,7 +51,8 @@
                 android:paddingRight="15dp"
                 android:text="添加运动记录"
                 android:textColor="@color/main_base_color"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:visibility="gone" />
 
 
         </RelativeLayout>

@@ -10,14 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
-import com.vice.bloodpressure.fragment.InputNumDialogAddFragment;
 import com.vice.bloodpressure.fragment.InputNumDialogFragment;
+import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.window.JZVideoPlayer;
 
 import cn.jzvd.Jzvd;
@@ -46,16 +48,41 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
      */
     private String sportId;
 
+    private ExerciseChildInfo exerciseChildInfo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         type = getIntent().getStringExtra("type");
         sportId = getIntent().getStringExtra("sportId");
-        topViewManager().titleTextView().setText(getIntent().getStringExtra("title"));
-        topViewManager().moreTextView().setOnClickListener(v -> startActivity(new Intent(getPageContext(), ExercisePlanAddRecordActivity.class)));
+
         initView();
         initListener();
-        initValues();
+        loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    @Override
+    protected void onPageLoad() {
+        Call<String> requestCall = HomeDataManager.pliableResistanceDetails(sportId, type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                exerciseChildInfo = (ExerciseChildInfo) response.object;
+                setData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("aerobicsDetails", requestCall);
+    }
+
+    private void setData() {
+        topViewManager().titleTextView().setText(exerciseChildInfo.getSportName());
+        jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "", JzvdStd.SCREEN_NORMAL);
+        jzVideoPlayer.startVideo();
+        startOrPause = "2";
+        XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, exerciseChildInfo.getCoverUrl(), jzVideoPlayer.posterImageView);
     }
 
     private void initListener() {
@@ -65,9 +92,6 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
 
     }
 
-    private void initValues() {
-        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "", JzvdStd.SCREEN_NORMAL);
-    }
 
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_exercise_video_flex, null);
@@ -76,11 +100,6 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
         stopImageView = view.findViewById(R.id.iv_exercise_hand_stop_flex);
         recordTextView = view.findViewById(R.id.tv_exercise_hand_record_flex);
         containerView().addView(view);
-    }
-
-    @Override
-    protected void onPageLoad() {
-
     }
 
 
@@ -112,11 +131,7 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
                 break;
             case R.id.tv_exercise_hand_record_flex:
                 //  type  R 抗阻  P 柔韧
-                if ("R".equals(type)) {
-                    showNumDialog();
-                } else {
-                    showFlexibilityNumDialog();
-                }
+                showNumDialog();
 
                 break;
 
@@ -131,27 +146,17 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
     private void showNumDialog() {
         InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
             //TODO 提交反馈信息
-            submitOxygen(inputStr, "", "");
+            submitOxygen(inputStr);
         });
         dialog.showNow(getSupportFragmentManager(), "inputRe");
     }
-    /**
-     * 这个是柔韧的弹出  时分秒的
-     */
-    private void showFlexibilityNumDialog() {
-        InputNumDialogAddFragment dialog = new InputNumDialogAddFragment((hour, min, second) -> {
-            submitOxygen(hour, min, second);
-        });
-        dialog.showNow(getSupportFragmentManager(), "inputFlex");
-    }
+
 
     /**
-     * @param hour
-     * @param min
-     * @param second
+     * @param sportNumber
      */
-    private void submitOxygen(String hour, String min, String second) {
-        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord(sportId, hour, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+    private void submitOxygen(String sportNumber) {
+        Call<String> requestCall = HomeDataManager.addPliableResistanceRecord(sportId, sportNumber, type, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);

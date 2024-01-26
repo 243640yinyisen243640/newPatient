@@ -47,7 +47,7 @@
                         android:id="@+id/tv_exercise_hand_time_oxy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30"
+                        android:text="0"
                         android:textColor="@color/main_base_color"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -90,7 +90,7 @@
                         android:id="@+id/tv_exercise_hand_fire_oxy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30"
+                        android:text="0"
                         android:textColor="#FF8604"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -127,7 +127,7 @@
             android:id="@+id/iv_exercise_hand_pause_oxy"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/exercise_hand_star" />
+            android:src="@drawable/exercise_hand_pause" />
 
         <ImageView
             android:id="@+id/iv_exercise_hand_stop_oxy"

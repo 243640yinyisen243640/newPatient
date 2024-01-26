@@ -8,9 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:padding="9dp"
         android:background="@drawable/shape_little_green_gra_5"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="9dp">
 
         <TextView
             android:id="@+id/tv_healthy_content"
@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="14dp"
             android:background="@drawable/shape_bg_main_gra_90"

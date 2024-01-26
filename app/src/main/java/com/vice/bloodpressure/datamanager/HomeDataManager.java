@@ -163,6 +163,7 @@ public class HomeDataManager {
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/addAerobicsRecord", map, successCallBack, failureCallBack);
     }
 
+
     /**
      * 添加抗阻/柔韧性运动记录
      *
@@ -193,7 +194,7 @@ public class HomeDataManager {
      */
     public static Call<String> getSportAerobics(BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, BaseLocalDataInfo.class, "system/sport/v2/getSportAerobics", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, BaseLocalDataInfo.class, "ai/sport/v2/getSportAerobicsList", map, successCallBack, failureCallBack);
     }
 
     /**
@@ -222,6 +223,53 @@ public class HomeDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseChildInfo.class, "system/sport/v2/getSportResistance", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param id              有氧运动id
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> aerobicsDetails(String id, String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, ExerciseChildInfo.class, "ai/sport/v2/aerobicsDetails", map, successCallBack, failureCallBack);
+    }
+
+
+    /**
+     * @param id
+     * @param type            运动类型 R 抗阻 P 柔韧性运动
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> pliableResistanceDetails(String id, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, ExerciseChildInfo.class, "ai/sport/v2/pliableResistanceDetails", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * 结束运动
+     *
+     * @param sportTime
+     * @param archivesId
+     * @param sportCalories
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> endSport(String sportTime, String archivesId, String sportCalories, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("sportTime", sportTime);
+        map.put("archivesId", archivesId);
+        map.put("sportCalories", sportCalories);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/endSport", map, successCallBack, failureCallBack);
     }
 
     /**
