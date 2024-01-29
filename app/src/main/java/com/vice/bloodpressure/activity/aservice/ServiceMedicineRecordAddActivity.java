@@ -1,8 +1,10 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -135,7 +137,7 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
 
     private void bindData(HealthyDataChildInfo allInfo) {
         startTime = allInfo.getAddTime();
-        startTime = allInfo.getFinishTime();
+        endTime = allInfo.getFinishTime();
         nameEditText.setText(allInfo.getDrugName());
         specsEditText.setText(allInfo.getDrugSpec());
         specsTextView.setText(allInfo.getDrugSpecUnit());
@@ -178,18 +180,22 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_service_medicine_record_add_specs:
+                closeKeyboard();
                 chooseTypeWindow("1", "药品规格");
                 break;
             case R.id.tv_service_medicine_record_add_dosage:
+                closeKeyboard();
                 chooseTypeWindow("2", "药品剂量");
                 break;
             case R.id.tv_service_medicine_record_add_start:
+                closeKeyboard();
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
                     startTime = object.toString();
                     startTextView.setText(object.toString());
                 });
                 break;
             case R.id.tv_service_medicine_record_add_end:
+                closeKeyboard();
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, true, true, true}, DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, object -> {
                     if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                         endTime = object.toString();
@@ -204,6 +210,16 @@ public class ServiceMedicineRecordAddActivity extends UIBaseLoadActivity impleme
                 break;
             default:
                 break;
+        }
+    }
+
+    //只是关闭软键盘  隐藏所有的软键盘
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 

@@ -43,7 +43,7 @@ public class ServiceBloodOxygenAdapter extends RecyclerView.Adapter<ServiceBlood
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataChildInfo info = list.get(position);
         holder.timeTextView.setText(info.getAddTime());
-        holder.valueTextView.setText(info.getSpo());
+        holder.valueTextView.setText(info.getSpo()+"%");
     }
 
     @Override
