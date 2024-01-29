@@ -121,7 +121,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         sexTv.setText(("1".equals(userInfo.getSex()) ? "男" : "女"));
         cityTv.setText(userInfo.getNativePlace());
         sosNameTv.setText(userInfo.getEmergency());
-        sosPhoneTv.setText(userInfo.getEmergencyMode());
+        sosPhoneTv.setText(userInfo.getTel());
     }
 
     @Override

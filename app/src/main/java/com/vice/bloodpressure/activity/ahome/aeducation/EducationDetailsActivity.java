@@ -141,10 +141,13 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     }
 
     private void setData() {
-        timer = new CountDownTimer(TurnUtils.getInt(educationInfo.getVideoTime(), 0) * 1000, 1000) {
+        long millisInFuture = TurnUtils.getInt(educationInfo.getVideoTime(), 0) * 1000;
+        timer = new CountDownTimer(millisInFuture, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-
+//                long time = (millisInFuture - millisUntilFinished) / 1000;
+                long time = ( millisUntilFinished) / 1000;
+                countdownTextView.setText("我已学习(" + time + "s)");
             }
 
             @Override
@@ -153,7 +156,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
             }
         };
         timer.start();
-
+        //        CountDownTask.getInstence().showTimer(allTimeTextView, TurnUtils.getInt(educationInfo.getVideoTime(),0), getPageContext());
         if ("1".equals(type)) {
             setVideoInfo();
             setWebViewData(webView, educationInfo.getIframeUrl());
@@ -427,6 +430,10 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
         StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
     }
@@ -444,4 +451,6 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         super.onPause();
         Jzvd.releaseAllVideos();
     }
+
+
 }

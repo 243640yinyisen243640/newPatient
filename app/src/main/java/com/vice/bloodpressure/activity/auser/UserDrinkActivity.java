@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
-import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
@@ -119,19 +118,16 @@ public class UserDrinkActivity extends UIBaseActivity {
      * 1->红酒;2->啤酒;3->白酒; 4 黄酒
      */
     private void chooseDrinkTypeWindow() {
-        List<BaseLocalDataInfo> drinkList = new ArrayList<>();
-        drinkList.add(new BaseLocalDataInfo("红酒", "1"));
-        drinkList.add(new BaseLocalDataInfo("啤酒", "1"));
-        drinkList.add(new BaseLocalDataInfo("白酒", "1"));
-        drinkList.add(new BaseLocalDataInfo("黄酒", "1"));
+        List<String> typeList = new ArrayList<>();
+        typeList.add("红酒");
+        typeList.add("啤酒");
+        typeList.add("白酒");
+        typeList.add("黄酒");
+        PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", typeList, object -> {
+            typeTv.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
+            drinkType = Integer.parseInt(String.valueOf(object)) + 1 + "";
 
-        PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", drinkList, object -> {
-                    drinkName = drinkList.get(Integer.parseInt(String.valueOf(object))).getName();
-                    typeTv.setText(drinkName);
-                    drinkType = drinkList.get(Integer.parseInt(String.valueOf(object))).getId();
-
-                }
-        );
+        });
     }
 
     private void initView() {

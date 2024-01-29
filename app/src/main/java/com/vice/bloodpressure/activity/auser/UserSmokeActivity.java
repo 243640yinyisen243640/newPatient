@@ -89,7 +89,7 @@ public class UserSmokeActivity extends UIBaseActivity {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 Intent intent = new Intent();
-                intent.putExtra("isCheck", yesCb.isChecked() ? "1" : "0");
+                intent.putExtra("isCheck", yesCb.isChecked() ? "Y" : "N");
                 intent.putExtra("smokeNum", TextUtils.isEmpty(smokeNumEt.getText().toString().trim()) ? "" : smokeNumEt.getText().toString().trim());
                 setResult(RESULT_OK, intent);
                 finish();

@@ -28,7 +28,7 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
 
     private IAdapterViewClickListener clickListener;
     private int parentPosition;
-
+    //type 1:智能学习 显示还有多少节课未学完 学习状态显示 2搜索 不显示学习状态   3：我的收藏 显示收藏目录  学习状态不显示
     private String type;
 
     public EducationIntelligenceChildAdapter(Context context, List<EducationInfo> list, int position, String type, IAdapterViewClickListener clickListener) {
@@ -56,6 +56,19 @@ public class EducationIntelligenceChildAdapter extends RecyclerView.Adapter<Educ
 
         if ("1".equals(type)) {
             holder.stateTextView.setVisibility(View.VISIBLE);
+            switch (info.getStatus()) {
+                case "0":
+                    holder.stateTextView.setText("未学习");
+                    break;
+                case "1":
+                    holder.stateTextView.setText("学习中");
+                    break;
+                case "2":
+                    holder.stateTextView.setText("已完成");
+                    break;
+                default:
+                    break;
+            }
         } else if ("2".equals(type)) {
             holder.stateTextView.setVisibility(View.GONE);
         } else {

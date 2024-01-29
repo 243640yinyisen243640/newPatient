@@ -39,8 +39,7 @@
 
             <TextView
                 android:id="@+id/tv_user_base_info_name"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right"/>
         </LinearLayout>
 
         <View
@@ -62,8 +61,7 @@
 
             <TextView
                 android:id="@+id/tv_user_base_info_id"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right"/>
         </LinearLayout>
 
         <View
@@ -85,8 +83,7 @@
 
             <TextView
                 android:id="@+id/tv_user_base_info_born"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right" />
         </LinearLayout>
 
         <View
@@ -108,8 +105,7 @@
 
             <TextView
                 android:id="@+id/tv_user_base_info_age"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right" />
         </LinearLayout>
 
         <View

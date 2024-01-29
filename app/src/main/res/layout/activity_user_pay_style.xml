@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_bg_white_90"
                     android:text="(可多选)"
+                    android:visibility="gone"
                     android:textColor="#B7B7B7"
                     android:textSize="15sp" />
 

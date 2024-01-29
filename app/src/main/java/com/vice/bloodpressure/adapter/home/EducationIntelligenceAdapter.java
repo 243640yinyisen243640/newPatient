@@ -67,7 +67,21 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
         holder.titleTextView.setText(info.getSname());
         holder.contentTextView.setText(info.getBrief());
         if ("1".equals(type)) {
+            //0 未学习 1 学习中 2 已完成;
             holder.stateTextView.setVisibility(View.VISIBLE);
+            switch (info.getStatus()) {
+                case "0":
+                    holder.stateTextView.setText("未学习");
+                    break;
+                case "1":
+                    holder.stateTextView.setText("学习中");
+                    break;
+                case "2":
+                    holder.stateTextView.setText("已完成");
+                    break;
+                default:
+                    break;
+            }
             holder.line.setVisibility(View.GONE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
             holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachEssayAppVos().size() + ""));

@@ -38,8 +38,7 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_smoke"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right" />
         </LinearLayout>
 
         <View
@@ -60,8 +59,7 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_drink"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right"/>
         </LinearLayout>
 
         <View
@@ -82,8 +80,7 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_pregnant"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right"/>
         </LinearLayout>
 
         <View
@@ -106,8 +103,7 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_pregnant_time"
-                style="@style/user_file_right"
-                android:text="一条鱼" />
+                style="@style/user_file_right" />
         </LinearLayout>
 
         <View

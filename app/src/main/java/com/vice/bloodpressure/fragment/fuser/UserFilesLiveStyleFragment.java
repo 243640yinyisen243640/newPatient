@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -167,7 +168,15 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         } else {
             drinkTv.setText("否");
         }
-        pregnantTv.setText(("Y".equals(userInfo.getPregnancy()) ? "是" : "否"));
+        if ("Y".equals(userInfo.getPregnancy())) {
+            pregnantTv.setText("是");
+            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+            pregnantTimeTv.setText(userInfo.getPregnancyTime());
+
+        } else {
+            pregnantTv.setText("否");
+            pregnantTimeLinearLayout.setVisibility(View.GONE);
+        }
         if ("1".equals(userInfo.getMarital())) {
             marriageTv.setText("已婚");
         } else if ("2".equals(userInfo.getMarital())) {
@@ -199,6 +208,16 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         } else {
             paystyleTv.setText("未知");
         }
+
+
+        if ("1".equals(userInfo.getProfession())) {
+            workTv.setText("轻体力");
+        } else if ("2".equals(userInfo.getMarital())) {
+            workTv.setText("中体力");
+        }  else {
+            workTv.setText("重体力");
+        }
+
         //1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
         if ("1".equals(userInfo.getMedicalPay())) {
             paystyleTv.setText("社会医疗保险");
@@ -280,7 +299,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                     marriageList.add(allMarriageList.get(i).getName());
                 }
 
-                chooseWindow("4", "婚姻", allMarriageList, marriageList);
+                chooseWindow("5", "婚姻", allMarriageList, marriageList);
                 break;
             case R.id.tv_user_live_style_alone:
                 List<BaseLocalDataInfo> allAloneList = new ArrayList<>();
@@ -292,7 +311,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                     aloneList.add(allAloneList.get(i).getName());
                 }
 
-                chooseWindow("5", "独居", allAloneList, aloneList);
+                chooseWindow("6", "独居", allAloneList, aloneList);
                 break;
             case R.id.tv_user_live_style_bed:
 
@@ -305,7 +324,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 for (int i = 0; i < allIsInBedList.size(); i++) {
                     isInBedList.add(allIsInBedList.get(i).getName());
                 }
-                chooseWindow("6", "卧床", allIsInBedList, isInBedList);
+                chooseWindow("7", "卧床", allIsInBedList, isInBedList);
                 break;
             case R.id.tv_user_live_style_culture:
                 List<BaseLocalDataInfo> allCultureList = new ArrayList<>();
@@ -325,7 +344,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 }
 
 
-                chooseWindow("7", "文化程度", allCultureList, cultureList);
+                chooseWindow("8", "文化程度", allCultureList, cultureList);
 
                 break;
             case R.id.tv_user_live_style_work:
@@ -337,7 +356,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 for (int i = 0; i < allWorkList.size(); i++) {
                     workList.add(allWorkList.get(i).getName());
                 }
-                chooseWindow("8", "职业情况", allWorkList, workList);
+                chooseWindow("9", "职业情况", allWorkList, workList);
                 break;
             case R.id.tv_user_live_style_pay:
                 intent = new Intent(getPageContext(), UserPayStyleActivity.class);
@@ -364,19 +383,19 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                             break;
 
                         case "5":
-                            editInfo("4", "marital", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("5", "marital", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "6":
-                            editInfo("5", "liveAlone", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("6", "liveAlone", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "7":
-                            editInfo("6", "bedridden", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("7", "bedridden", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "8":
-                            editInfo("7", "education", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("8", "education", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         case "9":
-                            editInfo("8", "profession", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
+                            editInfo("9", "profession", allList.get(Integer.parseInt(String.valueOf(object))).getName(), allList.get(Integer.parseInt(String.valueOf(object))).getId());
                             break;
                         default:
                             break;
@@ -434,10 +453,12 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
      * @param key
      * @param values
      */
+
     private void editInfo(String type, String key, String content, String values) {
         Call<String> requestCall = UserDataManager.editUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), key, values, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
+                Log.i("yys", "type====" + type + "key===" + key + "content==" + content + "values==" + values);
                 switch (type) {
                     case "3":
                         pregnantTv.setText(content);
@@ -453,22 +474,22 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         pregnantTimeTv.setText(values);
                         break;
                     case "5":
-                        marriageTv.setText(values);
+                        marriageTv.setText(content);
                         break;
                     case "6":
-                        aloneTv.setText(values);
+                        aloneTv.setText(content);
                         break;
                     case "7":
-                        bedTv.setText(values);
+                        bedTv.setText(content);
                         break;
                     case "8":
-                        cultureTv.setText(values);
+                        cultureTv.setText(content);
                         break;
                     case "9":
-                        workTv.setText(values);
+                        workTv.setText(content);
                         break;
                     case "11":
-                        hosCardTv.setText(values);
+                        hosCardTv.setText(content);
                         break;
                     default:
                         break;
@@ -495,8 +516,6 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                             smokeTv.setText("否");
                         }
                     }
-
-
                     break;
                 case REQUEST_CODE_FOR_DRINK_STYLE:
                     if (data != null) {

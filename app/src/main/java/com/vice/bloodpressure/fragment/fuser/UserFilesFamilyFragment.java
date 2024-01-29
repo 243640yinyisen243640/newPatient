@@ -32,7 +32,6 @@ public class UserFilesFamilyFragment extends UIBaseLoadFragment {
     private NoScrollListView listView;
 
     private UserFilesFamilyHistoryAdapter adapter;
-    private UserInfo userInfo;
 
     @Override
     protected void onCreate() {

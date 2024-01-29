@@ -10,6 +10,10 @@ import java.util.List;
  * 描述:
  */
 public class EducationInfo implements Serializable, IClassInfo {
+
+    /**
+     *  0 未学习 1 学习中 2 已完成;
+     */
     private String status;
     private List<EducationInfo> teachEssayAppVos;
     private List<EducationInfo> list;

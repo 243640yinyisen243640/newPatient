@@ -16,13 +16,18 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
+import com.vice.bloodpressure.model.EducationAllInfo;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -45,7 +50,18 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         mRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
         mRecyclerView.setLayoutManager(layoutManager);
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+        loadViewManager().setOnClickListener(LoadStatus.NODATA, view -> loadViewManager().changeLoadState(LoadStatus.LOADING));
 
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
+
+    @Override
+    protected boolean isRefresh() {
+        return false;
     }
 
     private void initTopView() {
@@ -59,14 +75,19 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
 
     @Override
     protected void getListData(CallBack callBack) {
-        educationInfos = new ArrayList<>();
+        Call<String> requestCall = HomeDataManager.teachSeriesListIndex(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                EducationAllInfo educationAllInfo = (EducationAllInfo) response.object;
+                callBack.callBack(educationAllInfo.getIndexList());
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
 
-        List<EducationInfo> childList = new ArrayList<>();
+        addRequestCallToMap("teachSeriesListIndex", requestCall);
 
-        for (int i = 0; i < educationInfos.size(); i++) {
-            educationInfos.get(i).setTeachEssayAppVos(childList);
-        }
-        callBack.callBack(educationInfos);
     }
 
     @Override

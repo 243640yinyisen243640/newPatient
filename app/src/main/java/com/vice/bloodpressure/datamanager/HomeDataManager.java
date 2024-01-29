@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.EducationAllInfo;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
@@ -403,6 +404,19 @@ public class HomeDataManager {
     //教育模块
 
     /**
+     * 智能学习首页
+     * @param archivesId
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> teachSeriesListIndex(String archivesId,  BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationAllInfo.class, "ai/wellness/v2/teach/index", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 智能教育系列列表
      *
      * @param typeId          类型ID
@@ -465,6 +479,6 @@ public class HomeDataManager {
         map.put("sid", sid);
         map.put("essayId", essayId);
         map.put("status", status);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationInfo.class, "ai/wellness/v2/teachPatient/addOrUpdate", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/wellness/v2/teachPatient/addOrUpdate", map, successCallBack, failureCallBack);
     }
 }
