@@ -13,6 +13,7 @@ import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.baseui.WebViewHelperActivity;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.AdvertInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -59,21 +60,50 @@ public class ServiceHealthyTestListActivity extends UIBaseListRecycleViewActivit
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<AdvertInfo> list) {
         return new ServiceHealthyTestAdapter(getPageContext(), list, object -> {
+            Intent intent;
             switch (Integer.parseInt(String.valueOf(object))) {
                 case 0:
-
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","糖尿病风险测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=1");
+                    startActivity(intent);
                     break;
+
                 case 1:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","饮食测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=8");
+                    startActivity(intent);
                     break;
                 case 2:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","运动测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=9");
+                    startActivity(intent);
                     break;
                 case 3:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","体重测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=5");
+                    startActivity(intent);
                     break;
                 case 4:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","抑郁测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=3");
+                    startActivity(intent);
                     break;
                 case 5:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","焦虑测评");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=4");
+                    startActivity(intent);
                     break;
                 case 6:
+                    intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                    intent.putExtra("title","缺血性心血管病风险评测");
+                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=2");
+                    startActivity(intent);
                     break;
                 default:
                     break;

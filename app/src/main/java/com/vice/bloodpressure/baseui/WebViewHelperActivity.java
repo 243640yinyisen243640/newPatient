@@ -15,9 +15,6 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 /**
  * 类描述：
  * 类传参： title (String) 标题
- * 类传参： explainId (String) 【6: 维系红人说明 7 会员中心 9 注册协议 10 提现说明 11 关于我们
- *                      12：隐私政策 13：用户协议 14 合作资讯后面 17 会员开通合同 18 引流红包默认留言 19 添加账户说明 22 提现手续费提示 ，28：创建群聊合同，30：注销重要提示】
- *
  * @author android.zsj
  * @date 2019/9/25
  */
