@@ -49,6 +49,8 @@ public class OutOfficeDoctorLeftAdapter extends XyBaseAdapter<DoctorInfo> {
             holder.typeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shape_green_4_18_2, 0, 0, 0);
         } else {
             holder.typeTextView.setTextSize(14);
+            holder.typeTextView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            holder.typeTextView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
             holder.typeTextView.setTextColor(ContextCompat.getColor(context, R.color.black_24));
             holder.typeTextView.setBackground(ContextCompat.getDrawable(context, R.color.defaultBackground));
             holder.typeTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shape_tran_20_3_2, 0, 0, 0);

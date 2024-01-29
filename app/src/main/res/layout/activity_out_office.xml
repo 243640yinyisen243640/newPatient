@@ -55,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="郑州大学第一附属医院"
                 android:textColor="@color/black_24"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -68,7 +67,6 @@
                 android:ellipsize="end"
                 android:includeFontPadding="false"
                 android:maxLines="2"
-                android:text="郑州市第一人民医院(新乡医学院郑州第一附属医院)始建于1942年，是一所集医疗、教...、科研、预防、保健、康复为一体的综合性"
                 android:textColor="@color/gray_8a"
                 android:textSize="13sp" />
 
@@ -80,9 +78,9 @@
                 android:drawableLeft="@drawable/location_gray"
                 android:drawablePadding="5dp"
                 android:ellipsize="end"
+                android:visibility="gone"
                 android:includeFontPadding="false"
                 android:maxLines="2"
-                android:text="郑州市金水区东十里铺社区"
                 android:textColor="#BBBBBB"
                 android:textSize="13sp" />
 
@@ -96,7 +94,6 @@
                 android:paddingTop="5dp"
                 android:paddingRight="7dp"
                 android:paddingBottom="5dp"
-                android:text="三甲医院"
                 android:textColor="@color/main_base_color"
                 android:textSize="11sp" />
 

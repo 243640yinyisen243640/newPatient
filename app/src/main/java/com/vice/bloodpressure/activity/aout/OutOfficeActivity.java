@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -88,14 +89,19 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
     private void bindData(HospitalInfo hospitalInfo) {
         XyImageUtils.loadRoundImage(getPageContext(), R.drawable.out_hospital_default, hospitalInfo.getLogo(), headImageView);
         nameTextView.setText(hospitalInfo.getHospitalName());
+        if (TextUtils.isEmpty(hospitalInfo.getDetailedAddress())) {
+            locationTextView.setVisibility(View.GONE);
+        } else {
+            locationTextView.setVisibility(View.VISIBLE);
+            locationTextView.setText(hospitalInfo.getDetailedAddress());
+        }
 
-        locationTextView.setText(hospitalInfo.getDetailedAddress());
-        if (hospitalInfo.getCategory() == null) {
+        if ( TextUtils.isEmpty(hospitalInfo.getCategory())) {
             levelTextView.setVisibility(View.GONE);
         } else {
             levelTextView.setText(hospitalInfo.getCategory());
         }
-        if (hospitalInfo.getIntroduction() == null) {
+        if (TextUtils.isEmpty(hospitalInfo.getIntroduction())) {
             introduceTextView.setVisibility(View.GONE);
         } else {
             introduceTextView.setText(hospitalInfo.getIntroduction());

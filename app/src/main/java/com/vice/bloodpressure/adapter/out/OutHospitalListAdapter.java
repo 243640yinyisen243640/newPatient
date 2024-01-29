@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.adapter.out;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -50,14 +51,14 @@ public class OutHospitalListAdapter extends RecyclerView.Adapter<OutHospitalList
         DoctorInfo info = list.get(position);
         XyImageUtils.loadRoundImage(context, R.drawable.shape_defaultbackground_5, info.getLogo(), holder.coverImageView);
         holder.nameTextView.setText(info.getHospitalName());
-        if (info.getIntroduction() == null) {
+        if (TextUtils.isEmpty(info.getIntroduction())) {
             holder.introduceTextView.setVisibility(View.GONE);
         } else {
             holder.introduceTextView.setText(info.getIntroduction());
         }
 
         holder.locationTextView.setText(info.getDetailedAddress());
-        if (info.getCategory() == null) {
+        if (TextUtils.isEmpty(info.getCategory())) {
             holder.levelTextView.setVisibility(View.GONE);
         } else {
             holder.levelTextView.setVisibility(View.VISIBLE);

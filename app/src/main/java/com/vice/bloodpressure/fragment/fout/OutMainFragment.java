@@ -120,7 +120,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
         });
         educationTextView.setOnClickListener(v -> {
-            if (!doctorInfoOther.isBindExternal()) {
+            if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
                 DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
                     if (HHSoftDialogActionEnum.POSITIVE == which) {
