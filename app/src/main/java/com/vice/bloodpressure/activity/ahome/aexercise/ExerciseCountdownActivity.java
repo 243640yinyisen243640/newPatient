@@ -62,23 +62,15 @@ public class ExerciseCountdownActivity extends UIBaseActivity {
         rxTimer2.timer(3000, number -> {
             //三秒以后跳转页面  R 抗阻  P 柔韧  O:有氧
             finish();
-
+            String sportId = getIntent().getStringExtra("sportId");
             if ("O".equals(type)) {
-                String sportId = getIntent().getStringExtra("sportId");
                 Intent intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
                 intent.putExtra("sportId", sportId);
                 startActivity(intent);
             } else {
-                String exerciseName = getIntent().getStringExtra("exerciseName");
-                String sportId = getIntent().getStringExtra("sportId");
-                String coverUrl = getIntent().getStringExtra("coverUrl");
-                String videoUrl = getIntent().getStringExtra("videoUrl");
                 Intent intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
                 intent.putExtra("type", type);
                 intent.putExtra("sportId", sportId);
-                intent.putExtra("exerciseName", exerciseName);
-                intent.putExtra("coverUrl", coverUrl);
-                intent.putExtra("videoUrl", videoUrl);
                 startActivity(intent);
             }
 

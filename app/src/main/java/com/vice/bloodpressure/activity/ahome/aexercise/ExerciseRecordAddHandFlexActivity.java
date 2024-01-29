@@ -1,6 +1,5 @@
 package com.vice.bloodpressure.activity.ahome.aexercise;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,7 +54,6 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
         super.onCreate(savedInstanceState);
         type = getIntent().getStringExtra("type");
         sportId = getIntent().getStringExtra("sportId");
-
         initView();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
