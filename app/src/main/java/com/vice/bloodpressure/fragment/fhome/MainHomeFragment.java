@@ -40,6 +40,8 @@ import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvesti
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseCountdownActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
+import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipsAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
@@ -295,16 +297,22 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 }
             }
             healthyTipAdapter = new HomeHealthyTipsAdapter(getPageContext(), messageInfos, (position, view) -> {
+                Intent intent;
                 switch (messageInfos.get(position).getTagType()) {
                     //1:血糖目标 2:血压目标： 3:用药提醒 4:运动目标
                     case "1":
-
+                        intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+                        startActivity(intent);
                         break;
                     case "2":
+                        startActivity(new Intent(getPageContext(), ServicePressureListActivity.class));
                         break;
                     case "3":
+
                         break;
                     case "4":
+                        intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;
