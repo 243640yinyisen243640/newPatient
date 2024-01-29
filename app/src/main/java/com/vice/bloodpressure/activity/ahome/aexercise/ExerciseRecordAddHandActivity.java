@@ -123,7 +123,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                     minuteTime = (int) (allTime / 1000);
                     Log.i("yys", "minuteTime==" + minuteTime);
                     //TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())
-                    fireNum = String.valueOf(TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight()));
+                    fireNum = String.valueOf((int)(TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())));
                     timeTv.setText(String.valueOf(minuteTime / 60));
                     fireTv.setText(fireNum);
                 }

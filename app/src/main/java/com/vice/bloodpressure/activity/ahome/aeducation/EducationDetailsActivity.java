@@ -145,8 +145,8 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         timer = new CountDownTimer(millisInFuture, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-//                long time = (millisInFuture - millisUntilFinished) / 1000;
-                long time = ( millisUntilFinished) / 1000;
+                //                long time = (millisInFuture - millisUntilFinished) / 1000;
+                long time = (millisUntilFinished) / 1000;
                 countdownTextView.setText("我已学习(" + time + "s)");
             }
 
@@ -255,13 +255,13 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);//加载完网页进度条消失
-
-                } else {
-                    progressBar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
-                    progressBar.setProgress(newProgress);//设置进度值
-                }
+                //                if (newProgress == 100) {
+                //                    progressBar.setVisibility(View.GONE);//加载完网页进度条消失
+                //
+                //                } else {
+                //                    progressBar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                //                    progressBar.setProgress(newProgress);//设置进度值
+                //                }
                 super.onProgressChanged(webView, newProgress);
             }
         });
