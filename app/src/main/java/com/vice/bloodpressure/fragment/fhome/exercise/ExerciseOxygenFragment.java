@@ -9,14 +9,17 @@ import com.vice.bloodpressure.adapter.home.ExerciseRecordListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -47,19 +50,18 @@ public class ExerciseOxygenFragment extends UIBaseListRecycleViewFragment<Exerci
 
     @Override
     protected void getListData(CallBack callBack) {
-        //        Call<String> requestCall = HomeDataManager.getSportAerobics();
-        listText = new ArrayList<>();
-        listText.add(new ExerciseInfo("3360", "2022-07-12 12:20:23", "1260"));
-        listText.add(new ExerciseInfo("3860", "2022-07-12 12:20:23", "1160"));
+        String type = getArguments().getString("type");
+        Call<String> requestCall = HomeDataManager.getSportRecord(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getSportRecord", requestCall);
 
-        List<ExerciseChildInfo> childList = new ArrayList<>();
-        childList.add(new ExerciseChildInfo("步行", "24min12s", "1260"));
-        childList.add(new ExerciseChildInfo("羽毛球", "30min", "1260"));
-
-        for (int i = 0; i < listText.size(); i++) {
-            listText.get(i).setList(childList);
-        }
-        callBack.callBack(listText);
     }
 
     @Override
@@ -74,5 +76,15 @@ public class ExerciseOxygenFragment extends UIBaseListRecycleViewFragment<Exerci
 
     public void refresh() {
         loadViewManager().changeLoadState(LoadStatus.LOADING);
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
+
+    @Override
+    protected boolean isRefresh() {
+        return false;
     }
 }

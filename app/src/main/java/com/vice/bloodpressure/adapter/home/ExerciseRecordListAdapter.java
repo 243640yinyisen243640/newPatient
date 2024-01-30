@@ -50,12 +50,12 @@ public class ExerciseRecordListAdapter extends RecyclerView.Adapter<ExerciseReco
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ExerciseInfo info = list.get(position);
-        setTextStyle(holder.needTextView, Color.parseColor("#00C27F"), "今日所需消耗", " 3360 ", "千卡");
-        setTextStyle(holder.haveTextView, Color.parseColor("#00C27F"), "已消耗", " 3360 ", "千卡");
-        holder.timeTextView.setText(info.getTime());
+//        setTextStyle(holder.needTextView, Color.parseColor("#00C27F"), "今日所需消耗 ", info.getNeedConsumeCalories(), " 千卡");
+        setTextStyle(holder.haveTextView, Color.parseColor("#00C27F"), "已消耗 ", info.getCaloriesConsumed(), " 千卡");
+        holder.timeTextView.setText(info.getSportDate());
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         holder.childRecyclerView.setLayoutManager(layoutManager);
-        ExerciseRecordChildListAdapter childListAdapter = new ExerciseRecordChildListAdapter(context, list.get(position).getList());
+        ExerciseRecordChildListAdapter childListAdapter = new ExerciseRecordChildListAdapter(context, list.get(position).getArds());
         holder.childRecyclerView.setAdapter(childListAdapter);
     }
 

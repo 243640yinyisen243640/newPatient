@@ -9,13 +9,17 @@ import com.vice.bloodpressure.adapter.home.ExerciseFlexibilityListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewFragment;
+import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.ExerciseChildInfo;
+import com.vice.bloodpressure.model.ExerciseInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -23,8 +27,7 @@ import java.util.List;
  * 传参:
  * 描述:
  */
-public class ExerciseFlexibilityFragment extends UIBaseListRecycleViewFragment<ExerciseChildInfo> {
-    private List<ExerciseChildInfo> listText = new ArrayList<>();
+public class ExerciseFlexibilityFragment extends UIBaseListRecycleViewFragment<ExerciseInfo> {
 
     public static ExerciseFlexibilityFragment newInstance(String type) {
         Bundle bundle = new Bundle();
@@ -46,19 +49,37 @@ public class ExerciseFlexibilityFragment extends UIBaseListRecycleViewFragment<E
 
     @Override
     protected void getListData(CallBack callBack) {
-        listText.add(new ExerciseChildInfo("深蹲", "10", "1260", "1"));
-        listText.add(new ExerciseChildInfo("深蹲", "30", "1260", "2"));
-
-        callBack.callBack(listText);
+        String type = getArguments().getString("type");
+        Call<String> requestCall = HomeDataManager.getSportRecord(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getSportRecord", requestCall);
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<ExerciseChildInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<ExerciseInfo> list) {
         return new ExerciseFlexibilityListAdapter(getPageContext(), list);
     }
 
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+
+    @Override
+    protected boolean isRefresh() {
+        return false;
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
     }
 }

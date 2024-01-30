@@ -199,6 +199,25 @@ public class HomeDataManager {
     }
 
     /**
+     * 运动记录
+     *
+     * @param archivesId
+     * @param type            运动类型 A 有氧运动 R 抗阻运动 P柔韧性运动
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getSportRecord(String archivesId, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseInfo.class, "ai/sport/v2/getSportRecord", map, successCallBack, failureCallBack);
+    }
+
+
+
+
+    /**
      * APP获取柔韧性运动
      *
      * @param archivesId
@@ -405,12 +424,13 @@ public class HomeDataManager {
 
     /**
      * 智能学习首页
+     *
      * @param archivesId
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> teachSeriesListIndex(String archivesId,  BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> teachSeriesListIndex(String archivesId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("archivesId", archivesId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationAllInfo.class, "ai/wellness/v2/teach/index", map, successCallBack, failureCallBack);

@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class ExerciseChildInfo implements Serializable {
     private String time;
-    private String exerciseTime;
+    private String sportTime;
     private String onceFire;
     private String state;
     /**
@@ -69,6 +69,42 @@ public class ExerciseChildInfo implements Serializable {
      * type
      */
     private String type;
+    /**
+     * 消耗热量
+     */
+    private String consumeCalories;
+    /**
+     * 达标状态 1未达标  2达标 3超标
+     */
+    private String sportStatus;
+    /**
+     * 运动数量
+     */
+    private String sportNum;
+
+    public String getSportNum() {
+        return sportNum;
+    }
+
+    public void setSportNum(String sportNum) {
+        this.sportNum = sportNum;
+    }
+
+    public String getSportStatus() {
+        return sportStatus;
+    }
+
+    public void setSportStatus(String sportStatus) {
+        this.sportStatus = sportStatus;
+    }
+
+    public String getConsumeCalories() {
+        return consumeCalories;
+    }
+
+    public void setConsumeCalories(String consumeCalories) {
+        this.consumeCalories = consumeCalories;
+    }
 
     public String getWeight() {
         return weight;
@@ -78,11 +114,6 @@ public class ExerciseChildInfo implements Serializable {
         this.weight = weight;
     }
 
-    public ExerciseChildInfo(String type, String exerciseTime, String onceFire) {
-        this.type = type;
-        this.exerciseTime = exerciseTime;
-        this.onceFire = onceFire;
-    }
 
     public ExerciseChildInfo(String type, String time, String onceFire, String state) {
         this.type = type;
@@ -124,12 +155,12 @@ public class ExerciseChildInfo implements Serializable {
         this.type = type;
     }
 
-    public String getExerciseTime() {
-        return exerciseTime;
+    public String getSportTime() {
+        return sportTime;
     }
 
-    public void setExerciseTime(String exerciseTime) {
-        this.exerciseTime = exerciseTime;
+    public void setSportTime(String sportTime) {
+        this.sportTime = sportTime;
     }
 
     public String getId() {

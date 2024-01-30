@@ -17,7 +17,6 @@ import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.fragment.fhome.exercise.ExerciseFlexibilityFragment;
 import com.vice.bloodpressure.fragment.fhome.exercise.ExerciseOxygenFragment;
-import com.vice.bloodpressure.fragment.fhome.exercise.ExerciseResistanceFragment;
 
 import java.util.ArrayList;
 
@@ -53,10 +52,12 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
     }
 
     private void initValue() {
+        //运动类型 A 有氧运动 R 抗阻运动 P柔韧性运动
         fragments = new ArrayList<>();
-        fragments.add(ExerciseOxygenFragment.newInstance("1"));
-        fragments.add(ExerciseResistanceFragment.newInstance("P"));
+        fragments.add(ExerciseOxygenFragment.newInstance("A"));
+//        fragments.add(ExerciseResistanceFragment.newInstance("P"));
         fragments.add(ExerciseFlexibilityFragment.newInstance("R"));
+        fragments.add(ExerciseFlexibilityFragment.newInstance("P"));
 
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         viewPager.setOffscreenPageLimit(fragments.size());
@@ -66,11 +67,11 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             int index = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
             viewPager.setCurrentItem(index);
-            if (index == 0) {
-                addRecordTv.setVisibility(View.VISIBLE);
-            } else {
-                addRecordTv.setVisibility(View.GONE);
-            }
+//            if (index == 0) {
+//                addRecordTv.setVisibility(View.VISIBLE);
+//            } else {
+//                addRecordTv.setVisibility(View.GONE);
+//            }
             setCurrentPosiStatus(radioGroup.indexOfChild(radioGroup.findViewById(checkedId)));
         });
 
@@ -84,11 +85,11 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
             public void onPageSelected(int i) {
 
                 radioGroup.check(radioGroup.getChildAt(i).getId());
-                if (i == 0) {
-                    addRecordTv.setVisibility(View.VISIBLE);
-                } else {
-                    addRecordTv.setVisibility(View.GONE);
-                }
+//                if (i == 0) {
+//                    addRecordTv.setVisibility(View.VISIBLE);
+//                } else {
+//                    addRecordTv.setVisibility(View.GONE);
+//                }
                 setCurrentPosiStatus(i);
             }
 
@@ -121,10 +122,10 @@ public class ExerciseRecordListActivity extends UIBaseActivity {
 
     private void initListener() {
         backIm.setOnClickListener(v -> finish());
-//        addRecordTv.setOnClickListener(v -> {
-//            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
-//            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
-//        });
+        //        addRecordTv.setOnClickListener(v -> {
+        //            Intent intent = new Intent(getPageContext(), ExercisePlanAddRecordActivity.class);
+        //            startActivityForResult(intent, REQUEST_CODE_FOR_REFRESH);
+        //        });
     }
 
     @Override

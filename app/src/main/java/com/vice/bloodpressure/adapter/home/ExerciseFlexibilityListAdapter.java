@@ -6,10 +6,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.model.ExerciseChildInfo;
+import com.vice.bloodpressure.model.ExerciseInfo;
 
 import java.util.List;
 
@@ -22,10 +23,10 @@ import java.util.List;
  */
 public class ExerciseFlexibilityListAdapter extends RecyclerView.Adapter<ExerciseFlexibilityListAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseChildInfo> list;
+    private List<ExerciseInfo> list;
 
 
-    public ExerciseFlexibilityListAdapter(Context context, List<ExerciseChildInfo> list) {
+    public ExerciseFlexibilityListAdapter(Context context, List<ExerciseInfo> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,11 +42,12 @@ public class ExerciseFlexibilityListAdapter extends RecyclerView.Adapter<Exercis
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ExerciseChildInfo info = list.get(position);
-        holder.timeTextView.setText(info.getTime());
-        holder.suggestTextView.setText(info.getOnceFire());
-        holder.exerciseTextView.setText(info.getState());
-
+        ExerciseInfo info = list.get(position);
+        holder.timeTextView.setText(info.getSportDate());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        holder.childRecyclerView.setLayoutManager(layoutManager);
+        ExercisePAndRChildListAdapter childListAdapter = new ExercisePAndRChildListAdapter(context, list.get(position).getArds());
+        holder.childRecyclerView.setAdapter(childListAdapter);
     }
 
     @Override
@@ -55,18 +57,14 @@ public class ExerciseFlexibilityListAdapter extends RecyclerView.Adapter<Exercis
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView typeTextView;
         private TextView timeTextView;
-        private TextView suggestTextView;
-        private TextView exerciseTextView;
+        private RecyclerView childRecyclerView;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             timeTextView = itemView.findViewById(R.id.tv_exercise_flexibility_time);
-            typeTextView = itemView.findViewById(R.id.tv_exercise_flexibility_type);
-            suggestTextView = itemView.findViewById(R.id.tv_exercise_flexibility_suggest);
-            exerciseTextView = itemView.findViewById(R.id.tv_exercise_flexibility_exercise);
+            childRecyclerView = itemView.findViewById(R.id.rv_exercise_p_and_r_child);
         }
     }
 

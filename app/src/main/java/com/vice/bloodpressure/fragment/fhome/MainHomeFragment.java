@@ -340,16 +340,19 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         if ("1".equals(bmiStatus)) {
             shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_thin_all_person));
             bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
+            bmiStateTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.blue_2a));
             //            bmiStateTv.setText("偏瘦");
             bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_blue_31_17_2));
         } else if ("2".equals(bmiStatus)) {
             shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
             bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
+            bmiStateTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.main_base_color));
             //            bmiStateTv.setText("正常");
             bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_green_31_17_2));
         } else if ("3".equals(bmiStatus)) {
             shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_more_fat_all_person));
             bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.orange_ff));
+            bmiStateTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.orange_ff));
             //            bmiStateTv.setText("超重");
             bmiStateTv.setBackground(ContextCompat.getDrawable(getPageContext(), R.drawable.shape_bg_white_orange_31_17_2));
         } else if ("4".equals(bmiStatus)) {
@@ -360,6 +363,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         } else {
             shapeIm.setImageDrawable(ContextCompat.getDrawable(getPageContext(), R.drawable.home_normal_all_person));
             bmiNumTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
+            bmiStateTv.setTextColor(ContextCompat.getColor(getPageContext(), R.color.black_24));
             bmiStateTv.setVisibility(View.GONE);
         }
 

@@ -95,6 +95,31 @@ public class ExerciseInfo implements Serializable {
      * 有氧运动id
      */
     private String aerobicsId;
+    private List<ExerciseChildInfo> ards;
+    /**
+     * 运动日期
+     */
+    private String sportDate;
+    /**
+     * 消耗热量
+     */
+    private String caloriesConsumed;
+
+    public String getCaloriesConsumed() {
+        return caloriesConsumed;
+    }
+
+    public void setCaloriesConsumed(String caloriesConsumed) {
+        this.caloriesConsumed = caloriesConsumed;
+    }
+
+    public String getSportDate() {
+        return sportDate;
+    }
+
+    public void setSportDate(String sportDate) {
+        this.sportDate = sportDate;
+    }
 
     public String getAerobicsId() {
         return aerobicsId;
@@ -160,21 +185,15 @@ public class ExerciseInfo implements Serializable {
         this.pliableId = pliableId;
     }
 
-    public ExerciseInfo(String need, String time, String have) {
-        this.need = need;
-        this.time = time;
-        this.have = have;
+
+
+
+    public List<ExerciseChildInfo> getArds() {
+        return ards;
     }
 
-
-    private List<ExerciseChildInfo> list;
-
-    public List<ExerciseChildInfo> getList() {
-        return list;
-    }
-
-    public void setList(List<ExerciseChildInfo> list) {
-        this.list = list;
+    public void setArds(List<ExerciseChildInfo> ards) {
+        this.ards = ards;
     }
 
     public String getOnceFire() {
