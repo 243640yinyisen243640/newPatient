@@ -229,7 +229,11 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.i("yys", "onNewIntent");
+        boolean isCheckPos = intent.getBooleanExtra("isCheckPos", true);
+        if (!isCheckPos) {
+            return;
+        }
+
         int checkId = intent.getIntExtra("checkId", 0);
 
         if (checkId == 0) {

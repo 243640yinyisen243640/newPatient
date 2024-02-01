@@ -8,9 +8,6 @@ package com.vice.bloodpressure.model;
  */
 public interface IClassInfo {
 
-    String getImplClassName();
-
-    String getImplClassImg();
 
     String getImplMealPic();
     String getImplDashName();

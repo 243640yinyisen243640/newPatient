@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
@@ -440,5 +441,10 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getPageContext(), MainActivity.class);
+        intent.putExtra("isCheckPos", false);
+        startActivity(intent);
+    }
 }

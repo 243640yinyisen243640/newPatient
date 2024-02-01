@@ -45,12 +45,12 @@ public class UserCollectActivity extends UIBaseActivity {
         ArrayList<Fragment> fragments = new ArrayList<>();
         UserCollectArticleFragment collectArticleFragment = new UserCollectArticleFragment();
         UserCollectVideoFragment videoFragment = new UserCollectVideoFragment();
-        UserCollectVideoFragment collectVideoFragment = new UserCollectVideoFragment();
+//        UserCollectVideoFragment collectVideoFragment = new UserCollectVideoFragment();
 
         fragments = new ArrayList<>();
         fragments.add(collectArticleFragment);
         fragments.add(videoFragment);
-        fragments.add(collectVideoFragment);
+//        fragments.add(collectVideoFragment);
 
         viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         viewPager.setOffscreenPageLimit(fragments.size());

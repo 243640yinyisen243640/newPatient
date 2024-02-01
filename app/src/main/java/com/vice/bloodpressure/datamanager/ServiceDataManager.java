@@ -650,6 +650,7 @@ public class ServiceDataManager {
 
     /**
      * 教育视频列表
+     *
      * @param searchKey
      * @param pageNum
      * @param pageSize
@@ -681,6 +682,20 @@ public class ServiceDataManager {
         map.put("collectType", collectType);
         map.put("id", id);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, MealExclusiveInfo.class, "ai/diet/v2/detail", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param archivesId
+     * @param essayId         章节id
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> educationDetails(String archivesId, String essayId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("essayId", essayId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, EducationInfo.class, "ai/edu/v2/getEducationVideoDetail", map, successCallBack, failureCallBack);
     }
 
     /**

@@ -16,8 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.MainActivity;
-import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.ExerciseInfo;
@@ -70,9 +68,8 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
                     //点击确定的操作
-                    Intent intent = new Intent(getPageContext(), MainActivity.class);
+                    Intent intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
                     startActivity(intent);
-                    finish();
                 });
             }
 
@@ -119,7 +116,6 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         Call<String> requestCall = HomeDataManager.recommendSportPlan(UserInfoUtils.getArchivesId(getPageContext()), height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
             if ("0000".equals(response.code)) {
                 ExerciseInfo info = (ExerciseInfo) response.object;
-                UserInfoUtils.saveUserInfo(getPageContext(), SharedPreferencesConstant.WEIGHT, weight);
                 TextView textView = successPopupWindow.showContent();
                 SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
 

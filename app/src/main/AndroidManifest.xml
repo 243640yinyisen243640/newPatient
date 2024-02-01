@@ -319,35 +319,43 @@
             android:name=".activity.ahome.aeducation.EducationIllnessActivity"
             android:screenOrientation="portrait" />
         <!--慢阻肺时间-->
-        <activity android:name=".activity.ahome.aeducation.EducationFeiTimeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationFeiTimeActivity"
+            android:screenOrientation="portrait" />
         <!--  糖尿病下的类型-->
-   <!--糖尿病知识-->
-        <activity android:name=".activity.ahome.aeducation.EducationTangKnowledgeActivity"
-            android:screenOrientation="portrait"/>
+        <!--糖尿病知识-->
+        <activity
+            android:name=".activity.ahome.aeducation.EducationTangKnowledgeActivity"
+            android:screenOrientation="portrait" />
         <!--糖尿病类型-->
         <activity
             android:name=".activity.ahome.aeducation.EducationAnswerTangActivity"
             android:screenOrientation="portrait" />
         <!--糖尿病前期-->
-        <activity android:name=".activity.ahome.aeducation.EducationTangQianKnowledgeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationTangQianKnowledgeActivity"
+            android:screenOrientation="portrait" />
         <!--高血压知识-->
-        <activity android:name=".activity.ahome.aeducation.EducationGaoKnowledgeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationGaoKnowledgeActivity"
+            android:screenOrientation="portrait" />
         <!--高血压时间-->
-        <activity android:name=".activity.ahome.aeducation.EducationGaoTimeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationGaoTimeActivity"
+            android:screenOrientation="portrait" />
         <!--冠心病时间-->
-        <activity android:name=".activity.ahome.aeducation.EducationGuanTimeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationGuanTimeActivity"
+            android:screenOrientation="portrait" />
         <!--脑卒中时间-->
-        <activity android:name=".activity.ahome.aeducation.EducationNaoTimeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationNaoTimeActivity"
+            android:screenOrientation="portrait" />
 
         <!--糖尿病时间-->
-        <activity android:name=".activity.ahome.aeducation.EducationTangTimeActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ahome.aeducation.EducationTangTimeActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 糖尿病并发症-->
         <activity
@@ -356,6 +364,7 @@
 
         <activity
             android:name=".activity.ahome.aeducation.EducationIntelligenceActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <!-- 教育 智能学习 -->
         <!-- 教育 分类 -->
@@ -398,6 +407,11 @@
         <!--视频详情-->
         <activity
             android:name=".activity.aservice.ServiceMakeMealDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <!--服务教育视频详情-->
+        <activity
+            android:name=".activity.aservice.ServiceMakeEducationDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <!--饮食搜索-->

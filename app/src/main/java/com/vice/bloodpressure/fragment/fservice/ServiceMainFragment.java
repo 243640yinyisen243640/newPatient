@@ -1,21 +1,27 @@
 package com.vice.bloodpressure.fragment.fservice;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
+import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
+import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceEducationVideoActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceHealthyDataActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceHealthyTestListActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceMealVideoActivity;
 import com.vice.bloodpressure.adapter.service.SerciveDataShowAdapter;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.customView.banner.view.BannerView;
 import com.vice.bloodpressure.model.AdvertInfo;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.banner.CommonBannerAdvertClickListener;
 import com.vice.bloodpressure.utils.banner.CommonBannerAdvertViewHolder;
 import com.vice.bloodpressure.view.HHAtMostGridView;
@@ -67,20 +73,41 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
                     startActivity(intent);
                     break;
                 case 1:
-                    intent = new Intent(getPageContext(), DietMealPlanDetailsActivity.class);
-                    startActivity(intent);
+                    String isopenmeal = SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_MEAL);
+                    if ("1".equals(isopenmeal)) {
+                        intent = new Intent(getPageContext(), DietMealPlanDetailsActivity.class);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(getPageContext(), DietProgrammeBeginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case 2:
-                    intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
-                    startActivity(intent);
+                    String isopeneducation = SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_EDUCATION);
+                    if ("1".equals(isopeneducation)) {
+                        intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Log.i("yys","1");
+                        intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case 3:
-                    intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
-                    startActivity(intent);
+                    String isopenexercise = SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_EXERCISE);
+                    if ("1".equals(isopenexercise)) {
+                        intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(getPageContext(), ExercisePlanOneActivity.class);
+                        startActivity(intent);
+                    }
+
                     break;
                 case 4:
                     intent = new Intent(getPageContext(), ServiceHealthyTestListActivity.class);
                     startActivity(intent);
+
                     break;
                 default:
                     break;

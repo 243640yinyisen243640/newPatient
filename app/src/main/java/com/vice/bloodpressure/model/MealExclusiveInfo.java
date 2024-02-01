@@ -255,15 +255,7 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
         this.materialList = materialList;
     }
 
-    @Override
-    public String getImplClassName() {
-        return recName;
-    }
 
-    @Override
-    public String getImplClassImg() {
-        return img;
-    }
 
     @Override
     public String getImplMealPic() {

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
@@ -131,8 +130,11 @@ public class EducationGaoKnowledgeActivity extends UIBaseActivity {
                 answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
                     ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                     if ("0000".equals(response.code)) {
-                        Intent intent = new Intent(getPageContext(), MainActivity.class);
-                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+//                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        finish();
+                        Intent intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
                         startActivity(intent);
                         finish();
                     }

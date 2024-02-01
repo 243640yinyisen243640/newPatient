@@ -7,45 +7,57 @@ package com.vice.bloodpressure.model;
  * 描述:
  */
 public class VideoInfo implements IClassInfo{
-    private String img;
-    private String title;
+    private String id;
+    private String dishName;
 
+    /**
+     * 视频类型，2：教育视频，3：饮食视频
+     */
+    private String type;
 
-    public String getImg() {
-        return img;
+    private String vid;
+
+    public String getId() {
+        return id;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDishName() {
+        return dishName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVid() {
+        return vid;
+    }
+
+    public void setVid(String vid) {
+        this.vid = vid;
     }
 
 
-
-    @Override
-    public String getImplClassName() {
-        return title;
-    }
-
-    @Override
-    public String getImplClassImg() {
-        return img;
-    }
 
     @Override
     public String getImplMealPic() {
-        return null;
+        return vid;
     }
 
     @Override
     public String getImplDashName() {
-        return null;
+        return dishName;
     }
 }

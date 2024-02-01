@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -90,6 +91,7 @@ public class EducationHeightWeightActivity extends UIBaseActivity {
 
         //下一步
         nextStepTv.setOnClickListener(v -> {
+            Log.i("yys","3");
             Intent intent = new Intent(getPageContext(), EducationIllnessActivity.class);
             intent.putExtra("height", height);
             intent.putExtra("weight", weight);

@@ -289,15 +289,7 @@ public class EducationInfo implements Serializable, IClassInfo {
         this.teachEssayAppVos = teachEssayAppVos;
     }
 
-    @Override
-    public String getImplClassName() {
-        return essayName;
-    }
 
-    @Override
-    public String getImplClassImg() {
-        return coverUrl;
-    }
 
     @Override
     public String getImplMealPic() {

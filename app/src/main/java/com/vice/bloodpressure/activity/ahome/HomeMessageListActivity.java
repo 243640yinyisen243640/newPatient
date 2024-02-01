@@ -1,17 +1,11 @@
 package com.vice.bloodpressure.activity.ahome;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
-import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
-import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
-import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
 import com.vice.bloodpressure.adapter.home.HomeMessageListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -85,37 +79,37 @@ public class HomeMessageListActivity extends UIBaseListRecycleViewActivity<Messa
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MessageInfo> list) {
         return messageListAdapter = new HomeMessageListAdapter(getPageContext(), list, (position, view) -> {
-            switch (view.getId()) {
-                case R.id.fl_message_click:
-                    Intent intent;
-                    getPageListData().get(position).setStatus("1");
-                    messageListAdapter.notifyDataSetChanged();
-                    readOneMessage(position);
-                    //  //1. 绑定医生 2. 血糖 3. 血压  4 智能教育
-                    switch (getPageListData().get(position).getType()) {
-                        case "1":
-                            intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                            startActivity(intent);
-                            break;
-                        case "2":
-                            intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
-                            startActivity(intent);
-                            break;
-                        case "3":
-                            intent = new Intent(getPageContext(), ServicePressureListActivity.class);
-                            startActivity(intent);
-                            break;
-                        case "4":
-                            intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
-                            startActivity(intent);
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-            }
+//            switch (view.getId()) {
+//                case R.id.fl_message_click:
+//                    Intent intent;
+//                    getPageListData().get(position).setStatus("1");
+//                    messageListAdapter.notifyDataSetChanged();
+//                    readOneMessage(position);
+//                    //  //1. 绑定医生 2. 血糖 3. 血压  4 智能教育
+//                    switch (getPageListData().get(position).getType()) {
+//                        case "1":
+//                            intent = new Intent(getPageContext(), UserDoctorActivity.class);
+//                            startActivity(intent);
+//                            break;
+//                        case "2":
+//                            intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+//                            startActivity(intent);
+//                            break;
+//                        case "3":
+//                            intent = new Intent(getPageContext(), ServicePressureListActivity.class);
+//                            startActivity(intent);
+//                            break;
+//                        case "4":
+//                            intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+//                            startActivity(intent);
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                    break;
+//                default:
+//                    break;
+//            }
 
 
         });

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.popwindow.DietProgrammePopupWindow;
@@ -87,9 +86,11 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
                         Call<String> requestCall = HomeDataManager.recommendDietPlan(height, weight, chronicDisease, workWeight, UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
                             if ("0000".equals(response.code)) {
                                 //成功的话回到首页
-                                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
-                                mainIntent.putExtra("checkId", 0);
-                                startActivity(mainIntent);
+                                //                                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                                //                                mainIntent.putExtra("checkId", 0);
+                                //                                startActivity(mainIntent);
+                                Intent intent = new Intent(getPageContext(), DietMealPlanDetailsActivity.class);
+                                startActivity(intent);
                                 finish();
                             } else {
                                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationIntelligenceAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
@@ -36,8 +37,10 @@ import retrofit2.Call;
  * 描述:智能学习
  */
 public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity<EducationInfo> {
-    private List<EducationInfo> educationInfos;
     private EducationIntelligenceAdapter adapter;
+
+    private TextView timeTextView;
+    private TextView subjectTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +71,9 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         View topView = View.inflate(getPageContext(), R.layout.include_education_intelligence_study, null);
         ImageView backImageView = topView.findViewById(R.id.iv_education_study_back);
         TextView classifyTextView = topView.findViewById(R.id.tv_education_study_classify);
-        backImageView.setOnClickListener(v -> finish());
+        timeTextView = topView.findViewById(R.id.tv_education_study_time);
+        subjectTextView = topView.findViewById(R.id.tv_education_study_subject);
+        backImageView.setOnClickListener(v -> onBackPressed());
         classifyTextView.setOnClickListener(v -> startActivity(new Intent(getPageContext(), EducationClassifyActivity.class)));
         topViewManager().topView().addView(topView);
     }
@@ -78,6 +83,8 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         Call<String> requestCall = HomeDataManager.teachSeriesListIndex(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), (call, response) -> {
             if ("0000".equals(response.code)) {
                 EducationAllInfo educationAllInfo = (EducationAllInfo) response.object;
+                timeTextView.setText(educationAllInfo.getStudyTimeSum());
+                subjectTextView.setText(educationAllInfo.getStudyCourseSum());
                 callBack.callBack(educationAllInfo.getIndexList());
             } else {
                 callBack.callBack(null);
@@ -132,5 +139,12 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getPageContext(), MainActivity.class);
+        intent.putExtra("isCheckPos", false);
+        startActivity(intent);
     }
 }

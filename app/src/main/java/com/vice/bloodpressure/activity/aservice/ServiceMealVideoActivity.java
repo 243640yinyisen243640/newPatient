@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgTopActivity;
@@ -68,19 +67,16 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<MealExclusiveInfo> list) {
-        return new UserCollectVideoAdapter(getPageContext(), list, new IAdapterViewClickOneListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                switch (view.getId()) {
-                    case R.id.ll_user_collect_video_click:
-                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
-                        intent.putExtra("mealId", getPageListData().get(position).getId());
-                        startActivity(intent);
-                        break;
-                    default:
-                        break;
+        return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
+            switch (view.getId()) {
+                case R.id.ll_user_collect_video_click:
+                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                    intent.putExtra("mealId", getPageListData().get(position).getId());
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
 
-                }
             }
         });
     }

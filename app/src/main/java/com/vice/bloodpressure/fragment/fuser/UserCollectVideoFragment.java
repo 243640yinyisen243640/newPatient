@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.aservice.ServiceMakeEducationDetailsActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceMakeMealDetailsActivity;
 import com.vice.bloodpressure.adapter.user.UserCollectVideoAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
@@ -63,8 +64,16 @@ public class UserCollectVideoFragment extends UIBaseListRecycleViewFragment<Vide
         return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
             switch (view.getId()) {
                 case R.id.ll_user_collect_video_click:
-                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
-                    startActivity(intent);
+                    // 视频类型，2：教育视频，3：饮食视频
+                    if ("3".equals(list.get(position).getType())){
+                        Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                        intent.putExtra("mealId",list.get(position).getId());
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getPageContext(), ServiceMakeEducationDetailsActivity.class);
+                        intent.putExtra("essayId",list.get(position).getId());
+                        startActivity(intent);
+                    }
                     break;
                 default:
                     break;
@@ -76,5 +85,22 @@ public class UserCollectVideoFragment extends UIBaseListRecycleViewFragment<Vide
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
+
+    @Override
+    protected boolean isRefresh() {
+        return false;
+    }
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
     }
 }

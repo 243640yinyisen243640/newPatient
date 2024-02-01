@@ -68,7 +68,8 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
         return new UserCollectVideoAdapter(getPageContext(), list, (position, view) -> {
             switch (view.getId()) {
                 case R.id.ll_user_collect_video_click:
-                    Intent intent = new Intent(getPageContext(), ServiceMakeMealDetailsActivity.class);
+                    Intent intent = new Intent(getPageContext(), ServiceMakeEducationDetailsActivity.class);
+                    intent.putExtra("essayId",list.get(position).getEssayId());
                     startActivity(intent);
                     break;
                 default:

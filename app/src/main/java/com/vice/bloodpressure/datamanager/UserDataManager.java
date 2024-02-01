@@ -2,10 +2,11 @@ package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.DiseaseInfo;
 import com.vice.bloodpressure.model.DoctorInfo;
+import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.model.EquipmetInfo;
-import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.model.UserInfo;
+import com.vice.bloodpressure.model.VideoInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 
@@ -386,7 +387,22 @@ public class UserDataManager {
         Map<String, String> map = new HashMap<>();
         map.put("patientId", patientId);
         map.put("collectTag", collectTag);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, VideoInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     *
+     * @param patientId
+     * @param collectTag （1，文章；2，视频（教育视频、饮食视频）；3，商品）
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getCollectForArtList(String patientId, String collectTag, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        map.put("collectTag", collectTag);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, EducationInfo.class, "ai/patient/patientCollect/list", map, successCallBack, failureCallBack);
     }
 
     /**

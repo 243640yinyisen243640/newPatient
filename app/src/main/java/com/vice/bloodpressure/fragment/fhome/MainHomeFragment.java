@@ -41,11 +41,13 @@ import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseCountdownActivity
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExercisePlanOneActivity;
 import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
+import com.vice.bloodpressure.activity.aservice.ServiceMedicineListActivity;
 import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
 import com.vice.bloodpressure.adapter.home.HomeHealthyTipsAdapter;
 import com.vice.bloodpressure.adapter.home.HomeMealListAdapter;
 import com.vice.bloodpressure.baseadapter.MyFragmentStateAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
+import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.HomeAllInfo;
@@ -54,6 +56,7 @@ import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
+import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
@@ -308,7 +311,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                         startActivity(new Intent(getPageContext(), ServicePressureListActivity.class));
                         break;
                     case "3":
-
+                        startActivity(new Intent(getPageContext(), ServiceMedicineListActivity.class));   
                         break;
                     case "4":
                         intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
@@ -468,6 +471,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      */
     private void initMeal() {
         //饮食是否开启   1开启  0未开启
+        SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_MEAL, allInfo.getDietModuleStatus());
         if ("1".equals(allInfo.getDietModuleStatus())) {
             mealHaveOpenLin.setVisibility(View.VISIBLE);
             mealNoOpenLin.setVisibility(View.GONE);
@@ -488,6 +492,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 给运动赋值
      */
     private void initExercise() {
+        SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_EXERCISE, allInfo.getSportModuleStatus());
+
         if ("1".equals(allInfo.getSportModuleStatus())) {
             exerciseNoLinearLayout.setVisibility(View.GONE);
             exerciseHaveLinearLayout.setVisibility(View.VISIBLE);
@@ -508,6 +514,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 给教育赋值
      */
     private void initEducation() {
+        SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.IS_OPEN_EDUCATION, allInfo.getTodayArticleModuleStatus());
         if ("1".equals(allInfo.getTodayArticleModuleStatus())) {
             educationNoLinearLayout.setVisibility(View.GONE);
             educationHaveLinearLayout.setVisibility(View.VISIBLE);

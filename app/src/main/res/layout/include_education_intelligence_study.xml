@@ -81,7 +81,6 @@
                     android:id="@+id/tv_education_study_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="220"
                     android:textColor="@color/text_white"
                     android:textSize="24sp" />
 
@@ -126,7 +125,6 @@
                     android:id="@+id/tv_education_study_subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
                     android:textColor="@color/text_white"
                     android:textSize="24sp" />
 

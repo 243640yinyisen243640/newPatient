@@ -38,7 +38,6 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
 
     private final static int REQUEST_CODE_FOE_REFRESH = 10;
     private EducationIntelligenceAdapter adapter;
-    private List<EducationInfo> educationInfos;
 
     @Override
     protected void onCreate() {
@@ -67,7 +66,7 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
     @Override
     protected void getListData(CallBack callBack) {
         //（1，文章；2，视频（教育视频、饮食视频）；3，商品）
-        Call<String> requestCall = UserDataManager.getCollectMealList(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
+        Call<String> requestCall = UserDataManager.getCollectForArtList(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             } else {
@@ -76,22 +75,22 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
         }, (call, t) -> {
             callBack.callBack(null);
         });
-        addRequestCallToMap("getCollectMealList", requestCall);
+        addRequestCallToMap("getCollectForArtList", requestCall);
 
     }
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<EducationInfo> list) {
-        return adapter = new EducationIntelligenceAdapter(getPageContext(), educationInfos, "3", new IAdapterViewClickListener() {
+        return adapter = new EducationIntelligenceAdapter(getPageContext(), list, "3", new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
                 //那个按钮的展示状态 0展开 1收起状态 2没有数据隐藏
                 switch (view.getId()) {
                     case R.id.ll_education_study_click:
-                        if (educationInfos.get(position).getIsExpand() == 1) {
-                            educationInfos.get(position).setIsExpand(0);
-                        } else if (educationInfos.get(position).getIsExpand() == 0) {
-                            educationInfos.get(position).setIsExpand(1);
+                        if (list.get(position).getIsExpand() == 1) {
+                            list.get(position).setIsExpand(0);
+                        } else if (list.get(position).getIsExpand() == 0) {
+                            list.get(position).setIsExpand(1);
                         }
                         adapter.notifyDataSetChanged();
                         break;
@@ -132,6 +131,7 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
             switch (requestCode) {
                 case REQUEST_CODE_FOE_REFRESH:
 
+
                     break;
                 default:
                     break;
@@ -139,5 +139,9 @@ public class UserCollectArticleFragment extends UIBaseListRecycleViewFragment<Ed
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
 }

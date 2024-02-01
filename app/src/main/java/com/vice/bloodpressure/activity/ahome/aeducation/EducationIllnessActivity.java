@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.EducationQuestionInvestigateRealAdapter;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
@@ -205,8 +205,13 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                 answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
                     ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                     if ("0000".equals(response.code)) {
-                        Intent intent = new Intent(getPageContext(), MainActivity.class);
-                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+//                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        finish();
+                        Log.i("yys","4");
+                        Intent intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
                         startActivity(intent);
                         finish();
                     }

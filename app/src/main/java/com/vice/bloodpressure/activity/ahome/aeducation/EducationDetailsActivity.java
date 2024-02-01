@@ -386,11 +386,14 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         }
 
         if ("1".equals(fromWhere)) {
-            countdownCollectLl.setVisibility(View.VISIBLE);
+            countdownTextView.setVisibility(View.VISIBLE);
+            collectImageView.setVisibility(View.VISIBLE);
         } else if ("2".equals(fromWhere)) {
-            countdownCollectLl.setVisibility(View.GONE);
+            countdownTextView.setVisibility(View.GONE);
+            collectImageView.setVisibility(View.GONE);
         } else {
-            countdownCollectLl.setVisibility(View.GONE);
+            countdownTextView.setVisibility(View.GONE);
+            collectImageView.setVisibility(View.VISIBLE);
         }
         startImageView.setOnClickListener(v -> {
             setAudioClick();

@@ -43,7 +43,15 @@ public class SharedPreferencesConstant {
      */
     public static final String INFO_STATUS = "info_status";
     /**
-     * 用户体重
+     * 是否开启饮食 智能饮食是否开启  1开启 0不开启
      */
-    public static final String WEIGHT = "weight";
+    public static final String IS_OPEN_MEAL = "isopenmeal";
+    /**
+     * 是否开启运动
+     */
+    public static final String IS_OPEN_EXERCISE = "isopenexercise";
+    /**
+     * 是否开启教育
+     */
+    public static final String IS_OPEN_EDUCATION = "isopeneducation";
 }

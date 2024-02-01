@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.adapter.home.DietMealDetailsThreeMealAdapter;
 import com.vice.bloodpressure.adapter.home.DietMealPlanWeekAdapter;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -366,5 +367,12 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getPageContext(), MainActivity.class);
+        intent.putExtra("isCheckPos", false);
+        startActivity(intent);
     }
 }

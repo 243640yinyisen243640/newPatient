@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome.aeducation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class EducationQuestionInvestigateBeginActivity extends UIBaseActivity {
 //            Intent intent = new Intent(getPageContext(), EducationQuestionInvestigateActivity.class);
 //            intent.putExtra("questionNowNum", 1);
 //            startActivity(intent);
-
+            Log.i("yys","2");
             Intent intent = new Intent(getPageContext(), EducationHeightWeightActivity.class);
             startActivity(intent);
         });
