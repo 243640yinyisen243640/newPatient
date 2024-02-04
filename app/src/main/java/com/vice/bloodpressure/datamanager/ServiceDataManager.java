@@ -8,6 +8,7 @@ import com.vice.bloodpressure.model.HealthyDataAllInfo;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.model.MealChildInfo;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
+import com.vice.bloodpressure.model.ReportNameInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
 import com.vice.bloodpressure.retrofit.HHSoftNetworkUtils;
@@ -716,5 +717,19 @@ public class ServiceDataManager {
         map.put("collectType", collectType);
         map.put("isCollect", isCollect);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/patient/collect/addOrUpdate", map, successCallBack, failureCallBack);
+    }
+
+    /**
+     * @param archivesId
+     * @param type            类型 1糖尿病风险 2心血管 3抑郁 4焦虑
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> getHistoryReports(String archivesId, String type, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("archivesId", archivesId);
+        map.put("type", type);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ReportNameInfo.class, "system/report/historyReports", map, successCallBack, failureCallBack);
     }
 }

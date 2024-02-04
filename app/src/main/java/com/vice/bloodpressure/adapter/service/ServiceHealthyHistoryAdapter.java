@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.model.ReportNameInfo;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import java.util.List;
  */
 public class ServiceHealthyHistoryAdapter extends RecyclerView.Adapter<ServiceHealthyHistoryAdapter.ViewHolder> {
     private Context context;
-    private List<HealthyDataAllInfo> list;
+    private List<ReportNameInfo> list;
     private IAdapterViewClickListener clickListener;
 
 
-    public ServiceHealthyHistoryAdapter(Context context, List<HealthyDataAllInfo> list, IAdapterViewClickListener clickListener) {
+    public ServiceHealthyHistoryAdapter(Context context, List<ReportNameInfo> list, IAdapterViewClickListener clickListener) {
         this.context = context;
         this.list = list;
         this.clickListener = clickListener;
@@ -44,11 +44,22 @@ public class ServiceHealthyHistoryAdapter extends RecyclerView.Adapter<ServiceHe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HealthyDataAllInfo typeInfo = list.get(position);
-//        holder.titleTextView.setText(typeInfo.getType());
-        //        holder.timeTextView.setText(typeInfo.getTime());
-        //        holder.numTextView.setText(typeInfo.getData());
-        //        holder.resultTextView.setText(typeInfo.getRate());
+        ReportNameInfo typeInfo = list.get(position);
+        holder.titleTextView.setText(typeInfo.getReportName());
+        holder.timeTextView.setText(typeInfo.getReportTime());
+        holder.numTextView.setText("评测分数"+typeInfo.getScore());
+
+        if ("1".equals(typeInfo.getLevel())){
+            holder.resultTextView.setText("低风险");
+            holder.resultTextView.setTextColor(context.getResources().getColor(R.color.main_base_color));
+
+        }else if ("2".equals(typeInfo.getLevel())){
+            holder.resultTextView.setText("中风险");
+            holder.resultTextView.setTextColor(context.getResources().getColor(R.color.blue_4B));
+        }else {
+            holder.resultTextView.setText("高风险");
+            holder.resultTextView.setTextColor(context.getResources().getColor(R.color.red_E5));
+        }
         ClickOnClick clickOnClick = new ClickOnClick(position);
         holder.lookResultTextView.setOnClickListener(clickOnClick);
 

@@ -17,12 +17,15 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.model.HealthyDataAllInfo;
+import com.vice.bloodpressure.model.ReportNameInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
+import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * 作者: beauty
@@ -30,7 +33,7 @@ import java.util.List;
  * 传参:
  * 描述:历史评测
  */
-public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActivity<HealthyDataAllInfo> implements View.OnClickListener {
+public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActivity<ReportNameInfo> implements View.OnClickListener {
     private TextView allTextView;
     private TextView tangTextView;
     private TextView mealTextView;
@@ -39,6 +42,10 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
     private TextView emoTextView;
     private TextView badTextView;
     private TextView heartTextView;
+    /**
+     * 类型 1糖尿病风险 2心血管 3抑郁 4焦虑
+     */
+    private String type="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,12 +91,21 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
 
     @Override
     protected void getListData(CallBack callBack) {
+        Call<String> requestCall = ServiceDataManager.getHistoryReports(UserInfoUtils.getArchivesId(getPageContext()), type, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                callBack.callBack(response.object);
+            } else {
+                callBack.callBack(null);
+            }
+        }, (call, t) -> {
+            callBack.callBack(null);
+        });
+        addRequestCallToMap("getHistoryReports", requestCall);
 
-        callBack.callBack(new ArrayList<>());
     }
 
     @Override
-    protected RecyclerView.Adapter instanceAdapter(List<HealthyDataAllInfo> list) {
+    protected RecyclerView.Adapter instanceAdapter(List<ReportNameInfo> list) {
         return new ServiceHealthyHistoryAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
@@ -117,6 +133,8 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_history_all:
+                type="";
+                onPageLoad();
                 setTextStyle(allTextView, true, Typeface.DEFAULT_BOLD);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
                 setTextStyle(mealTextView, false, Typeface.DEFAULT);
@@ -127,6 +145,8 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_tang:
+                type="1";
+                onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, true, Typeface.DEFAULT_BOLD);
                 setTextStyle(mealTextView, false, Typeface.DEFAULT);
@@ -167,6 +187,8 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_emo:
+                type="3";
+                onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
                 setTextStyle(mealTextView, false, Typeface.DEFAULT);
@@ -177,6 +199,8 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_bad:
+                type="4";
+                onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
                 setTextStyle(mealTextView, false, Typeface.DEFAULT);
@@ -187,6 +211,8 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_heart:
+                type="2";
+                onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
                 setTextStyle(mealTextView, false, Typeface.DEFAULT);
@@ -200,4 +226,6 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 break;
         }
     }
+
+
 }

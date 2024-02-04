@@ -74,18 +74,21 @@
                 <TextView
                     android:id="@+id/tv_service_history_meal"
                     style="@style/service_history_check"
-                    android:text="饮食评测" />
+                    android:text="饮食评测"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_service_history_exercise"
                     style="@style/service_history_check"
-                    android:text="运动评测" />
+                    android:text="运动评测"
+                    android:visibility="gone" />
 
 
                 <TextView
                     android:id="@+id/tv_service_history_weight"
                     style="@style/service_history_check"
-                    android:text="体重测评" />
+                    android:text="体重测评"
+                    android:visibility="gone"/>
 
 
                 <TextView
