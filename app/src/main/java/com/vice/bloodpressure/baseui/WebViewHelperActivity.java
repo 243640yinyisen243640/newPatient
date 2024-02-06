@@ -2,6 +2,7 @@ package com.vice.bloodpressure.baseui;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -37,6 +38,7 @@ public class WebViewHelperActivity extends UIBaseLoadActivity {
         topViewManager().titleTextView().setText(getIntent().getStringExtra("title"));
         containerView().addView(initView());
         url = getIntent().getStringExtra("url");
+        Log.i("yys","url===="+url);
         if (!TextUtils.isEmpty(url)) {
             setWebViewData(webView, url);
             loadViewManager().changeLoadState(LoadStatus.SUCCESS);

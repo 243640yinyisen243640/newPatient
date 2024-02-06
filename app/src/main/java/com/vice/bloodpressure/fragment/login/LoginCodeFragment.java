@@ -18,7 +18,9 @@ import androidx.core.content.ContextCompat;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.PerfectUserInfoActivity;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
+import com.vice.bloodpressure.baseui.WebViewHelperActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -78,7 +80,7 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             ToastUtils.getInstance().showToast(getPageContext(), "请先同意隐私政策和用户协议");
             return;
         }
-        Call<String> requestCall = LoginDataManager.userLoginForCode(phone, verification,UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
+        Call<String> requestCall = LoginDataManager.userLoginForCode(phone, verification, UserInfoUtils.getAcceToken(getPageContext()), (call, response) -> {
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
@@ -165,10 +167,10 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
         stringBuilder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                //                Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
-                //                intent.putExtra("title", getString(R.string.privacy_appointment));
-                //                intent.putExtra("explainId", "13");
-                //                startActivity(intent);
+                Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                intent.putExtra("title", "用户服务协议");
+                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "1");
+                startActivity(intent);
             }
 
             @Override
@@ -180,10 +182,10 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
         stringBuilder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                //                Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
-                //                intent.putExtra("title", getString(R.string.privacy_policy));
-                //                intent.putExtra("explainId", "12");
-                //                startActivity(intent);
+                Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                intent.putExtra("title", "隐私政策");
+                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "2");
+                startActivity(intent);
             }
 
             @Override

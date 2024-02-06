@@ -22,6 +22,7 @@ import com.lzx.starrysky.StarrySky;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.MainActivity;
 import com.vice.bloodpressure.activity.login.LoginActivity;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.baseui.WebViewHelperActivity;
@@ -211,7 +212,7 @@ public class SplashActivity extends UIBaseActivity {
     private void jumpToUserPrivacy() {
         Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
         intent.putExtra("title", "用户服务协议");
-        intent.putExtra("url", "file:///android_asset/user_protocol.html");
+        intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"1");
         startActivity(intent);
     }
 
@@ -221,7 +222,7 @@ public class SplashActivity extends UIBaseActivity {
     private void jumpToUserAgreement() {
         Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
         intent.putExtra("title", "隐私政策");
-        intent.putExtra("url", "http://chronics.xiyuns.cn/index/caseapp");
+        intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"2");
         startActivity(intent);
     }
 

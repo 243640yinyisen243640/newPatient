@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.baseui.WebViewHelperActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
@@ -94,7 +95,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "用户服务协议");
-                intent.putExtra("url", "file:///android_asset/user_protocol.html");
+                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"1");
                 startActivity(intent);
             }
 
@@ -109,7 +110,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", "http://chronics.xiyuns.cn/index/caseapp");
+                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"2");
                 startActivity(intent);
             }
 
