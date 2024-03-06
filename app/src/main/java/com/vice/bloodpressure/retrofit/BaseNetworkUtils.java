@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.vice.bloodpressure.activity.login.LoginActivity;
+import com.vice.bloodpressure.base.DiaLogActivity;
 import com.vice.bloodpressure.base.XyApplication;
 import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.utils.UserInfoUtils;
@@ -114,8 +115,10 @@ public class BaseNetworkUtils {
             if (UserInfoUtils.isLogin(XyApplication.getMyApplicationContext())) {
                 UserInfoUtils.resetUserInfo(XyApplication.getMyApplicationContext());
                 //这里要写一个弹窗，然后跳转到登录页面
-                Intent intent = new Intent(XyApplication.getMyApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                Intent intent = new Intent(XyApplication.getMyApplicationContext(), DiaLogActivity.class);
+                intent.putExtra("msg", "登录超时，请重新登录");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 XyApplication.getMyApplicationContext().startActivity(intent);
             }
         } else {
@@ -141,12 +144,12 @@ public class BaseNetworkUtils {
         response.code = jsonObject.optString("code");
         response.msg = jsonObject.optString("msg");
         response.result = jsonObject.optString("data");
-        if ("401".equals(response.code)){
+        if ("401".equals(response.code)) {
             UserInfoUtils.resetUserInfo(XyApplication.getMyApplicationContext());
             Intent intent = new Intent(XyApplication.getMyApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             XyApplication.getMyApplicationContext().startActivity(intent);
-        }else {
+        } else {
             if (JSON_OBJECT == parseMode) {
                 if ("0000".equals(response.code)) {
                     response.object = new Gson().fromJson(response.result, clazz);
