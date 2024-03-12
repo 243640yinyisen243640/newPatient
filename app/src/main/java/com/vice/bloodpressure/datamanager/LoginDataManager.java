@@ -122,15 +122,15 @@ public class LoginDataManager {
 
     /**
      * @param username
-     * @param password
+     * @param code
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> userLoginForCode(String username, String password, String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> userLoginForCode(String username, String code, String accessToken, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("username", username);
-        map.put("password", password);
+        map.put("code", code);
         return BaseNetworkUtils.postRequest(true, accessToken, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/codeLogin", map, successCallBack, failureCallBack);
     }
 
