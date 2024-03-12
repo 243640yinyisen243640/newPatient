@@ -95,7 +95,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "用户服务协议");
-                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"1");
+                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "1");
                 startActivity(intent);
             }
 
@@ -110,7 +110,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"2");
+                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "2");
                 startActivity(intent);
             }
 
@@ -130,21 +130,18 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
 
     private void sureToRegister() {
         String phone = phoneEditText.getText().toString().trim();
-        //        String phone = "15295201816";
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入手机号码");
             return;
         }
 
 
-        //        String verification = verificationEditText.getText().toString().trim();
-        String verification = "0000";
+        String verification = verificationEditText.getText().toString().trim();
         if (TextUtils.isEmpty(verification)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入验证码");
             return;
         }
-        //        String pwd = passwordEditText.getText().toString().trim();
-        String pwd = "123456";
+        String pwd = passwordEditText.getText().toString().trim();
         if (TextUtils.isEmpty(pwd)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入密码");
             return;
@@ -199,12 +196,10 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             return;
         }
 
-        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
         Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, (call, response) -> {
-            ToastUtils.getInstance().dismissProgressDialog();
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                CountDownTask.getInstence().showTimer(getVerTextView, 120, getPageContext());
+                CountDownTask.getInstence().showTimer(getVerTextView, 60, getPageContext());
             }
         }, (call, throwable) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);

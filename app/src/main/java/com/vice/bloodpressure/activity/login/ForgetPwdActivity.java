@@ -16,6 +16,7 @@ import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.LoginDataManager;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
+import com.vice.bloodpressure.utils.countdown.CountDownTask;
 
 import retrofit2.Call;
 
@@ -83,8 +84,7 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
         }
 
 
-        //        String verification = verificationEditText.getText().toString().trim();
-        String verification = "0000";
+        String verification = verificationEditText.getText().toString().trim();
         if (TextUtils.isEmpty(verification)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请输入验证码");
             return;
@@ -146,17 +146,15 @@ public class ForgetPwdActivity extends UIBaseActivity implements View.OnClickLis
             return;
         }
 
-        //        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-        //        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, "1", (call, response) -> {
-        //            ToastUtils.getInstance().dismissProgressDialog();
-        //            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-        //            if (100 == response.code) {
-        //                CountDownTask.getInstence().showTimer(getVerTextView, 120, getPageContext());
-        //            }
-        //        }, (call, throwable) -> {
-        //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        //        });
-        //        addRequestCallToMap("verifyCodeByTel", requestCall);
+        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, (call, response) -> {
+            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            if ("0000".equals(response.code)) {
+                CountDownTask.getInstence().showTimer(getVerTextView, 60, getPageContext());
+            }
+        }, (call, throwable) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("verifyCodeByTel", requestCall);
     }
 
     private View initView() {

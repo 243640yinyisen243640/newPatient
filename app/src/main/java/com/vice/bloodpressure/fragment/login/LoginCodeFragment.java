@@ -26,6 +26,7 @@ import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
+import com.vice.bloodpressure.utils.countdown.CountDownTask;
 
 import retrofit2.Call;
 
@@ -131,17 +132,15 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             return;
         }
 
-        //        ToastUtils.getInstance().showProgressDialog(getPageContext(), R.string.waiting, false);
-        //        Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone, "1", (call, response) -> {
-        //            ToastUtils.getInstance().dismissProgressDialog();
-        //            ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-        //            if (100 == response.code) {
-        //                CountDownTask.getInstence().showTimer(getVerTextView, 120, getPageContext());
-        //            }
-        //        }, (call, throwable) -> {
-        //            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        //        });
-        //        addRequestCallToMap("verifyCodeByTel", requestCall);
+                Call<String> requestCall = LoginDataManager.verifyCodeByTel(phone,  (call, response) -> {
+                    ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                    if ("0000".equals(response.code)) {
+                        CountDownTask.getInstence().showTimer(getVerTextView, 60, getPageContext());
+                    }
+                }, (call, throwable) -> {
+                    ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+                });
+                addRequestCallToMap("verifyCodeByTel", requestCall);
     }
 
     private View initView() {

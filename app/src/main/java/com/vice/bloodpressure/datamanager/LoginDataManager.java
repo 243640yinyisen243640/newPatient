@@ -93,15 +93,15 @@ public class LoginDataManager {
     }
 
     /**
-     * @param username
+     * @param phoneNumber
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> verifyCodeByTel(String username, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> verifyCodeByTel(String phoneNumber, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("username", username);
-        return BaseNetworkUtils.postRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/register", map, successCallBack, failureCallBack);
+        map.put("phoneNumber", phoneNumber);
+        return BaseNetworkUtils.getRequest(false, BaseNetworkUtils.JSON_OBJECT, UserInfo.class, "auth/getSmsCode", map, successCallBack, failureCallBack);
     }
 
     /**
