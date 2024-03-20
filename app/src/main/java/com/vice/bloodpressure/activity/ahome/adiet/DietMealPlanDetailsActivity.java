@@ -169,7 +169,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
             lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
             lunchLv.setAdapter(lunchAdapter);
 
-            List<MealExclusiveInfo> dinnerList = mealInfo.getExclusiveDietPlanVos().get(position).getBreakfast();
+            List<MealExclusiveInfo> dinnerList = mealInfo.getExclusiveDietPlanVos().get(position).getDinner();
             dinnerAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), dinnerList);
             dinnerLv.setAdapter(dinnerAdapter);
         }

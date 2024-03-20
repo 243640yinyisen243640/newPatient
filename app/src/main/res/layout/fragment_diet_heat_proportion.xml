@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_white_10"
         android:orientation="vertical">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pc_heat_proportion"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
-
-
-        <com.vice.bloodpressure.view.HHAtMostGridView
-            android:id="@+id/gv_heat_proportion"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fadingEdge="none"
-            android:fadingEdgeLength="0dp"
-            android:horizontalSpacing="5dp"
-            android:listSelector="@color/transparent"
-            android:numColumns="2"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="20dp"
-            android:scrollbars="none"
-            android:verticalSpacing="5dp" />
+            android:background="@drawable/shape_bg_white_10"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pc_heat_proportion"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+
+            <com.vice.bloodpressure.view.HHAtMostGridView
+                android:id="@+id/gv_heat_proportion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fadingEdge="none"
+                android:fadingEdgeLength="0dp"
+                android:horizontalSpacing="5dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="2"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" />
+        </LinearLayout>
     </LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>

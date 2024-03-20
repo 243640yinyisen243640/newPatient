@@ -35,6 +35,11 @@ public class DietMealDetailsThreeMealAdapter extends XyBaseAdapter<MealExclusive
         }
         MealExclusiveInfo info = getList().get(position);
         viewHolder.nameTextView.setText(info.getRecName());
+        if (info.getRecName().length() >= 6) {
+            viewHolder.nameTextView.setText(info.getRecName().substring(0, 5) + "...");
+        } else {
+            viewHolder.nameTextView.setText(info.getRecName());
+        }
         return convertView;
     }
 

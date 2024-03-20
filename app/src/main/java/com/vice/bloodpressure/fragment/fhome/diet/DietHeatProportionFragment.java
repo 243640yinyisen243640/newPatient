@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.home.DietHeatProportionAdapter;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.TurnUtils;
@@ -64,6 +65,10 @@ public class DietHeatProportionFragment extends UIBaseFragment {
 
 
         showPieChart(proportionPc, getPieChartData(rateString, nameString));
+
+        int[] intArray = getResources().getIntArray(R.array.diet_plan_colors);
+        DietHeatProportionAdapter proportionAdapter = new DietHeatProportionAdapter(getPageContext(),mealExclusiveInfo.getCalorieRatio(),intArray);
+        proportionGv.setAdapter(proportionAdapter);
     }
 
     private List<PieEntry> getPieChartData(List<String> list1, List<String> list2) {

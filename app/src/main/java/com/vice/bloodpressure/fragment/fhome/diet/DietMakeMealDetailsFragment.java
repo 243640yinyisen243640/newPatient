@@ -42,7 +42,7 @@ public class DietMakeMealDetailsFragment extends UIBaseFragment {
 
     private void initValues() {
 
-        DietOneMealDetailsAdapter resourceAdapter = new DietOneMealDetailsAdapter(getPageContext(), mealExclusiveInfo.getIngData(),"1");
+        DietOneMealDetailsAdapter resourceAdapter = new DietOneMealDetailsAdapter(getPageContext(), mealExclusiveInfo.getIngMap(),"1");
         resourceLv.setAdapter(resourceAdapter);
 
 

@@ -51,9 +51,9 @@ public class DietMealOneMealDetailsAdapter extends XyBaseAdapter<MealExclusiveIn
         viewHolder.nameTextView.setText(info.getRecName());
         StringBuilder builder = new StringBuilder();
         if ("4".equals(type)) {
-            for (int i = 0; i < info.getIngData().size(); i++) {
-                builder.append(info.getIngData().get(i).getName());
-                builder.append(info.getIngData().get(i).getIngK() + "g");
+            for (int i = 0; i < info.getIngMap().size(); i++) {
+                builder.append(info.getIngMap().get(i).getName());
+                builder.append(info.getIngMap().get(i).getIngK() + "g");
                 builder.append(";");
             }
             builder.deleteCharAt(builder.length() - 1);
