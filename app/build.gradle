@@ -38,11 +38,11 @@ android {
     buildTypes {
         debug {
             //混淆开关，默认为 false
-            minifyEnabled false
+            minifyEnabled true
             // zipAlign优化，默认为 true。一般我们打包之后先得到xxx-unaligned.apk，开启这个之后才得到最终的xxx-aligned.apk。
-            zipAlignEnabled false
+            zipAlignEnabled true
             //移除无用resources文件(需要保证minifyEnabled开启)
-            shrinkResources false
+            shrinkResources true
 //            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

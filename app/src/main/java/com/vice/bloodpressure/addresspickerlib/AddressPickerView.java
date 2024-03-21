@@ -3,11 +3,10 @@ package com.vice.bloodpressure.addresspickerlib;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.utils.DensityUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import java.util.List;
  * 自定义仿京东地址选择器
  */
 
-public class AddressPickerView extends RelativeLayout implements View.OnClickListener {
+public class AddressPickerView extends LinearLayout implements View.OnClickListener {
     // recyclerView 选中Item 的颜色
     private int defaultSelectedColor = Color.parseColor("#50AA00");
     // recyclerView 未选中Item 的颜色
@@ -79,6 +79,7 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
         init(context);
     }
 
+
     /**
      * 初始化
      */
@@ -86,7 +87,9 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
         mContext = context;
         mRvData = new ArrayList<>();
         // UI
-        View rootView = inflate(mContext, R.layout.address_picker_view, this);
+        View rootView = View.inflate(mContext, R.layout.address_picker_view, this);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtils.dip2px(getContext(), 350));
+        rootView.setLayoutParams(layoutParams);
         // 确定
         mTvSure = rootView.findViewById(R.id.tvSure);
         mTvSure.setTextColor(defaultSureUnClickColor);
@@ -100,7 +103,7 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
         mTabLayout.addOnTabSelectedListener(tabSelectedListener);
 
         // recyclerview adapter的绑定
-        mRvList = (RecyclerView) rootView.findViewById(R.id.rvList);
+        mRvList = rootView.findViewById(R.id.rvList);
         mRvList.setLayoutManager(new LinearLayoutManager(context));
         mAdapter = new AddressAdapter();
         mRvList.setAdapter(mAdapter);
@@ -186,8 +189,9 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
             e.printStackTrace();
         }
         // 将数据转换为对象
-        Type type = new TypeToken<List<ProvinceBean>>(){}.getType();
-        mYwpAddressBean = new Gson().fromJson(jsonSB.toString(),type);
+        Type type = new TypeToken<List<ProvinceBean>>() {
+        }.getType();
+        mYwpAddressBean = new Gson().fromJson(jsonSB.toString(), type);
         if (mYwpAddressBean != null) {
             mRvData.clear();
             for (int i = 0; i < mYwpAddressBean.size(); i++) {
@@ -256,7 +260,8 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_address_text, parent, false));
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_address_text, parent, false);
+            return new ViewHolder(view);
         }
 
         @Override
@@ -330,13 +335,18 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
                             mSelectDistrictPosition = position;
                             // 没了，选完了，这个时候可以点确定了
                             mTabLayout.getTabAt(2).setText(mSelectDistrict);
-                            notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();
                             // 确定按钮变亮
                             mTvSure.setTextColor(defaultSureCanClickColor);
                             break;
                     }
                 }
             });
+            if (position == mRvData.size() - 1) {
+                holder.view.setVisibility(VISIBLE);
+            } else {
+                holder.view.setVisibility(GONE);
+            }
         }
 
         @Override
@@ -346,10 +356,12 @@ public class AddressPickerView extends RelativeLayout implements View.OnClickLis
 
         class ViewHolder extends RecyclerView.ViewHolder {
             TextView mTitle;
+            View view;
 
             ViewHolder(View itemView) {
                 super(itemView);
                 mTitle = (TextView) itemView.findViewById(R.id.itemTvTitle);
+                view = itemView.findViewById(R.id.itemTvTitle_spec);
             }
 
         }

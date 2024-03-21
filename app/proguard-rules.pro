@@ -22,6 +22,7 @@
 
 -keep class com.vice.bloodpressure.basemodel.**{*;}
 -keep class com.vice.bloodpressure.model.**{*;}
+-keep class com.vice.bloodpressure.addresspickerlib.**{*;}
 
 #eventbus
 -keep class org.greenrobot.**{*;}

@@ -2,21 +2,24 @@ package com.vice.bloodpressure.fragment.fuser;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.addresspickerlib.CityBean;
 import com.vice.bloodpressure.addresspickerlib.ProvinceBean;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -24,7 +27,6 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.model.UserInfo;
-import com.vice.bloodpressure.popwindow.ShowCityPopupWindow;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ScreenUtils;
@@ -81,8 +83,12 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
      */
     private TextView sosPhoneTv;
 
-    private ShowCityPopupWindow cityPopupWindow;
+    private OptionsPickerView pvOptions;
     private List<ProvinceBean> mYwpAddressBean;
+    private List<CityBean> provinceList = new ArrayList<>();
+    private List<List<CityBean>> cityList = new ArrayList<>();
+    private List<List<List<CityBean>>> areaList = new ArrayList<>();
+
 
     private UserInfo userInfo;
 
@@ -119,7 +125,10 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         bornTv.setText(userInfo.getBirthday());
         ageTv.setText(userInfo.getAge());
         sexTv.setText(("1".equals(userInfo.getSex()) ? "男" : "女"));
-        cityTv.setText(userInfo.getNativePlace());
+        if (userInfo.getNativePlace()!=null){
+
+            cityTv.setText(userInfo.getNativePlace());
+        }
         sosNameTv.setText(userInfo.getEmergency());
         sosPhoneTv.setText(userInfo.getTel());
     }
@@ -149,12 +158,23 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                 chooseSexWindow();
                 break;
             case R.id.tv_user_base_info_city:
-                cityPopupWindow = new ShowCityPopupWindow(getPageContext(),
-                        (address, province, city, district) -> {
-                            editInfo("6", "nativePlace", address);
-                            cityPopupWindow.dismiss();
-                        });
-                cityPopupWindow.showAtLocation(containerView().getRootView(), 0, 0, Gravity.BOTTOM);
+                pvOptions = new OptionsPickerBuilder(getPageContext(), (options1, option2, options3, v1) -> {
+                    String provinceName = provinceList.get(options1).getNodeName();
+                    String cityName = cityList.get(options1).get(option2).getNodeName();
+                    String areaName = areaList.get(options1).get(option2).get(options3).getNodeName();
+                    editInfo("6", "nativePlace", provinceName + cityName + areaName);
+                })
+                        .setTitleText("城市选择")
+                        //                        .setSubmitColor(getResources().getColor(R.color.base_color))
+                        .setCancelColor(Color.parseColor("#666666"))
+                        .isDialog(false)
+                        //                    .setDecorView(contentView)
+                        //                    .setSelectOptions(provincePos,cityPos,1)
+                        //                        .setSelectOptions(provincePos == -1 ? 0 : provincePos, cityPos == -1 ? 0 : cityPos, 0)
+                        .setContentTextSize(15)
+                        .build();
+                pvOptions.setPicker(provinceList, cityList, areaList);
+                pvOptions.show();
                 break;
 
             case R.id.tv_user_base_info_sos_name:
@@ -181,13 +201,27 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
             while ((line = addressJsonStream.readLine()) != null) {
                 jsonSB.append(line);
             }
+            // 将数据转换为对象
+            Type type = new TypeToken<List<ProvinceBean>>() { }.getType();
+            mYwpAddressBean = new Gson().fromJson(jsonSB.toString(), type);
+            for (int i = 0; i < mYwpAddressBean.size(); i++) {
+                List<CityBean> cityBeans = new ArrayList<>();
+                List<List<CityBean>> areaBeanss = new ArrayList<>();
+                for (int j = 0; j < mYwpAddressBean.get(i).getCity().size(); j++) {
+                    List<CityBean> areaBeans = new ArrayList<>();
+                    cityBeans.add(new CityBean(mYwpAddressBean.get(i).getCity().get(j).getName()));
+                    for (int k = 0; k < mYwpAddressBean.get(i).getCity().get(j).getArea().size(); k++) {
+                        areaBeans.add(new CityBean(mYwpAddressBean.get(i).getCity().get(j).getArea().get(k)));
+                    }
+                    areaBeanss.add(areaBeans);
+                }
+                provinceList.add(new CityBean(mYwpAddressBean.get(i).getName()));
+                cityList.add(cityBeans);
+                areaList.add(areaBeanss);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // 将数据转换为对象
-        Type type = new TypeToken<List<ProvinceBean>>() {
-        }.getType();
-        mYwpAddressBean = new Gson().fromJson(jsonSB.toString(), type);
     }
 
 
