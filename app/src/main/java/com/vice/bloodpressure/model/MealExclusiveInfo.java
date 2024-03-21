@@ -79,6 +79,7 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
      * 视频详情 调料列表
      */
     private List<MealIngMapInfo> seasoningList;
+    private List<MealIngMapInfo> seasonings;
     /**
      * 饮食封面图
      */
@@ -86,6 +87,14 @@ public class MealExclusiveInfo implements Serializable, IClassInfo {
     private String videoUrl;
 
     private List<MealIngMapInfo> calorieRatio;
+
+    public List<MealIngMapInfo> getSeasonings() {
+        return seasonings;
+    }
+
+    public void setSeasonings(List<MealIngMapInfo> seasonings) {
+        this.seasonings = seasonings;
+    }
 
     public List<MealIngMapInfo> getCalorieRatio() {
         return calorieRatio;

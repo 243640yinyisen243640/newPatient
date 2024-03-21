@@ -311,7 +311,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                         startActivity(new Intent(getPageContext(), ServicePressureListActivity.class));
                         break;
                     case "3":
-                        startActivity(new Intent(getPageContext(), ServiceMedicineListActivity.class));   
+                        startActivity(new Intent(getPageContext(), ServiceMedicineListActivity.class));
                         break;
                     case "4":
                         intent = new Intent(getPageContext(), ExerciseIntelligenceActivity.class);
@@ -479,6 +479,13 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             layoutManager.setOrientation(recyclRv.HORIZONTAL);
             recyclRv.setLayoutManager(layoutManager);
 
+            if ("breakfast".equals(allInfo.getDietModule().getMeals())) {
+                refreshTv.setText("早餐");
+            }else if ("lunch".equals(allInfo.getDietModule().getMeals())){
+                refreshTv.setText("午餐");
+            }else {
+                refreshTv.setText("晚餐");
+            }
             HomeMealListAdapter adapter = new HomeMealListAdapter(getPageContext(), allInfo.getDietModule().getDietPlan());
             recyclRv.setAdapter(adapter);
             mealfireTv.setText(setMealTextType(Color.parseColor("#2A2A2A"), Color.parseColor("#00C27F"), 18, "今日需要摄入总热量", " " + allInfo.getDietModule().getSumCalories() + " ", "千卡"));

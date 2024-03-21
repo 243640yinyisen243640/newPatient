@@ -46,9 +46,9 @@ public class DietMakeMealDetailsFragment extends UIBaseFragment {
         resourceLv.setAdapter(resourceAdapter);
 
 
-        DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), mealExclusiveInfo.getSeasoningList(),"2");
+        DietOneMealDetailsAdapter seasoningAdapter = new DietOneMealDetailsAdapter(getPageContext(), mealExclusiveInfo.getSeasonings(),"2");
         seasoningLv.setAdapter(seasoningAdapter);
-        makeTextView.setText(mealExclusiveInfo.getPractice());
+        makeTextView.setText(mealExclusiveInfo.getPractice().replace("~","\n"));
     }
 
     private View initView() {

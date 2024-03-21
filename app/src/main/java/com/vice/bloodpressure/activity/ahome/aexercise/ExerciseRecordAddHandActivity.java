@@ -123,7 +123,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
                     minuteTime = (int) (allTime / 1000);
                     Log.i("yys", "minuteTime==" + minuteTime);
                     //TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())
-                    fireNum = String.valueOf((int)(TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())));
+                    fireNum = String.valueOf((int) (TurnUtils.getDouble(minuteTime + "", 0) * TurnUtils.stringToDoubleFour(exerciseChildInfo.getCalorie()) * TurnUtils.stringToDoubleOne(exerciseChildInfo.getWeight())));
                     timeTv.setText(String.valueOf(minuteTime / 60));
                     fireTv.setText(fireNum);
                 }
@@ -137,10 +137,10 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     private void setData() {
         topViewManager().titleTextView().setText(exerciseChildInfo.getSportName());
         Log.i("yys", "exerciseChildInfo.getVideoUrl()==" + exerciseChildInfo.getVideoUrl());
-        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
+        //        jzVideoPlayer.setUp("https://vd3.bdstatic.com/mda-mcjm50zbmckqbcwt/haokan_t/dash/1659566940889437712/mda-mcjm50zbmckqbcwt-1.mp4", "");
         //        jzVideoPlayer.setUp("http://120.55.60.103:9000/educational/c331a553f39c3453781474bbe22061b5.mp4", "");
         //        jzVideoPlayer.setUp("http://120.55.60.103:9000/diet/2fb763bb78694982a610806038e86f0f.mp4", "");
-        //        jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "");
+        jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "");
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, exerciseChildInfo.getCoverUrl(), jzVideoPlayer.posterImageView);
         jzVideoPlayer.startVideo();
         startOrPause = "2";
