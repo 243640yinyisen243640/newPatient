@@ -129,10 +129,10 @@ public class ServicePressureAddActivity extends UIBaseActivity implements View.O
 
     private void addPresureData() {
         String heartRate = rateEditText.getText().toString().trim();
-//        if (TextUtils.isEmpty(heartRate)) {
-//            ToastUtils.getInstance().showToast(getPageContext(), "请输入心率");
-//            return;
-//        }
+        if (TextUtils.isEmpty(heartRate)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请输入心率");
+            return;
+        }
 
         if (TextUtils.isEmpty(addTime)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择时间");

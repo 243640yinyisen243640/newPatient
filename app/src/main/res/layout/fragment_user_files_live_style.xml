@@ -38,7 +38,9 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_smoke"
-                style="@style/user_file_right" />
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp" />
         </LinearLayout>
 
         <View
@@ -59,7 +61,9 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_drink"
-                style="@style/user_file_right"/>
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"/>
         </LinearLayout>
 
         <View
@@ -80,7 +84,9 @@
 
             <TextView
                 android:id="@+id/tv_user_live_style_pregnant"
-                style="@style/user_file_right"/>
+                style="@style/user_file_right"
+                android:drawableRight="@drawable/arrow_right_gray"
+                android:drawablePadding="10dp"/>
         </LinearLayout>
 
         <View

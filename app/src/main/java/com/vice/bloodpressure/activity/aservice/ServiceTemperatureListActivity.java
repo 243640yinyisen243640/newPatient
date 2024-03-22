@@ -139,6 +139,8 @@ public class ServiceTemperatureListActivity extends UIBaseListRecycleViewForBgAc
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                             endTime = object.toString();
                             endTextView.setText(object.toString());
+                            setPageIndex(1);
+                            onPageLoad();
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }

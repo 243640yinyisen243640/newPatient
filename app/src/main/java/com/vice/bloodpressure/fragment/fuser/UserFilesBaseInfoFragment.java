@@ -265,7 +265,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
             }
         } else if ("7".equals(type)) {
             if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入联系人姓名");
+                msgEditText.setHint("请输入紧急联系人电话");
             } else {
                 msgEditText.setText(msg);
                 msgEditText.setSelection(msg.length());
@@ -295,8 +295,8 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
             msgEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
             msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
         } else if ("7".equals(type)) {
-            msgEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
+            msgEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+            msgEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});
 
         } else {
             msgEditText.setInputType(InputType.TYPE_CLASS_PHONE);

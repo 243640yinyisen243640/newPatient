@@ -149,92 +149,135 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
     }
 
     private void bindData() {
-        if ("Y".equals(userInfo.getSmokes())) {
-            smokeTv.setText("是 " + userInfo.getSmokesNum() + "支/日");
+        if (userInfo.getSmokes() == null) {
+            smokeTv.setText("请选择");
         } else {
-            smokeTv.setText("否");
-        }
-        //饮酒类型:1->红酒;2->啤酒;3->白酒; 4 黄酒
-        if ("Y".equals(userInfo.getWine())) {
-            if ("1".equals(userInfo.getWineType())) {
-                drinkTv.setText("是 " + " 红酒" + userInfo.getWineDose() + "ml/日");
-            } else if ("2".equals(userInfo.getWineType())) {
-                drinkTv.setText("是 " + " 啤酒" + userInfo.getWineDose() + "ml/日");
-            } else if ("3".equals(userInfo.getWineType())) {
-                drinkTv.setText("是 " + " 白酒" + userInfo.getWineDose() + "ml/日");
+            if ("Y".equals(userInfo.getSmokes())) {
+                smokeTv.setText("是 " + userInfo.getSmokesNum() + "支/日");
             } else {
-                drinkTv.setText("是 " + " 黄酒" + userInfo.getWineDose() + "ml/日");
+                smokeTv.setText("否");
             }
-        } else {
-            drinkTv.setText("否");
         }
-        if ("Y".equals(userInfo.getPregnancy())) {
-            pregnantTv.setText("是");
-            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
-            pregnantTimeTv.setText(userInfo.getPregnancyTime());
 
+
+        //饮酒类型:1->红酒;2->啤酒;3->白酒; 4 黄酒
+        if (userInfo.getWine() == null) {
+            drinkTv.setText("请选择");
         } else {
-            pregnantTv.setText("否");
+            if ("Y".equals(userInfo.getWine())) {
+                if ("1".equals(userInfo.getWineType())) {
+                    drinkTv.setText("是 " + " 红酒" + userInfo.getWineDose() + "ml/日");
+                } else if ("2".equals(userInfo.getWineType())) {
+                    drinkTv.setText("是 " + " 啤酒" + userInfo.getWineDose() + "ml/日");
+                } else if ("3".equals(userInfo.getWineType())) {
+                    drinkTv.setText("是 " + " 白酒" + userInfo.getWineDose() + "ml/日");
+                } else {
+                    drinkTv.setText("是 " + " 黄酒" + userInfo.getWineDose() + "ml/日");
+                }
+            } else {
+                drinkTv.setText("否");
+            }
+        }
+        if (userInfo.getPregnancy() == null) {
+            pregnantTv.setText("请选择");
             pregnantTimeLinearLayout.setVisibility(View.GONE);
-        }
-        if ("1".equals(userInfo.getMarital())) {
-            marriageTv.setText("已婚");
-        } else if ("2".equals(userInfo.getMarital())) {
-            marriageTv.setText("未婚");
         } else {
-            marriageTv.setText("其他");
+            if ("Y".equals(userInfo.getPregnancy())) {
+                pregnantTv.setText("是");
+                pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+                pregnantTimeTv.setText(userInfo.getPregnancyTime());
+            } else {
+                pregnantTv.setText("否");
+                pregnantTimeLinearLayout.setVisibility(View.GONE);
+            }
         }
-        aloneTv.setText(("Y".equals(userInfo.getLiveAlone()) ? "是" : "否"));
-        bedTv.setText(("Y".equals(userInfo.getBedridden()) ? "是" : "否"));
-        //1:研究生 2:大学本科 3大学专科和专科学院 4中等专业学校5:技工学校6:高中7:初中8:小学9:文盲或半文盲10:未知
-        if ("1".equals(userInfo.getEducation())) {
-            cultureTv.setText("研究生");
-        } else if ("2".equals(userInfo.getEducation())) {
-            paystyleTv.setText("大学本科");
-        } else if ("3".equals(userInfo.getEducation())) {
-            paystyleTv.setText("大学专科和专科学院");
-        } else if ("4".equals(userInfo.getEducation())) {
-            paystyleTv.setText("中等专业学校5");
-        } else if ("5".equals(userInfo.getEducation())) {
-            paystyleTv.setText("技工学校");
-        } else if ("6".equals(userInfo.getEducation())) {
-            paystyleTv.setText("高中");
-        } else if ("7".equals(userInfo.getEducation())) {
-            paystyleTv.setText("初中");
-        } else if ("8".equals(userInfo.getEducation())) {
-            paystyleTv.setText("小学");
-        } else if ("9".equals(userInfo.getEducation())) {
-            paystyleTv.setText("文盲或半文盲");
+        if (userInfo.getMarital() == null) {
+            marriageTv.setText("请选择");
         } else {
-            paystyleTv.setText("未知");
+            if ("1".equals(userInfo.getMarital())) {
+                marriageTv.setText("已婚");
+            } else if ("2".equals(userInfo.getMarital())) {
+                marriageTv.setText("未婚");
+            } else {
+                marriageTv.setText("其他");
+            }
         }
 
-
-        if ("1".equals(userInfo.getProfession())) {
-            workTv.setText("轻体力");
-        } else if ("2".equals(userInfo.getMarital())) {
-            workTv.setText("中体力");
-        }  else {
-            workTv.setText("重体力");
-        }
-
-        //1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
-        if ("1".equals(userInfo.getMedicalPay())) {
-            paystyleTv.setText("社会医疗保险");
-        } else if ("2".equals(userInfo.getMarital())) {
-            paystyleTv.setText("新型农村合作医疗保险");
-        } else if ("3".equals(userInfo.getEducation())) {
-            paystyleTv.setText("商业保险");
-        } else if ("4".equals(userInfo.getMedicalPay())) {
-            paystyleTv.setText("城镇居民医疗保险");
-        } else if ("5".equals(userInfo.getMedicalPay())) {
-            paystyleTv.setText("公费医疗");
-        } else if ("6".equals(userInfo.getMedicalPay())) {
-            paystyleTv.setText("自费医疗");
+        if (userInfo.getLiveAlone() == null) {
+            aloneTv.setText("请选择");
         } else {
-            paystyleTv.setText("其他");
+            aloneTv.setText(("Y".equals(userInfo.getLiveAlone()) ? "是" : "否"));
         }
-        hosCardTv.setText(userInfo.getMedicalCard());
+
+        if (userInfo.getBedridden() == null) {
+            bedTv.setText("请选择");
+        } else {
+            bedTv.setText(("Y".equals(userInfo.getBedridden()) ? "是" : "否"));
+        }
+
+        if (userInfo.getEducation() == null) {
+            cultureTv.setText("请选择");
+        } else {
+            //1:研究生 2:大学本科 3大学专科和专科学院 4中等专业学校5:技工学校6:高中7:初中8:小学9:文盲或半文盲10:未知
+            if ("1".equals(userInfo.getEducation())) {
+                cultureTv.setText("研究生");
+            } else if ("2".equals(userInfo.getEducation())) {
+                paystyleTv.setText("大学本科");
+            } else if ("3".equals(userInfo.getEducation())) {
+                paystyleTv.setText("大学专科和专科学院");
+            } else if ("4".equals(userInfo.getEducation())) {
+                paystyleTv.setText("中等专业学校5");
+            } else if ("5".equals(userInfo.getEducation())) {
+                paystyleTv.setText("技工学校");
+            } else if ("6".equals(userInfo.getEducation())) {
+                paystyleTv.setText("高中");
+            } else if ("7".equals(userInfo.getEducation())) {
+                paystyleTv.setText("初中");
+            } else if ("8".equals(userInfo.getEducation())) {
+                paystyleTv.setText("小学");
+            } else if ("9".equals(userInfo.getEducation())) {
+                paystyleTv.setText("文盲或半文盲");
+            } else {
+                paystyleTv.setText("未知");
+            }
+        }
+        if (userInfo.getProfession() == null) {
+            workTv.setText("请选择");
+        } else {
+            if ("1".equals(userInfo.getProfession())) {
+                workTv.setText("轻体力");
+            } else if ("2".equals(userInfo.getMarital())) {
+                workTv.setText("中体力");
+            } else {
+                workTv.setText("重体力");
+            }
+        }
+
+        if (userInfo.getMedicalPay() == null) {
+            paystyleTv.setText("请选择");
+        } else {
+            //1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
+            if ("1".equals(userInfo.getMedicalPay())) {
+                paystyleTv.setText("社会医疗保险");
+            } else if ("2".equals(userInfo.getMarital())) {
+                paystyleTv.setText("新型农村合作医疗保险");
+            } else if ("3".equals(userInfo.getEducation())) {
+                paystyleTv.setText("商业保险");
+            } else if ("4".equals(userInfo.getMedicalPay())) {
+                paystyleTv.setText("城镇居民医疗保险");
+            } else if ("5".equals(userInfo.getMedicalPay())) {
+                paystyleTv.setText("公费医疗");
+            } else if ("6".equals(userInfo.getMedicalPay())) {
+                paystyleTv.setText("自费医疗");
+            } else {
+                paystyleTv.setText("其他");
+            }
+        }
+        if (userInfo.getMedicalCard() == null) {
+            hosCardTv.setText("请输入就诊卡号");
+        } else {
+            hosCardTv.setText(userInfo.getMedicalCard());
+        }
 
     }
 
