@@ -38,7 +38,7 @@ public abstract class UIBaseListRecycleViewForBgActivity<T> extends UIBaseLoadAc
     protected boolean mIsLoadMore = true;
     protected boolean mIsRefresh = true;
     //当前获取的是第几页的数据，当前可见的数据的数量，当前页获取的数据的条数
-    private int mPageIndex = 1, mPageSize = 15, mVisibleCount = 0, mPageCount = 0;
+    private int mPageIndex = 1, mPageSize = 10, mVisibleCount = 0, mPageCount = 0;
     private String noDataText = "暂无数据";
 
     @Override

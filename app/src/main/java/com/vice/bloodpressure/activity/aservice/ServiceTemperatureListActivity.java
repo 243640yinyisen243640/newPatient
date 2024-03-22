@@ -107,7 +107,7 @@ public class ServiceTemperatureListActivity extends UIBaseListRecycleViewForBgAc
         }, (call, t) -> {
             callBack.callBack(null);
         });
-        addRequestCallToMap("selectMonitorHtnList", requestCall);
+        addRequestCallToMap("getBmiList", requestCall);
     }
 
     @Override
