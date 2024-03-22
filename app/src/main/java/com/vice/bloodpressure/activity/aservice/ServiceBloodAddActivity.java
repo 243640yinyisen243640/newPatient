@@ -3,6 +3,7 @@ package com.vice.bloodpressure.activity.aservice;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,11 +78,11 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
 
     private LinearLayout sureLinearLayout;
 
-    private int optionAdd;
+    private int optionAdd = -1;
 
-    private String addTime;
+    private String addTime = "";
 
-    private String sugarValue;
+    private String sugarValue = "";
 
     private BloodThirdInfo thirdInfo;
 
@@ -210,14 +211,20 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
 
 
     private void sureToAddData() {
-        if (TextUtils.isEmpty(sugarValue)) {
-            ToastUtils.getInstance().showToast(getPageContext(), "请选择血糖测量时间段");
+        Log.i("yys", "optionAdd==" + optionAdd + "sugarValue==" + sugarValue + "addTime==" + addTime);
+        if (optionAdd == -1) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择测量时间段");
             return;
         }
         if (TextUtils.isEmpty(addTime)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
             return;
         }
+        if (TextUtils.isEmpty(sugarValue)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请滑动到您的血糖值");
+            return;
+        }
+
 
         Call<String> requestCall = ServiceDataManager.saveMonitorBg(UserInfoUtils.getArchivesId(getPageContext()), (optionAdd + 1) + "", "2", addTime, sugarValue, (call, response) -> {
             if ("0000".equals(response.code)) {
