@@ -35,6 +35,7 @@ import com.vice.bloodpressure.activity.ahome.adiet.DietMealDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietMealPlanDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeBeginActivity;
 import com.vice.bloodpressure.activity.ahome.adiet.DietProgrammeChooseActivity;
+import com.vice.bloodpressure.activity.ahome.aeducation.EducationDetailsActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationIntelligenceActivity;
 import com.vice.bloodpressure.activity.ahome.aeducation.EducationQuestionInvestigateBeginActivity;
 import com.vice.bloodpressure.activity.ahome.aexercise.ExerciseCountdownActivity;
@@ -161,6 +162,8 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
      * 教育没有答题时去开启，教育与你相关  重新制定，标题，小内容，内容
      */
     private TextView educationOpenTv, aboutYouTv, makeAgainTv, titleTv, containTv, contentTv, educationNumTv;
+
+    private LinearLayout articleClickLinearLayout;
     /**
      * 文章封面，
      */
@@ -481,9 +484,9 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
             if ("breakfast".equals(allInfo.getDietModule().getMeals())) {
                 refreshTv.setText("早餐");
-            }else if ("lunch".equals(allInfo.getDietModule().getMeals())){
+            } else if ("lunch".equals(allInfo.getDietModule().getMeals())) {
                 refreshTv.setText("午餐");
-            }else {
+            } else {
                 refreshTv.setText("晚餐");
             }
             HomeMealListAdapter adapter = new HomeMealListAdapter(getPageContext(), allInfo.getDietModule().getDietPlan());
@@ -708,6 +711,14 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.ll_education_article:
+                 intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                intent.putExtra("type", allInfo.getTodayArticle().getType());
+                intent.putExtra("sid", allInfo.getTodayArticle().getSid());
+                intent.putExtra("essayId", allInfo.getTodayArticle().getEssayId());
+                intent.putExtra("fromWhere", "1");
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -791,6 +802,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
         aboutYouTv = view.findViewById(R.id.tv_education_about_you);
         makeAgainTv = view.findViewById(R.id.tv_education_make_again);
         articleBgIm = view.findViewById(R.id.iv_education_article_bg);
+        articleClickLinearLayout = view.findViewById(R.id.ll_education_article);
         titleTv = view.findViewById(R.id.tv_education_article_title);
         containTv = view.findViewById(R.id.tv_education_article_contain);
         contentTv = view.findViewById(R.id.tv_education_article_content);
@@ -857,6 +869,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
 
         aboutYouTv.setOnClickListener(this);
         makeAgainTv.setOnClickListener(this);
+        articleClickLinearLayout.setOnClickListener(this);
 
         refreshLayout().setOnRefreshListener(new OnRefreshListener() {
             @Override

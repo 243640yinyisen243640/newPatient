@@ -2,7 +2,6 @@ package com.vice.bloodpressure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -35,7 +34,6 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
     private TextView mallTextView;
     private TextView myTextView;
 
-    private int mItemPosi = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
