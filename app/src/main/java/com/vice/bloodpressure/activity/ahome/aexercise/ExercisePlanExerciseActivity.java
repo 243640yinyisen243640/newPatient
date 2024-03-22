@@ -5,12 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -37,6 +37,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
     private CheckBox habitNoCb;
     private CheckBox emptyYesCb;
     private CheckBox emptyNoCb;
+    private LinearLayout noLinearLayout;
     private EditText timeEt;
     private EditText rateEt;
     private TextView nextTv;
@@ -54,16 +55,16 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
 
     private void initListener() {
         nextTv.setOnClickListener(v -> {
-            String time = timeEt.getText().toString().trim();
-            if (TextUtils.isEmpty(time)) {
-                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动时间");
-                return;
-            }
-            String rate = rateEt.getText().toString().trim();
-            if (TextUtils.isEmpty(rate)) {
-                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
-                return;
-            }
+//            String time = timeEt.getText().toString().trim();
+//            if (TextUtils.isEmpty(time)) {
+//                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动时间");
+//                return;
+//            }
+//            String rate = rateEt.getText().toString().trim();
+//            if (TextUtils.isEmpty(rate)) {
+//                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
+//                return;
+//            }
             sureSubmit();
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
@@ -85,9 +86,12 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
             }
         });
         habitNoCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
             if (isChecked) {
+                noLinearLayout.setVisibility(View.GONE);
                 habitYesCb.setChecked(false);
             } else {
+                noLinearLayout.setVisibility(View.VISIBLE);
                 habitYesCb.setChecked(true);
             }
         });
@@ -163,6 +167,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         habitNoCb = view.findViewById(R.id.cb_exercise_exercise_habit_no);
         emptyYesCb = view.findViewById(R.id.cb_exercise_exercise_empty_yes);
         emptyNoCb = view.findViewById(R.id.cb_exercise_exercise_empty_no);
+        noLinearLayout = view.findViewById(R.id.ll_exercise_exercise_empty_yes);
         timeEt = view.findViewById(R.id.et_exercise_exercise_time);
         rateEt = view.findViewById(R.id.et_exercise_exercise_rate);
         nextTv = view.findViewById(R.id.tv_exercise_exercise_next);

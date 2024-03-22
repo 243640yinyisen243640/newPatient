@@ -28,7 +28,6 @@ import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.model.ExerciseInfo;
-import com.vice.bloodpressure.popwindow.AnswerForPopupWindow;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -48,7 +47,6 @@ import retrofit2.Call;
  * 描述:智能运动
  */
 public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements View.OnClickListener {
-    private AnswerForPopupWindow answerForPopupWindow;
     /**
      * 消耗的千卡总数
      */
@@ -125,6 +123,10 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         topViewManager().moreTextView().setText("运动记录");
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), ExerciseRecordListActivity.class));
+        });
+
+        topViewManager().backTextView().setOnClickListener(v -> {
+           onBackPressed();
         });
         initView();
         initListener();
@@ -447,4 +449,6 @@ public class ExerciseIntelligenceActivity extends UIBaseLoadActivity implements 
         intent.putExtra("isCheckPos", false);
         startActivity(intent);
     }
+
+
 }
