@@ -107,7 +107,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         //        int height = width * 9 / 16;
         //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         //        videoJz.setLayoutParams(ll);
-        Jzvd.SAVE_PROGRESS = true;
+        Jzvd.SAVE_PROGRESS = false;
         videoJz.setUp(messageInfo.getFileUrl(), "");
         XyImageUtils.getFirst(messageInfo.getFileUrl(), videoJz.posterImageView);
 

@@ -184,7 +184,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         //        int height = width * 9 / 16;
         //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         //        videoJz.setLayoutParams(ll);
-        Jzvd.SAVE_PROGRESS = true;
+        Jzvd.SAVE_PROGRESS = false;
         videoJz.setUp(educationInfo.getVideoUrl(), "");
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, educationInfo.getCoverUrl(), videoJz.posterImageView);
     }

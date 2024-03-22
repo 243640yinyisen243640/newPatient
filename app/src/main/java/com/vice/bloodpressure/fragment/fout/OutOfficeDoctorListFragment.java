@@ -59,7 +59,7 @@ public class OutOfficeDoctorListFragment extends UIBaseListRecycleViewFragment<D
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = OutDataManager.getDeptDoctorList("", "3", deptId, (call, response) -> {
+        Call<String> requestCall = OutDataManager.getDeptDoctorList("", "", deptId, (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }

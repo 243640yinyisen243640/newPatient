@@ -79,16 +79,16 @@ public class OutDataManager {
 
     /**
      * @param name            医生名称
-     * @param roleId          角色ID   1主任2副主任3医生4护士
+     * @param hospitalId      医院id
      * @param deptId          科室ID
      * @param successCallBack
      * @param failureCallBack
      * @return
      */
-    public static Call<String> getDeptDoctorList(String name, String roleId, String deptId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> getDeptDoctorList(String name, String hospitalId, String deptId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
-        map.put("roleId", roleId);
+        map.put("hospitalId", hospitalId);
         map.put("deptId", deptId);
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, DoctorInfo.class, "system/doctor/v2/appDoctorList", map, successCallBack, failureCallBack);
     }
@@ -173,6 +173,7 @@ public class OutDataManager {
 
     /**
      * 患者宣教全部已读
+     *
      * @param patientId
      * @param successCallBack
      * @param failureCallBack
@@ -183,6 +184,7 @@ public class OutDataManager {
         map.put("patientId", patientId);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "system/preach/article/readAll", map, successCallBack, failureCallBack);
     }
+
     /**
      * 患者宣教详情
      *

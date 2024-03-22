@@ -139,7 +139,7 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         int height = width * 9 / 16;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
-        Jzvd.SAVE_PROGRESS = true;
+        Jzvd.SAVE_PROGRESS = false;
         videoPlayer.setUp(allInfo.getVid(), "");
 
         ServiceOneMealDetailsAdapter resourceAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), allInfo.getMaterialList());

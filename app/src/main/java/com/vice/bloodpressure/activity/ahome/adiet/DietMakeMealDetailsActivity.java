@@ -162,7 +162,7 @@ public class DietMakeMealDetailsActivity extends UIBaseLoadActivity {
         int height = width * 9 / 16;
         FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         videoPlayer.setLayoutParams(ll);
-        Jzvd.SAVE_PROGRESS = true;
+        Jzvd.SAVE_PROGRESS = false;
         videoPlayer.setUp(mealExclusiveInfo.getVideoUrl(), "");
         XyImageUtils.loadImage(getPageContext(), R.drawable.default_img_1_1, mealExclusiveInfo.getCoverUrl(), videoPlayer.posterImageView);
     }
