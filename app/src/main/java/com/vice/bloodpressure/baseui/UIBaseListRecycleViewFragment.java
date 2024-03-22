@@ -49,6 +49,10 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
             mPageIndex++;
             onPageLoad();
         });
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPageIndex++;
+            onPageLoad();
+        });
         mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
             @Override
             public boolean canRefresh(View content) {
