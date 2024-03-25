@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -40,6 +41,8 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
     private ViewPager2 viewPager;
 
     private String startTime="";
+    private String endTime="";
+
 
     private ArrayList<Fragment> fragments;
     private int checkPosition = 0;
@@ -139,6 +142,10 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
                     public void callBack(Object object) {
                         startTime = String.valueOf(object);
                         startTimeTextView.setText(object.toString());
+                        if (!TextUtils.isEmpty(endTime)) {
+                            SevenAndThirtyBloodSugarListFragment fragment = (SevenAndThirtyBloodSugarListFragment) fragments.get(checkPosition);
+                            fragment.refresh(startTime, object.toString());
+                        }
                     }
                 });
                 break;
@@ -146,6 +153,7 @@ public class ServiceBloodListActivity extends UIBaseActivity implements View.OnC
                 PickerViewUtils.showTimeWindow(getPageContext(), new boolean[]{true, true, true, false, false, false}, DataFormatManager.TIME_FORMAT_Y_M_D, object -> {
                     if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                         endTimeTextView.setText(object.toString());
+                        endTime = object.toString();
                         SevenAndThirtyBloodSugarListFragment fragment = (SevenAndThirtyBloodSugarListFragment) fragments.get(checkPosition);
                         fragment.refresh(startTime, object.toString());
                     } else {

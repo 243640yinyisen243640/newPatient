@@ -3,7 +3,6 @@ package com.vice.bloodpressure.activity.aservice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,6 @@ public class ServiceTemperatureListActivity extends UIBaseListRecycleViewForBgAc
     }
 
     private void setPublicBottom() {
-
         View view = View.inflate(getPageContext(), R.layout.include_save_bottom, null);
         addLinearLayout = view.findViewById(R.id.ll_service_base_bottom_sure);
         TextView textTextView = view.findViewById(R.id.tv_service_base_bottom_text);
@@ -131,9 +129,7 @@ public class ServiceTemperatureListActivity extends UIBaseListRecycleViewForBgAc
                     public void callBack(Object object) {
                         startTime = String.valueOf(object);
                         startTextView.setText(object.toString());
-
                         if (!TextUtils.isEmpty(endTime)) {
-                            Log.i("yys", "endTime==" + endTime);
                             setPageIndex(1);
                             onPageLoad();
                         }

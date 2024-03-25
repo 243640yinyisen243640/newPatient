@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,6 +145,10 @@ public class ServiceCheckListActivity extends UIBaseListRecycleViewForBgActivity
                     public void callBack(Object object) {
                         startTime = String.valueOf(object);
                         startTextView.setText(object.toString());
+                        if (!TextUtils.isEmpty(endTime)) {
+                            setPageIndex(1);
+                            onPageLoad();
+                        }
                     }
                 });
                 break;
