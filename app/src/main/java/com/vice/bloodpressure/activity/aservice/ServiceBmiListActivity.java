@@ -115,7 +115,7 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewLRActivity<Heal
         }, (call, t) -> {
             loadViewManager().changeLoadState(LoadStatus.FAILED);
         });
-        addRequestCallToMap("getPressureStatistic", requestCall);
+        addRequestCallToMap("getBmiStatistic", requestCall);
     }
 
     private void getPressureList(CallBack callBack) {
@@ -126,12 +126,15 @@ public class ServiceBmiListActivity extends UIBaseListRecycleViewLRActivity<Heal
                 highTextView.setText(null == dataAllInfo.getMaxValue() ? "" : dataAllInfo.getMaxValue());
                 callBack.callBack(response.object);
             } else {
+                lowTextView.setText("");
+                avgTextView.setText("");
+                highTextView.setText("");
                 callBack.callBack(null);
             }
         }, (call, t) -> {
             callBack.callBack(null);
         });
-        addRequestCallToMap("selectMonitorHtnList", requestCall);
+        addRequestCallToMap("getBmiList", requestCall);
     }
 
     @Override

@@ -55,7 +55,7 @@ public class SplashActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState);
         topViewManager().topView().removeAllViews();
         getWindow().setBackgroundDrawable(null);
-        judgeIsToken();
+//        judgeIsToken();
         initView();
         setSplash();
     }
@@ -78,7 +78,10 @@ public class SplashActivity extends UIBaseActivity {
 
                 @Override
                 public void onFinish() {
-                    judgeIsTokenEmpty();
+                    Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                    startActivity(mainIntent);
+                    finish();
+//                    judgeIsTokenEmpty();
                 }
             };
             timer.start();
@@ -136,7 +139,10 @@ public class SplashActivity extends UIBaseActivity {
                 SharedPreferencesUtils.saveInfo(getPageContext(), SharedPreferencesConstant.IS_AGREE, "1");
                 initAudio();
                 protectDialog.dismiss();
-                judgeIsTokenEmpty();
+                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                startActivity(mainIntent);
+                finish();
+//                judgeIsTokenEmpty();
             });
             protectDialog.show();
         }

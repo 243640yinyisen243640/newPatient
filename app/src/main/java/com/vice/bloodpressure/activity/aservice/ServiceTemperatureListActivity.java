@@ -2,6 +2,8 @@ package com.vice.bloodpressure.activity.aservice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +131,12 @@ public class ServiceTemperatureListActivity extends UIBaseListRecycleViewForBgAc
                     public void callBack(Object object) {
                         startTime = String.valueOf(object);
                         startTextView.setText(object.toString());
+
+                        if (!TextUtils.isEmpty(endTime)) {
+                            Log.i("yys", "endTime==" + endTime);
+                            setPageIndex(1);
+                            onPageLoad();
+                        }
                     }
                 });
                 break;

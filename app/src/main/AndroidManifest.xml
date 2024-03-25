@@ -121,8 +121,13 @@
             android:name=".activity.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".base.DiaLogActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/DialogActivity" />
         <!--注册-->
         <activity
+
             android:name=".activity.login.RegisterActivity"
             android:screenOrientation="portrait" />
         <!--完善信息-->
