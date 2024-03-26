@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.View;
@@ -55,16 +56,19 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
 
     private void initListener() {
         nextTv.setOnClickListener(v -> {
-//            String time = timeEt.getText().toString().trim();
-//            if (TextUtils.isEmpty(time)) {
-//                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动时间");
-//                return;
-//            }
-//            String rate = rateEt.getText().toString().trim();
-//            if (TextUtils.isEmpty(rate)) {
-//                ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
-//                return;
-//            }
+            if (habitYesCb.isChecked()){
+                String time = timeEt.getText().toString().trim();
+                if (TextUtils.isEmpty(time)) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请输入运动时间");
+                    return;
+                }
+                String rate = rateEt.getText().toString().trim();
+                if (TextUtils.isEmpty(rate)) {
+                    ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
+                    return;
+                }
+            }
+
             sureSubmit();
             if (successPopupWindow == null) {
                 successPopupWindow = new ExercisePlanSuccessPopupWindow(getPageContext(), v1 -> {
