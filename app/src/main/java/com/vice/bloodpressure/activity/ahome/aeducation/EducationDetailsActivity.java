@@ -157,13 +157,14 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         };
         timer.start();
         //        CountDownTask.getInstence().showTimer(allTimeTextView, TurnUtils.getInt(educationInfo.getVideoTime(),0), getPageContext());
+        //1视频 2图文 3音频
         if ("1".equals(type)) {
             setVideoInfo();
             setWebViewData(webView, educationInfo.getIframeUrl());
         } else if ("2".equals(type)) {
-            setAudioClick();
             setWebViewData(webView, educationInfo.getIframeUrl());
         } else {
+            setAudioClick();
             setWebViewData(webView, educationInfo.getIframeUrl());
         }
         //0:收藏，1：未收藏

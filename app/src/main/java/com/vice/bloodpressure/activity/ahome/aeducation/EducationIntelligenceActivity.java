@@ -147,4 +147,10 @@ public class EducationIntelligenceActivity extends UIBaseListRecycleViewActivity
         intent.putExtra("isCheckPos", false);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
 }

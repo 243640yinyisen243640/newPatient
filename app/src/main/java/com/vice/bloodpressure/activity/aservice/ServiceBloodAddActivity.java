@@ -84,14 +84,20 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
 
     private String sugarValue = "";
 
-    private BloodThirdInfo thirdInfo;
+    private BloodThirdInfo thirdInfo=new BloodThirdInfo();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         topViewManager().titleTextView().setText("添加血糖数据");
         initView();
+        initValues();
         initListener();
+    }
+
+    private void initValues() {
+        thirdInfo.setStart("4.4");
+        thirdInfo.setEnd("6.8");
     }
 
     private void initListener() {
@@ -108,10 +114,10 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
 
             @Override
             public void onScrollResult(String result) {
-                if (thirdInfo == null) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择血糖测量时间段");
-                    return;
-                }
+//                if (thirdInfo == null) {
+//                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择血糖测量时间段");
+//                    return;
+//                }
                 sugarValue = result;
                 valueTextView.setText(result);
                 //                valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));

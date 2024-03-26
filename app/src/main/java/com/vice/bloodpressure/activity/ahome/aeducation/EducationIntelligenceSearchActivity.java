@@ -129,7 +129,11 @@ public class EducationIntelligenceSearchActivity extends UIBaseListRecycleViewAc
             }
         });
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onPageLoad();
+    }
     @Override
     protected int getPageSize() {
         return BaseDataManager.PAGE_SIZE;

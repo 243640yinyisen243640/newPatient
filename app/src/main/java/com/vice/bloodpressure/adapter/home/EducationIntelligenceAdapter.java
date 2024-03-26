@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,13 +72,19 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
             holder.stateTextView.setVisibility(View.VISIBLE);
             switch (info.getStatus()) {
                 case "0":
-                    holder.stateTextView.setText("未学习");
+                    holder.stateTextView.setText("待学习");
+                    holder.stateTextView.setTextColor(ContextCompat.getColor(context,R.color.red_ff));
+                    holder.stateTextView.setBackground(ContextCompat.getDrawable(context,R.drawable.shape_bg_white_red_90_1));
                     break;
                 case "1":
                     holder.stateTextView.setText("学习中");
+                    holder.stateTextView.setTextColor(ContextCompat.getColor(context,R.color.blue_00));
+                    holder.stateTextView.setBackground(ContextCompat.getDrawable(context,R.drawable.shape_white_blue_90_00aeff));
                     break;
                 case "2":
                     holder.stateTextView.setText("已完成");
+                    holder.stateTextView.setTextColor(ContextCompat.getColor(context,R.color.main_base_color));
+                    holder.stateTextView.setBackground(ContextCompat.getDrawable(context,R.drawable.shape_bg_white_green_90_1));
                     break;
                 default:
                     break;
