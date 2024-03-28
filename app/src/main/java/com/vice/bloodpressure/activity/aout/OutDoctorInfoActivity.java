@@ -79,7 +79,7 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
         //如果我已经绑定这个医生了，就要解绑这个医生
 
         breakTextView.setOnClickListener(v -> {
-            if (doctorInfoOther.isBindExternal()) {
+            if (doctorInfoOther.bindExternal()) {
                 DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
                     dialog.dismiss();
                     if (HHSoftDialogActionEnum.POSITIVE == which) {
@@ -149,7 +149,7 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
                 doctorInfoOther = (DoctorInfo) response.object;
                 initlistener();
                 bindData(doctorInfoOther);
-                if (doctorInfoOther.isBindExternal()) {
+                if (doctorInfoOther.bindExternal()) {
                     breakTextView.setText("解除绑定");
                 } else {
                     breakTextView.setText("绑定医生");

@@ -2,6 +2,7 @@ package com.vice.bloodpressure.activity.ahome;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -111,7 +112,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
 
     @Override
     protected void getListData(CallBack callBack) {
-        Call<String> requestCall = UserDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), startTime, endTime, "", (call, response) -> {
+        Call<String> requestCall = UserDataManager.getHomeWarningList(UserInfoUtils.getArchivesId(getPageContext()), startTime, endTime, exceptionType, (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }
@@ -209,6 +210,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                     public void callBack(Object object) {
                         startTime = object.toString();
                         startTv.setText(object.toString());
+
                     }
                 });
                 break;
@@ -219,6 +221,10 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                         if (XyTimeUtils.compareTwoTime(startTime, object.toString())) {
                             endTime = object.toString();
                             endTv.setText(object.toString());
+                            if (!TextUtils.isEmpty(endTime)) {
+                                setPageIndex(1);
+                                onPageLoad();
+                            }
                         } else {
                             ToastUtils.getInstance().showToast(getPageContext(), "结束时间不能大于开始时间");
                         }
@@ -238,6 +244,8 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 PickerViewUtils.showChooseSinglePicker(getPageContext(), "异常类型", typeList, object -> {
                     warningTypeTv.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
                     exceptionType = Integer.parseInt(String.valueOf(object)) + 1 + "";
+                    setPageIndex(1);
+                    onPageLoad();
 
                 });
 

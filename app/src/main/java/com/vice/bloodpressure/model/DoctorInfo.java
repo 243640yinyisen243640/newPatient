@@ -104,6 +104,13 @@ public class DoctorInfo {
      */
     private boolean bindExternal;
 
+    /**
+     * true已绑定/false未绑定
+     */
+    private boolean isBindExternal;
+
+
+
     public String getHospitalId() {
         return hospitalId;
     }
@@ -297,11 +304,19 @@ public class DoctorInfo {
     }
 
 
-    public boolean isBindExternal() {
+    public boolean bindExternal() {
         return bindExternal;
+    }
+
+    public boolean isBindExternal() {
+        return isBindExternal;
     }
 
     public void setBindExternal(boolean bindExternal) {
         this.bindExternal = bindExternal;
+    }
+
+    public void setisBindExternal(boolean bindExternal) {
+        this.isBindExternal = bindExternal;
     }
 }

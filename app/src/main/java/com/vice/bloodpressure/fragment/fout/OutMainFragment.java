@@ -64,23 +64,18 @@ public class OutMainFragment extends UIBaseLoadFragment {
 
     @Override
     protected void onPageLoad() {
-        if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
-            loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-            initValues();
-        } else {
-            Call<String> requestCall = OutDataManager.getDeptDoctorInfo(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID), UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-                if ("0000".equals(response.code)) {
-                    loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                    doctorInfoOther = (DoctorInfo) response.object;
-                    bindData(doctorInfoOther);
-                } else {
-                    loadViewManager().changeLoadState(LoadStatus.FAILED);
-                }
-            }, (call, t) -> {
+        Call<String> requestCall = OutDataManager.bindExternalInfo(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                doctorInfoOther = (DoctorInfo) response.object;
+                bindData(doctorInfoOther);
+            } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
-            });
-            addRequestCallToMap("getDeptDoctorInfo", requestCall);
-        }
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("bindExternalInfo", requestCall);
 
     }
 
@@ -100,15 +95,13 @@ public class OutMainFragment extends UIBaseLoadFragment {
     }
 
     private void bindData(DoctorInfo doctorInfoOther) {
-        unbandLinearLayout.setVisibility(View.GONE);
-        bandLinearLayout.setVisibility(View.VISIBLE);
-        XyImageUtils.loadImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfoOther.getAvatar(), headImageView);
-        nameTextView.setText(doctorInfoOther.getDoctorName());
-        postTextView.setText(doctorInfoOther.getDeptName());
-        hospitalTextView.setText(doctorInfoOther.getHospitalName());
         if (doctorInfoOther.isBindExternal()) {
             unbandLinearLayout.setVisibility(View.GONE);
             bandLinearLayout.setVisibility(View.VISIBLE);
+            XyImageUtils.loadImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfoOther.getAvatar(), headImageView);
+            nameTextView.setText(doctorInfoOther.getDoctorName());
+            postTextView.setText(doctorInfoOther.getDeptName());
+            hospitalTextView.setText(doctorInfoOther.getHospitalName());
         } else {
             unbandLinearLayout.setVisibility(View.VISIBLE);
             bandLinearLayout.setVisibility(View.GONE);

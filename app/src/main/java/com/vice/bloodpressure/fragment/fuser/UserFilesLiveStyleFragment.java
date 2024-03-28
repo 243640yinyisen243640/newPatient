@@ -246,7 +246,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         } else {
             if ("1".equals(userInfo.getProfession())) {
                 workTv.setText("轻体力");
-            } else if ("2".equals(userInfo.getMarital())) {
+            } else if ("2".equals(userInfo.getProfession())) {
                 workTv.setText("中体力");
             } else {
                 workTv.setText("重体力");

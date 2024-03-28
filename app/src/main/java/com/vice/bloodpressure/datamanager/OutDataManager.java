@@ -94,6 +94,18 @@ public class OutDataManager {
     }
 
     /**
+     * APP-查看是否绑定院外医生
+     * @param successCallBack
+     * @param failureCallBack
+     * @return
+     */
+    public static Call<String> bindExternalInfo(String patientId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("patientId", patientId);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, DoctorInfo.class, "system/patient/app/bindExternalInfo", map, successCallBack, failureCallBack);
+    }
+
+    /**
      * 院外管理获取医生详情
      *
      * @param doctorId
