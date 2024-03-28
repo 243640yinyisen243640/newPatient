@@ -65,19 +65,27 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
         topViewManager().titleTextView().setText("添加运动记录");
         weight = getIntent().getStringExtra("weight");
         initView();
+        getOxygenDataFirst();
         initListener();
-        initValue();
     }
 
-    private void initValue() {
+
+    private void initListener() {
+        typeTv.setOnClickListener(v -> {
+            getOxygenData();
+        });
+        sureTextView.setOnClickListener(v -> {
+            sureToAdd();
+        });
         //运动消耗热量的公式=体重(kg)*时间(min)*千卡/1kg/1min  步行 0.06
         timeRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
-                if (TextUtils.equals(sportId, "-1")) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择运动类型");
-                    return;
-                }
+                //                if (TextUtils.equals(sportId, "-1")) {
+                //                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择运动类型");
+                //                    return;
+                //                }
+                Log.i("yys","onEndResult====");
                 exerciseTime = String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP));
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
@@ -89,28 +97,47 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
 
             @Override
             public void onScrollResult(String result) {
-                if (TextUtils.equals(sportId, "-1")) {
-                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择运动类型");
-                    return;
-                }
+                //                if (TextUtils.equals(sportId, "-1")) {
+                //                    ToastUtils.getInstance().showToast(getPageContext(), "请先选择运动类型");
+                //                    return;
+                //                }
                 exerciseTime = String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP));
                 timeChooseTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 timeTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 Log.i("yys", "weight====" + weight);
-                double calorieDouble = Double.parseDouble(calorieString);
-                finishCalorieString = String.valueOf(new BigDecimal(String.valueOf(Double.parseDouble(weight) * calorieDouble * Double.parseDouble(result))).setScale(0, BigDecimal.ROUND_HALF_UP));
-                fireTv.setText(finishCalorieString);
+                if (!TextUtils.isEmpty(calorieString)){
+                    double calorieDouble = Double.parseDouble(calorieString);
+                    finishCalorieString = String.valueOf(new BigDecimal(String.valueOf(Double.parseDouble(weight) * calorieDouble * Double.parseDouble(result))).setScale(0, BigDecimal.ROUND_HALF_UP));
+                    fireTv.setText(finishCalorieString);
+                }
+
             }
         });
     }
 
-    private void initListener() {
-        typeTv.setOnClickListener(v -> {
-            getOxygenData();
+
+    private void getOxygenDataFirst() {
+        Call<String> requestCall = HomeDataManager.getSportAerobics((call, response) -> {
+            if ("0000".equals(response.code)) {
+                sportList = (List<BaseLocalDataInfo>) response.object;
+                List<String> list = new ArrayList<>();
+                if (sportList != null && sportList.size() > 0) {
+                    for (int i = 0; i < sportList.size(); i++) {
+                        String typeName = sportList.get(i).getSportName();
+                        list.add(typeName);
+                    }
+                    Log.i("yys","sportList==="+sportList.size());
+                    typeTv.setText(sportList.get(0).getSportName());
+                    calorieString = sportList.get(0).getCalorie();
+                }
+
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+            }
+        }, (call, t) -> {
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
-        sureTextView.setOnClickListener(v -> {
-            sureToAdd();
-        });
+        addRequestCallToMap("getSportAerobics", requestCall);
     }
 
     private void getOxygenData() {

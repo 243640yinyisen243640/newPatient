@@ -33,6 +33,10 @@ public class EducationInfo implements Serializable, IClassInfo {
      */
     private String essayName;
     /**
+     * 还剩几节课没学
+     */
+    private String studyDetail;
+    /**
      * 文章简介
      */
     private String essayProfile;
@@ -74,6 +78,14 @@ public class EducationInfo implements Serializable, IClassInfo {
      * 0:收藏，1：未收藏
      */
     private String collectOrNot;
+
+    public String getStudyDetail() {
+        return studyDetail;
+    }
+
+    public void setStudyDetail(String studyDetail) {
+        this.studyDetail = studyDetail;
+    }
 
     public List<EducationInfo> getRecords() {
         return records;

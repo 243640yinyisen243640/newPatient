@@ -328,6 +328,19 @@ public class UserInfo implements Serializable {
      */
     private String bmiDate;
 
+    /**
+     * true已绑定/false未绑定
+     */
+    private boolean isBindExternal;
+
+    public boolean isBindExternal() {
+        return isBindExternal;
+    }
+
+    public void setBindExternal(boolean bindExternal) {
+        isBindExternal = bindExternal;
+    }
+
     public String getTakeSum() {
         return takeSum;
     }

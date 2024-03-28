@@ -91,7 +91,7 @@ public class EducationIntelligenceAdapter extends RecyclerView.Adapter<Education
             }
             holder.line.setVisibility(View.GONE);
             holder.subjectTextView.setTextColor(context.getResources().getColor(R.color.red_ff));
-            holder.subjectTextView.setText(String.format(context.getString(R.string.education_intelligence_subject_num), info.getTeachEssayAppVos().size() + ""));
+            holder.subjectTextView.setText(info.getStudyDetail());
         } else if ("2".equals(type)) {
             holder.stateTextView.setVisibility(View.GONE);
             holder.line.setVisibility(View.GONE);

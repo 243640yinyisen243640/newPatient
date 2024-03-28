@@ -287,22 +287,25 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 break;
             //我的医生
             case R.id.tv_user_center_doctor:
-                if (!TextUtils.isEmpty(UserInfoUtils.getUserInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
-                    intent = new Intent(getPageContext(), UserDoctorActivity.class);
-                    intent.putExtra("type", "1");
-                    startActivityForResult(intent, REQUEST_CODE_FOR_UN_BIND_DOCTOR);
-                } else {
-                    DialogUtils.showOperDialog(getPageContext(), "", "您还没有绑定医生", "我在想想", "去绑定", (dialog, which) -> {
-                        dialog.dismiss();
-                        if (HHSoftDialogActionEnum.POSITIVE == which) {
-                            if (getActivity() != null) {
-                                Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
-                                mainIntent.putExtra("checkId", 2);
-                                startActivity(mainIntent);
+                if (userInfo!=null){
+                    if (userInfo.isBindExternal()) {
+                        intent = new Intent(getPageContext(), UserDoctorActivity.class);
+                        intent.putExtra("type", "1");
+                        startActivityForResult(intent, REQUEST_CODE_FOR_UN_BIND_DOCTOR);
+                    } else {
+                        DialogUtils.showOperDialog(getPageContext(), "", "您还没有绑定医生", "我在想想", "去绑定", (dialog, which) -> {
+                            dialog.dismiss();
+                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+                                if (getActivity() != null) {
+                                    Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
+                                    mainIntent.putExtra("checkId", 2);
+                                    startActivity(mainIntent);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
+
 
                 break;
             //订单
