@@ -331,14 +331,14 @@ public class UserInfo implements Serializable {
     /**
      * true已绑定/false未绑定
      */
-    private boolean isBindExternal;
+    private boolean bindDoctorFlag;
 
-    public boolean isBindExternal() {
-        return isBindExternal;
+    public boolean isBindDoctorFlag() {
+        return bindDoctorFlag;
     }
 
-    public void setBindExternal(boolean bindExternal) {
-        isBindExternal = bindExternal;
+    public void setBindDoctorFlag(boolean bindDoctorFlag) {
+        this.bindDoctorFlag = bindDoctorFlag;
     }
 
     public String getTakeSum() {

@@ -2,6 +2,7 @@ package com.vice.bloodpressure.fragment.fuser;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -267,10 +268,10 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 // 跳二维码页面
 
                 intent = new Intent(getPageContext(), UserQRCodeActivity.class);
-                intent.putExtra("archivesId",userInfo.getArchivesId());
-                intent.putExtra("nickName",userInfo.getNickName());
-                intent.putExtra("phoneNumber",userInfo.getPhoneNumber());
-                intent.putExtra("avatar",userInfo.getAvatar());
+                intent.putExtra("archivesId", userInfo.getArchivesId());
+                intent.putExtra("nickName", userInfo.getNickName());
+                intent.putExtra("phoneNumber", userInfo.getPhoneNumber());
+                intent.putExtra("avatar", userInfo.getAvatar());
                 startActivity(intent);
                 break;
             //我的档案
@@ -287,8 +288,9 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 break;
             //我的医生
             case R.id.tv_user_center_doctor:
-                if (userInfo!=null){
-                    if (userInfo.isBindExternal()) {
+                if (userInfo != null) {
+                    Log.i("yys", "isBindExternal==" + userInfo.isBindDoctorFlag());
+                    if (userInfo.isBindDoctorFlag()) {
                         intent = new Intent(getPageContext(), UserDoctorActivity.class);
                         intent.putExtra("type", "1");
                         startActivityForResult(intent, REQUEST_CODE_FOR_UN_BIND_DOCTOR);

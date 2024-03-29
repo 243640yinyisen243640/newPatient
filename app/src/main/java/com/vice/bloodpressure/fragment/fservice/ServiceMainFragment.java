@@ -88,7 +88,6 @@ public class ServiceMainFragment extends UIBaseLoadFragment {
                         intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
                         startActivity(intent);
                     } else {
-                        Log.i("yys","1");
                         intent = new Intent(getPageContext(), EducationQuestionInvestigateBeginActivity.class);
                         startActivity(intent);
                     }

@@ -110,11 +110,6 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                 list.get(position).setCheck(true);
                 tvNext.setText("完成");
             } else {
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getName().equals("都没有")) {
-                        list.get(i).setCheck(false);
-                    }
-                }
                 if (list.get(position).getName().equals("糖尿病")) {
                     for (int i = 0; i < list.size(); i++) {
                         if (list.get(i).getName().equals("糖尿病前期")) {
@@ -130,7 +125,21 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                     }
                 }
                 list.get(position).setCheck(!list.get(position).isCheck());
-                tvNext.setText("下一题");
+                //是否有选中的
+                boolean isCheck = false;
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isCheck()) {
+                        isCheck = true;
+                    }
+                }
+                if (isCheck) {
+                    //有选中的
+                    tvNext.setText("下一题");
+                } else {
+                    //没有选中的
+                    tvNext.setText("完成");
+                }
+                list.get(list.size() - 1).setCheck(!isCheck);
             }
             adapter.notifyDataSetChanged();
         });
@@ -205,13 +214,13 @@ public class EducationIllnessActivity extends UIBaseActivity implements View.OnC
                 answerInfo.getChdTime(), answerInfo.getCopdTime(), answerInfo.getStrokeTime(), (call, response) -> {
                     ToastUtils.getInstance().showToast(getPageContext(), response.msg);
                     if ("0000".equals(response.code)) {
-//                        Intent intent = new Intent(getPageContext(), MainActivity.class);
-//                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//                        finish();
-                        Log.i("yys","4");
+                        //                        Intent intent = new Intent(getPageContext(), MainActivity.class);
+                        //                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //                        startActivity(intent);
+                        //                        finish();
+                        Log.i("yys", "4");
                         Intent intent = new Intent(getPageContext(), EducationIntelligenceActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
                         startActivity(intent);
                         finish();
                     }

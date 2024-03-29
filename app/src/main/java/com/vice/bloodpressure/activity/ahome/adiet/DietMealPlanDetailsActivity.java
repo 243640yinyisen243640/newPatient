@@ -77,6 +77,10 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         topViewManager().moreTextView().setOnClickListener(v -> {
             startActivity(new Intent(getPageContext(), DietProgrammeBeginActivity.class));
         });
+
+        topViewManager().backTextView().setOnClickListener(v -> {
+            onBackPressed();
+        });
         initViews();
         initValues();
         initListener();
