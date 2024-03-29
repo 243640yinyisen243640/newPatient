@@ -1,7 +1,6 @@
 package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -82,15 +81,14 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         holder.dinnerLaterFrameLayout.setOnClickListener(click);
         holder.bedTimeFrameLayout.setOnClickListener(click);
         //血糖状态 1偏低 2正常 3偏高
-        setStatus(info.getValue().get(0).getBgStatus(), holder);
-        setStatus(info.getValue().get(1).getBgStatus(), holder);
-        Log.i("yys","info.getValue().get(1).getBgStatus()=="+info.getValue().get(1).getBgStatus());
-        setStatus(info.getValue().get(2).getBgStatus(), holder);
-        setStatus(info.getValue().get(3).getBgStatus(), holder);
-        setStatus(info.getValue().get(4).getBgStatus(), holder);
-        setStatus(info.getValue().get(5).getBgStatus(), holder);
-        setStatus(info.getValue().get(6).getBgStatus(), holder);
-        setStatus(info.getValue().get(7).getBgStatus(), holder);
+        setStatus(info.getValue().get(0).getBgStatus(), holder.dawnTextView);
+        setStatus(info.getValue().get(1).getBgStatus(), holder.empTextView);
+        setStatus(info.getValue().get(2).getBgStatus(), holder.breLaterTextView);
+        setStatus(info.getValue().get(3).getBgStatus(), holder.lunchBeforeTextView);
+        setStatus(info.getValue().get(4).getBgStatus(), holder.lunchLaterTextView);
+        setStatus(info.getValue().get(5).getBgStatus(), holder.dinnerBeforeTextView);
+        setStatus(info.getValue().get(6).getBgStatus(), holder.dinnerLaterTextView);
+        setStatus(info.getValue().get(7).getBgStatus(), holder.bedTimeTextView);
 
         setMoreData(info.getValue().get(0).getBgCount(), holder.dawnImageView);
         setMoreData(info.getValue().get(1).getBgCount(), holder.empImageView);
@@ -113,16 +111,14 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
 
     /**
      * @param status 血糖状态 1偏低 2正常 3偏高
-     * @param holder
      */
-    private void setStatus(String status, ViewHolder holder) {
-        Log.i("yys","status=="+status);
+    private void setStatus(String status, TextView textView) {
         if ("1".equals(status)) {
-            holder.dawnTextView.setTextColor(context.getResources().getColor(R.color.blue_4B));
+            textView.setTextColor(context.getResources().getColor(R.color.blue_4B));
         } else if ("2".equals(status)) {
-            holder.dawnTextView.setTextColor(context.getResources().getColor(R.color.main_base_color));
+            textView.setTextColor(context.getResources().getColor(R.color.main_base_color));
         } else {
-            holder.dawnTextView.setTextColor(context.getResources().getColor(R.color.red_E5));
+            textView.setTextColor(context.getResources().getColor(R.color.red_E5));
         }
     }
 
