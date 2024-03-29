@@ -127,27 +127,27 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
                 TextView textView = successPopupWindow.showContent();
                 SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
 
-                String bimTagText = "";
-                if ("1".equals(info.getBmiTag())) {
-                    bimTagText = "偏瘦";
-                } else if ("2".equals(info.getBmiTag())) {
-                    bimTagText = "正常";
-                } else if ("3".equals(info.getBmiTag())) {
-                    bimTagText = "超重";
-                } else {
-                    bimTagText = "肥胖";
-                }
+//                String bimTagText = "";
+//                if ("1".equals(info.getBmiTag())) {
+//                    bimTagText = "偏瘦";
+//                } else if ("2".equals(info.getBmiTag())) {
+//                    bimTagText = "正常";
+//                } else if ("3".equals(info.getBmiTag())) {
+//                    bimTagText = "超重";
+//                } else {
+//                    bimTagText = "肥胖";
+//                }
 
                 stringBuilder.append(getString(R.string.exercise_success_height));
                 int length1 = stringBuilder.length();
-                stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), bimTagText));
+                stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num), info.getBmiTag()));
                 int length2 = stringBuilder.length();
                 //1偏瘦 2正常 3超重 4肥胖
-                if ("1".equals(info.getBmiTag())) {
+                if ("1".equals(info.getBmiStatus())) {
                     stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "增重", info.getWeight(), "增重"));
-                } else if ("2".equals(info.getBmiTag())) {
+                } else if ("2".equals(info.getBmiStatus())) {
                     stringBuilder.append(getString(R.string.exercise_success_height_num_unit));
-                } else if ("3".equals(info.getBmiTag())) {
+                } else if ("3".equals(info.getBmiStatus())) {
                     stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "减重", info.getWeight(), "减重"));
                 } else {
                     stringBuilder.append(String.format(getPageContext().getString(R.string.exercise_success_height_num_all), "减重", info.getWeight(), "减重"));

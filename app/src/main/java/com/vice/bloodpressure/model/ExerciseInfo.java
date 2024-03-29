@@ -17,7 +17,9 @@ public class ExerciseInfo implements Serializable {
     private String exerciseTime;
     private String have;
     private String onceFire;
-
+    /**
+     *  1偏瘦 2正常 3超重 4肥胖
+     */
     private String bmiStatus;
     /**
      * 1偏瘦 2正常 3超重 4肥胖
