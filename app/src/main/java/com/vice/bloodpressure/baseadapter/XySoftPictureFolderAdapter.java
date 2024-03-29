@@ -15,12 +15,12 @@ import com.vice.bloodpressure.utils.entity.LocalMediaFolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HHSoftPictureFolderAdapter extends BaseAdapter {
+public class XySoftPictureFolderAdapter extends BaseAdapter {
 
     private List<LocalMediaFolder> folders;
     private Context mContext;
 
-    public HHSoftPictureFolderAdapter(Context mContext) {
+    public XySoftPictureFolderAdapter(Context mContext) {
         super();
         this.mContext = mContext;
     }
@@ -45,7 +45,7 @@ public class HHSoftPictureFolderAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.hhsoft_picture_item_floder_list, null);
+            convertView = View.inflate(mContext, R.layout.xysoft_picture_item_floder_list, null);
             holder.mThumbImageView = convertView.findViewById(R.id.hhsoft_iv_picture_media_thumb);
             holder.mTypeImageView = convertView.findViewById(R.id.hhsoft_iv_picture_media_type);
             holder.mNameTextView = convertView.findViewById(R.id.hhsoft_tv_picture_media_floder_name);
@@ -56,7 +56,7 @@ public class HHSoftPictureFolderAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         LocalMediaFolder folder = folders.get(position);
-        XyImageUtils.loadImage(mContext,R.drawable.hhsoft_picture_floder_item_bg,folder.getFirstImagePath(),holder.mThumbImageView);
+        XyImageUtils.loadImage(mContext,R.drawable.xysoft_picture_floder_item_bg,folder.getFirstImagePath(),holder.mThumbImageView);
         holder.mNameTextView.setText(folder.getName());
         if (position == 0) {
             holder.mTypeImageView.setVisibility(View.GONE);

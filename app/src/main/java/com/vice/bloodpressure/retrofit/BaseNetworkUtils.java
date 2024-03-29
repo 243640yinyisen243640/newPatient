@@ -32,7 +32,7 @@ import retrofit2.HttpException;
 public class BaseNetworkUtils {
 
 
-    private static final String TAG = "HHSoftNetworkUtils";
+    private static final String TAG = "XySoftNetworkUtils";
     private static final String AccessTokenKey = "Authorization";
 
 
@@ -54,7 +54,7 @@ public class BaseNetworkUtils {
     /**
      * 网络请求
      *
-     * @param requestType     请求方法，可参考：HHSoftNetReqUtils.RequestType.PUT
+     * @param requestType     请求方法，可参考：XySoftNetReqUtils.RequestType.PUT
      * @param jsonParseMode   解析数据类型，可取值BaseNetworkUtils.NONE、BaseNetworkUtils.JSON_OBJECT、BaseNetworkUtils.JSON_ARRAY
      * @param methodName
      * @param paramMap

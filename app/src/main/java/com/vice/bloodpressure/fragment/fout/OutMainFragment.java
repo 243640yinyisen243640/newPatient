@@ -15,7 +15,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
 import com.vice.bloodpressure.datamanager.OutDataManager;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
@@ -116,7 +116,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
                 DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    if (XySoftDialogActionEnum.POSITIVE == which) {
                         startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
                     }
                 });

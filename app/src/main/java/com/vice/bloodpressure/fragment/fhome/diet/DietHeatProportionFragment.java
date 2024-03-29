@@ -15,7 +15,7 @@ import com.vice.bloodpressure.adapter.home.DietHeatProportionAdapter;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.TurnUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class DietHeatProportionFragment extends UIBaseFragment {
     private PieChart proportionPc;
-    private HHAtMostGridView proportionGv;
+    private XyAtMostGridView proportionGv;
 
     private MealExclusiveInfo mealExclusiveInfo;
 

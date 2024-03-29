@@ -22,16 +22,16 @@ import java.util.List;
 
 /**
  * @类说明 底部菜单MenuWindow
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/29 16:44
  */
-public class HHSoftBottomMenuWindow extends PopupWindow {
+public class XySoftBottomMenuWindow extends PopupWindow {
     private Context context;
     private ListView menuListView;
     private TextView cancelTextView;
     private List<String> menuList;
 
-    public HHSoftBottomMenuWindow(Context context, List<String> menuList,AdapterItemClickListener itemClickListener) {
+    public XySoftBottomMenuWindow(Context context, List<String> menuList, AdapterItemClickListener itemClickListener) {
         super(context);
         this.context = context;
         this.menuList = menuList;
@@ -67,7 +67,7 @@ public class HHSoftBottomMenuWindow extends PopupWindow {
         params.setMargins(0, padding10, 0, 0);
         contentView.addView(cancelTextView, params);
         setContentView(contentView);
-        cancelTextView.setOnClickListener(view -> HHSoftBottomMenuWindow.this.dismiss());
+        cancelTextView.setOnClickListener(view -> XySoftBottomMenuWindow.this.dismiss());
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setFocusable(true);

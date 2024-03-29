@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class NetReqUtils {
 
-    private static final String TAG = "HHSoftNetReqUtils";
+    private static final String TAG = "XySoftNetReqUtils";
 
     /**
      * 请求方式
@@ -76,20 +76,20 @@ public class NetReqUtils {
         }
 
         public Call<String> build() {
-            Log.i(TAG, "HHSoftNetReqUtils:start:" + ip + methodName + "==" + threadType + "==" + requestType + "==" + requestBodyType);
+            Log.i(TAG, "XySoftNetReqUtils:start:" + ip + methodName + "==" + threadType + "==" + requestType + "==" + requestBodyType);
             if (TextUtils.isEmpty(ip)) {
                 throw new IllegalStateException("Base URL required is empty.");
             }
             if (headerMap != null && headerMap.size() > 0) {
                 for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                    Log.i(TAG, "HHSoftNetReqUtils:headerMap:" + entry.getKey() + "==" + entry.getValue());
+                    Log.i(TAG, "XySoftNetReqUtils:headerMap:" + entry.getKey() + "==" + entry.getValue());
                 }
             }
             if (paramMap != null && paramMap.size() > 0) {
                 StringBuilder paramStringBuilder = new StringBuilder();
                 paramStringBuilder.append("{");
                 for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                    Log.i(TAG, "HHSoftNetReqUtils:paramMap:" + entry.getKey() + "==" + entry.getValue());
+                    Log.i(TAG, "XySoftNetReqUtils:paramMap:" + entry.getKey() + "==" + entry.getValue());
                     paramStringBuilder.append("\"");
                     paramStringBuilder.append(entry.getKey());
                     paramStringBuilder.append("\"");
@@ -101,7 +101,7 @@ public class NetReqUtils {
                 }
                 paramStringBuilder.deleteCharAt(paramStringBuilder.length() - 1);
                 paramStringBuilder.append("}");
-                Log.i(TAG, "HHSoftNetReqUtils:paramJsonStr:" + paramStringBuilder.toString());
+                Log.i(TAG, "XySoftNetReqUtils:paramJsonStr:" + paramStringBuilder.toString());
             }
 
             Call<String> call = null;
@@ -146,7 +146,7 @@ public class NetReqUtils {
                     Map<String, RequestBody> requestParamsMap = new HashMap<>();
                     if (paramMap != null && paramMap.size() > 0) {
                         for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                            requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
+                            requestParamsMap.put(entry.getKey(), XySoftNetworkUtils.toRequestBody(entry.getValue()));
                         }
                     }
 
@@ -191,7 +191,7 @@ public class NetReqUtils {
                     Map<String, RequestBody> requestParamsMap = new HashMap<>();
                     if (paramMap != null && paramMap.size() > 0) {
                         for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-                            requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
+                            requestParamsMap.put(entry.getKey(), XySoftNetworkUtils.toRequestBody(entry.getValue()));
                         }
                     }
                     List<MultipartBody.Part> files = new ArrayList<>();
@@ -243,10 +243,10 @@ public class NetReqUtils {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Log.i(TAG, "response==" + response.toString());
-                        LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.ASYNC:onResponse：" + ip + methodName + "==" + response.code());
+                        LogUtils.showLongLog(TAG, "XySoftNetReqUtils：ThreadType.ASYNC:onResponse：" + ip + methodName + "==" + response.code());
                         if (response.isSuccessful()) {
                             String respResult = response.body();
-                            LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.ASYNC:onResponse：" + respResult);
+                            LogUtils.showLongLog(TAG, "XySoftNetReqUtils：ThreadType.ASYNC:onResponse：" + respResult);
                             if (successCallBack != null) {
                                 try {
                                     successCallBack.accept(call, respResult);
@@ -269,7 +269,7 @@ public class NetReqUtils {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.ASYNC:onFailure：" + Log.getStackTraceString(t));
+                        LogUtils.showLongLog(TAG, "XySoftNetReqUtils：ThreadType.ASYNC:onFailure：" + Log.getStackTraceString(t));
                         if (failureCallBack != null) {
                             try {
                                 failureCallBack.accept(call, t);
@@ -283,10 +283,10 @@ public class NetReqUtils {
             } else if (threadType == ThreadType.SYNC) {
                 try {
                     Response<String> response = call.execute();
-                    LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.SYNC:onResponse：" + ip + methodName + "==" + response.code());
+                    LogUtils.showLongLog(TAG, "XySoftNetReqUtils：ThreadType.SYNC:onResponse：" + ip + methodName + "==" + response.code());
                     if (response.isSuccessful()) {
                         String respResult = response.body();
-                        LogUtils.showLongLog(TAG, "HHSoftNetReqUtils：ThreadType.SYNC:onResponse：" + respResult);
+                        LogUtils.showLongLog(TAG, "XySoftNetReqUtils：ThreadType.SYNC:onResponse：" + respResult);
                         if (successCallBack != null) {
                             successCallBack.accept(call, respResult);
                         }

@@ -31,10 +31,10 @@ public class XyApplication extends BaseApplication {
          * 第三方初始化
          */
         //        Map<String, String> appIDMap = new HashMap<>();
-        //        appIDMap.put(HHSoftThirdTools.KEY_WECHAT_APP_ID, ThirdLoginConstants.WX_APP_ID);
-        //        appIDMap.put(HHSoftThirdTools.KEY_QQ_APP_ID, "1106246987");
-        //        appIDMap.put(HHSoftThirdTools.KEY_SINA_APP_ID, "3050346258");
-        //        HHSoftThirdTools.init(getApplicationContext(), appIDMap);
+        //        appIDMap.put(XySoftThirdTools.KEY_WECHAT_APP_ID, ThirdLoginConstants.WX_APP_ID);
+        //        appIDMap.put(XySoftThirdTools.KEY_QQ_APP_ID, "1106246987");
+        //        appIDMap.put(XySoftThirdTools.KEY_SINA_APP_ID, "3050346258");
+        //        XySoftThirdTools.init(getApplicationContext(), appIDMap);
         //
         ////        RongIM.init(getMyApplicationContext(), "8luwapkv84iyl");
         //        RongUtils.getInstance().rongCloudInit(getMyApplicationContext());
@@ -85,7 +85,7 @@ public class XyApplication extends BaseApplication {
         //            @Override
         //            public void onViewInitFinished(boolean arg0) {
         //                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-        //                HHSoftLogUtils.i("app", " onViewInitFinished is " + arg0);
+        //                XySoftLogUtils.i("app", " onViewInitFinished is " + arg0);
         //            }
         //
         //            @Override

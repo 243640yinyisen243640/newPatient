@@ -6,7 +6,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-public class HHSoftSystemUtils {
+public class XySoftSystemUtils {
 
     /**
      * 设备令牌 注意：调用该方法之前需要进行权限请求

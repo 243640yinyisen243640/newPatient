@@ -70,7 +70,7 @@
                         android:textSize="15sp"
                         android:visibility="gone" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_plus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

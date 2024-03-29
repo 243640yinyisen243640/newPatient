@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:background="@drawable/hhsoft_picture_floder_item_bg" />
+            android:background="@drawable/xysoft_picture_floder_item_bg" />
 
         <ImageView
             android:id="@+id/hhsoft_iv_picture_media_thumb"
@@ -28,7 +28,7 @@
             android:id="@+id/hhsoft_iv_picture_media_type"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:background="@drawable/hhsoft_picture_floder_video"
+            android:background="@drawable/xysoft_picture_floder_video"
             android:visibility="gone"/>
     </FrameLayout>
 

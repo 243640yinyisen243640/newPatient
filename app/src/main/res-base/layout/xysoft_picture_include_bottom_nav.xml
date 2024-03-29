@@ -12,7 +12,7 @@
             android:id="@+id/hhsoft_tv_picture_folder_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/hhsoft_picture_bottom_folder_arrow"
+            android:drawableRight="@drawable/xysoft_picture_bottom_folder_arrow"
             android:paddingBottom="14dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -20,19 +20,19 @@
             android:text="@string/hhsoft_picture_title_name"
             android:textColor="@color/defaultWhite"
             android:textSize="14sp"/>
+
         <TextView
             android:id="@+id/hhsoft_tv_picture_preview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingBottom="14dp"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:paddingTop="14dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="14dp"
             android:text="@string/hhsoft_picture_preview"
             android:textColor="?picture.preview.textColor"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
         <LinearLayout
             android:id="@+id/hhsoft_ll_picture_original"
             android:layout_width="wrap_content"

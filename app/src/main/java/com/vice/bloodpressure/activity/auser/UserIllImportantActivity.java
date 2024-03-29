@@ -16,7 +16,7 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.PickerViewUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ public class UserIllImportantActivity extends UIBaseLoadActivity {
     private ImageView arrowImageView;
     private LinearLayout bgLinearLayout;
     private LinearLayout gaoLinearLayout;
-    private HHAtMostGridView mostGridView;
-    private HHAtMostGridView gaoMostGridView;
-    private HHAtMostGridView levelMostGridView;
+    private XyAtMostGridView mostGridView;
+    private XyAtMostGridView gaoMostGridView;
+    private XyAtMostGridView levelMostGridView;
     private TextView timeTv;
     private TextView gaoTimeTv;
     private TextView saveTv;

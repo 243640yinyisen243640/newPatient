@@ -2,10 +2,10 @@ package com.vice.bloodpressure.basemodel;
 
 /**
  * @类说明 分享item信息
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/31 12:42
  */
-public class HHSoftShareItemInfo implements Comparable<HHSoftShareItemInfo> {
+public class XySoftShareItemInfo implements Comparable<XySoftShareItemInfo> {
     /**
      * 平台id
      */
@@ -23,7 +23,7 @@ public class HHSoftShareItemInfo implements Comparable<HHSoftShareItemInfo> {
      */
     private int drawableResID;
 
-    public HHSoftShareItemInfo(int order, int platformID, int nameResID, int drawableResID) {
+    public XySoftShareItemInfo(int order, int platformID, int nameResID, int drawableResID) {
         this.order = order;
         this.platformID = platformID;
         this.nameResID = nameResID;
@@ -63,7 +63,7 @@ public class HHSoftShareItemInfo implements Comparable<HHSoftShareItemInfo> {
     }
 
     @Override
-    public int compareTo(HHSoftShareItemInfo another) {
+    public int compareTo(XySoftShareItemInfo another) {
         return (order - another.getOrder());
     }
 }

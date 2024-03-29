@@ -8,7 +8,7 @@ import androidx.annotation.StyleRes;
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.utils.entity.LocalMedia;
 import com.vice.bloodpressure.utils.tools.PictureFileUtils;
-import com.vice.bloodpressure.utils.widget.HHSoftPicturePreviewActivity;
+import com.vice.bloodpressure.utils.widget.XyPicturePreviewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +118,7 @@ public final class PictureSelectionConfig implements Parcelable {
         suffixType = PictureFileUtils.POSTFIX;
         sizeMultiplier = 0.5f;
         selectionMedias = new ArrayList<>();
-        previewClazz = HHSoftPicturePreviewActivity.class;
+        previewClazz = XyPicturePreviewActivity.class;
     }
 
     public static PictureSelectionConfig getInstance() {

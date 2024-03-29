@@ -533,15 +533,15 @@
             android:name=".baseui.PictureBrowserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".utils.widget.HHSoftPictureSelectorActivity"
+            android:name=".utils.widget.XyPictureSelectorActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".utils.widget.HHSoftPictureVideoPlayActivity"
+            android:name=".utils.widget.XyPictureVideoPlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".utils.widget.HHSoftPicturePreviewActivity"
+            android:name=".utils.widget.XyPicturePreviewActivity"
             android:screenOrientation="portrait" />
         <!--服务模块结束-->
 

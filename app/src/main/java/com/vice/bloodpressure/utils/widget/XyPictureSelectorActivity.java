@@ -28,8 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.baseadapter.HHSoftPictureFolderAdapter;
-import com.vice.bloodpressure.baseadapter.HHSoftPictureGridAdapter;
+import com.vice.bloodpressure.baseadapter.XySoftPictureFolderAdapter;
+import com.vice.bloodpressure.baseadapter.XySoftPictureGridAdapter;
 import com.vice.bloodpressure.basemodel.LocalMediaLoader;
 import com.vice.bloodpressure.decoration.GridSpacingItemDecoration;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -45,7 +45,7 @@ import com.vice.bloodpressure.utils.tools.PictureFileUtils;
 import com.vice.bloodpressure.utils.tools.SdkVersionUtils;
 import com.vice.bloodpressure.utils.tools.StringUtils;
 import com.vice.bloodpressure.utils.tools.observable.ImagesObservable;
-import com.vice.bloodpressure.window.HHSoftBottomMenuWindow;
+import com.vice.bloodpressure.window.XySoftBottomMenuWindow;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -56,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity implements View.OnClickListener {
+public class XyPictureSelectorActivity extends XyPictureBaseActivity implements View.OnClickListener {
     /**
      * 权限
      */
@@ -99,11 +99,11 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
     private LocalMediaLoader mediaLoader;
     private List<LocalMediaFolder> mediaFolders = new ArrayList<>();
     private List<LocalMedia> mediaPhotos = new ArrayList<>();
-    private HHSoftPictureGridAdapter photoAdapter;
-    private HHSoftPictureFolderAdapter folderAdapter;
+    private XySoftPictureGridAdapter photoAdapter;
+    private XySoftPictureFolderAdapter folderAdapter;
 
 
-    private HHSoftBottomMenuWindow popupWindow;
+    private XySoftBottomMenuWindow popupWindow;
 
 
     @Override
@@ -170,7 +170,7 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
 
     private void initView() {
         if (!isInit) {
-            setContentView(R.layout.hhsoft_picture_activity_selector);
+            setContentView(R.layout.xysoft_picture_activity_selector);
             backImageView = findViewById(R.id.hhsoft_iv_picture_top_back);
             titleTextView = findViewById(R.id.hhsoft_tv_picture_top_title);
             sureTextView = findViewById(R.id.hhsoft_tv_picture_top_sure);
@@ -214,8 +214,8 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
 
         selectionMediaPhotos.clear();
         mediaFolders.clear();
-        photoAdapter = new HHSoftPictureGridAdapter(this, config);
-        photoAdapter.setOnPhotoSelectChangedListener(new HHSoftPictureGridAdapter.OnPhotoSelectChangedListener() {
+        photoAdapter = new XySoftPictureGridAdapter(this, config);
+        photoAdapter.setOnPhotoSelectChangedListener(new XySoftPictureGridAdapter.OnPhotoSelectChangedListener() {
             @Override
             public void onTakePhoto() {
 //                Log.i("chen", "onTakePhoto==");
@@ -253,7 +253,7 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
         });
         photoAdapter.bindSelectImages(selectionMediaPhotos);
         photoRecyclerView.setAdapter(photoAdapter);
-        folderAdapter = new HHSoftPictureFolderAdapter(this);
+        folderAdapter = new XySoftPictureFolderAdapter(this);
         folderAdapter.bindFolderData(mediaFolders);
         folderAdapter.setOnItemClickListener((folderName, photos) -> {
             boolean camera = StringUtils.isCamera(folderName);
@@ -331,7 +331,7 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
                         List<String> menuList = new ArrayList<>();
                         menuList.add(getString(R.string.hhsoft_picture_photograph));
                         menuList.add(getString(R.string.hhsoft_picture_video));
-                        popupWindow = new HHSoftBottomMenuWindow(getPageContext(), menuList, position -> {
+                        popupWindow = new XySoftBottomMenuWindow(getPageContext(), menuList, position -> {
                             switch (position) {
                                 case 0:
                                     popupWindow.dismiss();
@@ -524,7 +524,7 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
                 ImagesObservable.getInstance().saveLocalMedia(previewImages);
                 bundle.putSerializable(PictureConfig.EXTRA_SELECT_LIST, (Serializable) selectedImages);
                 bundle.putInt(PictureConfig.EXTRA_POSITION, position);
-                startActivity(HHSoftPicturePreviewActivity.class, bundle, 0);
+                startActivity(XyPicturePreviewActivity.class, bundle, 0);
 //                overridePendingTransition(R.anim.a5, 0);
                 break;
             case PictureConfig.TYPE_VIDEO:
@@ -534,7 +534,7 @@ public class HHSoftPictureSelectorActivity extends HHSoftPictureBaseActivity imp
                     onResult(result);
                 } else {
                     bundle.putString("video_path", media.getPath());
-                    startActivity(HHSoftPictureVideoPlayActivity.class, bundle);
+                    startActivity(XyPictureVideoPlayActivity.class, bundle);
                 }
                 break;
             case PictureConfig.TYPE_AUDIO:

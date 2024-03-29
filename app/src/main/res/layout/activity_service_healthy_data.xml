@@ -24,7 +24,7 @@
                 android:paddingEnd="10dp"
                 android:text="常规测量数据记录" />
 
-            <com.vice.bloodpressure.view.HHAtMostGridView
+            <com.vice.bloodpressure.view.XyAtMostGridView
                 android:id="@+id/gv_healthy_data_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:paddingEnd="10dp"
                 android:text="其他数据记录" />
 
-            <com.vice.bloodpressure.view.HHAtMostGridView
+            <com.vice.bloodpressure.view.XyAtMostGridView
                 android:id="@+id/gv_healthy_data_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.provider.Settings;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.dialog.HHSoftDialog;
+import com.vice.bloodpressure.dialog.XySoftDialog;
 
 
 /**
@@ -66,8 +66,8 @@ public class DialogUtils {
      * @param msg      内容
      * @param callback 回调
      */
-    public static void showOptionDialog(Context context, String msg, HHSoftDialog.SingleButtonCallback callback) {
-        new HHSoftDialog.Builder(context)
+    public static void showOptionDialog(Context context, String msg, XySoftDialog.SingleButtonCallback callback) {
+        new XySoftDialog.Builder(context)
                 .content(msg)
                 .negativeColor(R.color.gray_98)
                 .positiveColor(R.color.main_base_color)
@@ -84,8 +84,8 @@ public class DialogUtils {
      * @param msg
      * @param callback
      */
-    public static void showTipDialog(Context context, String msg, HHSoftDialog.SingleButtonCallback callback) {
-        new HHSoftDialog.Builder(context)
+    public static void showTipDialog(Context context, String msg, XySoftDialog.SingleButtonCallback callback) {
+        new XySoftDialog.Builder(context)
                 .title(R.string.tip)
                 .content(msg)
                 .positiveColorRes(R.color.main_base_color)
@@ -102,9 +102,9 @@ public class DialogUtils {
      * @param msg
      * @param callback
      */
-    public static void showPermissionsDeniedDialog(Context context, String msg, HHSoftDialog.SingleButtonCallback callback) {
-        new HHSoftDialog.Builder(context).content(msg).contentColorRes(R.color.text_white).negativeColorRes(R.color.grayAB).negativeText(R.string.cancel).positiveColorRes(R.color.main_base_color).positiveText(R.string.sure).cancelable(false).onPositive((hhSoftDialog, hhSoftDialogActionEnum) -> {
-            hhSoftDialog.dismiss();
+    public static void showPermissionsDeniedDialog(Context context, String msg, XySoftDialog.SingleButtonCallback callback) {
+        new XySoftDialog.Builder(context).content(msg).contentColorRes(R.color.text_white).negativeColorRes(R.color.grayAB).negativeText(R.string.cancel).positiveColorRes(R.color.main_base_color).positiveText(R.string.sure).cancelable(false).onPositive((xySoftDialog, xySoftDialogActionEnum) -> {
+            xySoftDialog.dismiss();
             Intent intent = new Intent();
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.addCategory(Intent.CATEGORY_DEFAULT);

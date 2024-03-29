@@ -71,7 +71,7 @@
                         android:textSize="15sp"
                         android:visibility="gone" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_other_type_tang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                         android:verticalSpacing="10dp"
                         android:visibility="gone" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_other_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                         android:textSize="15sp"
                         android:visibility="gone" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_other_level"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

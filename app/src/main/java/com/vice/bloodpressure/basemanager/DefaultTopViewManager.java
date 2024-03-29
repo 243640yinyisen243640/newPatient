@@ -16,8 +16,8 @@ import com.vice.bloodpressure.utils.ScreenUtils;
 
 
 /**
- * @类说明 HHSoftDefaultTopViewManager
- * @作者 hhsoft
+ * @类说明 DefaultTopViewManager
+ * @作者
  * @创建日期 2019/8/21 12:07
  */
 public final class DefaultTopViewManager {

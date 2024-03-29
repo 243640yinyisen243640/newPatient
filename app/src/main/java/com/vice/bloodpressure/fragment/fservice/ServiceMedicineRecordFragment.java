@@ -24,7 +24,7 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewForBgFragment;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.HealthyDataChildInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.DialogUtils;
@@ -123,7 +123,7 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
                     case R.id.tv_item_service_medicine_delete:
                         DialogUtils.showOperDialog(getPageContext(), "", "确定要删除吗？", "取消", "确定", (dialog, which) -> {
                             dialog.dismiss();
-                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            if (XySoftDialogActionEnum.POSITIVE == which) {
                                 deleteData(position);
                             }
                         });

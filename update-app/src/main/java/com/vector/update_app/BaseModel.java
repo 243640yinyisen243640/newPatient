@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 /**
  * @类说明 BaseModel
- * @作者 hhsoft
+ * @作者
  * @创建日期 2018/12/4 15:04
  */
 public abstract class BaseModel<T> {

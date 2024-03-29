@@ -9,18 +9,18 @@ import android.widget.GridView;
  * @author yuan
  *
  */
-public class HHAtMostGridView extends GridView 
+public class XyAtMostGridView extends GridView
 {
 
-	public HHAtMostGridView(Context context, AttributeSet attrs, int defStyle) 
+	public XyAtMostGridView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 	}
-	public HHAtMostGridView(Context context, AttributeSet attrs) 
+	public XyAtMostGridView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 	}
-	public HHAtMostGridView(Context context) 
+	public XyAtMostGridView(Context context)
 	{
 		super(context);
 	}

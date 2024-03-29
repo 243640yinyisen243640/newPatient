@@ -19,8 +19,8 @@ import retrofit2.Callback;
 import retrofit2.HttpException;
 import retrofit2.Response;
 
-public class HHSoftNetworkUtils {
-    private static final String TAG = "HHSoftNetworkUtils";
+public class XySoftNetworkUtils {
+    private static final String TAG = "XySoftNetworkUtils";
 //    private final String TAG="xiao";
 
     /**
@@ -184,7 +184,7 @@ public class HHSoftNetworkUtils {
             Map<String, RequestBody> requestParamsMap = new HashMap<>();
             if (parameterMap != null && parameterMap.size() > 0) {
                 for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
-                    requestParamsMap.put(entry.getKey(), HHSoftNetworkUtils.toRequestBody(entry.getValue()));
+                    requestParamsMap.put(entry.getKey(), XySoftNetworkUtils.toRequestBody(entry.getValue()));
                 }
             }
             //文件上传
@@ -292,7 +292,7 @@ public class HHSoftNetworkUtils {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-//                HHSoftLogUtils.i(TAG,"postRequestUrlAsync==onResponse=="+response);
+//                XySoftLogUtils.i(TAG,"postRequestUrlAsync==onResponse=="+response);
                 if (response.isSuccessful()) {
                     try {
                         String result = response.body();
@@ -339,7 +339,7 @@ public class HHSoftNetworkUtils {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-//                HHSoftLogUtils.i(TAG,"postRequestUrlAsync==onResponse=="+response);
+//                XySoftLogUtils.i(TAG,"postRequestUrlAsync==onResponse=="+response);
                 if (response.isSuccessful()) {
                     try {
                         String result = response.body();
@@ -572,13 +572,13 @@ public class HHSoftNetworkUtils {
         StringBuilder builder = new StringBuilder();
         builder.append("{");
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            Log.i(TAG, "HHSoftNetworkUtils==Parameter==" + entry.getKey() + "==" + entry.getValue());
+            Log.i(TAG, "XySoftNetworkUtils==Parameter==" + entry.getKey() + "==" + entry.getValue());
             builder.append("\"" + entry.getKey() + "\":" + "\"" + EncodeUtils.encodeBase64(entry.getValue()) + "\"" + ",");
         }
         builder.deleteCharAt(builder.length() - 1);
         builder.append("}");
         String para = TextUtils.isEmpty(aesKey) ? EncryptUtils.encryptAES(builder.toString()) : EncryptUtils.encryptAESWithKey(builder.toString(), aesKey);
-        Log.i(TAG, "HHSoftNetworkUtils==para==" + para);
+        Log.i(TAG, "XySoftNetworkUtils==para==" + para);
         return para;
     }
 
@@ -596,10 +596,10 @@ public class HHSoftNetworkUtils {
     public static MultipartBody.Part toFileMultipartBodyPart(String fileKey, String filePath) {
         /*MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);  ///< ParamKey.TOKEN 自定义参数key常量类，即参数
         String contentType = "application/octet-stream";
-        HHSoftFileUtils.FileType fileType = HHSoftFileUtils.fileTypeForImageData(filePath);
-        if (HHSoftFileUtils.FileType.IMAGE_GIF == fileType) {
+        XySoftFileUtils.FileType fileType = XySoftFileUtils.fileTypeForImageData(filePath);
+        if (XySoftFileUtils.FileType.IMAGE_GIF == fileType) {
             contentType = "image/gif";
-        } else if (HHSoftFileUtils.FileType.IMAGE_WEBP == fileType) {
+        } else if (XySoftFileUtils.FileType.IMAGE_WEBP == fileType) {
             contentType = "image/webp";
         }
         File file = new File(filePath);
@@ -611,10 +611,10 @@ public class HHSoftNetworkUtils {
         File file = new File(filePath);
         Log.i(TAG, "toFileMultipartBodyPart==" + filePath+"=="+file.isFile());
         String contentType = "application/octet-stream";
-       /* HHSoftFileUtils.FileType fileType = HHSoftFileUtils.fileTypeForImageData(filePath);
-        if (HHSoftFileUtils.FileType.IMAGE_GIF == fileType) {
+       /* XySoftFileUtils.FileType fileType = XySoftFileUtils.fileTypeForImageData(filePath);
+        if (XySoftFileUtils.FileType.IMAGE_GIF == fileType) {
             contentType = "image/gif";
-        } else if (HHSoftFileUtils.FileType.IMAGE_WEBP == fileType) {
+        } else if (XySoftFileUtils.FileType.IMAGE_WEBP == fileType) {
             contentType = "image/webp";
         }*/
         RequestBody requestBody = RequestBody.create(MediaType.parse(contentType), file);
@@ -623,13 +623,13 @@ public class HHSoftNetworkUtils {
     }
 
     private static class SingletonHolder {
-        static HHSoftNetworkUtils mInstance = new HHSoftNetworkUtils();
+        static XySoftNetworkUtils mInstance = new XySoftNetworkUtils();
 
         private SingletonHolder() {
         }
     }
 
-    public static HHSoftNetworkUtils getInstance() {
+    public static XySoftNetworkUtils getInstance() {
         return SingletonHolder.mInstance;
     }
 }

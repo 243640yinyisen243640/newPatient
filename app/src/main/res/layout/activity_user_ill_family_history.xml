@@ -45,7 +45,7 @@
                 android:textColor="@color/black_24"
                 android:textSize="15sp" />
 
-            <com.vice.bloodpressure.view.HHAtMostGridView
+            <com.vice.bloodpressure.view.XyAtMostGridView
                 android:id="@+id/gv_user_ill_family_history_relationship"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

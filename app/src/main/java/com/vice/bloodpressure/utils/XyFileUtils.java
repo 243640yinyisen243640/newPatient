@@ -33,11 +33,11 @@ import java.nio.channels.FileChannel;
 
 /**
  * @类说明 文件操作类
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/19 16:47
  */
 public class XyFileUtils {
-    private static final String TAG = "HHSoftFileUtils";
+    private static final String TAG = "XySoftFileUtils";
 
     /**
      * 判断SD卡是否装载
@@ -374,7 +374,7 @@ public class XyFileUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            XyLogUtils.e("HHSoftFileUtils", "saveBitmapToFile==" + Log.getStackTraceString(e));
+            XyLogUtils.e("XySoftFileUtils", "saveBitmapToFile==" + Log.getStackTraceString(e));
         }
         return isSuccess;
     }

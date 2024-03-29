@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
 /**
- * @类说明 HHSoftStatusBarUtils
+ * @类说明 XySoftStatusBarUtils
  * @作者
  * @创建日期 2019/8/20 17:20
  */

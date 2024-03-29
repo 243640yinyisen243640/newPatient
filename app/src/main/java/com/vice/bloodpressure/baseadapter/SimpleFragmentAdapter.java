@@ -27,7 +27,7 @@ import com.vice.bloodpressure.utils.longimage.ImageViewState;
 import com.vice.bloodpressure.utils.longimage.SubsamplingScaleImageView;
 import com.vice.bloodpressure.utils.photoview.OnViewTapListener;
 import com.vice.bloodpressure.utils.photoview.PhotoView;
-import com.vice.bloodpressure.utils.widget.HHSoftPictureVideoPlayActivity;
+import com.vice.bloodpressure.utils.widget.XyPictureVideoPlayActivity;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class SimpleFragmentAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         final View contentView = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.hhsoft_picture_image_preview, container, false);
+                .inflate(R.layout.xysoft_picture_image_preview, container, false);
         // 常规图控件
         final PhotoView imageView = contentView.findViewById(R.id.preview_image);
         // 长图控件
@@ -156,7 +156,7 @@ public class SimpleFragmentAdapter extends PagerAdapter {
                     Bundle bundle = new Bundle();
                     bundle.putString("video_path", path);
                     intent.putExtras(bundle);
-                    intent.setClass(mContext, HHSoftPictureVideoPlayActivity.class);
+                    intent.setClass(mContext, XyPictureVideoPlayActivity.class);
                     mContext.startActivity(intent);
                 }
             });

@@ -178,7 +178,7 @@ public final class PictureSelector {
      */
     public void externalPictureVideo(String path) {
         if (!DoubleUtils.isFastDoubleClick()) {
-            Intent intent = new Intent(getActivity(), HHSoftPictureVideoPlayActivity.class);
+            Intent intent = new Intent(getActivity(), XyPictureVideoPlayActivity.class);
             intent.putExtra("video_path", path);
             getActivity().startActivity(intent);
         }

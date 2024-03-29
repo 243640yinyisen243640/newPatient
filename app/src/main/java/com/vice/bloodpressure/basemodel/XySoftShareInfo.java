@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @注意：微博分享图片，imageUrl不传，thumpBitmap必传
  * @注意：QQ分享到好友，imageUrl和thumpBitmap必传其一，imageUrl非空时，thumpBitmap传logo，localImagePath必传
  * @注意：QQ分享到空间，imageUrl和thumpBitmap必传其一，imageUrl非空时，thumpBitmap传logo
- * @作者 hhsoft
+ * @作者
  * @创建日期 2020/7/24 16:28
  */
-public class HHSoftShareInfo {
+public class XySoftShareInfo {
     private String shareTitle;//必传
     private String shareDesc;//必传
     /**

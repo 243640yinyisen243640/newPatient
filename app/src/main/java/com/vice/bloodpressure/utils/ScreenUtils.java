@@ -9,8 +9,8 @@ import android.view.WindowManager;
 import java.lang.reflect.Field;
 
 /**
- * @类说明 HHSoftScreenUtils
- * @作者 hhsoft
+ * @类说明 XySoftScreenUtils
+ * @作者
  * @创建日期 2019/8/19 18:13
  * 注意事项：
  * 一、屏幕显示区域以两种不同的方式描述：包括应用程序的显示区域和实际显示区域

@@ -20,7 +20,7 @@ import com.vice.bloodpressure.R;
  * 创建时间：2018/3/8
  */
 
-public class HHSoftDialog extends Dialog implements View.OnClickListener{
+public class XySoftDialog extends Dialog implements View.OnClickListener{
     protected final Builder builder;
     protected View view;
     protected ImageView iconImageView;
@@ -30,19 +30,19 @@ public class HHSoftDialog extends Dialog implements View.OnClickListener{
     protected TextView actionNegativeTextView;
     protected TextView actionPositiveTextView;
 
-    protected HHSoftDialog(Builder builder) {
-        super(builder.context, HHSoftDialogInit.getTheme(builder));
+    protected XySoftDialog(Builder builder) {
+        super(builder.context, XySoftDialogInit.getTheme(builder));
         this.builder = builder;
         view=View.inflate(builder.context, R.layout.hhsoft_dialog_view,null);
         setContentView(view);
-        HHSoftDialogInit.init(this);
+        XySoftDialogInit.init(this);
         //在这一点之后，不要在生成器中保留上下文引用
         builder.context = null;
     }
 
     @Override
     public void onClick(View v) {
-        HHSoftDialogActionEnum tag = (HHSoftDialogActionEnum) v.getTag();
+        XySoftDialogActionEnum tag = (XySoftDialogActionEnum) v.getTag();
         switch (tag) {
             case POSITIVE:
                 if (builder.onPositiveCallback != null) {
@@ -110,11 +110,11 @@ public class HHSoftDialog extends Dialog implements View.OnClickListener{
             this.negativeColor= ContextCompat.getColor(context,R.color.defaultDialogActionTextColorNegative);
             this.positiveColor= ContextCompat.getColor(context,R.color.defaultDialogActionTextColorPositive);
         }
-        public HHSoftDialog build() {
-            return new HHSoftDialog(this);
+        public XySoftDialog build() {
+            return new XySoftDialog(this);
         }
-        public HHSoftDialog show() {
-            HHSoftDialog dialog = build();
+        public XySoftDialog show() {
+            XySoftDialog dialog = build();
             dialog.show();
             return dialog;
         }
@@ -249,6 +249,6 @@ public class HHSoftDialog extends Dialog implements View.OnClickListener{
         }
     }
     public interface SingleButtonCallback {
-        void onClick(HHSoftDialog dialog, HHSoftDialogActionEnum which);
+        void onClick(XySoftDialog dialog, XySoftDialogActionEnum which);
     }
 }

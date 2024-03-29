@@ -54,7 +54,7 @@ final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
 //            Map<String, String> map = (Map<String, String>) value;
 //            map.put("v","1.0.1");
 //            jsonString=getPostRequestParamString(map);
-//            HHSoftLogUtils.i(TAG, "RequestBody==param:" + jsonString);
+//            XySoftLogUtils.i(TAG, "RequestBody==param:" + jsonString);
 //            return RequestBody.create(MEDIA_TYPE, jsonString);
 //        }else {
 //            Buffer buffer = new Buffer();

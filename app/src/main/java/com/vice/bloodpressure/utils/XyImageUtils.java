@@ -37,7 +37,7 @@ import com.vice.bloodpressure.utils.luban.CompressionPredicate;
 import com.vice.bloodpressure.utils.luban.Luban;
 import com.vice.bloodpressure.utils.luban.OnCompressListener;
 import com.vice.bloodpressure.utils.luban.OnRenameListener;
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
 import com.vice.bloodpressure.utils.widget.PictureSelector;
 
 import java.io.File;
@@ -51,7 +51,7 @@ import static com.bumptech.glide.load.resource.bitmap.VideoDecoder.FRAME_OPTION;
 
 /**
  * @类说明 图片加载工具类
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/21 16:14
  * 注意：
  * 一、在Android P的系统上，所有Http的请求都被默认阻止了，导致glide在9.0加载不出来图片
@@ -271,7 +271,7 @@ public class XyImageUtils {
         clearImageMemoryCache(context);
         String imageExternalCatchDir = context.getExternalCacheDir()
                 + ExternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR;
-        HHSoftFileUtils.deleteFolder(imageExternalCatchDir);
+        XySoftFileUtils.deleteFolder(imageExternalCatchDir);
     }
 
     /**
@@ -336,8 +336,8 @@ public class XyImageUtils {
      *
      * @param context
      * @param sourceImagePath 原图片路径
-     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/HHSoftLib/
-     * @param callBack        压缩回调，压缩成功返回压缩后的路径eg:/storage/emulated/0/HHSoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
+     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/XySoftLib/
+     * @param callBack        压缩回调，压缩成功返回压缩后的路径eg:/storage/emulated/0/XySoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
      */
     public static void compressAsync(Context context, final String sourceImagePath, final String targetDirPath, final Consumer<String> callBack) {
         Luban.with(context)
@@ -381,8 +381,8 @@ public class XyImageUtils {
      *
      * @param context
      * @param sourceImages  原图片路径集合
-     * @param targetDirPath 目标文件夹路径eg:/storage/emulated/0/HHSoftLib/
-     * @param callBack      压缩回调，返回集合，压缩成功返回压缩后的路径eg:/storage/emulated/0/HHSoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
+     * @param targetDirPath 目标文件夹路径eg:/storage/emulated/0/XySoftLib/
+     * @param callBack      压缩回调，返回集合，压缩成功返回压缩后的路径eg:/storage/emulated/0/XySoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
      */
     public static void compressListAsync(Context context, final List<String> sourceImages, String targetDirPath, final Consumer<List<String>> callBack) {
         final List<String> compressImageList = new ArrayList<>();
@@ -394,7 +394,7 @@ public class XyImageUtils {
                 .filter(new CompressionPredicate() {
                     @Override
                     public boolean apply(String path) {
-                        return !(TextUtils.isEmpty(path) || HHSoftFileUtils.FileType.IMAGE_GIF == HHSoftFileUtils.fileTypeForImageData(context, path)) || HHSoftFileUtils.isHttpUrl(path);
+                        return !(TextUtils.isEmpty(path) || XySoftFileUtils.FileType.IMAGE_GIF == XySoftFileUtils.fileTypeForImageData(context, path)) || XySoftFileUtils.isHttpUrl(path);
                     }
                 })
                 .setRenameListener(new OnRenameListener() {
@@ -432,8 +432,8 @@ public class XyImageUtils {
      *
      * @param context
      * @param sourceImagePath 原图片路径
-     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/HHSoftLib/
-     * @return 压缩成功返回压缩后的路径eg:/storage/emulated/0/HHSoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
+     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/XySoftLib/
+     * @return 压缩成功返回压缩后的路径eg:/storage/emulated/0/XySoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
      */
     public static String compressSync(Context context, String sourceImagePath, String targetDirPath) {
         try {
@@ -444,7 +444,7 @@ public class XyImageUtils {
                     .filter(new CompressionPredicate() {
                         @Override
                         public boolean apply(String path) {
-                            return !(TextUtils.isEmpty(path) || HHSoftFileUtils.FileType.IMAGE_GIF == HHSoftFileUtils.fileTypeForImageData(context, path));
+                            return !(TextUtils.isEmpty(path) || XySoftFileUtils.FileType.IMAGE_GIF == XySoftFileUtils.fileTypeForImageData(context, path));
                         }
                     })
                     .setRenameListener(new OnRenameListener() {
@@ -464,8 +464,8 @@ public class XyImageUtils {
      *
      * @param context
      * @param sourceImageList 原图片路径集合
-     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/HHSoftLib/
-     * @return 图片路径集合，压缩成功返回压缩后的路径eg:/storage/emulated/0/HHSoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
+     * @param targetDirPath   目标文件夹路径eg:/storage/emulated/0/XySoftLib/
+     * @return 图片路径集合，压缩成功返回压缩后的路径eg:/storage/emulated/0/XySoftLib/1566460459501169.jpeg；压缩失败返回原路径sourceImagePath
      */
     public static List<String> compressListSync(Context context, List<String> sourceImageList, String targetDirPath) {
         try {
@@ -476,7 +476,7 @@ public class XyImageUtils {
                     .filter(new CompressionPredicate() {
                         @Override
                         public boolean apply(String path) {
-                            return !(TextUtils.isEmpty(path) || HHSoftFileUtils.FileType.IMAGE_GIF == HHSoftFileUtils.fileTypeForImageData(context, path));
+                            return !(TextUtils.isEmpty(path) || XySoftFileUtils.FileType.IMAGE_GIF == XySoftFileUtils.fileTypeForImageData(context, path));
                         }
                     })
                     .setRenameListener(new OnRenameListener() {
@@ -522,7 +522,7 @@ public class XyImageUtils {
      * @param isCompress
      */
     public static void getImagePictureSelector(Context context, int mimeType, int maxCount, boolean isCompress) {
-        HHSoftFileUtils.createDirectory(ConstantParamNew.IMAGE_SAVE_CACHE);
+        XySoftFileUtils.createDirectory(ConstantParamNew.IMAGE_SAVE_CACHE);
         // 进入相册 以下是例子：不需要的api可以不写
         PictureSelector.create((Activity) context).openGallery(mimeType)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .theme(R.style.app_picture_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style

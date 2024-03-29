@@ -15,7 +15,7 @@ import com.vice.bloodpressure.model.BaseLocalDataInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
      */
     private String isAdd;
 
-    private HHAtMostGridView relationshipGridView;
+    private XyAtMostGridView relationshipGridView;
     private CheckBox haveCheckBox;
     private CheckBox noCheckBox;
     private TextView saveTv;

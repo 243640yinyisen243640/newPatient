@@ -153,8 +153,8 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
     protected void onResume() {
         super.onResume();
         if (!checkPermission(PermissionsConstant.PERMISSIONS_CAMERA)) {
-            DialogUtils.showPermissionsDeniedDialog(getPageContext(), getString(R.string.zxing_permission_apply_camera_tip), (hhSoftDialog, hhSoftDialogActionEnum) -> {
-                hhSoftDialog.dismiss();
+            DialogUtils.showPermissionsDeniedDialog(getPageContext(), getString(R.string.zxing_permission_apply_camera_tip), (xySoftDialog, xySoftDialogActionEnum) -> {
+                xySoftDialog.dismiss();
                 finish();
             });
             return;
@@ -273,7 +273,7 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
      * @param imagePath
      */
     private void identificationQRCode(final String imagePath) {
-        //		HHSoftTipUtils.getInstance().showProgressDialog(getPageContext(), R.string.dealing);
+        //		XySoftTipUtils.getInstance().showProgressDialog(getPageContext(), R.string.dealing);
         new Thread(new Runnable() {
 
             @Override
@@ -395,8 +395,8 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
         Log.i("xiao", "displayFrameworkBugMessageAndExit==" + isPermission);
         if (isPermission) {
             DialogUtils.showTipDialog(getPageContext(), getString(R.string.zxing_scan_camera_open_failed),
-                    (hhSoftDialog, hhSoftDialogActionEnum) -> {
-                        hhSoftDialog.dismiss();
+                    (xySoftDialog, xySoftDialogActionEnum) -> {
+                        xySoftDialog.dismiss();
                         finish();
                     });
         } else {
@@ -460,14 +460,14 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
             // Called early, before init even finished
             return null;
         }
-        /*rect.left = rect.left * cameraResolution.y / screenResolution.x - HHSoftDensityUtils.dip2px(getPageContext(), 20);
-        rect.right = rect.right * cameraResolution.y / screenResolution.x + HHSoftDensityUtils.dip2px(getPageContext(), 20);
-        rect.top = rect.top * cameraResolution.x / screenResolution.y - HHSoftDensityUtils.dip2px(getPageContext(), 68) - HHSoftScreenUtils.statusBarHeight(getPageContext());
+        /*rect.left = rect.left * cameraResolution.y / screenResolution.x - XySoftDensityUtils.dip2px(getPageContext(), 20);
+        rect.right = rect.right * cameraResolution.y / screenResolution.x + XySoftDensityUtils.dip2px(getPageContext(), 20);
+        rect.top = rect.top * cameraResolution.x / screenResolution.y - XySoftDensityUtils.dip2px(getPageContext(), 68) - XySoftScreenUtils.statusBarHeight(getPageContext());
         rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;*/
         //        Log.e("chen", "getFramingRectInPreview==" + cameraResolution.x + "==" + cameraResolution.y);
         rect.left = rect.left * cameraResolution.y / screenResolution.x;
         rect.right = rect.right * cameraResolution.y / screenResolution.x;
-        //        rect.top = rect.top * cameraResolution.x / screenResolution.y - HHSoftDensityUtils.dip2px(getPageContext(), 48) - HHSoftScreenUtils.statusBarHeight(getPageContext());
+        //        rect.top = rect.top * cameraResolution.x / screenResolution.y - XySoftDensityUtils.dip2px(getPageContext(), 48) - XySoftScreenUtils.statusBarHeight(getPageContext());
         rect.top = rect.top * cameraResolution.x / screenResolution.y;
         rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
         //        Log.e("chen", "getFramingRectInPreview====" + rect.left + "==" + rect.right + "==" + rect.top + "==" + rect.bottom);
@@ -482,8 +482,8 @@ public final class CaptureActivity extends UIBaseActivity implements OnClickList
                 return null;
             }
 
-            //            MAX_FRAME_WIDTH = HHSoftScreenUtils.realScreenHeight(getPageContext()) / 10 * 9;
-            //            MAX_FRAME_HEIGHT = HHSoftScreenUtils.screenWidth(getPageContext()) / 10 * 9;
+            //            MAX_FRAME_WIDTH = XySoftScreenUtils.realScreenHeight(getPageContext()) / 10 * 9;
+            //            MAX_FRAME_HEIGHT = XySoftScreenUtils.screenWidth(getPageContext()) / 10 * 9;
             //            int width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
             //            int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
             ////            Log.e("chen", "getFramingRect==" + screenResolution.x + "==" + screenResolution.y);

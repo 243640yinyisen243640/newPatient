@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 
 
 public class CommonDialog extends Dialog {
@@ -88,12 +88,12 @@ public class CommonDialog extends Dialog {
         tvBg = findViewById(R.id.tv_oper_bg);
         tvNegative.setOnClickListener(v -> {
             if (callback != null) {
-                callback.onClick(this, HHSoftDialogActionEnum.NEGATIVE);
+                callback.onClick(this, XySoftDialogActionEnum.NEGATIVE);
             }
         });
         tvPositive.setOnClickListener(v -> {
             if (callback != null) {
-                callback.onClick(this, HHSoftDialogActionEnum.POSITIVE);
+                callback.onClick(this, XySoftDialogActionEnum.POSITIVE);
             }
         });
     }
@@ -145,6 +145,6 @@ public class CommonDialog extends Dialog {
     }
 
     public interface SingleButtonCallback {
-        void onClick(CommonDialog dialog, HHSoftDialogActionEnum which);
+        void onClick(CommonDialog dialog, XySoftDialogActionEnum which);
     }
 }

@@ -44,9 +44,9 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 //        showLog(result);
         return (T) result;
 //        String result=value.string();
-//        HHSoftLogUtils.i(TAG,"ResponseBody==convert=="+result);
-////        result= HHSoftEncryptUtils.decodeAES(result);
-////        HHSoftLogUtils.i(TAG,"ResponseBody==convert==decodeAES_B=="+result);
+//        XySoftLogUtils.i(TAG,"ResponseBody==convert=="+result);
+////        result= XySoftEncryptUtils.decodeAES(result);
+////        XySoftLogUtils.i(TAG,"ResponseBody==convert==decodeAES_B=="+result);
 ////        return (T) result;
 ////        return (T) ResponseBody.create(MEDIA_TYPE,result);
 ////        return (T) gson.fromJson(result, BaseModel.class);

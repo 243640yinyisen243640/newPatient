@@ -6,7 +6,7 @@
         android:id="@+id/hhsoft_iv_picture_grid_photo"
         style="@style/HuaHanSoft.Fill"
         android:scaleType="centerCrop"
-        android:src="@drawable/hhsoft_picture_grid_bg" />
+        android:src="@drawable/xysoft_picture_grid_bg" />
     <LinearLayout
         android:id="@+id/hhsoft_ll_picture_grid_select"
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:id="@+id/hhsoft_tv_picture_grid_video"
         style="@style/HuaHanSoft.Wrap"
         android:layout_alignParentBottom="true"
-        android:drawableLeft="@drawable/hhsoft_picture_media_type_video"
+        android:drawableLeft="@drawable/xysoft_picture_media_type_video"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
         android:paddingLeft="5dp"

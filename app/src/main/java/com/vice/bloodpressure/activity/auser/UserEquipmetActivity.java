@@ -17,7 +17,7 @@ import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.EquipmetInfo;
 import com.vice.bloodpressure.modules.zxing.activity.CaptureActivity;
 import com.vice.bloodpressure.utils.DensityUtils;
@@ -93,7 +93,7 @@ public class UserEquipmetActivity extends UIBaseListRecycleViewActivity<Equipmet
                     case R.id.tv_user_equipment_break:
                         DialogUtils.showOperDialog(getPageContext(), "", "是否解除该设备？", "取消", "确定", (dialog, which) -> {
                             dialog.dismiss();
-                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            if (XySoftDialogActionEnum.POSITIVE == which) {
                                 breakEquipmet(getPageListData().get(position).getPkId(), getPageListData().get(position).getDeviceId());
                             }
                         });

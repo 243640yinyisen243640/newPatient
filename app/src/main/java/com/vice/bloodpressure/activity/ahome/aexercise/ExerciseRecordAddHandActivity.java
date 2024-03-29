@@ -17,7 +17,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -177,7 +177,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
             case R.id.iv_exercise_hand_stop_oxy:
                 DialogUtils.showOperDialog(getPageContext(), "", "确定要结束运动吗？", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    if (XySoftDialogActionEnum.POSITIVE == which) {
                         stopExercise();
                     }
                 });

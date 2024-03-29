@@ -434,7 +434,7 @@ public class PictureSelectionModel {
             if (activity == null) {
                 return;
             }
-            Intent intent = new Intent(activity, HHSoftPictureSelectorActivity.class);
+            Intent intent = new Intent(activity, XyPictureSelectorActivity.class);
             Fragment fragment = selector.getFragment();
             if (fragment != null) {
                 fragment.startActivityForResult(intent, requestCode);

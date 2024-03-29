@@ -108,7 +108,7 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
 
                     @Override
                     public void onLoadImage(String imagePath, ImageView imageView) {
-                        //                        HHSoftImageUtils.loadImage(getPageContext(), R.drawable.album_upload, imagePath, imageView);
+                        //                        XySoftImageUtils.loadImage(getPageContext(), R.drawable.album_upload, imagePath, imageView);
 
                     }
 

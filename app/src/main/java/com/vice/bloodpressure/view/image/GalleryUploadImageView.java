@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hhsoft on 2019/2/22.
+ * Created by xysoft on 2019/2/22.
  */
 
 public class GalleryUploadImageView extends LinearLayout {

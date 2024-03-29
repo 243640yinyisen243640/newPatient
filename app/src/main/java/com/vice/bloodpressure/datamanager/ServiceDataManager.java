@@ -11,7 +11,7 @@ import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.ReportNameInfo;
 import com.vice.bloodpressure.retrofit.BaseNetworkUtils;
 import com.vice.bloodpressure.retrofit.BaseResponse;
-import com.vice.bloodpressure.retrofit.HHSoftNetworkUtils;
+import com.vice.bloodpressure.retrofit.XySoftNetworkUtils;
 import com.vice.bloodpressure.view.image.GalleryUploadImageInfo;
 
 import java.util.ArrayList;
@@ -563,7 +563,7 @@ public class ServiceDataManager {
         List<MultipartBody.Part> files = new ArrayList<>();
         if (imagesList != null && imagesList.size() > 0) {
             for (int i = 0; i < imagesList.size(); i++) {
-                files.add(HHSoftNetworkUtils.toFileMultipartBodyPart("files", imagesList.get(i).getThumbImage()));
+                files.add(XySoftNetworkUtils.toFileMultipartBodyPart("files", imagesList.get(i).getThumbImage()));
             }
         }
         return BaseNetworkUtils.uploadImgRequest(false, BaseNetworkUtils.JSON_OBJECT, GalleryInfo.class, "file/upload/v2", map, files, successCallBack, failureCallBack);

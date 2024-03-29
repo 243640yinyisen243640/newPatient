@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.adapter.service;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -83,6 +84,7 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
         //血糖状态 1偏低 2正常 3偏高
         setStatus(info.getValue().get(0).getBgStatus(), holder);
         setStatus(info.getValue().get(1).getBgStatus(), holder);
+        Log.i("yys","info.getValue().get(1).getBgStatus()=="+info.getValue().get(1).getBgStatus());
         setStatus(info.getValue().get(2).getBgStatus(), holder);
         setStatus(info.getValue().get(3).getBgStatus(), holder);
         setStatus(info.getValue().get(4).getBgStatus(), holder);
@@ -114,6 +116,7 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
      * @param holder
      */
     private void setStatus(String status, ViewHolder holder) {
+        Log.i("yys","status=="+status);
         if ("1".equals(status)) {
             holder.dawnTextView.setTextColor(context.getResources().getColor(R.color.blue_4B));
         } else if ("2".equals(status)) {

@@ -217,7 +217,6 @@ public class ServiceBloodAddActivity extends UIBaseActivity implements View.OnCl
 
 
     private void sureToAddData() {
-        Log.i("yys", "optionAdd==" + optionAdd + "sugarValue==" + sugarValue + "addTime==" + addTime);
         if (optionAdd == -1) {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择测量时间段");
             return;

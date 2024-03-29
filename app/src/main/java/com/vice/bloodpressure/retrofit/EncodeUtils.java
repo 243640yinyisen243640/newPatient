@@ -11,11 +11,11 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @类说明 编码/解码工具类
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/18 17:44
  */
 public class EncodeUtils {
-    public static final String TAG = "HHSoftEncodeUtils";
+    public static final String TAG = "XySoftEncodeUtils";
 
     /**
      * Base64编码：对字符串进行base64编码，默认的编方式是utf-8

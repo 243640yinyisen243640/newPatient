@@ -25,7 +25,7 @@
                 android:layout_height="150dp" />
 
 
-            <com.vice.bloodpressure.view.HHAtMostGridView
+            <com.vice.bloodpressure.view.XyAtMostGridView
                 android:id="@+id/gv_heat_proportion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

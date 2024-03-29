@@ -30,7 +30,7 @@ import retrofit2.http.Url;
  * @类说明 Retrofit生成接口
  * 一、FormUrlEncoded  不需要上传文件
  * 二、Multipart  图文上传：每个键值对都需要用@Part注解键名字
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/2 17:38
  */
 public interface RetrofitService {

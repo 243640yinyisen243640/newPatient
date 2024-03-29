@@ -24,7 +24,7 @@ import com.vice.bloodpressure.model.AdvertInfo;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.banner.CommonBannerAdvertClickListener;
 import com.vice.bloodpressure.utils.banner.CommonBannerAdvertViewHolder;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class ServiceMainFragment extends UIBaseLoadFragment {
     private BannerView bannerView;
-    private HHAtMostGridView gridView;
+    private XyAtMostGridView gridView;
     private TextView mallAreaTextView;
     private TextView videoAreaTextView;
 

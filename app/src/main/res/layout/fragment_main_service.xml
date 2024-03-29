@@ -34,7 +34,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
-        <com.vice.bloodpressure.view.HHAtMostGridView
+        <com.vice.bloodpressure.view.XyAtMostGridView
             android:id="@+id/gv_service_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

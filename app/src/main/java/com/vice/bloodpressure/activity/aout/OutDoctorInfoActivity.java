@@ -13,7 +13,7 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.OutDataManager;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.DoctorInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
@@ -82,14 +82,14 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
             if (doctorInfoOther.bindExternal()) {
                 DialogUtils.showOperDialog(getPageContext(), "", "确认解绑该医生吗？", "我在想想", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    if (XySoftDialogActionEnum.POSITIVE == which) {
                         unBindDoctor();
                     }
                 });
             } else {
                 DialogUtils.showOperDialog(getPageContext(), "", "确认绑定该医生吗？", "我在想想", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    if (XySoftDialogActionEnum.POSITIVE == which) {
                         bindDoctor();
                     }
                 });
@@ -97,7 +97,7 @@ public class OutDoctorInfoActivity extends UIBaseLoadActivity {
                 //                if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID, ""))) {
                 //                    DialogUtils.showOperDialog(getPageContext(), "", "确认绑定该医生吗？", "我在想想", "确定", (dialog, which) -> {
                 //                        dialog.dismiss();
-                //                        if (HHSoftDialogActionEnum.POSITIVE == which) {
+                //                        if (XySoftDialogActionEnum.POSITIVE == which) {
                 //                            bindDoctor();
                 //                        }
                 //                    });

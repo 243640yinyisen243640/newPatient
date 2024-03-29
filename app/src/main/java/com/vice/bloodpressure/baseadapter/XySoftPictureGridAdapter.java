@@ -24,14 +24,14 @@ import com.vice.bloodpressure.utils.config.PictureConfig;
 import com.vice.bloodpressure.utils.config.PictureMimeType;
 import com.vice.bloodpressure.utils.config.PictureSelectionConfig;
 import com.vice.bloodpressure.utils.entity.LocalMedia;
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
 import com.vice.bloodpressure.utils.tools.SdkVersionUtils;
 import com.vice.bloodpressure.utils.tools.ToastManage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class XySoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private PictureSelectionConfig config;
     private List<LocalMedia> photos = new ArrayList<>();
     private List<LocalMedia> selectedPhotos = new ArrayList<>();
@@ -49,7 +49,7 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
      */
     private boolean isGo;
 
-    public HHSoftPictureGridAdapter(Context context, PictureSelectionConfig config) {
+    public XySoftPictureGridAdapter(Context context, PictureSelectionConfig config) {
         this.context = context;
         this.config = config;
         this.showCamera = config.isCamera;
@@ -66,7 +66,7 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.hhsoft_picture_item_grid, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.xysoft_picture_item_grid, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -75,7 +75,7 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
         ViewHolder holder = (ViewHolder) viewHolder;
         if (getItemViewType(position) == PictureConfig.TYPE_CAMERA) {
             //首个拍摄功能
-            holder.photoImageView.setImageResource(R.drawable.hhsoft_picture_camera);
+            holder.photoImageView.setImageResource(R.drawable.xysoft_picture_camera);
             holder.checkImageView.setVisibility(View.GONE);
             holder.gifTextView.setVisibility(View.GONE);
             holder.videoTextView.setVisibility(View.GONE);
@@ -106,7 +106,7 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
             }
             options.diskCacheStrategy(DiskCacheStrategy.ALL);
             options.centerCrop();
-            options.placeholder(R.drawable.hhsoft_picture_grid_bg);
+            options.placeholder(R.drawable.xysoft_picture_grid_bg);
 //            Log.e("chen","onBindViewHolder=="+media.getPath());
             Glide.with(context)
                     .asBitmap()
@@ -303,24 +303,24 @@ public class HHSoftPictureGridAdapter extends RecyclerView.Adapter<RecyclerView.
         //checkedAndroid_Q不开启
 //        hasMediaFile==/storage/emulated/0/DCIM/Camera/IMG20210130103635.jpg==/storage/emulated/0/DCIM/Camera/IMG20210130103635.jpg
         if (TextUtils.isEmpty(newPath)) {
-            if (!HHSoftFileUtils.isContentUriExists(context, Uri.parse(path))) {
+            if (!XySoftFileUtils.isContentUriExists(context, Uri.parse(path))) {
                 ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                 return false;
             }
         } else {
-            if (!HHSoftFileUtils.isFileExist(newPath)) {
+            if (!XySoftFileUtils.isFileExist(newPath)) {
                 ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                 return false;
             }
         }*/
 
         if (SdkVersionUtils.checkedUriScheme_CONTENT(Uri.parse(path))) {
-            if (!HHSoftFileUtils.isContentUriExists(context, Uri.parse(path))) {
+            if (!XySoftFileUtils.isContentUriExists(context, Uri.parse(path))) {
                 ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                 return false;
             }
         } else {
-            if (!HHSoftFileUtils.isFileExist(path)) {
+            if (!XySoftFileUtils.isFileExist(path)) {
                 ToastManage.s(context, PictureMimeType.s(context, mediaMimeType));
                 return false;
             }

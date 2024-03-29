@@ -43,7 +43,7 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        mHandler = new HHSoftBaseHandler(this);
+        mHandler = new XySoftBaseHandler(this);
     }
 
     @Override
@@ -200,10 +200,10 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
 
     }
 
-    private class HHSoftBaseHandler extends Handler {
+    private class XySoftBaseHandler extends Handler {
         private WeakReference<BaseActivity> activityWeakReference;
 
-        public HHSoftBaseHandler(BaseActivity activityWeakReference) {
+        public XySoftBaseHandler(BaseActivity activityWeakReference) {
             this.activityWeakReference = new WeakReference<>(activityWeakReference);
         }
 

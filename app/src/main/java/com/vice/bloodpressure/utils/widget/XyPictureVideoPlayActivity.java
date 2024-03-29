@@ -15,7 +15,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.BaseActivity;
 
 
-public class HHSoftPictureVideoPlayActivity extends BaseActivity implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, View.OnClickListener {
+public class XyPictureVideoPlayActivity extends BaseActivity implements MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, View.OnClickListener {
     private String video_path = "";
     private ImageView picture_left_back;
     private MediaController mMediaController;
@@ -27,7 +27,7 @@ public class HHSoftPictureVideoPlayActivity extends BaseActivity implements Medi
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hhsoft_picture_activity_video_play);
+        setContentView(R.layout.xysoft_picture_activity_video_play);
         video_path = getIntent().getStringExtra("video_path");
         picture_left_back = (ImageView) findViewById(R.id.picture_left_back);
         mVideoView = (VideoView) findViewById(R.id.video_view);

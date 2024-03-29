@@ -40,7 +40,7 @@ import java.util.List;
  * email：893855882@qq.com
  * data：16/12/31
  */
-public class HHSoftPicturePreviewActivity extends HHSoftPictureBaseActivity implements
+public class XyPicturePreviewActivity extends XyPictureBaseActivity implements
         View.OnClickListener, Animation.AnimationListener, SimpleFragmentAdapter.OnCallBackActivity {
     private ImageView picture_left_back;
     private TextView tv_img_num, tv_title, tv_ok;
@@ -87,7 +87,7 @@ public class HHSoftPicturePreviewActivity extends HHSoftPictureBaseActivity impl
         super.onCreate(savedInstanceState);
         numComplete = AttrsUtils.getTypeValueBoolean(this,
                 R.attr.picture_style_numComplete);
-        setContentView(R.layout.hhsoft_picture_activity_preview);
+        setContentView(R.layout.xysoft_picture_activity_preview);
         if (!RxBus.getDefault().isRegistered(this)) {
             RxBus.getDefault().register(this);
         }

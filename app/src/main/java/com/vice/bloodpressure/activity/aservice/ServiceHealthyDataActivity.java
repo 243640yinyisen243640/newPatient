@@ -10,7 +10,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.adapter.service.SerciveDataShowAdapter;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.model.AdvertInfo;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ import java.util.List;
  * 描述:
  */
 public class ServiceHealthyDataActivity extends UIBaseActivity {
-    private HHAtMostGridView normalGridView;
-    private HHAtMostGridView otherGridView;
+    private XyAtMostGridView normalGridView;
+    private XyAtMostGridView otherGridView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

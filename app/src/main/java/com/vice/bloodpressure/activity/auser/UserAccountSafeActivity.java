@@ -12,7 +12,7 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.login.LoginActivity;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
@@ -60,7 +60,7 @@ public class UserAccountSafeActivity extends UIBaseActivity implements View.OnCl
             case R.id.ll_user_account_off:
                 DialogUtils.showOperDialog(getPageContext(), "", "确定要注销吗？", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
-                    if (HHSoftDialogActionEnum.POSITIVE == which) {
+                    if (XySoftDialogActionEnum.POSITIVE == which) {
                         sureToOffAccount();
                     }
                 });

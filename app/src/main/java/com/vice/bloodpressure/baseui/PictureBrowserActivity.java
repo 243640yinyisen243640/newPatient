@@ -43,8 +43,8 @@ import com.vice.bloodpressure.utils.longimage.ImageSource;
 import com.vice.bloodpressure.utils.longimage.ImageViewState;
 import com.vice.bloodpressure.utils.longimage.SubsamplingScaleImageView;
 import com.vice.bloodpressure.utils.photoview.PhotoView;
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
-import com.vice.bloodpressure.utils.widget.HHSoftPictureVideoPlayActivity;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
+import com.vice.bloodpressure.utils.widget.XyPictureVideoPlayActivity;
 import com.vice.bloodpressure.utils.widget.PreviewViewPager;
 
 import java.io.File;
@@ -81,7 +81,7 @@ public class PictureBrowserActivity extends UIBaseActivity {
     }
 
     private void initView() {
-        View view = View.inflate(getPageContext(), R.layout.hhsoft_base_activity_picture_browser, null);
+        View view = View.inflate(getPageContext(), R.layout.xysoft_base_activity_picture_browser, null);
         viewPager = view.findViewById(R.id.viewpage);
         backTextView = view.findViewById(R.id.tv_browser_back);
         titleTextView = view.findViewById(R.id.tv_browser_position);
@@ -94,7 +94,7 @@ public class PictureBrowserActivity extends UIBaseActivity {
         imageList = (List<? extends IImageBrower>) getIntent().getSerializableExtra(FLAG_IMAGE_LIST);
         for (int i = 0; i < imageList.size(); i++) {
             //判断是不是本地路径
-            if (!HHSoftFileUtils.isHttpUrl(imageList.get(i).bigImage())) {
+            if (!XySoftFileUtils.isHttpUrl(imageList.get(i).bigImage())) {
                 downloadTextView.setVisibility(View.GONE);
             } else {
                 downloadTextView.setVisibility(View.VISIBLE);
@@ -210,14 +210,14 @@ class PictureBrowserAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = View.inflate(context, R.layout.hhsoft_base_item_picture_browser, null);
+        View view = View.inflate(context, R.layout.xysoft_base_item_picture_browser, null);
         PhotoView photoView = view.findViewById(R.id.photoview);
         SubsamplingScaleImageView longImgView = view.findViewById(R.id.longImg);
         ImageView playImageView = view.findViewById(R.id.iv_video_play);
         ProgressBar progressBar = view.findViewById(R.id.progress_browser);
         IImageBrower image = images.get(position);
         String bigImagePath = image.bigImage();
-        if (HHSoftFileUtils.isHttpUrl(bigImagePath)) {
+        if (XySoftFileUtils.isHttpUrl(bigImagePath)) {
             progressBar.setVisibility(View.VISIBLE);
         }
         if ("2".equals(image.imageType())) {
@@ -260,7 +260,7 @@ class PictureBrowserAdapter extends PagerAdapter {
     }
 
     public static void pictureVideoPlay(Context context, String videoPath) {
-        Intent intent = new Intent(context, HHSoftPictureVideoPlayActivity.class);
+        Intent intent = new Intent(context, XyPictureVideoPlayActivity.class);
         intent.putExtra("video_path", videoPath);
         context.startActivity(intent);
     }

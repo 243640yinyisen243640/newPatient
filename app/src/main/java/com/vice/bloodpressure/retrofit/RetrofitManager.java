@@ -23,11 +23,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * @类说明 Retrofit管理类
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/2 17:32
  */
 public class RetrofitManager {
-    private static final String TAG="HHSoftRetrofitManager";
+    private static final String TAG="XySoftRetrofitManager";
     private static final int DEFAULT_TIME_OUT =20;//5s
     private static final int DEFAULT_READ_TIME_OUT=10;//10s
     private Map<String, Retrofit> mRetrofitMap;

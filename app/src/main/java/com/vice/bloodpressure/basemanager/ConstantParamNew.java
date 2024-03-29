@@ -3,7 +3,7 @@ package com.vice.bloodpressure.basemanager;
 import android.annotation.SuppressLint;
 import android.os.Environment;
 
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
 
 public class ConstantParamNew {
     public static final String SERVER_VERSION = "210601";
@@ -33,7 +33,7 @@ public class ConstantParamNew {
      */
     @SuppressLint("SdCardPath")
     private static String getBaseCacheDir() {
-        if (HHSoftFileUtils.isSDExist()) {
+        if (XySoftFileUtils.isSDExist()) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + CACHR_DIR_NAME + "/";
         } else {
             return "/data/data/" + PACKAGE_NAME + "/" + CACHR_DIR_NAME + "/";

@@ -9,21 +9,21 @@ import androidx.appcompat.widget.AppCompatImageView;
 /**
  * 类描述：
  * 类传参：
- * 创建人：xiao
+ * 创建人：
  * 创建时间：2018/3/5
  */
 
-public class HHSoftLoadingCircleView extends AppCompatImageView {
+public class XySoftLoadingCircleView extends AppCompatImageView {
     private AnimationDrawable mAnimationDrawable;
-    public HHSoftLoadingCircleView(Context context) {
+    public XySoftLoadingCircleView(Context context) {
         super(context);
     }
 
-    public HHSoftLoadingCircleView(Context context, AttributeSet attrs) {
+    public XySoftLoadingCircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public HHSoftLoadingCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XySoftLoadingCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -99,7 +99,7 @@
                         android:textColor="@color/black_24"
                         android:textSize="15sp" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_important"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                         android:textColor="@color/black_24"
                         android:textSize="15sp" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_important_gao_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                         android:textColor="@color/black_24"
                         android:textSize="15sp" />
 
-                    <com.vice.bloodpressure.view.HHAtMostGridView
+                    <com.vice.bloodpressure.view.XyAtMostGridView
                         android:id="@+id/gv_user_ill_important_gao_level"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

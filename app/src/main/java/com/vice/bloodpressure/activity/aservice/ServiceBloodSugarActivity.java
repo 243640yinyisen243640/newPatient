@@ -24,7 +24,8 @@ import retrofit2.Call;
 /**
  * 作者: beauty
  * 类名:
- * 传参:beginTime 时间    timeType  传过来的1...8  # 1 空腹
+ * 传参:beginTime 时间    timeType  传过来的1...8
+ * # 1 空腹
  * # 2 早餐后
  * # 3 午餐前
  * # 4 午餐后

@@ -26,7 +26,7 @@ import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     /**
      * 疾病类型的糖尿病
      */
-    private HHAtMostGridView tangTypeGridView;
+    private XyAtMostGridView tangTypeGridView;
     /**
      * 疾病类型的糖尿病
      */
@@ -61,11 +61,11 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
     /**
      * 疾病类型的高血压的程度
      */
-    private HHAtMostGridView typeGridView;
+    private XyAtMostGridView typeGridView;
     /**
      * 疾病类型的高血压的等级
      */
-    private HHAtMostGridView levelGridView;
+    private XyAtMostGridView levelGridView;
     /**
      * 时间
      */

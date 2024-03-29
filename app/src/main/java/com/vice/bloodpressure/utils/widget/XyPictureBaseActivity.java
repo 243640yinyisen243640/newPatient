@@ -29,7 +29,7 @@ import com.vice.bloodpressure.utils.entity.EventEntity;
 import com.vice.bloodpressure.utils.entity.LocalMedia;
 import com.vice.bloodpressure.utils.rxbus2.RxBus;
 import com.vice.bloodpressure.utils.rxbus2.RxUtils;
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
 import com.vice.bloodpressure.utils.tools.PictureFileUtils;
 import com.vice.bloodpressure.utils.tools.SdkVersionUtils;
 
@@ -43,7 +43,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class HHSoftPictureBaseActivity extends UIBaseActivity {
+public class XyPictureBaseActivity extends UIBaseActivity {
 
     protected PictureSelectionConfig config;
     protected String originalPath;
@@ -83,7 +83,7 @@ public class HHSoftPictureBaseActivity extends UIBaseActivity {
                                         .filter(new CompressionPredicate() {
                                             @Override
                                             public boolean apply(String path) {
-                                                return !(TextUtils.isEmpty(path) || HHSoftFileUtils.FileType.IMAGE_GIF == HHSoftFileUtils.fileTypeForImageData(getPageContext(), path));
+                                                return !(TextUtils.isEmpty(path) || XySoftFileUtils.FileType.IMAGE_GIF == XySoftFileUtils.fileTypeForImageData(getPageContext(), path));
                                             }
                                         })
                                         .get();
@@ -103,7 +103,7 @@ public class HHSoftPictureBaseActivity extends UIBaseActivity {
                     .filter(new CompressionPredicate() {
                         @Override
                         public boolean apply(String path) {
-                            return !(TextUtils.isEmpty(path) || HHSoftFileUtils.FileType.IMAGE_GIF == HHSoftFileUtils.fileTypeForImageData(getPageContext(), path));
+                            return !(TextUtils.isEmpty(path) || XySoftFileUtils.FileType.IMAGE_GIF == XySoftFileUtils.fileTypeForImageData(getPageContext(), path));
                         }
                     })
                     .setCompressListener(new OnCompressListener() {
@@ -177,7 +177,7 @@ public class HHSoftPictureBaseActivity extends UIBaseActivity {
                         int mediaMimeType = PictureMimeType.isPictureType(media.getPictureType());
                         if (PictureConfig.TYPE_VIDEO == mediaMimeType) {
                             File copyFile = getOutputMediaFile(PictureMimeType.ofVideo());
-                            boolean isSuccess = HHSoftFileUtils.copyFile(getPageContext(), Uri.parse(media.getPath()), copyFile.getAbsolutePath());
+                            boolean isSuccess = XySoftFileUtils.copyFile(getPageContext(), Uri.parse(media.getPath()), copyFile.getAbsolutePath());
                             if (isSuccess) {
                                 media.setPath(copyFile.getAbsolutePath());
                             }
@@ -188,7 +188,7 @@ public class HHSoftPictureBaseActivity extends UIBaseActivity {
                                 media.setPath(media.getCutPath());
                             } else {
                                 File copyFile = getOutputMediaFile(PictureMimeType.ofImage());
-                                boolean isSuccess = HHSoftFileUtils.copyFile(getPageContext(), Uri.parse(media.getPath()), copyFile.getAbsolutePath());
+                                boolean isSuccess = XySoftFileUtils.copyFile(getPageContext(), Uri.parse(media.getPath()), copyFile.getAbsolutePath());
                                 if (isSuccess) {
                                     media.setPath(copyFile.getAbsolutePath());
                                 }

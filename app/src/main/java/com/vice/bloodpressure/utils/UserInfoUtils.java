@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @类说明 UserInfoUtils
- * @作者 hhsoft
+ * @作者
  * @创建日期 2018/12/4 15:05
  */
 public class UserInfoUtils {
@@ -28,7 +28,7 @@ public class UserInfoUtils {
      */
     public static String getClientID(Context context) {
         String clientID = SharedPreferencesUtils.getInfo(context, SharedPreferencesConstant.CLIENT_ID);
-        return TextUtils.isEmpty(clientID) ? HHSoftSystemUtils.deviceToken(context) : clientID;
+        return TextUtils.isEmpty(clientID) ? XySoftSystemUtils.deviceToken(context) : clientID;
     }
 
 

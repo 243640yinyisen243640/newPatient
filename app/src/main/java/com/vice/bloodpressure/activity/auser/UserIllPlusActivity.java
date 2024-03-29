@@ -25,7 +25,7 @@ import com.vice.bloodpressure.utils.PickerViewUtils;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
-import com.vice.bloodpressure.view.HHAtMostGridView;
+import com.vice.bloodpressure.view.XyAtMostGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class UserIllPlusActivity extends UIBaseLoadActivity {
     private String isAdd;
 
     private FlexboxLayout typeFl;
-    private HHAtMostGridView typeGridView;
+    private XyAtMostGridView typeGridView;
     private TextView typeTextView;
     private TextView timeTv;
     private TextView saveTv;

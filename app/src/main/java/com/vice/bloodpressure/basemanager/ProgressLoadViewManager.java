@@ -49,7 +49,7 @@ public class ProgressLoadViewManager implements LoadViewInterface {
         this.mContext = context;
         this.mPageLoadInterface = pageLoad;
         //实例化加载的页面
-        mLoadingView = View.inflate(context, R.layout.hhsoft_include_load_view_progress, null);
+        mLoadingView = View.inflate(context, R.layout.xysoft_include_load_view_progress, null);
         mLoadingImageView = mLoadingView.findViewById(R.id.huahansoft_iv_loading_second);
         mLoadingTextView = mLoadingView.findViewById(R.id.huahansoft_tv_loading_second);
     }
@@ -203,7 +203,7 @@ public class ProgressLoadViewManager implements LoadViewInterface {
         String msg = "";
         //用户没有为单独的页面设置显示的图片和现实的文本
         if (hhLoadViewInfo == null) {
-//            HHSoftLoadViewInfo loadViewInfo = HuaHanSoftConstantParam.loadViewMap.get(state);
+//            XySoftLoadViewInfo loadViewInfo = HuaHanSoftConstantParam.loadViewMap.get(state);
             LoadViewInfo loadViewInfo = null;
             //用户没有为整个App设置显示的图片和文本
             if (loadViewInfo == null) {

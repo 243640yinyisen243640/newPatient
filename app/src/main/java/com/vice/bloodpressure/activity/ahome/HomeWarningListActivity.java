@@ -21,7 +21,7 @@ import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.datamanager.UserDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.MessageInfo;
 import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.DialogUtils;
@@ -132,7 +132,7 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                 case R.id.tv_warning_delete:
                     DialogUtils.showOperDialog(getPageContext(), "", "确认要删除吗？", "我在想想", "确定", (dialog, which) -> {
                         dialog.dismiss();
-                        if (HHSoftDialogActionEnum.POSITIVE == which) {
+                        if (XySoftDialogActionEnum.POSITIVE == which) {
                             deleteOneMessage(position);
                         }
                     });
@@ -272,4 +272,14 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
         addRequestCallToMap("readWarningList", requestCall);
     }
 
+
+    @Override
+    protected boolean isLoadMore() {
+        return false;
+    }
+
+    @Override
+    protected boolean isRefresh() {
+        return false;
+    }
 }

@@ -16,12 +16,12 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.vice.bloodpressure.R;
-import com.vice.bloodpressure.view.HHSoftLoadingCircleView;
+import com.vice.bloodpressure.view.XySoftLoadingCircleView;
 
 
 /**
  * @类说明 用于显示Toast提示和ProgressDialog提示的工具类
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/22 16:44
  */
 public class ToastUtils {
@@ -35,7 +35,7 @@ public class ToastUtils {
     private Dialog mProgressDialog;
     //显示Dialog的内容
     private TextView mDialogContentTextView;
-    private HHSoftLoadingCircleView mDialogLoadingImageView;
+    private XySoftLoadingCircleView mDialogLoadingImageView;
     // 主线程的Handler对象
     private Handler mHandler;
 
@@ -115,7 +115,7 @@ public class ToastUtils {
             view.setOrientation(LinearLayout.HORIZONTAL);
             view.setGravity(Gravity.CENTER_VERTICAL);
             view.setBackgroundResource(R.drawable.base_shape_dialog_tip_bg);
-            mDialogLoadingImageView = new HHSoftLoadingCircleView(context);
+            mDialogLoadingImageView = new XySoftLoadingCircleView(context);
             mDialogLoadingImageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             mDialogLoadingImageView.setBackgroundResource(R.drawable.loading_progress_bar);
             view.addView(mDialogLoadingImageView);

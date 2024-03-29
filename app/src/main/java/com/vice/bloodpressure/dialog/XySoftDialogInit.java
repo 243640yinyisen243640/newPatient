@@ -15,12 +15,12 @@ import com.vice.bloodpressure.R;
  * 创建时间：2018/3/8
  */
 
-public class HHSoftDialogInit {
-    public static int getTheme(HHSoftDialog.Builder builder) {
+public class XySoftDialogInit {
+    public static int getTheme(XySoftDialog.Builder builder) {
         return R.style.HuaHanSoft_Dialog_Base;
     }
 
-    public static void init(HHSoftDialog dialog) {
+    public static void init(XySoftDialog dialog) {
         dialog.iconImageView = dialog.view.findViewById(R.id.huahansoft_iv_dialog_icon);
         dialog.iconImageView = dialog.view.findViewById(R.id.huahansoft_iv_dialog_icon);
         dialog.titleTextView = dialog.view.findViewById(R.id.huahansoft_tv_dialog_title);
@@ -28,7 +28,7 @@ public class HHSoftDialogInit {
         dialog.actionNeutralTextView = dialog.view.findViewById(R.id.huahansoft_tv_dialog_action_neutral);
         dialog.actionNegativeTextView = dialog.view.findViewById(R.id.huahansoft_tv_dialog_action_negative);
         dialog.actionPositiveTextView = dialog.view.findViewById(R.id.huahansoft_tv_dialog_action_positive);
-        final HHSoftDialog.Builder builder = dialog.builder;
+        final XySoftDialog.Builder builder = dialog.builder;
         if (dialog.iconImageView != null) {
             if (builder.icon != null) {
                 dialog.iconImageView.setVisibility(View.VISIBLE);
@@ -58,7 +58,7 @@ public class HHSoftDialogInit {
                 dialog.actionNeutralTextView.setVisibility(View.VISIBLE);
                 dialog.actionNeutralTextView.setText(builder.neutralText);
                 dialog.actionNeutralTextView.setTextColor(builder.neutralColor);
-                dialog.actionNeutralTextView.setTag(HHSoftDialogActionEnum.NEUTRAL);
+                dialog.actionNeutralTextView.setTag(XySoftDialogActionEnum.NEUTRAL);
                 dialog.actionNeutralTextView.setOnClickListener(dialog);
             } else {
                 dialog.actionNeutralTextView.setVisibility(View.INVISIBLE);
@@ -69,7 +69,7 @@ public class HHSoftDialogInit {
                 dialog.actionNegativeTextView.setVisibility(View.VISIBLE);
                 dialog.actionNegativeTextView.setText(builder.negativeText);
                 dialog.actionNegativeTextView.setTextColor(builder.negativeColor);
-                dialog.actionNegativeTextView.setTag(HHSoftDialogActionEnum.NEGATIVE);
+                dialog.actionNegativeTextView.setTag(XySoftDialogActionEnum.NEGATIVE);
                 dialog.actionNegativeTextView.setOnClickListener(dialog);
             } else {
                 dialog.actionNegativeTextView.setVisibility(View.GONE);
@@ -80,7 +80,7 @@ public class HHSoftDialogInit {
                 dialog.actionPositiveTextView.setVisibility(View.VISIBLE);
                 dialog.actionPositiveTextView.setText(builder.positiveText);
                 dialog.actionPositiveTextView.setTextColor(builder.positiveColor);
-                dialog.actionPositiveTextView.setTag(HHSoftDialogActionEnum.POSITIVE);
+                dialog.actionPositiveTextView.setTag(XySoftDialogActionEnum.POSITIVE);
                 dialog.actionPositiveTextView.setOnClickListener(dialog);
             } else {
                 dialog.actionPositiveTextView.setVisibility(View.GONE);

@@ -22,7 +22,7 @@ import com.vice.bloodpressure.activity.auser.UserSetActivity;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseFragment;
 import com.vice.bloodpressure.datamanager.UserDataManager;
-import com.vice.bloodpressure.dialog.HHSoftDialogActionEnum;
+import com.vice.bloodpressure.dialog.XySoftDialogActionEnum;
 import com.vice.bloodpressure.model.UserInfo;
 import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
@@ -295,7 +295,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                     } else {
                         DialogUtils.showOperDialog(getPageContext(), "", "您还没有绑定医生", "我在想想", "去绑定", (dialog, which) -> {
                             dialog.dismiss();
-                            if (HHSoftDialogActionEnum.POSITIVE == which) {
+                            if (XySoftDialogActionEnum.POSITIVE == which) {
                                 if (getActivity() != null) {
                                     Intent mainIntent = new Intent(getPageContext(), MainActivity.class);
                                     mainIntent.putExtra("checkId", 2);

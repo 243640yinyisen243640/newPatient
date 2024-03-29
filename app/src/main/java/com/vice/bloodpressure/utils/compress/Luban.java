@@ -12,7 +12,7 @@ import android.util.Log;
 
 import com.vice.bloodpressure.utils.config.PictureMimeType;
 import com.vice.bloodpressure.utils.entity.LocalMedia;
-import com.vice.bloodpressure.utils.tools.HHSoftFileUtils;
+import com.vice.bloodpressure.utils.tools.XySoftFileUtils;
 import com.vice.bloodpressure.utils.tools.PictureFileUtils;
 import com.vice.bloodpressure.utils.tools.SdkVersionUtils;
 
@@ -217,10 +217,10 @@ public class Luban implements Handler.Callback {
                 //修改后
                 if (SdkVersionUtils.checkedUriScheme_CONTENT(Uri.parse(streamProvider.getPath()))) {
                     result = getImageCacheFile(context, Checker.SINGLE.extSuffix(streamProvider));
-                    HHSoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
+                    XySoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
                 } else {
                     result = getImageCacheFile(context, Checker.SINGLE.extSuffix(streamProvider));
-                    HHSoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
+                    XySoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
                 }
             }
         } else {
@@ -233,10 +233,10 @@ public class Luban implements Handler.Callback {
             } else {
                 if (SdkVersionUtils.checkedUriScheme_CONTENT(Uri.parse(streamProvider.getPath()))) {
                     result = getImageCacheFile(context, Checker.SINGLE.extSuffix(streamProvider));
-                    HHSoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
+                    XySoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
                 } else {
                     result = getImageCacheFile(context, Checker.SINGLE.extSuffix(streamProvider));
-                    HHSoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
+                    XySoftFileUtils.copyFile(context, Uri.parse(streamProvider.getPath()), result.getAbsolutePath());
                 }
             }
         }

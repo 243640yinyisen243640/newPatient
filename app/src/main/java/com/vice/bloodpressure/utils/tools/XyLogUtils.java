@@ -4,7 +4,7 @@ import android.util.Log;
 
 /**
  * @类说明 打印信息, 默认打印所有的信息
- * @作者 hhsoft
+ * @作者
  * @创建日期 2019/8/18 17:44
  */
 public class XyLogUtils {
