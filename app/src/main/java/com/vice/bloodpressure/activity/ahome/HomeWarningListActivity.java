@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aservice.ServiceBloodListActivity;
+import com.vice.bloodpressure.activity.aservice.ServicePressureListActivity;
 import com.vice.bloodpressure.adapter.home.HomeWarningListAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
@@ -140,8 +141,14 @@ public class HomeWarningListActivity extends UIBaseListRecycleViewActivity<Messa
                     break;
                 //获取更多数据
                 case R.id.tv_warning_more:
-                    Intent intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
-                    startActivity(intent);
+                    // 1血糖数据  2 血压数据
+                    if ("1".equals(getPageListData().get(position).getType())){
+                        Intent intent = new Intent(getPageContext(), ServiceBloodListActivity.class);
+                        startActivity(intent);
+                    }else {
+                        startActivity(new Intent(getPageContext(), ServicePressureListActivity.class));
+                    }
+
                     break;
                 default:
                     break;
