@@ -50,8 +50,10 @@ public class HomeWarningListAdapter extends RecyclerView.Adapter<HomeWarningList
         // 1血糖数据  2 血压数据
         if ("1".equals(info.getType())) {
             holder.titleTextView.setText("血糖");
+            holder.moreTextView.setText("更多血糖数据");
         } else {
             holder.titleTextView.setText("血压");
+            holder.moreTextView.setText("更多血压数据");
         }
         holder.numTextView.setText(info.getValue());
         holder.unitTextView.setText(info.getUnit());

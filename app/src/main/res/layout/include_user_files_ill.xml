@@ -28,7 +28,6 @@
             android:drawableRight="@drawable/arrow_right_gray"
             android:drawablePadding="10dp"
             android:gravity="center|right"
-            android:text="高血压  2级高血压  中危"
             android:textColor="@color/black_24"
             android:textSize="15sp" />
 

@@ -357,12 +357,13 @@ public class UserIllOtherActivity extends UIBaseLoadActivity implements View.OnC
         tangDiseaseList.add(new BaseLocalDataInfo("1型糖尿病", "1"));
         tangDiseaseList.add(new BaseLocalDataInfo("2型糖尿病", "2"));
         tangDiseaseList.add(new BaseLocalDataInfo("妊娠糖尿病", "3"));
+        tangDiseaseList.add(new BaseLocalDataInfo("其他", "4"));
         tangTypeAdapter = new PerfectDiseaseAdapter(getPageContext(), tangDiseaseList);
         tangTypeGridView.setAdapter(tangTypeAdapter);
 
-        yaDiseaseList.add(new BaseLocalDataInfo("1级高血压", "1"));
-        yaDiseaseList.add(new BaseLocalDataInfo("2级高血压", "2"));
-        yaDiseaseList.add(new BaseLocalDataInfo("3级高血压", "3"));
+        yaDiseaseList.add(new BaseLocalDataInfo("高血压1级", "1"));
+        yaDiseaseList.add(new BaseLocalDataInfo("高血压2级", "2"));
+        yaDiseaseList.add(new BaseLocalDataInfo("高血压3级", "3"));
 
         yaTypeAdapter = new PerfectDiseaseAdapter(getPageContext(), yaDiseaseList);
         typeGridView.setAdapter(yaTypeAdapter);

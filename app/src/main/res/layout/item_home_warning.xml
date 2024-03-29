@@ -24,7 +24,6 @@
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/warning_xuetang"
                 android:drawablePadding="8dp"
-                android:text="血糖"
                 android:textColor="@color/black_2A"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -85,7 +84,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="9.5dp"
                     android:includeFontPadding="false"
-                    android:text="2022-06-02 11:32"
                     android:textColor="@color/gray_BB"
                     android:textSize="12sp" />
 
@@ -119,7 +117,6 @@
                     android:paddingTop="7.5dp"
                     android:paddingRight="9.5dp"
                     android:paddingBottom="7.5dp"
-                    android:text="更多血糖数据"
                     android:textColor="@color/main_base_color"
                     android:textSize="12sp" />
 
