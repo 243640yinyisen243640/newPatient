@@ -284,11 +284,12 @@ public class HomeDataManager {
      * @param failureCallBack
      * @return
      */
-    public static Call<String> endSport(String sportTime, String archivesId, String sportCalories, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+    public static Call<String> endSport(String sportTime, String archivesId, String sportCalories, String aerobicsId, BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
         Map<String, String> map = new HashMap<>();
         map.put("sportTime", sportTime);
         map.put("archivesId", archivesId);
         map.put("sportCalories", sportCalories);
+        map.put("aerobicsId", aerobicsId);
         return BaseNetworkUtils.postRequest(true, BaseNetworkUtils.NONE, null, "ai/sport/v2/endSport", map, successCallBack, failureCallBack);
     }
 

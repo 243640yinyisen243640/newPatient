@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aout.OutDoctorEducationListActivity;
-import com.vice.bloodpressure.activity.aout.OutDoctorInfoActivity;
 import com.vice.bloodpressure.activity.aout.OutHospitalListActivity;
+import com.vice.bloodpressure.activity.auser.UserDoctorActivity;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseLoadFragment;
@@ -100,7 +100,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             bandLinearLayout.setVisibility(View.VISIBLE);
             XyImageUtils.loadImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfoOther.getAvatar(), headImageView);
             nameTextView.setText(doctorInfoOther.getDoctorName());
-            postTextView.setText(doctorInfoOther.getDeptName());
+            postTextView.setText(doctorInfoOther.getTitles());
             hospitalTextView.setText(doctorInfoOther.getHospitalName());
         } else {
             unbandLinearLayout.setVisibility(View.VISIBLE);
@@ -127,8 +127,8 @@ public class OutMainFragment extends UIBaseLoadFragment {
 
         });
         bandLinearLayout.setOnClickListener(v -> {
-            Intent intent = new Intent(getPageContext(), OutDoctorInfoActivity.class);
-            intent.putExtra("doctorId", doctorInfoOther.getId());
+            Intent intent = new Intent(getPageContext(), UserDoctorActivity.class);
+//            intent.putExtra("doctorId", doctorInfoOther.getId());
             startActivity(intent);
         });
 

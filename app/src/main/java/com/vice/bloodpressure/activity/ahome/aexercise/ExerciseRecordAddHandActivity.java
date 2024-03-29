@@ -190,7 +190,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
 
     private void stopExercise() {
         String id = getIntent().getStringExtra("sportId");
-        Call<String> requestCall = HomeDataManager.endSport(minuteTime + "", SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), fireNum, (call, response) -> {
+        Call<String> requestCall = HomeDataManager.endSport(minuteTime + "", SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), fireNum, id,(call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if (response.data) {
                 finish();

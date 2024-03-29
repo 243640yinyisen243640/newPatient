@@ -54,7 +54,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:includeFontPadding="false"
-                                    android:text="王飞飞"
                                     android:textColor="@color/black_24"
                                     android:textSize="20sp"
                                     android:textStyle="bold" />
@@ -65,7 +64,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
                                     android:includeFontPadding="false"
-                                    android:text="主任医师"
                                     android:textColor="@color/gray_8a"
                                     android:textSize="13sp" />
 
@@ -81,7 +79,6 @@
                                 android:drawableLeft="@drawable/user_my_doctor_hos"
                                 android:drawablePadding="10dp"
                                 android:includeFontPadding="false"
-                                android:text="河南省第一人民医院"
                                 android:textColor="@color/gray_8a"
                                 android:textSize="14sp" />
 

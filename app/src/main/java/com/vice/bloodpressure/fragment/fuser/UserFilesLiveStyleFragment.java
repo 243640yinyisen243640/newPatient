@@ -222,23 +222,23 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
             if ("1".equals(userInfo.getEducation())) {
                 cultureTv.setText("研究生");
             } else if ("2".equals(userInfo.getEducation())) {
-                paystyleTv.setText("大学本科");
+                cultureTv.setText("大学本科");
             } else if ("3".equals(userInfo.getEducation())) {
-                paystyleTv.setText("大学专科和专科学院");
+                cultureTv.setText("大学专科和专科学院");
             } else if ("4".equals(userInfo.getEducation())) {
-                paystyleTv.setText("中等专业学校5");
+                cultureTv.setText("中等专业学校5");
             } else if ("5".equals(userInfo.getEducation())) {
-                paystyleTv.setText("技工学校");
+                cultureTv.setText("技工学校");
             } else if ("6".equals(userInfo.getEducation())) {
-                paystyleTv.setText("高中");
+                cultureTv.setText("高中");
             } else if ("7".equals(userInfo.getEducation())) {
-                paystyleTv.setText("初中");
+                cultureTv.setText("初中");
             } else if ("8".equals(userInfo.getEducation())) {
-                paystyleTv.setText("小学");
+                cultureTv.setText("小学");
             } else if ("9".equals(userInfo.getEducation())) {
-                paystyleTv.setText("文盲或半文盲");
+                cultureTv.setText("文盲或半文盲");
             } else {
-                paystyleTv.setText("未知");
+                cultureTv.setText("未知");
             }
         }
         if (userInfo.getProfession() == null) {
@@ -259,9 +259,9 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
             //1:社会医疗保险 2:新型农村合作医疗保险 3:商业保险 4:城镇居民医疗保险 5:公费医疗 6:自费医疗 7:其他
             if ("1".equals(userInfo.getMedicalPay())) {
                 paystyleTv.setText("社会医疗保险");
-            } else if ("2".equals(userInfo.getMarital())) {
+            } else if ("2".equals(userInfo.getMedicalPay())) {
                 paystyleTv.setText("新型农村合作医疗保险");
-            } else if ("3".equals(userInfo.getEducation())) {
+            } else if ("3".equals(userInfo.getMedicalPay())) {
                 paystyleTv.setText("商业保险");
             } else if ("4".equals(userInfo.getMedicalPay())) {
                 paystyleTv.setText("城镇居民医疗保险");
@@ -270,7 +270,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
             } else if ("6".equals(userInfo.getMedicalPay())) {
                 paystyleTv.setText("自费医疗");
             } else {
-                paystyleTv.setText("其他");
+                paystyleTv.setText("其他险");
             }
         }
         if (userInfo.getMedicalCard() == null) {

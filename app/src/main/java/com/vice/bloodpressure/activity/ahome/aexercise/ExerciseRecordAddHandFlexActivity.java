@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.LoadStatus;
-import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.fragment.InputNumDialogFragment;
@@ -123,10 +122,11 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
                     jzVideoPlayer.onStatePlaying();
                 }
                 break;
+//            case R.id.iv_exercise_hand_stop_flex:
+//                BaseDataManager.EXERCISE_IS_COMPLETE = 2;
+//                jzVideoPlayer.onStateAutoComplete();
+//                break;
             case R.id.iv_exercise_hand_stop_flex:
-                BaseDataManager.EXERCISE_IS_COMPLETE = 2;
-                jzVideoPlayer.onStateAutoComplete();
-                break;
             case R.id.tv_exercise_hand_record_flex:
                 //  type  R 抗阻  P 柔韧
                 showNumDialog();
