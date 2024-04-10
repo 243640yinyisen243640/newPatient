@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/huahansoft_iv_loading_second"
         style="@style/HuaHanSoft.Wrap"
-        android:background="@drawable/hhsoft_loading_progress_bar" />
+        android:background="@drawable/xysoft_loading_progress_bar" />
 
     <TextView
         android:id="@+id/huahansoft_tv_loading_second"

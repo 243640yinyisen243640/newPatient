@@ -349,7 +349,7 @@ public class XyPictureSelectorActivity extends XyPictureBaseActivity implements 
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
                     }
-                    popupWindow.showAtLocation(findViewById(R.id.hhsoft_fl_content), Gravity.BOTTOM, 0, 0);
+                    popupWindow.showAtLocation(findViewById(R.id.xysoft_fl_content), Gravity.BOTTOM, 0, 0);
                     break;
                 case PictureConfig.TYPE_IMAGE:
                     // 拍照

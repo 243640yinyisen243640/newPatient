@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/HuaHanSoft.Fill.Wr"
-    android:background="@drawable/hhsoft_shape_dialog_frame_bg"
+    android:background="@drawable/xysoft_shape_dialog_frame_bg"
     android:orientation="vertical">
 
     <RelativeLayout

@@ -46,7 +46,7 @@ public class PictureFileUtils {
     public static final String POSTFIX = ".jpg";
     //    public static final String POSTFIX = ".JPEG";
     public static final String POST_VIDEO = ".mp4";
-    public static final String APP_NAME = "HHSoft";
+    public static final String APP_NAME = "XySoft";
     public static final String CAMERA_PATH = "/" + APP_NAME + "/CameraImage/";
 
     /**

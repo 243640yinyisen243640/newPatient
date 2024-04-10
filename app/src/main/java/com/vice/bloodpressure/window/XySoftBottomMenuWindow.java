@@ -48,7 +48,7 @@ public class XySoftBottomMenuWindow extends PopupWindow {
         contentView.setPadding(padding10, padding10, padding10, padding10);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         menuListView = new ListView(context);
-        menuListView.setBackgroundResource(R.drawable.hhsoft_shape_dialog_frame_bg);
+        menuListView.setBackgroundResource(R.drawable.xysoft_shape_dialog_frame_bg);
         menuListView.setDividerHeight(0);
         menuListView.setFadingEdgeLength(0);
         menuListView.setVerticalFadingEdgeEnabled(false);
@@ -61,7 +61,7 @@ public class XySoftBottomMenuWindow extends PopupWindow {
         cancelTextView.setTextColor(ContextCompat.getColor(context, R.color.defaultBlackText));
         cancelTextView.setText(R.string.cancel);
         cancelTextView.setGravity(Gravity.CENTER);
-        cancelTextView.setBackgroundResource(R.drawable.hhsoft_shape_dialog_frame_bg);
+        cancelTextView.setBackgroundResource(R.drawable.xysoft_shape_dialog_frame_bg);
         int padding12 = DensityUtils.dip2px(context, 12);
         cancelTextView.setPadding(padding12, padding12, padding12, padding12);
         params.setMargins(0, padding10, 0, 0);
