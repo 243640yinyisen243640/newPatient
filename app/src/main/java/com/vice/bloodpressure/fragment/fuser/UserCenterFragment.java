@@ -164,11 +164,11 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         if ("1".equals(userInfo.getSex())) {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
             //头像
-            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_male_head, userInfo.getAvatar(), avatarImageView);
         } else {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
             //头像
-            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_female_head, userInfo.getAvatar(), avatarImageView);
         }
 
         if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {
