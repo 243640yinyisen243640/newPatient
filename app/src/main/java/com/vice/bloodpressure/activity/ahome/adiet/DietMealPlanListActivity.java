@@ -3,7 +3,6 @@ package com.vice.bloodpressure.activity.ahome.adiet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -32,7 +31,7 @@ import retrofit2.Call;
  * 作者: beauty
  * 创建日期: 2023/2/3 16:55
  */
-public class DietMealPlanListActivity extends UIBaseLoadActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class DietMealPlanListActivity extends UIBaseLoadActivity implements View.OnClickListener {
     /**
      * 早餐
      */
@@ -49,12 +48,6 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
      */
     private TextView dinnerTitleTv;
     private NoScrollListView dinnerFastRv;
-
-    private List<MealExclusiveInfo> breakLsit;
-    private List<MealExclusiveInfo> lunchLsit;
-    private List<MealExclusiveInfo> dinnerLsit;
-
-
     private String planDate = "";
 
     private MealChildInfo mealInfo;
@@ -62,17 +55,6 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //        topViewManager().moreTextView().setText("换我想吃");
-        //        breakLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("breaklist");
-        //        lunchLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("lunchlist");
-        //        dinnerLsit = (List<MealExclusiveInfo>) getIntent().getSerializableExtra("dinnerlist");
-        //        topViewManager().moreTextView().setOnClickListener(v -> {
-        //            Intent intent = new Intent(getPageContext(), DietChangeDietActivity.class);
-        //            intent.putExtra("breaklist", (Serializable) breakLsit);
-        //            intent.putExtra("lunchlist", (Serializable) lunchLsit);
-        //            intent.putExtra("dinnerlist", (Serializable) dinnerLsit);
-        //            startActivity(intent);
-        //        });
         topViewManager().titleTextView().setText("饮食方案列表");
         planDate = getIntent().getStringExtra("planDate");
         initView();
@@ -81,10 +63,6 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
     }
 
     private void initListener() {
-        breakFastRv.setOnItemClickListener(this);
-        lunchFastRv.setOnItemClickListener(this);
-        dinnerFastRv.setOnItemClickListener(this);
-
         breakfastTitleTv.setOnClickListener(this);
         lunchTitleTv.setOnClickListener(this);
         dinnerTitleTv.setOnClickListener(this);
@@ -150,20 +128,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (view.getId()) {
-            case R.id.rv_diet_plan_breakfast:
-                getOneDayMeals("breakfast");
-            case R.id.rv_diet_plan_lunch:
-                getOneDayMeals("lunch");
-            case R.id.rv_diet_plan_dinner:
-                getOneDayMeals("dinner");
-                break;
-            default:
-                break;
-        }
-    }
+
 
     private void getOneDayMeals(String meals) {
         Call<String> requestCall = HomeDataManager.randomMealsPlanToDay(UserInfoUtils.getArchivesId(getPageContext()), meals, planDate, (call, response) -> {
@@ -193,11 +158,13 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements Adap
         switch (v.getId()) {
             case R.id.tv_diet_plan_breakfast:
                 getOneDayMeals("breakfast");
+                break;
             case R.id.tv_diet_plan_lunch:
                 getOneDayMeals("lunch");
+                break;
             case R.id.tv_diet_plan_dinner:
                 getOneDayMeals("dinner");
-                break;
+            break;
             default:
                 break;
         }

@@ -158,15 +158,17 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
      * 已登录
      */
     private void setData() {
-        //头像
-        XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
-        //昵称
+           //昵称
         nickNameTextView.setText(userInfo.getNickName());
         ageTextView.setText(String.format(getString(R.string.user_center_age), userInfo.getAge()));
         if ("1".equals(userInfo.getSex())) {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
+            //头像
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
         } else {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
+            //头像
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
         }
 
         if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {

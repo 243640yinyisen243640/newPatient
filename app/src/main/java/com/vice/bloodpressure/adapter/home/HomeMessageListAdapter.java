@@ -52,7 +52,7 @@ public class HomeMessageListAdapter extends RecyclerView.Adapter<HomeMessageList
         holder.contentTextView.setText(info.getDetail());
         clickOnClick onClick = new clickOnClick(position);
         holder.clickFrameLayout.setOnClickListener(onClick);
-        //0 未读 1已读
+        // 1已读 2 未读
         if ("1".equals(info.getStatus())) {
             holder.readImageView.setVisibility(View.GONE);
         } else {

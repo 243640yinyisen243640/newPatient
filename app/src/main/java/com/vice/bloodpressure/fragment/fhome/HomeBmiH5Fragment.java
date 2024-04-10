@@ -49,8 +49,7 @@ public class HomeBmiH5Fragment extends UIBaseFragment {
 
     private void setValues() {
         //状态1偏低 2正常 3偏高
-        if (!TextUtils.isEmpty(userInfo.getBgValue())) {
-
+        if (!TextUtils.isEmpty(userInfo.getBmiValue())) {
             numAndStateTv.setText(userInfo.getBmiValue());
             if ("1".equals(userInfo.getBmiStatus())) {
                 numAndStateTv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.home_bmi_low, 0);

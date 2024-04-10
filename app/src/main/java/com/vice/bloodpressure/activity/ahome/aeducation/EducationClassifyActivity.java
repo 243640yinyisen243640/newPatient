@@ -42,6 +42,10 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
     private final List<EducationInfo> rightList = new ArrayList<>();
 
+    private int pos = 0;
+
+    private List<EducationInfo> educationInfos;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +58,9 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
     private void initListener() {
         searchTextView.setOnClickListener(v -> {
-            startActivity(new Intent(getPageContext(), EducationIntelligenceSearchActivity.class));
+            Intent intent = new Intent(getPageContext(), EducationIntelligenceSearchActivity.class);
+            intent.putExtra("typeId", educationInfos.get(pos).getTypeId());
+            startActivity(intent);
         });
 
     }
@@ -75,9 +81,8 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
         Call<String> requestCall = HomeDataManager.teachTypeList((call, response) -> {
             if ("0000".equals(response.code)) {
-                List<EducationInfo> educationInfos = (List<EducationInfo>) response.object;
-                bindData(educationInfos);
-
+                educationInfos = (List<EducationInfo>) response.object;
+                bindData();
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
@@ -91,7 +96,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
         addRequestCallToMap("teachTypeList", requestCall);
     }
 
-    private void bindData(List<EducationInfo> educationInfos) {
+    private void bindData() {
         if (educationInfos != null && educationInfos.size() > 0) {
             educationInfos.get(0).setIsCheck("1");
             rightList.clear();
@@ -118,6 +123,7 @@ public class EducationClassifyActivity extends UIBaseLoadActivity {
 
 
             leftListView.setOnItemClickListener((parent, view, position, id) -> {
+                pos = position;
                 rightList.clear();
                 rightList.addAll(educationInfos.get(position).getTeachTypeDomains());
                 if (rightList.size() == 0) {
