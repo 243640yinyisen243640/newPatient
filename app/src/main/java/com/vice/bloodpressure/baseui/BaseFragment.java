@@ -33,7 +33,7 @@ public class BaseFragment extends Fragment implements EasyPermissions.Permission
     /**
      * 弱引用
      */
-    protected Handler mHandler = new HHSoftBaseFragmentHandler(this);
+    protected Handler mHandler = new XySoftBaseFragmentHandler(this);
 
     @Nullable
     @Override
@@ -195,10 +195,10 @@ public class BaseFragment extends Fragment implements EasyPermissions.Permission
 
     }
 
-    private class HHSoftBaseFragmentHandler extends Handler {
+    private class XySoftBaseFragmentHandler extends Handler {
         private WeakReference<BaseFragment> activityWeakReference;
 
-        public HHSoftBaseFragmentHandler(BaseFragment activityWeakReference) {
+        public XySoftBaseFragmentHandler(BaseFragment activityWeakReference) {
             this.activityWeakReference = new WeakReference<>(activityWeakReference);
         }
 
