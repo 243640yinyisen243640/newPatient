@@ -22,6 +22,7 @@ public class DietProgrammePopupWindow extends PopupWindow {
         tvRecommend.setOnClickListener(v -> {
             if (recommendClickListener != null) {
                 recommendClickListener.onClick(v);
+
             }
         });
 
