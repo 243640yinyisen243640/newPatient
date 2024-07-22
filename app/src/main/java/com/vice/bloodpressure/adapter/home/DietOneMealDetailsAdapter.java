@@ -43,7 +43,7 @@ public class DietOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> {
             holder.numTextView.setText(info.getIngK() + "g");
         }else {
             holder.nameTextView.setText(info.getSeasonings());
-            holder.numTextView.setText(info.getIngK() + "g");
+//            holder.numTextView.setText(info.getIngK() + "g");
         }
 
         return convertView;

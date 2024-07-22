@@ -58,8 +58,8 @@
                         android:id="@+id/et_perfect_id"
                         style="@style/user_add_right_right"
                         android:hint="请输入身份证号"
-                        android:inputType="numberSigned"
-                        android:digits="01234567890"
+                        android:inputType="textVisiblePassword|textNoSuggestions"
+                        android:digits="X0123456789"
                         android:lines="1" />
 
                 </LinearLayout>

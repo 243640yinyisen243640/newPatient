@@ -106,13 +106,18 @@ public class ServiceEducationVideoActivity extends UIBaseListRecycleViewForBgTop
      */
     private void chooseTypeWindow() {
         List<String> typeList = new ArrayList<>();
+        typeList.add("全部");
         typeList.add("1型");
         typeList.add("2型");
         typeList.add("妊娠");
         typeList.add("其他");
         typeList.add("高血压");
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "分类", typeList, object -> {
-            cid = Integer.parseInt(String.valueOf(object)) + 1 + "";
+            if (String.valueOf(object).equals("0")){
+                cid = "";
+            }else {
+                cid = Integer.parseInt(String.valueOf(object)) + "";
+            }
             typeTextView.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
             setPageIndex(1);
             onPageLoad();

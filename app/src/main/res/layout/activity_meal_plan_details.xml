@@ -588,8 +588,6 @@
                 <TextView
                     style="@style/style_title_with_green_h"
                     android:layout_width="0dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
                     android:layout_weight="1"
                     android:text="7天专属饮食方案" />
 

@@ -95,7 +95,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "用户服务协议");
-                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "1");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pagesC/pages/userAgreement?" + "type=" + "1");
                 startActivity(intent);
             }
 
@@ -110,7 +110,7 @@ public class RegisterActivity extends UIBaseActivity implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "2");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pagesC/pages/userAgreement?" + "type=" + "2");
                 startActivity(intent);
             }
 

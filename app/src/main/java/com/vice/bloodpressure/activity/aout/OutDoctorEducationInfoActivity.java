@@ -56,12 +56,14 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
      * 1->图文;2->音频;3->视频;
      */
     private String type;
+    private String fileUrl;
 
     private int clickCount;
 
     private TimerTaskManager taskManager;
 
     private MessageInfo messageInfo;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +110,9 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         //        FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(width, height);
         //        videoJz.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = false;
+        if (fileUrl.isEmpty() || fileUrl == null){
+            return;
+        }
         videoJz.setUp(messageInfo.getFileUrl(), "");
         XyImageUtils.getFirst(messageInfo.getFileUrl(), videoJz.posterImageView);
 
@@ -187,6 +192,7 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         //宣教类型:1->图文;2->音频;3->视频;
         titleTextView.setText(messageInfo.getTitle());
         timeTextView.setText(messageInfo.getSendTime());
+        fileUrl = messageInfo.getFileUrl();
 
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
@@ -329,7 +335,9 @@ public class OutDoctorEducationInfoActivity extends UIBaseLoadActivity implement
         super.onDestroy();
         StarrySky.with().stopMusic();
         taskManager.removeUpdateProgressTask();
-        videoJz.onStatePause();
+        if (videoJz != null && !fileUrl.isEmpty()){
+            videoJz.onStatePause();
+        }
     }
 
     @Override

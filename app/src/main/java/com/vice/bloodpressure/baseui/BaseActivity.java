@@ -31,8 +31,7 @@ public class BaseActivity extends AppCompatActivity implements EasyPermissions.P
      */
     private Context mContext;
     /**
-     * 网络请求对象保存
-     */
+     * 网络请求对象保存*/
     private Map<String, Call<String>> mRequestCallMap;
     /**
      * 弱引用

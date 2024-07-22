@@ -23,6 +23,9 @@ public class ExerciseCountdownActivity extends UIBaseActivity {
     private TextView timeTv;
 
     private String type;
+    private RxTimerUtils rxTimerUtils;
+
+    private int count = 3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,45 +43,36 @@ public class ExerciseCountdownActivity extends UIBaseActivity {
     }
 
     private void setTimeCountDown() {
-        setCountDownView("3");
+        setCountDownView(count);
 
-        RxTimerUtils rxTimer0 = new RxTimerUtils();
-        rxTimer0.timer(1000, new RxTimerUtils.RxAction() {
+        rxTimerUtils = new RxTimerUtils();
+        rxTimerUtils.intervalInRange(1000, 3000, 1000, new RxTimerUtils.RxAction() {
             @Override
             public void action(long number) {
-                setCountDownView("2");
+                count --;
+                setCountDownView(count);
+                if (count == 1){
+                    //三秒以后跳转页面  R 抗阻  P 柔韧  O:有氧
+                    finish();
+                    String sportId = getIntent().getStringExtra("sportId");
+                    Intent intent;
+                    if ("O".equals(type)) {
+                        intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
+                    } else {
+                        intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
+                        intent.putExtra("type", type);
+                    }
+                    intent.putExtra("sportId", sportId);
+                    startActivity(intent);
+                }
+
             }
         });
 
-        RxTimerUtils rxTimer1 = new RxTimerUtils();
-        rxTimer1.timer(2000, new RxTimerUtils.RxAction() {
-            @Override
-            public void action(long number) {
-                setCountDownView("1");
-            }
-        });
-
-        RxTimerUtils rxTimer2 = new RxTimerUtils();
-        rxTimer2.timer(3000, number -> {
-            //三秒以后跳转页面  R 抗阻  P 柔韧  O:有氧
-            finish();
-            String sportId = getIntent().getStringExtra("sportId");
-            if ("O".equals(type)) {
-                Intent intent = new Intent(getPageContext(), ExerciseRecordAddHandActivity.class);
-                intent.putExtra("sportId", sportId);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(getPageContext(), ExerciseRecordAddHandFlexActivity.class);
-                intent.putExtra("type", type);
-                intent.putExtra("sportId", sportId);
-                startActivity(intent);
-            }
-
-        });
     }
 
 
-    private void setCountDownView(String text) {
+    private void setCountDownView(int mCount) {
         ScaleAnimation animation = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         //设置持续时间
         animation.setDuration(1000);
@@ -86,7 +80,13 @@ public class ExerciseCountdownActivity extends UIBaseActivity {
         animation.setFillAfter(true);
         //设置循环次数，0为1次
         animation.setRepeatCount(0);
-        timeTv.setText(text);
+        timeTv.setText(String.valueOf(mCount));
         timeTv.startAnimation(animation);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        rxTimerUtils.cancel();
     }
 }

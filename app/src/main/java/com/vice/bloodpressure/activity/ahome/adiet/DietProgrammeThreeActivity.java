@@ -78,7 +78,7 @@ public class DietProgrammeThreeActivity extends UIBaseActivity {
         Log.i("yys", "weight==" + weight);
         Log.i("yys", "workWeight==" + workWeight);
         Log.i("yys", "chronicDisease==" + chronicDisease);
-        Log.i("yys", "UserInfoUtils.getArchivesId(getPageContext())" + UserInfoUtils.getArchivesId(getPageContext()));
+        Log.i("yys", "UserInfoUtils.getArchivenisId(getPageContext())" + UserInfoUtils.getArchivesId(getPageContext()));
         if (programmePopupWindow == null) {
             programmePopupWindow = new DietProgrammePopupWindow(getPageContext(),
                     recommendView -> {

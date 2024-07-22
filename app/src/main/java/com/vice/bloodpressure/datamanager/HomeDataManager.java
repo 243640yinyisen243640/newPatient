@@ -1,6 +1,7 @@
 package com.vice.bloodpressure.datamanager;
 
 import com.vice.bloodpressure.model.BaseLocalDataInfo;
+import com.vice.bloodpressure.model.CheckVersionInfo;
 import com.vice.bloodpressure.model.EducationAllInfo;
 import com.vice.bloodpressure.model.EducationInfo;
 import com.vice.bloodpressure.model.ExerciseChildInfo;
@@ -214,7 +215,16 @@ public class HomeDataManager {
         return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, ExerciseInfo.class, "ai/sport/v2/getSportRecord", map, successCallBack, failureCallBack);
     }
 
-
+    /**
+     * 版本更新
+     *
+     * @return
+     */
+    public static Call<String> checkVersion(String mVersion,BiConsumer<Call<String>, BaseResponse> successCallBack, BiConsumer<Call<String>, Throwable> failureCallBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("version", mVersion);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_OBJECT, CheckVersionInfo.class, "system/app/fileVersion/check", map, successCallBack, failureCallBack);
+    }
 
 
     /**

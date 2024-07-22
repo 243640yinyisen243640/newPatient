@@ -69,12 +69,12 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             if ("0000".equals(response.code)) {
                 loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 list = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1", (position, view) -> {
-                    Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "1", true,null);
+                    /*Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
                     intent.putExtra("recHeat", list.get(position).getRecHeat());
                     intent.putExtra("recId", list.get(position).getRecId());
-                    startActivity(intent);
-                });
+                    startActivity(intent);*/
+
                 mealTitleLv.setAdapter(adapter);
             } else {
                 loadViewManager().changeLoadState(LoadStatus.FAILED);
@@ -91,7 +91,7 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 List<MealExclusiveInfo> listSecond = (List<MealExclusiveInfo>) response.object;
-                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2",null);
+                DietMealOneMealDetailsAdapter adapter = new DietMealOneMealDetailsAdapter(getPageContext(), listSecond, "2",true,null);
                 mealTitleLv.setAdapter(adapter);
             }
         }, (call, t) -> {
@@ -113,15 +113,12 @@ public class DietMealDetailsActivity extends UIBaseLoadActivity {
 
     private void initValues() {
 
-        if ("早餐".equals(titleMeal)) {
+        if ("breakfast".equals(titleMeal)) {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_bing_with_green, 0, R.drawable.diet_change_my_like, 0);
-        } else if ("午餐".equals(titleMeal)) {
+        } else if ("lunch".equals(titleMeal)) {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.jitui_with_green_20, 0, R.drawable.diet_change_my_like, 0);
         } else {
             mealTitleTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.diet_huacai_with_green, 0, R.drawable.diet_change_my_like, 0);
         }
-
-
-
     }
 }

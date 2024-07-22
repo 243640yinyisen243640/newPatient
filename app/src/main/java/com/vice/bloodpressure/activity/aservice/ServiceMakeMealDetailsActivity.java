@@ -142,11 +142,11 @@ public class ServiceMakeMealDetailsActivity extends UIBaseLoadActivity {
         Jzvd.SAVE_PROGRESS = false;
         videoPlayer.setUp(allInfo.getVid(), "");
 
-        ServiceOneMealDetailsAdapter resourceAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), allInfo.getMaterialList());
+        ServiceOneMealDetailsAdapter resourceAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), true, allInfo.getMaterialList());
         resourceListView.setAdapter(resourceAdapter);
 
 
-        ServiceOneMealDetailsAdapter seasoningAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), allInfo.getSeasoningList());
+        ServiceOneMealDetailsAdapter seasoningAdapter = new ServiceOneMealDetailsAdapter(getPageContext(), false, allInfo.getSeasoningList());
         seasoningListView.setAdapter(seasoningAdapter);
     }
 

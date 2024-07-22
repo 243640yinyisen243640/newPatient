@@ -74,6 +74,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation files('libs\\starrysky-2.6.5.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -84,7 +85,7 @@ dependencies {
     api 'com.squareup.retrofit2:retrofit:2.9.0'
     api 'io.reactivex.rxjava2:rxjava:2.2.10'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.google.code.gson:gson:2.8.8'
     implementation 'com.qianwen:okhttp-utils:3.8.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     /**
@@ -126,7 +127,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:extension-mediasession:2.14.1'
     //音频播放器
     implementation 'com.google.android.exoplayer:extension-rtmp:2.14.1'
-    implementation 'com.github.EspoirX:StarrySky:v2.6.5'
+//    implementation 'com.github.EspoirX:StarrySky:v2.6.5'
 
     //流式布局
     implementation 'com.google.android:flexbox:2.0.1'

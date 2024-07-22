@@ -127,8 +127,14 @@ public class ExercisePlanAddRecordActivity extends UIBaseActivity {
                         list.add(typeName);
                     }
                     Log.i("yys","sportList==="+sportList.size());
+                    String mSportName = sportList.get(0).getSportName();
+                    sportId = sportList.get(0).getId();
                     typeTv.setText(sportList.get(0).getSportName());
                     calorieString = sportList.get(0).getCalorie();
+                    if (mSportName.equals("太极拳")){
+                        taijiLi.setVisibility(View.VISIBLE);
+                        tiaoshengLl.setVisibility(View.GONE);
+                    }
                 }
 
             } else {

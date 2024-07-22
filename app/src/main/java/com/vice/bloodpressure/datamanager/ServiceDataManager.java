@@ -646,7 +646,7 @@ public class ServiceDataManager {
         map.put("pageNum", pageNum);
         map.put("pageSize", pageSize);
         map.put("dishName", dishName);
-        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "/ai/diet/v2/list", map, successCallBack, failureCallBack);
+        return BaseNetworkUtils.getRequest(true, BaseNetworkUtils.JSON_ARRAY, MealExclusiveInfo.class, "ai/diet/v2/list", map, successCallBack, failureCallBack);
     }
 
     /**

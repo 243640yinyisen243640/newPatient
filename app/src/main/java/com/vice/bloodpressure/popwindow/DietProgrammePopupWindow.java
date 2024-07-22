@@ -49,6 +49,7 @@ public class DietProgrammePopupWindow extends PopupWindow {
         this.setBackgroundDrawable(dw);
         //因为某些机型是虚拟按键的,所以要加上以下设置防止挡住按键.
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        view.setOnClickListener(v -> dismiss());
+        //点击“智能推荐”按钮后dialog才能关闭
+//        view.setOnClickListener(v -> dismiss());
     }
 }

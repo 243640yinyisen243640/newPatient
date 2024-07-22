@@ -91,7 +91,7 @@ public class ServiceMealChooseActivity extends UIBaseLoadActivity {
                 ToastUtils.getInstance().showToast(getPageContext(), "请选择食物");
             } else {
                 Intent intent = new Intent();
-                intent.putExtra("tempList", (Serializable) listsAll);
+                intent.putExtra("", (Serializable) listsAll);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }

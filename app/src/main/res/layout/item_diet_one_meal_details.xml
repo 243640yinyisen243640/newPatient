@@ -28,7 +28,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:includeFontPadding="false"
-            android:text="60g"
             android:textColor="@color/gray_8a"
             android:textSize="13sp" />
     </LinearLayout>

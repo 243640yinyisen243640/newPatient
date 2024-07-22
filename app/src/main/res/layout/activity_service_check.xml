@@ -113,12 +113,20 @@
 
         </LinearLayout>
 
-        <com.vice.bloodpressure.view.image.GalleryUploadImageView
-            android:id="@+id/guiv_check_add"
-            style="@style/HuaHanSoft.Fill.Wr"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="285dp">
+
+            <com.vice.bloodpressure.view.image.GalleryUploadImageView
+                android:id="@+id/guiv_check_add"
+                style="@style/HuaHanSoft.Fill.Wr"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"/>
+        </ScrollView>
+
     </LinearLayout>
 
     <TextView

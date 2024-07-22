@@ -50,7 +50,7 @@ public class ExercisePAndRChildListAdapter extends RecyclerView.Adapter<Exercise
         if ("1".equals(info.getSportStatus())) {
             holder.stateTextView.setText("未达标");
             holder.stateTextView.setTextColor(Color.parseColor("#FF921C"));
-        } else if ("2".equals(info.getState())) {
+        } else if ("2".equals(info.getSportStatus())) {
             holder.stateTextView.setText("达标");
             holder.stateTextView.setTextColor(Color.parseColor("#00C27F"));
         } else {

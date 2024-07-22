@@ -11,7 +11,22 @@ public class ConstantParamNew {
      * ip地址
      */
 //    public static final String IP = "http://192.168.31.134:9500/";
+    /**
+     * 线上环境
+     */
     public static final String IP = "http://39.106.101.129:9500/";
+    /**
+     * 本地访问地址 李昂
+     */
+//    public static final String IP = "http://192.168.0.54:9500/";
+    /**
+     * 本地访问地址 赵亚鹏
+     */
+//    public static final String IP = "http://192.168.0.58:9500/";
+    /**
+     * 域名 访问用户服务协议、隐私政策
+     */
+    public static final String DOMAIN_NAME = "http://java.xiyuns.cn/";
 
 
     public static final String APK_NAME = "huijiankang";

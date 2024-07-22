@@ -18,8 +18,6 @@ import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 
-import java.math.BigDecimal;
-
 import retrofit2.Call;
 
 /**
@@ -34,8 +32,8 @@ public class ServiceTemperatureAddActivity extends UIBaseActivity implements Vie
     private RulerView rulerView;
     private LinearLayout sureLinearLayout;
 
-    private String temperatureValue="";
-    private String addTime="";
+    private String temperatureValue = "";
+    private String addTime = "";
 
 
     @Override
@@ -54,15 +52,15 @@ public class ServiceTemperatureAddActivity extends UIBaseActivity implements Vie
             @Override
             public void onEndResult(String result) {
 
-                //                valueTextView.setText(result);
-                valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                valueTextView.setText(result);
+//                valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 temperatureValue = valueTextView.getText().toString().trim();
             }
 
             @Override
             public void onScrollResult(String result) {
-                //                valueTextView.setText(result);
-                valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                valueTextView.setText(result);
+//                valueTextView.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
                 temperatureValue = valueTextView.getText().toString().trim();
             }
         });

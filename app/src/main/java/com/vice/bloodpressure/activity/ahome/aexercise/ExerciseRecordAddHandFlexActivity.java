@@ -48,11 +48,16 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
 
     private ExerciseChildInfo exerciseChildInfo;
 
+    private String videoUrl; //视频地址
+    private String titleTips;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         type = getIntent().getStringExtra("type");
         sportId = getIntent().getStringExtra("sportId");
+        titleTips = type.equals("R") ? "今天的抗阻运动您完成多少个动作？" : "今天的柔韧性运动您完成多少个动作？";
         initView();
         initListener();
         loadViewManager().changeLoadState(LoadStatus.LOADING);
@@ -75,9 +80,12 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
     }
 
     private void setData() {
+        videoUrl = exerciseChildInfo.getVideoUrl();
         topViewManager().titleTextView().setText(exerciseChildInfo.getSportName());
-        jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "", JzvdStd.SCREEN_NORMAL);
-        jzVideoPlayer.startVideo();
+        if (videoUrl != null){
+            jzVideoPlayer.setUp(exerciseChildInfo.getVideoUrl(), "", JzvdStd.SCREEN_NORMAL);
+            jzVideoPlayer.startVideo();
+        }
         startOrPause = "2";
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, exerciseChildInfo.getCoverUrl(), jzVideoPlayer.posterImageView);
     }
@@ -106,20 +114,28 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
             case R.id.iv_exercise_hand_pause_flex:
                 //首先第一次进来  点击是开始 然后再次点击就是暂停了，暂停状态下，再点击是继续播放，不是重新开始，所以有三个数值
                 Log.i("yys", "startOrPause==" + startOrPause);
-                if ("1".equals(startOrPause)) {
-                    startOrPause = "2";
-                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                    jzVideoPlayer.startVideo();
-                } else if ("2".equals(startOrPause)) {
-                    startOrPause = "3";
-                    pauseImageView.setImageResource(R.drawable.exercise_hand_star);
-                    jzVideoPlayer.mediaInterface.pause();
-                    jzVideoPlayer.onStatePause();
+                if (videoUrl == null) {
+                    ToastUtils.getInstance().showToast(ExerciseRecordAddHandFlexActivity.this, "暂无可播放的视频");
                 } else {
-                    startOrPause = "2";
-                    pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
-                    jzVideoPlayer.mediaInterface.start();
-                    jzVideoPlayer.onStatePlaying();
+                    switch (startOrPause) {
+                        case "1":
+                            startOrPause = "2";
+                            pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
+                            jzVideoPlayer.startVideo();
+                            break;
+                        case "2":
+                            startOrPause = "3";
+                            pauseImageView.setImageResource(R.drawable.exercise_hand_star);
+                            jzVideoPlayer.mediaInterface.pause();
+                            jzVideoPlayer.onStatePause();
+                            break;
+                        default:
+                            startOrPause = "2";
+                            pauseImageView.setImageResource(R.drawable.exercise_hand_pause);
+                            jzVideoPlayer.mediaInterface.start();
+                            jzVideoPlayer.onStatePlaying();
+                            break;
+                    }
                 }
                 break;
 //            case R.id.iv_exercise_hand_stop_flex:
@@ -130,7 +146,6 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
             case R.id.tv_exercise_hand_record_flex:
                 //  type  R 抗阻  P 柔韧
                 showNumDialog();
-
                 break;
 
             default:
@@ -142,13 +157,12 @@ public class ExerciseRecordAddHandFlexActivity extends UIBaseLoadActivity implem
      * 这个是抗阻运动的弹出  输入个数的
      */
     private void showNumDialog() {
-        InputNumDialogFragment dialog = new InputNumDialogFragment(inputStr -> {
+        InputNumDialogFragment dialog = new InputNumDialogFragment(titleTips,inputStr -> {
             //TODO 提交反馈信息
             submitOxygen(inputStr);
         });
         dialog.showNow(getSupportFragmentManager(), "inputRe");
     }
-
 
     /**
      * @param sportNumber

@@ -20,6 +20,7 @@ import com.vice.bloodpressure.fragment.fuser.UserFilesFamilyFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesIllFragment;
 import com.vice.bloodpressure.fragment.fuser.UserFilesLiveStyleFragment;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
+import com.vice.bloodpressure.utils.XyImageUtils;
 import com.vice.bloodpressure.view.NestRadioGroup;
 
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class UserFilesActivity extends UIBaseActivity {
     private ImageView imgImageView;
     private TextView nameTextView;
 
+    private String sex;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class UserFilesActivity extends UIBaseActivity {
         topViewManager().backTextView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.base_top_back_white, 0, 0, 0);
         topViewManager().titleTextView().setText("我的档案");
         topViewManager().lineViewVisibility(View.GONE);
+        sex = getIntent().getStringExtra("sex");
         initView();
         initValue();
     }
@@ -61,6 +65,12 @@ public class UserFilesActivity extends UIBaseActivity {
 
     private void initValue() {
         nameTextView.setText(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME, ""));
+
+        if ("1".equals(sex)){
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, "", imgImageView);
+        }else {
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head, "", imgImageView);
+        }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         UserFilesBaseInfoFragment infoFragment = new UserFilesBaseInfoFragment();

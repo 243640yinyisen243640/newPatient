@@ -22,7 +22,7 @@
             android:id="@+id/iv_exercise_hand_pause_flex"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/exercise_hand_star" />
+            android:src="@drawable/exercise_hand_pause" />
 
         <ImageView
             android:id="@+id/iv_exercise_hand_stop_flex"

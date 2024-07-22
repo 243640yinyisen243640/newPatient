@@ -187,6 +187,7 @@ public class EducationDetailsActivity extends UIBaseLoadActivity {
         //        videoJz.setLayoutParams(ll);
         Jzvd.SAVE_PROGRESS = false;
         videoJz.setUp(educationInfo.getVideoUrl(), "");
+        videoJz.startVideo();
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, educationInfo.getCoverUrl(), videoJz.posterImageView);
     }
 

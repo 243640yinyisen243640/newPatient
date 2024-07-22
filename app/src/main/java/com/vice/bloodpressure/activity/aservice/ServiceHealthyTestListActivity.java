@@ -13,6 +13,7 @@ import com.vice.bloodpressure.adapter.service.ServiceHealthyTestAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
+import com.vice.bloodpressure.basemanager.ConstantParamNew;
 import com.vice.bloodpressure.baseui.SharedPreferencesConstant;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
 import com.vice.bloodpressure.baseui.WebViewHelperActivity;
@@ -71,25 +72,25 @@ public class ServiceHealthyTestListActivity extends UIBaseListRecycleViewActivit
                 case 0:
                     intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                     intent.putExtra("title","糖尿病风险测评");
-                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=1"+"&archivesId="+archivesId+"&token="+token);
+                    intent.putExtra("url", ConstantParamNew.DOMAIN_NAME +"pages/healthAssessment/questionContainer?type=1"+"&archivesId="+archivesId+"&token="+token);
                     startActivity(intent);
                     break;
                 case 1:
                     intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                     intent.putExtra("title","抑郁测评");
-                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=3"+"&archivesId="+archivesId+"&token="+token);
+                    intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pages/healthAssessment/questionContainer?type=3"+"&archivesId="+archivesId+"&token="+token);
                     startActivity(intent);
                     break;
                 case 2:
                     intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                     intent.putExtra("title","焦虑测评");
-                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=4"+"&archivesId="+archivesId+"&token="+token);
+                    intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pages/healthAssessment/questionContainer?type=4"+"&archivesId="+archivesId+"&token="+token);
                     startActivity(intent);
                     break;
                 case 3:
                     intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                     intent.putExtra("title","缺血性心血管病风险评测");
-                    intent.putExtra("url", "http://192.168.31.250:8080/pages/healthAssessment/questionContainer?type=2"+"&archivesId="+archivesId+"&token="+token);
+                    intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pages/healthAssessment/questionContainer?type=2"+"&archivesId="+archivesId+"&token="+token);
                     startActivity(intent);
                     break;
                 default:

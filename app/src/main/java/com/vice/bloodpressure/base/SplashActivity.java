@@ -218,7 +218,7 @@ public class SplashActivity extends UIBaseActivity {
     private void jumpToUserPrivacy() {
         Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
         intent.putExtra("title", "用户服务协议");
-        intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"1");
+        intent.putExtra("url", ConstantParamNew.DOMAIN_NAME+"pagesC/pages/userAgreement?"+"type="+"1");
         startActivity(intent);
     }
 

@@ -91,7 +91,7 @@ public abstract class UIBaseListRecycleViewFragment<T> extends UIBaseLoadFragmen
                 if (1 == mPageIndex) {
                     mRefreshLayout.setVisibility(View.GONE);
                     mNestedScrollView.setVisibility(View.VISIBLE);
-                    mLoadingTextView.setText(R.string.huahansoft_net_error);
+                    mLoadingTextView.setText("暂无数据");
                     loadViewManager().changeLoadState(LoadStatus.SUCCESS);
                 } else {
                     ToastUtils.getInstance().showToast(getPageContext(), R.string.huahansoft_net_error);

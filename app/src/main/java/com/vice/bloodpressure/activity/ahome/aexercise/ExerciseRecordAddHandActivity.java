@@ -94,20 +94,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
 
     @Override
     protected void onPageLoad() {
-        String id = getIntent().getStringExtra("sportId");
-        Call<String> requestCall = HomeDataManager.aerobicsDetails(id, SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), (call, response) -> {
-            if ("0000".equals(response.code)) {
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-                exerciseChildInfo = (ExerciseChildInfo) response.object;
-                setData();
-                mHandler.sendEmptyMessage(START_TIME);
-            } else {
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-        });
-        addRequestCallToMap("aerobicsDetails", requestCall);
+
     }
 
     @Override
@@ -192,7 +179,7 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
         String id = getIntent().getStringExtra("sportId");
         Call<String> requestCall = HomeDataManager.endSport(minuteTime + "", SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), fireNum, id,(call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-            if (response.data) {
+            if (response.code.equals("0000")) {
                 finish();
             }
         }, (call, t) -> {
@@ -223,6 +210,25 @@ public class ExerciseRecordAddHandActivity extends UIBaseLoadActivity implements
     protected void onPause() {
         super.onPause();
         Jzvd.releaseAllVideos();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String id = getIntent().getStringExtra("sportId");
+        Call<String> requestCall = HomeDataManager.aerobicsDetails(id, SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.ARCHIVES_ID), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                exerciseChildInfo = (ExerciseChildInfo) response.object;
+                setData();
+                mHandler.sendEmptyMessage(START_TIME);
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("aerobicsDetails", requestCall);
     }
 }
 

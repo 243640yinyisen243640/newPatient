@@ -132,7 +132,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_service_history_all:
+            case R.id.tv_service_history_all://全部
                 type="";
                 onPageLoad();
                 setTextStyle(allTextView, true, Typeface.DEFAULT_BOLD);
@@ -144,7 +144,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(badTextView, false, Typeface.DEFAULT);
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
-            case R.id.tv_service_history_tang:
+            case R.id.tv_service_history_tang://糖尿病风险评测
                 type="1";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
@@ -156,7 +156,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(badTextView, false, Typeface.DEFAULT);
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
-            case R.id.tv_service_history_meal:
+            case R.id.tv_service_history_meal://饮食测评
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
                 setTextStyle(mealTextView, true, Typeface.DEFAULT_BOLD);
@@ -186,7 +186,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(badTextView, false, Typeface.DEFAULT);
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
-            case R.id.tv_service_history_emo:
+            case R.id.tv_service_history_emo://抑郁测评
                 type="3";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
@@ -198,7 +198,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(badTextView, false, Typeface.DEFAULT);
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
-            case R.id.tv_service_history_bad:
+            case R.id.tv_service_history_bad://焦虑测评
                 type="4";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
@@ -210,7 +210,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(badTextView, true, Typeface.DEFAULT_BOLD);
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
-            case R.id.tv_service_history_heart:
+            case R.id.tv_service_history_heart://国人缺血性心血管病
                 type="2";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);

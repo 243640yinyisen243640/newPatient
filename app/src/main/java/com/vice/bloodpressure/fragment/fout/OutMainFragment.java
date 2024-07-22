@@ -43,6 +43,8 @@ public class OutMainFragment extends UIBaseLoadFragment {
 
     private DoctorInfo doctorInfoOther;
 
+    private boolean isBindDoctor;
+
     @Override
     protected void onCreate() {
         topViewManager().titleTextView().setText("院外管理");
@@ -95,7 +97,8 @@ public class OutMainFragment extends UIBaseLoadFragment {
     }
 
     private void bindData(DoctorInfo doctorInfoOther) {
-        if (doctorInfoOther.isBindExternal()) {
+        isBindDoctor = doctorInfoOther.isBindExternal();
+        if (isBindDoctor) {
             unbandLinearLayout.setVisibility(View.GONE);
             bandLinearLayout.setVisibility(View.VISIBLE);
             XyImageUtils.loadImage(getPageContext(), R.drawable.out_doctor_default_head_img, doctorInfoOther.getAvatar(), headImageView);
@@ -113,7 +116,7 @@ public class OutMainFragment extends UIBaseLoadFragment {
             startActivity(new Intent(getPageContext(), OutHospitalListActivity.class));
         });
         educationTextView.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.DOCTOR_ID))) {
+            if (!isBindDoctor) {
                 DialogUtils.showOperDialog(getPageContext(), "", "请先绑定医生", "取消", "确定", (dialog, which) -> {
                     dialog.dismiss();
                     if (XySoftDialogActionEnum.POSITIVE == which) {

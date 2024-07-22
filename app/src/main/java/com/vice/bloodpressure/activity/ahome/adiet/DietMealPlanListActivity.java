@@ -13,13 +13,10 @@ import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.MealChildInfo;
-import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.view.NoScrollListView;
-
-import java.util.List;
 
 import retrofit2.Call;
 
@@ -70,21 +67,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = HomeDataManager.getDietPlanList(UserInfoUtils.getArchivesId(getPageContext()), planDate, (call, response) -> {
-            if ("0000".equals(response.code)) {
-                mealInfo = (MealChildInfo) response.object;
-                bindData();
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-            } else {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
-
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        });
-        addRequestCallToMap("getDietPlanList", requestCall);
+        getDietPlanInfo();
     }
 
     private void initView() {
@@ -100,7 +83,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
 
     private void bindData() {
 
-        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getBreakfast(), "1", (position, view) -> {
+        DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getBreakfast(), "1", false, (position, view) -> {
             Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
             intent.putExtra("recHeat", mealInfo.getBreakfast().get(position).getRecHeat());
             intent.putExtra("recId", mealInfo.getBreakfast().get(position).getRecId());
@@ -109,7 +92,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
         breakFastRv.setAdapter(breakAdapter);
 
 
-        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getLunch(), "1",(position, view) -> {
+        DietMealOneMealDetailsAdapter lunchAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getLunch(), "1",false, (position, view) -> {
             Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
             intent.putExtra("recHeat", mealInfo.getLunch().get(position).getRecHeat());
             intent.putExtra("recId", mealInfo.getLunch().get(position).getRecId());
@@ -118,7 +101,7 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
         lunchFastRv.setAdapter(lunchAdapter);
 
 
-        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getDinner(), "1",(position, view) -> {
+        DietMealOneMealDetailsAdapter dinnerAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), mealInfo.getDinner(), "1",false, (position, view) -> {
             Intent intent = new Intent(getPageContext(), DietMakeMealDetailsActivity.class);
             intent.putExtra("recHeat", mealInfo.getDinner().get(position).getRecHeat());
             intent.putExtra("recId", mealInfo.getDinner().get(position).getRecId());
@@ -134,7 +117,8 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
         Call<String> requestCall = HomeDataManager.randomMealsPlanToDay(UserInfoUtils.getArchivesId(getPageContext()), meals, planDate, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
+                getDietPlanInfo();
+               /* List<MealExclusiveInfo> list = (List<MealExclusiveInfo>) response.object;
                 if ("breakfast".equals(meals)) {
                     DietMealOneMealDetailsAdapter breakAdapter = new DietMealOneMealDetailsAdapter(getPageContext(), list, "4",null);
                     breakFastRv.setAdapter(breakAdapter);
@@ -146,11 +130,33 @@ public class DietMealPlanListActivity extends UIBaseLoadActivity implements View
                     dinnerFastRv.setAdapter(dinnerAdapter);
                 }
 
+*/
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
         });
         addRequestCallToMap("randomMealsPlanToDay", requestCall);
+    }
+
+    /**
+     * 获取食材信息
+     */
+    private void getDietPlanInfo(){
+        Call<String> requestCall = HomeDataManager.getDietPlanList(UserInfoUtils.getArchivesId(getPageContext()), planDate, (call, response) -> {
+            if ("0000".equals(response.code)) {
+                mealInfo = (MealChildInfo) response.object;
+                bindData();
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getDietPlanList", requestCall);
     }
 
     @Override

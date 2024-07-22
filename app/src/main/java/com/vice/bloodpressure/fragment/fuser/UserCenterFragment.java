@@ -1,5 +1,7 @@
 package com.vice.bloodpressure.fragment.fuser;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,8 +31,6 @@ import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
-
-import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -164,22 +164,26 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         if ("1".equals(userInfo.getSex())) {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
             //头像
-            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_male_head, userInfo.getAvatar(), avatarImageView);
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
         } else {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
             //头像
             XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_female_head, userInfo.getAvatar(), avatarImageView);
         }
 
+        String content;
         if (!TextUtils.isEmpty(userInfo.getDiabetesType()) && !TextUtils.isEmpty(userInfo.getHypertensionType())) {
-            illTextView.setText("主要诊断：" + userInfo.getDiabetesType() + " | " + userInfo.getHypertensionType());
+            content = "主要诊断：" + userInfo.getDiabetesType() + " | " + userInfo.getHypertensionType();
         } else if (!TextUtils.isEmpty(userInfo.getDiabetesType())) {
-            illTextView.setText("主要诊断：" + userInfo.getDiabetesType());
+            content = "主要诊断：" + userInfo.getDiabetesType();
         } else if (!TextUtils.isEmpty(userInfo.getHypertensionType())) {
-            illTextView.setText("主要诊断：" + userInfo.getHypertensionType());
+            content = "主要诊断：" + userInfo.getHypertensionType();
         } else {
             illTextView.setVisibility(View.GONE);
+            return;
         }
+
+        setContentWithLimit(illTextView, content);
 
         //        //待付款
         //        int orderUnreadCount = TurnUtils.getInt(userInfo.getConfirmationCount(), 0);
@@ -197,6 +201,16 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         //        }
 
 
+    }
+
+    /**
+     * 内容过长，文本显示不全处理
+     * @param textView
+     * @param content
+     */
+    private void setContentWithLimit(TextView textView, String content) {
+        String limitedContent = content.length() > 17 ? content.substring(0, 16) + "..." : content;
+        textView.setText(limitedContent);
     }
 
 
@@ -274,11 +288,14 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 intent.putExtra("nickName", userInfo.getNickName());
                 intent.putExtra("phoneNumber", userInfo.getPhoneNumber());
                 intent.putExtra("avatar", userInfo.getAvatar());
+                intent.putExtra("sex",userInfo.getSex());
                 startActivity(intent);
                 break;
             //我的档案
             case R.id.tv_user_center_files:
-                startActivity(new Intent(getPageContext(), UserFilesActivity.class));
+                Intent uIntent = new Intent(getPageContext(),UserFilesActivity.class);
+                uIntent.putExtra("sex", userInfo.getSex());
+                startActivity(uIntent);
                 break;
             //跳收藏
             case R.id.tv_user_center_collect:

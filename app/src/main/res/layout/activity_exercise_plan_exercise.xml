@@ -113,7 +113,6 @@
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
                         android:button="@null"
-                        android:checked="true"
                         android:drawableStart="@drawable/selector_green_white"
                         android:drawablePadding="10dp"
                         android:paddingTop="15dp"
@@ -135,6 +134,7 @@
                         android:paddingLeft="25dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
+                        android:checked="false"
                         android:text="否"
                         android:textColor="@color/black_24"
                         android:textSize="18sp"
@@ -149,6 +149,7 @@
                     android:layout_marginTop="35dp"
                     android:background="@drawable/shape_little_background_5"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:padding="15dp">
 
                     <TextView
@@ -170,13 +171,13 @@
                             android:layout_height="wrap_content"
                             android:background="@color/transparent"
                             android:button="@null"
-                            android:checked="true"
                             android:drawableStart="@drawable/selector_green_white"
                             android:drawablePadding="10dp"
                             android:paddingTop="15dp"
                             android:paddingRight="25dp"
                             android:paddingBottom="15dp"
                             android:text="是"
+                            android:checked="false"
                             android:textColor="@color/black_24"
                             android:textSize="18sp"
                             android:textStyle="bold" />

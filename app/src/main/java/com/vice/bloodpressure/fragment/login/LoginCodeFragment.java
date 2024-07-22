@@ -85,16 +85,15 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                Intent intent;
                 if ("1".equals(userInfo.getInfo_status())) {
-                    Intent intent = new Intent(getPageContext(), MainActivity.class);
+                    intent = new Intent(getPageContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    getActivity().finish();
                 } else {
-                    Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+                    intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
                 }
+                startActivity(intent);
+                getActivity().finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
@@ -168,7 +167,7 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "用户服务协议");
-                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "1");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pagesC/pages/userAgreement?" + "type=" + "1");
                 startActivity(intent);
             }
 
@@ -183,7 +182,7 @@ public class LoginCodeFragment extends UIBaseFragment implements View.OnClickLis
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", ConstantParamNew.IP + "pagesC/pages/userAgreement?" + "type=" + "2");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME + "pagesC/pages/userAgreement?" + "type=" + "2");
                 startActivity(intent);
             }
 

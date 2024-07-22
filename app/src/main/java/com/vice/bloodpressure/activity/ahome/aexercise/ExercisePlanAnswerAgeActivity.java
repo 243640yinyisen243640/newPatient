@@ -44,8 +44,8 @@ public class ExercisePlanAnswerAgeActivity extends UIBaseActivity implements Vie
         ageRv.setOnChooseResulterListener(new RulerView.OnChooseResulterListener() {
             @Override
             public void onEndResult(String result) {
-                age = result;
-                resultTv.setText(String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP)));
+                age = String.valueOf(new BigDecimal(result).setScale(0, BigDecimal.ROUND_HALF_UP));
+                resultTv.setText(age);
             }
 
             @Override

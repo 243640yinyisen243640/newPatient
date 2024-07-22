@@ -35,7 +35,6 @@
             android:paddingTop="30dp"
             android:paddingBottom="20dp"
             android:textStyle="bold"
-            android:text="今天的抗阻运动您完成多少个动作？"
             android:textColor="@color/black_2A"
             android:textSize="14sp" />
 

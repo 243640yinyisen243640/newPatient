@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +40,18 @@ public class InputNumDialogFragment extends DialogFragment {
     private IInputFinishCallback callback;
     private ImageView cancel;
     private TextView submit;
+    private TextView titleTv;
+
+    private String titleMsg;
+    private static InputMethodManager imm;
 
     public interface IInputFinishCallback {
         void sendStr(String inputStr);
     }
 
-    public InputNumDialogFragment(IInputFinishCallback callback) {
+    public InputNumDialogFragment(String mTitle,IInputFinishCallback callback) {
         this.callback = callback;
+        this.titleMsg = mTitle;
     }
 
     @Override
@@ -67,6 +73,7 @@ public class InputNumDialogFragment extends DialogFragment {
         submit.setOnClickListener(v -> {
             String trim = editText.getText().toString().trim();
             if (!TextUtils.isEmpty(trim) && trim.length() <= 200) {
+                hideSoftKeyboard();
                 callback.sendStr(trim);
                 dialog.dismiss();
             } else {
@@ -74,24 +81,23 @@ public class InputNumDialogFragment extends DialogFragment {
             }
         });
         cancel.setOnClickListener(v -> {
-
+            hideSoftKeyboard();
             dialog.dismiss();
         });
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            public InputMethodManager mInputMethodManager;
+                public InputMethodManager mInputMethodManager;
 
             @Override
             public void onDismiss(DialogInterface dialog) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        hideSoftkeyboard();
+                        hideSoftKeyboard();
                     }
                 }, 200);
             }
         });
     }
-
     private void setDialgParms() {
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wml = window.getAttributes();
@@ -109,23 +115,40 @@ public class InputNumDialogFragment extends DialogFragment {
         editText = contentView.findViewById(R.id.et_exercise_hand_num);
         cancel = contentView.findViewById(R.id.iv_hand_add_close);
         submit = contentView.findViewById(R.id.tv_exercise_hand_sure);
+        titleTv = contentView.findViewById(R.id.tv_exercise_success_content);
+        titleTv.setText(titleMsg);
         dialog.setContentView(contentView);
     }
 
     public static void showKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             view.requestFocus();
             imm.showSoftInput(view, 0);
         }
     }
 
-    public void hideSoftkeyboard() {
+  /*  public void hideSoftkeyboard() {
         try {
             ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         } catch (NullPointerException e) {
+            Log.e("LYY","LYY---错误信息：" + e.getMessage());
+        }
+    }*/
+
+    /**
+     * 隐藏软键盘
+     */
+    public void hideSoftKeyboard() {
+        editText.requestFocus();
+        if (editText.hasFocus()) {
+            // 只有当EditText有焦点时才尝试隐藏键盘
+            imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        } else {
+            Log.w("LYY", "LYY--- EditText doesn't have focus when trying to hide keyboard.");
         }
     }
+
 
     @Override
     public void onResume() {

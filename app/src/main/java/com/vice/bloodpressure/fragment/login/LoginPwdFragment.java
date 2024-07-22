@@ -103,7 +103,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "用户服务协议");
-                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"1");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME+"pagesC/pages/userAgreement?"+"type="+"1");
                 startActivity(intent);
             }
 
@@ -118,7 +118,7 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             public void onClick(@NonNull View view) {
                 Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
                 intent.putExtra("title", "隐私政策");
-                intent.putExtra("url", ConstantParamNew.IP+"pagesC/pages/userAgreement?"+"type="+"2");
+                intent.putExtra("url", ConstantParamNew.DOMAIN_NAME+"pagesC/pages/userAgreement?"+"type="+"2");
                 startActivity(intent);
             }
 
@@ -144,12 +144,11 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             if (isChecked) {
                 //显示密码不可见
                 passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
-                passwordEditText.setSelection(passwordEditText.getText().toString().trim().length());
             } else {
                 //显示明文可见
                 passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                passwordEditText.setSelection(passwordEditText.getText().toString().trim().length());
             }
+            passwordEditText.setSelection(passwordEditText.getText().toString().trim().length());
         });
     }
 
@@ -199,16 +198,15 @@ public class LoginPwdFragment extends UIBaseFragment implements View.OnClickList
             if ("0000".equals(response.code)) {
                 UserInfo userInfo = (UserInfo) response.object;
                 UserInfoUtils.saveLoginInfo(getPageContext(), userInfo);
+                Intent intent;
                 if ("1".equals(userInfo.getInfo_status())) {
-                    Intent intent = new Intent(getPageContext(), MainActivity.class);
+                    intent = new Intent(getPageContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    getActivity().finish();
                 } else {
-                    Intent intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+                    intent = new Intent(getPageContext(), PerfectUserInfoActivity.class);
                 }
+                startActivity(intent);
+                getActivity().finish();
             } else {
                 ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }

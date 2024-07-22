@@ -42,8 +42,6 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
         containerView().addView(initView());
         initValue();
         initListener();
-
-        //        VersionUtils.getInstance().updateNewVersion(getPageContext(), this, false);
     }
 
     private View initView() {

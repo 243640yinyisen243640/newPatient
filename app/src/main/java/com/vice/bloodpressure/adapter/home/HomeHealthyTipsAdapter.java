@@ -1,6 +1,10 @@
 package com.vice.bloodpressure.adapter.home;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -38,7 +42,7 @@ public class HomeHealthyTipsAdapter extends XyBaseAdapter<MessageInfo> {
         //   血压目标：2
         //     用药提醒：3
         //    运动目标：4
-        if ("1".equals(info.getTagType())) {
+       /* if ("1".equals(info.getTagType())) {
             holder.nameTextView.setText("血糖目标:" + info.getTagData());
         } else if ("2".equals(info.getTagType())) {
             holder.nameTextView.setText("血压目标:" + info.getTagData());
@@ -46,7 +50,24 @@ public class HomeHealthyTipsAdapter extends XyBaseAdapter<MessageInfo> {
             holder.nameTextView.setText("用药提醒:" + info.getTagData());
         } else {
             holder.nameTextView.setText("运动目标:" + info.getTagData());
+        }*/
+        String prefix;
+        int colorRed = Color.parseColor("#00C27F");
+
+        if ("1".equals(info.getTagType())) {
+            prefix = "血糖目标：";
+        } else if ("2".equals(info.getTagType())) {
+            prefix = "血压目标：";
+        } else if ("3".equals(info.getTagType())) {
+            prefix = "用药提醒：";
+        } else {
+            prefix = "运动目标：";
         }
+
+        SpannableString spannableString = new SpannableString(prefix + info.getTagData());
+        spannableString.setSpan(new ForegroundColorSpan(colorRed), 0, prefix.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.nameTextView.setText(spannableString);
+
         ClickOnClick clickOnClick = new ClickOnClick(position);
         holder.clickInfoTextView.setOnClickListener(clickOnClick);
         return convertView;

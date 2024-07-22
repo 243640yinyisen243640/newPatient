@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. 通过提交以下服务问卷，经过平台大数据+人功智能技术为您推出“智能饮食健康方案”方案包含早、午、晚及加餐应该怎么吃。"
+                android:text="1. 通过提交以下服务问卷，经过平台大数据+人工智能技术为您推出“智能饮食健康方案”方案包含早、午、晚及加餐应该怎么吃。"
                 android:textColor="#707070"
                 android:textSize="16sp"
                 android:layout_marginStart="20dp"

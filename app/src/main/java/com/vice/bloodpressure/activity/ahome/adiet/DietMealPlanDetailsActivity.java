@@ -26,6 +26,7 @@ import com.vice.bloodpressure.baseui.UIBaseLoadActivity;
 import com.vice.bloodpressure.datamanager.HomeDataManager;
 import com.vice.bloodpressure.model.MealExclusiveInfo;
 import com.vice.bloodpressure.model.MealInfo;
+import com.vice.bloodpressure.model.MealSecondInfo;
 import com.vice.bloodpressure.utils.ResponseUtils;
 import com.vice.bloodpressure.utils.ToastUtils;
 import com.vice.bloodpressure.utils.TurnUtils;
@@ -104,21 +105,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
 
     @Override
     protected void onPageLoad() {
-        Call<String> requestCall = HomeDataManager.getDietPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
-            if ("0000".equals(response.code)) {
-                mealInfo = (MealInfo) response.object;
-                bindData();
-                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
-            } else {
-                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
-                loadViewManager().changeLoadState(LoadStatus.FAILED);
-            }
 
-        }, (call, t) -> {
-            loadViewManager().changeLoadState(LoadStatus.FAILED);
-            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
-        });
-        addRequestCallToMap("getDietPlan", requestCall);
     }
 
     private void bindData() {
@@ -162,6 +149,21 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
             }
         });
         sevenPlanRv.setAdapter(weekAdapter);
+    }
+
+    /**
+     * 星期几排序
+     * @param list
+     */
+    public List<MealSecondInfo> moveLastElementToFront(List<MealSecondInfo> list) {
+        if (!list.isEmpty()) {
+            // 获取最后一个元素
+            MealSecondInfo lastElement = list.remove(list.size() - 1);
+            // 将最后一个元素添加到列表的开头
+            list.add(0, lastElement);
+        }
+
+        return list;
     }
 
     private void chanData(int position) {
@@ -294,7 +296,7 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
                 lunchAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), lunchList);
                 lunchLv.setAdapter(lunchAdapter);
 
-                List<MealExclusiveInfo> dinnerList = mealInfoSecond.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getBreakfast();
+                List<MealExclusiveInfo> dinnerList = mealInfoSecond.getExclusiveDietPlanVos().get(weekAdapter.getClickPosition()).getDinner();
                 dinnerAdapter = new DietMealDetailsThreeMealAdapter(getPageContext(), dinnerList);
                 dinnerLv.setAdapter(dinnerAdapter);
             }
@@ -378,5 +380,25 @@ public class DietMealPlanDetailsActivity extends UIBaseLoadActivity implements V
         Intent intent = new Intent(getPageContext(), MainActivity.class);
         intent.putExtra("isCheckPos", false);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Call<String> requestCall = HomeDataManager.getDietPlan(UserInfoUtils.getArchivesId(getPageContext()), (call, response) -> {
+            if ("0000".equals(response.code)) {
+                mealInfo = (MealInfo) response.object;
+                bindData();
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+            } else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+            ResponseUtils.defaultFailureCallBack(getPageContext(), call);
+        });
+        addRequestCallToMap("getDietPlan", requestCall);
     }
 }

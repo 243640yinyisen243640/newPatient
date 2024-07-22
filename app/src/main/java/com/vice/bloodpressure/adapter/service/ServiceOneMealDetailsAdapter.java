@@ -14,10 +14,12 @@ import java.util.List;
 public class ServiceOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> {
     private List<MealIngMapInfo> list;
     private Context context;
+    private boolean mFlag;//是否显示重量
 
-    public ServiceOneMealDetailsAdapter(Context context, List<MealIngMapInfo> list) {
+    public ServiceOneMealDetailsAdapter(Context context, boolean flag, List<MealIngMapInfo> list) {
         super(context, list);
         this.context = context;
+        this.mFlag = flag;
         this.list = list;
     }
 
@@ -36,7 +38,7 @@ public class ServiceOneMealDetailsAdapter extends XyBaseAdapter<MealIngMapInfo> 
         }
         MealIngMapInfo info = getList().get(position);
         holder.nameTextView.setText(info.getName());
-        holder.numTextView.setText(info.getWeight() + "g");
+        holder.numTextView.setText(mFlag ? info.getWeight() + "g" : "");
         return convertView;
     }
 

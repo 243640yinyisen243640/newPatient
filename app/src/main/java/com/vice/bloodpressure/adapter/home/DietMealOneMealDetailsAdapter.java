@@ -25,9 +25,12 @@ public class DietMealOneMealDetailsAdapter extends XyBaseAdapter<MealExclusiveIn
     private String type;
     private IAdapterViewClickOneListener clickOneListener;
 
-    public DietMealOneMealDetailsAdapter(Context context, List<MealExclusiveInfo> list, String type, IAdapterViewClickOneListener clickOneListener) {
+    private boolean isGone;
+
+    public DietMealOneMealDetailsAdapter(Context context, List<MealExclusiveInfo> list, String type,boolean mIsGone,IAdapterViewClickOneListener clickOneListener) {
         super(context, list);
         this.type = type;
+        this.isGone = mIsGone;
         this.clickOneListener = clickOneListener;
     }
 
@@ -41,10 +44,17 @@ public class DietMealOneMealDetailsAdapter extends XyBaseAdapter<MealExclusiveIn
             viewHolder.nameTextView = convertView.findViewById(R.id.tv_meal_details_name);
             viewHolder.numTextView = convertView.findViewById(R.id.tv_meal_details_num);
             viewHolder.clickLin = convertView.findViewById(R.id.ll_meal_details_click);
+            viewHolder.clickImageView = convertView.findViewById(R.id.click_img);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        if (isGone){
+            viewHolder.clickImageView.setVisibility(View.GONE);
+        }else {
+            viewHolder.clickImageView.setVisibility(View.VISIBLE);
         }
         MealExclusiveInfo info = getList().get(position);
         XyImageUtils.loadRoundImage(getContext(), R.drawable.diet_guogai_gray, info.getCoverUrl(), viewHolder.coverImageView);
@@ -73,7 +83,7 @@ public class DietMealOneMealDetailsAdapter extends XyBaseAdapter<MealExclusiveIn
     }
 
     private static class ViewHolder {
-        ImageView coverImageView;
+        ImageView coverImageView,clickImageView;
         TextView nameTextView;
         TextView numTextView;
         LinearLayout clickLin;

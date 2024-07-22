@@ -253,6 +253,8 @@ public class ServiceCheckAddActivity extends UIBaseLoadActivity implements View.
                 imgString = galleryInfo.getUrl();
 
                 commentSure(content, imgString);
+            }else {
+                ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);

@@ -44,6 +44,8 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
     private TextView nextTv;
 
     private ExercisePlanSuccessPopupWindow successPopupWindow;
+    private String time;
+    private String rate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,17 +58,30 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
 
     private void initListener() {
         nextTv.setOnClickListener(v -> {
+            if (!habitYesCb.isChecked() && !habitNoCb.isChecked()){
+                ToastUtils.getInstance().showToast(getPageContext(), "请选择是否有运动习惯");
+                return;
+            }
+
             if (habitYesCb.isChecked()){
-                String time = timeEt.getText().toString().trim();
+                if (!emptyYesCb.isChecked() && !emptyNoCb.isChecked()){
+                    ToastUtils.getInstance().showToast(getPageContext(), "请选择是否有空腹运动");
+                    return;
+                }
+                time = timeEt.getText().toString().trim();
                 if (TextUtils.isEmpty(time)) {
                     ToastUtils.getInstance().showToast(getPageContext(), "请输入运动时间");
                     return;
                 }
-                String rate = rateEt.getText().toString().trim();
+                rate = rateEt.getText().toString().trim();
                 if (TextUtils.isEmpty(rate)) {
                     ToastUtils.getInstance().showToast(getPageContext(), "请输入运动频率");
                     return;
                 }
+            }else {
+                time = "";
+                rate = "";
+                emptyYesCb.setChecked(false);
             }
 
             sureSubmit();
@@ -85,8 +100,11 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         habitYesCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 habitNoCb.setChecked(false);
+                noLinearLayout.setVisibility(View.VISIBLE);
             } else {
                 habitNoCb.setChecked(true);
+                noLinearLayout.setVisibility(View.GONE);
+
             }
         });
         habitNoCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -121,7 +139,7 @@ public class ExercisePlanExerciseActivity extends UIBaseActivity {
         String weight = getIntent().getStringExtra("weight");
         String age = getIntent().getStringExtra("age");
         String illType = getIntent().getStringExtra("diseases");
-        Call<String> requestCall = HomeDataManager.recommendSportPlan(UserInfoUtils.getArchivesId(getPageContext()), height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", timeEt.getText().toString().trim(), rateEt.getText().toString().trim(), age, (call, response) -> {
+        Call<String> requestCall = HomeDataManager.recommendSportPlan(UserInfoUtils.getArchivesId(getPageContext()), height, weight, illType, habitYesCb.isChecked() ? "Y" : "N", emptyYesCb.isChecked() ? "Y" : "N", time, rate, age, (call, response) -> {
             if ("0000".equals(response.code)) {
                 ExerciseInfo info = (ExerciseInfo) response.object;
                 TextView textView = successPopupWindow.showContent();

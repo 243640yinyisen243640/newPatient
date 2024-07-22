@@ -108,6 +108,7 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
      */
     private void chooseTypeWindow(TextView typeTextView) {
         List<String> typeList = new ArrayList<>();
+        typeList.add("全部");
         typeList.add("谷类");
         typeList.add("肉类");
         typeList.add("蔬菜");
@@ -115,7 +116,11 @@ public class ServiceMealVideoActivity extends UIBaseListRecycleViewForBgTopActiv
         typeList.add("其他类");
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "分类", typeList, object -> {
             typeTextView.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
-            cid = Integer.parseInt(String.valueOf(object)) + 1 + "";
+            if (String.valueOf(object).equals("0")){
+                cid = "";
+            }else {
+                cid = Integer.parseInt(String.valueOf(object)) + "";
+            }
             setPageIndex(1);
             onPageLoad();
         });

@@ -31,6 +31,7 @@ public class UserQRCodeActivity extends UIBaseActivity {
     private String nickName;
     private String phoneNumber;
     private String avatar;
+    private String sex;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class UserQRCodeActivity extends UIBaseActivity {
         nickName = getIntent().getStringExtra("nickName");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         avatar = getIntent().getStringExtra("avatar");
+        sex = getIntent().getStringExtra("sex");
         initView();
         initValues();
     }
@@ -48,8 +50,14 @@ public class UserQRCodeActivity extends UIBaseActivity {
         Bitmap bitmap = QRCodeUtils.createQRCodeBitmap("archivesId=="+archivesId, 150, 150);
         Log.i("yys", "bitmap==" + bitmap);
         qrImageView.setImageBitmap(bitmap);
-        XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, archivesId, headImageView);
-        XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, archivesId, qrHeadImageView);
+        if ("1".equals(sex)){
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, archivesId, headImageView);
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, archivesId, qrHeadImageView);
+        }else {
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head, archivesId, headImageView);
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head, archivesId, qrHeadImageView);
+        }
+
         nameTextView.setText(nickName);
         phoneTextView.setText(phoneNumber);
     }
