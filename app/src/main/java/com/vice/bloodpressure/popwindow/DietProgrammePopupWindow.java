@@ -19,7 +19,6 @@ public class DietProgrammePopupWindow extends PopupWindow {
         LinearLayout view = (LinearLayout) View.inflate(context, R.layout.pop_diet_programme, null);
         TextView tvRecommend = view.findViewById(R.id.tv_diet_programme_dialog_recommend);
         TextView tvChoose = view.findViewById(R.id.tv_diet_programme_dialog_choose);
-
         tvRecommend.setOnClickListener(v -> {
             if (recommendClickListener != null) {
                 recommendClickListener.onClick(v);
