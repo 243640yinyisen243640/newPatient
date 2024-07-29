@@ -67,9 +67,9 @@ public class UserFilesActivity extends UIBaseActivity {
         nameTextView.setText(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME, ""));
 
         if ("1".equals(sex)){
-            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.user_center_default_head_img, "", imgImageView);
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_male_head_circle, "", imgImageView);
         }else {
-            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head, "", imgImageView);
+            XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head_circle, "", imgImageView);
         }
 
         ArrayList<Fragment> fragments = new ArrayList<>();
