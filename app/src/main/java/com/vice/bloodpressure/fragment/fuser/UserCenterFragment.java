@@ -1,7 +1,5 @@
 package com.vice.bloodpressure.fragment.fuser;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,6 +29,8 @@ import com.vice.bloodpressure.utils.DialogUtils;
 import com.vice.bloodpressure.utils.SharedPreferencesUtils;
 import com.vice.bloodpressure.utils.UserInfoUtils;
 import com.vice.bloodpressure.utils.XyImageUtils;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -162,13 +162,13 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
         nickNameTextView.setText(userInfo.getNickName());
         ageTextView.setText(String.format(getString(R.string.user_center_age), userInfo.getAge()));
         if ("1".equals(userInfo.getSex())) {
-            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.user_center_male, 0, 0, 0);
+            nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.default_female_head_circle, 0, 0, 0);
             //头像
-            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.user_center_default_head_img, userInfo.getAvatar(), avatarImageView);
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_male_head, userInfo.getAvatar(), avatarImageView);
         } else {
             nickNameTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.use_center_female, 0, 0, 0);
             //头像
-            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_female_head, userInfo.getAvatar(), avatarImageView);
+            XyImageUtils.loadCircleImage(getPageContext(), R.drawable.default_female_head_circle, userInfo.getAvatar(), avatarImageView);
         }
 
         String content;
