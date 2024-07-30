@@ -87,8 +87,22 @@ public class OutHospitalInfoActivity extends UIBaseLoadActivity {
     private void bindData(HospitalInfo hospitalInfo) {
         XyImageUtils.loadImage(getPageContext(), R.drawable.shape_defaultbackground_0, hospitalInfo.getLogo(), backImageView);
         nameTexView.setText(hospitalInfo.getHospitalName());
-        levelTexView.setText(hospitalInfo.getCategory());
-        locationTexView.setText(hospitalInfo.getDetailedAddress());
+
+        if (!TextUtils.isEmpty(hospitalInfo.getDetailedAddress())){
+            locationTexView.setVisibility(View.VISIBLE);
+            locationTexView.setText(hospitalInfo.getDetailedAddress());
+        }else {
+            locationTexView.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(hospitalInfo.getCategory())){
+            levelTexView.setVisibility(View.VISIBLE);
+            levelTexView.setText(hospitalInfo.getCategory());
+        }else {
+            levelTexView.setVisibility(View.GONE);
+        }
         phoneNumber = hospitalInfo.getContactInfo();
+
+
+        introduceTexView.setText(hospitalInfo.getIntroduction());
     }
 }
