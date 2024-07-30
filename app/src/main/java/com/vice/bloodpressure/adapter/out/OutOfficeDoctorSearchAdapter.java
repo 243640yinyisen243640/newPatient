@@ -55,6 +55,12 @@ public class OutOfficeDoctorSearchAdapter extends RecyclerView.Adapter<OutOffice
         DoctorInfo info = list.get(position);
         XyImageUtils.loadCircleImage(context, R.drawable.out_doctor_default_head_img, info.getAvatar(), holder.headImageView);
         holder.nameTextView.setText(info.getDoctorName());
+        if (info.getTitles() != null && info.getDeptName() != null) {
+            holder.lineView.setVisibility(View.VISIBLE);
+        } else {
+            holder.lineView.setVisibility(View.GONE);
+        }
+
         holder.postTextView.setText(info.getTitles());
         holder.officeTextView.setText(info.getDeptName());
         if (info.getProfile() != null) {

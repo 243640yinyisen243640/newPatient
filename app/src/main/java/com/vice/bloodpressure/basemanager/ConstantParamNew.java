@@ -14,7 +14,7 @@ public class ConstantParamNew {
     /**
      * 线上环境
      */
-    public static final String IP = "http://39.106.101.129:9500/";
+//    public static final String IP = "http://39.106.101.129:9500/";
     /**
      * 本地访问地址 李昂
      */
@@ -22,7 +22,7 @@ public class ConstantParamNew {
     /**
      * 本地访问地址 赵亚鹏
      */
-//    public static final String IP = "http://192.168.0.58:9500/";
+    public static final String IP = "http://192.168.0.58:9500/";
     /**
      * 域名 访问用户服务协议、隐私政策
      */

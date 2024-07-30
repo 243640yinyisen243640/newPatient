@@ -73,7 +73,8 @@ public class OutDoctorSearchListActivity extends UIBaseListRecycleViewActivity<D
     @Override
     protected void getListData(CallBack callBack) {
         String deptId = getIntent().getStringExtra("deptId");
-        Call<String> requestCall = OutDataManager.getDeptDoctorList(hospitalName, "3", deptId, (call, response) -> {
+        String hospitalId = getIntent().getStringExtra("hospitalId");
+        Call<String> requestCall = OutDataManager.getDeptDoctorList(hospitalName, hospitalId, deptId, (call, response) -> {
             if ("0000".equals(response.code)) {
                 callBack.callBack(response.object);
             }
