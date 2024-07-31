@@ -566,6 +566,7 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                         String drinkNum = data.getStringExtra("drinkNum");
                         String drinkType = data.getStringExtra("drinkType");
                         String drinkName = data.getStringExtra("drinkName");
+                        Log.i("yys","drinkType=="+drinkType+"drinkName=="+drinkName);
                         if ("Y".equals(isDrink)) {
                             drinkTv.setText("是 " + drinkName + " " + drinkNum + "ml/日");
                         } else {

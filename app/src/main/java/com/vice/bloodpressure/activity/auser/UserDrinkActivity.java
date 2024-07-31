@@ -126,7 +126,7 @@ public class UserDrinkActivity extends UIBaseActivity {
         PickerViewUtils.showChooseSinglePicker(getPageContext(), "酒类", typeList, object -> {
             typeTv.setText(typeList.get(Integer.parseInt(String.valueOf(object))));
             drinkType = Integer.parseInt(String.valueOf(object)) + 1 + "";
-
+            drinkName = typeList.get(Integer.parseInt(String.valueOf(object)));
         });
     }
 
