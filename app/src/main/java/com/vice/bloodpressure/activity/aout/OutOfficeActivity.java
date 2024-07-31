@@ -90,21 +90,24 @@ public class OutOfficeActivity extends UIBaseLoadActivity {
         XyImageUtils.loadRoundImage(getPageContext(), R.drawable.out_hospital_default, hospitalInfo.getLogo(), headImageView);
         nameTextView.setText(hospitalInfo.getHospitalName());
         if (TextUtils.isEmpty(hospitalInfo.getDetailedAddress())) {
-            locationTextView.setVisibility(View.GONE);
-        } else {
             locationTextView.setVisibility(View.VISIBLE);
             locationTextView.setText(hospitalInfo.getDetailedAddress());
+        } else {
+            locationTextView.setVisibility(View.GONE);
         }
 
-        if ( TextUtils.isEmpty(hospitalInfo.getCategory())) {
-            levelTextView.setVisibility(View.GONE);
-        } else {
+        if ( !TextUtils.isEmpty(hospitalInfo.getCategory())) {
+
+            levelTextView.setVisibility(View.VISIBLE);
             levelTextView.setText(hospitalInfo.getCategory());
-        }
-        if (TextUtils.isEmpty(hospitalInfo.getIntroduction())) {
-            introduceTextView.setVisibility(View.GONE);
         } else {
+            levelTextView.setVisibility(View.GONE);
+        }
+        if (!TextUtils.isEmpty(hospitalInfo.getIntroduction())) {
+            introduceTextView.setVisibility(View.VISIBLE);
             introduceTextView.setText(hospitalInfo.getIntroduction());
+        } else {
+            introduceTextView.setVisibility(View.GONE);
         }
 
         fragments = new ArrayList<>();

@@ -531,13 +531,11 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
             SpannableStringBuilder builder = new SpannableStringBuilder();
             builder.append("本节共");
             int length = builder.length();
-            //            builder.append(allInfo.getTodayArticle().getWordNumber());
-            builder.append("100");
+            builder.append(allInfo.getTodayArticle().getWordNumber());
             int length1 = builder.length();
             builder.append("字，阅读时间约");
             int length2 = builder.length();
-            //            builder.append(allInfo.getTodayArticle().getReadTime());
-            builder.append("20");
+            builder.append(allInfo.getTodayArticle().getReadTime());
             int length3 = builder.length();
             builder.append("分钟");
 
@@ -712,7 +710,7 @@ public class MainHomeFragment extends UIBaseLoadRefreshFragment implements View.
                 startActivity(intent);
                 break;
             case R.id.ll_education_article:
-                 intent = new Intent(getPageContext(), EducationDetailsActivity.class);
+                intent = new Intent(getPageContext(), EducationDetailsActivity.class);
                 intent.putExtra("type", allInfo.getTodayArticle().getType());
                 intent.putExtra("sid", allInfo.getTodayArticle().getSid());
                 intent.putExtra("essayId", allInfo.getTodayArticle().getEssayId());
