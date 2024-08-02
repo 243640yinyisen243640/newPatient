@@ -8,6 +8,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -119,13 +120,29 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         addRequestCallToMap("getSelectDoctorInfo", requestCall);
     }
 
+
+    private void getData() {
+        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "1", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                userInfo = (UserInfo) response.object;
+                bindData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getSelectDoctorInfo", requestCall);
+    }
+
     private void bindData() {
         nameTv.setText(userInfo.getNickName());
         idCardTv.setText(userInfo.getIdCard());
         bornTv.setText(userInfo.getBirthday());
         ageTv.setText(userInfo.getAge());
         sexTv.setText(("1".equals(userInfo.getSex()) ? "男" : "女"));
-        if (userInfo.getNativePlace()!=null){
+        if (userInfo.getNativePlace() != null) {
 
             cityTv.setText(userInfo.getNativePlace());
         }
@@ -202,7 +219,8 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                 jsonSB.append(line);
             }
             // 将数据转换为对象
-            Type type = new TypeToken<List<ProvinceBean>>() { }.getType();
+            Type type = new TypeToken<List<ProvinceBean>>() {
+            }.getType();
             mYwpAddressBean = new Gson().fromJson(jsonSB.toString(), type);
             for (int i = 0; i < mYwpAddressBean.size(); i++) {
                 List<CityBean> cityBeans = new ArrayList<>();
@@ -240,46 +258,48 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         TextView sureTextView = getViewByID(view, R.id.tv_dialog_sure);
 
         titleTextView.setText(title);
-        if ("1".equals(type)) {
-            if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入姓名");
-            } else {
-                msgEditText.setText(msg);
-                msgEditText.setSelection(msg.length());
-            }
-        } else if ("2".equals(type)) {
-            if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入身份证号");
-            } else {
-                msgEditText.setText(msg);
-                msgEditText.setSelection(msg.length());
+        msgEditText.setHint("请输入内容");
 
-            }
-        } else if ("4".equals(type)) {
-            if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入年龄");
-            } else {
-                msgEditText.setText(msg);
-                msgEditText.setSelection(msg.length());
-
-            }
-        } else if ("7".equals(type)) {
-            if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入紧急联系人电话");
-            } else {
-                msgEditText.setText(msg);
-                msgEditText.setSelection(msg.length());
-
-            }
-        } else {
-            if (TextUtils.isEmpty(msg)) {
-                msgEditText.setHint("请输入联系人电话");
-            } else {
-                msgEditText.setText(msg);
-                msgEditText.setSelection(msg.length());
-
-            }
-        }
+        //        if ("1".equals(type)) {
+        //            if (TextUtils.isEmpty(msg)) {
+        //                msgEditText.setHint("请输入姓名");
+        //            } else {
+        //                msgEditText.setText(msg);
+        //                msgEditText.setSelection(msg.length());
+        //            }
+        //        } else if ("2".equals(type)) {
+        //            if (TextUtils.isEmpty(msg)) {
+        //                msgEditText.setHint("请输入身份证号");
+        //            } else {
+        //                msgEditText.setText(msg);
+        //                msgEditText.setSelection(msg.length());
+        //
+        //            }
+        //        } else if ("4".equals(type)) {
+        //            if (TextUtils.isEmpty(msg)) {
+        //                msgEditText.setHint("请输入年龄");
+        //            } else {
+        //                msgEditText.setText(msg);
+        //                msgEditText.setSelection(msg.length());
+        //
+        //            }
+        //        } else if ("7".equals(type)) {
+        //            if (TextUtils.isEmpty(msg)) {
+        //                msgEditText.setHint("请输入紧急联系人电话");
+        //            } else {
+        //                msgEditText.setText(msg);
+        //                msgEditText.setSelection(msg.length());
+        //
+        //            }
+        //        } else {
+        //            if (TextUtils.isEmpty(msg)) {
+        //                msgEditText.setHint("请输入联系人电话");
+        //            } else {
+        //                msgEditText.setText(msg);
+        //                msgEditText.setSelection(msg.length());
+        //
+        //            }
+        //        }
 
 
         //设置14个字长
@@ -312,9 +332,9 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         });
         sureTextView.setOnClickListener(v -> {
             // TODO Auto-generated method stub
-            String nick = msgEditText.getText().toString().trim();
-            if (TextUtils.isEmpty(nick)) {
-                ToastUtils.getInstance().showToast(getPageContext(), msg);
+            String content = msgEditText.getText().toString().trim();
+            if (TextUtils.isEmpty(content)) {
+                ToastUtils.getInstance().showToast(getPageContext(), "请输入内容");
                 return;
             }
 
@@ -340,34 +360,37 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         Call<String> requestCall = UserDataManager.editUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), key, values, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                switch (type) {
-                    case "1":
-                        nameTv.setText(values);
-                        break;
-                    case "2":
-                        idCardTv.setText(values);
-                        break;
-                    case "3":
-                        bornTv.setText(values);
-                        break;
-                    case "4":
-                        ageTv.setText(values);
-                        break;
-                    case "5":
-                        sexTv.setText((values.equals("1") ? "男" : "女"));
-                        break;
-                    case "6":
-                        cityTv.setText(values);
-                        break;
-                    case "7":
-                        sosNameTv.setText(values);
-                        break;
-                    case "8":
-                        sosPhoneTv.setText(values);
-                        break;
-                    default:
-                        break;
-                }
+                Log.i("yys", "type==" + type + "key==" + key + "values==" + values);
+                //                switch (type) {
+                //                    case "1":
+                //                        nameTv.setText(values);
+                //                        break;
+                //                    case "2":
+                //                        idCardTv.setText(values);
+                //                        break;
+                //                    case "3":
+                //                        bornTv.setText(values);
+                //                        break;
+                //                    case "4":
+                //                        ageTv.setText(values);
+                //                        break;
+                //                    case "5":
+                //                        sexTv.setText((values.equals("1") ? "男" : "女"));
+                //                        break;
+                //                    case "6":
+                //                        cityTv.setText(values);
+                //                        break;
+                //                    case "7":
+                //                        sosNameTv.setText(values);
+                //                        break;
+                //                    case "8":
+                //                        sosPhoneTv.setText(values);
+                //                        break;
+                //                    default:
+                //                        break;
+                //                }
+
+                getData();
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -399,10 +422,10 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     }
 
     private void initListener() {
-        nameLinearLayout.setOnClickListener(this);
+//        nameLinearLayout.setOnClickListener(this);
         idCardLinearLayout.setOnClickListener(this);
         bornLinearLayout.setOnClickListener(this);
-        ageLinearLayout.setOnClickListener(this);
+//        ageLinearLayout.setOnClickListener(this);
         sexTv.setOnClickListener(this);
         cityTv.setOnClickListener(this);
         sosNameTv.setOnClickListener(this);
