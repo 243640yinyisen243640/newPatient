@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -42,9 +41,11 @@ import static android.app.Activity.RESULT_OK;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:生活方式
  */
 public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements View.OnClickListener {
+
+
     /**
      * 抽烟
      */
@@ -73,11 +74,19 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
     /**
      * 怀孕时间
      */
+    private LinearLayout pregnantLinearLayout;
+    /**
+     * 怀孕时间
+     */
     private LinearLayout pregnantTimeLinearLayout;
     /**
      * 怀孕时间
      */
     private View pregnantTimeView;
+    /**
+     * 怀孕时间
+     */
+    private View pregnantView;
     /**
      * 是否结婚
      */
@@ -148,6 +157,21 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         addRequestCallToMap("getUserFilesInfo", requestCall);
     }
 
+    private void getData() {
+        Call<String> requestCall = UserDataManager.getUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), "2", (call, response) -> {
+            if ("0000".equals(response.code)) {
+                loadViewManager().changeLoadState(LoadStatus.SUCCESS);
+                userInfo = (UserInfo) response.object;
+                bindData();
+            } else {
+                loadViewManager().changeLoadState(LoadStatus.FAILED);
+            }
+        }, (call, t) -> {
+            loadViewManager().changeLoadState(LoadStatus.FAILED);
+        });
+        addRequestCallToMap("getUserFilesInfo", requestCall);
+    }
+
     private void bindData() {
         if (userInfo.getSmokes() == null) {
             smokeTv.setText("请选择");
@@ -178,19 +202,24 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
                 drinkTv.setText("否");
             }
         }
-        if (userInfo.getPregnancy() == null) {
-            pregnantTv.setText("请选择");
+        if ("1".equals(userInfo.getSex())) {
             pregnantTimeLinearLayout.setVisibility(View.GONE);
+            pregnantTimeView.setVisibility(View.GONE);
+            pregnantView.setVisibility(View.GONE);
+            pregnantLinearLayout.setVisibility(View.GONE);
         } else {
-            if ("Y".equals(userInfo.getPregnancy())) {
-                pregnantTv.setText("是");
-                pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
-                pregnantTimeTv.setText(userInfo.getPregnancyTime());
-            } else {
-                pregnantTv.setText("否");
+            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+            pregnantLinearLayout.setVisibility(View.VISIBLE);
+            pregnantTimeView.setVisibility(View.VISIBLE);
+            pregnantView.setVisibility(View.VISIBLE);
+            if (userInfo.getPregnancy() == null) {
+                pregnantTv.setText("请选择");
                 pregnantTimeLinearLayout.setVisibility(View.GONE);
+            } else {
+                setTimeVisible();
             }
         }
+
         if (userInfo.getMarital() == null) {
             marriageTv.setText("请选择");
         } else {
@@ -281,13 +310,28 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
 
     }
 
+    private void setTimeVisible(){
+        if ("Y".equals(userInfo.getPregnancy())) {
+            pregnantTv.setText("是");
+            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+            pregnantTimeView.setVisibility(View.VISIBLE);
+            pregnantTimeTv.setText(userInfo.getPregnancyTime());
+        } else {
+            pregnantTv.setText("否");
+            pregnantTimeLinearLayout.setVisibility(View.GONE);
+            pregnantTimeView.setVisibility(View.GONE);
+        }
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.fragment_user_files_live_style, null);
         smokeTv = view.findViewById(R.id.tv_user_live_style_smoke);
         drinkTv = view.findViewById(R.id.tv_user_live_style_drink);
         pregnantTv = view.findViewById(R.id.tv_user_live_style_pregnant);
+        pregnantLinearLayout = view.findViewById(R.id.ll_user_live_style_pregnant);
         pregnantTimeLinearLayout = view.findViewById(R.id.ll_user_live_style_pregnant_time);
         pregnantTimeView = view.findViewById(R.id.view_user_live_style_pregnant_time_line);
+        pregnantView = view.findViewById(R.id.view_user_live_style_pregnant_line);
         pregnantTimeTv = view.findViewById(R.id.tv_user_live_style_pregnant_time);
         marriageTv = view.findViewById(R.id.tv_user_live_style_marriage);
         aloneTv = view.findViewById(R.id.tv_user_live_style_alone);
@@ -501,42 +545,43 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         Call<String> requestCall = UserDataManager.editUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), key, values, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                Log.i("yys", "type====" + type + "key===" + key + "content==" + content + "values==" + values);
-                switch (type) {
-                    case "3":
-                        pregnantTv.setText(content);
-                        if ("Y".equals(values)) {
-                            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
-                            pregnantTimeView.setVisibility(View.VISIBLE);
-                        } else {
-                            pregnantTimeLinearLayout.setVisibility(View.GONE);
-                            pregnantTimeView.setVisibility(View.GONE);
-                        }
-                        break;
-                    case "4":
-                        pregnantTimeTv.setText(values);
-                        break;
-                    case "5":
-                        marriageTv.setText(content);
-                        break;
-                    case "6":
-                        aloneTv.setText(content);
-                        break;
-                    case "7":
-                        bedTv.setText(content);
-                        break;
-                    case "8":
-                        cultureTv.setText(content);
-                        break;
-                    case "9":
-                        workTv.setText(content);
-                        break;
-                    case "11":
-                        hosCardTv.setText(content);
-                        break;
-                    default:
-                        break;
-                }
+                getData();
+                //                Log.i("yys", "type====" + type + "key===" + key + "content==" + content + "values==" + values);
+                //                switch (type) {
+                //                    case "3":
+                //                        pregnantTv.setText(content);
+                //                        if ("Y".equals(values)) {
+                //                            pregnantTimeLinearLayout.setVisibility(View.VISIBLE);
+                //                            pregnantTimeView.setVisibility(View.VISIBLE);
+                //                        } else {
+                //                            pregnantTimeLinearLayout.setVisibility(View.GONE);
+                //                            pregnantTimeView.setVisibility(View.GONE);
+                //                        }
+                //                        break;
+                //                    case "4":
+                //                        pregnantTimeTv.setText(values);
+                //                        break;
+                //                    case "5":
+                //                        marriageTv.setText(content);
+                //                        break;
+                //                    case "6":
+                //                        aloneTv.setText(content);
+                //                        break;
+                //                    case "7":
+                //                        bedTv.setText(content);
+                //                        break;
+                //                    case "8":
+                //                        cultureTv.setText(content);
+                //                        break;
+                //                    case "9":
+                //                        workTv.setText(content);
+                //                        break;
+                //                    case "11":
+                //                        hosCardTv.setText(content);
+                //                        break;
+                //                    default:
+                //                        break;
+                //                }
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -550,30 +595,32 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_FOR_SMOKE_STYLE:
-                    if (data != null) {
-                        String isSmoke = data.getStringExtra("isCheck");
-                        String smokeNum = data.getStringExtra("smokeNum");
-                        if ("Y".equals(isSmoke)) {
-                            smokeTv.setText("是 " + smokeNum + "支/日");
-                        } else {
-                            smokeTv.setText("否");
-                        }
-                    }
-                    break;
                 case REQUEST_CODE_FOR_DRINK_STYLE:
                     if (data != null) {
-                        String isDrink = data.getStringExtra("isCheck");
-                        String drinkNum = data.getStringExtra("drinkNum");
-                        String drinkType = data.getStringExtra("drinkType");
-                        String drinkName = data.getStringExtra("drinkName");
-                        Log.i("yys","drinkType=="+drinkType+"drinkName=="+drinkName);
-                        if ("Y".equals(isDrink)) {
-                            drinkTv.setText("是 " + drinkName + " " + drinkNum + "ml/日");
-                        } else {
-                            drinkTv.setText("否");
-                        }
+                        getData();
+                        //                        String isSmoke = data.getStringExtra("isCheck");
+                        //                        String smokeNum = data.getStringExtra("smokeNum");
+                        //                        if ("Y".equals(isSmoke)) {
+                        //                            smokeTv.setText("是 " + smokeNum + "支/日");
+                        //                        } else {
+                        //                            smokeTv.setText("否");
+                        //                        }
                     }
                     break;
+                //                case REQUEST_CODE_FOR_DRINK_STYLE:
+                //                    if (data != null) {
+                //                        String isDrink = data.getStringExtra("isCheck");
+                //                        String drinkNum = data.getStringExtra("drinkNum");
+                //                        String drinkType = data.getStringExtra("drinkType");
+                //                        String drinkName = data.getStringExtra("drinkName");
+                //                        Log.i("yys", "drinkType==" + drinkType + "drinkName==" + drinkName);
+                //                        if ("Y".equals(isDrink)) {
+                //                            drinkTv.setText("是 " + drinkName + " " + drinkNum + "ml/日");
+                //                        } else {
+                //                            drinkTv.setText("否");
+                //                        }
+                //                    }
+                //                    break;
                 case REQUEST_CODE_FOR_PAY_STYLE:
                     if (data != null) {
                         String checkName = data.getStringExtra("checkName");
@@ -587,6 +634,10 @@ public class UserFilesLiveStyleFragment extends UIBaseLoadFragment implements Vi
     }
 
 
+
+    public void refresh(){
+        getData();
+    }
     private void showInputMethod() {
         //自动弹出键盘
         InputMethodManager inputManager = (InputMethodManager) getPageContext().getSystemService(Context.INPUT_METHOD_SERVICE);

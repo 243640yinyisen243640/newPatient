@@ -32,6 +32,7 @@ import java.util.ArrayList;
  * 描述:我的档案
  */
 public class UserFilesActivity extends UIBaseActivity {
+    private ArrayList<Fragment> fragments = new ArrayList<>();
     private NestRadioGroup radioGroup;
     private ViewPager2 viewPager;
     private ImageView imgImageView;
@@ -53,6 +54,10 @@ public class UserFilesActivity extends UIBaseActivity {
         initValue();
     }
 
+    public ArrayList getFragments(){
+        return fragments;
+    }
+
     private void initView() {
         View view = View.inflate(getPageContext(), R.layout.activity_user_center_files, null);
         imgImageView = view.findViewById(R.id.iv_user_files_avatar);
@@ -66,13 +71,13 @@ public class UserFilesActivity extends UIBaseActivity {
     private void initValue() {
         nameTextView.setText(SharedPreferencesUtils.getInfo(getPageContext(), SharedPreferencesConstant.NICK_NAME, ""));
 
-        if ("1".equals(sex)){
+        if ("1".equals(sex)) {
             XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_male_head_circle, "", imgImageView);
-        }else {
+        } else {
             XyImageUtils.loadRoundImage(getPageContext(), R.drawable.default_female_head_circle, "", imgImageView);
         }
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
+
         UserFilesBaseInfoFragment infoFragment = new UserFilesBaseInfoFragment();
         UserFilesLiveStyleFragment liveStyleFragment = new UserFilesLiveStyleFragment();
         UserFilesIllFragment illFragment = new UserFilesIllFragment();
@@ -82,8 +87,8 @@ public class UserFilesActivity extends UIBaseActivity {
         fragments.add(illFragment);
         fragments.add(familyFragment);
 
-        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         viewPager.setOffscreenPageLimit(fragments.size());
+        viewPager.setAdapter(new MyFragmentStateAdapter(this, fragments));
         radioGroup.check(radioGroup.getChildAt(0).getId());
         viewPager.setCurrentItem(0);
 

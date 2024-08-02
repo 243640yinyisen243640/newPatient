@@ -29,10 +29,7 @@ import retrofit2.Call;
  * 描述:家族史
  */
 public class UserIllFamilyHistoryActivity extends UIBaseActivity {
-    /**
-     * 1：添加  2：编辑
-     */
-    private String isAdd;
+
 
     private XyAtMostGridView relationshipGridView;
     private CheckBox haveCheckBox;
@@ -90,7 +87,7 @@ public class UserIllFamilyHistoryActivity extends UIBaseActivity {
      * 确定上传数据
      */
     private void sureToAddData() {
-        Call<String> requestCall = UserDataManager.editUserFilesInfoForFamily(UserInfoUtils.getArchivesId(getPageContext()), diseaseList.get(PerfectDiseaseAdapter.getClickPosition()).getId(), haveCheckBox.isChecked() ? "99" : "1", (call, response) -> {
+        Call<String> requestCall = UserDataManager.editUserFilesInfoForFamily(UserInfoUtils.getArchivesId(getPageContext()), diseaseList.get(PerfectDiseaseAdapter.getClickPosition()).getId(), haveCheckBox.isChecked() ? "12" : "1", (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
                 setResult(RESULT_OK);

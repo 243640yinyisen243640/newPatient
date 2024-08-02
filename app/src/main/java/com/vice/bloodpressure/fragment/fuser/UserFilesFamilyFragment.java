@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:家族史
  */
 public class UserFilesFamilyFragment extends UIBaseLoadFragment {
     private static final int REQUEST_CODE_FOR_REFRESH = 1;

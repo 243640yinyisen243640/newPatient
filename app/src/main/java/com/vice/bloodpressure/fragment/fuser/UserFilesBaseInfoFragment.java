@@ -15,11 +15,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.activity.auser.UserFilesActivity;
 import com.vice.bloodpressure.addresspickerlib.CityBean;
 import com.vice.bloodpressure.addresspickerlib.ProvinceBean;
 import com.vice.bloodpressure.baseimp.CallBack;
@@ -47,7 +50,7 @@ import retrofit2.Call;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:基本方式
  */
 public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements View.OnClickListener {
     private TextView nameTv;
@@ -360,7 +363,13 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
         Call<String> requestCall = UserDataManager.editUserFilesInfo(UserInfoUtils.getArchivesId(getPageContext()), key, values, (call, response) -> {
             ToastUtils.getInstance().showToast(getPageContext(), response.msg);
             if ("0000".equals(response.code)) {
-                Log.i("yys", "type==" + type + "key==" + key + "values==" + values);
+                getData();
+                if ("5".equals(type)) {
+                    List<Fragment> fragments = ((UserFilesActivity)getActivity()).getFragments();
+                    Log.i("yys", "fragments.size: =="+fragments.size());
+                    UserFilesLiveStyleFragment fragment = (UserFilesLiveStyleFragment) fragments.get(1);
+                    fragment.refresh();
+                }
                 //                switch (type) {
                 //                    case "1":
                 //                        nameTv.setText(values);
@@ -390,7 +399,7 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
                 //                        break;
                 //                }
 
-                getData();
+
             }
         }, (call, t) -> {
             ResponseUtils.defaultFailureCallBack(getPageContext(), call);
@@ -422,10 +431,10 @@ public class UserFilesBaseInfoFragment extends UIBaseLoadFragment implements Vie
     }
 
     private void initListener() {
-//        nameLinearLayout.setOnClickListener(this);
+        //        nameLinearLayout.setOnClickListener(this);
         idCardLinearLayout.setOnClickListener(this);
         bornLinearLayout.setOnClickListener(this);
-//        ageLinearLayout.setOnClickListener(this);
+        //        ageLinearLayout.setOnClickListener(this);
         sexTv.setOnClickListener(this);
         cityTv.setOnClickListener(this);
         sosNameTv.setOnClickListener(this);

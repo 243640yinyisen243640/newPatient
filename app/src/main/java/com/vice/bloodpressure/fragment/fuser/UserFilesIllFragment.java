@@ -26,7 +26,7 @@ import static android.app.Activity.RESULT_OK;
  * 作者: beauty
  * 类名:
  * 传参:
- * 描述:
+ * 描述:疾病诊断
  */
 public class UserFilesIllFragment extends UIBaseLoadFragment implements View.OnClickListener {
     private static final int REQUEST_CODE_FOR_ILL_REFRESH = 1;
