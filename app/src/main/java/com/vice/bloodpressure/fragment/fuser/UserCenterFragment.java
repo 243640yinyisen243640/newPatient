@@ -158,7 +158,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
      * 已登录
      */
     private void setData() {
-           //昵称
+        //昵称
         nickNameTextView.setText(userInfo.getNickName());
         ageTextView.setText(String.format(getString(R.string.user_center_age), userInfo.getAge()));
         if ("1".equals(userInfo.getSex())) {
@@ -205,6 +205,7 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
 
     /**
      * 内容过长，文本显示不全处理
+     *
      * @param textView
      * @param content
      */
@@ -288,14 +289,18 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                 intent.putExtra("nickName", userInfo.getNickName());
                 intent.putExtra("phoneNumber", userInfo.getPhoneNumber());
                 intent.putExtra("avatar", userInfo.getAvatar());
-                intent.putExtra("sex",userInfo.getSex());
+                intent.putExtra("sex", userInfo.getSex());
                 startActivity(intent);
                 break;
             //我的档案
             case R.id.tv_user_center_files:
-                Intent uIntent = new Intent(getPageContext(),UserFilesActivity.class);
-                uIntent.putExtra("sex", userInfo.getSex());
-                startActivity(uIntent);
+
+                if (userInfo != null) {
+                    Intent uIntent = new Intent(getPageContext(), UserFilesActivity.class);
+                    uIntent.putExtra("sex", userInfo.getSex());
+                    startActivity(uIntent);
+                }
+
                 break;
             //跳收藏
             case R.id.tv_user_center_collect:
@@ -326,8 +331,6 @@ public class UserCenterFragment extends UIBaseFragment implements View.OnClickLi
                         });
                     }
                 }
-
-
                 break;
             //订单
             case R.id.ll_user_center_order:
