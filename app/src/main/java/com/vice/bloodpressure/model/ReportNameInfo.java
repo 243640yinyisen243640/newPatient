@@ -27,6 +27,18 @@ public class ReportNameInfo {
      * 等级   1低风险 2中风险 3高风险
      */
     private String level;
+    /**
+     * url 的链接
+     */
+    private String iframeUrl;
+
+    public String getIframeUrl() {
+        return iframeUrl;
+    }
+
+    public void setIframeUrl(String iframeUrl) {
+        this.iframeUrl = iframeUrl;
+    }
 
     public String getPkId() {
         return pkId;

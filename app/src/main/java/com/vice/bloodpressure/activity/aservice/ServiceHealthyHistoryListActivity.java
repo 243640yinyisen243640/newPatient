@@ -1,7 +1,9 @@
 package com.vice.bloodpressure.activity.aservice;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.baseui.UIBaseListRecycleViewActivity;
+import com.vice.bloodpressure.baseui.WebViewHelperActivity;
 import com.vice.bloodpressure.datamanager.ServiceDataManager;
 import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.ReportNameInfo;
@@ -45,7 +48,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
     /**
      * 类型 1糖尿病风险 2心血管 3抑郁 4焦虑
      */
-    private String type="";
+    private String type = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,7 +112,18 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
         return new ServiceHealthyHistoryAdapter(getPageContext(), list, new IAdapterViewClickListener() {
             @Override
             public void adapterClickListener(int position, View view) {
+                switch (view.getId()) {
+                    case R.id.tv_service_history_look_result:
+                        Log.i("yys","click"+"===");
+                        Intent intent = new Intent(getPageContext(), WebViewHelperActivity.class);
+                        intent.putExtra("title", "评测结果");
+                        intent.putExtra("url", getPageListData().get(position).getIframeUrl());
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
 
+                }
             }
 
             @Override
@@ -133,7 +147,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_service_history_all://全部
-                type="";
+                type = "";
                 onPageLoad();
                 setTextStyle(allTextView, true, Typeface.DEFAULT_BOLD);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
@@ -145,7 +159,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_tang://糖尿病风险评测
-                type="1";
+                type = "1";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, true, Typeface.DEFAULT_BOLD);
@@ -187,7 +201,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_emo://抑郁测评
-                type="3";
+                type = "3";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
@@ -199,7 +213,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_bad://焦虑测评
-                type="4";
+                type = "4";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
@@ -211,7 +225,7 @@ public class ServiceHealthyHistoryListActivity extends UIBaseListRecycleViewActi
                 setTextStyle(heartTextView, false, Typeface.DEFAULT);
                 break;
             case R.id.tv_service_history_heart://国人缺血性心血管病
-                type="2";
+                type = "2";
                 onPageLoad();
                 setTextStyle(allTextView, false, Typeface.DEFAULT);
                 setTextStyle(tangTextView, false, Typeface.DEFAULT);
