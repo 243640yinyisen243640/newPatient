@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 类名：
- * 传参：type  1:用药记录
+ * 传参：type  1:用药记录 2:用药提醒
  * 描述:
  * 作者: beauty
  * 创建日期: 2023/2/16 14:22
@@ -48,14 +48,16 @@ public class ServiceMedicineAdapter extends RecyclerView.Adapter<ServiceMedicine
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthyDataChildInfo info = list.get(position);
 
-//        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D_H_M_S, DataFormatManager.TIME_FORMAT_Y_M_D, info.getWranTime()));
+
         holder.nameTextView.setText(info.getDrugName());
         holder.rateTextView.setText(info.getDrugTimes());
         holder.valueTextView.setText(info.getDrugDose());
         if ("1".equals(type)) {
             holder.editTextView.setText("复制");
+            holder.timeTextView.setText(info.getAddTime() + "~" + info.getFinishTime());
         } else {
             holder.editTextView.setText("编辑");
+            holder.timeTextView.setText(info.getWranTime());
         }
         clickOnClick clickOnClick = new clickOnClick(position);
         holder.deleteTextView.setOnClickListener(clickOnClick);

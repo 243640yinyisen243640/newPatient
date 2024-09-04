@@ -17,7 +17,6 @@ import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.activity.aservice.ServiceMedicineRecordAddActivity;
 import com.vice.bloodpressure.adapter.service.ServiceMedicineAdapter;
 import com.vice.bloodpressure.baseimp.CallBack;
-import com.vice.bloodpressure.baseimp.IAdapterViewClickOneListener;
 import com.vice.bloodpressure.baseimp.LoadStatus;
 import com.vice.bloodpressure.basemanager.BaseDataManager;
 import com.vice.bloodpressure.basemanager.DataFormatManager;
@@ -115,35 +114,32 @@ public class ServiceMedicineRecordFragment extends UIBaseListRecycleViewForBgFra
 
     @Override
     protected RecyclerView.Adapter instanceAdapter(List<HealthyDataChildInfo> list) {
-        return medicineAdapter = new ServiceMedicineAdapter(getPageContext(), list, "1", new IAdapterViewClickOneListener() {
-            @Override
-            public void adapterClickListener(int position, View view) {
-                Intent intent;
-                switch (view.getId()) {
-                    case R.id.tv_item_service_medicine_delete:
-                        DialogUtils.showOperDialog(getPageContext(), "", "确定要删除吗？", "取消", "确定", (dialog, which) -> {
-                            dialog.dismiss();
-                            if (XySoftDialogActionEnum.POSITIVE == which) {
-                                deleteData(position);
-                            }
-                        });
-                        break;
-                    case R.id.tv_item_service_medicine_edit:
-                        intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
-                        intent.putExtra("type", "1");
-                        intent.putExtra("pkId", getPageListData().get(position).getPkId());
-                        startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
-                        break;
-                    case R.id.tv_item_service_medicine_look:
-                        intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
-                        intent.putExtra("type", "2");
-                        intent.putExtra("pkId", getPageListData().get(position).getPkId());
-                        startActivity(intent);
-                        break;
+        return medicineAdapter = new ServiceMedicineAdapter(getPageContext(), list, "1", (position, view) -> {
+            Intent intent;
+            switch (view.getId()) {
+                case R.id.tv_item_service_medicine_delete:
+                    DialogUtils.showOperDialog(getPageContext(), "", "确定要删除吗？", "取消", "确定", (dialog, which) -> {
+                        dialog.dismiss();
+                        if (XySoftDialogActionEnum.POSITIVE == which) {
+                            deleteData(position);
+                        }
+                    });
+                    break;
+                case R.id.tv_item_service_medicine_edit:
+                    intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
+                    intent.putExtra("type", "1");
+                    intent.putExtra("pkId", getPageListData().get(position).getPkId());
+                    startActivityForResult(intent, REQUEST_CODE_FOR_FREFRESH);
+                    break;
+                case R.id.tv_item_service_medicine_look:
+                    intent = new Intent(getPageContext(), ServiceMedicineRecordAddActivity.class);
+                    intent.putExtra("type", "2");
+                    intent.putExtra("pkId", getPageListData().get(position).getPkId());
+                    startActivity(intent);
+                    break;
 
-                    default:
-                        break;
-                }
+                default:
+                    break;
             }
         });
     }

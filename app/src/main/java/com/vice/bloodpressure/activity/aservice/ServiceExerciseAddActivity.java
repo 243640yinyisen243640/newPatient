@@ -139,6 +139,10 @@ public class ServiceExerciseAddActivity extends UIBaseActivity implements View.O
 
 
     private void sureToAddData() {
+        if (TextUtils.isEmpty(exerciseType)) {
+            ToastUtils.getInstance().showToast(getPageContext(), "请选择运动类型");
+            return;
+        }
         if (TextUtils.isEmpty(addTime)) {
             ToastUtils.getInstance().showToast(getPageContext(), "请选择检测时间");
             return;

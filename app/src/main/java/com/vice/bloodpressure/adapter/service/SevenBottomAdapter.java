@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseimp.IAdapterViewClickListener;
-import com.vice.bloodpressure.basemanager.DataFormatManager;
 import com.vice.bloodpressure.model.BloodChildInfo;
-import com.vice.bloodpressure.utils.DataUtils;
 
 import java.util.List;
 
@@ -61,7 +59,8 @@ public class SevenBottomAdapter extends RecyclerView.Adapter<SevenBottomAdapter.
 
         BloodChildInfo info = list.get(position);
 
-        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D, DataFormatManager.TIME_FORMAT_M_D_1, info.getDate()));
+//        holder.timeTextView.setText(DataUtils.changeDataFormat(DataFormatManager.TIME_FORMAT_Y_M_D, DataFormatManager.TIME_FORMAT_M_D_1, info.getDate()));
+        holder.timeTextView.setText(info.getDate());
 
         OnClick click = new OnClick(position);
         holder.dawnFrameLayout.setTag(0);
