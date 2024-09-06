@@ -94,7 +94,7 @@ public class ServiceDataManager {
      *                        * # 6 晚餐后
      *                        * # 7 睡前
      *                        * # 8 凌晨
-     *                        * # 8 糖化血红蛋白
+     *                        * # 9 糖化血红蛋白
      * @param recordType      记录方式:1->自动记录;2->手动记录
      * @param addTime         添加时间
      * @param bgValue         值
