@@ -1,18 +1,23 @@
 package com.vice.bloodpressure.fragment.fmall;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.vice.bloodpressure.R;
+import com.vice.bloodpressure.adapter.mall.MallIndexAdapter;
 import com.vice.bloodpressure.baseui.UIBaseLoadRefreshFragment;
 import com.vice.bloodpressure.customView.banner.view.BannerView;
+import com.vice.bloodpressure.decoration.GridSpaceItemDecoration;
 import com.vice.bloodpressure.model.ActivityBaseInfo;
+import com.vice.bloodpressure.model.GoodsInfo;
+import com.vice.bloodpressure.utils.DensityUtils;
 import com.vice.bloodpressure.utils.banner.CommonBannerAdvertViewHolder;
 
 import java.util.ArrayList;
@@ -57,8 +62,8 @@ public class MallIndexFragment extends UIBaseLoadRefreshFragment {
         initTopView();
         initView();
         initListener();
-        List<ActivityBaseInfo> advertInfos =new ArrayList<>();
-        ActivityBaseInfo activityBaseInfo1 =new ActivityBaseInfo();
+        List<ActivityBaseInfo> advertInfos = new ArrayList<>();
+        ActivityBaseInfo activityBaseInfo1 = new ActivityBaseInfo();
         activityBaseInfo1.setImg("https://video.xiyuns.cn/witmed/diet-image/6E228AB0A1FD29F0EFA08935AFDD0B97.png");
         activityBaseInfo1.setLinkUrl("https://video.xiyuns.cn/witmed/diet-image/6E228AB0A1FD29F0EFA08935AFDD0B97.png");
         advertInfos.add(activityBaseInfo1);
@@ -89,10 +94,6 @@ public class MallIndexFragment extends UIBaseLoadRefreshFragment {
 
     }
 
-    @Override
-    protected boolean isNeedFullScreen() {
-        return false;
-    }
 
     /**
      * 轮播图
@@ -102,11 +103,11 @@ public class MallIndexFragment extends UIBaseLoadRefreshFragment {
             bannerView.setVisibility(View.GONE);
             return;
         }
-//        //设置轮播图
-//        int width = ScreenUtils.screenWidth(getPageContext()) - DensityUtils.dip2px(getPageContext(), 20);
-//        int height = width / 2;
-//        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(width, height);
-//        bannerView.setLayoutParams(lp);
+        //        //设置轮播图
+        //        int width = ScreenUtils.screenWidth(getPageContext()) - DensityUtils.dip2px(getPageContext(), 20);
+        //        int height = width / 2;
+        //        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(width, height);
+        //        bannerView.setLayoutParams(lp);
         if (advertInfos == null) {
             advertInfos = new ArrayList<>();
         }
@@ -135,11 +136,48 @@ public class MallIndexFragment extends UIBaseLoadRefreshFragment {
             }
         });
 
-//        if (advertInfos.size() > 1) {
-//            bannerView.start();
-//        } else {
-//            bannerView.pause();
-//        }
+        //        if (advertInfos.size() > 1) {
+        //            bannerView.start();
+        //        } else {
+        //            bannerView.pause();
+        //        }
+        List<GoodsInfo> list = new ArrayList<>();
+        GoodsInfo info = new GoodsInfo();
+
+        info.setPrice("10.36");
+        info.setCover("https://inews.gtimg.com/om_bt/O6SG7dHjdG0kWNyWz6WPo2_3v6A6eAC9ThTazwlKPO1qMAA/641");
+        info.setTitle("舒可唯NB-loT5G血糖 仪 ");
+        GoodsInfo info1 = new GoodsInfo();
+
+        info1.setPrice("10.36");
+        info1.setCover("https://img-blog.csdnimg.cn/166e183e84094c44bbc8ad66500cef5b.jpeg");
+        info1.setTitle("糖友厨房饼干零食无糖 精粗尿粮孕妇啊啊啊啊啊");
+        GoodsInfo info2 = new GoodsInfo();
+
+        info2.setPrice("10.36");
+        info2.setCover("https://wxls-cms.oss-cn-hangzhou.aliyuncs.com/online/2024-04-18/218da022-f4bf-456a-99af-5cb8e157f7b8.jpg");
+        info2.setTitle("舒可唯NB-loT5G血糖 仪 ");
+        GoodsInfo info3 = new GoodsInfo();
+
+        info3.setPrice("10.36");
+        info3.setCover("https://video.xiyuns.cn/witmed/edu-image/FBBC7ECA2CF645908A189D66E2403472.png");
+        info3.setTitle("舒可唯NB-loT5G血糖 仪 ");
+        GoodsInfo info4 = new GoodsInfo();
+
+        info4.setPrice("10.36");
+        info4.setCover("https://video.xiyuns.cn/witmed/edu-image/FBBC7ECA2CF645908A189D66E2403472.png");
+        info4.setTitle("舒可唯NB-loT5G血糖 仪 ");
+
+        list.add(info);
+        list.add(info1);
+        list.add(info2);
+        list.add(info3);
+        list.add(info4);
+
+        MallIndexAdapter adapter = new MallIndexAdapter(getPageContext(), list, (position, view) -> {
+
+        });
+        goodsRecyclerView.setAdapter(adapter);
 
     }
 
@@ -163,6 +201,20 @@ public class MallIndexFragment extends UIBaseLoadRefreshFragment {
             //            Intent intent = new Intent(getPageContext(), MallMoreGoodActivity.class);
             //            startActivity(intent);
         });
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        goodsRecyclerView.addItemDecoration(new GridSpaceItemDecoration(DensityUtils.dip2px(getPageContext(), 10), true));
+        goodsRecyclerView.setLayoutManager(layoutManager);
+
+
+        goodsRecyclerView.setHasFixedSize(true);
+        goodsRecyclerView.setNestedScrollingEnabled(false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getPageContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
 
         containerView().addView(view);
     }

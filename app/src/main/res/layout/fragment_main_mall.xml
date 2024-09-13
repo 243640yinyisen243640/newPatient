@@ -1,130 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/background"
+      android:orientation="vertical">
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/mall_main_top">
 
+          <com.vice.bloodpressure.customView.banner.view.BannerView
+              android:id="@+id/bv_mall_index_banner"
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginTop="5dp"
+              android:background="@drawable/shape_little_green_gra_5"
+              android:layout_marginRight="10dp"
+              app:open_mz_mode="false" />
+      </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mall_main_top">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginEnd="10dp"
+          android:background="@drawable/shape_bg_white_10"
+          android:orientation="horizontal"
+          android:paddingTop="13dp"
+          android:paddingBottom="13dp">
 
-        <com.vice.bloodpressure.customView.banner.view.BannerView
-            android:id="@+id/bv_mall_index_banner"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/shape_little_green_gra_5"
-            android:layout_marginRight="10dp"
-            app:open_mz_mode="false" />
-    </FrameLayout>
+          <TextView
+              android:id="@+id/tv_mall_index_instrument"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableTop="@drawable/mall_main_instrument"
+              android:drawablePadding="6.5dp"
+              android:gravity="center"
+              android:text="仪器"
+              android:textColor="@color/black_2A"
+              android:textSize="13sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_bg_white_10"
-        android:orientation="horizontal"
-        android:paddingTop="13dp"
-        android:paddingBottom="13dp">
+          <TextView
+              android:id="@+id/tv_mall_index_food"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableTop="@drawable/mall_main_food"
+              android:drawablePadding="6.5dp"
+              android:gravity="center"
+              android:text="食品"
+              android:textColor="@color/black_2A"
+              android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tv_mall_index_instrument"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/mall_main_instrument"
-            android:drawablePadding="6.5dp"
-            android:gravity="center"
-            android:text="仪器"
-            android:textColor="@color/black_2A"
-            android:textSize="13sp" />
+          <TextView
+              android:id="@+id/tv_mall_index_text_paper"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableTop="@drawable/mall_main_text_paper"
+              android:drawablePadding="6.5dp"
+              android:gravity="center"
+              android:text="试纸"
+              android:textColor="@color/black_2A"
+              android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tv_mall_index_food"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/mall_main_food"
-            android:drawablePadding="6.5dp"
-            android:gravity="center"
-            android:text="食品"
-            android:textColor="@color/black_2A"
-            android:textSize="13sp" />
+          <TextView
+              android:id="@+id/tv_mall_index_main_other"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableTop="@drawable/mall_main_other"
+              android:drawablePadding="6.5dp"
+              android:gravity="center"
+              android:text="其他"
+              android:textColor="@color/black_2A"
+              android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tv_mall_index_text_paper"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/mall_main_text_paper"
-            android:drawablePadding="6.5dp"
-            android:gravity="center"
-            android:text="试纸"
-            android:textColor="@color/black_2A"
-            android:textSize="13sp" />
+      </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_mall_index_main_other"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/mall_main_other"
-            android:drawablePadding="6.5dp"
-            android:gravity="center"
-            android:text="其他"
-            android:textColor="@color/black_2A"
-            android:textSize="13sp" />
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_marginTop="10dp"/>
 
-    </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"/>
+          <TextView
+              style="@style/style_title_with_green_h"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:text="推荐商品" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:orientation="horizontal">
+          <TextView
+              android:id="@+id/tv_mall_index_goods"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableRight="@drawable/arrow_right_gray"
+              android:drawablePadding="7dp"
+              android:paddingRight="10dp"
+              android:gravity="right"
+              android:paddingTop="15dp"
+              android:paddingBottom="15dp"
+              android:text="商品列表"
+              android:textColor="@color/gray_56"
+              android:textSize="14sp" />
 
-        <TextView
-            style="@style/style_title_with_green_h"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="推荐商品" />
+      </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_mall_index_goods"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawableRight="@drawable/arrow_right_gray"
-            android:drawablePadding="7dp"
-            android:paddingRight="10dp"
-            android:gravity="right"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:text="商品列表"
-            android:textColor="@color/gray_56"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_mall_index_goods"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv_mall_index_goods"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+  </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
 
