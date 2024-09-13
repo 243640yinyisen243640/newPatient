@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.vice.bloodpressure.R;
 import com.vice.bloodpressure.baseui.UIBaseActivity;
-import com.vice.bloodpressure.fragment.MainFragment;
 import com.vice.bloodpressure.fragment.fhome.MainHomeFragment;
+import com.vice.bloodpressure.fragment.fmall.MallIndexFragment;
 import com.vice.bloodpressure.fragment.fout.OutMainFragment;
 import com.vice.bloodpressure.fragment.fservice.ServiceMainFragment;
 import com.vice.bloodpressure.fragment.fuser.UserCenterFragment;
@@ -86,7 +86,7 @@ public class MainActivity extends UIBaseActivity implements View.OnClickListener
             } else if (checkId == R.id.tv_main_home_out_hospital) {
                 fragment = new OutMainFragment();
             } else if (checkId == R.id.tv_main_home_mall) {
-                fragment = new MainFragment();
+                fragment = new MallIndexFragment();
             } else {
                 fragment = new UserCenterFragment();
             }

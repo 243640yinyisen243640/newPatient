@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:background="@color/main_base_color"
+    android:paddingTop="28dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="@color/main_base_color"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_mall_index_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:background="@drawable/shape_bg_white_90"
+            android:drawableLeft="@drawable/mall_main_search"
+            android:drawablePadding="7dp"
+            android:hint="请输入关键词进行搜索"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_mall_index_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:layout_marginLeft="12dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/mall_main_customer" />
+
+            <ImageView
+                android:id="@+id/iv_mall_index_customer"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/shape_red_7_7_circle" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_mall_index_cart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|center"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/mall_main_cart" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
