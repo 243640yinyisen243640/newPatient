@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/mall_goods_list_top"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/rg_mall_goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/text_white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="@style/mall_goods_rb_bottom"
+            android:checked="true"
+            android:paddingTop="15dp"
+            android:text="线上商品"
+            android:textStyle="bold" />
+
+        <RadioButton
+            style="@style/mall_goods_rb_bottom"
+            android:paddingTop="15dp"
+            android:text="自提商品" />
+
+    </RadioGroup>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_mall_goods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-10dp" />
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="21dp"
+        android:paddingEnd="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:text="综合"
+            android:textColor="@color/black_2A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="销量"
+            android:textColor="@color/black_2A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="价格"
+            android:textColor="@color/black_2A"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/mall_goods_list_filter"
+            android:drawablePadding="3dp"
+            android:gravity="center|right"
+            android:text="价格"
+            android:textColor="@color/black_2A"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="13dp"
+        android:background="@drawable/shape_bg_gray_90"
+        android:gravity="center_vertical"
+        android:paddingEnd="3dp">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:background="#F4F4F4"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="7dp"
+            android:hint="请输入搜索内容"
+            android:maxLines="2"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/black_24"
+            android:textColorHint="@color/gray_8a"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="15dp"
+            android:src="@drawable/mall_goods_list_delete" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_green_90"
+            android:paddingLeft="14dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="6dp"
+            android:text="搜索"
+            android:textColor="@color/white_fa"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

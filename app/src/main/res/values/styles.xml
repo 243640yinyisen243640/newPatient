@@ -536,4 +536,21 @@
         <item name="android:paddingBottom">2dp</item>
         <item name="android:textColor">@color/selector_black_24_gray_8a</item>
     </style>
+
+
+    <style name="mall_goods_rb_bottom">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableBottom">@drawable/selector_gb_white_tran_40_3</item>
+        <item name="android:drawablePadding">13dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white_fa</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>
